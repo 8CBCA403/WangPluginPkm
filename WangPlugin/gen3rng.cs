@@ -46,7 +46,7 @@ namespace WangPlugin
                 var ivs = FrameUtil.dvsToIVs(dvUpper, dvLower);
                 var xor = TID^ SID ^ ((PID >> 16) ^ (PID & 0xFFFF));
 
-                if (xor<16)
+                if (xor<8)
                 {
                     yield return new Frame { seed = 0, number = num, rngValue = dvUpper, pid = PID, ivs = ivs };
                 }
