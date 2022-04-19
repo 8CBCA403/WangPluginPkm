@@ -34,13 +34,16 @@ namespace WangPlugin
         {
             var ctrl = new ToolStripMenuItem(Name);
             tools.DropDownItems.Add(ctrl);
-            var c = new ToolStripMenuItem($"{Name}全部闪光");
-            var a = new ToolStripMenuItem($"{Name}处理mod1");
-            c.Click += (s, e) => ModifySaveFile();
-            a.Click += (s, e) => ModifyPKM();
-            a.Click += (s, e) => MessageBox.Show($"搞定了");
-            ctrl.DropDownItems.Add(c);
-            ctrl.DropDownItems.Add(a);
+            var Calc = new ToolStripMenuItem($"性格计算器");
+            var Allshiny = new ToolStripMenuItem($"全部闪光");
+            var HandleM1 = new ToolStripMenuItem($"处理mod1");
+            Allshiny.Click += (s, e) => ModifySaveFile();
+            HandleM1.Click += (s, e) => ModifyPKM();
+            HandleM1.Click += (s, e) => MessageBox.Show($"搞定了");
+            Calc.Click += (s, e) =>Open();
+            ctrl.DropDownItems.Add(Allshiny);
+            ctrl.DropDownItems.Add(HandleM1);
+            ctrl.DropDownItems.Add(Calc);
             Console.WriteLine($"{Name} added menu items.");
         }
 
@@ -88,7 +91,11 @@ namespace WangPlugin
           }
             return pkm;
         }
-
+        private void Open()
+        {
+            var frm = new calc();
+            frm.Show();
+        }
         public void NotifySaveLoaded()
         {
             Console.WriteLine($"{Name} was notified that a Save File was just loaded.");
