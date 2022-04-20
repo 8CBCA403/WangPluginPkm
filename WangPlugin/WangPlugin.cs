@@ -38,7 +38,6 @@ namespace WangPlugin
             var HandleM1 = new ToolStripMenuItem($"处理mod1");
             Allshiny.Click += (s, e) => ModifySaveFile();
             HandleM1.Click += (s, e) => ModifyPKM();
-            HandleM1.Click += (s, e) => MessageBox.Show($"搞定了");
             Calc.Click += (s, e) =>Open();
             ctrl.DropDownItems.Add(Allshiny);
             ctrl.DropDownItems.Add(HandleM1);
@@ -66,9 +65,12 @@ namespace WangPlugin
         public PKM HandleMethod1(PKM pkm)
         {
             var Currentpid = PKMEditor.Data.PID;
-            var highpid = Currentpid >> 16;
-            var lowpid = Currentpid &0xFF;
-            var fs = Gen3RngUtil.findEmeraldFrame(highpid, 0, 2700,pkm.TID,pkm.SID);
+          //var highpid = Currentpid >> 16;
+          //var lowpid = Currentpid &0xFF;
+            Random r = new Random();
+            short rndnum = (short)r.Next(0, 65536);
+            uint seed = (uint)rndnum;
+            var fs = Gen3RngUtil.findEmeraldFrame(seed, 0, 2700,pkm.TID,pkm.SID);
             foreach (var f in fs)
          {
                 if (f.pid != 0)
@@ -81,11 +83,16 @@ namespace WangPlugin
                     pkm.IV_SPD = (int)f.ivs.spd;
                     pkm.IV_SPE = (int)f.ivs.spe;
                     pkm.IV_SPA = (int)f.ivs.spa;
+                    MessageBox.Show($"找到了");
                     break;
                 }
                 else
                     continue;
           }
+            if(pkm.IsShiny==false)
+            {
+                MessageBox.Show($"没找到,再试一下");
+            }
             return pkm;
         }
         private void Open()
