@@ -1,6 +1,9 @@
-﻿using System;
+﻿using PKHeX.Core;
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using PKHeX.Core;
 namespace WangPlugin
 {
     public class WangPlugin : IPlugin
@@ -11,6 +14,9 @@ namespace WangPlugin
         // Initialized on plugin load
         public ISaveFileProvider SaveFileEditor { get; private set; } = null!;
         public IPKMView PKMEditor { get; private set; } = null!;
+         
+
+        private CancellationTokenSource tokenSource = new();
 
         public void Initialize(params object[] args)
         {
@@ -20,7 +26,7 @@ namespace WangPlugin
             var menu = (ToolStrip)Array.Find(args, z => z is ToolStrip);
             LoadMenuStrip(menu);
         }
-
+       
         private void LoadMenuStrip(ToolStrip menuStrip)
         {
             var items = menuStrip.Items;
@@ -52,10 +58,8 @@ namespace WangPlugin
         }
         public void ModifyPKM()
         {
-            var sav = SaveFileEditor.SAV;
             var pkm = HandleMethod1(PKMEditor.Data);
-            pkm.Nature = (int)pkm.PID % 25;
-            sav.SetBoxSlotAtIndex(pkm,0,0);
+            PKMEditor.PopulateFields(pkm, false);
             SaveFileEditor.ReloadSlots();
         }
         public  void ModifyPKM(PKM pkm)
@@ -69,31 +73,21 @@ namespace WangPlugin
           //var lowpid = Currentpid &0xFF;
             Random r = new Random();
             short rndnum = (short)r.Next(0, 65536);
-            uint seed = (uint)rndnum;
-            var fs = Gen3RngUtil.findEmeraldFrame(seed, 0, 2700,pkm.TID,pkm.SID);
-            foreach (var f in fs)
-         {
-                if (f.pid != 0)
-                {
-                    pkm.PID = f.pid;
-                    pkm.EncryptionConstant = pkm.PID;
-                    pkm.IV_ATK = (int)f.ivs.atk;
-                    pkm.IV_DEF = (int)f.ivs.def;
-                    pkm.IV_HP = (int)f.ivs.hp;
-                    pkm.IV_SPD = (int)f.ivs.spd;
-                    pkm.IV_SPE = (int)f.ivs.spe;
-                    pkm.IV_SPA = (int)f.ivs.spa;
-                    MessageBox.Show($"找到了");
-                    break;
-                }
-                else
-                    continue;
-          }
-            if(pkm.IsShiny==false)
-            {
-                MessageBox.Show($"没找到,再试一下");
-            }
-            return pkm;
+            var seed = Util.Rand32();
+           while (true)
+           {
+           pkm = Method1RNG.GenPkm(pkm,seed, PKMEditor.Data.TID, PKMEditor.Data.SID);
+           if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID)<8)
+           {
+           pkm.RefreshChecksum();
+           return pkm;
+           }
+           seed = Method1RNG.Next(seed);
+           }       
+        }
+        private static uint GetShinyXor(uint pid, int TID, int SID)
+        {
+            return ((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF)));
         }
         private void Open()
         {

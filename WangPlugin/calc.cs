@@ -1,7 +1,5 @@
 ﻿using PKHeX.Core;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System;
 namespace WangPlugin
