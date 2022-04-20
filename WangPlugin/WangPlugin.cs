@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using PKHeX.Core;
-using System.Linq;
 namespace WangPlugin
 {
     public class WangPlugin : IPlugin
@@ -46,8 +45,6 @@ namespace WangPlugin
             ctrl.DropDownItems.Add(Calc);
             Console.WriteLine($"{Name} added menu items.");
         }
-
-       
         public void ModifySaveFile()
         {
             var sav = SaveFileEditor.SAV;
@@ -58,6 +55,7 @@ namespace WangPlugin
         {
             var sav = SaveFileEditor.SAV;
             var pkm = HandleMethod1(PKMEditor.Data);
+            pkm.Nature = (int)pkm.PID % 25;
             sav.SetBoxSlotAtIndex(pkm,0,0);
             SaveFileEditor.ReloadSlots();
         }
@@ -70,14 +68,13 @@ namespace WangPlugin
             var Currentpid = PKMEditor.Data.PID;
             var highpid = Currentpid >> 16;
             var lowpid = Currentpid &0xFF;
-            var fs = Gen3RngUtil.findEmeraldFrame(highpid, 0, 2700);
+            var fs = Gen3RngUtil.findEmeraldFrame(highpid, 0, 2700,pkm.TID,pkm.SID);
             foreach (var f in fs)
          {
                 if (f.pid != 0)
                 {
                     pkm.PID = f.pid;
                     pkm.EncryptionConstant = pkm.PID;
-                    pkm.Nature =  (int)pkm.PID % 25;
                     pkm.IV_ATK = (int)f.ivs.atk;
                     pkm.IV_DEF = (int)f.ivs.def;
                     pkm.IV_HP = (int)f.ivs.hp;

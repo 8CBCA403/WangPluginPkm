@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace WangPlugin
 {
-   
-
     public record IVs
     {
         public uint hp;
@@ -26,8 +19,10 @@ namespace WangPlugin
         public uint pid;
         public uint TID;
         public uint SID;
+#pragma warning disable CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
         public IVs ivs;
-        
+#pragma warning restore CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
+
     }
 
     public static class FrameUtil

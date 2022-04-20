@@ -18,18 +18,20 @@ namespace WangPlugin
 
         private CancellationTokenSource tokenSource = new();
 
+#pragma warning disable CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
         public calc()
+#pragma warning restore CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
         {
             InitializeComponent();
         }
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(calc));
-            this.CalcStart = new System.Windows.Forms.Button();
-            this.Exit = new System.Windows.Forms.Button();
-            this.PIDHex = new System.Windows.Forms.TextBox();
-            this.PID = new System.Windows.Forms.Label();
-            this.Nature = new System.Windows.Forms.TextBox();
+            this.CalcStart = new Button();
+            this.Exit = new Button();
+            this.PIDHex = new TextBox();
+            this.PID = new Label();
+            this.Nature = new TextBox();
             this.SuspendLayout();
             // 
             // CalcStart
@@ -40,7 +42,7 @@ namespace WangPlugin
             this.CalcStart.TabIndex = 0;
             this.CalcStart.Text = "计算性格";
             this.CalcStart.UseVisualStyleBackColor = true;
-            this.CalcStart.Click += new System.EventHandler(this.CalcStart_Click);
+            this.CalcStart.Click += new EventHandler(this.CalcStart_Click);
             // 
             // Exit
             // 
@@ -57,7 +59,6 @@ namespace WangPlugin
             this.PIDHex.Name = "PIDHex";
             this.PIDHex.Size = new System.Drawing.Size(100, 25);
             this.PIDHex.TabIndex = 2;
-            this.PIDHex.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // PID
             // 
@@ -68,7 +69,6 @@ namespace WangPlugin
             this.PID.Size = new System.Drawing.Size(46, 23);
             this.PID.TabIndex = 3;
             this.PID.Text = "PID";
-            this.PID.Click += new System.EventHandler(this.label1_Click);
             // 
             // Nature
             // 
@@ -87,26 +87,11 @@ namespace WangPlugin
             this.Controls.Add(this.CalcStart);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "calc";
-            this.Load += new System.EventHandler(this.calc_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
-        private void calc_Load(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void Show_Click(object sender, System.EventArgs e)
-        {
-
-        }
 
         private void CalcStart_Click(object sender, System.EventArgs e)
         {
@@ -199,10 +184,6 @@ namespace WangPlugin
             }
            
             return Nature;
-        }
-            private void label1_Click(object sender, System.EventArgs e)
-        {
-
         }
     }
 }

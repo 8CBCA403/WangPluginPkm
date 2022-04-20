@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace WangPlugin
 {
@@ -16,7 +12,6 @@ namespace WangPlugin
 
     public static class LCRNGUtil
     {
-
         public static LCRNG lcrngNext(LCRNG rng)
         {
             //LCRNG add mul (seed*mul+add) shift
