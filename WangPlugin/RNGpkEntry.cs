@@ -2,6 +2,7 @@
 {
     public record RNGpkEntry
     {
+        public int Species;
         public ulong EC;
         public uint PID;
         public int ShinyStatus;

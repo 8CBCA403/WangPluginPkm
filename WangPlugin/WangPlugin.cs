@@ -1,8 +1,9 @@
 ﻿using PKHeX.Core;
 using System;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using System.Collections;
 using System.Windows.Forms;
 namespace WangPlugin
 {
@@ -39,40 +40,38 @@ namespace WangPlugin
         {
             var ctrl = new ToolStripMenuItem(Name);
             tools.DropDownItems.Add(ctrl);
-            var Calc = new ToolStripMenuItem($"性格计算器");
             var Allshiny = new ToolStripMenuItem($"全部闪光");
             var HandleM1 = new ToolStripMenuItem($"处理mod1");
-            Allshiny.Click += (s, e) => ModifySaveFile();
-            HandleM1.Click += (s, e) => ModifyPKM();
+            var Calc = new ToolStripMenuItem($"性格计算器");
+            var Read = new ToolStripMenuItem($"简易排序");
+            Allshiny.Click += (s, e) => SetShiny();
+            HandleM1.Click += (s, e) => Method1();
             Calc.Click += (s, e) =>Open();
+            Read.Click += (s, e) => SortPokemon();
             ctrl.DropDownItems.Add(Allshiny);
             ctrl.DropDownItems.Add(HandleM1);
             ctrl.DropDownItems.Add(Calc);
-            Console.WriteLine($"{Name} added menu items.");
+            ctrl.DropDownItems.Add(Read);
+            //  Console.WriteLine($"{Name} added menu items.");
         }
-        public void ModifySaveFile()
+        public void SetShiny()
         {
             var sav = SaveFileEditor.SAV;
-            sav.ModifyBoxes(ModifyPKM);
+            sav.ModifyBoxes(SetAllShiny);
             SaveFileEditor.ReloadSlots();
         }
-        public void ModifyPKM()
+        public void Method1()
         {
             var pkm = HandleMethod1(PKMEditor.Data);
             PKMEditor.PopulateFields(pkm, false);
             SaveFileEditor.ReloadSlots();
         }
-        public  void ModifyPKM(PKM pkm)
+        public  void SetAllShiny(PKM pkm)
         {
             CommonEdits.SetShiny(pkm);
         }
         public PKM HandleMethod1(PKM pkm)
         {
-            var Currentpid = PKMEditor.Data.PID;
-          //var highpid = Currentpid >> 16;
-          //var lowpid = Currentpid &0xFF;
-            Random r = new Random();
-            short rndnum = (short)r.Next(0, 65536);
             var seed = Util.Rand32();
            while (true)
            {
@@ -80,7 +79,8 @@ namespace WangPlugin
            if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID)<8)
            {
            pkm.RefreshChecksum();
-           return pkm;
+           MessageBox.Show($"过啦！");
+            return pkm;
            }
            seed = Method1RNG.Next(seed);
            }       
@@ -88,6 +88,42 @@ namespace WangPlugin
         private static uint GetShinyXor(uint pid, int TID, int SID)
         {
             return ((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF)));
+        }
+
+        public void SortPokemon()
+        {
+            var sav = SaveFileEditor.SAV;
+            List<PKM> PokeList = new List<PKM>();
+            var PokeArray = new PKM[30];
+            int  i,j;
+          for (i = 0; i < 30; i++)
+          {
+                for (j = 0; j < 30; j++)
+                {
+                    
+                    PKM pk = sav.GetBoxSlotAtIndex(i, j);
+                    if (pk.Species == 0)
+                        break;
+                    PokeList.Add(pk);
+                }
+            }
+            var count = PokeList.Count;
+            var box = count / 30;
+            var remin = count % 30;
+            int n = 0;
+            List<PKM> sorted = PokeList.OrderBy(c => c.Species).ToList();
+            for (i = 0; i <box; i++)
+            {
+                for (j = 0; j < 30; j++)
+                {
+                    sav.SetBoxSlotAtIndex(sorted[i*30+j], i, j);
+                    n++;
+                }
+             }
+           /* for(i=0;i<count-n;i++)
+            {
+                sav.SetBoxSlotAtIndex(sorted[n+i], box+1, i);
+            }*/
         }
         private void Open()
         {
