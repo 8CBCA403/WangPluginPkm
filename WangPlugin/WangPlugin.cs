@@ -42,14 +42,17 @@ namespace WangPlugin
             tools.DropDownItems.Add(ctrl);
             var Allshiny = new ToolStripMenuItem($"全部闪光");
             var HandleM1 = new ToolStripMenuItem($"处理mod1");
+            var HandleOverworld8 = new ToolStripMenuItem($"处理Overworld8");
             var Calc = new ToolStripMenuItem($"性格计算器");
             var Read = new ToolStripMenuItem($"简易排序");
             Allshiny.Click += (s, e) => SetShiny();
             HandleM1.Click += (s, e) => Method1();
+            HandleOverworld8.Click += (s, e) => Method8rng();
             Calc.Click += (s, e) =>Open();
             Read.Click += (s, e) => SortPokemon();
             ctrl.DropDownItems.Add(Allshiny);
-            ctrl.DropDownItems.Add(HandleM1);
+            ctrl.DropDownItems.Add(HandleOverworld8);
+            ctrl.DropDownItems.Add(Read);
             ctrl.DropDownItems.Add(Calc);
             ctrl.DropDownItems.Add(Read);
             //  Console.WriteLine($"{Name} added menu items.");
@@ -63,6 +66,12 @@ namespace WangPlugin
         public void Method1()
         {
             var pkm = HandleMethod1(PKMEditor.Data);
+            PKMEditor.PopulateFields(pkm, false);
+            SaveFileEditor.ReloadSlots();
+        }
+        public void Method8rng()
+        {
+            var pkm = HandleMethod8rng(PKMEditor.Data);
             PKMEditor.PopulateFields(pkm, false);
             SaveFileEditor.ReloadSlots();
         }
@@ -84,6 +93,23 @@ namespace WangPlugin
            }
            seed = Method1RNG.Next(seed);
            }       
+        }
+
+        public PKM HandleMethod8rng(PKM pkm)
+        {
+            var seed = Util.Rand32();
+            while (true)
+            {
+                pkm = Overworld8RNGM.GenPkm(pkm, seed, PKMEditor.Data.TID, PKMEditor.Data.SID);
+                if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < 16)
+                {
+                    pkm.RefreshChecksum();
+                    MessageBox.Show($"过啦！");
+                    return pkm;
+                }
+                seed = Overworld8RNGM.Next(seed);
+            }
+            
         }
         private static uint GetShinyXor(uint pid, int TID, int SID)
         {
