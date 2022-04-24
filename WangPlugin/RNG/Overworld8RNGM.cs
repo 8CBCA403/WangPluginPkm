@@ -47,11 +47,12 @@ namespace WangPlugin
             pk.IV_SPD = ivs[4];
             pk.IV_SPE = ivs[5];
             // Remainder
-            var ability =( 1 << (int)xoro.NextInt(2));
             var scale = (IScaledSize)pk;
             scale.HeightScalar = (byte)((int)xoro.NextInt(0x81) + (int)xoro.NextInt(0x80));
             scale.WeightScalar = (byte)((int)xoro.NextInt(0x81) + (int)xoro.NextInt(0x80));
+            var ability = (1 << (int)xoro.NextInt(2));
             pk.AbilityNumber = ability;
+            pk.RefreshChecksum();
             return pk;
         }
         private static uint GetShinyPID(int tid, int sid, uint pid, int type)

@@ -45,15 +45,18 @@ namespace WangPlugin
             var HandleOverworld8 = new ToolStripMenuItem($"处理Overworld8");
             var Calc = new ToolStripMenuItem($"性格计算器");
             var Read = new ToolStripMenuItem($"简易排序");
+            var RNGForm = new ToolStripMenuItem($"RNG面板");
             Allshiny.Click += (s, e) => SetShiny();
             HandleM1.Click += (s, e) => Method1();
             HandleOverworld8.Click += (s, e) => Method8rng();
             Calc.Click += (s, e) =>Open();
+            RNGForm.Click += (s, e) => OpenRNGForm();
             Read.Click += (s, e) => SortPokemon();
             ctrl.DropDownItems.Add(Allshiny);
             ctrl.DropDownItems.Add(HandleOverworld8);
-            ctrl.DropDownItems.Add(Read);
+            ctrl.DropDownItems.Add(HandleM1);
             ctrl.DropDownItems.Add(Calc);
+            ctrl.DropDownItems.Add(RNGForm);
             ctrl.DropDownItems.Add(Read);
             //  Console.WriteLine($"{Name} added menu items.");
         }
@@ -81,7 +84,7 @@ namespace WangPlugin
         }
         public PKM HandleMethod1(PKM pkm)
         {
-            var seed = Util.Rand32();
+           var seed = Util.Rand32();
            while (true)
            {
            pkm = Method1RNG.GenPkm(pkm,seed, PKMEditor.Data.TID, PKMEditor.Data.SID);
@@ -104,7 +107,8 @@ namespace WangPlugin
                 if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < 16)
                 {
                     pkm.RefreshChecksum();
-                    MessageBox.Show($"过啦！");
+                    var s = (IScaledSize)pkm;
+                    MessageBox.Show($"过啦！{seed}身高{s.HeightScalar}体重{s.WeightScalar}");
                     return pkm;
                 }
                 seed = Overworld8RNGM.Next(seed);
@@ -154,6 +158,11 @@ namespace WangPlugin
         private void Open()
         {
             var frm = new calc();
+            frm.Show();
+        }
+        private void OpenRNGForm()
+        {
+            var frm = new RNGForm();
             frm.Show();
         }
         public void NotifySaveLoaded()
