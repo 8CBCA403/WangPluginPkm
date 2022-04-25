@@ -11,6 +11,8 @@ namespace WangPlugin
         private Button Method4;
         private Button XDColo;
         private Button Roaming8b;
+        private Button H1_BACD_R;
+        private Button Method_1_Roamer;
         private Button Method1;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
@@ -24,12 +26,15 @@ namespace WangPlugin
         }
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RNGForm));
             this.Method1 = new System.Windows.Forms.Button();
             this.Overworld8 = new System.Windows.Forms.Button();
             this.Method2 = new System.Windows.Forms.Button();
             this.Method4 = new System.Windows.Forms.Button();
             this.XDColo = new System.Windows.Forms.Button();
             this.Roaming8b = new System.Windows.Forms.Button();
+            this.H1_BACD_R = new System.Windows.Forms.Button();
+            this.Method_1_Roamer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Method1
@@ -44,7 +49,7 @@ namespace WangPlugin
             // 
             // Overworld8
             // 
-            this.Overworld8.Location = new System.Drawing.Point(24, 157);
+            this.Overworld8.Location = new System.Drawing.Point(24, 202);
             this.Overworld8.Name = "Overworld8";
             this.Overworld8.Size = new System.Drawing.Size(97, 38);
             this.Overworld8.TabIndex = 1;
@@ -85,7 +90,7 @@ namespace WangPlugin
             // Roaming8b
             // 
             this.Roaming8b.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Roaming8b.Location = new System.Drawing.Point(159, 157);
+            this.Roaming8b.Location = new System.Drawing.Point(159, 202);
             this.Roaming8b.Name = "Roaming8b";
             this.Roaming8b.Size = new System.Drawing.Size(99, 38);
             this.Roaming8b.TabIndex = 5;
@@ -93,15 +98,39 @@ namespace WangPlugin
             this.Roaming8b.UseVisualStyleBackColor = true;
             this.Roaming8b.Click += new System.EventHandler(this.Roaming8b_Click);
             // 
+            // H1_BACD_R
+            // 
+            this.H1_BACD_R.Location = new System.Drawing.Point(24, 144);
+            this.H1_BACD_R.Name = "H1_BACD_R";
+            this.H1_BACD_R.Size = new System.Drawing.Size(99, 38);
+            this.H1_BACD_R.TabIndex = 6;
+            this.H1_BACD_R.Text = "H1_BACD_R";
+            this.H1_BACD_R.UseVisualStyleBackColor = true;
+            this.H1_BACD_R.Click += new System.EventHandler(this.H1_BACD_R_Click);
+            // 
+            // Method_1_Roamer
+            // 
+            this.Method_1_Roamer.Location = new System.Drawing.Point(159, 144);
+            this.Method_1_Roamer.Name = "Method_1_Roamer";
+            this.Method_1_Roamer.Size = new System.Drawing.Size(99, 38);
+            this.Method_1_Roamer.TabIndex = 7;
+            this.Method_1_Roamer.Text = "Method_1_Roamer";
+            this.Method_1_Roamer.UseVisualStyleBackColor = true;
+            this.Method_1_Roamer.Click += new System.EventHandler(this.Method_1_Roamer_Click);
+            // 
             // RNGForm
             // 
-            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(282, 267);
+            this.Controls.Add(this.Method_1_Roamer);
+            this.Controls.Add(this.H1_BACD_R);
             this.Controls.Add(this.Roaming8b);
             this.Controls.Add(this.XDColo);
             this.Controls.Add(this.Method4);
             this.Controls.Add(this.Method2);
             this.Controls.Add(this.Overworld8);
             this.Controls.Add(this.Method1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RNGForm";
             this.ResumeLayout(false);
 
@@ -111,7 +140,7 @@ namespace WangPlugin
             var seed = Util.Rand32();
             while (true)
             {
-                var pkm = Method1RNG.GenPkm(Editor.Data, seed);
+                var pkm = Method1RNG.GenPkm(Editor.Data, seed );
                 
              if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < 8)
                 {
@@ -217,6 +246,42 @@ namespace WangPlugin
         private static uint GetShinyXor(uint pid, int TID, int SID)
         {
             return ((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF)));
+        }
+        private void H1_BACD_R_Click(object sender, EventArgs e)
+        {
+            var seed = Util.Rand32();
+            while (true)
+            {
+                var pkm = global::WangPlugin.H1_BACD_R.GenPkm(Editor.Data, seed & 0xFFFF, Editor.Data.SID, Editor.Data.TID);
+
+                if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < 8)
+                {
+                    pkm.RefreshChecksum();
+                    MessageBox.Show($"过啦！");
+                    Editor.PopulateFields(pkm, false);
+                    SAV.ReloadSlots();
+                    break;
+                }
+                seed = global::WangPlugin.H1_BACD_R.Next(seed);
+            }
+        }
+        private void Method_1_Roamer_Click(object sender, EventArgs e)
+        {
+            var seed = Util.Rand32();
+            while (true)
+            {
+                var pkm = Method1Roaming.GenPkm(Editor.Data, seed);
+
+                if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < 8)
+                {
+                    pkm.RefreshChecksum();
+                    MessageBox.Show($"过啦！");
+                    Editor.PopulateFields(pkm, false);
+                    SAV.ReloadSlots();
+                    break;
+                }
+                seed = Method1Roaming.Next(seed);
+            }
         }
     }
 }

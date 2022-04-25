@@ -25,11 +25,11 @@ namespace WangPlugin
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(calc));
-            this.CalcStart = new Button();
-            this.Exit = new Button();
-            this.PIDHex = new TextBox();
-            this.PID = new Label();
-            this.Nature = new TextBox();
+            this.CalcStart = new System.Windows.Forms.Button();
+            this.Exit = new System.Windows.Forms.Button();
+            this.PIDHex = new System.Windows.Forms.TextBox();
+            this.PID = new System.Windows.Forms.Label();
+            this.Nature = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // CalcStart
@@ -40,7 +40,7 @@ namespace WangPlugin
             this.CalcStart.TabIndex = 0;
             this.CalcStart.Text = "计算性格";
             this.CalcStart.UseVisualStyleBackColor = true;
-            this.CalcStart.Click += new EventHandler(this.CalcStart_Click);
+            this.CalcStart.Click += new System.EventHandler(this.CalcStart_Click);
             // 
             // Exit
             // 

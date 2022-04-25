@@ -2,7 +2,7 @@ using PKHeX.Core;
 
 namespace WangPlugin
 {
-    internal static class Method1RNG
+    internal static class Method1Roaming
     {
         private const int shift = 16;
 
@@ -15,16 +15,11 @@ namespace WangPlugin
             var dvLower = RNG.LCRNG.Advance(seed, 3) >> shift;
             var dvUpper = RNG.LCRNG.Advance(seed, 4) >> shift;
             var pid = combineRNG(pidUpper, pidLower, shift);
-            var pidR = combineRNG(pidLower, pidUpper, shift);
             var ivs = dvsToIVs(dvUpper, dvLower);
-            if (pk.Species == 201)
-            {
-                pk.PID = pidR;
-            }
-            else
-            {
-                pk.PID = pid;
-            }
+            ivs[1] &= 7;
+            for (int i = 2; i < 6; i++)
+                ivs[i] = 0;
+            pk.PID = pid;
             pk.IV_HP = (int)ivs[0];
             pk.IV_ATK = (int)ivs[1];
             pk.IV_DEF = (int)ivs[2];

@@ -11,12 +11,10 @@ namespace WangPlugin
     {
         public string Name => nameof(WangPlugin);
         public int Priority => 1; // Loading order, lowest is first.
-
+        public string ImageSource = @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\icon.jpg";
         // Initialized on plugin load
         public ISaveFileProvider SaveFileEditor { get; private set; } = null!;
         public IPKMView PKMEditor { get; private set; } = null!;
-         
-
         private readonly CancellationTokenSource tokenSource = new();
 
         public void Initialize(params object[] args)
@@ -27,7 +25,6 @@ namespace WangPlugin
             var menu = (ToolStrip)Array.Find(args, z => z is ToolStrip);
             LoadMenuStrip(menu);
         }
-       
         private void LoadMenuStrip(ToolStrip menuStrip)
         {
             var items = menuStrip.Items;
@@ -35,10 +32,12 @@ namespace WangPlugin
                 throw new ArgumentException(nameof(menuStrip));
             AddPluginControl(tools);
         }
-
         private void AddPluginControl(ToolStripDropDownItem tools)
         {
-            var ctrl = new ToolStripMenuItem(Name);
+            var ctrl = new ToolStripMenuItem(Name)
+            {
+                Image = System.Drawing.Image.FromFile(ImageSource)
+            };
             tools.DropDownItems.Add(ctrl);
             var RNGForm = new ToolStripMenuItem($"RNG面板");
             var Allshiny = new ToolStripMenuItem($"全部闪光");
@@ -60,13 +59,10 @@ namespace WangPlugin
             sav.ModifyBoxes(SetAllShiny);
             SaveFileEditor.ReloadSlots();
         }
-       
-        
         public  void SetAllShiny(PKM pkm)
         {
             CommonEdits.SetShiny(pkm);
         }
-
         public void SortPokemon()
         {
             var sav = SaveFileEditor.SAV;
@@ -116,7 +112,6 @@ namespace WangPlugin
         {
             Console.WriteLine($"{Name} was notified that a Save File was just loaded.");
         }
-
         public bool TryLoadFile(string filePath)
         {
             Console.WriteLine($"{Name} was provided with the file path, but chose to do nothing with it.");

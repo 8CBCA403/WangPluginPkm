@@ -15,8 +15,16 @@ namespace WangPlugin
             var dvLower = RNG.LCRNG.Advance(seed,3) >> shift;
             var dvUpper = RNG.LCRNG.Advance(seed,5 ) >> shift;
             var pid = combineRNG(pidUpper, pidLower, shift);
+            var pidR = combineRNG(pidLower, pidUpper, shift);
             var ivs = dvsToIVs(dvUpper, dvLower);
-            pk.PID = pid;
+            if (pk.Species == 201)
+            {
+                pk.PID = pidR;
+            }
+            else
+            {
+                pk.PID = pid;
+            }
             pk.IV_HP = (int)ivs[0];
             pk.IV_ATK = (int)ivs[1];
             pk.IV_DEF = (int)ivs[2];
