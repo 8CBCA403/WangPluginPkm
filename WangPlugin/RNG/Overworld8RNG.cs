@@ -9,7 +9,7 @@ namespace WangPlugin
     /// <remarks>
     /// Entities spawned into the overworld that can be encountered are assigned a 32bit seed, which can be immediately derived from the <see cref="PKM.EncryptionConstant"/>.
     /// </remarks>
-    public static class Overworld8RNGM
+    public static class Overworld8RNG
     {
        
         private const int UNSET = 255;
@@ -55,32 +55,12 @@ namespace WangPlugin
             pk.RefreshChecksum();
             return pk;
         }
-        private static uint GetShinyPID(int tid, int sid, uint pid, int type)
-        {
-            return (uint)(((tid ^ sid ^ (pid & 0xFFFF) ^ type) << 16) | (pid & 0xFFFF));
-        }
-
-        private static bool GetIsShiny(int tid, int sid, uint pid)
-        {
-            return GetShinyXor(pid, (uint)((sid << 16) | tid)) < 16;
-        }
 
         private static uint GetShinyXor(uint pid, uint oid)
         {
             var xor = pid ^ oid;
             return (xor ^ (xor >> 16)) & 0xFFFF;
         }
-        private static uint GetShinyNum(int tid, int sid, uint pid)
-        {
-            var oid =(uint)( (sid << 16) | tid);
-            return GetShinyXor(pid, oid);
-        }
-
-        /// <summary>
-        /// Obtains the original seed for the Generation 8 overworld wild encounter.
-        /// </summary>
-        /// <param name="trainer">Entity to check for</param>
-        /// <returns>Seed</returns>
        
     }
 }
