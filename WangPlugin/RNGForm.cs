@@ -13,7 +13,7 @@ namespace WangPlugin
         private CancellationTokenSource tokenSource = new();
         private TextBox Condition;
         private Button Cancel;
-
+        private CheckBox ShinyCheck;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
         enum MethodType
@@ -41,10 +41,11 @@ namespace WangPlugin
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RNGForm));
-            this.methodTypeBox = new System.Windows.Forms.ComboBox();
-            this.Search = new System.Windows.Forms.Button();
-            this.Condition = new System.Windows.Forms.TextBox();
-            this.Cancel = new System.Windows.Forms.Button();
+            this.methodTypeBox = new ComboBox();
+            this.Search = new Button();
+            this.Condition = new TextBox();
+            this.Cancel = new Button();
+            this.ShinyCheck = new CheckBox();
             this.SuspendLayout();
             // 
             // methodTypeBox
@@ -57,7 +58,7 @@ namespace WangPlugin
             // 
             // Search
             // 
-            this.Search.Location = new System.Drawing.Point(174, 22);
+            this.Search.Location = new System.Drawing.Point(175, 22);
             this.Search.Name = "Search";
             this.Search.Size = new System.Drawing.Size(92, 23);
             this.Search.TabIndex = 9;
@@ -67,7 +68,7 @@ namespace WangPlugin
             // 
             // Condition
             // 
-            this.Condition.Location = new System.Drawing.Point(12, 68);
+            this.Condition.Location = new System.Drawing.Point(12, 76);
             this.Condition.Name = "Condition";
             this.Condition.Size = new System.Drawing.Size(140, 25);
             this.Condition.TabIndex = 10;
@@ -75,18 +76,29 @@ namespace WangPlugin
             // 
             // Cancel
             // 
-            this.Cancel.Location = new System.Drawing.Point(174, 70);
+            this.Cancel.Location = new System.Drawing.Point(175, 76);
             this.Cancel.Name = "Cancel";
-            this.Cancel.Size = new System.Drawing.Size(92, 23);
+            this.Cancel.Size = new System.Drawing.Size(92, 25);
             this.Cancel.TabIndex = 11;
             this.Cancel.Text = "Cancel";
             this.Cancel.UseVisualStyleBackColor = true;
             this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
+            // ShinyCheck
+            // 
+            this.ShinyCheck.AutoSize = true;
+            this.ShinyCheck.Location = new System.Drawing.Point(12, 51);
+            this.ShinyCheck.Name = "ShinyCheck";
+            this.ShinyCheck.Size = new System.Drawing.Size(69, 19);
+            this.ShinyCheck.TabIndex = 12;
+            this.ShinyCheck.Text = "Shiny";
+            this.ShinyCheck.UseVisualStyleBackColor = true;
+            // 
             // RNGForm
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(278, 108);
+            this.ClientSize = new System.Drawing.Size(285, 112);
+            this.Controls.Add(this.ShinyCheck);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.Condition);
             this.Controls.Add(this.Search);
@@ -108,10 +120,10 @@ namespace WangPlugin
                 RNGMethod = (MethodType)Enum.Parse(typeof(MethodType), this.methodTypeBox.SelectedItem.ToString(), false);
             };
             this.methodTypeBox.SelectedIndex = 0;
+            
         }
         private PKM GenPkm(uint seed)
         {
-
             //MessageBox.Show($"{((ITrainerID)SAV.SAV).SID}, {((ITrainerID)SAV.SAV).TID}");
             return RNGMethod switch
             {
@@ -204,15 +216,18 @@ namespace WangPlugin
                 },
                 tokenSource.Token);
         }
-        private static uint GetShinyXor(uint pid, int TID, int SID)
+        private  uint GetShinyXor(uint pid, int TID, int SID)
         {
-            return ((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF)));
+            if (ShinyCheck.Checked)
+                return ((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF)));
+            else
+                return 0;
         }
-
         private void Cancel_Click(object sender, EventArgs e)
         {
             tokenSource.Cancel();
             IsRunning(false);
         }
+        
     }
 }
