@@ -6,16 +6,24 @@ namespace WangPlugin
 {
     internal class RNGForm : Form
     {
-        private Button Overworld8;
-        private Button Method2;
-        private Button Method4;
-        private Button XDColo;
-        private Button Roaming8b;
-        private Button H1_BACD_R;
-        private Button Method_1_Roamer;
-        private Button Method1;
+        private ComboBox methodTypeBox;
+        private Button Search;
+
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
+        enum MethodType
+        {
+            Method1,
+            H1_BACD_R,
+            Method1Roaming,
+            Method2,
+            Method4,
+            XDColo,
+            Colo,
+            Overworld8,
+            Roaming8b,
+        }
+        private MethodType RNGMethod = MethodType.Method1;
 #pragma warning disable CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
         public RNGForm(ISaveFileProvider sav, IPKMView editor)
 #pragma warning restore CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
@@ -23,268 +31,128 @@ namespace WangPlugin
             SAV = sav;
             Editor = editor;
             InitializeComponent();
+            BindingData();
         }
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RNGForm));
-            this.Method1 = new System.Windows.Forms.Button();
-            this.Overworld8 = new System.Windows.Forms.Button();
-            this.Method2 = new System.Windows.Forms.Button();
-            this.Method4 = new System.Windows.Forms.Button();
-            this.XDColo = new System.Windows.Forms.Button();
-            this.Roaming8b = new System.Windows.Forms.Button();
-            this.H1_BACD_R = new System.Windows.Forms.Button();
-            this.Method_1_Roamer = new System.Windows.Forms.Button();
+            this.methodTypeBox = new System.Windows.Forms.ComboBox();
+            this.Search = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // Method1
+            // methodTypeBox
             // 
-            this.Method1.Location = new System.Drawing.Point(24, 31);
-            this.Method1.Name = "Method1";
-            this.Method1.Size = new System.Drawing.Size(97, 38);
-            this.Method1.TabIndex = 0;
-            this.Method1.Text = "Method1RNG";
-            this.Method1.UseVisualStyleBackColor = true;
-            this.Method1.Click += new System.EventHandler(this.Method1_Click);
+            this.methodTypeBox.FormattingEnabled = true;
+            this.methodTypeBox.Location = new System.Drawing.Point(12, 22);
+            this.methodTypeBox.Name = "methodTypeBox";
+            this.methodTypeBox.Size = new System.Drawing.Size(129, 23);
+            this.methodTypeBox.TabIndex = 8;
             // 
-            // Overworld8
+            // Search
             // 
-            this.Overworld8.Location = new System.Drawing.Point(24, 202);
-            this.Overworld8.Name = "Overworld8";
-            this.Overworld8.Size = new System.Drawing.Size(97, 38);
-            this.Overworld8.TabIndex = 1;
-            this.Overworld8.Text = "Overworld8RNG";
-            this.Overworld8.UseVisualStyleBackColor = true;
-            this.Overworld8.Click += new System.EventHandler(this.Overworld8_Click);
-            // 
-            // Method2
-            // 
-            this.Method2.Location = new System.Drawing.Point(159, 31);
-            this.Method2.Name = "Method2";
-            this.Method2.Size = new System.Drawing.Size(99, 38);
-            this.Method2.TabIndex = 2;
-            this.Method2.Text = "Method2RNG";
-            this.Method2.UseVisualStyleBackColor = true;
-            this.Method2.Click += new System.EventHandler(this.Method2_Click);
-            // 
-            // Method4
-            // 
-            this.Method4.Location = new System.Drawing.Point(24, 91);
-            this.Method4.Name = "Method4";
-            this.Method4.Size = new System.Drawing.Size(99, 38);
-            this.Method4.TabIndex = 3;
-            this.Method4.Text = "Method4RNG";
-            this.Method4.UseVisualStyleBackColor = true;
-            this.Method4.Click += new System.EventHandler(this.Method4_Click);
-            // 
-            // XDColo
-            // 
-            this.XDColo.Location = new System.Drawing.Point(159, 91);
-            this.XDColo.Name = "XDColo";
-            this.XDColo.Size = new System.Drawing.Size(99, 38);
-            this.XDColo.TabIndex = 4;
-            this.XDColo.Text = "XDColoRNG";
-            this.XDColo.UseVisualStyleBackColor = true;
-            this.XDColo.Click += new System.EventHandler(this.XDColo_Click);
-            // 
-            // Roaming8b
-            // 
-            this.Roaming8b.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Roaming8b.Location = new System.Drawing.Point(159, 202);
-            this.Roaming8b.Name = "Roaming8b";
-            this.Roaming8b.Size = new System.Drawing.Size(99, 38);
-            this.Roaming8b.TabIndex = 5;
-            this.Roaming8b.Text = "Roaming8bRNG";
-            this.Roaming8b.UseVisualStyleBackColor = true;
-            this.Roaming8b.Click += new System.EventHandler(this.Roaming8b_Click);
-            // 
-            // H1_BACD_R
-            // 
-            this.H1_BACD_R.Location = new System.Drawing.Point(24, 144);
-            this.H1_BACD_R.Name = "H1_BACD_R";
-            this.H1_BACD_R.Size = new System.Drawing.Size(99, 38);
-            this.H1_BACD_R.TabIndex = 6;
-            this.H1_BACD_R.Text = "H1_BACD_R";
-            this.H1_BACD_R.UseVisualStyleBackColor = true;
-            this.H1_BACD_R.Click += new System.EventHandler(this.H1_BACD_R_Click);
-            // 
-            // Method_1_Roamer
-            // 
-            this.Method_1_Roamer.Location = new System.Drawing.Point(159, 144);
-            this.Method_1_Roamer.Name = "Method_1_Roamer";
-            this.Method_1_Roamer.Size = new System.Drawing.Size(99, 38);
-            this.Method_1_Roamer.TabIndex = 7;
-            this.Method_1_Roamer.Text = "Method_1_Roamer";
-            this.Method_1_Roamer.UseVisualStyleBackColor = true;
-            this.Method_1_Roamer.Click += new System.EventHandler(this.Method_1_Roamer_Click);
+            this.Search.Location = new System.Drawing.Point(162, 22);
+            this.Search.Name = "Search";
+            this.Search.Size = new System.Drawing.Size(92, 23);
+            this.Search.TabIndex = 9;
+            this.Search.Text = "StartRNG";
+            this.Search.UseVisualStyleBackColor = true;
+            this.Search.Click += new System.EventHandler(this.Search_Click);
             // 
             // RNGForm
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(282, 267);
-            this.Controls.Add(this.Method_1_Roamer);
-            this.Controls.Add(this.H1_BACD_R);
-            this.Controls.Add(this.Roaming8b);
-            this.Controls.Add(this.XDColo);
-            this.Controls.Add(this.Method4);
-            this.Controls.Add(this.Method2);
-            this.Controls.Add(this.Overworld8);
-            this.Controls.Add(this.Method1);
+            this.ClientSize = new System.Drawing.Size(278, 59);
+            this.Controls.Add(this.Search);
+            this.Controls.Add(this.methodTypeBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RNGForm";
             this.ResumeLayout(false);
 
         }
-        private void Method1_Click(object sender, EventArgs e)
+        private void BindingData()
+        {
+            this.methodTypeBox.DataSource = Enum.GetNames(typeof(MethodType));
+            this.methodTypeBox.SelectedIndexChanged += (_, __) =>
+            {
+                RNGMethod = (MethodType)Enum.Parse(typeof(MethodType), this.methodTypeBox.SelectedItem.ToString(), false);
+            };
+            this.methodTypeBox.SelectedIndex = 0;
+        }
+        private PKM GenPkm(uint seed)
+        {
+
+            //MessageBox.Show($"{((ITrainerID)SAV.SAV).SID}, {((ITrainerID)SAV.SAV).TID}");
+            return RNGMethod switch
+            {
+                MethodType.Method1 => Method1RNG.GenPkm(Editor.Data, seed),
+                MethodType.Method2 => Method2RNG.GenPkm(Editor.Data, seed),
+                MethodType.Method4 => Method4RNG.GenPkm(Editor.Data, seed),
+                MethodType.XDColo => XDColoRNG.GenPkm(Editor.Data, seed),
+                MethodType.Overworld8 => Overworld8RNG.GenPkm(Editor.Data, seed, Editor.Data.TID, Editor.Data.SID),
+                MethodType.Roaming8b => Roaming8bRNG.GenPkm(Editor.Data, seed, Editor.Data.TID, Editor.Data.SID),
+                MethodType.H1_BACD_R=> H1_BACD_R.GenPkm(Editor.Data, seed & 0xFFFF, Editor.Data.SID, Editor.Data.TID),
+                MethodType.Method1Roaming=> Method1Roaming.GenPkm(Editor.Data, seed),
+                MethodType.Colo=>ColoRNG.GenPkm(Editor.Data, seed),
+                _ => throw new NotSupportedException(),
+            };
+        }
+        private uint NextSeed(uint seed)
+        {
+            return RNGMethod switch
+            {
+                MethodType.Method1 => Method1RNG.Next(seed),
+                MethodType.Method2 => Method2RNG.Next(seed),
+                MethodType.Method4 => Method4RNG.Next(seed),
+                MethodType.XDColo => XDColoRNG.Next(seed),
+                MethodType.Overworld8 => Overworld8RNG.Next(seed),
+                MethodType.Roaming8b => Roaming8bRNG.Next(seed),
+                MethodType.H1_BACD_R => H1_BACD_R.Next(seed),
+                MethodType.Method1Roaming => Method1Roaming.Next(seed),
+                MethodType.Colo => ColoRNG.Next(seed),
+                _ => throw new NotSupportedException(),
+            };
+        }
+        private int TypeXor()
+        {
+            return RNGMethod switch
+            {
+                MethodType.Method1 => 8,
+                MethodType.Method2 => 8,
+                MethodType.Method4 => 8,
+                MethodType.XDColo => 8,
+                MethodType.H1_BACD_R =>8,
+                MethodType.Method1Roaming =>8,
+                MethodType.Colo =>8,
+                MethodType.Overworld8 => 16,
+                MethodType.Roaming8b => 16,
+                _ => throw new NotSupportedException(),
+            };
+        }
+        
+
+        private void Search_Click(object sender, EventArgs e)
         {
             var seed = Util.Rand32();
-            while (true)
-            {
-                var pkm = Method1RNG.GenPkm(Editor.Data, seed );
+        
                 
-             if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < 8)
-                {
-                    pkm.RefreshChecksum();
-                  
-                    
-                    MessageBox.Show($"过啦！{pkm.AbilityNumber}");
-                    Editor.PopulateFields(pkm, false);
-                    SAV.ReloadSlots();
-                    break;
-                }
-                seed = Method1RNG.Next(seed);
-            }
-        }
-        private void Method2_Click(object sender, EventArgs e)
-        {
-            var seed = Util.Rand32();
             while (true)
             {
-                var pkm = Method2RNG.GenPkm(Editor.Data, seed);
-
-                if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < 8)
-                {
-                    pkm.RefreshChecksum();
-                    MessageBox.Show($"过啦！");
-                    Editor.PopulateFields(pkm, false);
-                    SAV.ReloadSlots();
-                    break;
-                }
-                seed = Method2RNG.Next(seed);
-            }
-        }
-        private void Method4_Click(object sender, EventArgs e)
-        {
-            var seed = Util.Rand32();
-            while (true)
-            {
-                var pkm = Method4RNG.GenPkm(Editor.Data, seed);
-
-                if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < 8)
-                {
-                    pkm.RefreshChecksum();
-                    MessageBox.Show($"过啦！");
-                    Editor.PopulateFields(pkm, false);
-                    SAV.ReloadSlots();
-                    break;
-                }
-                seed = Method4RNG.Next(seed);
-            }
-        }
-        private void XDColo_Click(object sender, EventArgs e)
-        {
-            var seed = Util.Rand32();
-            while (true)
-            {
-                var pkm = XDColoRNG.GenPkm(Editor.Data, seed);
+                var pkm = GenPkm(seed);
                 var la = new LegalityAnalysis(pkm);
-                if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < 8&& la.Info.PIDIVMatches)
+                pkm.RefreshAbility((int)(pkm.PID & 1));
+                if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < TypeXor()&& la.Info.PIDIVMatches)
                 {
-                    pkm.RefreshChecksum();
-                    MessageBox.Show($"过啦！");
-                    Editor.PopulateFields(pkm, false);
-                    SAV.ReloadSlots();
-                    break;
+                        MessageBox.Show($"过啦！");
+                        Editor.PopulateFields(pkm, false);
+                        SAV.ReloadSlots();
+                        break;
                 }
-                seed = XDColoRNG.Next(seed);
-            }
-        }
-        private void Overworld8_Click(object sender, EventArgs e)
-        {
-            var seed = Util.Rand32();
-            while (true)
-            {
-                var pkm = Overworld8RNG.GenPkm(Editor.Data, seed, Editor.Data.TID, Editor.Data.SID);
-
-                if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < 16)
-                {
-                    pkm.RefreshChecksum();
-                    MessageBox.Show($"过啦！");
-                    Editor.PopulateFields(pkm, false);
-                    SAV.ReloadSlots();
-                    break;
-                }
-                seed = Overworld8RNG.Next(seed);
-            }
-        }
-        private void Roaming8b_Click(object sender, EventArgs e)
-        {
-            var seed = Util.Rand32();
-            while (true)
-            {
-                var pkm = Roaming8bRNG.GenPkm(Editor.Data, seed, Editor.Data.TID, Editor.Data.SID);
-
-                if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < 16)
-                {
-                    pkm.RefreshChecksum();
-                    MessageBox.Show($"过啦！{seed}");
-                    Editor.PopulateFields(pkm, false);
-                    SAV.ReloadSlots();
-                    break;
-                }
-                seed = Roaming8bRNG.Next(seed);
+                seed = NextSeed(seed);
             }
         }
         private static uint GetShinyXor(uint pid, int TID, int SID)
         {
             return ((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF)));
         }
-        private void H1_BACD_R_Click(object sender, EventArgs e)
-        {
-            var seed = Util.Rand32();
-            while (true)
-            {
-                var pkm = global::WangPlugin.H1_BACD_R.GenPkm(Editor.Data, seed & 0xFFFF, Editor.Data.SID, Editor.Data.TID);
-
-                if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < 8)
-                {
-                    pkm.RefreshChecksum();
-                    MessageBox.Show($"过啦！");
-                    Editor.PopulateFields(pkm, false);
-                    SAV.ReloadSlots();
-                    break;
-                }
-                seed = global::WangPlugin.H1_BACD_R.Next(seed);
-            }
-        }
-        private void Method_1_Roamer_Click(object sender, EventArgs e)
-        {
-            var seed = Util.Rand32();
-            while (true)
-            {
-                var pkm = Method1Roaming.GenPkm(Editor.Data, seed);
-
-                if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < 8)
-                {
-                    pkm.RefreshChecksum();
-                    MessageBox.Show($"过啦！");
-                    Editor.PopulateFields(pkm, false);
-                    SAV.ReloadSlots();
-                    break;
-                }
-                seed = Method1Roaming.Next(seed);
-            }
-        }
-       
     }
 }

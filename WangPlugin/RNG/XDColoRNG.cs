@@ -13,32 +13,36 @@ namespace WangPlugin
         public static PKM GenPkm(PKM pk, uint seed)
         {
             var rng = RNG.XDRNG;
-            switch (pk.Species)
-            {
-                case (int)Species.Umbreon or (int)Species.Eevee: // Colo Umbreon, XD Eevee
-                    pk.TID = (int)((seed = rng.Next(seed)) >> 16);
-                    pk.SID = (int)((seed = rng.Next(seed)) >> 16);
-                    seed = rng.Advance(seed, 2); // PID calls consumed
-                    break;
-                case (int)Species.Espeon: // Colo Espeon
-                    pk.TID = (int)((seed = rng.Next(seed)) >> 16);
-                    pk.SID = (int)((seed = rng.Next(seed)) >> 16);
-                    seed = rng.Advance(seed, 9); // PID calls consumed, skip over Umbreon
-                    break;
-            }
-            var A = rng.Next(seed); // IV1
-            var B = rng.Next(A); // IV2
-            var C = rng.Next(B); // Ability?
-            var D = rng.Next(C); // PID
-            var E = rng.Next(D); // PID
-            pk.PID = (D & 0xFFFF0000) | E >> 16;
-            Span<int> IVs = stackalloc int[6];
-            GetIVsInt32(IVs, A >> 16, B >> 16);
-            pk.SetIVs(IVs);
-            pk.Nature = (int)(pk.PID % 100 % 25);
-            pk.RefreshAbility((int)(pk.PID & 1));
+        
+                switch (pk.Species)
+                {
+                    case (int)Species.Umbreon or (int)Species.Eevee: // Colo Umbreon, XD Eevee
+                        pk.TID = (int)((seed = rng.Next(seed)) >> 16);
+                        pk.SID = (int)((seed = rng.Next(seed)) >> 16);
+                        seed = rng.Advance(seed, 2); // PID calls consumed
+                        break;
+                    case (int)Species.Espeon: // Colo Espeon
+                        pk.TID = (int)((seed = rng.Next(seed)) >> 16);
+                        pk.SID = (int)((seed = rng.Next(seed)) >> 16);
+                        seed = rng.Advance(seed, 9); // PID calls consumed, skip over Umbreon
+                        break;
+                }
+                var A = rng.Next(seed); // IV1
+                var B = rng.Next(A); // IV2
+                var C = rng.Next(B); // Ability?
+                var D = rng.Next(C); // PID
+                var E = rng.Next(D); // PID
+                pk.PID = (D & 0xFFFF0000) | E >> 16;
+                Span<int> IVs = stackalloc int[6];
+                GetIVsInt32(IVs, A >> 16, B >> 16);
+                pk.SetIVs(IVs);
+                pk.Nature = (int)(pk.PID % 100 % 25);
+                pk.RefreshAbility((int)(pk.PID & 1));
+               
+            
             return pk;
         }
+    
 
         private static void GetIVsInt32(Span<int> result, uint r1, uint r2)
         {
