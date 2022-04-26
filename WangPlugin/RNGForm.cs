@@ -23,6 +23,7 @@ namespace WangPlugin
             Method1Roaming,
             Method2,
             Method4,
+            ChainShiny,
             XDColo,
             Colo,
             Overworld8,
@@ -120,7 +121,7 @@ namespace WangPlugin
                 RNGMethod = (MethodType)Enum.Parse(typeof(MethodType), this.methodTypeBox.SelectedItem.ToString(), false);
             };
             this.methodTypeBox.SelectedIndex = 0;
-            
+
         }
         private PKM GenPkm(uint seed)
         {
@@ -133,9 +134,10 @@ namespace WangPlugin
                 MethodType.XDColo => XDColoRNG.GenPkm(Editor.Data, seed),
                 MethodType.Overworld8 => Overworld8RNG.GenPkm(Editor.Data, seed, Editor.Data.TID, Editor.Data.SID),
                 MethodType.Roaming8b => Roaming8bRNG.GenPkm(Editor.Data, seed, Editor.Data.TID, Editor.Data.SID),
-                MethodType.H1_BACD_R=> H1_BACD_R.GenPkm(Editor.Data, seed & 0xFFFF, Editor.Data.SID, Editor.Data.TID),
-                MethodType.Method1Roaming=> Method1Roaming.GenPkm(Editor.Data, seed),
-                MethodType.Colo=>ColoRNG.GenPkm(Editor.Data, seed),
+                MethodType.H1_BACD_R => H1_BACD_R.GenPkm(Editor.Data, seed & 0xFFFF, Editor.Data.SID, Editor.Data.TID),
+                MethodType.Method1Roaming => Method1Roaming.GenPkm(Editor.Data, seed),
+                MethodType.Colo => ColoRNG.GenPkm(Editor.Data, seed),
+                MethodType.ChainShiny => ChainShiny.GenPkm(Editor.Data, seed),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -152,6 +154,7 @@ namespace WangPlugin
                 MethodType.H1_BACD_R => H1_BACD_R.Next(seed),
                 MethodType.Method1Roaming => Method1Roaming.Next(seed),
                 MethodType.Colo => ColoRNG.Next(seed),
+                MethodType.ChainShiny => ChainShiny.Next(seed),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -163,9 +166,10 @@ namespace WangPlugin
                 MethodType.Method2 => 8,
                 MethodType.Method4 => 8,
                 MethodType.XDColo => 8,
-                MethodType.H1_BACD_R =>8,
-                MethodType.Method1Roaming =>8,
-                MethodType.Colo =>8,
+                MethodType.H1_BACD_R => 8,
+                MethodType.Method1Roaming => 8,
+                MethodType.Colo => 8,
+                MethodType.ChainShiny => 8,
                 MethodType.Overworld8 => 16,
                 MethodType.Roaming8b => 16,
                 _ => throw new NotSupportedException(),
@@ -185,38 +189,39 @@ namespace WangPlugin
                 () =>
                 {
                     var seed = Util.Rand32();
-                    
+
                     while (true)
                     {
                         var pkm = GenPkm(seed);
                         pkm.RefreshAbility((int)(pkm.PID & 1));
                         var la = new LegalityAnalysis(pkm);
+
                         if (tokenSource.IsCancellationRequested)
                         {
                             Condition.Text = "Stop";
                             return;
                         }
-                        if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < TypeXor() && la.Info.PIDIVMatches)
-                        {
-                            this.Invoke(() =>
+                            if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < TypeXor())
                             {
-                                MessageBox.Show($"过啦！");
-                                Editor.PopulateFields(pkm, false);
-                                SAV.ReloadSlots();
-                            });
-                            break;
-                        }
+                                this.Invoke(() =>
+                                {
+                                    MessageBox.Show($"过啦！");
+                                    Editor.PopulateFields(pkm, false);
+                                    SAV.ReloadSlots();
+                                });
+                                break;
+                            }
                         seed = NextSeed(seed);
                     }
                     this.Invoke(() =>
-                    { 
+                    {
                         IsRunning(false);
                         Condition.Text = "Nothing to check";
                     });
                 },
                 tokenSource.Token);
         }
-        private  uint GetShinyXor(uint pid, int TID, int SID)
+        private uint GetShinyXor(uint pid, int TID, int SID)
         {
             if (ShinyCheck.Checked)
                 return ((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF)));
@@ -228,6 +233,6 @@ namespace WangPlugin
             tokenSource.Cancel();
             IsRunning(false);
         }
-        
+       
     }
 }

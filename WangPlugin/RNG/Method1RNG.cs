@@ -8,7 +8,7 @@ namespace WangPlugin
 
         public static uint Next(uint seed) => RNG.LCRNG.Next(seed);
 
-        public static PKM GenPkm(PKM pk,uint seed)
+        public static PKM GenPkm( PKM pk,uint seed)
         {
             var pidLower = RNG.LCRNG.Next(seed) >> shift;
             var pidUpper = RNG.LCRNG.Advance(seed, 2) >> shift;
@@ -32,6 +32,7 @@ namespace WangPlugin
             pk.IV_SPD = (int)ivs[4];
             pk.IV_SPE = (int)ivs[5];
             pk.Nature =(int)(pid %100% 25);
+            pk.Gender = PKX.GetGenderFromPID(pk.Species, pk.PID);
             pk.RefreshAbility((int)(pk.PID & 1));
             return pk;
         }

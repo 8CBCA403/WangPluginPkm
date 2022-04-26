@@ -13,7 +13,8 @@ namespace WangPlugin
         public static PKM GenPkm(PKM pk, uint seed)
         {
             var rng = RNG.XDRNG;
-        
+            while (true)
+            {
                 switch (pk.Species)
                 {
                     case (int)Species.Umbreon or (int)Species.Eevee: // Colo Umbreon, XD Eevee
@@ -38,8 +39,13 @@ namespace WangPlugin
                 pk.SetIVs(IVs);
                 pk.Nature = (int)(pk.PID % 100 % 25);
                 pk.RefreshAbility((int)(pk.PID & 1));
-               
-            
+                var la = new LegalityAnalysis(pk);
+                if (la.Info.PIDIVMatches)
+                {
+                    break;
+                }
+                seed = Next(seed);
+            }
             return pk;
         }
     

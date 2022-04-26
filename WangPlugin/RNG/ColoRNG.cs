@@ -13,30 +13,32 @@ namespace WangPlugin
         public static PKM GenPkm(PKM pk, uint seed)
         {
             var rng = RNG.XDRNG;
-            var O = rng.Next(seed); // SID
-            var A = rng.Next(O); // PID
-            var B = rng.Next(A); // PID
-            var C = rng.Next(B); // Held Item
-            var D = rng.Next(C); // Version
-            var E = rng.Next(D); // OT Gender
-
-            const int TID = 40122;
-            var SID = (int)(O >> 16);
-            var pid1 = A >> 16;
-            var pid2 = B >> 16;
-            pk.TID = TID;
-            pk.SID = SID;
-            var pid = pid1 << 16 | pid2;
-            if ((pid2 > 7 ? 0 : 1) != (pid1 ^ SID ^ TID))
-                pid ^= 0x80000000;
-            pk.PID = pid;
-            pk.HeldItem = (int)(C >> 31) + 169; // 0-Ganlon, 1-Salac
-            pk.Version = (int)(D >> 31) + 1; // 0-Sapphire, 1-Ruby
-            pk.OT_Gender = (int)(E >> 31);
-            Span<int> ivs = stackalloc int[6];
-            rng.GetSequentialIVsInt32(E, ivs);
-            pk.SetIVs(ivs);
-        
+           
+                var O = rng.Next(seed); // SID
+                var A = rng.Next(O); // PID
+                var B = rng.Next(A); // PID
+                var C = rng.Next(B); // Held Item
+                var D = rng.Next(C); // Version
+                var E = rng.Next(D); // OT Gender
+                const int TID = 40122;
+                var SID = (int)(O >> 16);
+                var pid1 = A >> 16;
+                var pid2 = B >> 16;
+                pk.TID = TID;
+                pk.SID = SID;
+                var pid = pid1 << 16 | pid2;
+                if ((pid2 > 7 ? 0 : 1) != (pid1 ^ SID ^ TID))
+                    pid ^= 0x80000000;
+                pk.PID = pid;
+                pk.HeldItem = (int)(C >> 31) + 169; // 0-Ganlon, 1-Salac
+                pk.Version = (int)(D >> 31) + 1; // 0-Sapphire, 1-Ruby
+                pk.OT_Gender = (int)(E >> 31);
+                Span<int> ivs = stackalloc int[6];
+                rng.GetSequentialIVsInt32(E, ivs);
+                pk.SetIVs(ivs);
+                pk.Gender = PKX.GetGenderFromPID(pk.Species, pk.PID);
+              
+               
             return pk;
         }
 

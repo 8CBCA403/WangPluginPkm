@@ -3,26 +3,31 @@ using System;
 
 namespace WangPlugin
 {
-    internal static class H1_BACD_R
+    internal static class ChainShiny
     {
         private const int shift = 16;
 
         public static uint Next(uint seed) => RNG.LCRNG.Next(seed);
 
-        public static PKM GenPkm(PKM pk,uint seed,int SID,int TID)
+        public static PKM GenPkm(PKM pk,uint seed)
         {
-            var rng = RNG.LCRNG;
-            uint X = seed;
-            var A = rng.Next(X);
-            var B = rng.Next(A);
-            var C = rng.Next(B);
-            var D = rng.Next(C);
-            pk.PID = (A & 0xFFFF0000) | B >> 16;
+            // 13 rand bits
+            // 1 3-bit for upper
+            // 1 3-bit for lower
+
+            uint Next() => (seed = RNG.LCRNG.Next(seed)) >> 16;
+            uint lower = Next() & 7;
+            uint upper = Next() & 7;
+            for (int i = 0; i < 13; i++)
+                lower |= (Next() & 1) << (3 + i);
+            upper = ((uint)(lower ^ pk.TID ^ pk.SID) & 0xFFF8) | (upper & 0x7);
+            pk.PID = upper << 16 | lower;
+            var pid = pk.PID;
             Span<int> IVs = stackalloc int[6];
-            GetIVsInt32(IVs, C >> 16, D >> 16);
+            GetIVsInt32(IVs, Next(), Next());
+            pk.Nature = (int)(pid % 100 % 25);
+            pk.RefreshAbility((int)(pk.PID & 1));
             pk.SetIVs(IVs);
-            pk.Nature =(int)(pk.PID % 100% 25);
-            pk.Ability = (int)pk.PID & 1;
             pk.Gender = PKX.GetGenderFromPID(pk.Species, pk.PID);
             return pk;
         }
