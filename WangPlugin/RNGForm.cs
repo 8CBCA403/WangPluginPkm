@@ -11,7 +11,6 @@ namespace WangPlugin
         private ComboBox methodTypeBox;
         private Button Search;
         private CancellationTokenSource tokenSource = new();
-        private List<IEncounterInfo> Results = new();
         private TextBox Condition;
         private Button Cancel;
 
@@ -165,8 +164,6 @@ namespace WangPlugin
             Search.Enabled = !running;
             Cancel.Visible = running;
         }
-
-
         private void Search_Click(object sender, EventArgs e)
         {
             IsRunning(true);
