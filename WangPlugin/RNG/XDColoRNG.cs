@@ -1,4 +1,5 @@
 using PKHeX.Core;
+using System;
 
 namespace WangPlugin
 {
@@ -11,36 +12,42 @@ namespace WangPlugin
 
         public static PKM GenPkm(PKM pk, uint seed)
         {
-            var dvLower = RNG.XDRNG.Next(seed) >> shift;
-            var dvUpper = RNG.XDRNG.Advance(seed, 2) >> shift;
-            var ability = RNG.XDRNG.Advance(seed, 3) & 1>> shift8;
-            var pidUpper = RNG.XDRNG.Advance(seed,4) >> shift;
-            var pidLower = RNG.XDRNG.Advance(seed,5 ) >> shift;           
-            var pid = combineRNG(pidUpper, pidLower, shift);
-            var ivs = dvsToIVs(dvUpper, dvLower);
-            pk.PID = pid;
-            pk.IV_HP = (int)ivs[0];
-            pk.IV_ATK = (int)ivs[1];
-            pk.IV_DEF = (int)ivs[2];
-            pk.IV_SPA = (int)ivs[3];
-            pk.IV_SPD = (int)ivs[4];
-            pk.IV_SPE = (int)ivs[5];
-            pk.Nature = (int)(pid % 100 % 25);
-            pk.Ability =(int) ability;
+            var rng = RNG.XDRNG;
+            switch (pk.Species)
+            {
+                case (int)Species.Umbreon or (int)Species.Eevee: // Colo Umbreon, XD Eevee
+                    pk.TID = (int)((seed = rng.Next(seed)) >> 16);
+                    pk.SID = (int)((seed = rng.Next(seed)) >> 16);
+                    seed = rng.Advance(seed, 2); // PID calls consumed
+                    break;
+                case (int)Species.Espeon: // Colo Espeon
+                    pk.TID = (int)((seed = rng.Next(seed)) >> 16);
+                    pk.SID = (int)((seed = rng.Next(seed)) >> 16);
+                    seed = rng.Advance(seed, 9); // PID calls consumed, skip over Umbreon
+                    break;
+            }
+            var A = rng.Next(seed); // IV1
+            var B = rng.Next(A); // IV2
+            var C = rng.Next(B); // Ability?
+            var D = rng.Next(C); // PID
+            var E = rng.Next(D); // PID
+            pk.PID = (D & 0xFFFF0000) | E >> 16;
+            Span<int> IVs = stackalloc int[6];
+            GetIVsInt32(IVs, A >> 16, B >> 16);
+            pk.SetIVs(IVs);
+            pk.Nature = (int)(pk.PID % 100 % 25);
+            pk.RefreshAbility((int)(pk.PID & 1));
             return pk;
         }
 
-        private static uint[] dvsToIVs(uint dvUpper, uint dvLower)
+        private static void GetIVsInt32(Span<int> result, uint r1, uint r2)
         {
-            return new uint[]
-            {
-                dvLower & 0x1f,
-                (dvLower & 0x3E0) >> 5,
-                (dvLower & 0x7C00) >> 10,
-                (dvUpper & 0x3E0) >> 5,
-                (dvUpper & 0x7C00) >> 10,
-                dvUpper & 0x1f,
-            };
+            result[5] = (((int)r2 >> 10) & 0x1F);
+            result[4] = (((int)r2 >> 5) & 0x1F);
+            result[3] = (int)(r2 & 0x1F);
+            result[2] = (((int)r1 >> 10) & 0x1F);
+            result[1] = (((int)r1 >> 5) & 0x1F);
+            result[0] = (int)(r1 & 0x1F);
         }
         private static uint combineRNG(uint upper, uint lower, uint shift)
         {

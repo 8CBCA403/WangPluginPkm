@@ -145,7 +145,9 @@ namespace WangPlugin
              if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < 8)
                 {
                     pkm.RefreshChecksum();
-                    MessageBox.Show($"过啦！");
+                  
+                    
+                    MessageBox.Show($"过啦！{pkm.AbilityNumber}");
                     Editor.PopulateFields(pkm, false);
                     SAV.ReloadSlots();
                     break;
@@ -195,8 +197,8 @@ namespace WangPlugin
             while (true)
             {
                 var pkm = XDColoRNG.GenPkm(Editor.Data, seed);
-
-                if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < 8)
+                var la = new LegalityAnalysis(pkm);
+                if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < 8&& la.Info.PIDIVMatches)
                 {
                     pkm.RefreshChecksum();
                     MessageBox.Show($"过啦！");
@@ -283,5 +285,6 @@ namespace WangPlugin
                 seed = Method1Roaming.Next(seed);
             }
         }
+       
     }
 }

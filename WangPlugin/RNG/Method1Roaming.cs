@@ -27,7 +27,7 @@ namespace WangPlugin
             pk.IV_SPD = (int)ivs[4];
             pk.IV_SPE = (int)ivs[5];
             pk.Nature =(int)(pid %100% 25);
-            pk.Ability = (int)pid & 1;
+            pk.AbilityNumber = (int)(pid & 1);
             return pk;
         }
         private static uint[] dvsToIVs(uint dvUpper, uint dvLower)

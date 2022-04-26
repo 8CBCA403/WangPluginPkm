@@ -61,7 +61,7 @@ namespace WangPlugin
         }
         public  void SetAllShiny(PKM pkm)
         {
-            CommonEdits.SetShiny(pkm);
+            pkm.SetShinySID();
         }
         public void SortPokemon()
         {
