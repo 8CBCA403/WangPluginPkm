@@ -1,13 +1,19 @@
 ﻿using PKHeX.Core;
 using System;
 using System.Windows.Forms;
-
+using System.Threading;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 namespace WangPlugin
 {
     internal class RNGForm : Form
     {
         private ComboBox methodTypeBox;
         private Button Search;
+        private CancellationTokenSource tokenSource = new();
+        private List<IEncounterInfo> Results = new();
+        private TextBox Condition;
+        private Button Cancel;
 
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
@@ -38,6 +44,8 @@ namespace WangPlugin
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RNGForm));
             this.methodTypeBox = new System.Windows.Forms.ComboBox();
             this.Search = new System.Windows.Forms.Button();
+            this.Condition = new System.Windows.Forms.TextBox();
+            this.Cancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // methodTypeBox
@@ -45,12 +53,12 @@ namespace WangPlugin
             this.methodTypeBox.FormattingEnabled = true;
             this.methodTypeBox.Location = new System.Drawing.Point(12, 22);
             this.methodTypeBox.Name = "methodTypeBox";
-            this.methodTypeBox.Size = new System.Drawing.Size(129, 23);
+            this.methodTypeBox.Size = new System.Drawing.Size(140, 23);
             this.methodTypeBox.TabIndex = 8;
             // 
             // Search
             // 
-            this.Search.Location = new System.Drawing.Point(162, 22);
+            this.Search.Location = new System.Drawing.Point(174, 22);
             this.Search.Name = "Search";
             this.Search.Size = new System.Drawing.Size(92, 23);
             this.Search.TabIndex = 9;
@@ -58,15 +66,39 @@ namespace WangPlugin
             this.Search.UseVisualStyleBackColor = true;
             this.Search.Click += new System.EventHandler(this.Search_Click);
             // 
+            // Condition
+            // 
+            this.Condition.Location = new System.Drawing.Point(12, 68);
+            this.Condition.Name = "Condition";
+            this.Condition.Size = new System.Drawing.Size(140, 25);
+            this.Condition.TabIndex = 10;
+            this.Condition.Text = "Nothing to check";
+            // 
+            // Cancel
+            // 
+            this.Cancel.Location = new System.Drawing.Point(174, 70);
+            this.Cancel.Name = "Cancel";
+            this.Cancel.Size = new System.Drawing.Size(92, 23);
+            this.Cancel.TabIndex = 11;
+            this.Cancel.Text = "Cancel";
+            this.Cancel.UseVisualStyleBackColor = true;
+            this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
+            // 
             // RNGForm
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(278, 59);
+            this.ClientSize = new System.Drawing.Size(278, 108);
+            this.Controls.Add(this.Cancel);
+            this.Controls.Add(this.Condition);
             this.Controls.Add(this.Search);
             this.Controls.Add(this.methodTypeBox);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RNGForm";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Text = "Super Wang";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
         private void BindingData()
@@ -128,31 +160,62 @@ namespace WangPlugin
                 _ => throw new NotSupportedException(),
             };
         }
-        
+        private void IsRunning(bool running)
+        {
+            Search.Enabled = !running;
+            Cancel.Visible = running;
+        }
+
 
         private void Search_Click(object sender, EventArgs e)
         {
-            var seed = Util.Rand32();
-        
-                
-            while (true)
-            {
-                var pkm = GenPkm(seed);
-                var la = new LegalityAnalysis(pkm);
-                pkm.RefreshAbility((int)(pkm.PID & 1));
-                if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < TypeXor()&& la.Info.PIDIVMatches)
+            IsRunning(true);
+            Condition.Text = "searching...";
+            tokenSource = new();
+            Task.Factory.StartNew(
+                () =>
                 {
-                        MessageBox.Show($"过啦！");
-                        Editor.PopulateFields(pkm, false);
-                        SAV.ReloadSlots();
-                        break;
-                }
-                seed = NextSeed(seed);
-            }
+                    var seed = Util.Rand32();
+                    
+                    while (true)
+                    {
+                        var pkm = GenPkm(seed);
+                        pkm.RefreshAbility((int)(pkm.PID & 1));
+                        var la = new LegalityAnalysis(pkm);
+                        if (tokenSource.IsCancellationRequested)
+                        {
+                            Condition.Text = "Stop";
+                            return;
+                        }
+                        if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < TypeXor() && la.Info.PIDIVMatches)
+                        {
+                            this.Invoke(() =>
+                            {
+                                MessageBox.Show($"过啦！");
+                                Editor.PopulateFields(pkm, false);
+                                SAV.ReloadSlots();
+                            });
+                            break;
+                        }
+                        seed = NextSeed(seed);
+                    }
+                    this.Invoke(() =>
+                    { 
+                        IsRunning(false);
+                        Condition.Text = "Nothing to check";
+                    });
+                },
+                tokenSource.Token);
         }
         private static uint GetShinyXor(uint pid, int TID, int SID)
         {
             return ((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF)));
+        }
+
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+            tokenSource.Cancel();
+            IsRunning(false);
         }
     }
 }
