@@ -10,7 +10,7 @@ namespace WangPlugin
 
         public static uint Next(uint seed) => RNG.XDRNG.Next(seed);
 
-        public static PKM GenPkm(PKM pk, uint seed)
+        public static bool GenPkm(ref PKM pk, uint seed,bool shiny)
         {
             var rng = RNG.XDRNG;
            
@@ -30,7 +30,11 @@ namespace WangPlugin
                 if ((pid2 > 7 ? 0 : 1) != (pid1 ^ SID ^ TID))
                     pid ^= 0x80000000;
                 pk.PID = pid;
-                pk.HeldItem = (int)(C >> 31) + 169; // 0-Ganlon, 1-Salac
+            if (shiny && (CheckShiny(pk.PID, pk.TID, pk.SID) == false))
+            {
+                return false;
+            }
+            pk.HeldItem = (int)(C >> 31) + 169; // 0-Ganlon, 1-Salac
                 pk.Version = (int)(D >> 31) + 1; // 0-Sapphire, 1-Ruby
                 pk.OT_Gender = (int)(E >> 31);
                 Span<int> ivs = stackalloc int[6];
@@ -39,7 +43,7 @@ namespace WangPlugin
                 pk.Gender = PKX.GetGenderFromPID(pk.Species, pk.PID);
               
                
-            return pk;
+            return true;
         }
 
         private static void GetIVsInt32(Span<int> result, uint r1, uint r2)
@@ -62,6 +66,13 @@ namespace WangPlugin
         private static uint combineRNG(uint upper, uint lower, uint shift)
         {
             return (upper << (int)shift) + lower;
+        }
+        private static bool CheckShiny(uint pid, int TID, int SID)
+        {
+            if (((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF))) < 8)
+                return true;
+            else
+                return false;
         }
     }
 }

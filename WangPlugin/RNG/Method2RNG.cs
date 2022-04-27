@@ -8,7 +8,7 @@ namespace WangPlugin
 
         public static uint Next(uint seed) => RNG.LCRNG.Next(seed);
 
-        public static PKM GenPkm(PKM pk, uint seed)
+        public static bool GenPkm(ref PKM pk, uint seed, bool shiny)
         {
             var pidLower = RNG.LCRNG.Next(seed) >> shift;
             var pidUpper = RNG.LCRNG.Advance(seed, 2) >> shift;
@@ -17,6 +17,10 @@ namespace WangPlugin
             var pid = combineRNG(pidUpper, pidLower, shift);
             var ivs = dvsToIVs(dvUpper, dvLower);
             pk.PID = pid;
+            if (shiny && (CheckShiny(pk.PID, pk.TID, pk.SID) == false))
+            {
+                return false;
+            }
             pk.IV_HP = (int)ivs[0];
             pk.IV_ATK = (int)ivs[1];
             pk.IV_DEF = (int)ivs[2];
@@ -26,7 +30,7 @@ namespace WangPlugin
             pk.Nature = (int)(pid % 100 % 25);
             pk.Gender = PKX.GetGenderFromPID(pk.Species, pk.PID);
             pk.RefreshAbility((int)(pk.PID & 1));
-            return pk;
+            return true;
         }
         private static uint[] dvsToIVs(uint dvUpper, uint dvLower)
         {
@@ -43,6 +47,13 @@ namespace WangPlugin
         private static uint combineRNG(uint upper, uint lower, uint shift)
         {
             return (upper << (int)shift) + lower;
+        }
+        private static bool CheckShiny(uint pid, int TID, int SID)
+        {
+            if (((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF))) < 8)
+                return true;
+            else
+                return false;
         }
     }
 }

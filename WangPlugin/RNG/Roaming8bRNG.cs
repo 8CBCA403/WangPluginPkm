@@ -9,7 +9,7 @@ namespace WangPlugin
 
         public static uint Next(uint seed) => (uint)new Xoroshiro128Plus8b(seed).Next();
         
-        public static PKM GenPkm(PKM pk, uint seed, int TID, int SID)
+        public static bool GenPkm(ref PKM pk, uint seed, int TID, int SID, bool shiny)
         {
             var xoro = new Xoroshiro128Plus8b(seed);
             var fakeTID = xoro.NextUInt();
@@ -36,6 +36,10 @@ namespace WangPlugin
                 }
             }
             pk.PID = pid;
+            if (shiny && (CheckShiny(pk.PID, pk.TID, pk.SID) == false))
+            {
+                return false;
+            }
             pk.EncryptionConstant = seed;
             pk.IV_HP = ivs[0];
             pk.IV_ATK = ivs[1];
@@ -51,7 +55,7 @@ namespace WangPlugin
             scale.HeightScalar = (byte)((int)xoro.NextUInt(0x81) + (int)xoro.NextUInt(0x80));
             scale.WeightScalar = (byte)((int)xoro.NextUInt(0x81) + (int)xoro.NextUInt(0x80));
             pk.RefreshChecksum();
-            return pk;
+            return true;
         }
 
         private static uint GetRevisedPID(uint fakeTID, uint pid, int TID, int SID)
@@ -77,13 +81,17 @@ namespace WangPlugin
             < 16 => 1,
             _ => 0,
         };
-
-
-
         private static uint GetShinyXor(uint pid, uint oid)
         {
             var xor = pid ^ oid;
             return (xor ^ (xor >> 16)) & 0xFFFF;
+        }
+        private static bool CheckShiny(uint pid, int TID, int SID)
+        {
+            if (((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF))) < 16)
+                return true;
+            else
+                return false;
         }
     }
 }

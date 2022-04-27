@@ -10,11 +10,9 @@ namespace WangPlugin
 
         public static uint Next(uint seed) => RNG.XDRNG.Next(seed);
 
-        public static PKM GenPkm(PKM pk, uint seed)
+        public static bool GenPkm(ref PKM pk, uint seed,bool shiny)
         {
             var rng = RNG.XDRNG;
-            while (true)
-            {
                 switch (pk.Species)
                 {
                     case (int)Species.Umbreon or (int)Species.Eevee: // Colo Umbreon, XD Eevee
@@ -34,19 +32,22 @@ namespace WangPlugin
                 var D = rng.Next(C); // PID
                 var E = rng.Next(D); // PID
                 pk.PID = (D & 0xFFFF0000) | E >> 16;
+                if(shiny&&(CheckShiny(pk.PID,pk.TID,pk.SID)==false))
+                {
+                    return false;
+                }
                 Span<int> IVs = stackalloc int[6];
                 GetIVsInt32(IVs, A >> 16, B >> 16);
                 pk.SetIVs(IVs);
                 pk.Nature = (int)(pk.PID % 100 % 25);
                 pk.RefreshAbility((int)(pk.PID & 1));
                 var la = new LegalityAnalysis(pk);
-                if (la.Info.PIDIVMatches)
+                if (!la.Info.PIDIVMatches)
                 {
-                    break;
+                    return false;
                 }
-                seed = Next(seed);
-            }
-            return pk;
+              
+            return true;
         }
     
 
@@ -58,6 +59,13 @@ namespace WangPlugin
             result[2] = (((int)r1 >> 10) & 0x1F);
             result[1] = (((int)r1 >> 5) & 0x1F);
             result[0] = (int)(r1 & 0x1F);
+        }
+        private static bool CheckShiny(uint pid, int TID, int SID)
+        {
+            if (((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF))) < 8)
+                return true;
+            else
+                return false;
         }
         private static uint combineRNG(uint upper, uint lower, uint shift)
         {

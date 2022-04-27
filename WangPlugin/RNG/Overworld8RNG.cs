@@ -14,7 +14,7 @@ namespace WangPlugin
        
         private const int UNSET = 255;
         public static uint Next(uint seed) => (uint)new Xoroshiro128Plus(seed).Next();
-        public static PKM GenPkm(PKM pk,uint seed, int TID, int SID)
+        public static bool GenPkm(ref PKM pk,uint seed, int TID, int SID, bool shiny)
         {
             var xoro = new Xoroshiro128Plus(seed);
 
@@ -24,6 +24,10 @@ namespace WangPlugin
             var pid = (uint)xoro.NextInt(uint.MaxValue);
             pk.PID = pid;
             // IVs
+            if (shiny && (CheckShiny(pk.PID, pk.TID, pk.SID) == false))
+            {
+                return false;
+            }
             var ivs = new int[6] { UNSET, UNSET, UNSET, UNSET, UNSET, UNSET };
            
             const int MAX = 31;
@@ -53,14 +57,16 @@ namespace WangPlugin
             var ability = (1 << (int)xoro.NextInt(2));
             pk.AbilityNumber = ability;
             pk.RefreshChecksum();
-            return pk;
+            return true;
         }
 
-        private static uint GetShinyXor(uint pid, uint oid)
+        private static bool CheckShiny(uint pid, int TID, int SID)
         {
-            var xor = pid ^ oid;
-            return (xor ^ (xor >> 16)) & 0xFFFF;
+            if (((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF))) < 16)
+                return true;
+            else
+                return false;
         }
-       
+
     }
 }

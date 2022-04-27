@@ -123,21 +123,21 @@ namespace WangPlugin
             this.methodTypeBox.SelectedIndex = 0;
 
         }
-        private PKM GenPkm(uint seed)
+        private bool GenPkm(ref PKM pk,uint seed)
         {
             //MessageBox.Show($"{((ITrainerID)SAV.SAV).SID}, {((ITrainerID)SAV.SAV).TID}");
             return RNGMethod switch
             {
-                MethodType.Method1 => Method1RNG.GenPkm(Editor.Data, seed),
-                MethodType.Method2 => Method2RNG.GenPkm(Editor.Data, seed),
-                MethodType.Method4 => Method4RNG.GenPkm(Editor.Data, seed),
-                MethodType.XDColo => XDColoRNG.GenPkm(Editor.Data, seed),
-                MethodType.Overworld8 => Overworld8RNG.GenPkm(Editor.Data, seed, Editor.Data.TID, Editor.Data.SID),
-                MethodType.Roaming8b => Roaming8bRNG.GenPkm(Editor.Data, seed, Editor.Data.TID, Editor.Data.SID),
-                MethodType.H1_BACD_R => H1_BACD_R.GenPkm(Editor.Data, seed & 0xFFFF, Editor.Data.SID, Editor.Data.TID),
-                MethodType.Method1Roaming => Method1Roaming.GenPkm(Editor.Data, seed),
-                MethodType.Colo => ColoRNG.GenPkm(Editor.Data, seed),
-                MethodType.ChainShiny => ChainShiny.GenPkm(Editor.Data, seed),
+                MethodType.Method1 => Method1RNG.GenPkm(ref pk, seed, ShinyCheck.Checked),
+                MethodType.Method2 => Method2RNG.GenPkm(ref pk, seed, ShinyCheck.Checked),
+                MethodType.Method4 => Method4RNG.GenPkm(ref pk, seed, ShinyCheck.Checked),
+                MethodType.XDColo => XDColoRNG.GenPkm(ref pk, seed, ShinyCheck.Checked),
+                MethodType.Overworld8 => Overworld8RNG.GenPkm(ref pk, seed, Editor.Data.TID, Editor.Data.SID, ShinyCheck.Checked),
+                MethodType.Roaming8b => Roaming8bRNG.GenPkm(ref pk, seed, Editor.Data.TID, Editor.Data.SID, ShinyCheck.Checked),
+                MethodType.H1_BACD_R => H1_BACD_R.GenPkm(ref pk, seed & 0xFFFF, Editor.Data.SID, Editor.Data.TID, ShinyCheck.Checked),
+                MethodType.Method1Roaming => Method1Roaming.GenPkm(ref pk, seed, ShinyCheck.Checked),
+                MethodType.Colo => ColoRNG.GenPkm(ref pk, seed,ShinyCheck.Checked),
+                MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -189,24 +189,21 @@ namespace WangPlugin
                 () =>
                 {
                     var seed = Util.Rand32();
-
+                    var pk = Editor.Data;
                     while (true)
                     {
-                        var pkm = GenPkm(seed);
-                        pkm.RefreshAbility((int)(pkm.PID & 1));
-                        var la = new LegalityAnalysis(pkm);
-
+                        pk.RefreshAbility((int)(pk.PID & 1));
                         if (tokenSource.IsCancellationRequested)
                         {
                             Condition.Text = "Stop";
                             return;
                         }
-                            if (GetShinyXor(pkm.PID, pkm.TID, pkm.SID) < TypeXor())
+                            if (GenPkm(ref pk, seed))
                             {
                                 this.Invoke(() =>
                                 {
                                     MessageBox.Show($"过啦！");
-                                    Editor.PopulateFields(pkm, false);
+                                    Editor.PopulateFields(pk, false);
                                     SAV.ReloadSlots();
                                 });
                                 break;
@@ -221,13 +218,7 @@ namespace WangPlugin
                 },
                 tokenSource.Token);
         }
-        private uint GetShinyXor(uint pid, int TID, int SID)
-        {
-            if (ShinyCheck.Checked)
-                return ((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF)));
-            else
-                return 0;
-        }
+        
         private void Cancel_Click(object sender, EventArgs e)
         {
             tokenSource.Cancel();

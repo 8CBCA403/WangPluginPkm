@@ -9,7 +9,7 @@ namespace WangPlugin
 
         public static uint Next(uint seed) => RNG.LCRNG.Next(seed);
 
-        public static PKM GenPkm(PKM pk,uint seed)
+        public static bool GenPkm(ref PKM pk,uint seed)
         {
             // 13 rand bits
             // 1 3-bit for upper
@@ -29,7 +29,7 @@ namespace WangPlugin
             pk.RefreshAbility((int)(pk.PID & 1));
             pk.SetIVs(IVs);
             pk.Gender = PKX.GetGenderFromPID(pk.Species, pk.PID);
-            return pk;
+            return true;
         }
         internal static void GetIVsInt32(Span<int> result, uint r1, uint r2)
         {
@@ -44,5 +44,6 @@ namespace WangPlugin
         {
             return (upper << (int)shift) + lower;
         }
+       
     }
 }
