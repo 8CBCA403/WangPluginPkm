@@ -158,23 +158,6 @@ namespace WangPlugin
                 _ => throw new NotSupportedException(),
             };
         }
-        private int TypeXor()
-        {
-            return RNGMethod switch
-            {
-                MethodType.Method1 => 8,
-                MethodType.Method2 => 8,
-                MethodType.Method4 => 8,
-                MethodType.XDColo => 8,
-                MethodType.H1_BACD_R => 8,
-                MethodType.Method1Roaming => 8,
-                MethodType.Colo => 8,
-                MethodType.ChainShiny => 8,
-                MethodType.Overworld8 => 16,
-                MethodType.Roaming8b => 16,
-                _ => throw new NotSupportedException(),
-            };
-        }
         private void IsRunning(bool running)
         {
             Search.Enabled = !running;
@@ -218,7 +201,6 @@ namespace WangPlugin
                 },
                 tokenSource.Token);
         }
-        
         private void Cancel_Click(object sender, EventArgs e)
         {
             tokenSource.Cancel();
