@@ -12,11 +12,12 @@ namespace WangPlugin
         public string Name => nameof(WangPlugin);
         public int Priority => 1; // Loading order, lowest is first.
         public string ImageSource = @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\icon.jpg";
+        public string ShinyImg = @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\shiny.jpg";
+        public string RNGImg= @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\RNG.jpg";
         // Initialized on plugin load
         public ISaveFileProvider SaveFileEditor { get; private set; } = null!;
         public IPKMView PKMEditor { get; private set; } = null!;
         private readonly CancellationTokenSource tokenSource = new();
-
         public void Initialize(params object[] args)
         {
             Console.WriteLine($"Loading {Name}...");
@@ -28,8 +29,9 @@ namespace WangPlugin
         private void LoadMenuStrip(ToolStrip menuStrip)
         {
             var items = menuStrip.Items;
-            if (!(items.Find("Menu_Tools", false)[0] is ToolStripDropDownItem tools))
-                throw new ArgumentException(nameof(menuStrip));
+            string name = nameof(menuStrip);
+            if (items.Find("Menu_Tools", false)[0] is not ToolStripDropDownItem tools)
+                throw new ArgumentException(name);
             AddPluginControl(tools);
         }
         private void AddPluginControl(ToolStripDropDownItem tools)
@@ -39,8 +41,14 @@ namespace WangPlugin
                 Image = System.Drawing.Image.FromFile(ImageSource)
             };
             tools.DropDownItems.Add(ctrl);
-            var RNGForm = new ToolStripMenuItem($"RNG面板");
-            var Allshiny = new ToolStripMenuItem($"全部闪光");
+            var RNGForm = new ToolStripMenuItem($"RNG面板")
+            {
+                Image = System.Drawing.Image.FromFile(RNGImg)
+            };
+            var Allshiny = new ToolStripMenuItem($"全部闪光")
+            {
+                Image = System.Drawing.Image.FromFile(ShinyImg)
+            };
             var Calc = new ToolStripMenuItem($"性格计算器");
             var Read = new ToolStripMenuItem($"简易排序");
             RNGForm.Click += (s, e) => OpenRNGForm();
@@ -51,7 +59,6 @@ namespace WangPlugin
             ctrl.DropDownItems.Add(Allshiny);
             ctrl.DropDownItems.Add(Calc);
             ctrl.DropDownItems.Add(Read);
-            //  Console.WriteLine($"{Name} added menu items.");
         }
         public void SetShiny()
         {
@@ -59,14 +66,14 @@ namespace WangPlugin
             sav.ModifyBoxes(SetAllShiny);
             SaveFileEditor.ReloadSlots();
         }
-        public  void SetAllShiny(PKM pkm)
+        public static void SetAllShiny(PKM pkm)
         {
             pkm.SetShinySID();
         }
         public void SortPokemon()
         {
             var sav = SaveFileEditor.SAV;
-            List<PKM> PokeList = new List<PKM>();
+            List<PKM> PokeList = new();
             var PokeArray = new PKM[30];
             int  i,j;
           for (i = 0; i < 30; i++)
@@ -93,14 +100,10 @@ namespace WangPlugin
                     n++;
                 }
              }
-           /* for(i=0;i<count-n;i++)
-            {
-                sav.SetBoxSlotAtIndex(sorted[n+i], box+1, i);
-            }*/
         }
-        private void OpenCalc()
+        private static void OpenCalc()
         {
-            var frm = new calc();
+            var frm = new Calc();
             frm.Show();
         }
         private void OpenRNGForm()

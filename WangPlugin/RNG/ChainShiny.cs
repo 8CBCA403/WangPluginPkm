@@ -9,12 +9,8 @@ namespace WangPlugin
 
         public static uint Next(uint seed) => RNG.LCRNG.Next(seed);
 
-        public static bool GenPkm(ref PKM pk,uint seed)
+        public static bool GenPkm(ref PKM pk,uint seed, bool[] IV)
         {
-            // 13 rand bits
-            // 1 3-bit for upper
-            // 1 3-bit for lower
-
             uint Next() => (seed = RNG.LCRNG.Next(seed)) >> 16;
             uint lower = Next() & 7;
             uint upper = Next() & 7;
@@ -25,6 +21,14 @@ namespace WangPlugin
             var pid = pk.PID;
             Span<int> IVs = stackalloc int[6];
             GetIVsInt32(IVs, Next(), Next());
+            if (IV[0] && IVs[1] != 0)
+            {
+                return false;
+            }
+            if (IV[1] && IVs[3] != 0)
+            {
+                return false;
+            }
             pk.Nature = (int)(pid % 100 % 25);
             pk.RefreshAbility((int)(pk.PID & 1));
             pk.SetIVs(IVs);
@@ -39,10 +43,6 @@ namespace WangPlugin
             result[2] = (int)r1 >> 10 & 31;
             result[1] = (int)r1 >> 5 & 31;
             result[0] = (int)r1 & 31;
-        }
-        private static uint combineRNG(uint upper, uint lower, uint shift)
-        {
-            return (upper << (int)shift) + lower;
         }
        
     }

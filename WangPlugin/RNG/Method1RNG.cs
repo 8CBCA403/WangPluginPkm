@@ -8,7 +8,7 @@ namespace WangPlugin
 
         public static uint Next(uint seed) => RNG.LCRNG.Next(seed);
 
-        public static bool GenPkm(ref PKM pk,uint seed, bool shiny)
+        public static bool GenPkm(ref PKM pk,uint seed, bool[] shiny,bool[] IV)
         {
             var pidLower = RNG.LCRNG.Next(seed) >> shift;
             var pidUpper = RNG.LCRNG.Advance(seed, 2) >> shift;
@@ -16,7 +16,7 @@ namespace WangPlugin
             var dvUpper = RNG.LCRNG.Advance(seed, 4) >> shift;
             var pid = combineRNG(pidUpper, pidLower, shift);
             var pidR = combineRNG(pidLower, pidUpper, shift);
-            var ivs = dvsToIVs(dvUpper, dvLower);
+            var ivs = DvsToIVs(dvUpper, dvLower);
             if (pk.Species == 201)
             {
                 pk.PID = pidR;
@@ -25,7 +25,15 @@ namespace WangPlugin
             {
                 pk.PID = pid;
             }
-            if (shiny && (CheckShiny(pk.PID, pk.TID, pk.SID) == false))
+            if (!CheckShiny(pk.PID, pk.TID, pk.SID,  shiny) )
+            {
+                return false;
+            }
+            if(IV[0]&&ivs[1]!=0)
+            {
+                return false;
+            }
+            if(IV[1]&&ivs[5]!=0)
             {
                 return false;
             }
@@ -40,7 +48,7 @@ namespace WangPlugin
             pk.RefreshAbility((int)(pk.PID & 1));
             return true;
         }
-        private static uint[] dvsToIVs(uint dvUpper, uint dvLower)
+        private static uint[] DvsToIVs(uint dvUpper, uint dvLower)
         {
             return new uint[]
             {
@@ -52,13 +60,23 @@ namespace WangPlugin
                 dvUpper & 0x1f,
             };
         }
-        private static bool CheckShiny(uint pid, int TID, int SID)
+        private static bool CheckShiny(uint pid, int TID, int SID, bool[] shiny)
         {
-            if (((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF))) < 8)
+            var s = (uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF));
+            if (shiny[0])
+                return true;
+            else if (shiny[1] && s < 8)
+                return true;
+            else if (shiny[2] && s < 8 && s != 0)
+                return true;
+            else if (shiny[3] && s == 0 )
+                return true;
+            else if (shiny[4] && s == 1)
                 return true;
             else
                 return false;
         }
+
         private static uint combineRNG(uint upper, uint lower, uint shift)
         {
             return (upper << (int)shift) + lower;

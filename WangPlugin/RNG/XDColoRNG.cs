@@ -7,10 +7,8 @@ namespace WangPlugin
     {
         private const int shift = 16;
         private const int shift8 = 8;
-
         public static uint Next(uint seed) => RNG.XDRNG.Next(seed);
-
-        public static bool GenPkm(ref PKM pk, uint seed,bool shiny)
+        public static bool GenPkm(ref PKM pk, uint seed,bool[] shiny, bool[] IV)
         {
             var rng = RNG.XDRNG;
                 switch (pk.Species)
@@ -32,13 +30,22 @@ namespace WangPlugin
                 var D = rng.Next(C); // PID
                 var E = rng.Next(D); // PID
                 pk.PID = (D & 0xFFFF0000) | E >> 16;
-                if(shiny&&(CheckShiny(pk.PID,pk.TID,pk.SID)==false))
+                if(!CheckShiny(pk.PID,pk.TID,pk.SID,shiny))
                 {
                     return false;
                 }
                 Span<int> IVs = stackalloc int[6];
                 GetIVsInt32(IVs, A >> 16, B >> 16);
-                pk.SetIVs(IVs);
+            if (IV[0] && IVs[1] != 0)
+            {
+                return false;
+            }
+            if (IV[1] && IVs[3] != 0)
+            {
+                return false;
+            }
+            pk.SetIVs(IVs);
+
                 pk.Nature = (int)(pk.PID % 100 % 25);
                 pk.RefreshAbility((int)(pk.PID & 1));
                 var la = new LegalityAnalysis(pk);
@@ -46,11 +53,8 @@ namespace WangPlugin
                 {
                     return false;
                 }
-              
             return true;
         }
-    
-
         private static void GetIVsInt32(Span<int> result, uint r1, uint r2)
         {
             result[5] = (((int)r2 >> 10) & 0x1F);
@@ -60,16 +64,22 @@ namespace WangPlugin
             result[1] = (((int)r1 >> 5) & 0x1F);
             result[0] = (int)(r1 & 0x1F);
         }
-        private static bool CheckShiny(uint pid, int TID, int SID)
+        private static bool CheckShiny(uint pid, int TID, int SID, bool[] shiny)
         {
-            if (((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF))) < 8)
+            var s = (uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF));
+            if (shiny[0])
+                return true;
+            else if (shiny[1] && s < 8)
+                return true;
+            else if (shiny[2] && s < 8 && s != 0)
+                return true;
+            else if (shiny[3] && s == 0)
+                return true;
+            else if (shiny[4] && s == 1)
                 return true;
             else
                 return false;
         }
-        private static uint combineRNG(uint upper, uint lower, uint shift)
-        {
-            return (upper << (int)shift) + lower;
-        }
+
     }
 }

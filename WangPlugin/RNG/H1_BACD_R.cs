@@ -9,7 +9,7 @@ namespace WangPlugin
 
         public static uint Next(uint seed) => RNG.LCRNG.Next(seed);
 
-        public static bool GenPkm( ref PKM pk,uint seed,int SID,int TID, bool shiny)
+        public static bool GenPkm( ref PKM pk,uint seed,int SID,int TID, bool[] shiny, bool[] IV)
         {
             var rng = RNG.LCRNG;
             uint X = seed;
@@ -18,12 +18,20 @@ namespace WangPlugin
             var C = rng.Next(B);
             var D = rng.Next(C);
             pk.PID = (A & 0xFFFF0000) | B >> 16;
-            if (shiny && (CheckShiny(pk.PID, pk.TID, pk.SID) == false))
+            if (!CheckShiny(pk.PID, pk.TID, pk.SID,shiny))
             {
                 return false;
             }
             Span<int> IVs = stackalloc int[6];
             GetIVsInt32(IVs, C >> 16, D >> 16);
+            if (IV[0] && IVs[1] != 0)
+            {
+                return false;
+            }
+            if (IV[1] && IVs[3] != 0)
+            {
+                return false;
+            }
             pk.SetIVs(IVs);
             pk.Nature =(int)(pk.PID % 100% 25);
             pk.Ability = (int)pk.PID & 1;
@@ -39,13 +47,18 @@ namespace WangPlugin
             result[1] = (int)r1 >> 5 & 31;
             result[0] = (int)r1 & 31;
         }
-        private static uint combineRNG(uint upper, uint lower, uint shift)
+        private static bool CheckShiny(uint pid, int TID, int SID, bool[] shiny)
         {
-            return (upper << (int)shift) + lower;
-        }
-        private static bool CheckShiny(uint pid, int TID, int SID)
-        {
-            if (((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF))) < 8)
+            var s = (uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF));
+            if (shiny[0])
+                return true;
+            else if (shiny[1] && s < 8)
+                return true;
+            else if (shiny[2] && s < 8 && s != 0)
+                return true;
+            else if (shiny[3] && s == 0)
+                return true;
+            else if (shiny[4] && s == 1)
                 return true;
             else
                 return false;

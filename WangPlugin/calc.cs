@@ -4,56 +4,41 @@ using System.Windows.Forms;
 using System;
 namespace WangPlugin
 {
-    public partial class calc : Form
+    public partial class Calc : Form
     {
         private Button CalcStart;
-        private Button Exit;
         private Label PID;
         private TextBox Nature;
+        private Button CloseBTN;
         private TextBox PIDHex;
-        private ISaveFileProvider SAV { get; }
-        private IPKMView Editor { get; }
+        public Calc()
 
-        private CancellationTokenSource tokenSource = new();
-
-#pragma warning disable CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
-        public calc()
-#pragma warning restore CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
         {
             InitializeComponent();
         }
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(calc));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Calc));
             this.CalcStart = new System.Windows.Forms.Button();
-            this.Exit = new System.Windows.Forms.Button();
             this.PIDHex = new System.Windows.Forms.TextBox();
             this.PID = new System.Windows.Forms.Label();
             this.Nature = new System.Windows.Forms.TextBox();
+            this.CloseBTN = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CalcStart
             // 
-            this.CalcStart.Location = new System.Drawing.Point(67, 85);
+            this.CalcStart.Location = new System.Drawing.Point(54, 53);
             this.CalcStart.Name = "CalcStart";
-            this.CalcStart.Size = new System.Drawing.Size(75, 40);
+            this.CalcStart.Size = new System.Drawing.Size(100, 28);
             this.CalcStart.TabIndex = 0;
-            this.CalcStart.Text = "计算性格";
+            this.CalcStart.Text = "Calculate";
             this.CalcStart.UseVisualStyleBackColor = true;
             this.CalcStart.Click += new System.EventHandler(this.CalcStart_Click);
             // 
-            // Exit
-            // 
-            this.Exit.Location = new System.Drawing.Point(172, 85);
-            this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(75, 40);
-            this.Exit.TabIndex = 1;
-            this.Exit.Text = "退出";
-            this.Exit.UseVisualStyleBackColor = true;
-            // 
             // PIDHex
             // 
-            this.PIDHex.Location = new System.Drawing.Point(54, 47);
+            this.PIDHex.Location = new System.Drawing.Point(54, 22);
             this.PIDHex.Name = "PIDHex";
             this.PIDHex.Size = new System.Drawing.Size(100, 25);
             this.PIDHex.TabIndex = 2;
@@ -61,45 +46,54 @@ namespace WangPlugin
             // PID
             // 
             this.PID.AutoSize = true;
-            this.PID.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.PID.Location = new System.Drawing.Point(2, 47);
+            this.PID.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PID.Location = new System.Drawing.Point(6, 22);
             this.PID.Name = "PID";
-            this.PID.Size = new System.Drawing.Size(46, 23);
+            this.PID.Size = new System.Drawing.Size(45, 26);
             this.PID.TabIndex = 3;
             this.PID.Text = "PID";
             // 
             // Nature
             // 
-            this.Nature.Location = new System.Drawing.Point(160, 47);
+            this.Nature.Location = new System.Drawing.Point(160, 22);
             this.Nature.Name = "Nature";
             this.Nature.Size = new System.Drawing.Size(100, 25);
             this.Nature.TabIndex = 4;
             // 
-            // calc
+            // CloseBTN
             // 
-            this.ClientSize = new System.Drawing.Size(291, 143);
+            this.CloseBTN.Location = new System.Drawing.Point(160, 53);
+            this.CloseBTN.Name = "CloseBTN";
+            this.CloseBTN.Size = new System.Drawing.Size(100, 28);
+            this.CloseBTN.TabIndex = 5;
+            this.CloseBTN.Text = "Close";
+            this.CloseBTN.UseVisualStyleBackColor = true;
+            this.CloseBTN.Click += new System.EventHandler(this.CloseBTN_Click);
+            // 
+            // Calc
+            // 
+            this.ClientSize = new System.Drawing.Size(292, 89);
+            this.Controls.Add(this.CloseBTN);
             this.Controls.Add(this.Nature);
             this.Controls.Add(this.PID);
             this.Controls.Add(this.PIDHex);
-            this.Controls.Add(this.Exit);
             this.Controls.Add(this.CalcStart);
+            this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "calc";
+            this.Name = "Calc";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Super Wang";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
-
-
         private void CalcStart_Click(object sender, System.EventArgs e)
         {
             var PID=uint.Parse(PIDHex.Text, System.Globalization.NumberStyles.HexNumber);
             var NatureID = PID % 25;
-            
             Nature.Text = ShowNature(NatureID);
-
         }
-        private string ShowNature(uint ID)
+        private static string ShowNature(uint ID)
         {
             string Nature = "Hardy";
             switch (ID)
@@ -182,6 +176,10 @@ namespace WangPlugin
             }
            
             return Nature;
+        }
+        private void CloseBTN_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

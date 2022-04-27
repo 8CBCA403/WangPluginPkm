@@ -13,7 +13,6 @@ namespace WangPlugin
         private CancellationTokenSource tokenSource = new();
         private TextBox Condition;
         private Button Cancel;
-        private CheckBox ShinyCheck;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
         enum MethodType
@@ -29,10 +28,23 @@ namespace WangPlugin
             Overworld8,
             Roaming8b,
         }
+        enum ShinyType
+        {
+            None,
+            Shiny,
+            Star,
+            Sqaure,
+            ForceStar,
+        }
         private MethodType RNGMethod = MethodType.Method1;
-#pragma warning disable CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
+        private ComboBox ShinyTypeBox;
+        private Label ShinyTypeLabel;
+        private TextBox SeedText;
+        private CheckBox AtkCheck;
+        private CheckBox SpeCheck;
+        private ShinyType Stype = ShinyType.None;
         public RNGForm(ISaveFileProvider sav, IPKMView editor)
-#pragma warning restore CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
+
         {
             SAV = sav;
             Editor = editor;
@@ -42,72 +54,117 @@ namespace WangPlugin
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RNGForm));
-            this.methodTypeBox = new ComboBox();
-            this.Search = new Button();
-            this.Condition = new TextBox();
-            this.Cancel = new Button();
-            this.ShinyCheck = new CheckBox();
+            this.methodTypeBox = new System.Windows.Forms.ComboBox();
+            this.Search = new System.Windows.Forms.Button();
+            this.Condition = new System.Windows.Forms.TextBox();
+            this.Cancel = new System.Windows.Forms.Button();
+            this.ShinyTypeBox = new System.Windows.Forms.ComboBox();
+            this.ShinyTypeLabel = new System.Windows.Forms.Label();
+            this.SeedText = new System.Windows.Forms.TextBox();
+            this.AtkCheck = new System.Windows.Forms.CheckBox();
+            this.SpeCheck = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // methodTypeBox
             // 
             this.methodTypeBox.FormattingEnabled = true;
-            this.methodTypeBox.Location = new System.Drawing.Point(12, 22);
+            this.methodTypeBox.Location = new System.Drawing.Point(12, 12);
             this.methodTypeBox.Name = "methodTypeBox";
-            this.methodTypeBox.Size = new System.Drawing.Size(140, 23);
+            this.methodTypeBox.Size = new System.Drawing.Size(124, 25);
             this.methodTypeBox.TabIndex = 8;
             // 
             // Search
             // 
-            this.Search.Location = new System.Drawing.Point(175, 22);
+            this.Search.Location = new System.Drawing.Point(156, 101);
             this.Search.Name = "Search";
-            this.Search.Size = new System.Drawing.Size(92, 23);
+            this.Search.Size = new System.Drawing.Size(124, 25);
             this.Search.TabIndex = 9;
-            this.Search.Text = "StartRNG";
+            this.Search.Text = "RNG Start";
             this.Search.UseVisualStyleBackColor = true;
             this.Search.Click += new System.EventHandler(this.Search_Click);
             // 
             // Condition
             // 
-            this.Condition.Location = new System.Drawing.Point(12, 76);
+            this.Condition.Location = new System.Drawing.Point(156, 12);
             this.Condition.Name = "Condition";
-            this.Condition.Size = new System.Drawing.Size(140, 25);
+            this.Condition.Size = new System.Drawing.Size(124, 25);
             this.Condition.TabIndex = 10;
             this.Condition.Text = "Nothing to check";
             // 
             // Cancel
             // 
-            this.Cancel.Location = new System.Drawing.Point(175, 76);
+            this.Cancel.Location = new System.Drawing.Point(156, 132);
             this.Cancel.Name = "Cancel";
-            this.Cancel.Size = new System.Drawing.Size(92, 25);
+            this.Cancel.Size = new System.Drawing.Size(124, 25);
             this.Cancel.TabIndex = 11;
-            this.Cancel.Text = "Cancel";
+            this.Cancel.Text = "Stop";
             this.Cancel.UseVisualStyleBackColor = true;
             this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
-            // ShinyCheck
+            // ShinyTypeBox
             // 
-            this.ShinyCheck.AutoSize = true;
-            this.ShinyCheck.Location = new System.Drawing.Point(12, 51);
-            this.ShinyCheck.Name = "ShinyCheck";
-            this.ShinyCheck.Size = new System.Drawing.Size(69, 19);
-            this.ShinyCheck.TabIndex = 12;
-            this.ShinyCheck.Text = "Shiny";
-            this.ShinyCheck.UseVisualStyleBackColor = true;
+            this.ShinyTypeBox.FormattingEnabled = true;
+            this.ShinyTypeBox.Location = new System.Drawing.Point(62, 56);
+            this.ShinyTypeBox.Name = "ShinyTypeBox";
+            this.ShinyTypeBox.Size = new System.Drawing.Size(74, 25);
+            this.ShinyTypeBox.TabIndex = 13;
+            // 
+            // ShinyTypeLabel
+            // 
+            this.ShinyTypeLabel.AutoSize = true;
+            this.ShinyTypeLabel.Location = new System.Drawing.Point(12, 59);
+            this.ShinyTypeLabel.Name = "ShinyTypeLabel";
+            this.ShinyTypeLabel.Size = new System.Drawing.Size(44, 17);
+            this.ShinyTypeLabel.TabIndex = 14;
+            this.ShinyTypeLabel.Text = "Shiny";
+            // 
+            // SeedText
+            // 
+            this.SeedText.Location = new System.Drawing.Point(156, 56);
+            this.SeedText.Name = "SeedText";
+            this.SeedText.Size = new System.Drawing.Size(124, 25);
+            this.SeedText.TabIndex = 15;
+            this.SeedText.Text = "No Seed";
+            // 
+            // AtkCheck
+            // 
+            this.AtkCheck.AutoSize = true;
+            this.AtkCheck.Location = new System.Drawing.Point(15, 108);
+            this.AtkCheck.Name = "AtkCheck";
+            this.AtkCheck.Size = new System.Drawing.Size(58, 21);
+            this.AtkCheck.TabIndex = 16;
+            this.AtkCheck.Text = "0Atk";
+            this.AtkCheck.UseVisualStyleBackColor = true;
+            // 
+            // SpeCheck
+            // 
+            this.SpeCheck.AutoSize = true;
+            this.SpeCheck.Location = new System.Drawing.Point(15, 135);
+            this.SpeCheck.Name = "SpeCheck";
+            this.SpeCheck.Size = new System.Drawing.Size(64, 21);
+            this.SpeCheck.TabIndex = 17;
+            this.SpeCheck.Text = "0Spe";
+            this.SpeCheck.UseVisualStyleBackColor = true;
             // 
             // RNGForm
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(285, 112);
-            this.Controls.Add(this.ShinyCheck);
+            this.ClientSize = new System.Drawing.Size(292, 177);
+            this.Controls.Add(this.SpeCheck);
+            this.Controls.Add(this.AtkCheck);
+            this.Controls.Add(this.SeedText);
+            this.Controls.Add(this.ShinyTypeLabel);
+            this.Controls.Add(this.ShinyTypeBox);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.Condition);
             this.Controls.Add(this.Search);
             this.Controls.Add(this.methodTypeBox);
+            this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RNGForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Super Wang";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -116,28 +173,65 @@ namespace WangPlugin
         private void BindingData()
         {
             this.methodTypeBox.DataSource = Enum.GetNames(typeof(MethodType));
+            this.ShinyTypeBox.DataSource = Enum.GetNames(typeof(ShinyType));
             this.methodTypeBox.SelectedIndexChanged += (_, __) =>
             {
                 RNGMethod = (MethodType)Enum.Parse(typeof(MethodType), this.methodTypeBox.SelectedItem.ToString(), false);
             };
             this.methodTypeBox.SelectedIndex = 0;
+            this.ShinyTypeBox.SelectedIndexChanged += (_, __) =>
+            {
+                Stype = (ShinyType)Enum.Parse(typeof(ShinyType), this.ShinyTypeBox.SelectedItem.ToString(), false);
+            };
+            this.ShinyTypeBox.SelectedIndex = 0;
+        }
+        private bool[] GetShinyType()
+        {
+            var shinytype = new bool[5] { false, false, false, false, false };
+            switch (Stype)
+            {
+                case ShinyType.None:
+                    shinytype[0] = true;
+                    break;
+                case ShinyType.Shiny:
+                    shinytype[1] = true;
+                    break;
+                case ShinyType.Star:
+                    shinytype[2] = true;
+                    break;
+                case ShinyType.Sqaure:
+                    shinytype[3] = true;
+                    break;
+                case ShinyType.ForceStar:
+                    shinytype[4] = true;
+                    break;
+            }
+            return shinytype;
+        }
 
+        private bool[] CheckIV()
+        {
+            var IV = new bool[2] { false, false};
+            if (AtkCheck.Checked)
+                IV[0] = true;
+            if (SpeCheck.Checked)
+                IV[1] = true;
+            return IV;
         }
         private bool GenPkm(ref PKM pk,uint seed)
         {
-            //MessageBox.Show($"{((ITrainerID)SAV.SAV).SID}, {((ITrainerID)SAV.SAV).TID}");
             return RNGMethod switch
             {
-                MethodType.Method1 => Method1RNG.GenPkm(ref pk, seed, ShinyCheck.Checked),
-                MethodType.Method2 => Method2RNG.GenPkm(ref pk, seed, ShinyCheck.Checked),
-                MethodType.Method4 => Method4RNG.GenPkm(ref pk, seed, ShinyCheck.Checked),
-                MethodType.XDColo => XDColoRNG.GenPkm(ref pk, seed, ShinyCheck.Checked),
-                MethodType.Overworld8 => Overworld8RNG.GenPkm(ref pk, seed, Editor.Data.TID, Editor.Data.SID, ShinyCheck.Checked),
-                MethodType.Roaming8b => Roaming8bRNG.GenPkm(ref pk, seed, Editor.Data.TID, Editor.Data.SID, ShinyCheck.Checked),
-                MethodType.H1_BACD_R => H1_BACD_R.GenPkm(ref pk, seed & 0xFFFF, Editor.Data.SID, Editor.Data.TID, ShinyCheck.Checked),
-                MethodType.Method1Roaming => Method1Roaming.GenPkm(ref pk, seed, ShinyCheck.Checked),
-                MethodType.Colo => ColoRNG.GenPkm(ref pk, seed,ShinyCheck.Checked),
-                MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed),
+                MethodType.Method1 => Method1RNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
+                MethodType.Method2 => Method2RNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
+                MethodType.Method4 => Method4RNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
+                MethodType.XDColo => XDColoRNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
+                MethodType.Overworld8 => Overworld8RNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
+                MethodType.Roaming8b => Roaming8bRNG.GenPkm(ref pk, seed, Editor.Data.TID, Editor.Data.SID, GetShinyType(), CheckIV()),
+                MethodType.H1_BACD_R => H1_BACD_R.GenPkm(ref pk, seed & 0xFFFF, Editor.Data.SID, Editor.Data.TID, GetShinyType(), CheckIV()),
+                MethodType.Method1Roaming => Method1Roaming.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
+                MethodType.Colo => ColoRNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
+                MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed, CheckIV()),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -161,7 +255,7 @@ namespace WangPlugin
         private void IsRunning(bool running)
         {
             Search.Enabled = !running;
-            Cancel.Visible = running;
+            Cancel.Enabled = running;
         }
         private void Search_Click(object sender, EventArgs e)
         {
@@ -185,9 +279,10 @@ namespace WangPlugin
                             {
                                 this.Invoke(() =>
                                 {
-                                    MessageBox.Show($"过啦！");
+                                    MessageBox.Show($"Success！");
                                     Editor.PopulateFields(pk, false);
                                     SAV.ReloadSlots();
+                                    SeedText.Text = $"{Convert.ToString(seed,16)}";
                                 });
                                 break;
                             }
@@ -206,6 +301,7 @@ namespace WangPlugin
             tokenSource.Cancel();
             IsRunning(false);
         }
-       
+
+    
     }
 }

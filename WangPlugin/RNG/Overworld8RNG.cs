@@ -14,7 +14,7 @@ namespace WangPlugin
        
         private const int UNSET = 255;
         public static uint Next(uint seed) => (uint)new Xoroshiro128Plus(seed).Next();
-        public static bool GenPkm(ref PKM pk,uint seed, int TID, int SID, bool shiny)
+        public static bool GenPkm(ref PKM pk,uint seed,  bool[] shiny, bool[] IV)
         {
             var xoro = new Xoroshiro128Plus(seed);
 
@@ -24,7 +24,7 @@ namespace WangPlugin
             var pid = (uint)xoro.NextInt(uint.MaxValue);
             pk.PID = pid;
             // IVs
-            if (shiny && (CheckShiny(pk.PID, pk.TID, pk.SID) == false))
+            if (!CheckShiny(pk.PID, pk.TID, pk.SID,shiny))
             {
                 return false;
             }
@@ -44,6 +44,14 @@ namespace WangPlugin
                 if (ivs[i] == UNSET)
                     ivs[i] = (int) xoro.NextInt(32);
             }
+            if (IV[0] && ivs[1] != 0)
+            {
+                return false;
+            }
+            if (IV[1] && ivs[5] != 0)
+            {
+                return false;
+            }
             pk.IV_HP = ivs[0];
             pk.IV_ATK = ivs[1];
             pk.IV_DEF = ivs[2];
@@ -60,9 +68,18 @@ namespace WangPlugin
             return true;
         }
 
-        private static bool CheckShiny(uint pid, int TID, int SID)
+        private static bool CheckShiny(uint pid, int TID, int SID, bool[] shiny)
         {
-            if (((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF))) < 16)
+            var s = (uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF));
+            if (shiny[0])
+                return true;
+            else if (shiny[1] && s < 16)
+                return true;
+            else if (shiny[2] && s < 16 && s != 0)
+                return true;
+            else if (shiny[3] && s == 0)
+                return true;
+            else if (shiny[4] && s == 1)
                 return true;
             else
                 return false;

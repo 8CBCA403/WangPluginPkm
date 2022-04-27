@@ -10,7 +10,7 @@ namespace WangPlugin
 
         public static uint Next(uint seed) => RNG.XDRNG.Next(seed);
 
-        public static bool GenPkm(ref PKM pk, uint seed,bool shiny)
+        public static bool GenPkm(ref PKM pk, uint seed, bool []shiny, bool[] IV)
         {
             var rng = RNG.XDRNG;
            
@@ -30,19 +30,25 @@ namespace WangPlugin
                 if ((pid2 > 7 ? 0 : 1) != (pid1 ^ SID ^ TID))
                     pid ^= 0x80000000;
                 pk.PID = pid;
-            if (shiny && (CheckShiny(pk.PID, pk.TID, pk.SID) == false))
+            if (!CheckShiny(pk.PID, pk.TID, pk.SID,shiny))
             {
                 return false;
             }
-            pk.HeldItem = (int)(C >> 31) + 169; // 0-Ganlon, 1-Salac
-                pk.Version = (int)(D >> 31) + 1; // 0-Sapphire, 1-Ruby
+                pk.HeldItem = (int)(C >> 31) + 169; 
+                pk.Version = (int)(D >> 31) + 1; 
                 pk.OT_Gender = (int)(E >> 31);
                 Span<int> ivs = stackalloc int[6];
                 rng.GetSequentialIVsInt32(E, ivs);
-                pk.SetIVs(ivs);
+            if (IV[0] && ivs[1] != 0)
+            {
+                return false;
+            }
+            if (IV[1] && ivs[5] != 0)
+            {
+                return false;
+            }
+            pk.SetIVs(ivs);
                 pk.Gender = PKX.GetGenderFromPID(pk.Species, pk.PID);
-              
-               
             return true;
         }
 
@@ -67,9 +73,18 @@ namespace WangPlugin
         {
             return (upper << (int)shift) + lower;
         }
-        private static bool CheckShiny(uint pid, int TID, int SID)
+        private static bool CheckShiny(uint pid, int TID, int SID, bool[] shiny)
         {
-            if (((uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF))) < 8)
+            var s = (uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF));
+            if (shiny[0])
+                return true;
+            else if (shiny[1] && s < 8)
+                return true;
+            else if (shiny[2] && s < 8 && s != 0)
+                return true;
+            else if (shiny[3] && s == 0)
+                return true;
+            else if (shiny[4] && s == 1)
                 return true;
             else
                 return false;
