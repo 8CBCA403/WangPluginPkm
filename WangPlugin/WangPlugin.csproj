@@ -1,17 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
     <OutputType>Library</OutputType>
+    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFrameworks>net48;net6.0-windows</TargetFrameworks>
     <LangVersion>10</LangVersion>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="PKHeX.Core" Version="22.3.18" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
