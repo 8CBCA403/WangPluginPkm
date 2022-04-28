@@ -16,6 +16,7 @@ namespace WangPlugin
         public string RNGImg= @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\RNG.jpg";
         public string CalcImg = @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\Calc.jpg";
         public string SortImg = @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\Sort.jpg";
+        public string EggImg = @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\Egg.jpg";
         // Initialized on plugin load
         public ISaveFileProvider SaveFileEditor { get; private set; } = null!;
         public IPKMView PKMEditor { get; private set; } = null!;
@@ -25,6 +26,7 @@ namespace WangPlugin
             Console.WriteLine($"Loading {Name}...");
             SaveFileEditor = (ISaveFileProvider)Array.Find(args, z => z is ISaveFileProvider);
             PKMEditor = (IPKMView)Array.Find(args, z => z is IPKMView);
+
             var menu = (ToolStrip)Array.Find(args, z => z is ToolStrip);
             LoadMenuStrip(menu);
         }
@@ -59,46 +61,20 @@ namespace WangPlugin
             {
                 Image = System.Drawing.Image.FromFile(SortImg)
             };
-
+            var ConvertEgg = new ToolStripMenuItem($"简易变蛋")
+            {
+                Image = System.Drawing.Image.FromFile(EggImg)
+            };
             RNGForm.Click += (s, e) => OpenRNGForm();
-            Allshiny.Click += (s, e) => SetShiny();
+            Allshiny.Click += (s, e) => SetAllShiny.SetShiny(SaveFileEditor);
+            ConvertEgg.Click += (s, e) => ConvertToEgg.Egg(PKMEditor.Data, PKMEditor, SaveFileEditor);
             Calc.Click += (s, e) =>OpenCalc();
-            Sort.Click += (s, e) => SortPokemon();
+            Sort.Click += (s, e) => SortPokemon.Sort(SaveFileEditor);
             ctrl.DropDownItems.Add(RNGForm);
             ctrl.DropDownItems.Add(Allshiny);
+            ctrl.DropDownItems.Add(ConvertEgg);
             ctrl.DropDownItems.Add(Calc);
             ctrl.DropDownItems.Add(Sort);
-        }
-        public void SetShiny()
-        {
-            var sav = SaveFileEditor.SAV;
-            sav.ModifyBoxes(SetAllShiny);
-            SaveFileEditor.ReloadSlots();
-        }
-        public static void SetAllShiny(PKM pkm)
-        {
-            pkm.SetShinySID();
-        }
-        public void SortPokemon()
-        {
-            var sav = SaveFileEditor.SAV;
-            List<PKM> PokeList = new();
-            var PokeArray = new PKM[30];
-            int i;
-            for (i = 0; i < 30; i++)
-          {     
-            PKM pk = sav.GetBoxSlotAtIndex(sav.CurrentBox, i);
-            if (pk.Species == 0)
-                break;
-            PokeList.Add(pk);
-           }
-            var count = PokeList.Count;
-            List<PKM> sorted = PokeList.OrderBy(c => c.Species).ToList();
-          for (i = 0; i <count; i++)
-          {
-            sav.SetBoxSlotAtIndex(sorted[i], sav.CurrentBox, i);
-          }
-            sav.LegalizeBox(sav.CurrentBox);
         }
         private static void OpenCalc()
         {

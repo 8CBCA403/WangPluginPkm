@@ -14,8 +14,8 @@ namespace WangPlugin
             var pidUpper = RNG.LCRNG.Advance(seed, 2) >> shift;
             var dvLower = RNG.LCRNG.Advance(seed, 3) >> shift;
             var dvUpper = RNG.LCRNG.Advance(seed, 4) >> shift;
-            var pid = combineRNG(pidUpper, pidLower, shift);
-            var pidR = combineRNG(pidLower, pidUpper, shift);
+            var pid = CombineRNG(pidUpper, pidLower, shift);
+            var pidR = CombineRNG(pidLower, pidUpper, shift);
             var ivs = DvsToIVs(dvUpper, dvLower);
             if (pk.Species == 201)
             {
@@ -77,7 +77,7 @@ namespace WangPlugin
                 return false;
         }
 
-        private static uint combineRNG(uint upper, uint lower, uint shift)
+        private static uint CombineRNG(uint upper, uint lower, uint shift)
         {
             return (upper << (int)shift) + lower;
         }
