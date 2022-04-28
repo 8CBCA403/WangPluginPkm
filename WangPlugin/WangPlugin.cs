@@ -4,6 +4,7 @@ using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using PKHeX.Core.AutoMod;
 namespace WangPlugin
 {
     public class WangPlugin : IPlugin
@@ -54,18 +55,19 @@ namespace WangPlugin
             {
                 Image = System.Drawing.Image.FromFile(CalcImg)
             };
-            var Read = new ToolStripMenuItem($"简易排序")
+            var Sort = new ToolStripMenuItem($"简易排序")
             {
                 Image = System.Drawing.Image.FromFile(SortImg)
             };
+
             RNGForm.Click += (s, e) => OpenRNGForm();
             Allshiny.Click += (s, e) => SetShiny();
             Calc.Click += (s, e) =>OpenCalc();
-            Read.Click += (s, e) => SortPokemon();
+            Sort.Click += (s, e) => SortPokemon();
             ctrl.DropDownItems.Add(RNGForm);
             ctrl.DropDownItems.Add(Allshiny);
             ctrl.DropDownItems.Add(Calc);
-            ctrl.DropDownItems.Add(Read);
+            ctrl.DropDownItems.Add(Sort);
         }
         public void SetShiny()
         {
@@ -82,31 +84,21 @@ namespace WangPlugin
             var sav = SaveFileEditor.SAV;
             List<PKM> PokeList = new();
             var PokeArray = new PKM[30];
-            int  i,j;
-          for (i = 0; i < 30; i++)
-          {
-                for (j = 0; j < 30; j++)
-                {
-                    
-                    PKM pk = sav.GetBoxSlotAtIndex(i, j);
-                    if (pk.Species == 0)
-                        break;
-                    PokeList.Add(pk);
-                }
-            }
+            int i;
+            for (i = 0; i < 30; i++)
+          {     
+            PKM pk = sav.GetBoxSlotAtIndex(sav.CurrentBox, i);
+            if (pk.Species == 0)
+                break;
+            PokeList.Add(pk);
+           }
             var count = PokeList.Count;
-            var box = count / 30;
-            var remin = count % 30;
-            int n = 0;
             List<PKM> sorted = PokeList.OrderBy(c => c.Species).ToList();
-            for (i = 0; i <box; i++)
-            {
-                for (j = 0; j < 30; j++)
-                {
-                    sav.SetBoxSlotAtIndex(sorted[i*30+j], i, j);
-                    n++;
-                }
-             }
+          for (i = 0; i <count; i++)
+          {
+            sav.SetBoxSlotAtIndex(sorted[i], sav.CurrentBox, i);
+          }
+            sav.LegalizeBox(sav.CurrentBox);
         }
         private static void OpenCalc()
         {
