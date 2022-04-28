@@ -11,6 +11,14 @@
     <PackageReference Include="PKHeX.Core" Version="22.3.18" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="PKHeX.Core.AutoMod">
+      <HintPath>deps\PKHeX.Core.AutoMod.dll</HintPath>
+    </Reference>
+    <Reference Include="PKHeX.Core.Enhancements">
+      <HintPath>deps\PKHeX.Core.Enhancements.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

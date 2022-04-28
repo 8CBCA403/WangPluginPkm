@@ -1,9 +1,9 @@
 ﻿using PKHeX.Core;
+using PKHeX.Core.AutoMod;
 using System;
 using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 namespace WangPlugin
 {
     internal class RNGForm : Form
@@ -42,6 +42,7 @@ namespace WangPlugin
         private TextBox SeedText;
         private CheckBox AtkCheck;
         private CheckBox SpeCheck;
+        private CheckBox SetRibbon;
         private ShinyType Stype = ShinyType.None;
         public RNGForm(ISaveFileProvider sav, IPKMView editor)
 
@@ -63,6 +64,7 @@ namespace WangPlugin
             this.SeedText = new System.Windows.Forms.TextBox();
             this.AtkCheck = new System.Windows.Forms.CheckBox();
             this.SpeCheck = new System.Windows.Forms.CheckBox();
+            this.SetRibbon = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // methodTypeBox
@@ -146,10 +148,21 @@ namespace WangPlugin
             this.SpeCheck.Text = "0Spe";
             this.SpeCheck.UseVisualStyleBackColor = true;
             // 
+            // SetRibbon
+            // 
+            this.SetRibbon.AutoSize = true;
+            this.SetRibbon.Location = new System.Drawing.Point(79, 108);
+            this.SetRibbon.Name = "SetRibbon";
+            this.SetRibbon.Size = new System.Drawing.Size(76, 21);
+            this.SetRibbon.TabIndex = 18;
+            this.SetRibbon.Text = "Ribbon";
+            this.SetRibbon.UseVisualStyleBackColor = true;
+            // 
             // RNGForm
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(292, 177);
+            this.Controls.Add(this.SetRibbon);
             this.Controls.Add(this.SpeCheck);
             this.Controls.Add(this.AtkCheck);
             this.Controls.Add(this.SeedText);
@@ -208,7 +221,6 @@ namespace WangPlugin
             }
             return shinytype;
         }
-
         private bool[] CheckIV()
         {
             var IV = new bool[2] { false, false};
@@ -279,6 +291,10 @@ namespace WangPlugin
                             {
                                 this.Invoke(() =>
                                 {
+                                    if(SetRibbon.Checked)
+                                    {
+                                        RibbonApplicator.SetAllValidRibbons(pk);
+                                    }
                                     MessageBox.Show($"Success！");
                                     Editor.PopulateFields(pk, false);
                                     SAV.ReloadSlots();

@@ -3,7 +3,6 @@ using System;
 using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
-using System.Collections;
 using System.Windows.Forms;
 namespace WangPlugin
 {
@@ -12,8 +11,10 @@ namespace WangPlugin
         public string Name => nameof(WangPlugin);
         public int Priority => 1; // Loading order, lowest is first.
         public string ImageSource = @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\icon.jpg";
-        public string ShinyImg = @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\shiny.jpg";
+        public string ShinyImg = @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\Shiny.jpg";
         public string RNGImg= @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\RNG.jpg";
+        public string CalcImg = @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\Calc.jpg";
+        public string SortImg = @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\Sort.jpg";
         // Initialized on plugin load
         public ISaveFileProvider SaveFileEditor { get; private set; } = null!;
         public IPKMView PKMEditor { get; private set; } = null!;
@@ -49,8 +50,14 @@ namespace WangPlugin
             {
                 Image = System.Drawing.Image.FromFile(ShinyImg)
             };
-            var Calc = new ToolStripMenuItem($"性格计算器");
-            var Read = new ToolStripMenuItem($"简易排序");
+            var Calc = new ToolStripMenuItem($"性格计算器")
+            {
+                Image = System.Drawing.Image.FromFile(CalcImg)
+            };
+            var Read = new ToolStripMenuItem($"简易排序")
+            {
+                Image = System.Drawing.Image.FromFile(SortImg)
+            };
             RNGForm.Click += (s, e) => OpenRNGForm();
             Allshiny.Click += (s, e) => SetShiny();
             Calc.Click += (s, e) =>OpenCalc();
