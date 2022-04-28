@@ -1,22 +1,13 @@
 ﻿using PKHeX.Core;
 using System;
 using System.Threading;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
-using PKHeX.Core.AutoMod;
 namespace WangPlugin
 {
     public class WangPlugin : IPlugin
     {
         public string Name => nameof(WangPlugin);
         public int Priority => 1; // Loading order, lowest is first.
-        public string ImageSource = @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\icon.jpg";
-        public string ShinyImg = @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\Shiny.jpg";
-        public string RNGImg= @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\RNG.jpg";
-        public string CalcImg = @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\Calc.jpg";
-        public string SortImg = @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\Sort.jpg";
-        public string EggImg = @"D:\GITHUB\WangPlugin\WangPlugin\Resources\img\Egg.jpg";
         // Initialized on plugin load
         public ISaveFileProvider SaveFileEditor { get; private set; } = null!;
         public IPKMView PKMEditor { get; private set; } = null!;
@@ -42,28 +33,28 @@ namespace WangPlugin
         {
             var ctrl = new ToolStripMenuItem(Name)
             {
-                Image = System.Drawing.Image.FromFile(ImageSource)
+                Image = Properties.Resources.icon1
             };
             tools.DropDownItems.Add(ctrl);
             var RNGForm = new ToolStripMenuItem($"RNG面板")
             {
-                Image = System.Drawing.Image.FromFile(RNGImg)
+                Image = Properties.Resources.RNG
             };
             var Allshiny = new ToolStripMenuItem($"全部闪光")
             {
-                Image = System.Drawing.Image.FromFile(ShinyImg)
+                Image = Properties.Resources.Shiny
             };
             var Calc = new ToolStripMenuItem($"性格计算器")
             {
-                Image = System.Drawing.Image.FromFile(CalcImg)
+                Image = Properties.Resources.Calc
             };
             var Sort = new ToolStripMenuItem($"简易排序")
             {
-                Image = System.Drawing.Image.FromFile(SortImg)
+                Image = Properties.Resources.Sort
             };
             var ConvertEgg = new ToolStripMenuItem($"简易变蛋")
             {
-                Image = System.Drawing.Image.FromFile(EggImg)
+                Image = Properties.Resources.Egg
             };
             RNGForm.Click += (s, e) => OpenRNGForm();
             Allshiny.Click += (s, e) => SetAllShiny.SetShiny(SaveFileEditor);
