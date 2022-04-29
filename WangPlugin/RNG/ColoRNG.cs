@@ -8,11 +8,11 @@ namespace WangPlugin
         private const int shift = 16;
         private const int shift8 = 8;
 
-        public static uint Next(uint seed) => RNG.XDRNG.Next(seed);
+        public static uint Next(uint seed) => PKHeX.Core.RNG.XDRNG.Next(seed);
 
         public static bool GenPkm(ref PKM pk, uint seed, bool []shiny, bool[] IV)
         {
-            var rng = RNG.XDRNG;
+            var rng = PKHeX.Core.RNG.XDRNG;
            
                 var O = rng.Next(seed); // SID
                 var A = rng.Next(O); // PID

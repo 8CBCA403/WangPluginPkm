@@ -12,7 +12,6 @@ namespace WangPlugin
             var xoro = new Xoroshiro128Plus8b(seed);
             var fakeTID = xoro.NextUInt();
             var pid = xoro.NextUInt();
-            var opid = pid;
             pid = GetRevisedPID(fakeTID, pid, TID,SID);
             var ivs = new int[6] { UNSET, UNSET, UNSET, UNSET, UNSET, UNSET };
             var determined = 0;

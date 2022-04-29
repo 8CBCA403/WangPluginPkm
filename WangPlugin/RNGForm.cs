@@ -17,6 +17,7 @@ namespace WangPlugin
         private IPKMView Editor { get; }
         enum MethodType
         {
+            None,
             Method1,
             H1_BACD_R,
             Method1Roaming,
@@ -36,7 +37,7 @@ namespace WangPlugin
             Sqaure,
             ForceStar,
         }
-        private MethodType RNGMethod = MethodType.Method1;
+        private MethodType RNGMethod = MethodType.None;
         private ComboBox ShinyTypeBox;
         private Label ShinyTypeLabel;
         private TextBox SeedText;
@@ -234,6 +235,7 @@ namespace WangPlugin
         {
             return RNGMethod switch
             {
+                MethodType.None=>NoMethod.GenPkm(ref pk, GetShinyType(), CheckIV()),
                 MethodType.Method1 => Method1RNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
                 MethodType.Method2 => Method2RNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
                 MethodType.Method4 => Method4RNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),

@@ -6,14 +6,14 @@ namespace WangPlugin
     {
         private const int shift = 16;
 
-        public static uint Next(uint seed) => RNG.LCRNG.Next(seed);
+        public static uint Next(uint seed) => PKHeX.Core.RNG.LCRNG.Next(seed);
 
         public static bool  GenPkm(ref PKM pk,uint seed, bool[] shiny, bool[] IV)
         {
-            var pidLower = RNG.LCRNG.Next(seed) >> shift;
-            var pidUpper = RNG.LCRNG.Advance(seed, 2) >> shift;
-            var dvLower = RNG.LCRNG.Advance(seed, 3) >> shift;
-            var dvUpper = RNG.LCRNG.Advance(seed, 4) >> shift;
+            var pidLower = PKHeX.Core.RNG.LCRNG.Next(seed) >> shift;
+            var pidUpper = PKHeX.Core.RNG.LCRNG.Advance(seed, 2) >> shift;
+            var dvLower = PKHeX.Core.RNG.LCRNG.Advance(seed, 3) >> shift;
+            var dvUpper = PKHeX.Core.RNG.LCRNG.Advance(seed, 4) >> shift;
             var pid = combineRNG(pidUpper, pidLower, shift);
             var ivs = dvsToIVs(dvUpper, dvLower);
             ivs[1] &= 7;

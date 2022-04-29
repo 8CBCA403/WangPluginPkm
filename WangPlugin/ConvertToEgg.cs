@@ -14,6 +14,7 @@ namespace WangPlugin
             List<IEncounterInfo> Results = new();
             IEncounterInfo enc;
             PKM pkm = PKMEditor.Data;
+            ITechRecord8 techRecord = pk as ITechRecord8;
             int[] zero = {0,0,0,0,0,0 };
             var tree = EvolutionTree.GetEvolutionTree(PKMEditor.Data, PKMEditor.Data.Format);
             var PE=tree.GetPreEvolutions(PKMEditor.Data.Species, PKMEditor.Data.Form);
@@ -37,10 +38,16 @@ namespace WangPlugin
                 pkm = enc.ConvertToPKM(SaveFileEditor.SAV, criteria);
             }
             pk.IsEgg = true;
+            pk.TrainerID7 = SaveFileEditor.SAV.TrainerID7;
+            pk.TrainerSID7 = SaveFileEditor.SAV.TrainerSID7;
+            pk.OT_Gender = SaveFileEditor.SAV.Gender;
+            pk.OT_Name = SaveFileEditor.SAV.OT;
+            pk.CurrentHandler = 0;
             if (pk.Ball == 1)
             {
                 pk.Ball = 4;
             }
+            TechnicalRecordApplicator.SetRecordFlags(techRecord,false, 112);
             pk.Moves = pkm.Moves;
             pk.Move1_PP = pkm.Move1_PP;
             pk.Move2_PP = pkm.Move2_PP;
@@ -72,6 +79,7 @@ namespace WangPlugin
                 pk.Nickname = "Egg";
             }
             pk.SetDynamaxLevel(0);
+            RibbonApplicator.RemoveAllValidRibbons(pk);
             pk.RefreshChecksum();
             PKMEditor.PopulateFields(pk, false);
             SaveFileEditor.ReloadSlots();
