@@ -14,19 +14,22 @@ namespace WangPlugin
             List<IEncounterInfo> Results = new();
             IEncounterInfo enc;
             PKM pkm = PKMEditor.Data;
-            ITechRecord8 techRecord = pk as ITechRecord8;
-            int[] zero = {0,0,0,0,0,0 };
+            PKM pko = PKMEditor.Data;
             var tree = EvolutionTree.GetEvolutionTree(PKMEditor.Data, PKMEditor.Data.Format);
             var PE=tree.GetPreEvolutions(PKMEditor.Data.Species, PKMEditor.Data.Form);
+
             if (PE.Count() != 0)
             {
                 int PreSpecies = PE.First();
                 pk.Species = PreSpecies;
+               
             }
             var setting = new SearchSettings
             {
                 Species = pk.Species,
                 SearchEgg = true,
+                Version=pk.Version,
+                
             };
             var search = EncounterUtil.SearchDatabase(setting, SaveFileEditor.SAV);
             var results = search.ToList();
@@ -36,14 +39,83 @@ namespace WangPlugin
                 enc = Results[0];
                 var criteria = EncounterUtil.GetCriteria(enc, pkm);
                 pkm = enc.ConvertToPKM(SaveFileEditor.SAV, criteria);
+                pk = pkm;
+                pk.IsEgg = true;
+                pk.TrainerID7 = SaveFileEditor.SAV.TrainerID7;
+                pk.TrainerSID7 = SaveFileEditor.SAV.TrainerSID7;
+                pk.OT_Gender = SaveFileEditor.SAV.Gender;
+                pk.OT_Name = SaveFileEditor.SAV.OT;
+                pk.Gender = pko.Gender;
+                pk.Form = pko.Form;
+                pk.CurrentHandler = 0;
+                pk.Ability = pko.Ability;
+                pk.Nature = pko.Nature;
+                pk.IVs = pko.IVs;
+                if (pko.Ball == 1)
+                {
+                    pk.Ball = 4;
+                }
+                if (pk.Gen4 == true)
+                {
+                    if (pko.IsShiny == true)
+                        pk.SetShiny();
+                    pk.Nickname = "Egg";
+                    pk.RefreshAbility((int)(pk.PID & 1));
+                    pk.Egg_Location = 2000;
+                    pk.Met_Location = 0;
+                }
+                if (pk.Gen7 == true)
+                {
+                    pk.PID = pko.PID;
+                    pk.Ball = pko.Ball;
+                    pk.IsNicknamed = true;
+                    if (pk.Language == 10 || pk.Language == 9)
+                    {
+                        pk.Nickname = "蛋";
+                    }
+                    if (pk.Language == 2)
+                    {
+                        pk.Nickname = "Egg";
+                    }
+                    pk.Egg_Location = 60002;
+                    pk.Met_Location = 0;
+                  
+                }
+                if (pk.Gen8 == true)
+                {
+                    pk.PID = pko.PID;
+                    pk.Ball = pko.Ball;
+                    pk.IsNicknamed = true;
+                    if (pk.Language == 10 || pk.Language == 9)
+                    {
+                        pk.Nickname = "蛋";
+                    }
+                    if (pk.Language == 2)
+                    {
+                        pk.Nickname = "Egg";
+                    }
+                    pk.Egg_Location = 60002;
+                    if (pk.Version == 49 || pk.Version == 48)
+                    {
+                        pk.Egg_Location = 60010;
+                    }
+                    pk.Met_Location = 0;
+                    if (pk.Version == 49 || pk.Version == 48)
+                    {
+                        pk.Met_Location = 65535;
+                    }
+                }
+                pk.OT_Friendship = 1;
+                pk.RefreshChecksum();
+                PKMEditor.PopulateFields(pk, false);
+                SaveFileEditor.ReloadSlots();
+                MessageBox.Show($"Success!");
             }
-            pk.IsEgg = true;
-            pk.TrainerID7 = SaveFileEditor.SAV.TrainerID7;
-            pk.TrainerSID7 = SaveFileEditor.SAV.TrainerSID7;
-            pk.OT_Gender = SaveFileEditor.SAV.Gender;
-            pk.OT_Name = SaveFileEditor.SAV.OT;
-            pk.CurrentHandler = 0;
-            if (pk.Ball == 1)
+            if (results.Count == 0)
+            {
+                MessageBox.Show($"Can't Convert to Egg!");
+            }
+            /*if (pk.Ball == 1)
             {
                 pk.Ball = 4;
             }
@@ -59,8 +131,18 @@ namespace WangPlugin
             pk.Move4_PPUps = 0;
             pk.Met_Level = 1;
             pk.CurrentLevel = 1;
+            pk.StatNature = pk.Nature;
             pk.Egg_Location = 60002;
+            if (pk.Version == 49 || pk.Version == 48)
+            {
+                pk.Egg_Location = 60010;
+            }
             pk.Met_Location = 0;
+            if (pk.Version == 49 || pk.Version == 48)
+            {
+               pk.Met_Location = 65535;
+            }
+            
             pk.EggMetDate = DateTime.Today;
             pk.MetDate = DateTime.Today;
             pk.RelearnMove1 = pk.Move1;
@@ -79,11 +161,11 @@ namespace WangPlugin
                 pk.Nickname = "Egg";
             }
             pk.SetDynamaxLevel(0);
-            RibbonApplicator.RemoveAllValidRibbons(pk);
+            pk.HeldItem = 0;
             pk.RefreshChecksum();
             PKMEditor.PopulateFields(pk, false);
-            SaveFileEditor.ReloadSlots();
-            MessageBox.Show($"Success！");
+            SaveFileEditor.ReloadSlots();*/
+            
         }
 
     }
