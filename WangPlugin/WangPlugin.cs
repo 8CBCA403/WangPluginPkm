@@ -44,6 +44,11 @@ namespace WangPlugin
             {
                 Image = Properties.Resources.Shiny
             };
+            var SimpleEdit = new ToolStripMenuItem($"常用功能")
+            {
+                Image = Properties.Resources.Edit
+            };
+            
             var Calc = new ToolStripMenuItem($"性格计算器")
             {
                 Image = Properties.Resources.Calc
@@ -60,9 +65,11 @@ namespace WangPlugin
             Allshiny.Click += (s, e) => SetAllShiny.SetShiny(SaveFileEditor);
             ConvertEgg.Click += (s, e) => ConvertToEgg.Egg(PKMEditor.Data, PKMEditor, SaveFileEditor);
             Calc.Click += (s, e) =>OpenCalc();
+            SimpleEdit.Click += (s, e) => OpenSimpleEdit();
             Sort.Click += (s, e) => SortPokemon.Sort(SaveFileEditor);
             ctrl.DropDownItems.Add(RNGForm);
             ctrl.DropDownItems.Add(Allshiny);
+            ctrl.DropDownItems.Add(SimpleEdit);
             ctrl.DropDownItems.Add(ConvertEgg);
             ctrl.DropDownItems.Add(Calc);
             ctrl.DropDownItems.Add(Sort);
@@ -75,6 +82,11 @@ namespace WangPlugin
         private void OpenRNGForm()
         {
             var frm = new RNGForm(SaveFileEditor, PKMEditor);
+            frm.Show();
+        }
+        private void OpenSimpleEdit()
+        {
+            var frm = new SimpleEdit(SaveFileEditor, PKMEditor);
             frm.Show();
         }
         public void NotifySaveLoaded()

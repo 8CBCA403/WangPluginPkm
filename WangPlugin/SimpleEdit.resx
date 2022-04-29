@@ -117,29 +117,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Calc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\img\Calc.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\img\Edit.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Egg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\img\Egg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\img\icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\img\icon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RNG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\img\RNG.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Shiny" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\img\Shiny.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Sort" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\img\Sort.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
   </data>
 </root>

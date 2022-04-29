@@ -23,7 +23,6 @@ namespace WangPlugin
             }
             return true;
         }
-      
         private static uint CheckShiny(PKM pk, bool[] shiny)
         {
             Random myObject = new Random();
