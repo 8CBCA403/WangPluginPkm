@@ -57,7 +57,7 @@ namespace WangPlugin
             {
                 Image = Properties.Resources.Sort
             };
-            var ConvertEgg = new ToolStripMenuItem($"一键变蛋")
+            var ConvertEgg = new ToolStripMenuItem($"变蛋器")
             {
                 Image = Properties.Resources.Egg
             };
