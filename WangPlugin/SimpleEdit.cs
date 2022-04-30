@@ -6,7 +6,6 @@ namespace WangPlugin
 {
     internal class SimpleEdit : Form
     {
-        private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
         private Button AllRibbon;
         private Button ClearRecord;
@@ -51,9 +50,7 @@ namespace WangPlugin
 
         }
         public SimpleEdit(ISaveFileProvider sav, IPKMView editor)
-
         {
-            SAV = sav;
             Editor = editor;
             InitializeComponent();
         }

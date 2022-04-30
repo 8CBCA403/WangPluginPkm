@@ -63,7 +63,7 @@ namespace WangPlugin
             };
             RNGForm.Click += (s, e) => OpenRNGForm();
             Allshiny.Click += (s, e) => SetAllShiny.SetShiny(SaveFileEditor);
-            ConvertEgg.Click += (s, e) => ConvertToEgg.Egg(PKMEditor.Data, PKMEditor, SaveFileEditor);
+            ConvertEgg.Click += (s, e) => OpenEggForm();
             Calc.Click += (s, e) =>OpenCalc();
             SimpleEdit.Click += (s, e) => OpenSimpleEdit();
             Sort.Click += (s, e) => SortPokemon.Sort(SaveFileEditor);
@@ -82,6 +82,11 @@ namespace WangPlugin
         private void OpenRNGForm()
         {
             var frm = new RNGForm(SaveFileEditor, PKMEditor);
+            frm.Show();
+        }
+        private void OpenEggForm()
+        {
+            var frm = new ConvertToEgg(SaveFileEditor, PKMEditor);
             frm.Show();
         }
         private void OpenSimpleEdit()
