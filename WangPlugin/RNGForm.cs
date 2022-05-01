@@ -44,6 +44,7 @@ namespace WangPlugin
         private CheckBox AtkCheck;
         private CheckBox SpeCheck;
         private CheckBox SetRibbon;
+        private CheckBox LockIV;
         private ShinyType Stype = ShinyType.None;
         public RNGForm(ISaveFileProvider sav, IPKMView editor)
 
@@ -66,6 +67,7 @@ namespace WangPlugin
             this.AtkCheck = new System.Windows.Forms.CheckBox();
             this.SpeCheck = new System.Windows.Forms.CheckBox();
             this.SetRibbon = new System.Windows.Forms.CheckBox();
+            this.LockIV = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // methodTypeBox
@@ -159,10 +161,22 @@ namespace WangPlugin
             this.SetRibbon.Text = "Ribbon";
             this.SetRibbon.UseVisualStyleBackColor = true;
             // 
+            // LockIV
+            // 
+            this.LockIV.AutoSize = true;
+            this.LockIV.Location = new System.Drawing.Point(79, 136);
+            this.LockIV.Name = "LockIV";
+            this.LockIV.Size = new System.Drawing.Size(78, 21);
+            this.LockIV.TabIndex = 19;
+            this.LockIV.Text = "Lock3V";
+            this.LockIV.UseVisualStyleBackColor = true;
+            this.LockIV.Enabled = false;
+            // 
             // RNGForm
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(292, 177);
+            this.Controls.Add(this.LockIV);
             this.Controls.Add(this.SetRibbon);
             this.Controls.Add(this.SpeCheck);
             this.Controls.Add(this.AtkCheck);
@@ -190,8 +204,24 @@ namespace WangPlugin
             this.ShinyTypeBox.DataSource = Enum.GetNames(typeof(ShinyType));
             this.methodTypeBox.SelectedIndexChanged += (_, __) =>
             {
+                if (methodTypeBox.SelectedItem == methodTypeBox.Items[9])
+                {
+                    LockIV.Enabled = true;
+                    LockIV.Checked = false;
+                }
+                else if (methodTypeBox.SelectedItem == methodTypeBox.Items[10])
+                {
+                    LockIV.Enabled = false;
+                    LockIV.Checked = true;
+                }
+                else
+                {
+                    LockIV.Enabled = false;
+                    LockIV.Checked = false;
+                }
                 RNGMethod = (MethodType)Enum.Parse(typeof(MethodType), this.methodTypeBox.SelectedItem.ToString(), false);
             };
+           
             this.methodTypeBox.SelectedIndex = 0;
             this.ShinyTypeBox.SelectedIndexChanged += (_, __) =>
             {
@@ -224,11 +254,15 @@ namespace WangPlugin
         }
         private bool[] CheckIV()
         {
-            var IV = new bool[2] { false, false};
+            var IV = new bool[3] { false, false,false};
             if (AtkCheck.Checked)
                 IV[0] = true;
             if (SpeCheck.Checked)
                 IV[1] = true;
+            if (LockIV.Checked)
+            {
+                IV[2] = true;
+            }
             return IV;
         }
         private bool GenPkm(ref PKM pk,uint seed)
@@ -283,7 +317,7 @@ namespace WangPlugin
                     var pk = Editor.Data;
                     while (true)
                     {
-                        pk.RefreshAbility((int)(pk.PID & 1));
+                        //pk.RefreshAbility((int)(pk.PID & 1));
                         if (tokenSource.IsCancellationRequested)
                         {
                             Condition.Text = "Stop";
@@ -320,6 +354,6 @@ namespace WangPlugin
             IsRunning(false);
         }
 
-    
+        
     }
 }

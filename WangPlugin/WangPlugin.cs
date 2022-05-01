@@ -2,6 +2,7 @@
 using System;
 using System.Threading;
 using System.Windows.Forms;
+using PKHeX.Core.Enhancements;
 namespace WangPlugin
 {
     public class WangPlugin : IPlugin
@@ -33,7 +34,7 @@ namespace WangPlugin
         {
             var ctrl = new ToolStripMenuItem(Name)
             {
-                Image = Properties.Resources.icon1
+                Image = Properties.Resources.wang
             };
             tools.DropDownItems.Add(ctrl);
             var RNGForm = new ToolStripMenuItem($"RNG面板")

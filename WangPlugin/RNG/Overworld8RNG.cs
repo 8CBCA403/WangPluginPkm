@@ -11,11 +11,14 @@ namespace WangPlugin
     /// </remarks>
     public static class Overworld8RNG
     {
-       
+        
         private const int UNSET = 255;
         public static uint Next(uint seed) => (uint)new Xoroshiro128Plus(seed).Next();
         public static bool GenPkm(ref PKM pk,uint seed,  bool[] shiny, bool[] IV)
         {
+            int FlawlessIVs = 0;
+            if (IV[2])
+                FlawlessIVs = 3;
             var xoro = new Xoroshiro128Plus(seed);
 
             var ec= (uint)xoro.NextInt(uint.MaxValue);
@@ -31,7 +34,7 @@ namespace WangPlugin
             var ivs = new int[6] { UNSET, UNSET, UNSET, UNSET, UNSET, UNSET };
            
             const int MAX = 31;
-            for (int i = 0; i < 0; i++)
+            for (int i = 0; i < FlawlessIVs; i++)
             {
                 int index;
                 do { index = (int)xoro.NextInt(6); }
@@ -63,7 +66,8 @@ namespace WangPlugin
             scale.HeightScalar = (byte)((int)xoro.NextInt(0x81) + (int)xoro.NextInt(0x80));
             scale.WeightScalar = (byte)((int)xoro.NextInt(0x81) + (int)xoro.NextInt(0x80));
             var ability = (1 << (int)xoro.NextInt(2));
-            pk.AbilityNumber = ability;
+            if (pk.Species is not (638 or 639 or 640))
+                pk.AbilityNumber = ability;
             pk.RefreshChecksum();
             return true;
         }
