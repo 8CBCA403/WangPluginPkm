@@ -204,7 +204,7 @@ namespace WangPlugin
             this.ShinyTypeBox.DataSource = Enum.GetNames(typeof(ShinyType));
             this.methodTypeBox.SelectedIndexChanged += (_, __) =>
             {
-                if (methodTypeBox.SelectedItem == methodTypeBox.Items[9])
+                if (methodTypeBox.SelectedItem == methodTypeBox.Items[9]|| methodTypeBox.SelectedItem == methodTypeBox.Items[1])
                 {
                     LockIV.Enabled = true;
                     LockIV.Checked = false;

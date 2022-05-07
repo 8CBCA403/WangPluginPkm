@@ -17,6 +17,8 @@ namespace WangPlugin
             var pid = CombineRNG(pidUpper, pidLower, shift);
             var pidR = CombineRNG(pidLower, pidUpper, shift);
             var ivs = DvsToIVs(dvUpper, dvLower);
+            var FlawlessIVs = 0;
+            uint MAX = 31;
             if (pk.Species == 201)
             {
                 pk.PID = pidR;
@@ -46,6 +48,20 @@ namespace WangPlugin
             pk.Nature =(int)(pid %100% 25);
             pk.Gender = PKX.GetGenderFromPID(pk.Species, pk.PID);
             pk.RefreshAbility((int)(pk.PID & 1));
+            if (IV[2] == true)
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    if (ivs[i] == MAX)
+                        FlawlessIVs++;
+                }
+                if (FlawlessIVs is 3 or > 3)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
             return true;
         }
         private static uint[] DvsToIVs(uint dvUpper, uint dvLower)
