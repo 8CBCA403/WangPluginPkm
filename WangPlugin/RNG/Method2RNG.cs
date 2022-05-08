@@ -36,7 +36,7 @@ namespace WangPlugin
             pk.IV_SPD = (int)ivs[4];
             pk.IV_SPE = (int)ivs[5];
             pk.Nature = (int)(pid % 100 % 25);
-            pk.Gender = PKX.GetGenderFromPID(pk.Species, pk.PID);
+            pk.Gender = GenderApplicator.GetSaneGender(pk);
             pk.RefreshAbility((int)(pk.PID & 1));
             return true;
         }

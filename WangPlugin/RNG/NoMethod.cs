@@ -9,7 +9,7 @@ namespace WangPlugin
         {
             pk.PID= Util.Rand32();
             pk.PID = CheckShiny(pk, shiny);
-            pk.Gender = PKX.GetGenderFromPID(pk.Species, pk.PID);
+            pk.Gender = GenderApplicator.GetSaneGender(pk);
             if(pk.Gen8==true)
                 pk.SetRandomEC();
             pk.RefreshAbility((int)(pk.PID & 1));

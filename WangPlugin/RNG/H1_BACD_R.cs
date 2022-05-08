@@ -35,7 +35,7 @@ namespace WangPlugin
             pk.SetIVs(IVs);
             pk.Nature =(int)(pk.PID % 100% 25);
             pk.Ability = (int)pk.PID & 1;
-            pk.Gender = PKX.GetGenderFromPID(pk.Species, pk.PID);
+            pk.Gender = GenderApplicator.GetSaneGender(pk);
             return true;
         }
         internal static void GetIVsInt32(Span<int> result, uint r1, uint r2)

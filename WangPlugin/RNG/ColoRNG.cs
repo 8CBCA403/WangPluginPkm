@@ -48,7 +48,7 @@ namespace WangPlugin
                 return false;
             }
             pk.SetIVs(ivs);
-                pk.Gender = PKX.GetGenderFromPID(pk.Species, pk.PID);
+                pk.Gender = GenderApplicator.GetSaneGender(pk);
             return true;
         }
 

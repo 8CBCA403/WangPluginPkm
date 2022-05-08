@@ -13,7 +13,7 @@
     <Content Include="Resources\img\icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="PKHeX.Core" Version="22.3.18" />
+    <PackageReference Include="PKHeX.Core" Version="22.5.8" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="PKHeX.Core.AutoMod">
