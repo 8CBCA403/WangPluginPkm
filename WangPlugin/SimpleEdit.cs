@@ -105,9 +105,20 @@ namespace WangPlugin
 
         private void Master_Click(object sender, EventArgs e)
         {
+            if (SAV.SAV.Version != GameVersion.PLA)
+                MessageBox.Show("只适用于阿尔宙斯！");
+            else
+            {
+                Handle_MoveShop();
+                MessageBox.Show("搞定了！");
+            }
+
+        }
+        private void Handle_MoveShop()
+        {
             List<PKM> PokeList = new();
             var PokeArray = new PKM[30];
-            var la = new LegalityAnalysis(Editor.Data);         
+            var la = new LegalityAnalysis(Editor.Data);
             for (int i = 0; i < 30; i++)
             {
                 PKM pkm = SAV.SAV.GetBoxSlotAtIndex(SAV.SAV.CurrentBox, i);
@@ -116,8 +127,8 @@ namespace WangPlugin
                 var pk = (PA8)pkm;
                 if (pk.Species == 0)
                     break;
-                pk = Handle_MoveShop(pkm);
-               // MessageBox.Show($"{pk.AlphaMove}");
+                pk = GetMoveFromDataBase(pkm);
+                // MessageBox.Show($"{pk.AlphaMove}");
                 IMoveShop8Mastery shop = pk;
                 for (int q = 0; q < 62; q++)
                 {
@@ -153,21 +164,21 @@ namespace WangPlugin
                 pk.GV_SPA = 7;
                 pk.GV_SPD = 7;
                 pk.GV_SPE = 7;
+                pk.Form = pkm.Form;
                 pk.RefreshChecksum();
-              
+
                 if (l.Valid)
                     PokeList.Add(pkm);
                 else
-                PokeList.Add(pk);
+                    PokeList.Add(pk);
             }
             var count = PokeList.Count;
-
             for (int i = 0; i < count; i++)
             {
                 SAV.SAV.SetBoxSlotAtIndex(PokeList[i], SAV.SAV.CurrentBox, i);
             }
         }
-        public PA8 Handle_MoveShop (PKM pk)
+        private PA8 GetMoveFromDataBase (PKM pk)
         {
             List<IEncounterInfo> Results = new();
             IEncounterInfo enc;
@@ -181,7 +192,6 @@ namespace WangPlugin
             };
             var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
             var results = search.ToList();
-            
             if (results.Count != 0)
             {
                 Results = results;
@@ -200,14 +210,10 @@ namespace WangPlugin
                         else
                             continue;
                     }
-                    else
-                    {
                         enc = Results[i];
                         criteria = EncounterUtil.GetCriteria(enc, pk);
                         pkm = enc.ConvertToPKM(SAV.SAV, criteria);
                         p = (PA8)pkm;
-                    }
-
                 } 
             }
                 return p;

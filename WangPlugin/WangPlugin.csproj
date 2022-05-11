@@ -10,6 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\lvlmove_la.pkl" />
+    <None Remove="Resources\mastery_la.pkl" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Resources\img\icon.ico" />
   </ItemGroup>
   <ItemGroup>

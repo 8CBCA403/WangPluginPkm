@@ -2,7 +2,6 @@
 using System;
 using System.Threading;
 using System.Windows.Forms;
-using PKHeX.Core.Enhancements;
 namespace WangPlugin
 {
     public class WangPlugin : IPlugin
@@ -18,7 +17,6 @@ namespace WangPlugin
             Console.WriteLine($"Loading {Name}...");
             SaveFileEditor = (ISaveFileProvider)Array.Find(args, z => z is ISaveFileProvider);
             PKMEditor = (IPKMView)Array.Find(args, z => z is IPKMView);
-
             var menu = (ToolStrip)Array.Find(args, z => z is ToolStrip);
             LoadMenuStrip(menu);
         }
@@ -37,6 +35,10 @@ namespace WangPlugin
                 Image = Properties.Resources.wang
             };
             tools.DropDownItems.Add(ctrl);
+            var form = tools.GetCurrentParent().FindForm();
+            if (form is not null)
+                form.Icon = Properties.Resources.icon;
+
             var RNGForm = new ToolStripMenuItem($"RNG面板")
             {
                 Image = Properties.Resources.RNG
@@ -75,6 +77,7 @@ namespace WangPlugin
             ctrl.DropDownItems.Add(Calc);
             ctrl.DropDownItems.Add(Sort);
         }
+     
         private static void OpenCalc()
         {
             var frm = new Calc();
