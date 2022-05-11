@@ -122,7 +122,7 @@ namespace WangPlugin
             for (int i = 0; i < 30; i++)
             {
                 PKM pkm = SAV.SAV.GetBoxSlotAtIndex(SAV.SAV.CurrentBox, i);
-                var pko = pkm;
+               var pko = pkm;
                 var l = new LegalityAnalysis(pko);
                 var pk = (PA8)pkm;
                 if (pk.Species == 0)
