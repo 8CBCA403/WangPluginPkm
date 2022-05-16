@@ -52,7 +52,7 @@ namespace WangPlugin
                 Image = Properties.Resources.Edit
             };
             
-            var Calc = new ToolStripMenuItem($"性格计算器")
+            var Calc = new ToolStripMenuItem($"多功能计算器")
             {
                 Image = Properties.Resources.Calc
             };
@@ -95,7 +95,7 @@ namespace WangPlugin
         }
         private void OpenDexBuildForm()
         {
-            var frm = new DexBuildForm(SaveFileEditor, PKMEditor);
+            var frm = new DexBuildForm(SaveFileEditor);
             frm.Show();
         }
         private void OpenSimpleEdit()

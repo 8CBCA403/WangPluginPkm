@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
-using PKHeX.Core.Searching;
 using PKHeX.Core;
 using PKHeX.Core.AutoMod;
 
@@ -21,10 +18,12 @@ namespace WangPlugin
         private LanguageBoxSelect7 type7 = LanguageBoxSelect7.ENG;
         private ComboBox GenderBox;
         private LanguageBoxSelect type = LanguageBoxSelect.ENG;
+        private Label TIDLabel;
+        private Label SIDLabel;
+        private Label OTLabel;
+        private Label LGLabel;
         private OT_Gender typeG = OT_Gender.Male;
         private ISaveFileProvider SAV { get; }
-        private IPKMView Editor { get; }
-
         enum LanguageBoxSelect
         {
             JPN,
@@ -52,11 +51,11 @@ namespace WangPlugin
             Male,
             Female,
         }
-        public DexBuildForm(ISaveFileProvider sav, IPKMView editor)
+        public DexBuildForm(ISaveFileProvider sav)
 
         {
             SAV = sav;
-            Editor = editor;
+       
             InitializeComponent();
             if (sav.SAV.Version is GameVersion.SN or GameVersion.MN or GameVersion.US or GameVersion.UM or
                 GameVersion.GP or GameVersion.GE or GameVersion.SW or GameVersion.SH or GameVersion.PLA or GameVersion.BD or GameVersion.SP)
@@ -111,11 +110,16 @@ namespace WangPlugin
             this.OT_Name = new System.Windows.Forms.TextBox();
             this.LanguageBox = new System.Windows.Forms.ComboBox();
             this.GenderBox = new System.Windows.Forms.ComboBox();
+            this.TIDLabel = new System.Windows.Forms.Label();
+            this.SIDLabel = new System.Windows.Forms.Label();
+            this.OTLabel = new System.Windows.Forms.Label();
+            this.LGLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Sort_BTN
             // 
-            this.Sort_BTN.Location = new System.Drawing.Point(18, 84);
+            this.Sort_BTN.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Sort_BTN.Location = new System.Drawing.Point(79, 83);
             this.Sort_BTN.Name = "Sort_BTN";
             this.Sort_BTN.Size = new System.Drawing.Size(102, 25);
             this.Sort_BTN.TabIndex = 0;
@@ -125,7 +129,8 @@ namespace WangPlugin
             // 
             // Gen_BTN
             // 
-            this.Gen_BTN.Location = new System.Drawing.Point(126, 84);
+            this.Gen_BTN.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Gen_BTN.Location = new System.Drawing.Point(187, 83);
             this.Gen_BTN.Name = "Gen_BTN";
             this.Gen_BTN.Size = new System.Drawing.Size(117, 24);
             this.Gen_BTN.TabIndex = 1;
@@ -135,47 +140,95 @@ namespace WangPlugin
             // 
             // TIDBox
             // 
-            this.TIDBox.Location = new System.Drawing.Point(18, 22);
+            this.TIDBox.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TIDBox.Location = new System.Drawing.Point(58, 24);
             this.TIDBox.Name = "TIDBox";
-            this.TIDBox.Size = new System.Drawing.Size(102, 25);
+            this.TIDBox.Size = new System.Drawing.Size(102, 27);
             this.TIDBox.TabIndex = 2;
             this.TIDBox.Text = "10101";
             // 
             // SIDBox
             // 
-            this.SIDBox.Location = new System.Drawing.Point(18, 53);
+            this.SIDBox.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SIDBox.Location = new System.Drawing.Point(58, 55);
             this.SIDBox.Name = "SIDBox";
-            this.SIDBox.Size = new System.Drawing.Size(102, 25);
+            this.SIDBox.Size = new System.Drawing.Size(102, 27);
             this.SIDBox.TabIndex = 3;
             this.SIDBox.Text = "01010";
             // 
             // OT_Name
             // 
-            this.OT_Name.Location = new System.Drawing.Point(126, 22);
+            this.OT_Name.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OT_Name.Location = new System.Drawing.Point(216, 24);
             this.OT_Name.Name = "OT_Name";
-            this.OT_Name.Size = new System.Drawing.Size(115, 25);
+            this.OT_Name.Size = new System.Drawing.Size(115, 27);
             this.OT_Name.TabIndex = 4;
             this.OT_Name.Text = "Wang";
             // 
             // LanguageBox
             // 
             this.LanguageBox.FormattingEnabled = true;
-            this.LanguageBox.Location = new System.Drawing.Point(126, 55);
+            this.LanguageBox.Location = new System.Drawing.Point(216, 55);
             this.LanguageBox.Name = "LanguageBox";
-            this.LanguageBox.Size = new System.Drawing.Size(45, 23);
+            this.LanguageBox.Size = new System.Drawing.Size(45, 25);
             this.LanguageBox.TabIndex = 5;
             // 
             // GenderBox
             // 
             this.GenderBox.FormattingEnabled = true;
-            this.GenderBox.Location = new System.Drawing.Point(171, 55);
+            this.GenderBox.Location = new System.Drawing.Point(261, 55);
             this.GenderBox.Name = "GenderBox";
-            this.GenderBox.Size = new System.Drawing.Size(70, 23);
+            this.GenderBox.Size = new System.Drawing.Size(70, 25);
             this.GenderBox.TabIndex = 6;
+            // 
+            // TIDLabel
+            // 
+            this.TIDLabel.AutoSize = true;
+            this.TIDLabel.Font = new System.Drawing.Font("MV Boli", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TIDLabel.Location = new System.Drawing.Point(1, 20);
+            this.TIDLabel.Name = "TIDLabel";
+            this.TIDLabel.Size = new System.Drawing.Size(51, 29);
+            this.TIDLabel.TabIndex = 7;
+            this.TIDLabel.Text = "TID";
+            // 
+            // SIDLabel
+            // 
+            this.SIDLabel.AutoSize = true;
+            this.SIDLabel.Font = new System.Drawing.Font("MV Boli", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SIDLabel.Location = new System.Drawing.Point(1, 49);
+            this.SIDLabel.Name = "SIDLabel";
+            this.SIDLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.SIDLabel.Size = new System.Drawing.Size(50, 29);
+            this.SIDLabel.TabIndex = 8;
+            this.SIDLabel.Text = "SID";
+            // 
+            // OTLabel
+            // 
+            this.OTLabel.AutoSize = true;
+            this.OTLabel.Font = new System.Drawing.Font("MV Boli", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OTLabel.Location = new System.Drawing.Point(166, 22);
+            this.OTLabel.Name = "OTLabel";
+            this.OTLabel.Size = new System.Drawing.Size(44, 29);
+            this.OTLabel.TabIndex = 9;
+            this.OTLabel.Text = "OT";
+            // 
+            // LGLabel
+            // 
+            this.LGLabel.AutoSize = true;
+            this.LGLabel.Font = new System.Drawing.Font("MV Boli", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LGLabel.Location = new System.Drawing.Point(167, 51);
+            this.LGLabel.Name = "LGLabel";
+            this.LGLabel.Size = new System.Drawing.Size(43, 29);
+            this.LGLabel.TabIndex = 10;
+            this.LGLabel.Text = "LG";
             // 
             // DexBuildForm
             // 
-            this.ClientSize = new System.Drawing.Size(258, 126);
+            this.ClientSize = new System.Drawing.Size(359, 126);
+            this.Controls.Add(this.LGLabel);
+            this.Controls.Add(this.OTLabel);
+            this.Controls.Add(this.SIDLabel);
+            this.Controls.Add(this.TIDLabel);
             this.Controls.Add(this.GenderBox);
             this.Controls.Add(this.LanguageBox);
             this.Controls.Add(this.OT_Name);
@@ -183,6 +236,7 @@ namespace WangPlugin
             this.Controls.Add(this.TIDBox);
             this.Controls.Add(this.Gen_BTN);
             this.Controls.Add(this.Sort_BTN);
+            this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DexBuildForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -324,7 +378,6 @@ namespace WangPlugin
             Sort(SAV);
             MessageBox.Show("搞定了！");
         }
-
         private void Gen_BTN_Click(object sender, EventArgs e)
         {
             Gen(SAV);
