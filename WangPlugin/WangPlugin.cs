@@ -56,9 +56,9 @@ namespace WangPlugin
             {
                 Image = Properties.Resources.Calc
             };
-            var Dex = new ToolStripMenuItem($"全图鉴制作器")
+            var Dex = new ToolStripMenuItem($"自定ID转换器")
             {
-                Image = Properties.Resources.Sort
+                Image = Properties.Resources.ID
             };
             var ConvertEgg = new ToolStripMenuItem($"变蛋器")
             {

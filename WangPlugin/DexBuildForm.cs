@@ -16,16 +16,16 @@ namespace WangPlugin
         private Button Gen_BTN;
         private TextBox TIDBox;
         private TextBox SIDBox;
-        private ComboBox language;
+        private ComboBox LanguageBox;
         private TextBox OT_Name;
-        private languageSelect7 type7 = languageSelect7.ENG;
+        private LanguageBoxSelect7 type7 = LanguageBoxSelect7.ENG;
         private ComboBox GenderBox;
-        private languageSelect type = languageSelect.ENG;
-        private OT_Gender typeG = OT_Gender.Female;
+        private LanguageBoxSelect type = LanguageBoxSelect.ENG;
+        private OT_Gender typeG = OT_Gender.Male;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
 
-        enum languageSelect
+        enum LanguageBoxSelect
         {
             JPN,
             ENG,
@@ -35,7 +35,7 @@ namespace WangPlugin
             ESP,
            
         }
-        enum languageSelect7
+        enum LanguageBoxSelect7
         {
             JPN,
             ENG,
@@ -67,37 +67,37 @@ namespace WangPlugin
         private void BindingData7()
         {
            
-            this.language.DataSource = Enum.GetNames(typeof(languageSelect7));
-          
-            this.language.SelectedIndexChanged += (_, __) =>
-            {
-                type7 = (languageSelect7)Enum.Parse(typeof(languageSelect7), this.language.SelectedItem.ToString(), false);
-            };
-            this.language.SelectedIndex = 0;
-            this.language.DataSource = Enum.GetNames(typeof(OT_Gender));
+            this.LanguageBox.DataSource = Enum.GetNames(typeof(LanguageBoxSelect7));
+            this.GenderBox.DataSource = Enum.GetNames(typeof(OT_Gender));
 
-            this.language.SelectedIndexChanged += (_, __) =>
+            this.LanguageBox.SelectedIndexChanged += (_, __) =>
+            {
+                type7 = (LanguageBoxSelect7)Enum.Parse(typeof(LanguageBoxSelect7), this.LanguageBox.SelectedItem.ToString(), false);
+            };
+            this.GenderBox.SelectedIndexChanged += (_, __) =>
             {
                 typeG = (OT_Gender)Enum.Parse(typeof(OT_Gender), this.GenderBox.SelectedItem.ToString(), false);
             };
-            this.language.SelectedIndex = 0;
+            this.LanguageBox.SelectedIndex = 0;
+            this.GenderBox.SelectedIndex = 0;
 
         }
         private void BindingData()
         {
 
-            this.language.DataSource = Enum.GetNames(typeof(languageSelect));
+            this.LanguageBox.DataSource = Enum.GetNames(typeof(LanguageBoxSelect));
+            this.GenderBox.DataSource = Enum.GetNames(typeof(OT_Gender));
 
-            this.language.SelectedIndexChanged += (_, __) =>
+            this.LanguageBox.SelectedIndexChanged += (_, __) =>
             {
-                type = (languageSelect)Enum.Parse(typeof(languageSelect), this.language.SelectedItem.ToString(), false);
+                type = (LanguageBoxSelect)Enum.Parse(typeof(LanguageBoxSelect), this.LanguageBox.SelectedItem.ToString(), false);
             };
-            this.language.SelectedIndex = 0;
-            this.language.SelectedIndexChanged += (_, __) =>
+            this.GenderBox.SelectedIndexChanged += (_, __) =>
             {
                 typeG = (OT_Gender)Enum.Parse(typeof(OT_Gender), this.GenderBox.SelectedItem.ToString(), false);
             };
-            this.language.SelectedIndex = 0;
+            this.LanguageBox.SelectedIndex = 0;
+            this.GenderBox.SelectedIndex = 0;
 
 
         }
@@ -109,7 +109,7 @@ namespace WangPlugin
             this.TIDBox = new System.Windows.Forms.TextBox();
             this.SIDBox = new System.Windows.Forms.TextBox();
             this.OT_Name = new System.Windows.Forms.TextBox();
-            this.language = new System.Windows.Forms.ComboBox();
+            this.LanguageBox = new System.Windows.Forms.ComboBox();
             this.GenderBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -125,9 +125,9 @@ namespace WangPlugin
             // 
             // Gen_BTN
             // 
-            this.Gen_BTN.Location = new System.Drawing.Point(145, 85);
+            this.Gen_BTN.Location = new System.Drawing.Point(126, 84);
             this.Gen_BTN.Name = "Gen_BTN";
-            this.Gen_BTN.Size = new System.Drawing.Size(102, 24);
+            this.Gen_BTN.Size = new System.Drawing.Size(117, 24);
             this.Gen_BTN.TabIndex = 1;
             this.Gen_BTN.Text = "Start";
             this.Gen_BTN.UseVisualStyleBackColor = true;
@@ -151,33 +151,33 @@ namespace WangPlugin
             // 
             // OT_Name
             // 
-            this.OT_Name.Location = new System.Drawing.Point(147, 22);
+            this.OT_Name.Location = new System.Drawing.Point(126, 22);
             this.OT_Name.Name = "OT_Name";
-            this.OT_Name.Size = new System.Drawing.Size(101, 25);
+            this.OT_Name.Size = new System.Drawing.Size(115, 25);
             this.OT_Name.TabIndex = 4;
             this.OT_Name.Text = "Wang";
             // 
-            // language
+            // LanguageBox
             // 
-            this.language.FormattingEnabled = true;
-            this.language.Location = new System.Drawing.Point(146, 55);
-            this.language.Name = "language";
-            this.language.Size = new System.Drawing.Size(101, 23);
-            this.language.TabIndex = 5;
+            this.LanguageBox.FormattingEnabled = true;
+            this.LanguageBox.Location = new System.Drawing.Point(126, 55);
+            this.LanguageBox.Name = "LanguageBox";
+            this.LanguageBox.Size = new System.Drawing.Size(45, 23);
+            this.LanguageBox.TabIndex = 5;
             // 
             // GenderBox
             // 
             this.GenderBox.FormattingEnabled = true;
-            this.GenderBox.Location = new System.Drawing.Point(254, 22);
+            this.GenderBox.Location = new System.Drawing.Point(171, 55);
             this.GenderBox.Name = "GenderBox";
-            this.GenderBox.Size = new System.Drawing.Size(32, 23);
+            this.GenderBox.Size = new System.Drawing.Size(70, 23);
             this.GenderBox.TabIndex = 6;
             // 
             // DexBuildForm
             // 
-            this.ClientSize = new System.Drawing.Size(313, 126);
+            this.ClientSize = new System.Drawing.Size(258, 126);
             this.Controls.Add(this.GenderBox);
-            this.Controls.Add(this.language);
+            this.Controls.Add(this.LanguageBox);
             this.Controls.Add(this.OT_Name);
             this.Controls.Add(this.SIDBox);
             this.Controls.Add(this.TIDBox);
@@ -185,6 +185,7 @@ namespace WangPlugin
             this.Controls.Add(this.Sort_BTN);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DexBuildForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Super Wang";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -210,62 +211,62 @@ namespace WangPlugin
             }
             sav.LegalizeBox(sav.CurrentBox);
         }
-        private int GetLanguage7()
+        private int GetLanguageBox7()
         {
             var T = 1;
             switch (type7)
             {
-                case languageSelect7.JPN:
+                case LanguageBoxSelect7.JPN:
                     T=1;
                     break;
-                case languageSelect7.ENG:
+                case LanguageBoxSelect7.ENG:
                     T = 2;
                     break;
-                case languageSelect7.FRE:
+                case LanguageBoxSelect7.FRE:
                     T = 3;
                     break;
-                case languageSelect7.ITA:
+                case LanguageBoxSelect7.ITA:
                     T = 4;
                     break;
-                case languageSelect7.GRE:
+                case LanguageBoxSelect7.GRE:
                     T = 5;
                     break;
-                case languageSelect7.ESP:
+                case LanguageBoxSelect7.ESP:
                     T = 7;
                     break;
-                case languageSelect7.KOR:
+                case LanguageBoxSelect7.KOR:
                     T = 8;
                     break;
-                case languageSelect7.CHS:
+                case LanguageBoxSelect7.CHS:
                     T = 9;
                     break;
-                case languageSelect7.CHT:
+                case LanguageBoxSelect7.CHT:
                     T = 10;
                     break;
             }
             return T;
         }
-        private int GetLanguage()
+        private int GetLanguageBox()
         {
             var T = 1;
             switch (type)
             {
-                case languageSelect.JPN:
+                case LanguageBoxSelect.JPN:
                     T = 1;
                     break;
-                case languageSelect.ENG:
+                case LanguageBoxSelect.ENG:
                     T = 2;
                     break;
-                case languageSelect.FRE:
+                case LanguageBoxSelect.FRE:
                     T = 3;
                     break;
-                case languageSelect.ITA:
+                case LanguageBoxSelect.ITA:
                     T = 4;
                     break;
-                case languageSelect.GRE:
+                case LanguageBoxSelect.GRE:
                     T = 5;
                     break;
-                case languageSelect.ESP:
+                case LanguageBoxSelect.ESP:
                     T = 7;
                     break;
             }
@@ -299,21 +300,23 @@ namespace WangPlugin
             
             if (SAV.SAV.Version is GameVersion.SN or GameVersion.MN or GameVersion.US or GameVersion.UM or
                  GameVersion.GP or GameVersion.GE or GameVersion.SW or GameVersion.SH or GameVersion.PLA or GameVersion.BD or GameVersion.SP)
-                pkm.Language=GetLanguage7();
+                pkm.Language=GetLanguageBox7();
             else
-                pkm.Language = GetLanguage();
+                pkm.Language = GetLanguageBox();
             pkm.OT_Name = Name;
             if (SAV.SAV.Version is GameVersion.SN or GameVersion.MN or GameVersion.US or GameVersion.UM or
                GameVersion.GP or GameVersion.GE or GameVersion.SW or GameVersion.SH or GameVersion.PLA or GameVersion.BD or GameVersion.SP)
             {
-                pkm.TID = TID;
-                pkm.SID = SID;
-            }
-            else
-            {
                 pkm.TrainerID7 = TID;
                 pkm.TrainerSID7 = SID;
             }
+            else
+            {
+                pkm.TID = TID;
+                pkm.SID = SID;
+                
+            }
+            pkm.OT_Gender = GetGender();
             pkm.ClearNickname();
         }
         private void Sort_BTN_Click(object sender, EventArgs e)
@@ -327,5 +330,6 @@ namespace WangPlugin
             Gen(SAV);
             MessageBox.Show("搞定了！");
         }
+
     }
 }
