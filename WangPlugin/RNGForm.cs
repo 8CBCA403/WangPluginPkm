@@ -1,5 +1,4 @@
 ﻿using PKHeX.Core;
-using PKHeX.Core.AutoMod;
 using System;
 using System.Windows.Forms;
 using System.Threading;
@@ -77,6 +76,7 @@ namespace WangPlugin
             this.methodTypeBox.Name = "methodTypeBox";
             this.methodTypeBox.Size = new System.Drawing.Size(124, 25);
             this.methodTypeBox.TabIndex = 8;
+            this.methodTypeBox.SelectedIndexChanged += new System.EventHandler(this.methodTypeBox_SelectedIndexChanged);
             // 
             // Search
             // 
@@ -164,13 +164,13 @@ namespace WangPlugin
             // LockIV
             // 
             this.LockIV.AutoSize = true;
+            this.LockIV.Enabled = false;
             this.LockIV.Location = new System.Drawing.Point(79, 136);
             this.LockIV.Name = "LockIV";
             this.LockIV.Size = new System.Drawing.Size(78, 21);
             this.LockIV.TabIndex = 19;
             this.LockIV.Text = "Lock3V";
             this.LockIV.UseVisualStyleBackColor = true;
-            this.LockIV.Enabled = false;
             // 
             // RNGForm
             // 
@@ -220,8 +220,7 @@ namespace WangPlugin
                     LockIV.Checked = false;
                 }
                 RNGMethod = (MethodType)Enum.Parse(typeof(MethodType), this.methodTypeBox.SelectedItem.ToString(), false);
-            };
-           
+            };        
             this.methodTypeBox.SelectedIndex = 0;
             this.ShinyTypeBox.SelectedIndexChanged += (_, __) =>
             {
@@ -354,6 +353,9 @@ namespace WangPlugin
             IsRunning(false);
         }
 
-        
+        private void methodTypeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -56,7 +56,7 @@ namespace WangPlugin
             {
                 Image = Properties.Resources.Calc
             };
-            var Sort = new ToolStripMenuItem($"简易排序")
+            var Dex = new ToolStripMenuItem($"全图鉴制作器")
             {
                 Image = Properties.Resources.Sort
             };
@@ -69,13 +69,13 @@ namespace WangPlugin
             ConvertEgg.Click += (s, e) => OpenEggForm();
             Calc.Click += (s, e) =>OpenCalc();
             SimpleEdit.Click += (s, e) => OpenSimpleEdit();
-            Sort.Click += (s, e) => SortPokemon.Sort(SaveFileEditor);
+            Dex.Click += (s, e) => OpenDexBuildForm();
             ctrl.DropDownItems.Add(RNGForm);
             ctrl.DropDownItems.Add(Allshiny);
             ctrl.DropDownItems.Add(SimpleEdit);
             ctrl.DropDownItems.Add(ConvertEgg);
             ctrl.DropDownItems.Add(Calc);
-            ctrl.DropDownItems.Add(Sort);
+            ctrl.DropDownItems.Add(Dex);
         }
      
         private static void OpenCalc()
@@ -91,6 +91,11 @@ namespace WangPlugin
         private void OpenEggForm()
         {
             var frm = new ConvertToEgg(SaveFileEditor, PKMEditor);
+            frm.Show();
+        }
+        private void OpenDexBuildForm()
+        {
+            var frm = new DexBuildForm(SaveFileEditor, PKMEditor);
             frm.Show();
         }
         private void OpenSimpleEdit()

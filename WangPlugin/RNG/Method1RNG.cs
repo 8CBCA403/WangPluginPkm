@@ -55,11 +55,11 @@ namespace WangPlugin
                     if (ivs[i] == MAX)
                         FlawlessIVs++;
                 }
-                if (FlawlessIVs is 3 or > 3)
+                if (FlawlessIVs is 2 or > 2)
                 {
+                   if(pk.Nature==10)
                     return true;
                 }
-                else
                     return false;
             }
             return true;

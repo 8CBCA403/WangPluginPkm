@@ -116,72 +116,57 @@ namespace WangPlugin
         }
         private void Handle_MoveShop()
         {
-            List<PKM> PokeList = new();
-            var PokeArray = new PKM[30];
-            var la = new LegalityAnalysis(Editor.Data);
-            for (int i = 0; i < 30; i++)
+            LegalityAnalysis la;
+            PKM pkm = Editor.Data;
+            var pk = (PA8)pkm;
+            if (pk.Species != 0)
+            pk = GetMoveFromDataBase(pkm);
+            IMoveShop8Mastery shop = pk;
+            for (int q = 0; q < 62; q++)
             {
-                PKM pkm = SAV.SAV.GetBoxSlotAtIndex(SAV.SAV.CurrentBox, i);
-               var pko = pkm;
-                var l = new LegalityAnalysis(pko);
-                var pk = (PA8)pkm;
-                if (pk.Species == 0)
-                    break;
-                pk = GetMoveFromDataBase(pkm);
-                // MessageBox.Show($"{pk.AlphaMove}");
-                IMoveShop8Mastery shop = pk;
-                for (int q = 0; q < 62; q++)
-                {
-                    shop.SetPurchasedRecordFlag(q, true);
-                    la = new LegalityAnalysis(pk);
-                    if (!la.Valid)
-                        shop.SetPurchasedRecordFlag(q, false);
-                }
-                for (int j = 0; j < 62; j++)
-                {
-                    shop.SetMasteredRecordFlag(j, true);
-                    la = new LegalityAnalysis(pk);
-                    if (!la.Valid)
-                        shop.SetMasteredRecordFlag(j, false);
-                }
-                pk.Language = pkm.Language;
-                pk.PID = pkm.PID;
-                pk.EncryptionConstant = pkm.EncryptionConstant;
-                pk.OT_Name = pkm.OT_Name;
-                pk.TrainerID7 = pkm.TrainerID7;
-                pk.TrainerSID7 = pkm.TrainerSID7;
-                pk.OT_Gender = pkm.OT_Gender;
-                pk.IVs = pkm.IVs;
-                pk.EVs = pkm.EVs;
-                pk.Nature = pkm.Nature;
-                pk.AbilityNumber = pkm.AbilityNumber;
-                pk.StatNature = pkm.StatNature;
-                pk.CurrentLevel = pkm.CurrentLevel;
-                pk.Ball = pkm.Ball;
-                pk.GV_ATK = 7;
-                pk.GV_DEF = 7;
-                pk.GV_HP = 7;
-                pk.GV_SPA = 7;
-                pk.GV_SPD = 7;
-                pk.GV_SPE = 7;
-                pk.Form = pkm.Form;
-                pk.RefreshChecksum();
+              shop.SetPurchasedRecordFlag(q, true);
+              la = new LegalityAnalysis(pk);
+              if (!la.Valid)
+                  shop.SetPurchasedRecordFlag(q, false);
+             }
+            for (int j = 0; j < 62; j++)
+             {
+               shop.SetMasteredRecordFlag(j, true);
+               la = new LegalityAnalysis(pk);
+               if (!la.Valid)
+                  shop.SetMasteredRecordFlag(j, false);
+             }
+            pk.Language = pkm.Language;
+            pk.PID = pkm.PID;
+            pk.EncryptionConstant = pkm.EncryptionConstant;
+            pk.OT_Name = pkm.OT_Name;
+            pk.TrainerID7 = pkm.TrainerID7;
+            pk.TrainerSID7 = pkm.TrainerSID7;
+            pk.OT_Gender = pkm.OT_Gender;
+            pk.IVs = pkm.IVs;
+            pk.EVs = pkm.EVs;
+            pk.Nature = pkm.Nature;
+            pk.AbilityNumber = pkm.AbilityNumber;
+            pk.StatNature = pkm.StatNature;
+            pk.CurrentLevel = pkm.CurrentLevel;
+            HandleStatic(pk);
+            pk.Ball = pkm.Ball;
+            pk.GV_ATK = 7;
+            pk.GV_DEF = 7;
+            pk.GV_HP = 7;
+            pk.GV_SPA = 7;
+            pk.GV_SPD = 7;
+            pk.GV_SPE = 7;
+            pk.Form = pkm.Form;
+            pk.ClearNickname();
+            Editor.PopulateFields(pk, false);
+            SAV.ReloadSlots();
 
-                if (l.Valid)
-                    PokeList.Add(pkm);
-                else
-                    PokeList.Add(pk);
-            }
-            var count = PokeList.Count;
-            for (int i = 0; i < count; i++)
-            {
-                SAV.SAV.SetBoxSlotAtIndex(PokeList[i], SAV.SAV.CurrentBox, i);
-            }
         }
         private PA8 GetMoveFromDataBase (PKM pk)
         {
-            List<IEncounterInfo> Results = new();
             IEncounterInfo enc;
+            List<PA8> PokeList = new();
             PKM pkm = pk;
             var p = (PA8)pkm;
             var setting = new SearchSettings
@@ -194,29 +179,45 @@ namespace WangPlugin
             var results = search.ToList();
             if (results.Count != 0)
             {
-                Results = results;
-                enc = Results[0];
-                var criteria = EncounterUtil.GetCriteria(enc, pkm);
-                pkm = enc.ConvertToPKM(SAV.SAV, criteria);
-                p = (PA8)pkm;
                 for (int i = 0; i < results.Count; i++)
                 {
-                    if (p.IsAlpha == true&&p.Species== pk.Species&&p.Form==pk.Form)
+                    enc = results[i];
+                    var criteria = EncounterUtil.GetCriteria(enc, pk);
+                    pkm = enc.ConvertToPKM(SAV.SAV, criteria);
+                    p = (PA8)pkm;
+                    if (p.IsAlpha == true && p.Species == pk.Species && p.Form == pk.Form)
                     {
-                        p.SetShiny();
-                        var la = new LegalityAnalysis(p);
-                        if (la.Valid)
-                            break;
-                        else
-                            continue;
+                        PokeList.Add(p);
                     }
-                        enc = Results[i];
-                        criteria = EncounterUtil.GetCriteria(enc, pk);
-                        pkm = enc.ConvertToPKM(SAV.SAV, criteria);
-                        p = (PA8)pkm;
-                } 
+                }
+                if (PokeList.Count != 0)
+                {
+                    if (p.Species != 571 && p.Species != 362 && p.Species != 706 && p.Species != 904)
+                    {
+                       
+                        return PokeList[1];
+                    }
+                    else
+                    {
+                       
+                        return PokeList[2];
+                    }
+                }
+
             }
-                return p;
+            return p;
+        }
+
+        private PKM HandleStatic(PKM pk)
+        {
+            if (pk.Species is 571 or 362 or 706 or 904)
+            {
+                pk.CurrentLevel = 85;
+                pk.IV_SPE = 31;
+                pk.IV_HP = 31;
+                pk.IV_DEF = 31;
+            }
+                return pk;
         }
         
     }
