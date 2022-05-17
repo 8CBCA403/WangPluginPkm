@@ -10,12 +10,14 @@ namespace WangPlugin
         public int Priority => 1; // Loading order, lowest is first.
         // Initialized on plugin load
         public ISaveFileProvider SaveFileEditor { get; private set; } = null!;
+   
         public IPKMView PKMEditor { get; private set; } = null!;
         private readonly CancellationTokenSource tokenSource = new();
         public void Initialize(params object[] args)
         {
             Console.WriteLine($"Loading {Name}...");
             SaveFileEditor = (ISaveFileProvider)Array.Find(args, z => z is ISaveFileProvider);
+           
             PKMEditor = (IPKMView)Array.Find(args, z => z is IPKMView);
             var menu = (ToolStrip)Array.Find(args, z => z is ToolStrip);
             LoadMenuStrip(menu);
@@ -64,18 +66,24 @@ namespace WangPlugin
             {
                 Image = Properties.Resources.Egg
             };
+            var GP1Edit = new ToolStripMenuItem($"GP1编辑器")
+            {
+                Image = Properties.Resources.GoPark
+            };
             RNGForm.Click += (s, e) => OpenRNGForm();
             Allshiny.Click += (s, e) => SetAllShiny.SetShiny(SaveFileEditor);
             ConvertEgg.Click += (s, e) => OpenEggForm();
             Calc.Click += (s, e) =>OpenCalc();
             SimpleEdit.Click += (s, e) => OpenSimpleEdit();
             Dex.Click += (s, e) => OpenDexBuildForm();
+            GP1Edit.Click += (s, e) => OpenGPEdit();
             ctrl.DropDownItems.Add(RNGForm);
             ctrl.DropDownItems.Add(Allshiny);
             ctrl.DropDownItems.Add(SimpleEdit);
             ctrl.DropDownItems.Add(ConvertEgg);
             ctrl.DropDownItems.Add(Calc);
             ctrl.DropDownItems.Add(Dex);
+            ctrl.DropDownItems.Add(GP1Edit);
         }
      
         private static void OpenCalc()
@@ -101,6 +109,11 @@ namespace WangPlugin
         private void OpenSimpleEdit()
         {
             var frm = new SimpleEdit(SaveFileEditor, PKMEditor);
+            frm.Show();
+        }
+        private void OpenGPEdit()
+        {
+            var frm = new GP1Edit(SaveFileEditor, PKMEditor);
             frm.Show();
         }
         public void NotifySaveLoaded()

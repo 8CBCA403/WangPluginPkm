@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
-    <TargetFrameworks>net48;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows</TargetFrameworks>
     <LangVersion>10</LangVersion>
     <Nullable>disable</Nullable>
     <ApplicationIcon>Resources\img\icon.ico</ApplicationIcon>
