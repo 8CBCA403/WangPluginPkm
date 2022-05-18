@@ -34,6 +34,12 @@ namespace WangPlugin
         private ComboBox GenderBox;
         private const string GoFilter = "Go Park Entity |*.gp1|All Files|*.*";
         private Button CovertToPB7;
+        private TextBox CP_TextBox;
+        private Label CP_Label;
+        private TextBox MetDate_TextBox;
+        private Label Time_Label;
+        private CheckBox AlolaForm_Check;
+        private CheckBox ShinyCheck;
         private GenderType Gtype = GenderType.None;
         enum GenderType
         {
@@ -48,7 +54,6 @@ namespace WangPlugin
             Editor = editor;
             InitializeComponent();
             BindingData();
-
         }
         private void InitializeComponent()
         {
@@ -74,11 +79,17 @@ namespace WangPlugin
             this.Move2_label = new System.Windows.Forms.Label();
             this.GenderBox = new System.Windows.Forms.ComboBox();
             this.CovertToPB7 = new System.Windows.Forms.Button();
+            this.CP_TextBox = new System.Windows.Forms.TextBox();
+            this.CP_Label = new System.Windows.Forms.Label();
+            this.MetDate_TextBox = new System.Windows.Forms.TextBox();
+            this.Time_Label = new System.Windows.Forms.Label();
+            this.AlolaForm_Check = new System.Windows.Forms.CheckBox();
+            this.ShinyCheck = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // ImportGP_BTN
             // 
-            this.ImportGP_BTN.Location = new System.Drawing.Point(283, 116);
+            this.ImportGP_BTN.Location = new System.Drawing.Point(273, 165);
             this.ImportGP_BTN.Name = "ImportGP_BTN";
             this.ImportGP_BTN.Size = new System.Drawing.Size(96, 33);
             this.ImportGP_BTN.TabIndex = 0;
@@ -88,7 +99,7 @@ namespace WangPlugin
             // 
             // ExportGP_BTN
             // 
-            this.ExportGP_BTN.Location = new System.Drawing.Point(408, 116);
+            this.ExportGP_BTN.Location = new System.Drawing.Point(386, 165);
             this.ExportGP_BTN.Name = "ExportGP_BTN";
             this.ExportGP_BTN.Size = new System.Drawing.Size(96, 33);
             this.ExportGP_BTN.TabIndex = 1;
@@ -98,7 +109,7 @@ namespace WangPlugin
             // 
             // Edit_GP
             // 
-            this.Edit_GP.Location = new System.Drawing.Point(159, 118);
+            this.Edit_GP.Location = new System.Drawing.Point(152, 166);
             this.Edit_GP.Name = "Edit_GP";
             this.Edit_GP.Size = new System.Drawing.Size(96, 30);
             this.Edit_GP.TabIndex = 2;
@@ -204,22 +215,22 @@ namespace WangPlugin
             // 
             // Move1_TextBox
             // 
-            this.Move1_TextBox.Location = new System.Drawing.Point(283, 52);
+            this.Move1_TextBox.Location = new System.Drawing.Point(385, 52);
             this.Move1_TextBox.Name = "Move1_TextBox";
-            this.Move1_TextBox.Size = new System.Drawing.Size(103, 25);
+            this.Move1_TextBox.Size = new System.Drawing.Size(97, 25);
             this.Move1_TextBox.TabIndex = 16;
             // 
             // Move2_TextBox
             // 
-            this.Move2_TextBox.Location = new System.Drawing.Point(283, 83);
+            this.Move2_TextBox.Location = new System.Drawing.Point(385, 83);
             this.Move2_TextBox.Name = "Move2_TextBox";
-            this.Move2_TextBox.Size = new System.Drawing.Size(103, 25);
+            this.Move2_TextBox.Size = new System.Drawing.Size(97, 25);
             this.Move2_TextBox.TabIndex = 17;
             // 
             // Move1_label
             // 
             this.Move1_label.AutoSize = true;
-            this.Move1_label.Location = new System.Drawing.Point(227, 55);
+            this.Move1_label.Location = new System.Drawing.Point(329, 55);
             this.Move1_label.Name = "Move1_label";
             this.Move1_label.Size = new System.Drawing.Size(50, 17);
             this.Move1_label.TabIndex = 18;
@@ -228,7 +239,7 @@ namespace WangPlugin
             // Move2_label
             // 
             this.Move2_label.AutoSize = true;
-            this.Move2_label.Location = new System.Drawing.Point(227, 86);
+            this.Move2_label.Location = new System.Drawing.Point(329, 86);
             this.Move2_label.Name = "Move2_label";
             this.Move2_label.Size = new System.Drawing.Size(50, 17);
             this.Move2_label.TabIndex = 19;
@@ -244,7 +255,7 @@ namespace WangPlugin
             // 
             // CovertToPB7
             // 
-            this.CovertToPB7.Location = new System.Drawing.Point(36, 118);
+            this.CovertToPB7.Location = new System.Drawing.Point(29, 166);
             this.CovertToPB7.Name = "CovertToPB7";
             this.CovertToPB7.Size = new System.Drawing.Size(105, 30);
             this.CovertToPB7.TabIndex = 21;
@@ -252,9 +263,67 @@ namespace WangPlugin
             this.CovertToPB7.UseVisualStyleBackColor = true;
             this.CovertToPB7.Click += new System.EventHandler(this.CovertToPB7_Click);
             // 
+            // CP_TextBox
+            // 
+            this.CP_TextBox.Location = new System.Drawing.Point(245, 52);
+            this.CP_TextBox.Name = "CP_TextBox";
+            this.CP_TextBox.Size = new System.Drawing.Size(78, 25);
+            this.CP_TextBox.TabIndex = 22;
+            // 
+            // CP_Label
+            // 
+            this.CP_Label.AutoSize = true;
+            this.CP_Label.Location = new System.Drawing.Point(210, 55);
+            this.CP_Label.Name = "CP_Label";
+            this.CP_Label.Size = new System.Drawing.Size(29, 17);
+            this.CP_Label.TabIndex = 23;
+            this.CP_Label.Text = "CP";
+            // 
+            // MetDate_TextBox
+            // 
+            this.MetDate_TextBox.Location = new System.Drawing.Point(96, 114);
+            this.MetDate_TextBox.Name = "MetDate_TextBox";
+            this.MetDate_TextBox.Size = new System.Drawing.Size(106, 25);
+            this.MetDate_TextBox.TabIndex = 24;
+            // 
+            // Time_Label
+            // 
+            this.Time_Label.AutoSize = true;
+            this.Time_Label.Location = new System.Drawing.Point(29, 117);
+            this.Time_Label.Name = "Time_Label";
+            this.Time_Label.Size = new System.Drawing.Size(63, 17);
+            this.Time_Label.TabIndex = 25;
+            this.Time_Label.Text = "MetTime";
+            // 
+            // AlolaForm_Check
+            // 
+            this.AlolaForm_Check.AutoSize = true;
+            this.AlolaForm_Check.Location = new System.Drawing.Point(210, 116);
+            this.AlolaForm_Check.Name = "AlolaForm_Check";
+            this.AlolaForm_Check.Size = new System.Drawing.Size(96, 21);
+            this.AlolaForm_Check.TabIndex = 26;
+            this.AlolaForm_Check.Text = "AlolaForm";
+            this.AlolaForm_Check.UseVisualStyleBackColor = true;
+            // 
+            // ShinyCheck
+            // 
+            this.ShinyCheck.AutoSize = true;
+            this.ShinyCheck.Location = new System.Drawing.Point(210, 85);
+            this.ShinyCheck.Name = "ShinyCheck";
+            this.ShinyCheck.Size = new System.Drawing.Size(66, 21);
+            this.ShinyCheck.TabIndex = 27;
+            this.ShinyCheck.Text = "Shiny";
+            this.ShinyCheck.UseVisualStyleBackColor = true;
+            // 
             // GP1Edit
             // 
-            this.ClientSize = new System.Drawing.Size(526, 160);
+            this.ClientSize = new System.Drawing.Size(526, 217);
+            this.Controls.Add(this.ShinyCheck);
+            this.Controls.Add(this.AlolaForm_Check);
+            this.Controls.Add(this.Time_Label);
+            this.Controls.Add(this.MetDate_TextBox);
+            this.Controls.Add(this.CP_Label);
+            this.Controls.Add(this.CP_TextBox);
             this.Controls.Add(this.CovertToPB7);
             this.Controls.Add(this.GenderBox);
             this.Controls.Add(this.Move2_label);
@@ -294,7 +363,6 @@ namespace WangPlugin
             };
             this.GenderBox.SelectedIndex = 0;
         }
-
             private void ImportGP1From(string path)
         {
             var data = File.ReadAllBytes(path);
@@ -307,33 +375,44 @@ namespace WangPlugin
             data.CopyTo(gp1.Data, 0);
             data.CopyTo(gpm.Data, 0);
             gp = gp1;
-            
         }
         private void EditGP(GP1M pk)
         {
+            byte a = 0;
+            byte b = 0;
             pk.Species=SpeciesName.GetSpeciesID(SpeciesBox.Text, 9);
             gp.Username1 = OT_Name.Text;
             var Move1 = Array.IndexOf(GameInfo.Strings.movelist,Move1_TextBox.Text);
             var Move2 = Array.IndexOf(GameInfo.Strings.movelist,Move2_TextBox.Text);
-           // gp.Username2 = OName.Text;
+          //gp.Username2 = OName.Text;
             gp.Nickname = NickNameBox.Text;
             gp.IV_HP =Convert.ToInt16(HP_TextBox.Text);
             gp.IV_ATK = Convert.ToInt16(Atk_TextBox.Text);
             gp.IV_DEF = Convert.ToInt16(Def_TextBox.Text);
             gp.Gender = GenderBox.SelectedIndex;
             gp.Move1= Move1;
-            gp.Move2= Move2; 
+            gp.Move2= Move2;
+            gp.CP = Convert.ToInt16(CP_TextBox.Text);
+            gp.Date = Convert.ToInt32(MetDate_TextBox.Text);
+            if (ShinyCheck.Checked)
+                a = 1;
+            gp.IsShiny = a;
+            if (AlolaForm_Check.Checked)
+                b = 1;
+            gp.Form = b;
             gp = pk;
+            
         }
         private void ImportGP_BTN_Click(object sender, EventArgs e)
         {
+         
             using var sfd = new OpenFileDialog
             {
                 Filter = GoFilter,
                 FilterIndex = 0,
                 RestoreDirectory = true,
             };
-            // Export
+         // Export
             if (sfd.ShowDialog() != DialogResult.OK)
                 return;
 
@@ -345,13 +424,23 @@ namespace WangPlugin
             SpeciesBox.Text = Name;
             NickNameBox.Text = gp.Nickname;
             OT_Name.Text = gp.Username1;
-            //OName.Text = gp.Username2;
+          //OName.Text = gp.Username2;
             HP_TextBox.Text = gp.IV_HP.ToString();
             Atk_TextBox.Text = gp.IV_ATK.ToString();
             Def_TextBox.Text = gp.IV_DEF.ToString();
             Move1_TextBox.Text = Move1;
             Move2_TextBox.Text = Move2;
-            GenderBox.SelectedIndex = gp.Gender;
+            CP_TextBox.Text = gp.CP.ToString();
+            GenderBox.SelectedIndex = gp.Gender%4;
+            MetDate_TextBox.Text = gp.Date.ToString();
+            if (gp.IsShiny == 1)
+                ShinyCheck.Checked = true;
+            else
+                ShinyCheck.Checked = false;
+            if (gp.Form == 1)
+                AlolaForm_Check.Checked = true;
+            else
+                AlolaForm_Check.Checked = false;
         }
 
         private void ExportGP_BTN_Click(object sender, EventArgs e)

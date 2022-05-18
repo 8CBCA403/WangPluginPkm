@@ -12,8 +12,6 @@ namespace WangPlugin
     {
         public const int SIZE = 0x1B0;
         public byte[] Data;
-
-
         public bool EggEncounter => false;
         public byte LevelMin => Level;
         public byte LevelMax => Level;
@@ -22,6 +20,8 @@ namespace WangPlugin
         public Span<byte> User_name1 => Data.AsSpan(0x00, 0x10);
         public Span<byte> User_name2 => Data.AsSpan(0x10, 0x10);
         public Span<byte> Nick_Name => Data.AsSpan(0x12D, 0x20);
+
+        public Span<byte> Shiny_Check=>Data.AsSpan(0x73,0x01);
         public GP1M(byte[] data) => Data = data;
         public GP1M() : this((byte[])Blank.Clone()) { }
         public void WriteTo(byte[] data, int offset) => Data.CopyTo(data, offset);
@@ -84,7 +84,11 @@ namespace WangPlugin
             get => ReadInt32LittleEndian(Data.AsSpan(0x28));
             set => WriteInt32LittleEndian(Data.AsSpan(0x28), (ushort)value);
         }
-        public int CP => ReadInt32LittleEndian(Data.AsSpan(0x2C));
+        public int CP
+        {
+            get => ReadInt32LittleEndian(Data.AsSpan(0x2C));
+            set => WriteInt32LittleEndian(Data.AsSpan(0x2C), value);
+        }
         public float LevelF => ReadSingleLittleEndian(Data.AsSpan(0x30));
         public byte Level => Math.Max((byte)1, (byte)Math.Round(LevelF));
         public int Stat_HP => ReadInt32LittleEndian(Data.AsSpan(0x34));
@@ -132,7 +136,11 @@ namespace WangPlugin
             set => WriteInt32LittleEndian(Data.AsSpan(0x58), (ushort)value);
 
         }
-        public int Date => ReadInt32LittleEndian(Data.AsSpan(0x5C)); // ####.##.## YYYY.MM.DD
+        public int Date 
+        {
+            get => ReadInt32LittleEndian(Data.AsSpan(0x5C)); // ####.##.## YYYY.MM.DD
+            set => WriteInt32LittleEndian(Data.AsSpan(0x5C), value);
+            }
         public int Year => Date / 1_00_00;
         public int Month => (Date / 1_00) % 1_00;
         public int Day => Date % 1_00;
@@ -142,11 +150,17 @@ namespace WangPlugin
             get => ReadInt32LittleEndian(Data.AsSpan(0x70)); // M=1, F=2, G=3 ;; shift down by 1.
             set => WriteInt32LittleEndian(Data.AsSpan(0x70), value);
         }
-       
-
-        public int Form => Data[0x72];
-        public bool IsShiny => Data[0x73] == 1;
-
+        public byte Form
+        {
+            get => Data[0x72];
+            set => Data[0x72] = value;
+        }
+        public byte IsShiny
+        {   
+            get => Data[0x73]; 
+            set => Data[0x73] = value; 
+        }
+        
         // https://bulbapedia.bulbagarden.net/wiki/List_of_moves_in_Pok%C3%A9mon_GO
         public int Move1 
         {
@@ -171,7 +185,7 @@ namespace WangPlugin
 
         public static readonly IReadOnlyList<string> Genders = GameInfo.GenderSymbolASCII;
         public string GenderString => (uint)Gender >= Genders.Count ? string.Empty : Genders[Gender];
-        public string ShinyString => IsShiny ? "★ " : string.Empty;
+        public string ShinyString => IsShiny==1 ? "★ " : string.Empty;
         public string FormString => Form != 0 ? $"-{Form}" : string.Empty;
         private string NickStr => string.IsNullOrWhiteSpace(Nickname) ? SpeciesName.GetSpeciesNameGeneration(Species, (int)LanguageID.English, 7) : Nickname;
         public string FileName => $"{FileNameWithoutExtension}.gp1";
@@ -181,7 +195,7 @@ namespace WangPlugin
             get
             {
                 string form = Form > 0 ? $"-{Form:00}" : string.Empty;
-                string star = IsShiny ? " ★" : string.Empty;
+                string star = IsShiny==1 ? " ★" : string.Empty;
                 return $"{Species:000}{form}{star} - {NickStr} - Lv. {Level:00} - {IV_HP:00}.{IV_ATK:00}.{IV_DEF:00} - CP {CP:0000} (Moves {Move1:000}, {Move2:000})";
             }
         }
