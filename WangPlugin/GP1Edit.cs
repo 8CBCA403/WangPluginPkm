@@ -40,6 +40,8 @@ namespace WangPlugin
         private Label Time_Label;
         private CheckBox AlolaForm_Check;
         private CheckBox ShinyCheck;
+        private TextBox GeoName_TextBox;
+        private Label GeoName_Label;
         private GenderType Gtype = GenderType.None;
         enum GenderType
         {
@@ -85,11 +87,13 @@ namespace WangPlugin
             this.Time_Label = new System.Windows.Forms.Label();
             this.AlolaForm_Check = new System.Windows.Forms.CheckBox();
             this.ShinyCheck = new System.Windows.Forms.CheckBox();
+            this.GeoName_TextBox = new System.Windows.Forms.TextBox();
+            this.GeoName_Label = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ImportGP_BTN
             // 
-            this.ImportGP_BTN.Location = new System.Drawing.Point(273, 165);
+            this.ImportGP_BTN.Location = new System.Drawing.Point(268, 183);
             this.ImportGP_BTN.Name = "ImportGP_BTN";
             this.ImportGP_BTN.Size = new System.Drawing.Size(96, 33);
             this.ImportGP_BTN.TabIndex = 0;
@@ -99,7 +103,7 @@ namespace WangPlugin
             // 
             // ExportGP_BTN
             // 
-            this.ExportGP_BTN.Location = new System.Drawing.Point(386, 165);
+            this.ExportGP_BTN.Location = new System.Drawing.Point(386, 183);
             this.ExportGP_BTN.Name = "ExportGP_BTN";
             this.ExportGP_BTN.Size = new System.Drawing.Size(96, 33);
             this.ExportGP_BTN.TabIndex = 1;
@@ -109,7 +113,7 @@ namespace WangPlugin
             // 
             // Edit_GP
             // 
-            this.Edit_GP.Location = new System.Drawing.Point(152, 166);
+            this.Edit_GP.Location = new System.Drawing.Point(153, 186);
             this.Edit_GP.Name = "Edit_GP";
             this.Edit_GP.Size = new System.Drawing.Size(96, 30);
             this.Edit_GP.TabIndex = 2;
@@ -255,7 +259,7 @@ namespace WangPlugin
             // 
             // CovertToPB7
             // 
-            this.CovertToPB7.Location = new System.Drawing.Point(29, 166);
+            this.CovertToPB7.Location = new System.Drawing.Point(32, 186);
             this.CovertToPB7.Name = "CovertToPB7";
             this.CovertToPB7.Size = new System.Drawing.Size(105, 30);
             this.CovertToPB7.TabIndex = 21;
@@ -315,9 +319,27 @@ namespace WangPlugin
             this.ShinyCheck.Text = "Shiny";
             this.ShinyCheck.UseVisualStyleBackColor = true;
             // 
+            // GeoName_TextBox
+            // 
+            this.GeoName_TextBox.Location = new System.Drawing.Point(96, 145);
+            this.GeoName_TextBox.Name = "GeoName_TextBox";
+            this.GeoName_TextBox.Size = new System.Drawing.Size(386, 25);
+            this.GeoName_TextBox.TabIndex = 28;
+            // 
+            // GeoName_Label
+            // 
+            this.GeoName_Label.AutoSize = true;
+            this.GeoName_Label.Location = new System.Drawing.Point(16, 148);
+            this.GeoName_Label.Name = "GeoName_Label";
+            this.GeoName_Label.Size = new System.Drawing.Size(74, 17);
+            this.GeoName_Label.TabIndex = 29;
+            this.GeoName_Label.Text = "GeoName";
+            // 
             // GP1Edit
             // 
-            this.ClientSize = new System.Drawing.Size(526, 217);
+            this.ClientSize = new System.Drawing.Size(526, 228);
+            this.Controls.Add(this.GeoName_Label);
+            this.Controls.Add(this.GeoName_TextBox);
             this.Controls.Add(this.ShinyCheck);
             this.Controls.Add(this.AlolaForm_Check);
             this.Controls.Add(this.Time_Label);
@@ -345,7 +367,7 @@ namespace WangPlugin
             this.Controls.Add(this.Edit_GP);
             this.Controls.Add(this.ExportGP_BTN);
             this.Controls.Add(this.ImportGP_BTN);
-            this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Font = new System.Drawing.Font("Arial", 9F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GP1Edit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -433,6 +455,7 @@ namespace WangPlugin
             CP_TextBox.Text = gp.CP.ToString();
             GenderBox.SelectedIndex = gp.Gender%4;
             MetDate_TextBox.Text = gp.Date.ToString();
+            GeoName_TextBox.Text = gp.GeoCityName;
             if (gp.IsShiny == 1)
                 ShinyCheck.Checked = true;
             else

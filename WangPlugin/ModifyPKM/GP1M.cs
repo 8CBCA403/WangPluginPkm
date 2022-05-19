@@ -20,8 +20,7 @@ namespace WangPlugin
         public Span<byte> User_name1 => Data.AsSpan(0x00, 0x10);
         public Span<byte> User_name2 => Data.AsSpan(0x10, 0x10);
         public Span<byte> Nick_Name => Data.AsSpan(0x12D, 0x20);
-
-        public Span<byte> Shiny_Check=>Data.AsSpan(0x73,0x01);
+        public Span<byte> GeoCity_Name => Data.AsSpan(0x7C, 0x60);
         public GP1M(byte[] data) => Data = data;
         public GP1M() : this((byte[])Blank.Clone()) { }
         public void WriteTo(byte[] data, int offset) => Data.CopyTo(data, offset);
@@ -89,12 +88,12 @@ namespace WangPlugin
             get => ReadInt32LittleEndian(Data.AsSpan(0x2C));
             set => WriteInt32LittleEndian(Data.AsSpan(0x2C), value);
         }
-        public float LevelF => ReadSingleLittleEndian(Data.AsSpan(0x30));
+        public float LevelF => ReadInt32LittleEndian(Data.AsSpan(0x30));
         public byte Level => Math.Max((byte)1, (byte)Math.Round(LevelF));
         public int Stat_HP => ReadInt32LittleEndian(Data.AsSpan(0x34));
         // geolocation data 0x38-0x47?
-        public float HeightF => ReadSingleLittleEndian(Data.AsSpan(0x48));
-        public float WeightF => ReadSingleLittleEndian(Data.AsSpan(0x4C));
+        public float HeightF => ReadInt32LittleEndian(Data.AsSpan(0x48));
+        public float WeightF => ReadInt32LittleEndian(Data.AsSpan(0x4C));
 
         public byte HeightScalar
         {
@@ -136,11 +135,11 @@ namespace WangPlugin
             set => WriteInt32LittleEndian(Data.AsSpan(0x58), (ushort)value);
 
         }
-        public int Date 
+        public int Date
         {
             get => ReadInt32LittleEndian(Data.AsSpan(0x5C)); // ####.##.## YYYY.MM.DD
             set => WriteInt32LittleEndian(Data.AsSpan(0x5C), value);
-            }
+        }
         public int Year => Date / 1_00_00;
         public int Month => (Date / 1_00) % 1_00;
         public int Day => Date % 1_00;
@@ -156,25 +155,28 @@ namespace WangPlugin
             set => Data[0x72] = value;
         }
         public byte IsShiny
-        {   
-            get => Data[0x73]; 
-            set => Data[0x73] = value; 
+        {
+            get => Data[0x73];
+            set => Data[0x73] = value;
         }
-        
+
         // https://bulbapedia.bulbagarden.net/wiki/List_of_moves_in_Pok%C3%A9mon_GO
-        public int Move1 
+        public int Move1
         {
             get => ReadInt32LittleEndian(Data.AsSpan(0x74));
             set => WriteInt32LittleEndian(Data.AsSpan(0x74), value);
-         }
+        }
         public int Move2
         {
             get => ReadInt32LittleEndian(Data.AsSpan(0x78)); // uses Go Indexes
             set => WriteInt32LittleEndian(Data.AsSpan(0x78), value);
-        } 
+        }
 
-        public string GeoCityName => Util.TrimFromZero(Encoding.ASCII.GetString(Data, 0x7C, 0x60)); // dunno length
-
+        public string GeoCityName 
+        {
+            get=>Util.TrimFromZero(Encoding.ASCII.GetString(Data, 0x7C, 0x60)); // dunno length
+            set => WriteByte(GeoCity_Name, Encoding.ASCII.GetBytes(value));
+        }
         public string Nickname
         {
             get=>Util.TrimFromZero(Encoding.ASCII.GetString(Data, 0x12D, 0x20));

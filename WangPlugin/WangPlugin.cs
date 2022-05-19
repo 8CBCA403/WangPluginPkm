@@ -34,12 +34,12 @@ namespace WangPlugin
         {
             var ctrl = new ToolStripMenuItem(Name)
             {
-                Image = Properties.Resources.wang
+                Image = Properties.Resources.SuperWang
             };
             tools.DropDownItems.Add(ctrl);
             var form = tools.GetCurrentParent().FindForm();
             if (form is not null)
-                form.Icon = Properties.Resources.icon;
+                form.Icon = Properties.Resources.SW;
 
             var RNGForm = new ToolStripMenuItem($"RNG面板")
             {
