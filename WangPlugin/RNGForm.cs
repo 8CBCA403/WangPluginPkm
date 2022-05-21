@@ -204,7 +204,9 @@ namespace WangPlugin
             this.ShinyTypeBox.DataSource = Enum.GetNames(typeof(ShinyType));
             this.methodTypeBox.SelectedIndexChanged += (_, __) =>
             {
-                if (methodTypeBox.SelectedItem == methodTypeBox.Items[9]|| methodTypeBox.SelectedItem == methodTypeBox.Items[1])
+                if (methodTypeBox.SelectedItem == methodTypeBox.Items[9]|| 
+                methodTypeBox.SelectedItem == methodTypeBox.Items[1]|| 
+                methodTypeBox.SelectedItem == methodTypeBox.Items[7])
                 {
                     LockIV.Enabled = true;
                     LockIV.Checked = false;
@@ -316,7 +318,6 @@ namespace WangPlugin
                     var pk = Editor.Data;
                     while (true)
                     {
-                        //pk.RefreshAbility((int)(pk.PID & 1));
                         if (tokenSource.IsCancellationRequested)
                         {
                             Condition.Text = "Stop";

@@ -71,7 +71,7 @@ namespace WangPlugin
                 Image = Properties.Resources.GoPark
             };
             RNGForm.Click += (s, e) => OpenRNGForm();
-            Allshiny.Click += (s, e) => SetAllShiny.SetShiny(SaveFileEditor);
+            Allshiny.Click += (s, e) => OpenShiny();
             ConvertEgg.Click += (s, e) => OpenEggForm();
             Calc.Click += (s, e) =>OpenCalc();
             SimpleEdit.Click += (s, e) => OpenSimpleEdit();
@@ -114,6 +114,12 @@ namespace WangPlugin
         private void OpenGPEdit()
         {
             var frm = new GP1Edit(SaveFileEditor, PKMEditor);
+            frm.Show();
+        }
+
+        private void OpenShiny()
+        {
+            var frm = new SetAllShiny(SaveFileEditor, PKMEditor);
             frm.Show();
         }
         public void NotifySaveLoaded()

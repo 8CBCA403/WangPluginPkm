@@ -7,11 +7,15 @@ namespace WangPlugin
     {
         private const int shift = 16;
         private const int shift8 = 8;
+
         public static uint Next(uint seed) => PKHeX.Core.RNG.XDRNG.Next(seed);
         public static bool GenPkm(ref PKM pk, uint seed,bool[] shiny, bool[] IV)
         {
-            var rng = PKHeX.Core.RNG.XDRNG;
-                switch (pk.Species)
+            int FlawlessIVs = 0;
+            uint MAX = 31;
+            var rng = RNG.XDRNG;
+            var la = new LegalityAnalysis(pk);
+            switch (pk.Species)
                 {
                     case (int)Species.Umbreon or (int)Species.Eevee: // Colo Umbreon, XD Eevee
                         pk.TID = (int)((seed = rng.Next(seed)) >> 16);
@@ -44,11 +48,32 @@ namespace WangPlugin
             {
                 return false;
             }
+            if (IV[2] == true)
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    if (IVs[i] == MAX)
+                        FlawlessIVs++;
+                }
+                if (FlawlessIVs is 3 or > 3)
+                {
+                    pk.SetIVs(IVs);
+                    pk.Nature = (int)(pk.PID % 100 % 25);
+                    pk.RefreshAbility((int)(pk.PID & 1));
+                     la = new LegalityAnalysis(pk);
+                    if (!la.Info.PIDIVMatches)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+                return false;
+            }
             pk.SetIVs(IVs);
 
                 pk.Nature = (int)(pk.PID % 100 % 25);
                 pk.RefreshAbility((int)(pk.PID & 1));
-                var la = new LegalityAnalysis(pk);
+                la = new LegalityAnalysis(pk);
                 if (!la.Info.PIDIVMatches)
                 {
                     return false;
