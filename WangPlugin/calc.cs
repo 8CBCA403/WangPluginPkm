@@ -286,79 +286,79 @@ namespace WangPlugin
             switch (ID)
             {
                 case 0: 
-                    Nature = "Hardy";
+                    Nature = "0,Hardy";
                     break;
                 case 1:
-                    Nature = "Lonely";
+                    Nature = "1,Lonely";
                     break;
                 case 2:
-                    Nature = "Brave";
+                    Nature = "2,Brave";
                     break;
                 case 3:
-                    Nature = "Adamant";
+                    Nature = "3,Adamant";
                     break;
                 case 4:
-                    Nature = "Naughty";
+                    Nature = "4,Naughty";
                     break;
                 case 5:
-                    Nature = "Bold";
+                    Nature = "5,Bold";
                     break;
                 case 6:
-                    Nature = "Docile";
+                    Nature = "6,Docile";
                     break;
                 case 7:
-                    Nature = "Relaxed";
+                    Nature = "7,Relaxed";
                     break;
                 case 8:
-                    Nature = "Impish";
+                    Nature = "8,Impish";
                     break;
                 case 9:
-                    Nature = "Lax";
+                    Nature = "9,Lax";
                     break;
                 case 10:
-                    Nature = "Timid";
+                    Nature = "10,Timid";
                     break;
                 case 11:
-                    Nature = "Hasty";
+                    Nature = "11,Hasty";
                     break;
                 case 12:
-                    Nature = "Serious";
+                    Nature = "12,Serious";
                     break;
                 case 13:
-                    Nature = "Jolly";
+                    Nature = "13,Jolly";
                     break;
                 case 14:
-                    Nature = "Naive";
+                    Nature = "14,Naive";
                     break;
                 case 15:
-                    Nature = "Modest";
+                    Nature = "15,Modest";
                     break;
                 case 16:
-                    Nature = "Mild";
+                    Nature = "16,Mild";
                     break;
                 case 17:
-                    Nature = "Quiet";
+                    Nature = "17,Quiet";
                     break;
                 case 18:
-                    Nature = "Bashful";
+                    Nature = "18,Bashful";
                     break;
                 case 19:
-                    Nature = "Rash";
+                    Nature = "19,Rash";
                     break;
                 case 20:
-                    Nature = "Calm";
+                    Nature = "20,Calm";
                     break;
                 case 21:
-                    Nature = "Gentle";
+                    Nature = "21,Gentle";
                     break;
                 case 22:
-                    Nature = "Sassy";
+                    Nature = "22,Sassy";
                     break;
                 case 23:
-                    Nature = "Careful";
+                    Nature = "23,Careful";
                     break;
                 case 24:
-                    Nature = "Quirky";
+                    Nature = "24,Quirky";
                     break;
             }
            

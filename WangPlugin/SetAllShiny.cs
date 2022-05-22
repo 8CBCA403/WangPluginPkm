@@ -4,28 +4,32 @@ using PKHeX.Core;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+
 namespace WangPlugin
 {
     internal class SetAllShiny : Form
     {
-        private Button ForceShiny_BTN;
-        private Button ForceStar_BTN;
+        private Button ShinySID_BTN;
+        private Button RandomStar_BTN;
         private Button ForceSquare_BTN;
         private ComboBox XorBox;
         private Button Xor_BTN;
         public  static uint XorNumber;
         public Stopwatch sw = new();
-        public enum shinytype
+        private Button ForceStar;
+        private Label XorValue_Label;
+
+        public enum Shinytype
         {
+            Sid,
             Star,
             Square,
             RandomStar,
             Xor,
         }
-        public static shinytype shiny=shinytype.Star;
+        public static Shinytype shinyflag=Shinytype.Star;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
-        
         public SetAllShiny(ISaveFileProvider sav, IPKMView editor)
         {
             SAV = sav;
@@ -36,32 +40,34 @@ namespace WangPlugin
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetAllShiny));
-            this.ForceShiny_BTN = new System.Windows.Forms.Button();
-            this.ForceStar_BTN = new System.Windows.Forms.Button();
+            this.ShinySID_BTN = new System.Windows.Forms.Button();
+            this.RandomStar_BTN = new System.Windows.Forms.Button();
             this.ForceSquare_BTN = new System.Windows.Forms.Button();
             this.XorBox = new System.Windows.Forms.ComboBox();
             this.Xor_BTN = new System.Windows.Forms.Button();
+            this.ForceStar = new System.Windows.Forms.Button();
+            this.XorValue_Label = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // ForceShiny_BTN
+            // ShinySID_BTN
             // 
-            this.ForceShiny_BTN.Location = new System.Drawing.Point(25, 12);
-            this.ForceShiny_BTN.Name = "ForceShiny_BTN";
-            this.ForceShiny_BTN.Size = new System.Drawing.Size(103, 29);
-            this.ForceShiny_BTN.TabIndex = 0;
-            this.ForceShiny_BTN.Text = "ForceShiny";
-            this.ForceShiny_BTN.UseVisualStyleBackColor = true;
-            this.ForceShiny_BTN.Click += new System.EventHandler(this.ForceShiny_BTN_Click);
+            this.ShinySID_BTN.Location = new System.Drawing.Point(21, 43);
+            this.ShinySID_BTN.Name = "ShinySID_BTN";
+            this.ShinySID_BTN.Size = new System.Drawing.Size(107, 27);
+            this.ShinySID_BTN.TabIndex = 0;
+            this.ShinySID_BTN.Text = "ShinySID";
+            this.ShinySID_BTN.UseVisualStyleBackColor = true;
+            this.ShinySID_BTN.Click += new System.EventHandler(this.ShinySID_BTN_Click);
             // 
-            // ForceStar_BTN
+            // RandomStar_BTN
             // 
-            this.ForceStar_BTN.Location = new System.Drawing.Point(134, 12);
-            this.ForceStar_BTN.Name = "ForceStar_BTN";
-            this.ForceStar_BTN.Size = new System.Drawing.Size(107, 29);
-            this.ForceStar_BTN.TabIndex = 1;
-            this.ForceStar_BTN.Text = "ForceStar";
-            this.ForceStar_BTN.UseVisualStyleBackColor = true;
-            this.ForceStar_BTN.Click += new System.EventHandler(this.ForceStar_BTN_Click);
+            this.RandomStar_BTN.Location = new System.Drawing.Point(134, 12);
+            this.RandomStar_BTN.Name = "RandomStar_BTN";
+            this.RandomStar_BTN.Size = new System.Drawing.Size(107, 29);
+            this.RandomStar_BTN.TabIndex = 1;
+            this.RandomStar_BTN.Text = "RandomStar";
+            this.RandomStar_BTN.UseVisualStyleBackColor = true;
+            this.RandomStar_BTN.Click += new System.EventHandler(this.ForceStar_BTN_Click);
             // 
             // ForceSquare_BTN
             // 
@@ -76,34 +82,57 @@ namespace WangPlugin
             // XorBox
             // 
             this.XorBox.FormattingEnabled = true;
-            this.XorBox.Location = new System.Drawing.Point(88, 47);
+            this.XorBox.Location = new System.Drawing.Point(187, 47);
             this.XorBox.Name = "XorBox";
-            this.XorBox.Size = new System.Drawing.Size(81, 23);
+            this.XorBox.Size = new System.Drawing.Size(54, 23);
             this.XorBox.TabIndex = 3;
             // 
             // Xor_BTN
             // 
-            this.Xor_BTN.Location = new System.Drawing.Point(197, 43);
+            this.Xor_BTN.Location = new System.Drawing.Point(247, 43);
             this.Xor_BTN.Name = "Xor_BTN";
-            this.Xor_BTN.Size = new System.Drawing.Size(94, 29);
+            this.Xor_BTN.Size = new System.Drawing.Size(103, 27);
             this.Xor_BTN.TabIndex = 4;
             this.Xor_BTN.Text = "XorShiny";
             this.Xor_BTN.UseVisualStyleBackColor = true;
             this.Xor_BTN.Click += new System.EventHandler(this.Xor_BTN_Click);
             // 
+            // ForceStar
+            // 
+            this.ForceStar.Location = new System.Drawing.Point(21, 12);
+            this.ForceStar.Name = "ForceStar";
+            this.ForceStar.Size = new System.Drawing.Size(107, 29);
+            this.ForceStar.TabIndex = 5;
+            this.ForceStar.Text = "ForceStar";
+            this.ForceStar.UseVisualStyleBackColor = true;
+            this.ForceStar.Click += new System.EventHandler(this.ForceStar_Click);
+            // 
+            // XorValue_Label
+            // 
+            this.XorValue_Label.AutoSize = true;
+            this.XorValue_Label.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.XorValue_Label.Location = new System.Drawing.Point(136, 48);
+            this.XorValue_Label.Name = "XorValue_Label";
+            this.XorValue_Label.Size = new System.Drawing.Size(45, 19);
+            this.XorValue_Label.TabIndex = 6;
+            this.XorValue_Label.Text = "Xor=";
+            // 
             // SetAllShiny
             // 
             this.ClientSize = new System.Drawing.Size(392, 84);
+            this.Controls.Add(this.XorValue_Label);
+            this.Controls.Add(this.ForceStar);
             this.Controls.Add(this.Xor_BTN);
             this.Controls.Add(this.XorBox);
             this.Controls.Add(this.ForceSquare_BTN);
-            this.Controls.Add(this.ForceStar_BTN);
-            this.Controls.Add(this.ForceShiny_BTN);
+            this.Controls.Add(this.RandomStar_BTN);
+            this.Controls.Add(this.ShinySID_BTN);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SetAllShiny";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Super Wang";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
         private void BindingData()
@@ -120,77 +149,16 @@ namespace WangPlugin
             };
             this.XorBox.SelectedIndex = 0;
         }
-        public static void SetStar(ISaveFileProvider SaveFileEditor)
-        {
-            var sav = SaveFileEditor.SAV;
-            sav.ModifyBoxes(ShinyFunction);
-            SaveFileEditor.ReloadSlots();
-        }
+       
         public static void SetShiny(ISaveFileProvider SaveFileEditor)
         {
             var sav = SaveFileEditor.SAV;
-            sav.ModifyBoxes(ForceShiny);
-            SaveFileEditor.ReloadSlots();
-        }
-        public static void SetSquare(ISaveFileProvider SaveFileEditor)
-        {
-            var sav = SaveFileEditor.SAV;
             sav.ModifyBoxes(ShinyFunction);
             SaveFileEditor.ReloadSlots();
         }
-        public static void SetXor(ISaveFileProvider SaveFileEditor)
-        {
-            var sav = SaveFileEditor.SAV;
-            sav.ModifyBoxes(ShinyFunction);
-            SaveFileEditor.ReloadSlots();
-        }
-        public static void ForceShiny(PKM pkm)
+        public static void ShinySID(PKM pkm)
         {
             pkm.SetShinySID();
-        }
-        public static void ShinyFunction(PKM pkm)
-        {
-            PKM val = pkm.Clone();
-            if (val.Format is 3 or 4  && val.Version != 15)
-            {
-                List<uint[]> list = new List<uint[]>();
-                do
-                {
-                    val.SetPIDGender(val.GetSaneGender());
-                    if(shiny==shinytype.RandomStar)
-                        val.PID = RandomStar(val);
-                    else if(shiny==shinytype.Square)
-                        val.PID = (((uint)(val.TID ^ val.SID) ^ (val.PID & 0xFFFF) ^ 0u) << 16) | (val.PID & 0xFFFF);
-                    else if(shiny==shinytype.Xor)
-                        val.PID = (((uint)(val.TID ^ val.SID) ^ (val.PID & 0xFFFF) ^ XorNumber) << 16) | (val.PID & 0xFFFF);
-                    list = RecoverLower16BitsPID.CalcPIDIVsByLCRNG(val.PID);
-                }
-                while (!val.IsShiny || list == null);
-                uint[] iVs = RecoverLower16BitsPID.GetIVs(val, list);
-                RecoverLower16BitsPID.SetIVsFromList(val, iVs);
-                pkm.PID=val.PID;
-                pkm.RefreshAbility((int)(pkm.PID & 1));
-                pkm.IVs=val.IVs;
-            }
-            else if(val.Format is  6 or 7)
-            {
-                pkm.PID = RandomStar(pkm);
-                CommonEdits.SetRandomEC(pkm);
-            }
-            else if(val.Format==8)
-            {
-                bool[] shiny = new bool[] { false, false, true, false, false };
-                bool[] iv = new bool[] { false, false, false };
-                for(; ;)
-                {
-                    uint seed = Util.Rand32();
-                    if (Overworld8RNG.GenPkm(ref pkm, seed, shiny, iv))
-                        break;
-                    else
-                        Overworld8RNG.Next(seed);
-                } 
-            }
-
         }
         private static uint RandomStar(PKM pk)
         {
@@ -200,11 +168,122 @@ namespace WangPlugin
                 r = (uint)myObject.Next(1, 16);
             return (((uint)(pk.TID ^ pk.SID) ^ (pk.PID & 0xFFFF) ^ r) << 16) | (pk.PID & 0xFFFF);
         }
+        private static uint ShinyPID(PKM val)
+        {
+            if (shinyflag == Shinytype.RandomStar)
+                val.PID = RandomStar(val);
+            else if (shinyflag == Shinytype.Star)
+                val.PID = (((uint)(val.TID ^ val.SID) ^ (val.PID & 0xFFFF) ^ 1u) << 16) | (val.PID & 0xFFFF);
+            else if (shinyflag == Shinytype.Square)
+                val.PID = (((uint)(val.TID ^ val.SID) ^ (val.PID & 0xFFFF) ^ 0u) << 16) | (val.PID & 0xFFFF);
+            else if (shinyflag == Shinytype.Xor)
+                val.PID = (((uint)(val.TID ^ val.SID) ^ (val.PID & 0xFFFF) ^ XorNumber) << 16) | (val.PID & 0xFFFF);
+            return val.PID;
+        }
+        public static void ShinyFunction(PKM pkm)
+        {
+            PKM val = pkm.Clone();
+            bool EggFlag = val.IsEgg || val.Met_Level <= 1;
+            if (Version.Gen3Flag(val.Version)|| 
+                Version.Gen4Flag(val.Version)|| 
+                Version.Gen5Flag(val.Version))
+            {
+                if (EggFlag)
+                {
+                    pkm.PID = ShinyPID(val);
+                    val.SetPIDGender(val.GetSaneGender());
+                   
+                    pkm.Ball = 4;
+                    pkm.RefreshAbility((int)(pkm.PID & 1));
+                    pkm.Nature = (int)(pkm.PID % 25);
+                    pkm.StatNature = pkm.Nature;
+                    pkm.EncryptionConstant = pkm.PID;
+                    pkm.RefreshChecksum();
+                    
+                }
+                if ((!EggFlag) && (!Version.CXDFlag(val.Version)))
+                {
+                    List<uint[]> list;
+                    do
+                    {
+                        val.SetPIDGender(val.GetSaneGender());
+                        val.PID = ShinyPID(val);
+                        list = RecoverLower16BitsPID.CalcPIDIVsByLCRNG(val.PID);
+                        // MessageBox.Show("ok");
 
-        private void ForceShiny_BTN_Click(object sender, EventArgs e)
+                    }
+                    while (!val.IsShiny || list == null);
+                    
+                    uint[] iVs = RecoverLower16BitsPID.GetIVs(val, list);
+                    RecoverLower16BitsPID.SetIVsFromList(val, iVs);
+                    
+                    pkm.PID = val.PID;
+                    pkm.IVs = val.IVs;
+                    pkm.Nature = (int)(pkm.PID % 25);
+                    pkm.StatNature = pkm.Nature;
+                    pkm.EncryptionConstant = pkm.PID;
+                    pkm.RefreshAbility((int)(pkm.PID & 1));
+                    pkm.RefreshChecksum();
+                    
+                }
+               
+            }
+            if (Version.Gen6Flag(val.Version) ||
+                Version.Gen7Flag(val.Version))
+            {
+                pkm.PID = ShinyPID(val);
+                CommonEdits.SetRandomEC(pkm);
+            }
+            if (Version.Gen8SWSHFlag(val.Version))
+            {
+                if (EggFlag)
+                {
+                    pkm.PID = ShinyPID(val);
+                    CommonEdits.SetRandomEC(pkm);
+                }
+                else
+                {
+                    bool[] shiny = new bool[6] { false, false, false, false, false, false };
+                    bool[] iv = new bool[] { false, false, false };
+                    if (shinyflag == Shinytype.RandomStar)
+                    {
+                        shiny = new bool[6] { false, false, true, false, false, false };
+                    }
+                    else if (shinyflag == Shinytype.Star)
+                    {
+                        shiny = new bool[6] { false, false, false, false, true, false };
+                    }
+                    else if (shinyflag == Shinytype.Square)
+                    {
+                        shiny = new bool[6] { false, false, false, true, false, false };
+                    }
+                    else if (shinyflag == Shinytype.Xor)
+                    {
+                        shiny = new bool[6] { false, false, false, false, false, true };
+                    }
+                    for (; ; )
+                    {
+                        uint seed = Util.Rand32();
+                        if (shinyflag != Shinytype.Xor && Overworld8RNG.GenPkm(ref pkm, seed, shiny, iv))
+                        {
+                            pkm.RefreshChecksum();
+                            break;
+                        }
+                        else if (shinyflag == Shinytype.Xor && Overworld8RNG.GenPkm(ref pkm, seed, shiny, iv, XorNumber))
+                        {
+                            pkm.RefreshChecksum();
+                            break;
+                        }
+                        else
+                            Overworld8RNG.Next(seed);
+                    }
+                }
+            }
+        }
+        private void ShinySID_BTN_Click(object sender, EventArgs e)
         {
             sw.Start();
-            SetShiny(SAV);
+            SAV.SAV.ModifyBoxes(ShinySID);
             sw.Stop();
             MessageBox.Show($"{sw.ElapsedMilliseconds}");
         }
@@ -212,8 +291,8 @@ namespace WangPlugin
         private void ForceStar_BTN_Click(object sender, EventArgs e)
         {
             sw.Start();
-            shiny = shinytype.RandomStar;
-            SetStar(SAV);
+            shinyflag = Shinytype.RandomStar;
+            SetShiny(SAV);
             sw.Stop();
             MessageBox.Show($"{sw.ElapsedMilliseconds}");
         }
@@ -221,8 +300,8 @@ namespace WangPlugin
         private void ForceSquare_BTN_Click(object sender, EventArgs e)
         {
             sw.Start();
-            shiny = shinytype.Square;
-            SetSquare(SAV);
+            shinyflag = Shinytype.Square;
+            SetShiny(SAV);
             sw.Stop();
             MessageBox.Show($"{sw.ElapsedMilliseconds}");
         }
@@ -230,8 +309,17 @@ namespace WangPlugin
         private void Xor_BTN_Click(object sender, EventArgs e)
         {
             sw.Start();
-            shiny = shinytype.Xor;
-            SetXor(SAV);
+            shinyflag = Shinytype.Xor;
+            SetShiny(SAV);
+            sw.Stop();
+            MessageBox.Show($"{sw.ElapsedMilliseconds}");
+        }
+
+        private void ForceStar_Click(object sender, EventArgs e)
+        {
+            sw.Start();
+            shinyflag = Shinytype.Star;
+            SetShiny(SAV);
             sw.Stop();
             MessageBox.Show($"{sw.ElapsedMilliseconds}");
         }

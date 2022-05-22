@@ -232,7 +232,7 @@ namespace WangPlugin
         }
         private bool[] GetShinyType()
         {
-            var shinytype = new bool[5] { false, false, false, false, false };
+            var shinytype = new bool[6] { false, false, false, false, false,false };
             switch (Stype)
             {
                 case ShinyType.None:

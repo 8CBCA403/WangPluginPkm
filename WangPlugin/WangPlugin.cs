@@ -45,7 +45,7 @@ namespace WangPlugin
             {
                 Image = Properties.Resources.RNG
             };
-            var Allshiny = new ToolStripMenuItem($"全部闪光")
+            var Allshiny = new ToolStripMenuItem($"闪光器")
             {
                 Image = Properties.Resources.Shiny
             };

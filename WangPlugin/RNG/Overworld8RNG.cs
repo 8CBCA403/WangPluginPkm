@@ -1,5 +1,5 @@
 ﻿using PKHeX.Core;
-
+using System.Windows.Forms;
 namespace WangPlugin
 
 {
@@ -14,7 +14,7 @@ namespace WangPlugin
         
         private const int UNSET = 255;
         public static uint Next(uint seed) => (uint)new Xoroshiro128Plus(seed).Next();
-        public static bool GenPkm(ref PKM pk,uint seed,  bool[] shiny, bool[] IV)
+        public static bool GenPkm(ref PKM pk,uint seed,  bool[] shiny, bool[] IV,uint Xor=0)
         {
             int FlawlessIVs = 0;
             if (IV[2])
@@ -27,10 +27,11 @@ namespace WangPlugin
             var pid = (uint)xoro.NextInt(uint.MaxValue);
             pk.PID = pid;
             // IVs
-            if (!CheckShiny(pk.PID, pk.TID, pk.SID,shiny))
+            if (!CheckShiny(pk.PID, pk.TID, pk.SID,shiny,Xor))
             {
                 return false;
             }
+            
             var ivs = new int[6] { UNSET, UNSET, UNSET, UNSET, UNSET, UNSET };
            
             const int MAX = 31;
@@ -72,7 +73,7 @@ namespace WangPlugin
             return true;
         }
 
-        private static bool CheckShiny(uint pid, int TID, int SID, bool[] shiny)
+        private static bool CheckShiny(uint pid, int TID, int SID, bool[] shiny,uint Xor=0)
         {
             var s = (uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF));
             if (shiny[0])
@@ -84,6 +85,8 @@ namespace WangPlugin
             else if (shiny[3] && s == 0)
                 return true;
             else if (shiny[4] && s == 1)
+                return true;
+            else if (shiny[5] && s == Xor)
                 return true;
             else
                 return false;
