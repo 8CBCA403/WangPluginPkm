@@ -9,7 +9,7 @@ namespace WangPlugin
         private const int shift8 = 8;
 
         public static uint Next(uint seed) => PKHeX.Core.RNG.XDRNG.Next(seed);
-        public static bool GenPkm(ref PKM pk, uint seed,bool[] shiny, bool[] IV)
+        public static bool GenPkm(ref PKM pk, uint seed,bool[] shiny, bool[] IV, uint Xor = 0)
         {
             int FlawlessIVs = 0;
             uint MAX = 31;
@@ -34,7 +34,7 @@ namespace WangPlugin
                 var D = rng.Next(C); // PID
                 var E = rng.Next(D); // PID
                 pk.PID = (D & 0xFFFF0000) | E >> 16;
-                if(!CheckShiny(pk.PID,pk.TID,pk.SID,shiny))
+                if(!CheckShiny(pk.PID,pk.TID,pk.SID,shiny, Xor))
                 {
                     return false;
                 }
@@ -89,18 +89,20 @@ namespace WangPlugin
             result[1] = (((int)r1 >> 5) & 0x1F);
             result[0] = (int)(r1 & 0x1F);
         }
-        private static bool CheckShiny(uint pid, int TID, int SID, bool[] shiny)
+        private static bool CheckShiny(uint pid, int TID, int SID, bool[] shiny, uint Xor = 0)
         {
             var s = (uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF));
             if (shiny[0])
                 return true;
-            else if (shiny[1] && s < 8)
+            else if (shiny[1] && s < 16)
                 return true;
-            else if (shiny[2] && s < 8 && s != 0)
+            else if (shiny[2] && s < 16 && s != 0)
                 return true;
             else if (shiny[3] && s == 0)
                 return true;
             else if (shiny[4] && s == 1)
+                return true;
+            else if (shiny[5] && s == Xor)
                 return true;
             else
                 return false;

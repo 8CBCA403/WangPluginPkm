@@ -63,6 +63,16 @@ namespace WangPlugin.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap avatar {
+            get {
+                object obj = ResourceManager.GetObject("avatar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Calc {
             get {
                 object obj = ResourceManager.GetObject("Calc", resourceCulture);
@@ -143,6 +153,16 @@ namespace WangPlugin.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap pokeball {
+            get {
+                object obj = ResourceManager.GetObject("pokeball", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap RNG {
             get {
                 object obj = ResourceManager.GetObject("RNG", resourceCulture);
@@ -197,6 +217,16 @@ namespace WangPlugin.Properties {
             get {
                 object obj = ResourceManager.GetObject("SW", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap TEST {
+            get {
+                object obj = ResourceManager.GetObject("TEST", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using PKHeX.Core;
-using PKHeX.Core.AutoMod;
-using System.Windows.Forms;
 namespace WangPlugin
 {
     internal class RecoverLower16BitsPID

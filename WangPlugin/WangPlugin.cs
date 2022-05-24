@@ -10,14 +10,12 @@ namespace WangPlugin
         public int Priority => 1; // Loading order, lowest is first.
         // Initialized on plugin load
         public ISaveFileProvider SaveFileEditor { get; private set; } = null!;
-   
         public IPKMView PKMEditor { get; private set; } = null!;
         private readonly CancellationTokenSource tokenSource = new();
         public void Initialize(params object[] args)
         {
             Console.WriteLine($"Loading {Name}...");
             SaveFileEditor = (ISaveFileProvider)Array.Find(args, z => z is ISaveFileProvider);
-           
             PKMEditor = (IPKMView)Array.Find(args, z => z is IPKMView);
             var menu = (ToolStrip)Array.Find(args, z => z is ToolStrip);
             LoadMenuStrip(menu);
@@ -40,7 +38,6 @@ namespace WangPlugin
             var form = tools.GetCurrentParent().FindForm();
             if (form is not null)
                 form.Icon = Properties.Resources.SW;
-
             var RNGForm = new ToolStripMenuItem($"RNG面板")
             {
                 Image = Properties.Resources.RNG
@@ -51,9 +48,8 @@ namespace WangPlugin
             };
             var SimpleEdit = new ToolStripMenuItem($"常用功能")
             {
-                Image = Properties.Resources.Edit
+                Image = Properties.Resources.pokeball
             };
-            
             var Calc = new ToolStripMenuItem($"多功能计算器")
             {
                 Image = Properties.Resources.Calc
@@ -70,6 +66,14 @@ namespace WangPlugin
             {
                 Image = Properties.Resources.GoPark
             };
+            var TESTmod = new ToolStripMenuItem($"ModTest(BUG)")
+            {
+                Image=Properties.Resources.TEST
+            };
+            var About = new ToolStripMenuItem($"关于")
+            {
+                Image = Properties.Resources.avatar
+            };
             RNGForm.Click += (s, e) => OpenRNGForm();
             Allshiny.Click += (s, e) => OpenShiny();
             ConvertEgg.Click += (s, e) => OpenEggForm();
@@ -77,6 +81,8 @@ namespace WangPlugin
             SimpleEdit.Click += (s, e) => OpenSimpleEdit();
             Dex.Click += (s, e) => OpenDexBuildForm();
             GP1Edit.Click += (s, e) => OpenGPEdit();
+            TESTmod.Click += (s, e) => OpenTESTForm();
+            About.Click += (s, e) => MessageBox.Show("感谢！Thanks!","About");
             ctrl.DropDownItems.Add(RNGForm);
             ctrl.DropDownItems.Add(Allshiny);
             ctrl.DropDownItems.Add(SimpleEdit);
@@ -84,8 +90,9 @@ namespace WangPlugin
             ctrl.DropDownItems.Add(Calc);
             ctrl.DropDownItems.Add(Dex);
             ctrl.DropDownItems.Add(GP1Edit);
+            ctrl.DropDownItems.Add(TESTmod);
+            ctrl.DropDownItems.Add(About);
         }
-     
         private static void OpenCalc()
         {
             var frm = new Calc();
@@ -119,7 +126,13 @@ namespace WangPlugin
 
         private void OpenShiny()
         {
+            MessageBox.Show("请确保本身全部精灵合法！\n不是100%准确，使用前请备份存档！","SuperWang", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             var frm = new SetAllShiny(SaveFileEditor, PKMEditor);
+            frm.Show();
+        }
+        private void OpenTESTForm()
+        {
+            var frm = new TESTForm(SaveFileEditor, PKMEditor);
             frm.Show();
         }
         public void NotifySaveLoaded()

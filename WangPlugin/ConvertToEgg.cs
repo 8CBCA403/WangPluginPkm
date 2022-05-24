@@ -57,9 +57,9 @@ namespace WangPlugin
         private void GEgg_Click(object sender, EventArgs e)
         {
             if(Egg(Editor.Data, Editor, SAV))
-                MessageBox.Show($"Success!");
+                MessageBox.Show($"Success!", "SuperWang");
             else
-                MessageBox.Show($"Can't Convert to Egg!");
+                MessageBox.Show($"Can't Convert to Egg!", "SuperWang");
         }
         public ConvertToEgg(ISaveFileProvider sav, IPKMView editor)
         {
@@ -70,7 +70,7 @@ namespace WangPlugin
         }
         public static bool Egg(PKM pk, IPKMView PKMEditor, ISaveFileProvider SaveFileEditor)
         {
-            List<IEncounterInfo> Results = new();
+            List<IEncounterInfo> Results ;
             IEncounterInfo enc;
             PKM pkm = PKMEditor.Data;
             PKM pko = PKMEditor.Data;

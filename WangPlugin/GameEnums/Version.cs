@@ -4,7 +4,7 @@
     {
         public static bool Gen3Flag(int Version)
         {
-            if (Version == 1|| Version == 2 || Version == 3 || Version == 4 || Version == 5)
+            if (Version is 1 or 2 or 3 or 4 or 5)
                 return true;
             else
                 return false;

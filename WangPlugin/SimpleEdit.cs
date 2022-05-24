@@ -103,11 +103,11 @@ namespace WangPlugin
         private void Master_Click(object sender, EventArgs e)
         {
             if (SAV.SAV.Version != GameVersion.PLA)
-                MessageBox.Show("只适用于阿尔宙斯！");
+                MessageBox.Show("只适用于阿尔宙斯！","SuperWang");
             else
             {
                 Handle_MoveShop();
-                MessageBox.Show("搞定了！");
+                MessageBox.Show("搞定了！", "SuperWang");
             }
         }
         private void Handle_MoveShop()
