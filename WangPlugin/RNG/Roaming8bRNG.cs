@@ -13,6 +13,7 @@ namespace WangPlugin
             var fakeTID = xoro.NextUInt();
             var pid = xoro.NextUInt();
             pid = GetRevisedPID(fakeTID, pid, TID,SID);
+          
             var ivs = new int[6] { UNSET, UNSET, UNSET, UNSET, UNSET, UNSET };
             var determined = 0;
             while (determined < FlawlessIVs)
@@ -26,6 +27,7 @@ namespace WangPlugin
             {
                 if (ivs[i] == UNSET)
                 {
+                   
                     ivs[i] = (int)xoro.NextUInt(32);
                 }
             }
@@ -38,7 +40,7 @@ namespace WangPlugin
                 return false;
             }
             pk.PID = pid;
-            if (!CheckShiny(pk.PID, pk.TID, pk.SID,shiny))
+            if (!CheckShiny(pk.PID, pk.TID, pk.SID, shiny))
             {
                 return false;
             }

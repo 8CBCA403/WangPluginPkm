@@ -312,6 +312,16 @@ namespace WangPlugin
                         }
                     }
                 }
+                if(Version.Gen8PLAFlag(val.Version))
+                {
+                    pkm.PID = ShinyPID(val);
+                    CommonEdits.SetRandomEC(pkm);
+                }
+                if(Version.Gen8BDSPFlag(val.Version))
+                {
+                    pkm.PID = ShinyPID(val);
+                    CommonEdits.SetRandomEC(pkm);
+                }
             }
             var la = new LegalityAnalysis(pkm);
             if (!la.Valid)

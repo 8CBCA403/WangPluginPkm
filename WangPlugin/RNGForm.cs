@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 namespace WangPlugin
 {
     internal class RNGForm : Form
@@ -42,7 +43,7 @@ namespace WangPlugin
         private TextBox SeedText;
         private CheckBox AtkCheck;
         private CheckBox SpeCheck;
-        private CheckBox SetRibbon;
+        private CheckBox VCheck;
         private CheckBox LockIV;
         private ShinyType Stype = ShinyType.None;
         public RNGForm(ISaveFileProvider sav, IPKMView editor)
@@ -65,7 +66,7 @@ namespace WangPlugin
             this.SeedText = new System.Windows.Forms.TextBox();
             this.AtkCheck = new System.Windows.Forms.CheckBox();
             this.SpeCheck = new System.Windows.Forms.CheckBox();
-            this.SetRibbon = new System.Windows.Forms.CheckBox();
+            this.VCheck = new System.Windows.Forms.CheckBox();
             this.LockIV = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
@@ -151,15 +152,15 @@ namespace WangPlugin
             this.SpeCheck.Text = "0Spe";
             this.SpeCheck.UseVisualStyleBackColor = true;
             // 
-            // SetRibbon
+            // VCheck
             // 
-            this.SetRibbon.AutoSize = true;
-            this.SetRibbon.Location = new System.Drawing.Point(79, 108);
-            this.SetRibbon.Name = "SetRibbon";
-            this.SetRibbon.Size = new System.Drawing.Size(76, 21);
-            this.SetRibbon.TabIndex = 18;
-            this.SetRibbon.Text = "Ribbon";
-            this.SetRibbon.UseVisualStyleBackColor = true;
+            this.VCheck.AutoSize = true;
+            this.VCheck.Location = new System.Drawing.Point(79, 108);
+            this.VCheck.Name = "VCheck";
+            this.VCheck.Size = new System.Drawing.Size(47, 21);
+            this.VCheck.TabIndex = 18;
+            this.VCheck.Text = "6V";
+            this.VCheck.UseVisualStyleBackColor = true;
             // 
             // LockIV
             // 
@@ -175,9 +176,9 @@ namespace WangPlugin
             // RNGForm
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(292, 177);
+            this.ClientSize = new System.Drawing.Size(296, 177);
             this.Controls.Add(this.LockIV);
-            this.Controls.Add(this.SetRibbon);
+            this.Controls.Add(this.VCheck);
             this.Controls.Add(this.SpeCheck);
             this.Controls.Add(this.AtkCheck);
             this.Controls.Add(this.SeedText);
@@ -210,16 +211,59 @@ namespace WangPlugin
                 {
                     LockIV.Enabled = true;
                     LockIV.Checked = false;
+                    VCheck.Enabled = false;
                 }
                 else if (methodTypeBox.SelectedItem == methodTypeBox.Items[10])
                 {
                     LockIV.Enabled = false;
                     LockIV.Checked = true;
+                    VCheck.Enabled = true;
+                    this.VCheck.CheckedChanged += (_, __) =>
+                    {
+                        if (VCheck.Checked == true)
+                        {
+                            AtkCheck.Enabled = false;
+                            SpeCheck.Enabled = false;
+                            AtkCheck.Checked = false;
+                            SpeCheck.Checked = false;
+                        }
+                        else
+                        {
+                            AtkCheck.Enabled = true;
+                            SpeCheck.Enabled = true;
+                        }
+
+                    };
+                    this.AtkCheck.CheckedChanged += (_, __) =>
+                    {
+                        if (AtkCheck.Checked == true)
+                        {
+                            VCheck.Checked = false;
+                            VCheck.Enabled = false;
+                        }
+                        else
+                        {
+                            VCheck.Enabled = true;
+                        }
+                    };
+                    this.SpeCheck.CheckedChanged += (_, __) =>
+                    {
+                        if (SpeCheck.Checked == true)
+                        {
+                            VCheck.Checked = false;
+                            VCheck.Enabled = false;
+                        }
+                        else
+                        {
+                            VCheck.Enabled = true;
+                        }
+                    };
                 }
                 else
                 {
                     LockIV.Enabled = false;
                     LockIV.Checked = false;
+                    VCheck.Enabled = false;
                 }
                 RNGMethod = (MethodType)Enum.Parse(typeof(MethodType), this.methodTypeBox.SelectedItem.ToString(), false);
             };        
@@ -301,6 +345,60 @@ namespace WangPlugin
                 _ => throw new NotSupportedException(),
             };
         }
+        private Queue<uint> PreSetSeed()
+        {
+
+            Queue<uint> Getqeueu = new Queue<uint>();
+            if (RNGMethod == MethodType.Roaming8b &&
+                VCheck.Checked &&
+                Stype != ShinyType.None)
+            {
+                Getqeueu = SeedList.EnqueueSeed(1);
+            }
+            else if (RNGMethod == MethodType.Roaming8b&& 
+                AtkCheck.Checked&&
+                SpeCheck.Checked&&
+                Stype!=ShinyType.None)
+            {
+                Getqeueu = SeedList.EnqueueSeed(2);
+            }
+            else if (RNGMethod == MethodType.Roaming8b &&
+                AtkCheck.Checked &&
+                !SpeCheck.Checked &&
+                Stype != ShinyType.None)
+                {
+                Getqeueu = SeedList.EnqueueSeed(3);
+            }
+            else if(RNGMethod==MethodType.Roaming8b&&
+                !AtkCheck.Checked&&
+                SpeCheck.Checked &&
+                (Stype != ShinyType.None&&Stype!=ShinyType.Sqaure))
+            {
+                Getqeueu = SeedList.EnqueueSeed(4);
+            }
+            else if (RNGMethod == MethodType.Overworld8 &&
+               AtkCheck.Checked &&
+               !SpeCheck.Checked &&
+               Stype == ShinyType.Sqaure)
+            {
+                Getqeueu = SeedList.EnqueueSeed(5);
+            }
+            else if (RNGMethod == MethodType.Overworld8 &&
+              !AtkCheck.Checked &&
+              SpeCheck.Checked &&
+              Stype == ShinyType.Sqaure)
+            {
+                Getqeueu = SeedList.EnqueueSeed(6);
+            }
+            else if (RNGMethod == MethodType.Overworld8 &&
+             AtkCheck.Checked &&
+             SpeCheck.Checked &&
+             Stype == ShinyType.Sqaure)
+            {
+                Getqeueu = SeedList.EnqueueSeed(7);
+            }
+            return Getqeueu;
+        }
         private void IsRunning(bool running)
         {
             Search.Enabled = !running;
@@ -310,11 +408,16 @@ namespace WangPlugin
         {
             IsRunning(true);
             Condition.Text = "searching...";
+            uint seed = 0;
+            Queue<uint> SeedQueue = new Queue<uint>();
+            SeedQueue = PreSetSeed();
             tokenSource = new();
+            
             Task.Factory.StartNew(
                 () =>
                 {
-                    var seed = Util.Rand32();
+                    seed = Util.Rand32();
+                    
                     var pk = Editor.Data;
                     while (true)
                     {
@@ -323,21 +426,26 @@ namespace WangPlugin
                             Condition.Text = "Stop";
                             return;
                         }
-                            if (GenPkm(ref pk, seed))
+                        if (SeedQueue.Count != 0)
+                        {
+                            seed = SeedQueue.Dequeue();
+                        }
+                       
+                        if (GenPkm(ref pk, seed))
                             {
-                                this.Invoke(() =>
+                           
+                            this.Invoke(() =>
                                 {
-                                    if(SetRibbon.Checked)
-                                    {
-                                        RibbonApplicator.SetAllValidRibbons(pk);
-                                    }
                                     MessageBox.Show($"Success！");
                                     Editor.PopulateFields(pk, false);
                                     SAV.ReloadSlots();
-                                    SeedText.Text = $"{Convert.ToString(seed,16)}";
+                                    SeedText.Text = $"{Convert.ToString(seed, 16)}";
                                 });
+                               
                                 break;
                             }
+
+               
                         seed = NextSeed(seed);
                     }
                     this.Invoke(() =>

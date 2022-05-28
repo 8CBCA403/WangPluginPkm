@@ -4,7 +4,7 @@ using System.Threading;
 using System.Windows.Forms;
 namespace WangPlugin
 {
-    public class WangPlugin : IPlugin
+    public  class WangPlugin : IPlugin
     {
         public string Name => nameof(WangPlugin);
         public int Priority => 1; // Loading order, lowest is first.
@@ -68,7 +68,7 @@ namespace WangPlugin
             };
             var TESTmod = new ToolStripMenuItem($"ModTest(BUG)")
             {
-                Image=Properties.Resources.TEST
+                Image = Properties.Resources.TEST
             };
             var About = new ToolStripMenuItem($"关于")
             {
@@ -77,12 +77,12 @@ namespace WangPlugin
             RNGForm.Click += (s, e) => OpenRNGForm();
             Allshiny.Click += (s, e) => OpenShiny();
             ConvertEgg.Click += (s, e) => OpenEggForm();
-            Calc.Click += (s, e) =>OpenCalc();
+            Calc.Click += (s, e) => OpenCalc();
             SimpleEdit.Click += (s, e) => OpenSimpleEdit();
             Dex.Click += (s, e) => OpenDexBuildForm();
             GP1Edit.Click += (s, e) => OpenGPEdit();
             TESTmod.Click += (s, e) => OpenTESTForm();
-            About.Click += (s, e) => MessageBox.Show("感谢！Thanks!","About");
+            About.Click += (s, e) => MessageBox.Show("感谢！Thanks!", "About");
             ctrl.DropDownItems.Add(RNGForm);
             ctrl.DropDownItems.Add(Allshiny);
             ctrl.DropDownItems.Add(SimpleEdit);
@@ -126,7 +126,7 @@ namespace WangPlugin
 
         private void OpenShiny()
         {
-            MessageBox.Show("请确保本身全部精灵合法！\n不是100%准确，使用前请备份存档！","SuperWang", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("请确保本身全部精灵合法！\n不是100%准确，使用前请备份存档！", "SuperWang", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             var frm = new SetAllShiny(SaveFileEditor, PKMEditor);
             frm.Show();
         }

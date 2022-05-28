@@ -6,6 +6,7 @@ namespace WangPlugin
 {
     public partial class Calc : Form
     {
+       
         private Button CalcNature;
         private Label PID;
         private TextBox Nature;
@@ -256,7 +257,7 @@ namespace WangPlugin
             this.Controls.Add(this.CalcNature);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Calc";
+        //  this.Name = "Calc";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Super Wang";
             this.ResumeLayout(false);
@@ -406,5 +407,6 @@ namespace WangPlugin
                 SIDResult.Text = SID5.ToString();
             }
         }
+         
     }
 }

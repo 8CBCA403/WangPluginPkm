@@ -1,5 +1,5 @@
 ﻿using PKHeX.Core;
-using System.Windows.Forms;
+using System;
 namespace WangPlugin
 
 {
@@ -25,13 +25,13 @@ namespace WangPlugin
             pk.EncryptionConstant = ec;
             // PID
             var pid = (uint)xoro.NextInt(uint.MaxValue);
-            pk.PID = pid;
-            // IVs
-            if (!CheckShiny(pk.PID, pk.TID, pk.SID,shiny,Xor))
+            uint revised_pid = GetRevisedPID(pid, pk.TID,pk.SID,shiny);
+            pk.PID = revised_pid;
+            if(!CheckShiny(pk.PID, pk.TID,pk.SID,shiny))
             {
                 return false;
             }
-            
+            // IVs
             var ivs = new int[6] { UNSET, UNSET, UNSET, UNSET, UNSET, UNSET };
            
             const int MAX = 31;
@@ -72,7 +72,24 @@ namespace WangPlugin
             pk.RefreshChecksum();
             return true;
         }
-
+        private static uint GetRevisedPID( uint pid, int TID, int SID, bool[] shiny)
+        {
+            uint s = (uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF));
+             if (shiny[3]&& s!=0)
+            {
+                pid = (((uint)(TID ^ SID) ^ (pid & 0xFFFF) ^ 0) << 16) | (pid & 0xFFFF);
+                return pid;
+            }
+        
+            else if (shiny[0]&&s<16)
+            {
+                
+                return pid ^ 0x10000000;
+            }
+            
+                return pid;
+            
+        }
         private static bool CheckShiny(uint pid, int TID, int SID, bool[] shiny,uint Xor=0)
         {
             var s = (uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF));
