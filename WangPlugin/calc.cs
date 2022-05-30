@@ -1,6 +1,4 @@
-﻿using PKHeX.Core;
-using System.Threading;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using System;
 namespace WangPlugin
 {
@@ -26,7 +24,18 @@ namespace WangPlugin
         private TextBox SIDResult;
         private CheckBox IDCheck;
         private CheckBox IDsCheck;
+        private TextBox BoxInput_TextBox;
+        private TextBox PriceOutPut_TextBox;
+        private Button PriceCalc_BTN;
+        private Label Price;
         private TextBox PIDHex;
+        private TextBox PricePerBox_TextBox;
+        private TextBox PricePerPKM_TextBox;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        public const double E = 2.7182818284590451;
         public Calc()
         {
             InitializeComponent();
@@ -55,6 +64,16 @@ namespace WangPlugin
             this.SIDResult = new System.Windows.Forms.TextBox();
             this.IDCheck = new System.Windows.Forms.CheckBox();
             this.IDsCheck = new System.Windows.Forms.CheckBox();
+            this.BoxInput_TextBox = new System.Windows.Forms.TextBox();
+            this.PriceOutPut_TextBox = new System.Windows.Forms.TextBox();
+            this.PriceCalc_BTN = new System.Windows.Forms.Button();
+            this.Price = new System.Windows.Forms.Label();
+            this.PricePerBox_TextBox = new System.Windows.Forms.TextBox();
+            this.PricePerPKM_TextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // CalcNature
@@ -232,9 +251,107 @@ namespace WangPlugin
             this.IDsCheck.Text = "7TO5";
             this.IDsCheck.UseVisualStyleBackColor = true;
             // 
+            // BoxInput_TextBox
+            // 
+            this.BoxInput_TextBox.Location = new System.Drawing.Point(131, 162);
+            this.BoxInput_TextBox.Name = "BoxInput_TextBox";
+            this.BoxInput_TextBox.Size = new System.Drawing.Size(42, 25);
+            this.BoxInput_TextBox.TabIndex = 21;
+            // 
+            // PriceOutPut_TextBox
+            // 
+            this.PriceOutPut_TextBox.Location = new System.Drawing.Point(430, 196);
+            this.PriceOutPut_TextBox.Name = "PriceOutPut_TextBox";
+            this.PriceOutPut_TextBox.Size = new System.Drawing.Size(174, 25);
+            this.PriceOutPut_TextBox.TabIndex = 22;
+            // 
+            // PriceCalc_BTN
+            // 
+            this.PriceCalc_BTN.Location = new System.Drawing.Point(610, 194);
+            this.PriceCalc_BTN.Name = "PriceCalc_BTN";
+            this.PriceCalc_BTN.Size = new System.Drawing.Size(100, 26);
+            this.PriceCalc_BTN.TabIndex = 23;
+            this.PriceCalc_BTN.Text = "Calculate";
+            this.PriceCalc_BTN.UseVisualStyleBackColor = true;
+            this.PriceCalc_BTN.Click += new System.EventHandler(this.PriceCalc_BTN_Click);
+            // 
+            // Price
+            // 
+            this.Price.AutoSize = true;
+            this.Price.Font = new System.Drawing.Font("MV Boli", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Price.Location = new System.Drawing.Point(259, 122);
+            this.Price.Name = "Price";
+            this.Price.Size = new System.Drawing.Size(240, 40);
+            this.Price.TabIndex = 24;
+            this.Price.Text = "Price Calculator";
+            // 
+            // PricePerBox_TextBox
+            // 
+            this.PricePerBox_TextBox.Location = new System.Drawing.Point(131, 196);
+            this.PricePerBox_TextBox.Name = "PricePerBox_TextBox";
+            this.PricePerBox_TextBox.Size = new System.Drawing.Size(179, 25);
+            this.PricePerBox_TextBox.TabIndex = 25;
+            // 
+            // PricePerPKM_TextBox
+            // 
+            this.PricePerPKM_TextBox.Location = new System.Drawing.Point(430, 162);
+            this.PricePerPKM_TextBox.Name = "PricePerPKM_TextBox";
+            this.PricePerPKM_TextBox.Size = new System.Drawing.Size(174, 25);
+            this.PricePerPKM_TextBox.TabIndex = 26;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 195);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(123, 26);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "PricePerBox";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("MV Boli", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(302, 163);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(122, 23);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "PricePerPKM";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(316, 196);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(108, 26);
+            this.label3.TabIndex = 29;
+            this.label3.Text = "TotalPrice";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(6, 161);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(119, 26);
+            this.label4.TabIndex = 30;
+            this.label4.Text = "BoxNumber";
+            // 
             // Calc
             // 
-            this.ClientSize = new System.Drawing.Size(715, 123);
+            this.ClientSize = new System.Drawing.Size(715, 249);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.PricePerPKM_TextBox);
+            this.Controls.Add(this.PricePerBox_TextBox);
+            this.Controls.Add(this.Price);
+            this.Controls.Add(this.PriceCalc_BTN);
+            this.Controls.Add(this.PriceOutPut_TextBox);
+            this.Controls.Add(this.BoxInput_TextBox);
             this.Controls.Add(this.IDsCheck);
             this.Controls.Add(this.IDCheck);
             this.Controls.Add(this.SIDResult);
@@ -257,7 +374,7 @@ namespace WangPlugin
             this.Controls.Add(this.CalcNature);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-        //  this.Name = "Calc";
+            this.Name = "Calc";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Super Wang";
             this.ResumeLayout(false);
@@ -407,6 +524,37 @@ namespace WangPlugin
                 SIDResult.Text = SID5.ToString();
             }
         }
-         
+
+        private void PriceCalc_BTN_Click(object sender, EventArgs e)
+        {
+            var Box = Int16.Parse(BoxInput_TextBox.Text);
+            var a0 = 9.39116979028421;
+            var a1 = 9.07347629645924;
+            double PricePerBox = 0;
+            if (Box < 9||Box==9)
+            {
+                PricePerBox = PriceFunction(Box);
+            }
+            else
+            {
+                for (int i = 0; i < Box - 9; i++)
+                {
+                    PricePerBox = a1 + (a1 - a0) / 10;
+                    a0 = a1;
+                    a1 = PricePerBox;
+                }
+            }
+            double Price = PricePerBox*Box; 
+            var PricePerPKM= (Price / Box/30);
+            PriceOutPut_TextBox.Text = Price.ToString();
+            PricePerBox_TextBox.Text = PricePerBox.ToString();
+            PricePerPKM_TextBox.Text = PricePerPKM.ToString();
+        }
+        private double PriceFunction(int Box)
+        {
+            double Price;
+                Price = (15 + (-2.69727717624839005266) * Math.Log(Box));
+            return Price;
+        }
     }
 }

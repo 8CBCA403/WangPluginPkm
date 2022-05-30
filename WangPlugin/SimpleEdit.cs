@@ -3,6 +3,7 @@ using PKHeX.Core;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using PKHeX.Core.Searching;
+using PKHeX.Core.AutoMod;
 using System.Linq;
 
 namespace WangPlugin
@@ -14,6 +15,7 @@ namespace WangPlugin
         private Button AllRibbon;
         private Button LegalizeReport;
         private Button Master;
+        private Button Legal_BTN;
         private Button ClearRecord;
 
         private void InitializeComponent()
@@ -23,6 +25,7 @@ namespace WangPlugin
             this.ClearRecord = new System.Windows.Forms.Button();
             this.LegalizeReport = new System.Windows.Forms.Button();
             this.Master = new System.Windows.Forms.Button();
+            this.Legal_BTN = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // AllRibbon
@@ -65,9 +68,20 @@ namespace WangPlugin
             this.Master.UseVisualStyleBackColor = true;
             this.Master.Click += new System.EventHandler(this.Master_Click);
             // 
+            // Legal_BTN
+            // 
+            this.Legal_BTN.Location = new System.Drawing.Point(25, 117);
+            this.Legal_BTN.Name = "Legal_BTN";
+            this.Legal_BTN.Size = new System.Drawing.Size(110, 28);
+            this.Legal_BTN.TabIndex = 4;
+            this.Legal_BTN.Text = "Legal";
+            this.Legal_BTN.UseVisualStyleBackColor = true;
+            this.Legal_BTN.Click += new System.EventHandler(this.Legal_BTN_Click);
+            // 
             // SimpleEdit
             // 
-            this.ClientSize = new System.Drawing.Size(287, 111);
+            this.ClientSize = new System.Drawing.Size(287, 157);
+            this.Controls.Add(this.Legal_BTN);
             this.Controls.Add(this.Master);
             this.Controls.Add(this.LegalizeReport);
             this.Controls.Add(this.ClearRecord);
@@ -217,6 +231,15 @@ namespace WangPlugin
                 pk.IV_DEF = 31;
             }
                 return pk;
-        } 
+        }
+        public static void Legal(ISaveFileProvider SaveFileEditor)
+        {
+            var sav = SaveFileEditor.SAV;
+            sav.LegalizeBox(sav.CurrentBox);
+        }
+            private void Legal_BTN_Click(object sender, EventArgs e)
+        {
+            Legal(SAV);
+        }
     }
 }
