@@ -16,6 +16,7 @@ namespace WangPlugin
         private Button LegalizeReport;
         private Button Master;
         private Button Legal_BTN;
+        private Button LegalALL_BTN;
         private Button ClearRecord;
 
         private void InitializeComponent()
@@ -26,6 +27,7 @@ namespace WangPlugin
             this.LegalizeReport = new System.Windows.Forms.Button();
             this.Master = new System.Windows.Forms.Button();
             this.Legal_BTN = new System.Windows.Forms.Button();
+            this.LegalALL_BTN = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // AllRibbon
@@ -74,13 +76,24 @@ namespace WangPlugin
             this.Legal_BTN.Name = "Legal_BTN";
             this.Legal_BTN.Size = new System.Drawing.Size(110, 28);
             this.Legal_BTN.TabIndex = 4;
-            this.Legal_BTN.Text = "Legal";
+            this.Legal_BTN.Text = "LegalBox";
             this.Legal_BTN.UseVisualStyleBackColor = true;
             this.Legal_BTN.Click += new System.EventHandler(this.Legal_BTN_Click);
+            // 
+            // LegalALL_BTN
+            // 
+            this.LegalALL_BTN.Location = new System.Drawing.Point(156, 117);
+            this.LegalALL_BTN.Name = "LegalALL_BTN";
+            this.LegalALL_BTN.Size = new System.Drawing.Size(110, 28);
+            this.LegalALL_BTN.TabIndex = 5;
+            this.LegalALL_BTN.Text = "LegalAll";
+            this.LegalALL_BTN.UseVisualStyleBackColor = true;
+            this.LegalALL_BTN.Click += new System.EventHandler(this.LegalALL_BTN_Click);
             // 
             // SimpleEdit
             // 
             this.ClientSize = new System.Drawing.Size(287, 157);
+            this.Controls.Add(this.LegalALL_BTN);
             this.Controls.Add(this.Legal_BTN);
             this.Controls.Add(this.Master);
             this.Controls.Add(this.LegalizeReport);
@@ -232,14 +245,28 @@ namespace WangPlugin
             }
                 return pk;
         }
-        public static void Legal(ISaveFileProvider SaveFileEditor)
+        public static void LegalBox(ISaveFileProvider SaveFileEditor)
         {
             var sav = SaveFileEditor.SAV;
             sav.LegalizeBox(sav.CurrentBox);
         }
-            private void Legal_BTN_Click(object sender, EventArgs e)
+        public static void LegalAll(ISaveFileProvider SaveFileEditor)
         {
-            Legal(SAV);
+            var sav = SaveFileEditor.SAV;
+            sav.LegalizeBoxes();
+        }
+        private void Legal_BTN_Click(object sender, EventArgs e)
+        {
+            LegalBox(SAV);
+            SAV.ReloadSlots();
+            MessageBox.Show("搞定啦");
+        }
+
+        private void LegalALL_BTN_Click(object sender, EventArgs e)
+        {
+            LegalAll(SAV);
+            SAV.ReloadSlots();
+            MessageBox.Show("搞定啦");
         }
     }
 }
