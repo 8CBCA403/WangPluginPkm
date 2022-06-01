@@ -50,11 +50,11 @@ which are used for unit testing.
 (https://github.com/projectpokemon/) 
 -[Wang.Song] BDSPRoaming
 (https://github.com/g0dw5)
--[Caleeeeeeeeeeeee] PIDFinder 猎游者
+- [Caleeeeeeeeeeeee] PIDFinder 猎游者
 (https://github.com/ca1e/PIDFinder)
--[Easy World]
+- [Easy World]
 (https://github.com/easyworld)
--[CScorpion-h]
+- [CScorpion-h]
 (https://github.com/CScorpion-h)
 - The PokemonRNG team for various contributions and research (zaksabeast, EzPzstreamz, Shiny_Sylveon, Vlad, Feder)
 - Other great people for various help and research (OmegaDonut, Bond697, Kaphotics, SciresM, Zari, amab, Marin, Lean, etc)
