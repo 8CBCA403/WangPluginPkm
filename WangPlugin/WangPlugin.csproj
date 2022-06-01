@@ -7,6 +7,7 @@
     <LangVersion>10</LangVersion>
     <Nullable>disable</Nullable>
     <ApplicationIcon>Resources\img\icon.ico</ApplicationIcon>
+    
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,10 +18,15 @@
   <ItemGroup>
     <Content Include="Resources\img\icon.ico" />
   </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="PKHeX.Core" Version="22.5.8" />
+    <PackageReference Include="IndexRange" Version="1.0.2" />
+    <PackageReference Include="System.Memory" Version="4.5.4" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="PKHeX.Core">
+      <HintPath>deps\PKHeX.Core.dll</HintPath>
+    </Reference>
     <Reference Include="PKHeX.Core.AutoMod">
       <HintPath>deps\PKHeX.Core.AutoMod.dll</HintPath>
     </Reference>
@@ -51,6 +57,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GUI\" />
+    <Folder Include="Plugins\" />
   </ItemGroup>
 
 </Project>

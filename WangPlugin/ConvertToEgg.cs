@@ -74,7 +74,7 @@ namespace WangPlugin
             IEncounterInfo enc;
             PKM pkm = PKMEditor.Data;
             PKM pko = PKMEditor.Data;
-            var tree = EvolutionTree.GetEvolutionTree(PKMEditor.Data, PKMEditor.Data.Format);
+            var tree = EvolutionTree.GetEvolutionTree(PKMEditor.Data.Context);
             var PE = tree.GetPreEvolutions(PKMEditor.Data.Species, PKMEditor.Data.Form);
             if (PE.Count() != 0)
             {

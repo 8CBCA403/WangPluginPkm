@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using PKHeX.Core;
-using System.IO;
 using static System.Buffers.Binary.BinaryPrimitives;
 
 namespace WangPlugin

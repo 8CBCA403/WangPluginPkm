@@ -66,6 +66,8 @@ namespace WangPlugin
             {
                 Image = Properties.Resources.GoPark
             };
+            var HomeViewer = new ToolStripMenuItem($"Home查看器");
+          
             var TESTmod = new ToolStripMenuItem($"ModTest(BUG)")
             {
                 Image = Properties.Resources.TEST
@@ -82,6 +84,7 @@ namespace WangPlugin
             Dex.Click += (s, e) => OpenDexBuildForm();
             GP1Edit.Click += (s, e) => OpenGPEdit();
             TESTmod.Click += (s, e) => OpenTESTForm();
+            HomeViewer.Click += (s, e) => OpenHomeViewer();
             About.Click += (s, e) => MessageBox.Show("感谢！Thanks!", "About");
             ctrl.DropDownItems.Add(RNGForm);
             ctrl.DropDownItems.Add(Allshiny);
@@ -90,6 +93,7 @@ namespace WangPlugin
             ctrl.DropDownItems.Add(Calc);
             ctrl.DropDownItems.Add(Dex);
             ctrl.DropDownItems.Add(GP1Edit);
+            ctrl.DropDownItems.Add(HomeViewer);
             ctrl.DropDownItems.Add(TESTmod);
             ctrl.DropDownItems.Add(About);
         }
@@ -123,7 +127,11 @@ namespace WangPlugin
             var frm = new GP1Edit(SaveFileEditor, PKMEditor);
             frm.Show();
         }
-
+        private void OpenHomeViewer()
+        {
+            var frm =new HomeViewer(SaveFileEditor, PKMEditor);
+            frm.Show();
+        }
         private void OpenShiny()
         {
             MessageBox.Show("请确保本身全部精灵合法！\n不是100%准确，使用前请备份存档！", "SuperWang", MessageBoxButtons.OK, MessageBoxIcon.Warning);

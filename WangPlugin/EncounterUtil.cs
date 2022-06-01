@@ -51,7 +51,7 @@ namespace WangPlugin
         {
             //if any then return EncounterCriteria.Unrestricted;
 
-            var tree = EvolutionTree.GetEvolutionTree(editor, editor.Format);
+            var tree = EvolutionTree.GetEvolutionTree(editor.Context);
             bool isInChain = tree.IsSpeciesDerivedFrom(editor.Species, editor.Form, enc.Species, enc.Form);
             var set = new ShowdownSet(editor);
             var criteria = EncounterCriteria.GetCriteria(set, editor.PersonalInfo);
