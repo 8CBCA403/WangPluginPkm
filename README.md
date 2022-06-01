@@ -1,4 +1,5 @@
 # WangPlugin
+![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
  A pkhex plugin with several function. "make pokemon looks more real"
  
  
