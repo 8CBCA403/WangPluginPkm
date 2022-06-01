@@ -48,7 +48,7 @@ which are used for unit testing.
 (https://www.flaticon.com/)
 - [Project Pokémon] for their Mystery Gift Event Gallery.
 (https://github.com/projectpokemon/) 
--[Wang.Song] BDSPRoaming
+- [Wang.Song] BDSPRoaming
 (https://github.com/g0dw5)
 - [Caleeeeeeeeeeeee] PIDFinder 猎游者
 (https://github.com/ca1e/PIDFinder)
