@@ -61,6 +61,15 @@ namespace WangPlugin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Hello! world 的本地化字符串。
+        /// </summary>
+        internal static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap avatar {
@@ -106,6 +115,16 @@ namespace WangPlugin.Properties {
         internal static System.Drawing.Bitmap GoPark {
             get {
                 object obj = ResourceManager.GetObject("GoPark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Home {
+            get {
+                object obj = ResourceManager.GetObject("Home", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -236,6 +255,16 @@ namespace WangPlugin.Properties {
         internal static System.Drawing.Bitmap wang {
             get {
                 object obj = ResourceManager.GetObject("wang", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Wanghaoran {
+            get {
+                object obj = ResourceManager.GetObject("Wanghaoran", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
