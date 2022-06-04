@@ -6,7 +6,7 @@ namespace WangPlugin.Plugins
 {
      public class ShinyMakerPlugin: WangPlugin
     {
-        public override string Name => "闪光器";
+        public override string Name => "闪光器/Shiny Maker";
         public override int Priority => 1;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
@@ -16,7 +16,7 @@ namespace WangPlugin.Plugins
                 Image = Properties.Resources.Shiny
             };
             ctrl.Click += OpenForm;
-            ctrl.Name = "闪光器";
+            ctrl.Name = "闪光器/Shiny Maker";
             modmenu.DropDownItems.Add(ctrl);
 
         }

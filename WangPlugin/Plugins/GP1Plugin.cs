@@ -6,7 +6,7 @@ namespace WangPlugin.Plugins
     internal class GP1Plugin: WangPlugin
     {
         
-            public override string Name => "GP1编辑器";
+            public override string Name => "GP1编辑器/GP1 Editor";
             public override int Priority => 6;
 
             protected override void AddPluginControl(ToolStripDropDownItem modmenu)
@@ -16,7 +16,7 @@ namespace WangPlugin.Plugins
                     Image = Properties.Resources.GoPark
                 };
                 ctrl.Click += OpenForm;
-                ctrl.Name = "GP1编辑器";
+                ctrl.Name = "GP1编辑器/GP1 Editor";
                 modmenu.DropDownItems.Add(ctrl);
 
             }

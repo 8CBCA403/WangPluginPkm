@@ -6,7 +6,7 @@ namespace WangPlugin.Plugins
 {
     internal class EggGeneratorPlugin: WangPlugin
     {
-        public override string Name => "变蛋器";
+        public override string Name => "变蛋器/Egg Generator";
         public override int Priority => 2;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
@@ -16,7 +16,7 @@ namespace WangPlugin.Plugins
                 Image = Properties.Resources.Egg
             };
             ctrl.Click += OpenForm;
-            ctrl.Name = "变蛋器";
+            ctrl.Name = "变蛋器/Egg Generator";
             modmenu.DropDownItems.Add(ctrl);
 
         }

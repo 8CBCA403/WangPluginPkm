@@ -6,7 +6,7 @@ namespace WangPlugin.Plugins
 {
     internal class DexBuildPlugin: WangPlugin
     {
-        public override string Name => "自定ID转换";
+        public override string Name => "自定ID转换/Change ID";
         public override int Priority => 4;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
@@ -16,7 +16,7 @@ namespace WangPlugin.Plugins
                 Image = Properties.Resources.ID
             };
             ctrl.Click += OpenForm;
-            ctrl.Name = "自定ID转换";
+            ctrl.Name = "自定ID转换/Change ID";
             modmenu.DropDownItems.Add(ctrl);
 
         }

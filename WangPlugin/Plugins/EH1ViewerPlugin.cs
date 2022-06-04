@@ -6,7 +6,7 @@ namespace WangPlugin.Plugins
 {
     internal class EH1ViewerPlugin: WangPlugin
     {
-        public override string Name => "EH1查看器";
+        public override string Name => "EH1查看器/EH1 Viewer";
         public override int Priority => 7;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
@@ -16,7 +16,7 @@ namespace WangPlugin.Plugins
                 Image = Properties.Resources.Home
             };
             ctrl.Click += OpenForm;
-            ctrl.Name = "EH1查看器";
+            ctrl.Name = "EH1查看器/EH1 Viewer";
             modmenu.DropDownItems.Add(ctrl);
 
         }

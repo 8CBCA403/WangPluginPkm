@@ -7,7 +7,7 @@ namespace WangPlugin.Plugins
 {
      public class RNGPlugin:WangPlugin
     {
-        public override string Name => "RNG面板";
+        public override string Name => "RNG面板/RNG Form";
         public override int Priority => 0;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
@@ -17,7 +17,7 @@ namespace WangPlugin.Plugins
                 Image = Properties.Resources.RNG
             };
             ctrl.Click += OpenForm;
-            ctrl.Name = "RNG面板";
+            ctrl.Name = "RNG面板/RNG Form";
             modmenu.DropDownItems.Add(ctrl);
             
         }

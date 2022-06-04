@@ -5,7 +5,7 @@ namespace WangPlugin.Plugins
 {
     public class MutiCalcPlugin: WangPlugin
     {
-        public override string Name => "多功能计算器";
+        public override string Name => "多功能计算器/Muti Calculator";
         public override int Priority => 3;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
@@ -15,7 +15,7 @@ namespace WangPlugin.Plugins
                 Image = Properties.Resources.Calc 
             };
             ctrl.Click += OpenForm;
-            ctrl.Name = "多功能计算器";
+            ctrl.Name = "多功能计算器/Muti Calculator";
             modmenu.DropDownItems.Add(ctrl);
         }
 

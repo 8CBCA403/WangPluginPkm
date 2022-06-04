@@ -6,7 +6,7 @@ namespace WangPlugin.Plugins
 {
     internal class AboutPlugin: WangPlugin
     {
-        public override string Name => "关于";
+        public override string Name => "关于/About";
         public override int Priority => 9;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
@@ -16,7 +16,7 @@ namespace WangPlugin.Plugins
                 Image = Properties.Resources.avatar
             };
             ctrl.Click += OpenForm;
-            ctrl.Name = "关于";
+            ctrl.Name = "关于/About";
             modmenu.DropDownItems.Add(ctrl);
 
         }

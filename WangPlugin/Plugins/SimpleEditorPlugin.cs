@@ -6,7 +6,7 @@ namespace WangPlugin.Plugins
 {
     internal class SimpleEditorPlugin: WangPlugin
     {
-        public override string Name => "常用功能";
+        public override string Name => "常用功能/Simple Editor";
         public override int Priority => 5;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
@@ -16,7 +16,7 @@ namespace WangPlugin.Plugins
                 Image = Properties.Resources.pokeball
             };
             ctrl.Click += OpenForm;
-            ctrl.Name = "常用功能";
+            ctrl.Name = "常用功能/Simple Editor";
             modmenu.DropDownItems.Add(ctrl);
 
         }

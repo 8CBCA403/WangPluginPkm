@@ -53,6 +53,7 @@ namespace WangPlugin.GUI
             this.BOX_TextBox.Name = "BOX_TextBox";
             this.BOX_TextBox.Size = new System.Drawing.Size(84, 25);
             this.BOX_TextBox.TabIndex = 1;
+            this.BOX_TextBox.Text = "1";
             // 
             // BOX_Label
             // 
