@@ -61,4 +61,4 @@ which are used for unit testing.
 - And all the countless users who have helped improve this project with ideas and suggestions!
  
  
-<img src="https://github.com/Wanghaoran86/WangBot.NET/blob/master/SysBot.Pokemon.WinForms/SuperWang.png">
+<img src="https://github.com/Wanghaoran86/WangPlugin/Resources/img/SW.png">
