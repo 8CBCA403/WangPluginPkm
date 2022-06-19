@@ -18,6 +18,7 @@ namespace WangPlugin.GUI
         public static Stopwatch sw = new();
         private Button ForceStar;
         private Label XorValue_Label;
+        private static int i=0;
 
         public enum Shinytype
         {
@@ -119,6 +120,7 @@ namespace WangPlugin.GUI
             // 
             // ShinyMakerUI
             // 
+            this.AllowDrop = true;
             this.ClientSize = new System.Drawing.Size(392, 84);
             this.Controls.Add(this.XorValue_Label);
             this.Controls.Add(this.ForceStar);
@@ -189,6 +191,8 @@ namespace WangPlugin.GUI
         }
         public static void ShinyFunction(PKM pkm)
         {
+            i++;
+            MessageBox.Show($"{i}");
             PKM val = pkm.Clone();
             PKM va = pkm.Clone();
             if (!MythicalPool.MythicalFlag(pkm.Species))
@@ -305,6 +309,7 @@ namespace WangPlugin.GUI
                             }
                             else if (shinyflag == Shinytype.Xor && Overworld8RNG.GenPkm(ref pkm, seed, ShinyArray(), iv, XorNumber))
                             {
+                               
                                 pkm.RefreshChecksum();
                                 break;
                             }
@@ -406,5 +411,7 @@ namespace WangPlugin.GUI
             sw.Stop();
             MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
         }
+
+     
     }
 }

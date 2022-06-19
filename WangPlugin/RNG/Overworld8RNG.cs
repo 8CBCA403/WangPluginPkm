@@ -27,7 +27,7 @@ namespace WangPlugin
             var pid = (uint)xoro.NextInt(uint.MaxValue);
             uint revised_pid = GetRevisedPID(pid, pk.TID,pk.SID,shiny);
             pk.PID = revised_pid;
-            if(!CheckShiny(pk.PID, pk.TID,pk.SID,shiny))
+            if(!CheckShiny(pk.PID, pk.TID,pk.SID,shiny,Xor))
             {
                 return false;
             }
