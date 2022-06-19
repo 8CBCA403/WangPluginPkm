@@ -56,6 +56,7 @@ which are used for unit testing.
 (https://github.com/easyworld)
 - CScorpion-h
 (https://github.com/CScorpion-h)
+- 感谢污教授编写的教程wiki
 - The PokemonRNG team for various contributions and research (zaksabeast, EzPzstreamz, Shiny_Sylveon, Vlad, Feder)
 - Other great people for various help and research (OmegaDonut, Bond697, Kaphotics, SciresM, Zari, amab, Marin, Lean, etc)
 - And all the countless users who have helped improve this project with ideas and suggestions!
