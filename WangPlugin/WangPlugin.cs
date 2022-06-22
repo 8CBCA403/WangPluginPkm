@@ -16,9 +16,11 @@ namespace WangPlugin
         public ISaveFileProvider SaveFileEditor { get; private set; } = null!;
         public IPKMView PKMEditor { get; private set; } = null!;
         private readonly CancellationTokenSource tokenSource = new();
-        public void Initialize(params object[] args)
+       
+        public  void Initialize(params object[] args)
         {
             Console.WriteLine($"Loading {Name}...");
+          
             SaveFileEditor = (ISaveFileProvider)Array.Find(args, z => z is ISaveFileProvider);
             PKMEditor = (IPKMView)Array.Find(args, z => z is IPKMView);
             var menu = (ToolStrip)Array.Find(args, z => z is ToolStrip);
@@ -54,7 +56,7 @@ namespace WangPlugin
         };
         protected abstract void AddPluginControl(ToolStripDropDownItem modmenu);
        
-        public void NotifySaveLoaded()
+        public  void NotifySaveLoaded()
         {
             Console.WriteLine($"{Name} was notified that a Save File was just loaded.");
         }

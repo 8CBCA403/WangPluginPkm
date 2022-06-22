@@ -7,7 +7,7 @@ namespace WangPlugin.Plugins
     internal class TEST: WangPlugin
     {
         public override string Name => "Test";
-        public override int Priority => 8;
+        public override int Priority => 9;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {

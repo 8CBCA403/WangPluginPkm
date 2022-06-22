@@ -7,7 +7,7 @@ namespace WangPlugin.Plugins
     {
         
             public override string Name => "GP1编辑器/GP1 Editor";
-            public override int Priority => 6;
+            public override int Priority => 7;
 
             protected override void AddPluginControl(ToolStripDropDownItem modmenu)
             {

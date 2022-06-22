@@ -7,7 +7,7 @@ namespace WangPlugin.Plugins
     internal class EH1ViewerPlugin: WangPlugin
     {
         public override string Name => "EH1查看器/EH1 Viewer";
-        public override int Priority => 7;
+        public override int Priority => 8;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {
