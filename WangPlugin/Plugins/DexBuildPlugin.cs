@@ -25,7 +25,7 @@ namespace WangPlugin.Plugins
         {
 
             var form = new DexBuildForm(SaveFileEditor);
-            form.ShowDialog();
+            form.Show();
         }
     }
 }

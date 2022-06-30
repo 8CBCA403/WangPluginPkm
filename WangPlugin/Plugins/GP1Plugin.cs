@@ -25,7 +25,7 @@ namespace WangPlugin.Plugins
             {
 
                 var form = new GP1Editor(SaveFileEditor, PKMEditor);
-                form.ShowDialog();
+                form.Show();
             }
         }
 }

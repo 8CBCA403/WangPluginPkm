@@ -175,6 +175,7 @@ namespace WangPlugin.GUI
             // 
             // RNGForm
             // 
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(296, 177);
             this.Controls.Add(this.LockIV);
@@ -192,6 +193,7 @@ namespace WangPlugin.GUI
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "RNGForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -467,5 +469,7 @@ namespace WangPlugin.GUI
         {
 
         }
+
+       
     }
 }

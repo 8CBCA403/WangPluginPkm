@@ -25,7 +25,7 @@ namespace WangPlugin.Plugins
         {
 
             var form = new TESTForm(SaveFileEditor, PKMEditor);
-            form.ShowDialog();
+            form.Show();
         }
     }
 }

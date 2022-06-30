@@ -1,0 +1,17 @@
+About This File
+This a Pokémon Dream Radar save file that can be used to directly transfer all the Legendary Pokémon, and some extra Pokémon and items to Pokémon Black 2 and White 2.
+
+Available Pokémon and Items to transfer:
+-Tornadus, Thundurus, Landorus, Dialga, Palkia, Giratina, Ho-oh and Lugia
+-Riolu, Ralts, Togepi, Spiritomb, Porygon and Rotom
+-Sun Stone x10, Moon Stone x10, Fire Stone x10, Water Stone x10, Thunder Stone x10 and Leaf Stone x10
+
+This save is also 100% cleared, so it can be used to catch any non-Legendary Pokémon and collect any item:
+-999999 Orbs
+-All Extensions Unlocked
+-All Upgrades Unlocked
+-Max Game Records
+
+Note: It is not needed to use Pokémon Dream Radar to transfer Pokémon and items to B2W2, thanks to the Gen 5 Save Tool. This save has also been edited using the Pokémon Dream Radar Save Editor, both tools made by Suloku. It's recommended to use JKSV or Checkpoint for importing 3DS save files.
+
+https://projectpokemon.org/home/files/file/4689-pok%C3%A9mon-dream-radar-100-save-file/

@@ -25,7 +25,7 @@ namespace WangPlugin.Plugins
         {
 
             var form = new EggGeneratorUI(SaveFileEditor, PKMEditor);
-            form.ShowDialog();
+            form.Show();
         }
     }
 }

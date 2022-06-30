@@ -369,6 +369,7 @@ namespace WangPlugin.GUI
             this.Controls.Add(this.ImportGP_BTN);
             this.Font = new System.Drawing.Font("Arial", 9F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "GP1Editor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Super Wang";

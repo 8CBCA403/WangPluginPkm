@@ -1,5 +1,4 @@
 ﻿using PKHeX.Core;
-using System;
 namespace WangPlugin
 
 {
@@ -67,7 +66,14 @@ namespace WangPlugin
             scale.HeightScalar = (byte)((int)xoro.NextInt(0x81) + (int)xoro.NextInt(0x80));
             scale.WeightScalar = (byte)((int)xoro.NextInt(0x81) + (int)xoro.NextInt(0x80));
             var ability = (1 << (int)xoro.NextInt(2));
-            if (pk.Species is not (638 or 639 or 640))
+            if(pk.Species is (638 or 639 or 640))
+            {
+                if (ability != 1)
+                    return false;
+                else
+                pk.AbilityNumber = ability;
+            }
+            else
                 pk.AbilityNumber = ability;
             pk.RefreshChecksum();
             return true;

@@ -18,7 +18,6 @@ namespace WangPlugin.GUI
         public static Stopwatch sw = new();
         private Button ForceStar;
         private Label XorValue_Label;
-        private static int i=0;
 
         public enum Shinytype
         {
@@ -131,6 +130,7 @@ namespace WangPlugin.GUI
             this.Controls.Add(this.ShinySID_BTN);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ShinyMakerUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Super Wang";
@@ -191,8 +191,6 @@ namespace WangPlugin.GUI
         }
         public static void ShinyFunction(PKM pkm)
         {
-            i++;
-            MessageBox.Show($"{i}");
             PKM val = pkm.Clone();
             PKM va = pkm.Clone();
             if (!MythicalPool.MythicalFlag(pkm.Species))
@@ -286,7 +284,7 @@ namespace WangPlugin.GUI
                 if (Version.Gen8SWSHFlag(val.Version))
                 {
                     pkm.PID = Util.Rand32();
-                    if (EggFlag)
+                    if (EggFlag||pkm.Met_Location==162)
                     {
                         pkm.PID = ShinyPID(val);
                         CommonEdits.SetRandomEC(pkm);

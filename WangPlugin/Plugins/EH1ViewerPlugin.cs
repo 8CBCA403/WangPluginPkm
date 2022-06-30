@@ -25,7 +25,7 @@ namespace WangPlugin.Plugins
         {
 
             var form = new EH1ViewerUI(SaveFileEditor, PKMEditor);
-            form.ShowDialog();
+            form.Show();
         }
     }
 }

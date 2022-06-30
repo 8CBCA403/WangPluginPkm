@@ -1,6 +1,5 @@
 ﻿using System;
 using WangPlugin.GUI;
-using PKHeX.Core;
 using System.Windows.Forms;
 
 namespace WangPlugin.Plugins
@@ -19,14 +18,12 @@ namespace WangPlugin.Plugins
             ctrl.Click += OpenForm;
             ctrl.Name = "RNG面板/RNG Form";
             modmenu.DropDownItems.Add(ctrl);
-            
         }
-
         private  void OpenForm(object sender, EventArgs e)
         {
            
             var form = new RNGForm(SaveFileEditor, PKMEditor);
-            form.ShowDialog();
+            form.Show();
         }
     }
 }

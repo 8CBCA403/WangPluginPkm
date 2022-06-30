@@ -1,0 +1,56 @@
+Project 22796 - "Every" Event Pokemon Save File(s) By TFOTT
+
+All of the Mythical and Legendary Pokemon in three save files. (Well "all" of them, there's still some missing out there, like the 1997 CoroCoro 20th Anniversary Mews, and so on.)
+
+Also includes Shiny Locked and Unreleased Pokemon. (AZ’s Floette, Azure Flute Arceus, Oak's Letter Shaymin, Member Card Darkrai, Original Coloured Magearna, and etc.)
+
+All of the save files listed are:
+
+USUM:
+
+"Gen 7 - Project 22796 (USUM) 1" - Has all events from Gen 1-6.
+
+"Gen 7 - Project 22796 (USUM) 2" -  Has all events from Gen 6-7, Unreleased Pokemon, Shinylocked Pokemon, and Other Events.
+
+"Gen 7 - Project 22796 - Mystery Mew (USUM)" - Has all of the Mystery Mews from Generation 3.
+
+ORAS:
+
+"Gen 6 - Project 22796 (ORAS) 1" -  Has all events from Gen 1-5.
+
+"Gen 6 - Project 22796 (ORAS) 2" - Has all events from Gen 5-6, Unreleased Pokemon, Shinylocked Pokemon, and Other Events.
+
+"Gen 6 - Project 22796 - Mystery Mew (ORAS)" - Has all of the Mystery Mews from Generation 3.
+
+XY:
+
+"Gen 6 - Project 22796 (XY) 1": Has all events from Gen 1-5.
+
+"Gen 6 - Project 22796 (ORAS) 2" - Has all events from Gen 5-6, Unreleased Pokemon, Shinylocked Pokemon, and Other Events.
+
+"Gen 6 - Project 22796 - Mystery Mew (XY) - Has all of the Mystery Mews from Generation 3.
+
+BW:
+
+"Gen 5 - Project 22796 (BW) 1" - Has all events from Gen 1-4.
+
+"Gen 5 - Project 22796 (BW) 2'' - Has all events from Gen 4-5, Unreleased Pokemon, Shinylocked Pokemon, and Other events.
+
+"Gen 5 - Project 22796 - Mystery Mew (BW)" - Has all Mystery Mews from Generation 3.
+
+IMPORTANT: WHEN YOU DOWNLOAD THE SAVE FILE(S),  PLEASE RENAME IT TO "main" (obviously, without the quotation marks.)
+
+IMPORTANT FOR DS GAMES (DP, HGSS, BW and B2W2): WHEN YOU DOWNLOAD THE SAVE FILES(S), PLEASE RENAME IT TO YOUR ROM NAME. OTHERWISE IT WOULDN'T WORK.
+
+All of these save files have a 100% Pokedex and a Completed Story.
+
+All events were Injected from PKHeX and PKSM.
+
+All the credits go to projectpokemon.org and ProjectPokemon’s Event Gallery. This wouldn’t have existed if it wasn’t for them.
+
+Special thanks to theSLAYER, Sabresite, Kaphotics, jasenyoface, The Flagbrew Team, ProjectPokemon, and the Project Pokemon Event Gallery.
+
+READ: NOT ALL POKEMON IN THIS SAVE FILE ARE LEGAL, ALL OF THE GENERATION 1 EVENTS ARE NOT LEGAL, SHINYLOCKED AND UNRELEASED POKEMON ARE NOT LEGAL. KEEP IN MIND OF THAT.
+
+https://projectpokemon.org/home/files/file/4200-project-22796-every-event-legendarymythical-pokemon-in-a-save-files-generations-5-6-and-7/
+

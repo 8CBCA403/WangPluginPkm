@@ -102,6 +102,7 @@ namespace WangPlugin.GUI
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "SimpleEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Super Wang";
@@ -224,7 +225,12 @@ namespace WangPlugin.GUI
             pk.TrainerSID7 = pkm.TrainerSID7;
             pk.OT_Gender = pkm.OT_Gender;
             pk.IVs = pkm.IVs;
-            pk.EVs = pkm.EVs;
+            pk.EV_ATK = pkm.EV_ATK;
+            pk.EV_DEF = pkm.EV_DEF;
+            pk.EV_HP = pkm.EV_HP;
+            pk.EV_SPA = pkm.EV_SPA;
+            pk.EV_SPD = pkm.EV_SPD;
+            pk.EV_SPE = pkm.EV_SPE;
             pk.Nature = pkm.Nature;
             pk.AbilityNumber = pkm.AbilityNumber;
             pk.StatNature = pkm.StatNature;

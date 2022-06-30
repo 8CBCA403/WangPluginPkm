@@ -23,7 +23,7 @@ namespace WangPlugin.Plugins
         {
            
             var form = new MutiCalcUI();
-            form.ShowDialog();
+            form.Show();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace WangPlugin.Plugins
         {
             MessageBox.Show("请确保本身全部精灵合法！\n不是100%准确，使用前请备份存档！", "SuperWang", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             var form = new ShinyMakerUI(SaveFileEditor, PKMEditor);
-            form.ShowDialog();
+            form.Show();
         }
     }
 }

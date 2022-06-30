@@ -25,7 +25,7 @@ namespace WangPlugin.Plugins
         {
 
             var form = new AboutUI();
-            form.ShowDialog();
+            form.Show();
         }
     }
 }
