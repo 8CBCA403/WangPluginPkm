@@ -4,10 +4,10 @@ using WangPlugin.GUI;
 
 namespace WangPlugin.Plugins
 {
-    internal class TEST: WangPlugin
+    internal class BattleKingPlugin:WangPlugin
     {
-        public override string Name => "Test";
-        public override int Priority => 10;
+        public override string Name => "对战王/BattleKing";
+        public override int Priority => 9;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {
@@ -16,7 +16,7 @@ namespace WangPlugin.Plugins
                 Image = Properties.Resources.TEST
             };
             ctrl.Click += OpenForm;
-            ctrl.Name = "Test";
+            ctrl.Name = "对战王/BattleKing";
             modmenu.DropDownItems.Add(ctrl);
 
         }
@@ -24,7 +24,7 @@ namespace WangPlugin.Plugins
         private void OpenForm(object sender, EventArgs e)
         {
 
-            var form = new TESTForm(SaveFileEditor, PKMEditor);
+            var form = new BattleKingUI(SaveFileEditor, PKMEditor);
             form.Show();
         }
     }
