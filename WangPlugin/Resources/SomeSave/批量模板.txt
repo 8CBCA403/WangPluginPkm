@@ -1,0 +1,178 @@
+.Version=44
+.OT_Name=乐趣
+.OT_Gender=0
+.DisplaySID=1932
+.DisplayTID=793436
+.EncryptionConstant=$rand
+.PID=$rand
+.Ball=26
+
+相遇地点=5号道路
+.Met_Location=40
+
+取得场所=寄放屋
+.Egg_Location=60002
+
+孵化时间
+.Egg_Year=20
+.Egg_Month=6
+.Egg_Day=22
+
+相遇时间
+.Met_Year=20
+.Met_Month=6
+.Met_Day=22
+
+.Language=10
+.IsNicknamed=true
+.IsNicknamed=false
+
+
+.PID=$shiny0
+.DynamaxLevel=10
+.CurrentLevel=100
+.Move1_PPUps=3
+.Move2_PPUps=3
+.Move3_PPUps=3
+.Move4_PPUps=3
+
+
+
+.HeldItem=498
+.Nature=17
+.StatNature=17
+.IV_HP=31
+.IV_ATK=0
+.IV_DEF=31
+.IV_SPA=31
+.IV_SPD=31
+.IV_SPE=252
+.EV_HP=0
+.EV_ATK=252
+.EV_DEF=0
+.EV_SPA=0
+.EV_SPD=6
+.EV_SPE=0
+.HeightScalar=$48,207
+.WeightScalar=$48,207
+
+
+一键变蛋代码
+.DynamaxLevel=0
+.CurrentLevel=1
+.Move1_PPUps=0
+.Move2_PPUps=0
+.Move3_PPUps=0
+.Move4_PPUps=0
+.EV_HP=0
+.EV_ATK=0
+.EV_DEF=0
+.EV_SPA=0
+.EV_SPD=0
+.EV_SPE=0
+.OT_Friendship=3
+.RelearnMoves=$suggest
+.IsEgg=true
+.CurrentHandler=0
+.IsNicknamed=true
+.Nickname=蛋
+
+7变8蛋代码
+.Version=44
+.OT_Name=乐趣
+.OT_Gender=0
+.DisplaySID=1932
+.DisplayTID=793436
+.EncryptionConstant=$rand
+.PID=$rand
+.Ball=26
+.DynamaxLevel=0
+.CurrentLevel=1
+.Move1_PPUps=0
+.Move2_PPUps=0
+.Move3_PPUps=0
+.Move4_PPUps=0
+.EV_HP=0
+.EV_ATK=0
+.EV_DEF=0
+.EV_SPA=0
+.EV_SPD=0
+.EV_SPE=0
+.OT_Friendship=3
+.RelearnMoves=$suggest
+.IsEgg=true
+.CurrentHandler=0
+.IsNicknamed=true
+.Nickname=蛋
+.Met_Location=40
+.Egg_Location=60002
+.Egg_Year=20
+.Egg_Month=12
+.Egg_Day=1
+.Met_Year=20
+.Met_Month=12
+.Met_Day=1
+.PID=$shiny0
+
+批量修改指定盒子：=Box=(1,2,3,4,...)
+批量修改游戏版本：.Version=45 剑44，盾45
+
+
+批量随机加密常数：.EncryptionConstant=$rand
+批量PID随机：.PID=$rand
+
+
+批量修改初训家名字：.OT_Name=
+批量修改初训家性别：.OT_Gender=0/1 （0男 1女）
+批量修改初训家里ID：.DisplaySID= （里ID）
+批量修改初训家表ID：.DisplayTID= （表ID）
+批量修改宝可梦语言：.language=(1 = JPN;2 = English;3 = French;4 = Italian;5 = German;7 = Spanish;8 = Korean;9 = Chinese Simplified;10 = Chinese Traditional)
+
+相遇地点=5号道路：.Met_Location=40
+
+批量修改个体值：.IV_ATK/DEF/HP/SPA/SPD/SPE=0-31 （V=31）
+批量修改努力值：.EV_ATK/DEF/HP/SPA/SPD/SPE= （单项上限252/全部总和上限510）
+批量修改普通闪光：.PID=$shiny
+批量修改方块闪光：.PID=$shiny0
+批量修改特性：.AbilityNumber=（1=特性1;2=特性2;4=隐藏特性）
+批量修改携带道具：.HeldItem=
+批量极具等级：.DynamaxLevel=10
+批量当前等级100级：.CurrentLevel=100
+批量亲密度：.OT_Friendship=255
+批量精灵球：.Ball=
+1大师球 2高级球 3超级球 4精灵球 5狩猎球 6捕网球 7潜水球 8巢穴球 9重复球 10计时球 
+11豪华球 12纪念球 13黑暗球 14治愈球 15先机球 16贵重球 17速度球 18等级球 19诱饵球 20沉重球
+21甜蜜球 22友友球 23月亮球 24竞赛球 25梦境球 26究极球
+Gender=0/1 （0公 1母）
+
+批量让性格与能力性格一致：.Nature=$suggest
+批量性格：.Nature=
+批量能力性格：.StatNature=
+0勤奋 1怕寂寞 2勇敢 3固执 4顽皮 5大胆 6坦率 7悠闲 8淘气 9乐天 10胆小
+11急躁 12认真 13爽朗 14天真 15内敛 16慢吞吞 17冷静 18害羞 19马虎 20温和
+21温顺 22自大 23慎重 24浮躁
+
+批量去除非法： =Legal=false .Species=0
+批量习得当前招式对应的招式记录：.RelearnMoves=$suggest 
+批量招式PP值最大：.Move1_PPUps=3 （同理可改Move2、Move3、Move4）
+492速度 493等级 494诱饵 495沉重 496甜蜜 497友友 498月亮 576梦境 851ub 796金冠
+.HeightScalar=$48,207
+.WeightScalar=$48,207
+.IV_ATK=0
+.IV_DEF=31
+.IV_HP=31
+.IV_SPA=31
+.IV_SPD=31
+.IV_SPE=0
+
+.EV_ATK=0
+.EV_DEF=6
+.EV_HP=252
+.EV_SPA=252
+.EV_SPD=0
+.EV_SPE=0
+
+.Move1_PPUps=3
+.Move2_PPUps=3
+.Move3_PPUps=3
+.Move4_PPUps=3

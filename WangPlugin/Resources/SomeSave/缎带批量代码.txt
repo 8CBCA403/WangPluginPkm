@@ -1,0 +1,247 @@
+批处理代码解释
+RibbonBestFriends == 好友奖章
+RibbonChampionGalar == 伽勒尔冠军奖章
+RibbonMasterRank == 级别对战大师奖章
+RibbonTowerMaster == 对战塔大师奖章
+RibbonAlert == 振奋奖章
+RibbonArtist == 肖像奖章
+RibbonBattlerSkillful == 高手对战奖章
+RibbonBattlerExpert == 大师对战奖章
+RibbonBattleTreeGreat == 高手对战树奖章
+RibbonBattleTreeMaster == 大师对战树奖章
+RibbonBattleRoyale == 皇家大师奖章
+RibbonCareless == 大意奖章
+RibbonChampionAlola == 阿罗拉冠军奖章
+RibbonChampionG3Hoenn == 丰缘冠军奖章（3代）
+RibbonChampionG6Hoenn == 丰缘冠军奖章（6代）
+RibbonChampionGalar == 伽勒尔冠军奖章
+RibbonChampionKalos == 卡洛斯冠军奖章
+RibbonChampionSinnoh == 神奥冠军奖章
+RibbonContestStar == 华丽大赛之星奖章
+RibbonCountMemoryBattle == 对战回忆奖章
+RibbonCountMemoryContest == 华丽大赛回忆奖章
+RibbonEarth == 地球奖章
+RibbonEffort == 努力奖章
+RibbonFootprint == 脚印奖章
+RibbonDowncast == 失望奖章
+RibbonGorgeous == 豪华奖章
+RibbonGorgeousRoyal == 豪华高贵奖章
+RibbonRelax == 畅快奖章
+RibbonRoyal == 高贵奖章
+RibbonShock == 心跳奖章
+RibbonSmile == 欢笑奖章
+RibbonSnooze == 酣睡奖章
+RibbonLegend == 传说奖章
+RibbonTraining == 修行奖章
+RibbonMasterBeauty == 美丽大师奖章
+RibbonMasterCleverness == 聪明大师奖章
+RibbonMasterCoolness == 帅气大师奖章
+RibbonMasterCuteness == 可爱大师奖章
+RibbonMasterToughness == 强壮大师奖章
+.RibbonMarkAbsentMinded= 无虑
+.RibbonMarkAngry= 愤怒
+.RibbonMarkBlizzard= 暴雪
+.RibbonMarkCalmness= 冷静
+.RibbonMarkCharismatic= 领袖
+.RibbonMarkCloudy= 阴云
+.RibbonMarkCrafty= 狡猾
+.RibbonMarkCurry= 咖喱
+.RibbonMarkDawn= 拂晓
+.RibbonMarkDestiny= 命运
+.RibbonMarkDry= 干燥
+.RibbonMarkDusk= 黄昏
+.RibbonMarkExcited= 期待
+.RibbonMarkFerocious= 本能
+.RibbonMarkFishing= 上钩
+.RibbonMarkFlustered= 动摇
+.RibbonMarkHumble= 木讷
+.RibbonMarkIntellectual= 理性
+.RibbonMarkIntense= 热情
+.RibbonMarkJittery= 紧张
+.RibbonMarkJoyful= 幸福
+.RibbonMarkKindly= 优雅
+.RibbonMarkLunchtime= 正午
+.RibbonMarkMisty= 浓雾
+.RibbonMarkPeeved= 激动
+.RibbonMarkPrideful= 自信
+.RibbonMarkPumpedUp= 昂扬
+.RibbonMarkRainy= 降雨
+.RibbonMarkRare= 未知
+.RibbonMarkRowdy= 淘气
+.RibbonMarkSandstorm= 沙尘
+.RibbonMarkScowling= 凶悍
+.RibbonMarkSleepyTime= 午夜
+.RibbonMarkSlump= 不振
+.RibbonMarkSmiley= 微笑
+.RibbonMarkSnowy= 降雪
+.RibbonMarkStormy= 落雷
+.RibbonMarkTeary= 悲伤
+.RibbonMarkThorny= 不纯
+.RibbonMarkUncommon= 偶遇
+.RibbonMarkUnsure= 自卑
+.RibbonMarkUpbeat= 爽快
+.RibbonMarkVigor= 活力
+.RibbonMarkZeroEnergy= 倦怠
+.RibbonMarkZonedOut= 疏忽
+
+缎带代码
+
+第三世代专用（火红叶绿、宝石）
+.BattleVersion=44
+.RibbonAlert=True
+.RibbonArtist=True
+.RibbonBattlerExpert=True
+.RibbonBattlerSkillful=True
+.RibbonCareless=True
+.RibbonChampionG3Hoenn=True
+.RibbonChampionG6Hoenn=True
+.RibbonChampionKalos=True
+.RibbonChampionSinnoh=True
+.RibbonContestStar=True
+.RibbonEarth=True
+.RibbonLegend=True
+.RibbonDowncast=True
+.RibbonGorgeous=True
+.RibbonGorgeousRoyal=True
+.RibbonRelax=True
+.RibbonRoyal=True
+.RibbonShock=True
+.RibbonSmile=True
+.RibbonSnooze=True
+.RibbonTraining=True
+.RibbonMasterBeauty=True
+.RibbonMasterCleverness=True
+.RibbonMasterCoolness=True
+.RibbonMasterCuteness=True
+.RibbonMasterToughness=True
+.RibbonCountMemoryBattle=2
+.RibbonCountMemoryContest=20
+.RibbonChampionAlola=True
+.RibbonBattleTreeMaster=True
+.RibbonBattleTreeGreat=True
+.RibbonBattleRoyale=True
+.RibbonFootprint=True
+.RibbonBestFriends=True
+.RibbonChampionGalar=True
+.RibbonEffort=True
+.RibbonTowerMaster=True
+.RibbonMasterRank=True
+
+第四世代（珍珠钻石白金心金魂银）
+.BattleVersion=44
+.RibbonAlert=True
+.RibbonBattlerExpert=True
+.RibbonBattlerSkillful=True
+.RibbonCareless=True
+.RibbonChampionG6Hoenn=True
+.RibbonChampionKalos=True
+.RibbonChampionSinnoh=True
+.RibbonContestStar=True
+.RibbonLegend=True
+.RibbonDowncast=True
+.RibbonGorgeous=True
+.RibbonGorgeousRoyal=True
+.RibbonRelax=True
+.RibbonRoyal=True
+.RibbonShock=True
+.RibbonSmile=True
+.RibbonSnooze=True
+.RibbonTraining=True
+.RibbonMasterBeauty=True
+.RibbonMasterCleverness=True
+.RibbonMasterCoolness=True
+.RibbonMasterCuteness=True
+.RibbonMasterToughness=True
+.RibbonCountMemoryBattle=2
+.RibbonCountMemoryContest=20
+.RibbonChampionAlola=True
+.RibbonBattleTreeMaster=True
+.RibbonBattleTreeGreat=True
+.RibbonBattleRoyale=True
+.RibbonFootprint=True
+.RibbonBestFriends=True
+.RibbonChampionGalar=True
+.RibbonEffort=True
+.RibbonTowerMaster=True
+.RibbonMasterRank=True
+
+第五世代（黑白12）
+.RibbonEffort=True
+.RibbonRelax=True
+.RibbonCareless=True
+.RibbonRoyal=True
+.RibbonSmile=True
+.RibbonFootprint=True
+.RibbonDowncast=True
+.RibbonShock=True
+.RibbonTraining=True
+.RibbonAlert=True
+.RibbonGorgeous=True
+.RibbonGorgeousRoyal=True
+.RibbonSnooze=True
+.RibbonBestFriends=True
+.RibbonChampionAlola=True
+.RibbonChampionKalos=True
+.RibbonMasterBeauty=True
+.RibbonMasterCleverness=True
+.RibbonMasterCoolness=True
+.RibbonMasterCuteness=True
+.RibbonMasterToughness=True
+.RibbonBattlerExpert=True
+.RibbonBattleTreeMaster=True
+.RibbonBattlerSkillful=True
+.RibbonBattleTreeGreat=True
+.RibbonBattleRoyale=True
+.RibbonContestStar=True
+.RibbonTowerMaster=True
+.RibbonChampionG6Hoenn=True
+.RibbonChampionGalar=True
+.RibbonMasterRank=True
+
+第六世代专用（XY、宝石复刻）
+.RibbonChampionAlola=True
+.RibbonEffort=True
+.RibbonRelax=True
+.RibbonCareless=True
+.RibbonRoyal=True
+.RibbonSmile=True
+.RibbonFootprint=True
+.RibbonDowncast=True
+.RibbonShock=True
+.RibbonTraining=True
+.RibbonAlert=True
+.RibbonGorgeous=True
+.RibbonGorgeousRoyal=True
+.RibbonSnooze=True
+.RibbonBestFriends=True
+.RibbonBattlerSkillful=True
+.RibbonBattlerExpert=True
+.RibbonBattleTreeGreat=True
+.RibbonBattleTreeMaster=True
+.RibbonMasterBeauty=True
+.RibbonMasterCleverness=True
+.RibbonMasterCoolness=True
+.RibbonMasterCuteness=True
+.RibbonMasterToughness=True
+.RibbonContestStar=True
+.RibbonChampionKalos=True
+.RibbonBattleRoyale=True
+.RibbonChampionGalar=True
+.RibbonTowerMaster=True
+.RibbonMasterRank=True
+
+
+第七世代专用（日月、究极日月、去皮去伊）
+.BattleVersion=44
+.RibbonChampionAlola=True
+.RibbonBattleTreeMaster=True
+.RibbonBattleTreeGreat=True
+.RibbonBattleRoyale=True
+.RibbonFootprint=True
+
+第八世代专用
+.RibbonBestFriends=True
+.RibbonEffort=True
+.RibbonChampionGalar=True
+.RibbonTowerMaster=True
+.RibbonMasterRank=True
