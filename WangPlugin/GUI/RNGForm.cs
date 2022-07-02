@@ -155,6 +155,7 @@ namespace WangPlugin.GUI
             // VCheck
             // 
             this.VCheck.AutoSize = true;
+            this.VCheck.Enabled = false;
             this.VCheck.Location = new System.Drawing.Point(79, 108);
             this.VCheck.Name = "VCheck";
             this.VCheck.Size = new System.Drawing.Size(47, 21);

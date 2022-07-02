@@ -13,7 +13,7 @@ namespace WangPlugin.Plugins
         {
             var ctrl = new ToolStripMenuItem(Name)
             {
-                Image = Properties.Resources.TEST
+                Image = Properties.Resources.BattleKing
             };
             ctrl.Click += OpenForm;
             ctrl.Name = "对战王/BattleKing";

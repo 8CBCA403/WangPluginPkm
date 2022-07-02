@@ -38,7 +38,7 @@ namespace WangPlugin.GUI
             // 
             this.LoadBattleTeam_BTN.Location = new System.Drawing.Point(120, 194);
             this.LoadBattleTeam_BTN.Name = "LoadBattleTeam_BTN";
-            this.LoadBattleTeam_BTN.Size = new System.Drawing.Size(96, 25);
+            this.LoadBattleTeam_BTN.Size = new System.Drawing.Size(107, 25);
             this.LoadBattleTeam_BTN.TabIndex = 0;
             this.LoadBattleTeam_BTN.Text = "LoadTeam";
             this.LoadBattleTeam_BTN.UseVisualStyleBackColor = true;
@@ -57,8 +57,10 @@ namespace WangPlugin.GUI
             this.ClientSize = new System.Drawing.Size(361, 231);
             this.Controls.Add(this.UrlBox);
             this.Controls.Add(this.LoadBattleTeam_BTN);
+            this.Font = new System.Drawing.Font("Arial", 10.2F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BattleKingUI";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Super Wang";
             this.ResumeLayout(false);
 

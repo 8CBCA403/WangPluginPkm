@@ -61,7 +61,19 @@ namespace WangPlugin.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Hello! world 的本地化字符串。
+        ///   查找类似 Credits (in no particular order)
+        ///- Bill Young, Mike Suleski, and Andrew Ringer for [RNGReporter]
+        ///(https://github.com/Slashmolder/RNGReporter)
+        ///(https://github.com/Slashmolder/lrng)
+        ///- chiizu for [PPRNG]
+        ///(https://github.com/chiizu/PPRNG)
+        ///- wwwwwwzx for [3DSRNG Tool]
+        ///(https://github.com/wwwwwwzx/3DSRNGTool)
+        ///- [kwsch]for providing the IPlugin interface in PKHeX.
+        ///(https://github.com/kwsch) 
+        ///- [berichan] for adding USB-Botbase support to LiveHeX.
+        ///(https://github.com/berichan) 
+        ///- [soopercool101] for man [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string About {
             get {
@@ -75,6 +87,16 @@ namespace WangPlugin.Properties {
         internal static System.Drawing.Bitmap avatar {
             get {
                 object obj = ResourceManager.GetObject("avatar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap BattleKing {
+            get {
+                object obj = ResourceManager.GetObject("BattleKing", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
