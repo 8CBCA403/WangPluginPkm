@@ -17,7 +17,8 @@ namespace WangPlugin.GUI
         private RichTextBox UrlBox;
         private RichTextBox PSBox;
         private Button LoadTeamFromPSCode_BTN;
-        private Button ExportPKM_BTN;
+        private Button ImportPKM_BTN;
+        private TextBox ConditionBox;
 
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
@@ -38,7 +39,8 @@ namespace WangPlugin.GUI
             this.UrlBox = new System.Windows.Forms.RichTextBox();
             this.PSBox = new System.Windows.Forms.RichTextBox();
             this.LoadTeamFromPSCode_BTN = new System.Windows.Forms.Button();
-            this.ExportPKM_BTN = new System.Windows.Forms.Button();
+            this.ImportPKM_BTN = new System.Windows.Forms.Button();
+            this.ConditionBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // LoadBattleTeam_BTN
@@ -77,21 +79,30 @@ namespace WangPlugin.GUI
             this.LoadTeamFromPSCode_BTN.UseVisualStyleBackColor = true;
             this.LoadTeamFromPSCode_BTN.Click += new System.EventHandler(this.LoadTeamFromPSCode_BTN_Click);
             // 
-            // ExportPKM_BTN
+            // ImportPKM_BTN
             // 
-            this.ExportPKM_BTN.Location = new System.Drawing.Point(716, 92);
-            this.ExportPKM_BTN.Name = "ExportPKM_BTN";
-            this.ExportPKM_BTN.Size = new System.Drawing.Size(106, 45);
-            this.ExportPKM_BTN.TabIndex = 5;
-            this.ExportPKM_BTN.TabStop = false;
-            this.ExportPKM_BTN.Text = "ExportPKM";
-            this.ExportPKM_BTN.UseVisualStyleBackColor = true;
-            this.ExportPKM_BTN.Click += new System.EventHandler(this.ExportPKM_BTN_Click);
+            this.ImportPKM_BTN.Location = new System.Drawing.Point(712, 45);
+            this.ImportPKM_BTN.Name = "ImportPKM_BTN";
+            this.ImportPKM_BTN.Size = new System.Drawing.Size(106, 30);
+            this.ImportPKM_BTN.TabIndex = 5;
+            this.ImportPKM_BTN.TabStop = false;
+            this.ImportPKM_BTN.Text = "ImportPKM";
+            this.ImportPKM_BTN.UseVisualStyleBackColor = true;
+            this.ImportPKM_BTN.Click += new System.EventHandler(this.ImportPKM_BTN_Click);
+            // 
+            // ConditionBox
+            // 
+            this.ConditionBox.Location = new System.Drawing.Point(688, 12);
+            this.ConditionBox.Name = "ConditionBox";
+            this.ConditionBox.Size = new System.Drawing.Size(157, 27);
+            this.ConditionBox.TabIndex = 6;
+            this.ConditionBox.Text = "Nothing to check";
             // 
             // BattleKingUI
             // 
             this.ClientSize = new System.Drawing.Size(857, 231);
-            this.Controls.Add(this.ExportPKM_BTN);
+            this.Controls.Add(this.ConditionBox);
+            this.Controls.Add(this.ImportPKM_BTN);
             this.Controls.Add(this.LoadTeamFromPSCode_BTN);
             this.Controls.Add(this.PSBox);
             this.Controls.Add(this.UrlBox);
@@ -102,9 +113,17 @@ namespace WangPlugin.GUI
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Super Wang";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
-
+        private void IsRunning(bool running)
+        {
+            ImportPKM_BTN.Enabled = !running;
+            if (running)
+                ConditionBox.Text = "Dumping...";
+            else
+                ConditionBox.Text = "Nothing to check";
+        }
         private void LoadBattleTeam_BTN_Click(object sender, System.EventArgs e)
         {
             var url = UrlBox.Text.Trim();
@@ -145,6 +164,27 @@ namespace WangPlugin.GUI
                 return;
             Import(text!);
         }
+        private void ImportPKM_BTN_Click(object sender, EventArgs e)
+        {
+            IsRunning(true);
+            int n = 0;
+            string supported = string.Join(";", SAV.SAV.PKMExtensions.Select(s => $"*.{s}").Concat(new[] { "*.pk" }));
+            using var ofd = new OpenFileDialog
+            {
+                Filter = "All Files|*.*" + $"|Decrypted PKM File (*.pk)|" + supported,
+                Multiselect = true,
+            };
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                foreach (var file in ofd.FileNames)
+                {
+                    GenSmogonSets(OpenFromPath(file));
+                    n++;
+                }
+            }
+            IsRunning(false);
+            MessageBox.Show($"导出了{n}只");
+        }
         public void Import(string source)
         {
             if (ShowdownUtil.IsTeamBackup(source))
@@ -176,13 +216,9 @@ namespace WangPlugin.GUI
             }
 
         }
-        private AutoModErrorCode ImportSetToTabs(ShowdownSet set, bool skipDialog = false)
+        private void ImportSetToTabs(ShowdownSet set, bool skipDialog = false)
         {
             var regen = new RegenTemplate(set, SAV.SAV.Generation);
-
-            if (set.InvalidLines.Count > 0)
-                return AutoModErrorCode.InvalidLines;
-
             Debug.WriteLine($"Commencing Import of {GameInfo.Strings.Species[set.Species]}");
             var timer = Stopwatch.StartNew();
 
@@ -207,30 +243,23 @@ namespace WangPlugin.GUI
             Editor.PopulateFields(legal);
             var timespan = timer.Elapsed;
             Debug.WriteLine($"Time to complete {nameof(ImportSetToTabs)}: {timespan.Minutes:00} minutes {timespan.Seconds:00} seconds {timespan.Milliseconds / 10:00} milliseconds");
-            return AutoModErrorCode.None;
+        
         }
-        private AutoModErrorCode ImportSetsToBoxes(IReadOnlyList<ShowdownSet> sets, bool replace)
+        private void ImportSetsToBoxes(IReadOnlyList<ShowdownSet> sets, bool replace)
         {
             var timer = Stopwatch.StartNew();
             var sav = SAV.SAV;
             var BoxData = sav.BoxData;
             var start = SAV.CurrentBox * sav.BoxSlotCount;
-
             Debug.WriteLine($"Commencing Import of {sets.Count} set(s).");
             var result = sav.ImportToExisting(sets, BoxData, out var invalid, out var timeout, start, replace);
-
-
-            if (result != AutoModErrorCode.None)
-                return result;
-
             Debug.WriteLine("Multi Set Genning Complete. Setting data to the save file and reloading view.");
             SAV.ReloadSlots();
-
             // Debug Statements
             timer.Stop();
             var timespan = timer.Elapsed;
             Debug.WriteLine($"Time to complete {nameof(ImportSetsToBoxes)}: {timespan.Minutes:00} minutes {timespan.Seconds:00} seconds {timespan.Milliseconds / 10:00} milliseconds");
-            return AutoModErrorCode.None;
+           
         }
         private  string GetTextShowdownData()
         {
@@ -241,40 +270,12 @@ namespace WangPlugin.GUI
            
             return null;
         }
-        private void ExportPKM_BTN_Click(object sender, EventArgs e)
-        {
-            string supported = string.Join(";", SAV.SAV.PKMExtensions.Select(s => $"*.{s}").Concat(new[] { "*.pk" }));
-            using var ofd = new OpenFileDialog
-            {
-                Filter = "All Files|*.*" + $"|Decrypted PKM File (*.pk)|" + supported,
-                Multiselect = true,
-            };
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                foreach (var file in ofd.FileNames)
-                {
-                    GenSmogonSets(OpenFromPath(file));
-                }
-            }
-        }
         private void GenSmogonSets(PKM rough)
         {
             SmogonSetList info;
             info = new SmogonSetList(rough);
-               /* for (int i = 0; i < info.Sets.Count;)
-                {
-                    
-                        info.Sets.RemoveAt(i);
-                        info.SetFormat.RemoveAt(i);
-                        info.SetName.RemoveAt(i);
-                        info.SetConfig.RemoveAt(i);
-                        info.SetText.RemoveAt(i);
-                        continue;
-                i++;
-                }*/
             ImportSetsToBoxes(info.Sets, false);
         }
-       
         private PKM OpenFromPath(string path)
         {
             var fi = new FileInfo(path);
