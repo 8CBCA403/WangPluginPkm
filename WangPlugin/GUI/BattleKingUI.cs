@@ -6,6 +6,7 @@ using PKHeX.Core.Enhancements;
 using PKHeX.Core.AutoMod;
 using System.Diagnostics;
 using System.Linq;
+using System.IO;
 namespace WangPlugin.GUI
 {
     internal class BattleKingUI : Form
@@ -14,6 +15,9 @@ namespace WangPlugin.GUI
       //  public string Page;
         public  List<ShowdownSet> Sets = new();
         private RichTextBox UrlBox;
+        private RichTextBox PSBox;
+        private Button LoadTeamFromPSCode_BTN;
+        private Button ExportPKM_BTN;
 
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
@@ -32,29 +36,64 @@ namespace WangPlugin.GUI
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BattleKingUI));
             this.LoadBattleTeam_BTN = new System.Windows.Forms.Button();
             this.UrlBox = new System.Windows.Forms.RichTextBox();
+            this.PSBox = new System.Windows.Forms.RichTextBox();
+            this.LoadTeamFromPSCode_BTN = new System.Windows.Forms.Button();
+            this.ExportPKM_BTN = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LoadBattleTeam_BTN
             // 
-            this.LoadBattleTeam_BTN.Location = new System.Drawing.Point(120, 194);
+            this.LoadBattleTeam_BTN.Location = new System.Drawing.Point(459, 194);
             this.LoadBattleTeam_BTN.Name = "LoadBattleTeam_BTN";
-            this.LoadBattleTeam_BTN.Size = new System.Drawing.Size(107, 25);
+            this.LoadBattleTeam_BTN.Size = new System.Drawing.Size(149, 25);
             this.LoadBattleTeam_BTN.TabIndex = 0;
-            this.LoadBattleTeam_BTN.Text = "LoadTeam";
+            this.LoadBattleTeam_BTN.Text = "LoadTeamFromUrl";
             this.LoadBattleTeam_BTN.UseVisualStyleBackColor = true;
             this.LoadBattleTeam_BTN.Click += new System.EventHandler(this.LoadBattleTeam_BTN_Click);
             // 
             // UrlBox
             // 
-            this.UrlBox.Location = new System.Drawing.Point(12, 12);
+            this.UrlBox.Location = new System.Drawing.Point(381, 12);
             this.UrlBox.Name = "UrlBox";
-            this.UrlBox.Size = new System.Drawing.Size(332, 176);
+            this.UrlBox.Size = new System.Drawing.Size(301, 176);
             this.UrlBox.TabIndex = 2;
             this.UrlBox.Text = "";
             // 
+            // PSBox
+            // 
+            this.PSBox.Location = new System.Drawing.Point(12, 12);
+            this.PSBox.Name = "PSBox";
+            this.PSBox.Size = new System.Drawing.Size(363, 176);
+            this.PSBox.TabIndex = 3;
+            this.PSBox.Text = "";
+            // 
+            // LoadTeamFromPSCode_BTN
+            // 
+            this.LoadTeamFromPSCode_BTN.Location = new System.Drawing.Point(87, 194);
+            this.LoadTeamFromPSCode_BTN.Name = "LoadTeamFromPSCode_BTN";
+            this.LoadTeamFromPSCode_BTN.Size = new System.Drawing.Size(197, 25);
+            this.LoadTeamFromPSCode_BTN.TabIndex = 4;
+            this.LoadTeamFromPSCode_BTN.Text = "LoadTeamFromPSCode";
+            this.LoadTeamFromPSCode_BTN.UseVisualStyleBackColor = true;
+            this.LoadTeamFromPSCode_BTN.Click += new System.EventHandler(this.LoadTeamFromPSCode_BTN_Click);
+            // 
+            // ExportPKM_BTN
+            // 
+            this.ExportPKM_BTN.Location = new System.Drawing.Point(716, 92);
+            this.ExportPKM_BTN.Name = "ExportPKM_BTN";
+            this.ExportPKM_BTN.Size = new System.Drawing.Size(106, 45);
+            this.ExportPKM_BTN.TabIndex = 5;
+            this.ExportPKM_BTN.TabStop = false;
+            this.ExportPKM_BTN.Text = "ExportPKM";
+            this.ExportPKM_BTN.UseVisualStyleBackColor = true;
+            this.ExportPKM_BTN.Click += new System.EventHandler(this.ExportPKM_BTN_Click);
+            // 
             // BattleKingUI
             // 
-            this.ClientSize = new System.Drawing.Size(361, 231);
+            this.ClientSize = new System.Drawing.Size(857, 231);
+            this.Controls.Add(this.ExportPKM_BTN);
+            this.Controls.Add(this.LoadTeamFromPSCode_BTN);
+            this.Controls.Add(this.PSBox);
             this.Controls.Add(this.UrlBox);
             this.Controls.Add(this.LoadBattleTeam_BTN);
             this.Font = new System.Drawing.Font("Arial", 10.2F);
@@ -97,7 +136,14 @@ namespace WangPlugin.GUI
                   //  var response = $"All sets generated from the following URL: {info.URL}";
                    // MessageBox.Show(response);
                 }
-            MessageBox.Show($"导出了{suburl.Length}个队伍");
+            MessageBox.Show($"导入了{suburl.Length}个队伍");
+        }
+        private void LoadTeamFromPSCode_BTN_Click(object sender, EventArgs e)
+        {
+            var text = GetTextShowdownData();
+            if (string.IsNullOrWhiteSpace(text))
+                return;
+            Import(text!);
         }
         public void Import(string source)
         {
@@ -119,15 +165,14 @@ namespace WangPlugin.GUI
         }
         public void Import(IReadOnlyList<ShowdownSet> sets, bool skipDialog = false)
         {
-            AutoModErrorCode result;
             if (sets.Count == 1)
             {
-                result = ImportSetToTabs(sets[0], skipDialog);
+                ImportSetToTabs(sets[0], skipDialog);
             }
             else
             {
                 var replace = (Control.ModifierKeys & Keys.Alt) != 0;
-                result = ImportSetsToBoxes(sets, replace);
+                 ImportSetsToBoxes(sets, replace);
             }
 
         }
@@ -187,6 +232,59 @@ namespace WangPlugin.GUI
             Debug.WriteLine($"Time to complete {nameof(ImportSetsToBoxes)}: {timespan.Minutes:00} minutes {timespan.Seconds:00} seconds {timespan.Milliseconds / 10:00} milliseconds");
             return AutoModErrorCode.None;
         }
-        
+        private  string GetTextShowdownData()
+        {
+            var text = PSBox.Text.TrimEnd();
+            if (ShowdownUtil.IsTextShowdownData(text))
+                return text;
+
+           
+            return null;
+        }
+        private void ExportPKM_BTN_Click(object sender, EventArgs e)
+        {
+            string supported = string.Join(";", SAV.SAV.PKMExtensions.Select(s => $"*.{s}").Concat(new[] { "*.pk" }));
+            using var ofd = new OpenFileDialog
+            {
+                Filter = "All Files|*.*" + $"|Decrypted PKM File (*.pk)|" + supported,
+                Multiselect = true,
+            };
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                foreach (var file in ofd.FileNames)
+                {
+                    GenSmogonSets(OpenFromPath(file));
+                }
+            }
+        }
+        private void GenSmogonSets(PKM rough)
+        {
+            SmogonSetList info;
+            info = new SmogonSetList(rough);
+               /* for (int i = 0; i < info.Sets.Count;)
+                {
+                    
+                        info.Sets.RemoveAt(i);
+                        info.SetFormat.RemoveAt(i);
+                        info.SetName.RemoveAt(i);
+                        info.SetConfig.RemoveAt(i);
+                        info.SetText.RemoveAt(i);
+                        continue;
+                i++;
+                }*/
+            ImportSetsToBoxes(info.Sets, false);
+        }
+       
+        private PKM OpenFromPath(string path)
+        {
+            var fi = new FileInfo(path);
+            if (!fi.Exists)
+                return null;
+            string ext = fi.Extension;
+            byte[] input;  
+            input = File.ReadAllBytes(path); 
+            FileUtil.TryGetPKM(input, out var pk, ext);
+            return pk;
+        }
     }
 }
