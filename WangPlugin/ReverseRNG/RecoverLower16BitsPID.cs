@@ -51,7 +51,6 @@ namespace WangPlugin
            
             if (enumerable.Count() == 0)
             {
-                
                 return null;
             }
             List<uint[]> list = new List<uint[]>();

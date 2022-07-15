@@ -157,7 +157,7 @@ namespace WangPlugin.GUI
         {
             var sav = SaveFileEditor.SAV;
             sav.ModifyBoxes(ShinyFunction);
-            
+           
             SaveFileEditor.ReloadSlots();
         }
         public static void ShinySID(PKM pkm)
@@ -188,6 +188,22 @@ namespace WangPlugin.GUI
             else if(f==1)
                 val.PID = (((uint)(val.TID ^ val.SID) ^ (val.PID & 0xFFFF) ^ 1u) << 16) | (val.PID & 0xFFFF);
             return val.PID;
+        }
+        private static int ShinySIDLite(PKM val, int f = 0)
+        {
+            if (shinyflag == Shinytype.Star && f == 0)
+                val.SID = SetShinySID(val.TID, val.PID, Shinytype.Star);
+            else if (shinyflag == Shinytype.Square && f == 0)
+                val.SID = SetShinySID(val.TID, val.PID, Shinytype.Square);
+            else if (shinyflag == Shinytype.Xor && f == 0)
+                val.SID = SetShinySID(val.TID, val.PID, Shinytype.Xor); ;
+            return val.SID;
+        }
+        private static uint ShinyPIDLite(PKM val, int f = 0)
+        {
+            if (shinyflag == Shinytype.RandomStar && f == 0)
+                val.PID = RandomStar(val);
+             return val.PID;
         }
         public static void ShinyFunction(PKM pkm)
         {
@@ -229,15 +245,23 @@ namespace WangPlugin.GUI
                     if ((!EggFlag) && (!Version.CXDFlag(val.Version)))
                     {
                         List<uint[]> list;
-                        do
+                        if (shinyflag == Shinytype.RandomStar)
                         {
-                            val.PID = ShinyPID(val);
+                            do
+                            {
+                                val.PID = ShinyPIDLite(val);
+                                list = RecoverLower16BitsPID.CalcPIDIVsByLCRNG(val.PID);
 
-                            list = RecoverLower16BitsPID.CalcPIDIVsByLCRNG(val.PID);
+                            }
+                            while (!val.IsShiny || list == null);
+                            uint[] iVs = RecoverLower16BitsPID.GetIVs(val, list);
+
+                            RecoverLower16BitsPID.SetIVsFromList(val, iVs);
                         }
-                        while (!val.IsShiny || list == null);
-                        uint[] iVs = RecoverLower16BitsPID.GetIVs(val, list);
-                        RecoverLower16BitsPID.SetIVsFromList(val, iVs);
+                        else
+                        {
+                            pkm.SID = ShinySIDLite(val);
+                        }
                         pkm.PID = val.PID;
                         pkm.IVs = val.IVs;
                         pkm.Gender = EntityGender.GetFromPID(pkm.Species, pkm.PID);
@@ -256,16 +280,22 @@ namespace WangPlugin.GUI
                     {
 
                         List<uint[]> list;
-                        do
+                        if (shinyflag == Shinytype.RandomStar)
                         {
-                            val.PID = ShinyPID(val);
+                            do
+                            {
+                                val.PID = ShinyPIDLite(val);
+                                list = RecoverLower16BitsEuclid16.CalcPIDIVsByXDRNG(val.PID);
+                            }
+                            while (!val.IsShiny || list == null);
 
-                            list = RecoverLower16BitsEuclid16.CalcPIDIVsByXDRNG(val.PID);
+                            uint[] iVs = RecoverLower16BitsEuclid16.GetIVs(val, list);
+                            RecoverLower16BitsEuclid16.SetIVsFromList(val, iVs);
                         }
-                        while (!val.IsShiny || list == null);
-
-                        uint[] iVs = RecoverLower16BitsEuclid16.GetIVs(val, list);
-                        RecoverLower16BitsEuclid16.SetIVsFromList(val, iVs);
+                        else
+                        {
+                            pkm.SID = ShinySIDLite(val);
+                        }
                         pkm.PID = val.PID;
                         pkm.IVs = val.IVs;
                         pkm.Gender = EntityGender.GetFromPID(pkm.Species, pkm.PID);
@@ -330,6 +360,8 @@ namespace WangPlugin.GUI
             var la = new LegalityAnalysis(pkm);
             if (!la.Valid)
             {
+                pkm.TID = va.TID;
+                pkm.SID = va.SID;
                 pkm.PID = va.PID;
                 pkm.IVs = va.IVs;
                 pkm.Ability = va.Ability;
@@ -344,6 +376,20 @@ namespace WangPlugin.GUI
                  s.WeightScalar = p.WeightScalar;
                 }
             }
+        }
+        public static int SetShinySID(int TID,uint PID,Shinytype shiny=Shinytype.Square)
+        {
+ 
+            var xor = TID ^ (PID >> 16) ^ (PID & 0xFFFF);
+            uint bits = shiny switch
+            {
+                Shinytype.Square => 0,
+                Shinytype.Star => 1,
+                Shinytype.Xor=> XorNumber,
+               _=>0,
+            };
+            int SID = (int)xor ^ (int)bits;
+            return SID; 
         }
         private void ShinySID_BTN_Click(object sender, EventArgs e)
         {
@@ -390,6 +436,7 @@ namespace WangPlugin.GUI
             SetShiny(SAV);
             sw.Stop();
             MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+            sw.Reset();
         }
 
         private void Xor_BTN_Click(object sender, EventArgs e)
@@ -399,6 +446,7 @@ namespace WangPlugin.GUI
             SetShiny(SAV);
             sw.Stop();
             MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+            sw.Reset();
         }
 
         private void ForceStar_Click(object sender, EventArgs e)
@@ -408,6 +456,7 @@ namespace WangPlugin.GUI
             SetShiny(SAV);
             sw.Stop();
             MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+            sw.Reset();
         }
 
      

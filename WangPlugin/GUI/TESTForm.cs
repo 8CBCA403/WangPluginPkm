@@ -1,5 +1,8 @@
 ﻿using System.Windows.Forms;
 using PKHeX.Core;
+using System.Collections.Generic;
+using PKHeX.Core.Searching;
+using System.Linq;
 namespace WangPlugin.GUI
 {
     internal class TESTForm : Form
@@ -22,7 +25,7 @@ namespace WangPlugin.GUI
             // 
             // SetAll_BTN
             // 
-            this.SetAll_BTN.Location = new System.Drawing.Point(76, 34);
+            this.SetAll_BTN.Location = new System.Drawing.Point(80, 34);
             this.SetAll_BTN.Name = "SetAll_BTN";
             this.SetAll_BTN.Size = new System.Drawing.Size(96, 30);
             this.SetAll_BTN.TabIndex = 0;
@@ -46,12 +49,44 @@ namespace WangPlugin.GUI
         public void SetPkm(ISaveFileProvider SaveFileEditor)
         {
             var sav = SaveFileEditor.SAV;
-            sav.ModifyBoxes(GetPkm);
+            List<PKM> PKL = new();
+            for(int i=0;i<30;i++)
+            {
+                var pk = GetPkm(Editor.Data);
+                pk.Language = Editor.Data.Language;
+                pk.ClearNickname();
+                pk.OT_Name = "Homelander";
+                pk.TrainerID7= 074074;
+                pk.TrainerSID7 =0007;
+                PKL.Add(pk);
+            }
+            if(PKL.Count!=0)
+            sav.SetBoxData(PKL,sav.CurrentBox);
             SaveFileEditor.ReloadSlots();
         }
-        public void GetPkm(PKM pk)
+        public PKM GetPkm(PKM pk)
         {
-            pk.PID = Util.Rand32();
+            // pk = Editor.Data;
+            List<IEncounterInfo> Results;
+            IEncounterInfo enc;
+            var setting = new SearchSettings
+            {
+                Species = pk.Species,
+                SearchEgg = false,
+                Version = (int)SAV.SAV.Version,
+
+            };
+            var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
+            var results = search.ToList();
+            if (results.Count != 0)
+            {
+                Results = results;
+                enc = Results[0];
+                var criteria = EncounterUtil.GetCriteria(enc, pk);
+                pk= enc.ConvertToPKM(SAV.SAV, criteria);
+                
+            }
+            return pk;
         }
         private void SetAll_BTN_Click(object sender, System.EventArgs e)
         {
