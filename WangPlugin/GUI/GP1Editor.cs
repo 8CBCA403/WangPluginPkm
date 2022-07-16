@@ -93,31 +93,34 @@ namespace WangPlugin.GUI
             // 
             // ImportGP_BTN
             // 
+            this.ImportGP_BTN.Font = new System.Drawing.Font("黑体", 9F);
             this.ImportGP_BTN.Location = new System.Drawing.Point(268, 183);
             this.ImportGP_BTN.Name = "ImportGP_BTN";
             this.ImportGP_BTN.Size = new System.Drawing.Size(96, 33);
             this.ImportGP_BTN.TabIndex = 0;
-            this.ImportGP_BTN.Text = "ImportGP1";
+            this.ImportGP_BTN.Text = "导出GP1";
             this.ImportGP_BTN.UseVisualStyleBackColor = true;
             this.ImportGP_BTN.Click += new System.EventHandler(this.ImportGP_BTN_Click);
             // 
             // ExportGP_BTN
             // 
+            this.ExportGP_BTN.Font = new System.Drawing.Font("黑体", 9F);
             this.ExportGP_BTN.Location = new System.Drawing.Point(386, 183);
             this.ExportGP_BTN.Name = "ExportGP_BTN";
             this.ExportGP_BTN.Size = new System.Drawing.Size(96, 33);
             this.ExportGP_BTN.TabIndex = 1;
-            this.ExportGP_BTN.Text = "ExportGP1";
+            this.ExportGP_BTN.Text = "导入GP1";
             this.ExportGP_BTN.UseVisualStyleBackColor = true;
             this.ExportGP_BTN.Click += new System.EventHandler(this.ExportGP_BTN_Click);
             // 
             // Edit_GP
             // 
+            this.Edit_GP.Font = new System.Drawing.Font("黑体", 9F);
             this.Edit_GP.Location = new System.Drawing.Point(153, 186);
             this.Edit_GP.Name = "Edit_GP";
             this.Edit_GP.Size = new System.Drawing.Size(96, 30);
             this.Edit_GP.TabIndex = 2;
-            this.Edit_GP.Text = "Save";
+            this.Edit_GP.Text = "保存";
             this.Edit_GP.UseVisualStyleBackColor = true;
             this.Edit_GP.Click += new System.EventHandler(this.Edit_GP_Click);
             // 
@@ -152,29 +155,33 @@ namespace WangPlugin.GUI
             // SpeciesLabel
             // 
             this.SpeciesLabel.AutoSize = true;
-            this.SpeciesLabel.Location = new System.Drawing.Point(29, 25);
+            this.SpeciesLabel.Font = new System.Drawing.Font("黑体", 9F);
+            this.SpeciesLabel.Location = new System.Drawing.Point(51, 26);
             this.SpeciesLabel.Name = "SpeciesLabel";
-            this.SpeciesLabel.Size = new System.Drawing.Size(61, 17);
+            this.SpeciesLabel.Size = new System.Drawing.Size(39, 15);
             this.SpeciesLabel.TabIndex = 8;
-            this.SpeciesLabel.Text = "Species";
+            this.SpeciesLabel.Text = "种类";
             // 
             // NickNameLabel
             // 
             this.NickNameLabel.AutoSize = true;
-            this.NickNameLabel.Location = new System.Drawing.Point(15, 55);
+            this.NickNameLabel.Font = new System.Drawing.Font("黑体", 9F);
+            this.NickNameLabel.Location = new System.Drawing.Point(51, 56);
             this.NickNameLabel.Name = "NickNameLabel";
-            this.NickNameLabel.Size = new System.Drawing.Size(75, 17);
+            this.NickNameLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.NickNameLabel.Size = new System.Drawing.Size(39, 15);
             this.NickNameLabel.TabIndex = 9;
-            this.NickNameLabel.Text = "NickName";
+            this.NickNameLabel.Text = "昵称";
             // 
             // OT_Name_Label
             // 
             this.OT_Name_Label.AutoSize = true;
-            this.OT_Name_Label.Location = new System.Drawing.Point(22, 86);
+            this.OT_Name_Label.Font = new System.Drawing.Font("黑体", 9F);
+            this.OT_Name_Label.Location = new System.Drawing.Point(3, 87);
             this.OT_Name_Label.Name = "OT_Name_Label";
-            this.OT_Name_Label.Size = new System.Drawing.Size(68, 17);
+            this.OT_Name_Label.Size = new System.Drawing.Size(87, 15);
             this.OT_Name_Label.TabIndex = 10;
-            this.OT_Name_Label.Text = "OTName";
+            this.OT_Name_Label.Text = "初训家名字";
             // 
             // Atk_TextBox
             // 
@@ -234,20 +241,22 @@ namespace WangPlugin.GUI
             // Move1_label
             // 
             this.Move1_label.AutoSize = true;
-            this.Move1_label.Location = new System.Drawing.Point(329, 55);
+            this.Move1_label.Font = new System.Drawing.Font("黑体", 9F);
+            this.Move1_label.Location = new System.Drawing.Point(332, 57);
             this.Move1_label.Name = "Move1_label";
-            this.Move1_label.Size = new System.Drawing.Size(50, 17);
+            this.Move1_label.Size = new System.Drawing.Size(47, 15);
             this.Move1_label.TabIndex = 18;
-            this.Move1_label.Text = "Move1";
+            this.Move1_label.Text = "技能1";
             // 
             // Move2_label
             // 
             this.Move2_label.AutoSize = true;
-            this.Move2_label.Location = new System.Drawing.Point(329, 86);
+            this.Move2_label.Font = new System.Drawing.Font("黑体", 9F);
+            this.Move2_label.Location = new System.Drawing.Point(332, 86);
             this.Move2_label.Name = "Move2_label";
-            this.Move2_label.Size = new System.Drawing.Size(50, 17);
+            this.Move2_label.Size = new System.Drawing.Size(47, 15);
             this.Move2_label.TabIndex = 19;
-            this.Move2_label.Text = "Move2";
+            this.Move2_label.Text = "技能2";
             // 
             // GenderBox
             // 
@@ -259,11 +268,12 @@ namespace WangPlugin.GUI
             // 
             // CovertToPB7
             // 
+            this.CovertToPB7.Font = new System.Drawing.Font("黑体", 9F);
             this.CovertToPB7.Location = new System.Drawing.Point(32, 186);
             this.CovertToPB7.Name = "CovertToPB7";
             this.CovertToPB7.Size = new System.Drawing.Size(105, 30);
             this.CovertToPB7.TabIndex = 21;
-            this.CovertToPB7.Text = "CovertToPB7";
+            this.CovertToPB7.Text = "转为PB7";
             this.CovertToPB7.UseVisualStyleBackColor = true;
             this.CovertToPB7.Click += new System.EventHandler(this.CovertToPB7_Click);
             // 
@@ -293,30 +303,33 @@ namespace WangPlugin.GUI
             // Time_Label
             // 
             this.Time_Label.AutoSize = true;
-            this.Time_Label.Location = new System.Drawing.Point(29, 117);
+            this.Time_Label.Font = new System.Drawing.Font("黑体", 9F);
+            this.Time_Label.Location = new System.Drawing.Point(19, 117);
             this.Time_Label.Name = "Time_Label";
-            this.Time_Label.Size = new System.Drawing.Size(63, 17);
+            this.Time_Label.Size = new System.Drawing.Size(71, 15);
             this.Time_Label.TabIndex = 25;
-            this.Time_Label.Text = "MetTime";
+            this.Time_Label.Text = "相遇时间";
             // 
             // AlolaForm_Check
             // 
             this.AlolaForm_Check.AutoSize = true;
+            this.AlolaForm_Check.Font = new System.Drawing.Font("黑体", 9F);
             this.AlolaForm_Check.Location = new System.Drawing.Point(210, 116);
             this.AlolaForm_Check.Name = "AlolaForm_Check";
-            this.AlolaForm_Check.Size = new System.Drawing.Size(96, 21);
+            this.AlolaForm_Check.Size = new System.Drawing.Size(109, 19);
             this.AlolaForm_Check.TabIndex = 26;
-            this.AlolaForm_Check.Text = "AlolaForm";
+            this.AlolaForm_Check.Text = "阿罗拉形态";
             this.AlolaForm_Check.UseVisualStyleBackColor = true;
             // 
             // ShinyCheck
             // 
             this.ShinyCheck.AutoSize = true;
+            this.ShinyCheck.Font = new System.Drawing.Font("黑体", 9F);
             this.ShinyCheck.Location = new System.Drawing.Point(210, 85);
             this.ShinyCheck.Name = "ShinyCheck";
-            this.ShinyCheck.Size = new System.Drawing.Size(66, 21);
+            this.ShinyCheck.Size = new System.Drawing.Size(61, 19);
             this.ShinyCheck.TabIndex = 27;
-            this.ShinyCheck.Text = "Shiny";
+            this.ShinyCheck.Text = "闪光";
             this.ShinyCheck.UseVisualStyleBackColor = true;
             // 
             // GeoName_TextBox
@@ -329,11 +342,12 @@ namespace WangPlugin.GUI
             // GeoName_Label
             // 
             this.GeoName_Label.AutoSize = true;
-            this.GeoName_Label.Location = new System.Drawing.Point(16, 148);
+            this.GeoName_Label.Font = new System.Drawing.Font("黑体", 9F);
+            this.GeoName_Label.Location = new System.Drawing.Point(19, 149);
             this.GeoName_Label.Name = "GeoName_Label";
-            this.GeoName_Label.Size = new System.Drawing.Size(74, 17);
+            this.GeoName_Label.Size = new System.Drawing.Size(71, 15);
             this.GeoName_Label.TabIndex = 29;
-            this.GeoName_Label.Text = "GeoName";
+            this.GeoName_Label.Text = "地理位置";
             // 
             // GP1Editor
             // 

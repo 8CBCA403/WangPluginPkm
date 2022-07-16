@@ -22,11 +22,12 @@ namespace WangPlugin.GUI
             // 
             // GEgg
             // 
+            this.GEgg.Font = new System.Drawing.Font("黑体", 9F);
             this.GEgg.Location = new System.Drawing.Point(135, 12);
             this.GEgg.Name = "GEgg";
             this.GEgg.Size = new System.Drawing.Size(104, 28);
             this.GEgg.TabIndex = 0;
-            this.GEgg.Text = "GenEgg";
+            this.GEgg.Text = "生成蛋";
             this.GEgg.UseVisualStyleBackColor = true;
             this.GEgg.Click += new System.EventHandler(this.GEgg_Click);
             // 

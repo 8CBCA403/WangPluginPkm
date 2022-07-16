@@ -47,6 +47,7 @@ namespace WangPlugin.GUI
             // 
             // LoadBattleTeam_BTN
             // 
+            this.LoadBattleTeam_BTN.Font = new System.Drawing.Font("黑体", 9F);
             this.LoadBattleTeam_BTN.Location = new System.Drawing.Point(423, 194);
             this.LoadBattleTeam_BTN.Name = "LoadBattleTeam_BTN";
             this.LoadBattleTeam_BTN.Size = new System.Drawing.Size(149, 32);
@@ -73,6 +74,7 @@ namespace WangPlugin.GUI
             // 
             // LoadTeamFromPSCode_BTN
             // 
+            this.LoadTeamFromPSCode_BTN.Font = new System.Drawing.Font("黑体", 9F);
             this.LoadTeamFromPSCode_BTN.Location = new System.Drawing.Point(78, 194);
             this.LoadTeamFromPSCode_BTN.Name = "LoadTeamFromPSCode_BTN";
             this.LoadTeamFromPSCode_BTN.Size = new System.Drawing.Size(197, 32);
@@ -83,6 +85,7 @@ namespace WangPlugin.GUI
             // 
             // ImportPKM_BTN
             // 
+            this.ImportPKM_BTN.Font = new System.Drawing.Font("黑体", 9F);
             this.ImportPKM_BTN.Location = new System.Drawing.Point(639, 83);
             this.ImportPKM_BTN.Name = "ImportPKM_BTN";
             this.ImportPKM_BTN.Size = new System.Drawing.Size(206, 30);
@@ -102,6 +105,7 @@ namespace WangPlugin.GUI
             // 
             // ClearAllBox_BTN
             // 
+            this.ClearAllBox_BTN.Font = new System.Drawing.Font("黑体", 9F);
             this.ClearAllBox_BTN.Location = new System.Drawing.Point(639, 129);
             this.ClearAllBox_BTN.Name = "ClearAllBox_BTN";
             this.ClearAllBox_BTN.Size = new System.Drawing.Size(206, 29);

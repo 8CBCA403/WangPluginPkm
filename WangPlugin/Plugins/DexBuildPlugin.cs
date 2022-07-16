@@ -24,7 +24,7 @@ namespace WangPlugin.Plugins
         private void OpenForm(object sender, EventArgs e)
         {
 
-            var form = new DexBuildForm(SaveFileEditor);
+            var form = new DexBuildForm(SaveFileEditor,PKMEditor);
             form.Show();
         }
     }

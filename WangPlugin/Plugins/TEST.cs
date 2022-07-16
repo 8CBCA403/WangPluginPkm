@@ -1,4 +1,5 @@
-﻿using System;
+﻿#region
+/*using System;
 using System.Windows.Forms;
 using WangPlugin.GUI;
 
@@ -28,4 +29,5 @@ namespace WangPlugin.Plugins
             form.Show();
         }
     }
-}
+}*/
+#endregion

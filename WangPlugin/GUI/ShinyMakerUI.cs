@@ -51,59 +51,64 @@ namespace WangPlugin.GUI
             // 
             // ShinySID_BTN
             // 
-            this.ShinySID_BTN.Location = new System.Drawing.Point(21, 43);
+            this.ShinySID_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.ShinySID_BTN.Location = new System.Drawing.Point(12, 45);
             this.ShinySID_BTN.Name = "ShinySID_BTN";
-            this.ShinySID_BTN.Size = new System.Drawing.Size(107, 27);
+            this.ShinySID_BTN.Size = new System.Drawing.Size(120, 30);
             this.ShinySID_BTN.TabIndex = 0;
-            this.ShinySID_BTN.Text = "ShinySID";
+            this.ShinySID_BTN.Text = "随机SID闪光";
             this.ShinySID_BTN.UseVisualStyleBackColor = true;
             this.ShinySID_BTN.Click += new System.EventHandler(this.ShinySID_BTN_Click);
             // 
             // RandomStar_BTN
             // 
-            this.RandomStar_BTN.Location = new System.Drawing.Point(21, 12);
+            this.RandomStar_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.RandomStar_BTN.Location = new System.Drawing.Point(12, 12);
             this.RandomStar_BTN.Name = "RandomStar_BTN";
-            this.RandomStar_BTN.Size = new System.Drawing.Size(107, 29);
+            this.RandomStar_BTN.Size = new System.Drawing.Size(120, 30);
             this.RandomStar_BTN.TabIndex = 1;
-            this.RandomStar_BTN.Text = "RandomShiny";
+            this.RandomStar_BTN.Text = "随机闪光";
             this.RandomStar_BTN.UseVisualStyleBackColor = true;
             this.RandomStar_BTN.Click += new System.EventHandler(this.ForceStar_BTN_Click);
             // 
             // ForceSquare_BTN
             // 
-            this.ForceSquare_BTN.Location = new System.Drawing.Point(247, 12);
+            this.ForceSquare_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.ForceSquare_BTN.Location = new System.Drawing.Point(282, 12);
             this.ForceSquare_BTN.Name = "ForceSquare_BTN";
-            this.ForceSquare_BTN.Size = new System.Drawing.Size(103, 29);
+            this.ForceSquare_BTN.Size = new System.Drawing.Size(120, 30);
             this.ForceSquare_BTN.TabIndex = 2;
-            this.ForceSquare_BTN.Text = "ForceSqaure";
+            this.ForceSquare_BTN.Text = "强制方块";
             this.ForceSquare_BTN.UseVisualStyleBackColor = true;
             this.ForceSquare_BTN.Click += new System.EventHandler(this.ForceSquare_BTN_Click);
             // 
             // XorBox
             // 
             this.XorBox.FormattingEnabled = true;
-            this.XorBox.Location = new System.Drawing.Point(187, 47);
+            this.XorBox.Location = new System.Drawing.Point(194, 48);
             this.XorBox.Name = "XorBox";
-            this.XorBox.Size = new System.Drawing.Size(54, 23);
+            this.XorBox.Size = new System.Drawing.Size(73, 23);
             this.XorBox.TabIndex = 3;
             // 
             // Xor_BTN
             // 
-            this.Xor_BTN.Location = new System.Drawing.Point(247, 43);
+            this.Xor_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.Xor_BTN.Location = new System.Drawing.Point(282, 45);
             this.Xor_BTN.Name = "Xor_BTN";
-            this.Xor_BTN.Size = new System.Drawing.Size(103, 27);
+            this.Xor_BTN.Size = new System.Drawing.Size(120, 30);
             this.Xor_BTN.TabIndex = 4;
-            this.Xor_BTN.Text = "XorShiny";
+            this.Xor_BTN.Text = "指定Xor闪光";
             this.Xor_BTN.UseVisualStyleBackColor = true;
             this.Xor_BTN.Click += new System.EventHandler(this.Xor_BTN_Click);
             // 
             // ForceStar
             // 
-            this.ForceStar.Location = new System.Drawing.Point(134, 12);
+            this.ForceStar.Font = new System.Drawing.Font("黑体", 9F);
+            this.ForceStar.Location = new System.Drawing.Point(147, 12);
             this.ForceStar.Name = "ForceStar";
-            this.ForceStar.Size = new System.Drawing.Size(107, 29);
+            this.ForceStar.Size = new System.Drawing.Size(120, 30);
             this.ForceStar.TabIndex = 5;
-            this.ForceStar.Text = "ForceStar";
+            this.ForceStar.Text = "强制星星";
             this.ForceStar.UseVisualStyleBackColor = true;
             this.ForceStar.Click += new System.EventHandler(this.ForceStar_Click);
             // 
@@ -111,7 +116,7 @@ namespace WangPlugin.GUI
             // 
             this.XorValue_Label.AutoSize = true;
             this.XorValue_Label.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.XorValue_Label.Location = new System.Drawing.Point(134, 48);
+            this.XorValue_Label.Location = new System.Drawing.Point(143, 49);
             this.XorValue_Label.Name = "XorValue_Label";
             this.XorValue_Label.Size = new System.Drawing.Size(45, 19);
             this.XorValue_Label.TabIndex = 6;
@@ -120,7 +125,7 @@ namespace WangPlugin.GUI
             // ShinyMakerUI
             // 
             this.AllowDrop = true;
-            this.ClientSize = new System.Drawing.Size(392, 84);
+            this.ClientSize = new System.Drawing.Size(414, 80);
             this.Controls.Add(this.XorValue_Label);
             this.Controls.Add(this.ForceStar);
             this.Controls.Add(this.Xor_BTN);

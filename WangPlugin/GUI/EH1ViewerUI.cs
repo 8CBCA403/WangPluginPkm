@@ -33,12 +33,12 @@ namespace WangPlugin.GUI
             // 
             // LoadEH1_BTN
             // 
-            this.LoadEH1_BTN.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoadEH1_BTN.Font = new System.Drawing.Font("黑体", 9F);
             this.LoadEH1_BTN.Location = new System.Drawing.Point(162, 17);
             this.LoadEH1_BTN.Name = "LoadEH1_BTN";
             this.LoadEH1_BTN.Size = new System.Drawing.Size(119, 25);
             this.LoadEH1_BTN.TabIndex = 0;
-            this.LoadEH1_BTN.Text = "LoadEH1";
+            this.LoadEH1_BTN.Text = "读取EH1";
             this.LoadEH1_BTN.UseVisualStyleBackColor = true;
             this.LoadEH1_BTN.Click += new System.EventHandler(this.LoadEH1_BTN_Click);
             // 
