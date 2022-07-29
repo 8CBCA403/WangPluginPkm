@@ -98,7 +98,7 @@ namespace WangPlugin.GUI
             this.ImportGP_BTN.Name = "ImportGP_BTN";
             this.ImportGP_BTN.Size = new System.Drawing.Size(96, 33);
             this.ImportGP_BTN.TabIndex = 0;
-            this.ImportGP_BTN.Text = "导出GP1";
+            this.ImportGP_BTN.Text = "导入GP1";
             this.ImportGP_BTN.UseVisualStyleBackColor = true;
             this.ImportGP_BTN.Click += new System.EventHandler(this.ImportGP_BTN_Click);
             // 
@@ -109,7 +109,7 @@ namespace WangPlugin.GUI
             this.ExportGP_BTN.Name = "ExportGP_BTN";
             this.ExportGP_BTN.Size = new System.Drawing.Size(96, 33);
             this.ExportGP_BTN.TabIndex = 1;
-            this.ExportGP_BTN.Text = "导入GP1";
+            this.ExportGP_BTN.Text = "导出GP1";
             this.ExportGP_BTN.UseVisualStyleBackColor = true;
             this.ExportGP_BTN.Click += new System.EventHandler(this.ExportGP_BTN_Click);
             // 
@@ -156,7 +156,7 @@ namespace WangPlugin.GUI
             // 
             this.SpeciesLabel.AutoSize = true;
             this.SpeciesLabel.Font = new System.Drawing.Font("黑体", 9F);
-            this.SpeciesLabel.Location = new System.Drawing.Point(51, 26);
+            this.SpeciesLabel.Location = new System.Drawing.Point(51, 27);
             this.SpeciesLabel.Name = "SpeciesLabel";
             this.SpeciesLabel.Size = new System.Drawing.Size(39, 15);
             this.SpeciesLabel.TabIndex = 8;
@@ -166,7 +166,7 @@ namespace WangPlugin.GUI
             // 
             this.NickNameLabel.AutoSize = true;
             this.NickNameLabel.Font = new System.Drawing.Font("黑体", 9F);
-            this.NickNameLabel.Location = new System.Drawing.Point(51, 56);
+            this.NickNameLabel.Location = new System.Drawing.Point(51, 57);
             this.NickNameLabel.Name = "NickNameLabel";
             this.NickNameLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.NickNameLabel.Size = new System.Drawing.Size(39, 15);
@@ -177,7 +177,7 @@ namespace WangPlugin.GUI
             // 
             this.OT_Name_Label.AutoSize = true;
             this.OT_Name_Label.Font = new System.Drawing.Font("黑体", 9F);
-            this.OT_Name_Label.Location = new System.Drawing.Point(3, 87);
+            this.OT_Name_Label.Location = new System.Drawing.Point(3, 89);
             this.OT_Name_Label.Name = "OT_Name_Label";
             this.OT_Name_Label.Size = new System.Drawing.Size(87, 15);
             this.OT_Name_Label.TabIndex = 10;

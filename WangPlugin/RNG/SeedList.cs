@@ -40,6 +40,17 @@ namespace WangPlugin
         {
            0xDDF01AC6,0xD2B74A56,0xC44F1D1B,0x7ED778CF,0x200DA840
         };
+        public static List<uint> OverWorld8_0spa = new List<uint>()
+        {
+           0x76352687,0x10379A04,0x1235A4FC,0x15960158,0x17943FA0,
+           0x199114E6,0x1B932A1E,0x1C308FBA,0x1E32B142,0x21AC24AC,
+           0x23AE1A54,0x240DBFF0,0x260F8108,0x280AAA4E,0x2A0894B6,
+           0x2DAB3112,0x2FA90FEA,0x31B5AD93,0x33B7936B,0x341436CF,
+           0x36160837,0x38132371,0x3A111D89,0x3DB2B82D,0x3FB086D5,
+           0x400D3D8B,0x420F0373,0x45ACA6D7,0x47AE982F,0x49ABB369,
+           0x4BA98D91,0x4C0A2835,0x4E0816CD,0x5014B4B4,0x52168A4C,
+        };
+        
         public static Queue<uint> EnqueueSeed(int SeedFlag)
         {
             Queue<uint> SeedQueue = new Queue<uint>();
@@ -90,6 +101,13 @@ namespace WangPlugin
                 for (int i = 0; i < 5; i++)
                 {
                     SeedQueue.Enqueue(OverWorld8_0a0s[i]);
+                }
+            }
+            else if (SeedFlag == 8)
+            {
+                for (int i = 0; i < 35; i++)
+                {
+                    SeedQueue.Enqueue(OverWorld8_0spa[i]);
                 }
             }
             return SeedQueue;

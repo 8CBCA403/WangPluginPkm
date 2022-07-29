@@ -39,6 +39,7 @@ namespace WangPlugin.GUI
         private Sort version = Sort.National;
         private LanguageBoxSelect7 type7 = LanguageBoxSelect7.ENG;
         private LanguageBoxSelect type = LanguageBoxSelect.ENG;
+        private Button GODex_BTN;
         private OT_Gender typeG = OT_Gender.Male;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
@@ -189,6 +190,7 @@ namespace WangPlugin.GUI
             this.Sort_BTN = new System.Windows.Forms.Button();
             this.DeleteBox_BTN = new System.Windows.Forms.Button();
             this.Clone_BTN = new System.Windows.Forms.Button();
+            this.GODex_BTN = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BuildDex_BTN
@@ -393,9 +395,21 @@ namespace WangPlugin.GUI
             this.Clone_BTN.UseVisualStyleBackColor = true;
             this.Clone_BTN.Click += new System.EventHandler(this.Clone_BTN_Click);
             // 
+            // GODex_BTN
+            // 
+            this.GODex_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.GODex_BTN.Location = new System.Drawing.Point(731, 11);
+            this.GODex_BTN.Name = "GODex_BTN";
+            this.GODex_BTN.Size = new System.Drawing.Size(102, 26);
+            this.GODex_BTN.TabIndex = 20;
+            this.GODex_BTN.Text = "生成GO图鉴";
+            this.GODex_BTN.UseVisualStyleBackColor = true;
+            this.GODex_BTN.Click += new System.EventHandler(this.GODex_BTN_Click);
+            // 
             // DexBuildForm
             // 
-            this.ClientSize = new System.Drawing.Size(739, 105);
+            this.ClientSize = new System.Drawing.Size(837, 105);
+            this.Controls.Add(this.GODex_BTN);
             this.Controls.Add(this.Clone_BTN);
             this.Controls.Add(this.DeleteBox_BTN);
             this.Controls.Add(this.Sort_BTN);
@@ -824,5 +838,34 @@ namespace WangPlugin.GUI
         {
             SetPkm(SAV);
         }
+
+        private void GODex_BTN_Click(object sender, EventArgs e)
+        {
+            GODex(Editor,SAV);
+        }
+        private void GODex(IPKMView Editor,ISaveFileProvider SaveFileEditor)
+        {
+            List<IEncounterInfo> Results;
+            IEncounterInfo enc;
+            PKM pk = Editor.Data;
+            var setting = new SearchSettings
+            {
+                Species = pk.Species,
+              //  Version = 34,
+
+            };
+            var search = EncounterUtil.SearchDatabase(setting, SaveFileEditor.SAV);
+            var results = search.ToList();
+            if (results.Count != 0)
+            {
+                Results = results;
+                enc = Results[0];
+                var criteria = EncounterUtil.GetCriteria(enc, pk);
+                pk = enc.ConvertToPKM(SaveFileEditor.SAV, criteria);
+            }
+            Editor.PopulateFields(pk, false);
+            SaveFileEditor.ReloadSlots();
+        }
+        
     }
 }

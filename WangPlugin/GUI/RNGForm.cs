@@ -45,6 +45,9 @@ namespace WangPlugin.GUI
         private CheckBox SpeCheck;
         private CheckBox VCheck;
         private CheckBox LockIV;
+        private Label label1;
+        private CheckBox SpaCheck;
+        private CheckBox UsePreSeed;
         private ShinyType Stype = ShinyType.None;
         public RNGForm(ISaveFileProvider sav, IPKMView editor)
 
@@ -68,51 +71,54 @@ namespace WangPlugin.GUI
             this.SpeCheck = new System.Windows.Forms.CheckBox();
             this.VCheck = new System.Windows.Forms.CheckBox();
             this.LockIV = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.SpaCheck = new System.Windows.Forms.CheckBox();
+            this.UsePreSeed = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // methodTypeBox
             // 
             this.methodTypeBox.FormattingEnabled = true;
-            this.methodTypeBox.Location = new System.Drawing.Point(12, 12);
+            this.methodTypeBox.Location = new System.Drawing.Point(91, 17);
             this.methodTypeBox.Name = "methodTypeBox";
             this.methodTypeBox.Size = new System.Drawing.Size(124, 25);
             this.methodTypeBox.TabIndex = 8;
-            this.methodTypeBox.SelectedIndexChanged += new System.EventHandler(this.methodTypeBox_SelectedIndexChanged);
+
             // 
             // Search
             // 
-            this.Search.Location = new System.Drawing.Point(156, 101);
+            this.Search.Location = new System.Drawing.Point(36, 145);
             this.Search.Name = "Search";
             this.Search.Size = new System.Drawing.Size(124, 25);
             this.Search.TabIndex = 9;
-            this.Search.Text = "RNG Start";
+            this.Search.Text = "开始查找";
             this.Search.UseVisualStyleBackColor = true;
             this.Search.Click += new System.EventHandler(this.Search_Click);
             // 
             // Condition
             // 
-            this.Condition.Location = new System.Drawing.Point(156, 12);
+            this.Condition.Location = new System.Drawing.Point(221, 17);
             this.Condition.Name = "Condition";
             this.Condition.Size = new System.Drawing.Size(124, 25);
             this.Condition.TabIndex = 10;
-            this.Condition.Text = "Nothing to check";
+            this.Condition.Text = "无事可做";
             // 
             // Cancel
             // 
-            this.Cancel.Location = new System.Drawing.Point(156, 132);
+            this.Cancel.Location = new System.Drawing.Point(184, 145);
             this.Cancel.Name = "Cancel";
             this.Cancel.Size = new System.Drawing.Size(124, 25);
             this.Cancel.TabIndex = 11;
-            this.Cancel.Text = "Stop";
+            this.Cancel.Text = "停止";
             this.Cancel.UseVisualStyleBackColor = true;
             this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
             // ShinyTypeBox
             // 
             this.ShinyTypeBox.FormattingEnabled = true;
-            this.ShinyTypeBox.Location = new System.Drawing.Point(62, 56);
+            this.ShinyTypeBox.Location = new System.Drawing.Point(91, 56);
             this.ShinyTypeBox.Name = "ShinyTypeBox";
-            this.ShinyTypeBox.Size = new System.Drawing.Size(74, 25);
+            this.ShinyTypeBox.Size = new System.Drawing.Size(124, 25);
             this.ShinyTypeBox.TabIndex = 13;
             // 
             // ShinyTypeLabel
@@ -120,43 +126,43 @@ namespace WangPlugin.GUI
             this.ShinyTypeLabel.AutoSize = true;
             this.ShinyTypeLabel.Location = new System.Drawing.Point(12, 59);
             this.ShinyTypeLabel.Name = "ShinyTypeLabel";
-            this.ShinyTypeLabel.Size = new System.Drawing.Size(44, 17);
+            this.ShinyTypeLabel.Size = new System.Drawing.Size(72, 17);
             this.ShinyTypeLabel.TabIndex = 14;
-            this.ShinyTypeLabel.Text = "Shiny";
+            this.ShinyTypeLabel.Text = "闪光种类";
             // 
             // SeedText
             // 
-            this.SeedText.Location = new System.Drawing.Point(156, 56);
+            this.SeedText.Location = new System.Drawing.Point(221, 56);
             this.SeedText.Name = "SeedText";
             this.SeedText.Size = new System.Drawing.Size(124, 25);
             this.SeedText.TabIndex = 15;
-            this.SeedText.Text = "No Seed";
+            this.SeedText.Text = "没有seed";
             // 
             // AtkCheck
             // 
             this.AtkCheck.AutoSize = true;
-            this.AtkCheck.Location = new System.Drawing.Point(15, 108);
+            this.AtkCheck.Location = new System.Drawing.Point(14, 91);
             this.AtkCheck.Name = "AtkCheck";
-            this.AtkCheck.Size = new System.Drawing.Size(58, 21);
+            this.AtkCheck.Size = new System.Drawing.Size(70, 21);
             this.AtkCheck.TabIndex = 16;
-            this.AtkCheck.Text = "0Atk";
+            this.AtkCheck.Text = "0物攻";
             this.AtkCheck.UseVisualStyleBackColor = true;
             // 
             // SpeCheck
             // 
             this.SpeCheck.AutoSize = true;
-            this.SpeCheck.Location = new System.Drawing.Point(15, 135);
+            this.SpeCheck.Location = new System.Drawing.Point(81, 91);
             this.SpeCheck.Name = "SpeCheck";
-            this.SpeCheck.Size = new System.Drawing.Size(64, 21);
+            this.SpeCheck.Size = new System.Drawing.Size(70, 21);
             this.SpeCheck.TabIndex = 17;
-            this.SpeCheck.Text = "0Spe";
+            this.SpeCheck.Text = "0速度";
             this.SpeCheck.UseVisualStyleBackColor = true;
             // 
             // VCheck
             // 
             this.VCheck.AutoSize = true;
             this.VCheck.Enabled = false;
-            this.VCheck.Location = new System.Drawing.Point(79, 108);
+            this.VCheck.Location = new System.Drawing.Point(221, 91);
             this.VCheck.Name = "VCheck";
             this.VCheck.Size = new System.Drawing.Size(47, 21);
             this.VCheck.TabIndex = 18;
@@ -167,18 +173,52 @@ namespace WangPlugin.GUI
             // 
             this.LockIV.AutoSize = true;
             this.LockIV.Enabled = false;
-            this.LockIV.Location = new System.Drawing.Point(79, 136);
+            this.LockIV.Location = new System.Drawing.Point(282, 91);
             this.LockIV.Name = "LockIV";
-            this.LockIV.Size = new System.Drawing.Size(78, 21);
+            this.LockIV.Size = new System.Drawing.Size(63, 21);
             this.LockIV.TabIndex = 19;
-            this.LockIV.Text = "Lock3V";
+            this.LockIV.Text = "锁3V";
             this.LockIV.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 17);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "RNG类型";
+            // 
+            // SpaCheck
+            // 
+            this.SpaCheck.AutoSize = true;
+            this.SpaCheck.Enabled = true;
+            this.SpaCheck.Location = new System.Drawing.Point(145, 91);
+            this.SpaCheck.Name = "SpaCheck";
+            this.SpaCheck.Size = new System.Drawing.Size(70, 21);
+            this.SpaCheck.TabIndex = 21;
+            this.SpaCheck.Text = "随机特攻";
+            this.SpaCheck.UseVisualStyleBackColor = true;
+            // 
+            // UsePreSeed
+            // 
+            this.UsePreSeed.AutoSize = true;
+            this.UsePreSeed.Enabled = true;
+            this.UsePreSeed.Location = new System.Drawing.Point(14, 118);
+            this.UsePreSeed.Name = "UsePreSeed";
+            this.UsePreSeed.Size = new System.Drawing.Size(126, 21);
+            this.UsePreSeed.TabIndex = 22;
+            this.UsePreSeed.Text = "使用预设种子";
+            this.UsePreSeed.UseVisualStyleBackColor = true;
             // 
             // RNGForm
             // 
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(296, 177);
+            this.ClientSize = new System.Drawing.Size(355, 177);
+            this.Controls.Add(this.UsePreSeed);
+            this.Controls.Add(this.SpaCheck);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.LockIV);
             this.Controls.Add(this.VCheck);
             this.Controls.Add(this.SpeCheck);
@@ -401,6 +441,14 @@ namespace WangPlugin.GUI
             {
                 Getqeueu = SeedList.EnqueueSeed(7);
             }
+            else if (RNGMethod == MethodType.Overworld8 &&
+             !AtkCheck.Checked &&
+             !SpeCheck.Checked &&
+             SpaCheck.Checked &&
+             Stype == ShinyType.Sqaure)
+            {
+                Getqeueu = SeedList.EnqueueSeed(8);
+            }
             return Getqeueu;
         }
         private void IsRunning(bool running)
@@ -414,14 +462,25 @@ namespace WangPlugin.GUI
             Condition.Text = "searching...";
             uint seed = 0;
             Queue<uint> SeedQueue = new Queue<uint>();
-            SeedQueue = PreSetSeed();
+            var j = 0;
+            if (UsePreSeed.Checked == true)
+            {
+                SeedQueue = PreSetSeed();
+                MessageBox.Show($"预设种子数量:{SeedQueue.Count}");
+            }
             tokenSource = new();
-            
+            if (UsePreSeed.Checked == true)
+            {
+                Random rd = new Random();
+                if (SeedQueue.Count >1)
+                    j = rd.Next(0, SeedQueue.Count);
+                else
+                    j = 1;
+            }
             Task.Factory.StartNew(
                 () =>
                 {
                     seed = Util.Rand32();
-                    
                     var pk = Editor.Data;
                     while (true)
                     {
@@ -430,9 +489,14 @@ namespace WangPlugin.GUI
                             Condition.Text = "Stop";
                             return;
                         }
-                        if (SeedQueue.Count != 0)
+                        for (int i = 0; i < j; i++)
                         {
-                            seed = SeedQueue.Dequeue();
+                            if (SeedQueue.Count != 0)
+                            {
+                                seed = SeedQueue.Dequeue();
+                            }
+                            else
+                                break;
                         }
                        
                         if (GenPkm(ref pk, seed))
@@ -466,10 +530,7 @@ namespace WangPlugin.GUI
             IsRunning(false);
         }
 
-        private void methodTypeBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+      
 
        
     }
