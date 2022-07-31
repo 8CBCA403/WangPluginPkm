@@ -841,29 +841,68 @@ namespace WangPlugin.GUI
 
         private void GODex_BTN_Click(object sender, EventArgs e)
         {
-            GODex(Editor,SAV);
+            GODex(SAV);
         }
-        private void GODex(IPKMView Editor,ISaveFileProvider SaveFileEditor)
+        private void GODex(ISaveFileProvider SaveFileEditor)
         {
             List<IEncounterInfo> Results;
             IEncounterInfo enc;
-            PKM pk = Editor.Data;
-            var setting = new SearchSettings
+            PKM pk ;
+            int j;
+            List<PKM> pkMList;
+            List<PKM> p=new();
+            pkMList = (List<PKM>)SaveFileEditor.SAV.GetAllPKM();
+            MessageBox.Show($"{pkMList.Count()}");
+            for (int i = 0; i < pkMList.Count(); i++)
             {
-                Species = pk.Species,
-              //  Version = 34,
+                pk = pkMList[i];
+                var pkc = pk.Clone();
+                j = pk.Species;
+                var setting = new SearchSettings
+                {
+                    Species = pk.Species,
+                    SearchEgg = false,
+                    Version = 34,
+                };
+                var search = EncounterUtil.SearchDatabase(setting, SaveFileEditor.SAV);
+                var results = search.ToList();
+               // MessageBox.Show($"{results.Count}");
 
-            };
-            var search = EncounterUtil.SearchDatabase(setting, SaveFileEditor.SAV);
-            var results = search.ToList();
-            if (results.Count != 0)
-            {
-                Results = results;
-                enc = Results[0];
-                var criteria = EncounterUtil.GetCriteria(enc, pk);
-                pk = enc.ConvertToPKM(SaveFileEditor.SAV, criteria);
+                if (results.Count != 0)
+                {
+                    Results = results;
+                    enc = Results[0];
+                    var criteria = EncounterUtil.GetCriteria(enc, pk);
+                    EntityConverter.TryMakePKMCompatible(enc.ConvertToPKM(SaveFileEditor.SAV, criteria), pk, out var c, out pk);
+                    pk.Species = j;
+                    pk.ClearNickname();
+                    pk.Ability = pkc.Ability;
+                    pk.OT_Name = RandomString(6);
+                    pk.SetSuggestedMoves();
+                    if( pk.Move1 != 0)
+                        pk.SetSuggestedMovePP(0);
+                    if (pk.Move2 != 0)
+                        pk.SetSuggestedMovePP(1);
+                    if (pk.Move3 != 0)
+                        pk.SetSuggestedMovePP(2);
+                    if (pk.Move4 != 0)
+                        pk.SetSuggestedMovePP(3);
+                    pk.RefreshChecksum();
+                    p.Add(pk);
+                }
+                else
+                    p.Add(pkc);
             }
-            Editor.PopulateFields(pk, false);
+            for (int i = 0; i < SaveFileEditor.SAV.BoxCount; i++)
+            {
+                for (j = 0; j < 30; j++)
+                {
+                    if (pkMList.Count >(i * 30 + j))
+                        SaveFileEditor.SAV.SetBoxSlotAtIndex(p[i * 30 + j], i, j);
+                    else
+                        break;
+                }
+            }
             SaveFileEditor.ReloadSlots();
         }
         
