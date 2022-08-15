@@ -6,6 +6,7 @@
     <TargetFrameworks>net48;net6.0-windows</TargetFrameworks>
     <LangVersion>10</LangVersion>
     <Nullable>disable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>Resources\img\icon.ico</ApplicationIcon>
     
   </PropertyGroup>

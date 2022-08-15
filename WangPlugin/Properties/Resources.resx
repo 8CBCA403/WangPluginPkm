@@ -130,6 +130,9 @@
   <data name="Calc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\img\Calc.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Distribution" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img\Distribution.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\img\Edit.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -177,6 +180,9 @@
   </data>
   <data name="TEST" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\img\TEST.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Trainers" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\text\Trainers.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="wang" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\img\wang.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

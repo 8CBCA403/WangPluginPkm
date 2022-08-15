@@ -33,13 +33,13 @@ namespace WangPlugin.GUI
         private Button RandomPID_BTN;
         private Button Sort_BTN;
         private Button DeleteBox_BTN;
-        private Button Clone_BTN;
         private static Random rand = new Random();
         public static Stopwatch sw = new();
         private Sort version = Sort.National;
         private LanguageBoxSelect7 type7 = LanguageBoxSelect7.ENG;
         private LanguageBoxSelect type = LanguageBoxSelect.ENG;
         private Button GODex_BTN;
+        private GroupBox groupBox1;
         private OT_Gender typeG = OT_Gender.Male;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
@@ -189,14 +189,15 @@ namespace WangPlugin.GUI
             this.RandomPID_BTN = new System.Windows.Forms.Button();
             this.Sort_BTN = new System.Windows.Forms.Button();
             this.DeleteBox_BTN = new System.Windows.Forms.Button();
-            this.Clone_BTN = new System.Windows.Forms.Button();
             this.GODex_BTN = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // BuildDex_BTN
             // 
             this.BuildDex_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.BuildDex_BTN.Location = new System.Drawing.Point(623, 11);
+            this.BuildDex_BTN.Location = new System.Drawing.Point(629, 26);
             this.BuildDex_BTN.Name = "BuildDex_BTN";
             this.BuildDex_BTN.Size = new System.Drawing.Size(102, 26);
             this.BuildDex_BTN.TabIndex = 0;
@@ -207,7 +208,7 @@ namespace WangPlugin.GUI
             // Gen_BTN
             // 
             this.Gen_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.Gen_BTN.Location = new System.Drawing.Point(404, 12);
+            this.Gen_BTN.Location = new System.Drawing.Point(398, 21);
             this.Gen_BTN.Name = "Gen_BTN";
             this.Gen_BTN.Size = new System.Drawing.Size(102, 25);
             this.Gen_BTN.TabIndex = 1;
@@ -218,7 +219,7 @@ namespace WangPlugin.GUI
             // TIDBox
             // 
             this.TIDBox.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TIDBox.Location = new System.Drawing.Point(68, 12);
+            this.TIDBox.Location = new System.Drawing.Point(62, 22);
             this.TIDBox.Name = "TIDBox";
             this.TIDBox.Size = new System.Drawing.Size(100, 27);
             this.TIDBox.TabIndex = 2;
@@ -227,7 +228,7 @@ namespace WangPlugin.GUI
             // SIDBox
             // 
             this.SIDBox.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SIDBox.Location = new System.Drawing.Point(68, 45);
+            this.SIDBox.Location = new System.Drawing.Point(62, 55);
             this.SIDBox.Name = "SIDBox";
             this.SIDBox.Size = new System.Drawing.Size(100, 27);
             this.SIDBox.TabIndex = 3;
@@ -236,7 +237,7 @@ namespace WangPlugin.GUI
             // OT_Name
             // 
             this.OT_Name.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OT_Name.Location = new System.Drawing.Point(249, 12);
+            this.OT_Name.Location = new System.Drawing.Point(244, 22);
             this.OT_Name.Name = "OT_Name";
             this.OT_Name.Size = new System.Drawing.Size(149, 27);
             this.OT_Name.TabIndex = 4;
@@ -245,7 +246,7 @@ namespace WangPlugin.GUI
             // LanguageBox
             // 
             this.LanguageBox.FormattingEnabled = true;
-            this.LanguageBox.Location = new System.Drawing.Point(279, 43);
+            this.LanguageBox.Location = new System.Drawing.Point(273, 53);
             this.LanguageBox.Name = "LanguageBox";
             this.LanguageBox.Size = new System.Drawing.Size(57, 25);
             this.LanguageBox.TabIndex = 5;
@@ -253,7 +254,7 @@ namespace WangPlugin.GUI
             // GenderBox
             // 
             this.GenderBox.FormattingEnabled = true;
-            this.GenderBox.Location = new System.Drawing.Point(342, 43);
+            this.GenderBox.Location = new System.Drawing.Point(337, 53);
             this.GenderBox.Name = "GenderBox";
             this.GenderBox.Size = new System.Drawing.Size(56, 25);
             this.GenderBox.TabIndex = 6;
@@ -262,7 +263,7 @@ namespace WangPlugin.GUI
             // 
             this.TIDLabel.AutoSize = true;
             this.TIDLabel.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.TIDLabel.Location = new System.Drawing.Point(12, 13);
+            this.TIDLabel.Location = new System.Drawing.Point(7, 25);
             this.TIDLabel.Name = "TIDLabel";
             this.TIDLabel.Size = new System.Drawing.Size(49, 20);
             this.TIDLabel.TabIndex = 7;
@@ -272,7 +273,7 @@ namespace WangPlugin.GUI
             // 
             this.SIDLabel.AutoSize = true;
             this.SIDLabel.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.SIDLabel.Location = new System.Drawing.Point(12, 46);
+            this.SIDLabel.Location = new System.Drawing.Point(7, 58);
             this.SIDLabel.Name = "SIDLabel";
             this.SIDLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.SIDLabel.Size = new System.Drawing.Size(49, 20);
@@ -283,7 +284,7 @@ namespace WangPlugin.GUI
             // 
             this.OTLabel.AutoSize = true;
             this.OTLabel.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.OTLabel.Location = new System.Drawing.Point(174, 13);
+            this.OTLabel.Location = new System.Drawing.Point(169, 25);
             this.OTLabel.Name = "OTLabel";
             this.OTLabel.Size = new System.Drawing.Size(69, 20);
             this.OTLabel.TabIndex = 9;
@@ -293,7 +294,7 @@ namespace WangPlugin.GUI
             // 
             this.LGLabel.AutoSize = true;
             this.LGLabel.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.LGLabel.Location = new System.Drawing.Point(174, 46);
+            this.LGLabel.Location = new System.Drawing.Point(168, 58);
             this.LGLabel.Name = "LGLabel";
             this.LGLabel.Size = new System.Drawing.Size(99, 20);
             this.LGLabel.TabIndex = 10;
@@ -302,7 +303,7 @@ namespace WangPlugin.GUI
             // LivingDex_BTN
             // 
             this.LivingDex_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.LivingDex_BTN.Location = new System.Drawing.Point(515, 12);
+            this.LivingDex_BTN.Location = new System.Drawing.Point(521, 28);
             this.LivingDex_BTN.Name = "LivingDex_BTN";
             this.LivingDex_BTN.Size = new System.Drawing.Size(102, 25);
             this.LivingDex_BTN.TabIndex = 11;
@@ -313,7 +314,7 @@ namespace WangPlugin.GUI
             // SortBox
             // 
             this.SortBox.FormattingEnabled = true;
-            this.SortBox.Location = new System.Drawing.Point(17, 75);
+            this.SortBox.Location = new System.Drawing.Point(11, 84);
             this.SortBox.Name = "SortBox";
             this.SortBox.Size = new System.Drawing.Size(273, 25);
             this.SortBox.TabIndex = 12;
@@ -321,7 +322,7 @@ namespace WangPlugin.GUI
             // Legal_BTN
             // 
             this.Legal_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.Legal_BTN.Location = new System.Drawing.Point(515, 43);
+            this.Legal_BTN.Location = new System.Drawing.Point(521, 58);
             this.Legal_BTN.Name = "Legal_BTN";
             this.Legal_BTN.Size = new System.Drawing.Size(102, 25);
             this.Legal_BTN.TabIndex = 13;
@@ -332,7 +333,7 @@ namespace WangPlugin.GUI
             // LegalAll_BTN
             // 
             this.LegalAll_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.LegalAll_BTN.Location = new System.Drawing.Point(623, 43);
+            this.LegalAll_BTN.Location = new System.Drawing.Point(629, 58);
             this.LegalAll_BTN.Name = "LegalAll_BTN";
             this.LegalAll_BTN.Size = new System.Drawing.Size(102, 25);
             this.LegalAll_BTN.TabIndex = 14;
@@ -343,7 +344,7 @@ namespace WangPlugin.GUI
             // ClearAll_BTN
             // 
             this.ClearAll_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.ClearAll_BTN.Location = new System.Drawing.Point(623, 74);
+            this.ClearAll_BTN.Location = new System.Drawing.Point(629, 90);
             this.ClearAll_BTN.Name = "ClearAll_BTN";
             this.ClearAll_BTN.Size = new System.Drawing.Size(102, 25);
             this.ClearAll_BTN.TabIndex = 15;
@@ -354,7 +355,7 @@ namespace WangPlugin.GUI
             // RandomPID_BTN
             // 
             this.RandomPID_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.RandomPID_BTN.Location = new System.Drawing.Point(404, 43);
+            this.RandomPID_BTN.Location = new System.Drawing.Point(398, 52);
             this.RandomPID_BTN.Name = "RandomPID_BTN";
             this.RandomPID_BTN.Size = new System.Drawing.Size(102, 25);
             this.RandomPID_BTN.TabIndex = 16;
@@ -365,7 +366,7 @@ namespace WangPlugin.GUI
             // Sort_BTN
             // 
             this.Sort_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.Sort_BTN.Location = new System.Drawing.Point(296, 75);
+            this.Sort_BTN.Location = new System.Drawing.Point(290, 83);
             this.Sort_BTN.Name = "Sort_BTN";
             this.Sort_BTN.Size = new System.Drawing.Size(102, 25);
             this.Sort_BTN.TabIndex = 17;
@@ -376,7 +377,7 @@ namespace WangPlugin.GUI
             // DeleteBox_BTN
             // 
             this.DeleteBox_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.DeleteBox_BTN.Location = new System.Drawing.Point(515, 74);
+            this.DeleteBox_BTN.Location = new System.Drawing.Point(521, 90);
             this.DeleteBox_BTN.Name = "DeleteBox_BTN";
             this.DeleteBox_BTN.Size = new System.Drawing.Size(102, 25);
             this.DeleteBox_BTN.TabIndex = 18;
@@ -384,21 +385,10 @@ namespace WangPlugin.GUI
             this.DeleteBox_BTN.UseVisualStyleBackColor = true;
             this.DeleteBox_BTN.Click += new System.EventHandler(this.DeleteBox_BTN_Click);
             // 
-            // Clone_BTN
-            // 
-            this.Clone_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.Clone_BTN.Location = new System.Drawing.Point(404, 75);
-            this.Clone_BTN.Name = "Clone_BTN";
-            this.Clone_BTN.Size = new System.Drawing.Size(102, 25);
-            this.Clone_BTN.TabIndex = 19;
-            this.Clone_BTN.Text = "复制编辑器";
-            this.Clone_BTN.UseVisualStyleBackColor = true;
-            this.Clone_BTN.Click += new System.EventHandler(this.Clone_BTN_Click);
-            // 
             // GODex_BTN
             // 
             this.GODex_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.GODex_BTN.Location = new System.Drawing.Point(731, 11);
+            this.GODex_BTN.Location = new System.Drawing.Point(398, 83);
             this.GODex_BTN.Name = "GODex_BTN";
             this.GODex_BTN.Size = new System.Drawing.Size(102, 26);
             this.GODex_BTN.TabIndex = 20;
@@ -406,29 +396,38 @@ namespace WangPlugin.GUI
             this.GODex_BTN.UseVisualStyleBackColor = true;
             this.GODex_BTN.Click += new System.EventHandler(this.GODex_BTN_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.GODex_BTN);
+            this.groupBox1.Controls.Add(this.Sort_BTN);
+            this.groupBox1.Controls.Add(this.RandomPID_BTN);
+            this.groupBox1.Controls.Add(this.SortBox);
+            this.groupBox1.Controls.Add(this.LGLabel);
+            this.groupBox1.Controls.Add(this.OTLabel);
+            this.groupBox1.Controls.Add(this.SIDLabel);
+            this.groupBox1.Controls.Add(this.TIDLabel);
+            this.groupBox1.Controls.Add(this.GenderBox);
+            this.groupBox1.Controls.Add(this.LanguageBox);
+            this.groupBox1.Controls.Add(this.OT_Name);
+            this.groupBox1.Controls.Add(this.SIDBox);
+            this.groupBox1.Controls.Add(this.TIDBox);
+            this.groupBox1.Controls.Add(this.Gen_BTN);
+            this.groupBox1.Location = new System.Drawing.Point(5, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(510, 121);
+            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "编辑全部箱子";
+            // 
             // DexBuildForm
             // 
-            this.ClientSize = new System.Drawing.Size(837, 105);
-            this.Controls.Add(this.GODex_BTN);
-            this.Controls.Add(this.Clone_BTN);
+            this.ClientSize = new System.Drawing.Size(738, 129);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.DeleteBox_BTN);
-            this.Controls.Add(this.Sort_BTN);
-            this.Controls.Add(this.RandomPID_BTN);
             this.Controls.Add(this.ClearAll_BTN);
             this.Controls.Add(this.LegalAll_BTN);
             this.Controls.Add(this.Legal_BTN);
-            this.Controls.Add(this.SortBox);
             this.Controls.Add(this.LivingDex_BTN);
-            this.Controls.Add(this.LGLabel);
-            this.Controls.Add(this.OTLabel);
-            this.Controls.Add(this.SIDLabel);
-            this.Controls.Add(this.TIDLabel);
-            this.Controls.Add(this.GenderBox);
-            this.Controls.Add(this.LanguageBox);
-            this.Controls.Add(this.OT_Name);
-            this.Controls.Add(this.SIDBox);
-            this.Controls.Add(this.TIDBox);
-            this.Controls.Add(this.Gen_BTN);
             this.Controls.Add(this.BuildDex_BTN);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -437,8 +436,9 @@ namespace WangPlugin.GUI
             this.Name = "DexBuildForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Super Wang";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
         private int GetLanguageBox7()
@@ -621,52 +621,8 @@ namespace WangPlugin.GUI
             SAV.SAV.SortBoxes();
             SAV.ReloadSlots();
         }
-        public void SetPkm(ISaveFileProvider SaveFileEditor)
-        {
-            var sav = SaveFileEditor.SAV;
-            List<PKM> PKL = new();
-            for (int i = 0; i < 30; i++)
-            {
-                var pk = GetPkm(Editor.Data);
-                pk.Language = Editor.Data.Language;
-                pk.ClearNickname();
-                pk.OT_Name = RandomString(6);
-                pk.TID = rand.Next(65535);
-                pk.SID = rand.Next(65535);
-                PKL.Add(pk);
-            }
-            if (PKL.Count != 0)
-                sav.SetBoxData(PKL, sav.CurrentBox);
-            SaveFileEditor.ReloadSlots();
-        }
-        public PKM GetPkm(PKM pk)
-        {
-            List<IEncounterInfo> Results;
-            IEncounterInfo enc;
-            var setting = new SearchSettings
-            {
-                Species = pk.Species,
-                SearchEgg = false,
-                Version = (int)SAV.SAV.Version,
-
-            };
-            var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
-            var results = search.ToList();
-            if (results.Count != 0)
-            {
-                Results = results;
-                enc = Results[0];
-                var criteria = EncounterUtil.GetCriteria(enc, pk);
-                pk = enc.ConvertToPKM(SAV.SAV, criteria);
-            }
-            return pk;
-        }
-        public static string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-            return new string(Enumerable.Repeat(chars, length)
-                .Select(s => s[rand.Next(s.Length)]).ToArray());
-        }
+       
+        
         private void Gen_BTN_Click(object sender, EventArgs e)
         {
             Gen(SAV);
@@ -834,14 +790,16 @@ namespace WangPlugin.GUI
             SAV.SAV.ModifyBoxes(ClearPKM,SAV.CurrentBox,SAV.CurrentBox);
             SAV.ReloadSlots();
         }
-        private void Clone_BTN_Click(object sender, EventArgs e)
-        {
-            SetPkm(SAV);
-        }
-
+       
         private void GODex_BTN_Click(object sender, EventArgs e)
         {
             GODex(SAV);
+        }
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[rand.Next(s.Length)]).ToArray());
         }
         private void GODex(ISaveFileProvider SaveFileEditor)
         {
