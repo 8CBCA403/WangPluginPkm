@@ -648,8 +648,8 @@ namespace WangPlugin.GUI
                 {
                     pk.OT_Name = Trainer.OT_Name;
                     pk.OT_Gender = Trainer.Gender;
-                    pk.TID = Trainer.Tid;
-                    pk.SID = Trainer.Sid;
+                    pk.TrainerID7 = Trainer.Tid;
+                    pk.TrainerSID7 = Trainer.Sid;
                     pk.Language = Trainer.Language;
                     pk.ClearNickname();
                 }
@@ -712,8 +712,8 @@ namespace WangPlugin.GUI
                 {
                     pk.OT_Name = Trainer.OT_Name;
                     pk.OT_Gender = Trainer.Gender;
-                    pk.TID = Trainer.Tid;
-                    pk.SID = Trainer.Sid;
+                    pk.TrainerID7 = Trainer.Tid;
+                    pk.TrainerSID7 = Trainer.Sid;
                     pk.Language = Trainer.Language;
                     pk.ClearNickname();
                 }
@@ -770,8 +770,8 @@ namespace WangPlugin.GUI
                 {
                     pk.OT_Name = Trainer.OT_Name;
                     pk.OT_Gender = Trainer.Gender;
-                    pk.TID = Trainer.Tid;
-                    pk.SID = Trainer.Sid;
+                    pk.TrainerID7 = Trainer.Tid;
+                    pk.TrainerSID7 = Trainer.Sid;
                     pk.Language = Trainer.Language;
                     pk.ClearNickname();
 
