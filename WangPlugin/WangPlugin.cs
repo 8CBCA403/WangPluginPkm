@@ -15,12 +15,12 @@ namespace WangPlugin
         // Initialized on plugin load
         public ISaveFileProvider SaveFileEditor { get; private set; } = null!;
         public IPKMView PKMEditor { get; private set; } = null!;
-        private readonly CancellationTokenSource tokenSource = new();
-       
+        private object[] globalArgs;
+
         public  void Initialize(params object[] args)
         {
             Console.WriteLine($"Loading {Name}...");
-          
+            globalArgs = args;
             SaveFileEditor = (ISaveFileProvider)Array.Find(args, z => z is ISaveFileProvider);
             PKMEditor = (IPKMView)Array.Find(args, z => z is IPKMView);
             var menu = (ToolStrip)Array.Find(args, z => z is ToolStrip);

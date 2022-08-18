@@ -35,14 +35,14 @@ namespace WangPlugin.GUI
         private Button DeleteBox_BTN;
         private static Random rand = new Random();
         public static Stopwatch sw = new();
-        private Sort version = Sort.National;
+        public VersionClass version;
         private LanguageBoxSelect7 type7 = LanguageBoxSelect7.ENG;
         private LanguageBoxSelect type = LanguageBoxSelect.ENG;
+        public List<VersionClass> L = new();
         private Button GODex_BTN;
         private GroupBox groupBox1;
         private OT_Gender typeG = OT_Gender.Male;
         private ISaveFileProvider SAV { get; }
-        private IPKMView Editor { get; }
         enum LanguageBoxSelect
         {
             JPN,
@@ -69,55 +69,9 @@ namespace WangPlugin.GUI
             Male,
             Female,
         }
-        enum Sort
-        {
-            [Description("按照全国图鉴顺序")]
-            National,
-            [Description("Gen 1 关东图鉴（蓝，绿，红，黄）顺序")]
-            RYBG,
-            [Description("Gen 2 城都图鉴（金，银，水晶）顺序")]
-            GS,
-            [Description("Gen 3 丰缘图鉴（红，绿，蓝宝石）顺序")]
-            E,
-            [Description("Gen 3 关东图鉴（火红，叶绿）顺序")]
-            FRGL,
-            [Description("Gen 4 神奥图鉴（钻石，珍珠）顺序")]
-            DP,
-            [Description("Gen 4 神奥图鉴（白金）顺序")]
-            Platinum,
-            [Description("Gen 4 城都图鉴（心金，魂银）顺序")]
-            GHSS,
-            [Description("Gen 5 合众图鉴（黑，白）顺序")]
-            BW,
-            [Description("Gen 5 合众图鉴（黑2，白2）顺序")]
-            B2W2,
-            [Description("Gen 6 卡洛斯图鉴（X，Y）顺序")]
-            XY,
-            [Description("Gen 6 丰缘图鉴（始源红宝石，蓝宝石）顺序")]
-            ORAS,
-            [Description("Gen 7 阿罗拉图鉴（日，月）顺序")]
-            SM,
-            [Description("Gen 7 阿罗拉图鉴（究极日，月）顺序")]
-            USUM,
-            [Description("Gen 7 关东图鉴（去皮，去伊）顺序")]
-            LPLE,
-            [Description("Gen 8 伽勒尔图鉴（剑，盾）顺序")]
-            SWSH,
-            [Description("Gen 8 伽勒尔铠岛图鉴（剑盾DLC1）顺序")]
-            SWSH1,
-            [Description("Gen 8 伽勒尔冰冠图鉴（剑盾DLC2）顺序")]
-            SWSH2,
-            [Description("Gen 8 伽勒尔完整图鉴顺序")]
-            SWSH3,
-            [Description("Gen 8 神奥图鉴（明亮珍珠，晶灿钻石）顺序")]
-            BDSP,
-            [Description("Gen 8 洗翠图鉴（传说阿尔宙斯）顺序")]
-            PLA,    
-         }
         public DexBuildForm(ISaveFileProvider sav, IPKMView editor)
         {
             SAV = sav;
-            Editor = editor;
             InitializeComponent();
             BindingData(SAV);
         }
@@ -141,7 +95,7 @@ namespace WangPlugin.GUI
                 {
                     type = (LanguageBoxSelect)Enum.Parse(typeof(LanguageBoxSelect), this.LanguageBox.SelectedItem.ToString(), false);
                 };
-                
+
             }
             this.GenderBox.SelectedIndexChanged += (_, __) =>
             {
@@ -149,23 +103,16 @@ namespace WangPlugin.GUI
             };
             this.LanguageBox.SelectedIndex = 0;
             this.GenderBox.SelectedIndex = 0;
-            this.SortBox.DisplayMember = "Description";
-            this.SortBox.ValueMember = "Value";
-            this.SortBox.DataSource = Enum.GetValues(typeof(Sort))
-                .Cast<Enum>()
-                .Select(value => new
-                {
-                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
-                    value
-                })
-                .OrderBy(item => item.value)
-                .ToList();
-           
+            L = VersionClass.VersionList(sav);
+            var bindingSource1 = new BindingSource();
+            bindingSource1.DataSource = L;
+            SortBox.DataSource = bindingSource1.DataSource;
+            SortBox.DisplayMember = "Name";
+            SortBox.ValueMember = "Version";
             this.SortBox.SelectedIndexChanged += (_, __) =>
             {
-                version = (Sort)Enum.Parse(typeof(Sort), this.SortBox.SelectedValue.ToString(), false);
+                version =(VersionClass) this.SortBox.SelectedItem;
             };
-            this.SortBox.SelectedIndex = 0;
         }
         private void InitializeComponent()
         {
@@ -447,7 +394,7 @@ namespace WangPlugin.GUI
             switch (type7)
             {
                 case LanguageBoxSelect7.JPN:
-                    T=1;
+                    T = 1;
                     break;
                 case LanguageBoxSelect7.ENG:
                     T = 2;
@@ -621,8 +568,6 @@ namespace WangPlugin.GUI
             SAV.SAV.SortBoxes();
             SAV.ReloadSlots();
         }
-       
-        
         private void Gen_BTN_Click(object sender, EventArgs e)
         {
             Gen(SAV);
@@ -671,126 +616,121 @@ namespace WangPlugin.GUI
         }
         private void Sort_BTN_Click(object sender, EventArgs e)
         {
-            switch (version)
+            switch (version.Version)
             {
-                case Sort.National:
+                case "National":
                     {
                         SortByNationalDex();
                         break;
                     }
-                case Sort.RYBG:
+                case "RYBG":
                     {
                         SortByRegionalDex(Gen1_Kanto.GetSortFunctions());
                         break;
                     }
-                case Sort.GS:
+                case "GS":
                     {
                         SortByRegionalDex(Gen2_Johto.GetSortFunctions());
                         break;
                     }
-                case Sort.E:
+                case "E":
                     {
                         SortByRegionalDex(Gen3_Hoenn.GetSortFunctions());
                         break;
                     }
-                case Sort.FRGL:
+                case "FRGL":
                     {
                         SortByRegionalDex(Gen3_Kanto.GetSortFunctions());
                         break;
                     }
-                case Sort.DP:
+                case "DP":
                     {
                         SortByRegionalDex(Gen4_Sinnoh.GetDPSortFunctions());
                         break;
                     }
-                case Sort.Platinum:
+                case "Platinum":
                     {
                         SortByRegionalDex(Gen4_Sinnoh.GetPtSortFunctions());
                         break;
                     }
-                case Sort.GHSS:
+                case "GHSS":
                     {
                         SortByRegionalDex(Gen4_Johto.GetSortFunctions());
                         break;
                     }
-                case Sort.BW:
+                case "BW":
                     {
                         SortByRegionalDex(Gen5_Unova.GetBWSortFunctions());
                         break;
                     }
-                case Sort.B2W2:
+                case "B2W2":
                     {
                         SortByRegionalDex(Gen5_Unova.GetB2W2SortFunctions());
                         break;
                     }
-                case Sort.XY:
+                case "XY":
                     {
                         SortByRegionalDex(Gen6_Kalos.GetSortFunctions());
                         break;
                     }
-                case Sort.ORAS:
+                case "ORAS":
                     {
                         SortByRegionalDex(Gen6_Hoenn.GetSortFunctions());
                         break;
                     }
-                case Sort.SM:
+                case "SM":
                     {
                         SortByRegionalDex(Gen7_Alola.GetFullSMSortFunctions());
                         break;
                     }
-                case Sort.USUM:
+                case "USUM":
                     {
                         SortByRegionalDex(Gen7_Alola.GetFullUSUMSortFunctions());
                         break;
                     }
-                case Sort.LPLE:
+                case "LPLE":
                     {
                         SortByRegionalDex(Gen7_Kanto.GetSortFunctions());
                         break;
                     }
-                case Sort.SWSH:
+                case "SWSH":
                     {
                         SortByRegionalDex(Gen8_Galar.GetGalarDexSortFunctions());
                         break;
                     }
-                case Sort.SWSH1:
+                case "SWSH1":
                     {
                         SortByRegionalDex(Gen8_Galar.GetIoADexSortFunctions());
                         break;
                     }
-                case Sort.SWSH2:
+                case "SWSH2":
                     {
                         SortByRegionalDex(Gen8_Galar.GetCTDexSortFunction());
                         break;
                     }
-                case Sort.SWSH3:
+                case "SWSH3":
                     {
                         SortByRegionalDex(Gen8_Galar.GetFullGalarDexSortFunctions());
                         break;
                     }
-                case Sort.BDSP:
+                case "BDSP":
                     {
                         SortByRegionalDex(Gen8_Sinnoh.GetSortFunctions());
                         break;
                     }
-                case Sort.PLA:
+                case "PLA":
                     {
                         SortByRegionalDex(Gen8_Hisui.GetSortFunctions());
                         break;
                     }
-
-
-
-
             }
-            MessageBox.Show("顺序完成", "SuperWang");
+            MessageBox.Show("排序完成", "SuperWang");
         }
         private void DeleteBox_BTN_Click(object sender, EventArgs e)
         {
             SAV.SAV.ModifyBoxes(ClearPKM,SAV.CurrentBox,SAV.CurrentBox);
             SAV.ReloadSlots();
         }
-       
         private void GODex_BTN_Click(object sender, EventArgs e)
         {
             GODex(SAV);

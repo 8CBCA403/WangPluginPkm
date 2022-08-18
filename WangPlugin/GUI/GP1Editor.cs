@@ -33,6 +33,7 @@ namespace WangPlugin.GUI
         private Label Move2_label;
         private ComboBox GenderBox;
         private const string GoFilter = "Go Park Entity |*.gp1|All Files|*.*";
+        private const string PK8Filter = "SWSH/PLA pokemon file |*.pb8|*.pa8|All Files|*.*";
         private Button CovertToPB7;
         private TextBox CP_TextBox;
         private Label CP_Label;
@@ -351,7 +352,7 @@ namespace WangPlugin.GUI
             // 
             // GP1Editor
             // 
-            this.ClientSize = new System.Drawing.Size(526, 228);
+            this.ClientSize = new System.Drawing.Size(510, 228);
             this.Controls.Add(this.GeoName_Label);
             this.Controls.Add(this.GeoName_TextBox);
             this.Controls.Add(this.ShinyCheck);
@@ -508,6 +509,46 @@ namespace WangPlugin.GUI
             pkm=gpm.ConvertToPB7(SAV.SAV);
             Editor.PopulateFields(pkm, false);
             SAV.ReloadSlots();
+        }
+
+        private void CovertToPK8_Click(object sender, EventArgs e)
+        {
+            using var sfd = new OpenFileDialog
+            {
+                Filter = PK8Filter,
+                FilterIndex = 0,
+                RestoreDirectory = true,
+            };
+            if (sfd.ShowDialog() != DialogResult.OK)
+                return;
+            string path = sfd.FileName;
+            var pk = ImportPKFrom(path);
+            Editor.PopulateFields(pk, false);
+            SAV.ReloadSlots();
+        }
+        private PKM ImportPKFrom(string path)
+        {
+            PKM pkm=Editor.Data;
+            var data = File.ReadAllBytes(path);
+            string extension = Path.GetExtension(path);
+            if (data.Length != 344|| data.Length != 376)
+            {
+                MessageBox.Show(MessageStrings.MsgFileLoadIncompatible);
+               
+            }
+           switch(extension)
+            {
+                case "pk8":
+                    pkm = new PK8(data);
+                    break;
+                case "pb8":
+                    pkm = new PB8(data);
+                    break;
+                case "pa8":
+                    pkm = new PA8(data);
+                    break;
+            }
+            return pkm;
         }
     }
 }

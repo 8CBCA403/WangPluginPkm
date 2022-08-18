@@ -115,7 +115,6 @@ namespace WangPlugin.GUI
         private GroupBox groupBox4;
         private GroupBox groupBox5;
         public BindingList<Trainer> Tr=new();
-     
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
         public DistributionUI(ISaveFileProvider sav, IPKMView editor)
@@ -200,7 +199,7 @@ namespace WangPlugin.GUI
             // Clone_BTN
             // 
             this.Clone_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.Clone_BTN.Location = new System.Drawing.Point(287, 47);
+            this.Clone_BTN.Location = new System.Drawing.Point(287, 49);
             this.Clone_BTN.Name = "Clone_BTN";
             this.Clone_BTN.Size = new System.Drawing.Size(100, 25);
             this.Clone_BTN.TabIndex = 20;
@@ -222,7 +221,7 @@ namespace WangPlugin.GUI
             // Gift_BTN
             // 
             this.Gift_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Gift_BTN.Location = new System.Drawing.Point(393, 47);
+            this.Gift_BTN.Location = new System.Drawing.Point(393, 49);
             this.Gift_BTN.Name = "Gift_BTN";
             this.Gift_BTN.Size = new System.Drawing.Size(100, 25);
             this.Gift_BTN.TabIndex = 35;
@@ -685,7 +684,7 @@ namespace WangPlugin.GUI
                     pk.SetRandomEC();
                 }
                 if (ShinyBox.Checked)
-                    pk.PID = RandomShiny(pk);
+                    pk.PID = Shiny(pk);
           
                 PKL.Add(pk);
             }
@@ -818,7 +817,7 @@ namespace WangPlugin.GUI
                     pk.SetRandomEC();
                 }
                 if (ShinyBox.Checked)
-                    pk.PID = RandomShiny(pk);
+                    pk.PID = Shiny(pk);
                 c.RemoveAt(j);
                 PKL.Add(pk);
             }
@@ -835,7 +834,6 @@ namespace WangPlugin.GUI
             }
             SaveFileEditor.ReloadSlots();
         }
-        
         public PKM GetGodPkm(int s)
         {
             List<IEncounterInfo> Results;
@@ -862,226 +860,6 @@ namespace WangPlugin.GUI
             }
             return pk;
         }
-        public void MytheryPK(PKM pk)
-        {
-            var db = EncounterEvent.GetAllEvents();
-            var RawDB = new List<MysteryGift>(db);
-            int i = 0;
-            PKM pkc;
-            List < PKM > p= new();
-            int species = pk.Species;
-            IEnumerable<MysteryGift> res = RawDB;
-            if (species != -1) res = res.Where(pkm => pkm.Species == species);
-           res = res.Where(pkm => pkm.IsShiny == true);
-           // res = res.Where(pkm => pkm.Form == 1);
-            var results = res.ToArray();
-            if (results.Count() != 0)
-            {
-                foreach (MysteryGift gift in results)
-                {
-                    
-                    pkc=gift.ConvertToPKM(SAV.SAV);
-                    EntityConverter.TryMakePKMCompatible(pkc, pk, out var c, out pkc);
-                    #region
-                  /*  if (UseIVNature_BOX.Checked)
-                    {
-                        pkc.IV_HP = Convert.ToInt32(IVHPBox.Text);
-                        pkc.IV_ATK = Convert.ToInt32(IVATKBox.Text);
-                        pkc.IV_DEF = Convert.ToInt32(IVDEFBox.Text);
-                        pkc.IV_SPA = Convert.ToInt32(IVSPABox.Text);
-                        pkc.IV_SPD = Convert.ToInt32(IVSPDBox.Text);
-                        pkc.IV_SPE = Convert.ToInt32(IVSPEBox.Text);
-                        pkc.EV_HP = Convert.ToInt32(EVHPBox.Text);
-                        pkc.EV_ATK = Convert.ToInt32(EVATKBox.Text);
-                        pkc.EV_DEF = Convert.ToInt32(EVDEFBox.Text);
-                        pkc.EV_SPA = Convert.ToInt32(EVSPABox.Text);
-                        pkc.EV_SPD = Convert.ToInt32(EVSPDBox.Text);
-                        pkc.EV_SPE = Convert.ToInt32(EVSPEBox.Text);
-                        switch (Ntype)
-                        {
-                            case Nature.Hardy:
-                                pk.Nature = 0;
-                                break;
-                            case Nature.Lonely:
-                                pk.Nature = 1;
-                                break;
-                            case Nature.Brave:
-                                pk.Nature = 2;
-                                break;
-                            case Nature.Adamant:
-                                pk.Nature = 3;
-                                break;
-                            case Nature.Naughty:
-                                pk.Nature = 4;
-                                break;
-                            case Nature.Bold:
-                                pk.Nature = 5;
-                                break;
-                            case Nature.Docile:
-                                pk.Nature = 6;
-                                break;
-                            case Nature.Relaxed:
-                                pk.Nature = 7;
-                                break;
-                            case Nature.Impish:
-                                pk.Nature = 8;
-                                break;
-                            case Nature.Lax:
-                                pk.Nature = 9;
-                                break;
-                            case Nature.Timid:
-                                pk.Nature = 10;
-                                break;
-                            case Nature.Hasty:
-                                pk.Nature = 11;
-                                break;
-                            case Nature.Serious:
-                                pk.Nature = 12;
-                                break;
-                            case Nature.Jolly:
-                                pk.Nature = 13;
-                                break;
-                            case Nature.Naive:
-                                pk.Nature = 14;
-                                break;
-                            case Nature.Modest:
-                                pk.Nature = 15;
-                                break;
-                            case Nature.Mild:
-                                pk.Nature = 16;
-                                break;
-                            case Nature.Quiet:
-                                pk.Nature = 17;
-                                break;
-                            case Nature.Bashful:
-                                pk.Nature = 18;
-                                break;
-                            case Nature.Rash:
-                                pk.Nature = 19;
-                                break;
-                            case Nature.Calm:
-                                pk.Nature = 20;
-                                break;
-                            case Nature.Gentle:
-                                pk.Nature = 21;
-                                break;
-                            case Nature.Sassy:
-                                pk.Nature = 22;
-                                break;
-                            case Nature.Careful:
-                                pk.Nature = 23;
-                                break;
-                            case Nature.Quirky:
-                                pk.Nature = 24;
-                                break;
-                        }
-                        switch (Ntype)
-                        {
-                            case Nature.Hardy:
-                                pkc.Nature = 0;
-                                break;
-                            case Nature.Lonely:
-                                pkc.Nature = 1;
-                                break;
-                            case Nature.Brave:
-                                pkc.Nature = 2;
-                                break;
-                            case Nature.Adamant:
-                                pkc.Nature = 3;
-                                break;
-                            case Nature.Naughty:
-                                pkc.Nature = 4;
-                                break;
-                            case Nature.Bold:
-                                pkc.Nature = 5;
-                                break;
-                            case Nature.Docile:
-                                pkc.Nature = 6;
-                                break;
-                            case Nature.Relaxed:
-                                pkc.Nature = 7;
-                                break;
-                            case Nature.Impish:
-                                pkc.Nature = 8;
-                                break;
-                            case Nature.Lax:
-                                pkc.Nature = 9;
-                                break;
-                            case Nature.Timid:
-                                pkc.Nature = 10;
-                                break;
-                            case Nature.Hasty:
-                                pkc.Nature = 11;
-                                break;
-                            case Nature.Serious:
-                                pkc.Nature = 12;
-                                break;
-                            case Nature.Jolly:
-                                pkc.Nature = 13;
-                                break;
-                            case Nature.Naive:
-                                pkc.Nature = 14;
-                                break;
-                            case Nature.Modest:
-                                pk.Nature = 15;
-                                break;
-                            case Nature.Mild:
-                                pkc.Nature = 16;
-                                break;
-                            case Nature.Quiet:
-                                pkc.Nature = 17;
-                                break;
-                            case Nature.Bashful:
-                                pkc.Nature = 18;
-                                break;
-                            case Nature.Rash:
-                                pkc.Nature = 19;
-                                break;
-                            case Nature.Calm:
-                                pkc.Nature = 20;
-                                break;
-                            case Nature.Gentle:
-                                pkc.Nature = 21;
-                                break;
-                            case Nature.Sassy:
-                                pkc.Nature = 22;
-                                break;
-                            case Nature.Careful:
-                                pkc.Nature = 23;
-                                break;
-                            case Nature.Quirky:
-                                pkc.Nature = 24;
-                                break;
-                        }*/
-                        #endregion
-                        pkc.StatNature = pkc.Nature;
-                    
-                    if (SetTrainer_Box.Checked)
-                    {
-                        i++;
-                        var T = RandomT(Tr,i);
-                        pkc.OT_Name = T.OT_Name;
-                        pkc.OT_Gender = T.Gender;
-                        pkc.TrainerID7 = T.Tid;
-                        pkc.TrainerSID7 = T.Sid;
-                        pkc.Language = T.Language;
-                        
-                    }
-                        p.Add(pkc);
-                }
-            }
-            MessageBox.Show($"{p.Count()}");
-            var BoxData = SAV.SAV.BoxData;
-            IList<PKM> arr2 = BoxData;
-            List<int> list = FindAllEmptySlots(arr2, 0);
-            for (int j = 0; j < p.Count; j++)
-            {
-                int index = list[j];
-                SAV.SAV.SetBoxSlotAtIndex(p[j], index);
-               
-            }
-            
-        }
         private static List<int> FindAllEmptySlots(IList<PKM> data, int start)
         {
             List<int> list = new List<int>();
@@ -1094,12 +872,8 @@ namespace WangPlugin.GUI
             }
             return list;
         }
-        private static uint RandomShiny(PKM pk)
+        private static uint Shiny(PKM pk)
         {
-            //  Random myObject = new Random();
-            //   var r = (uint)myObject.Next(0, 8);
-            //   if (pk.Gen8 == true)
-            //  r = (uint)myObject.Next(0, 16);
             return (((uint)(pk.TID ^ pk.SID) ^ (pk.PID & 0xFFFF) ^ 1) << 16) | (pk.PID & 0xFFFF);
         }
         private static Trainer RandomT(IList<Trainer> T,int i)
@@ -1118,7 +892,6 @@ namespace WangPlugin.GUI
             pk.OT_Gender = Trainer.Gender;
             Editor.PopulateFields(pk);
         }
-      
         private void Handle_MoveShop(PKM pk)
         {
             LegalityAnalysis la;
@@ -1242,7 +1015,226 @@ namespace WangPlugin.GUI
         {
             SAV.SAV.ModifyBoxes(Level);
         }
+        #region
+        /* public void MytheryPK(PKM pk)
+         {
+             var db = EncounterEvent.GetAllEvents();
+             var RawDB = new List<MysteryGift>(db);
+             int i = 0;
+             PKM pkc;
+             List<PKM> p = new();
+             int species = pk.Species;
+             IEnumerable<MysteryGift> res = RawDB;
+             if (species != -1) res = res.Where(pkm => pkm.Species == species);
+             res = res.Where(pkm => pkm.IsShiny == true);
+             // res = res.Where(pkm => pkm.Form == 1);
+             var results = res.ToArray();
+             if (results.Count() != 0)
+             {
+                 foreach (MysteryGift gift in results)
+                 {
 
- 
+                     pkc = gift.ConvertToPKM(SAV.SAV);
+                     EntityConverter.TryMakePKMCompatible(pkc, pk, out var c, out pkc);
+                       if (UseIVNature_BOX.Checked)
+                       {
+                           pkc.IV_HP = Convert.ToInt32(IVHPBox.Text);
+                           pkc.IV_ATK = Convert.ToInt32(IVATKBox.Text);
+                           pkc.IV_DEF = Convert.ToInt32(IVDEFBox.Text);
+                           pkc.IV_SPA = Convert.ToInt32(IVSPABox.Text);
+                           pkc.IV_SPD = Convert.ToInt32(IVSPDBox.Text);
+                           pkc.IV_SPE = Convert.ToInt32(IVSPEBox.Text);
+                           pkc.EV_HP = Convert.ToInt32(EVHPBox.Text);
+                           pkc.EV_ATK = Convert.ToInt32(EVATKBox.Text);
+                           pkc.EV_DEF = Convert.ToInt32(EVDEFBox.Text);
+                           pkc.EV_SPA = Convert.ToInt32(EVSPABox.Text);
+                           pkc.EV_SPD = Convert.ToInt32(EVSPDBox.Text);
+                           pkc.EV_SPE = Convert.ToInt32(EVSPEBox.Text);
+                           switch (Ntype)
+                           {
+                               case Nature.Hardy:
+                                   pk.Nature = 0;
+                                   break;
+                               case Nature.Lonely:
+                                   pk.Nature = 1;
+                                   break;
+                               case Nature.Brave:
+                                   pk.Nature = 2;
+                                   break;
+                               case Nature.Adamant:
+                                   pk.Nature = 3;
+                                   break;
+                               case Nature.Naughty:
+                                   pk.Nature = 4;
+                                   break;
+                               case Nature.Bold:
+                                   pk.Nature = 5;
+                                   break;
+                               case Nature.Docile:
+                                   pk.Nature = 6;
+                                   break;
+                               case Nature.Relaxed:
+                                   pk.Nature = 7;
+                                   break;
+                               case Nature.Impish:
+                                   pk.Nature = 8;
+                                   break;
+                               case Nature.Lax:
+                                   pk.Nature = 9;
+                                   break;
+                               case Nature.Timid:
+                                   pk.Nature = 10;
+                                   break;
+                               case Nature.Hasty:
+                                   pk.Nature = 11;
+                                   break;
+                               case Nature.Serious:
+                                   pk.Nature = 12;
+                                   break;
+                               case Nature.Jolly:
+                                   pk.Nature = 13;
+                                   break;
+                               case Nature.Naive:
+                                   pk.Nature = 14;
+                                   break;
+                               case Nature.Modest:
+                                   pk.Nature = 15;
+                                   break;
+                               case Nature.Mild:
+                                   pk.Nature = 16;
+                                   break;
+                               case Nature.Quiet:
+                                   pk.Nature = 17;
+                                   break;
+                               case Nature.Bashful:
+                                   pk.Nature = 18;
+                                   break;
+                               case Nature.Rash:
+                                   pk.Nature = 19;
+                                   break;
+                               case Nature.Calm:
+                                   pk.Nature = 20;
+                                   break;
+                               case Nature.Gentle:
+                                   pk.Nature = 21;
+                                   break;
+                               case Nature.Sassy:
+                                   pk.Nature = 22;
+                                   break;
+                               case Nature.Careful:
+                                   pk.Nature = 23;
+                                   break;
+                               case Nature.Quirky:
+                                   pk.Nature = 24;
+                                   break;
+                           }
+                           switch (Ntype)
+                           {
+                               case Nature.Hardy:
+                                   pkc.Nature = 0;
+                                   break;
+                               case Nature.Lonely:
+                                   pkc.Nature = 1;
+                                   break;
+                               case Nature.Brave:
+                                   pkc.Nature = 2;
+                                   break;
+                               case Nature.Adamant:
+                                   pkc.Nature = 3;
+                                   break;
+                               case Nature.Naughty:
+                                   pkc.Nature = 4;
+                                   break;
+                               case Nature.Bold:
+                                   pkc.Nature = 5;
+                                   break;
+                               case Nature.Docile:
+                                   pkc.Nature = 6;
+                                   break;
+                               case Nature.Relaxed:
+                                   pkc.Nature = 7;
+                                   break;
+                               case Nature.Impish:
+                                   pkc.Nature = 8;
+                                   break;
+                               case Nature.Lax:
+                                   pkc.Nature = 9;
+                                   break;
+                               case Nature.Timid:
+                                   pkc.Nature = 10;
+                                   break;
+                               case Nature.Hasty:
+                                   pkc.Nature = 11;
+                                   break;
+                               case Nature.Serious:
+                                   pkc.Nature = 12;
+                                   break;
+                               case Nature.Jolly:
+                                   pkc.Nature = 13;
+                                   break;
+                               case Nature.Naive:
+                                   pkc.Nature = 14;
+                                   break;
+                               case Nature.Modest:
+                                   pk.Nature = 15;
+                                   break;
+                               case Nature.Mild:
+                                   pkc.Nature = 16;
+                                   break;
+                               case Nature.Quiet:
+                                   pkc.Nature = 17;
+                                   break;
+                               case Nature.Bashful:
+                                   pkc.Nature = 18;
+                                   break;
+                               case Nature.Rash:
+                                   pkc.Nature = 19;
+                                   break;
+                               case Nature.Calm:
+                                   pkc.Nature = 20;
+                                   break;
+                               case Nature.Gentle:
+                                   pkc.Nature = 21;
+                                   break;
+                               case Nature.Sassy:
+                                   pkc.Nature = 22;
+                                   break;
+                               case Nature.Careful:
+                                   pkc.Nature = 23;
+                                   break;
+                               case Nature.Quirky:
+                                   pkc.Nature = 24;
+                                   break;
+                           }
+
+                     pkc.StatNature = pkc.Nature;
+
+                     if (SetTrainer_Box.Checked)
+                     {
+                         i++;
+                         var T = RandomT(Tr, i);
+                         pkc.OT_Name = T.OT_Name;
+                         pkc.OT_Gender = T.Gender;
+                         pkc.TrainerID7 = T.Tid;
+                         pkc.TrainerSID7 = T.Sid;
+                         pkc.Language = T.Language;
+
+                     }
+                     p.Add(pkc);
+                 }
+             }
+             MessageBox.Show($"{p.Count()}");
+             var BoxData = SAV.SAV.BoxData;
+             IList<PKM> arr2 = BoxData;
+             List<int> list = FindAllEmptySlots(arr2, 0);
+             for (int j = 0; j < p.Count; j++)
+             {
+                 int index = list[j];
+                 SAV.SAV.SetBoxSlotAtIndex(p[j], index);
+
+             }
+
+         }*/
+        #endregion
     }
 }
