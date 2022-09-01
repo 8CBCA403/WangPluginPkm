@@ -21,13 +21,13 @@ namespace WangPlugin
             results = results.Distinct(comparer); // only distinct objects
             return results;
         }
-        private static IEnumerable<IEncounterInfo> GetAllSpeciesFormEncounters(int species, PersonalTable pt, IReadOnlyList<GameVersion> versions, PKM pk)
+        private static IEnumerable<IEncounterInfo> GetAllSpeciesFormEncounters(int species, IPersonalTable pt, IReadOnlyList<GameVersion> versions, PKM pk)
         {
-            var pi = pt.GetFormEntry(species, 0);
+            var pi = pt.GetFormEntry((ushort)species, 0);
             var fc = pi.FormCount;
             for (int f = 0; f < fc; f++)
             {
-                if (FormInfo.IsBattleOnlyForm(species, f, pk.Format))
+                if (FormInfo.IsBattleOnlyForm((ushort)species, (byte)f, pk.Format))
                     continue;
                 var encs = GetEncounters(species, f, pk, versions);
                 foreach (var enc in encs)
@@ -42,8 +42,8 @@ namespace WangPlugin
         /// <returns></returns>
         public static IEnumerable<IEncounterInfo> GetEncounters(int species, int form, PKM pkm, IReadOnlyList<GameVersion> versions)
         {
-            pkm.Species = species;
-            pkm.Form = form;
+            pkm.Species = (ushort)species;
+            pkm.Form = (byte)form;
             pkm.SetGender(pkm.GetSaneGender());
             return EncounterMovesetGenerator.GenerateEncounters(pkm, null, versions);
         }

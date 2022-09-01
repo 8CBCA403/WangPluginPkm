@@ -35,7 +35,11 @@ namespace WangPlugin.GUI
         private Button DeleteBox_BTN;
         private static Random rand = new Random();
         public static Stopwatch sw = new();
-        public VersionClass version;
+        public VersionClass version = new VersionClass
+        {
+            Name = "按照全国图鉴顺序",
+            Version = "National",
+        };
         private LanguageBoxSelect7 type7 = LanguageBoxSelect7.ENG;
         private LanguageBoxSelect type = LanguageBoxSelect.ENG;
         public List<VersionClass> L = new();
@@ -746,11 +750,11 @@ namespace WangPlugin.GUI
             List<IEncounterInfo> Results;
             IEncounterInfo enc;
             PKM pk ;
-            int j;
+            ushort j;
             List<PKM> pkMList;
             List<PKM> p=new();
             pkMList = (List<PKM>)SaveFileEditor.SAV.GetAllPKM();
-            MessageBox.Show($"{pkMList.Count()}");
+           // MessageBox.Show($"{pkMList.Count()}");
             for (int i = 0; i < pkMList.Count(); i++)
             {
                 pk = pkMList[i];

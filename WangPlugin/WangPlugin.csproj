@@ -8,6 +8,7 @@
     <Nullable>disable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>Resources\img\icon.ico</ApplicationIcon>
+    <Platforms>AnyCPU;x64</Platforms>
     
   </PropertyGroup>
 
@@ -27,13 +28,11 @@
       <IncludeAssets>runtime; compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="IndexRange" Version="1.0.2" />
+    <PackageReference Include="Microsoft.Z3" Version="4.11.0" />
+    <PackageReference Include="PKHeX.Core" Version="22.8.31" />
     <PackageReference Include="System.Memory" Version="4.5.4" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="PKHeX.Core">
-      <HintPath>deps\PKHeX.Core.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
     <Reference Include="PKHeX.Core.AutoMod">
       <HintPath>deps\PKHeX.Core.AutoMod.dll</HintPath>
     </Reference>

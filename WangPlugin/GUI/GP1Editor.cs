@@ -418,10 +418,10 @@ namespace WangPlugin.GUI
         {
             byte a = 0;
             byte b = 0;
-            pk.Species=SpeciesName.GetSpeciesID(SpeciesBox.Text, 9);
+            pk.Species= (ushort)SpeciesName.GetSpeciesID(SpeciesBox.Text, 9);
             gp.Username1 = OT_Name.Text;
-            var Move1 = Array.IndexOf(GameInfo.Strings.movelist,Move1_TextBox.Text);
-            var Move2 = Array.IndexOf(GameInfo.Strings.movelist,Move2_TextBox.Text);
+            ushort Move1 = (ushort)Array.IndexOf(GameInfo.Strings.movelist,Move1_TextBox.Text);
+            ushort Move2 = (ushort)Array.IndexOf(GameInfo.Strings.movelist,Move2_TextBox.Text);
           //gp.Username2 = OName.Text;
             gp.Nickname = NickNameBox.Text;
             gp.IV_HP =Convert.ToInt16(HP_TextBox.Text);

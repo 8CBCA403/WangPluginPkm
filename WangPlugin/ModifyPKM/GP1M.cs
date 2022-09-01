@@ -76,9 +76,9 @@ namespace WangPlugin
             set => WriteByte(User_name2, Encoding.ASCII.GetBytes(value));
         }
 
-        public int Species
+        public ushort Species
         {
-            get => ReadInt32LittleEndian(Data.AsSpan(0x28));
+            get => (ushort)ReadInt32LittleEndian(Data.AsSpan(0x28));
             set => WriteInt32LittleEndian(Data.AsSpan(0x28), (ushort)value);
         }
         public int CP
@@ -159,14 +159,14 @@ namespace WangPlugin
         }
 
         // https://bulbapedia.bulbagarden.net/wiki/List_of_moves_in_Pok%C3%A9mon_GO
-        public int Move1
+        public ushort Move1
         {
-            get => ReadInt32LittleEndian(Data.AsSpan(0x74));
+            get => (ushort)ReadInt32LittleEndian(Data.AsSpan(0x74));
             set => WriteInt32LittleEndian(Data.AsSpan(0x74), value);
         }
-        public int Move2
+        public ushort Move2
         {
-            get => ReadInt32LittleEndian(Data.AsSpan(0x78)); // uses Go Indexes
+            get => (ushort)ReadInt32LittleEndian(Data.AsSpan(0x78)); // uses Go Indexes
             set => WriteInt32LittleEndian(Data.AsSpan(0x78), value);
         }
 

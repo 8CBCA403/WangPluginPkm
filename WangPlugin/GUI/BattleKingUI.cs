@@ -20,8 +20,6 @@ namespace WangPlugin.GUI
         private Button ImportPKM_BTN;
         private TextBox ConditionBox;
         private Button ClearAllBox_BTN;
-        private RichTextBox Test_Box;
-        private Button Test_BTN;
 
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
@@ -45,8 +43,6 @@ namespace WangPlugin.GUI
             this.ImportPKM_BTN = new System.Windows.Forms.Button();
             this.ConditionBox = new System.Windows.Forms.TextBox();
             this.ClearAllBox_BTN = new System.Windows.Forms.Button();
-            this.Test_Box = new System.Windows.Forms.RichTextBox();
-            this.Test_BTN = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LoadBattleTeam_BTN
@@ -118,30 +114,9 @@ namespace WangPlugin.GUI
             this.ClearAllBox_BTN.UseVisualStyleBackColor = true;
             this.ClearAllBox_BTN.Click += new System.EventHandler(this.ClearAllBox_BTN_Click);
             // 
-            // Test_Box
-            // 
-            this.Test_Box.Location = new System.Drawing.Point(851, 12);
-            this.Test_Box.Name = "Test_Box";
-            this.Test_Box.Size = new System.Drawing.Size(283, 176);
-            this.Test_Box.TabIndex = 8;
-            this.Test_Box.Text = "";
-            // 
-            // Test_BTN
-            // 
-            this.Test_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.Test_BTN.Location = new System.Drawing.Point(922, 194);
-            this.Test_BTN.Name = "Test_BTN";
-            this.Test_BTN.Size = new System.Drawing.Size(149, 32);
-            this.Test_BTN.TabIndex = 9;
-            this.Test_BTN.Text = "测试";
-            this.Test_BTN.UseVisualStyleBackColor = true;
-            this.Test_BTN.Click += new System.EventHandler(this.Test_BTN_Click);
-            // 
             // BattleKingUI
             // 
-            this.ClientSize = new System.Drawing.Size(1158, 231);
-            this.Controls.Add(this.Test_BTN);
-            this.Controls.Add(this.Test_Box);
+            this.ClientSize = new System.Drawing.Size(856, 231);
             this.Controls.Add(this.ClearAllBox_BTN);
             this.Controls.Add(this.ConditionBox);
             this.Controls.Add(this.ImportPKM_BTN);
@@ -201,7 +176,7 @@ namespace WangPlugin.GUI
         }
         private void LoadTeamFromPSCode_BTN_Click(object sender, EventArgs e)
         {
-            var text = GetTextShowdownData(TranslatorZH(PSBox.Text.TrimEnd()));
+            var text = GetTextShowdownData(PSBox.Text.TrimEnd());
             if (string.IsNullOrWhiteSpace(text))
                 return;
             Import(text!);
@@ -358,7 +333,7 @@ namespace WangPlugin.GUI
 
         private void Test_BTN_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(TranslatorZH(Test_Box.Text.Trim()));
+ 
         }
     }
 }

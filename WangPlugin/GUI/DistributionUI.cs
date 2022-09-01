@@ -27,7 +27,7 @@ namespace WangPlugin.GUI
             Impish,Lax,Timid,Hasty,Serious,Jolly,Naive,Modest,
             Mild,Quiet,Bashful,Rash,Calm,Gentle,Sassy,Careful,Quirky,
         }
-        public enum Ball : int
+        public enum Ball
         {
             None = 0,
             Master = 1,
@@ -57,7 +57,7 @@ namespace WangPlugin.GUI
             Dream = 25,
             Beast = 26,
         }
-        public enum IVEVN:int
+        public enum IVEVN
         {
             [Description("物攻")]
             ATK,
@@ -71,14 +71,14 @@ namespace WangPlugin.GUI
             TANK,
 
         }
-        public enum CLONE : int
+        public enum CLONE 
         {
             [Description("复制一箱")]
             BOX,
             [Description("竖向复制5只")]
             FIVE,
         }
-        public enum TRAINER : int
+        public enum TRAINER 
         {
             [Description("覆盖一箱")]
             BOX,
@@ -644,6 +644,11 @@ namespace WangPlugin.GUI
             for (int i = 0; i <30; i++)
             {
                 var pk = Editor.Data.Clone();
+                pk.StatNature = Editor.Data.StatNature;
+                pk.Move1_PPUps = Editor.Data.Move1_PPUps;
+                pk.Move2_PPUps = Editor.Data.Move2_PPUps;
+                pk.Move3_PPUps = Editor.Data.Move3_PPUps;
+                pk.Move4_PPUps = Editor.Data.Move4_PPUps;
                 if (SetTrainer_Box.Checked)
                 {
                     pk.OT_Name = Trainer.OT_Name;
@@ -708,6 +713,11 @@ namespace WangPlugin.GUI
             for (int i = 0; i < 5; i++)
             {
                 var pk = Editor.Data.Clone();
+                pk.StatNature = Editor.Data.StatNature;
+                pk.Move1_PPUps = Editor.Data.Move1_PPUps;
+                pk.Move2_PPUps = Editor.Data.Move2_PPUps;
+                pk.Move3_PPUps = Editor.Data.Move3_PPUps;
+                pk.Move4_PPUps = Editor.Data.Move4_PPUps;
                 if (SetTrainer_Box.Checked)
                 {
                     pk.OT_Name = Trainer.OT_Name;
@@ -834,7 +844,7 @@ namespace WangPlugin.GUI
             }
             SaveFileEditor.ReloadSlots();
         }
-        public PKM GetGodPkm(int s)
+        public PKM GetGodPkm(ushort s)
         {
             List<IEncounterInfo> Results;
             IEncounterInfo enc;
@@ -1236,5 +1246,7 @@ namespace WangPlugin.GUI
 
          }*/
         #endregion
+
+     
     }
 }

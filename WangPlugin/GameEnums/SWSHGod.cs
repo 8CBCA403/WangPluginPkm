@@ -6,7 +6,7 @@ namespace WangPlugin
 {
     internal class SWSHGod
     {
-        public int Species { get; set; }
+        public ushort Species { get; set; }
         public int[] IVs { get; set; }
         public int[] EVs{ get; set; }
         public int Nature { get; set; }
