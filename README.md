@@ -3,6 +3,7 @@
 
 
  A pkhex plugin with several function. "make pokemon looks more real"
+ 使用方法见wiki
  
  Credits (in no particular order)
 - Bill Young, Mike Suleski, and Andrew Ringer for [RNGReporter]
