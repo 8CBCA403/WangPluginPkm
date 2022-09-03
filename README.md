@@ -50,13 +50,13 @@ which are used for unit testing.
 (https://github.com/chenzw95)
 - BernardoGiordano for many ideas on improving speed.
 (https://github.com/BernardoGiordano) 
-- olliz0r for developing and maintaining `sys-botbase` as well which is necessary for LiveHeX to work.
+- olliz0r for developing and maintaining sys-botbase as well which is necessary for LiveHeX to work.
 (https://github.com/olliz0r) 
 - SteveCookTU and [olliz0r] for [LedyLib] from which a lot of the NTR processing code is liberally referenced.
 (https://github.com/olliz0r)
 (https://github.com/SteveCookTU)
 (https://github.com/olliz0r/Ledybot/tree/master/LedyLib)
-- fishguy6564 for creating `USB-Botbase` (by extending sys-botbase).
+- fishguy6564 for creating USB-Botbase (by extending sys-botbase).
 (https://github.com/fishguy6564) 
 - FlatIcon for their icons. Author credits (Those Icons, Pixel perfect).
 (https://www.flaticon.com/)
