@@ -43,7 +43,6 @@ namespace WangPlugin.GUI
         private LanguageBoxSelect7 type7 = LanguageBoxSelect7.ENG;
         private LanguageBoxSelect type = LanguageBoxSelect.ENG;
         public List<VersionClass> L = new();
-        private Button GODex_BTN;
         private GroupBox groupBox1;
         private OT_Gender typeG = OT_Gender.Male;
         private ISaveFileProvider SAV { get; }
@@ -140,7 +139,6 @@ namespace WangPlugin.GUI
             this.RandomPID_BTN = new System.Windows.Forms.Button();
             this.Sort_BTN = new System.Windows.Forms.Button();
             this.DeleteBox_BTN = new System.Windows.Forms.Button();
-            this.GODex_BTN = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -336,20 +334,8 @@ namespace WangPlugin.GUI
             this.DeleteBox_BTN.UseVisualStyleBackColor = true;
             this.DeleteBox_BTN.Click += new System.EventHandler(this.DeleteBox_BTN_Click);
             // 
-            // GODex_BTN
-            // 
-            this.GODex_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.GODex_BTN.Location = new System.Drawing.Point(398, 83);
-            this.GODex_BTN.Name = "GODex_BTN";
-            this.GODex_BTN.Size = new System.Drawing.Size(102, 26);
-            this.GODex_BTN.TabIndex = 20;
-            this.GODex_BTN.Text = "生成GO图鉴";
-            this.GODex_BTN.UseVisualStyleBackColor = true;
-            this.GODex_BTN.Click += new System.EventHandler(this.GODex_BTN_Click);
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.GODex_BTN);
             this.groupBox1.Controls.Add(this.Sort_BTN);
             this.groupBox1.Controls.Add(this.RandomPID_BTN);
             this.groupBox1.Controls.Add(this.SortBox);

@@ -973,27 +973,27 @@ namespace WangPlugin.GUI
         {
             switch (T)
             {
-                case TRAINER.BOX:
-                    PKM[] p;
-                    int i = SAV.CurrentBox;
-                    p = SAV.SAV.GetBoxData(i);
-                    if (p.Count() != 0)
+            case TRAINER.BOX:
+                PKM[] p;
+                int i = SAV.CurrentBox;
+                p = SAV.SAV.GetBoxData(i);
+                if (p.Count() != 0)
+                {
+                    foreach (PKM pk in p)
                     {
-                        foreach (PKM pk in p)
-                        {
-                            pk.OT_Name = Trainer.OT_Name;
-                            pk.TrainerID7 = Trainer.Tid;
-                            pk.TrainerSID7 = Trainer.Sid;
-                            pk.Language = Trainer.Language;
-                            pk.OT_Gender = Trainer.Gender;
-                            pk.ClearNickname();
-                        }
+                        pk.OT_Name = Trainer.OT_Name;
+                        pk.TrainerID7 = Trainer.Tid;
+                        pk.TrainerSID7 = Trainer.Sid;
+                        pk.Language = Trainer.Language;
+                        pk.OT_Gender = Trainer.Gender;
+                        pk.ClearNickname();
                     }
-                    SAV.SAV.SetBoxData(p, i);
-                    break;
-                case TRAINER.EDITER:
-                    UseTrainer(Editor.Data);
-                    break;
+                }
+                SAV.SAV.SetBoxData(p, i);
+                break;
+            case TRAINER.EDITER:
+                UseTrainer(Editor.Data);
+                break;
             }
         }
         private void IVEVN_BTN_Click(object sender, EventArgs e)

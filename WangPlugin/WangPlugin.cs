@@ -12,10 +12,9 @@ namespace WangPlugin
         private const string ParentMenuParent = "Menu_Tools";
         public abstract string Name { get; }
         public abstract int Priority { get; }
-        // Initialized on plugin load
         public ISaveFileProvider SaveFileEditor { get; private set; } = null!;
         public IPKMView PKMEditor { get; private set; } = null!;
-        private object[] globalArgs;
+        public object[] globalArgs;
 
         public  void Initialize(params object[] args)
         {
@@ -25,7 +24,6 @@ namespace WangPlugin
             PKMEditor = (IPKMView)Array.Find(args, z => z is IPKMView);
             var menu = (ToolStrip)Array.Find(args, z => z is ToolStrip);
             LoadMenuStrip(menu);
-          //  ShowdownSetLoader.SetAPILegalitySettings();
 
         }
         private void LoadMenuStrip(ToolStrip menuStrip)
@@ -65,7 +63,7 @@ namespace WangPlugin
         public bool TryLoadFile(string filePath)
         {
             Console.WriteLine($"{Name} was provided with the file path, but chose to do nothing with it.");
-            return false; // no action taken
+            return false;
         }
     }
 }

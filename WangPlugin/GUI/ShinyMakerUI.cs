@@ -3,8 +3,6 @@ using System.Windows.Forms;
 using PKHeX.Core;
 using System.Collections.Generic;
 using System.Diagnostics;
-
-
 namespace WangPlugin.GUI
 {
     internal class ShinyMakerUI : Form

@@ -24,17 +24,7 @@ namespace WangPlugin.GUI
         private TextBox SIDResult;
         private CheckBox IDCheck;
         private CheckBox IDsCheck;
-        private TextBox BoxInput_TextBox;
-        private TextBox PriceOutPut_TextBox;
-        private Button PriceCalc_BTN;
-        private Label Price;
         private TextBox PIDHex;
-        private TextBox PricePerBox_TextBox;
-        private TextBox PricePerPKM_TextBox;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
         private Label TIDLabel;
         private Label SIDLabel;
         public const double E = 2.7182818284590451;
@@ -66,16 +56,6 @@ namespace WangPlugin.GUI
             this.SIDResult = new System.Windows.Forms.TextBox();
             this.IDCheck = new System.Windows.Forms.CheckBox();
             this.IDsCheck = new System.Windows.Forms.CheckBox();
-            this.BoxInput_TextBox = new System.Windows.Forms.TextBox();
-            this.PriceOutPut_TextBox = new System.Windows.Forms.TextBox();
-            this.PriceCalc_BTN = new System.Windows.Forms.Button();
-            this.Price = new System.Windows.Forms.Label();
-            this.PricePerBox_TextBox = new System.Windows.Forms.TextBox();
-            this.PricePerPKM_TextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.TIDLabel = new System.Windows.Forms.Label();
             this.SIDLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -83,7 +63,7 @@ namespace WangPlugin.GUI
             // CalcNature
             // 
             this.CalcNature.Font = new System.Drawing.Font("黑体", 9F);
-            this.CalcNature.Location = new System.Drawing.Point(359, 23);
+            this.CalcNature.Location = new System.Drawing.Point(315, 23);
             this.CalcNature.Name = "CalcNature";
             this.CalcNature.Size = new System.Drawing.Size(100, 25);
             this.CalcNature.TabIndex = 0;
@@ -93,7 +73,7 @@ namespace WangPlugin.GUI
             // 
             // PIDHex
             // 
-            this.PIDHex.Location = new System.Drawing.Point(147, 23);
+            this.PIDHex.Location = new System.Drawing.Point(103, 23);
             this.PIDHex.Name = "PIDHex";
             this.PIDHex.Size = new System.Drawing.Size(100, 25);
             this.PIDHex.TabIndex = 2;
@@ -101,17 +81,17 @@ namespace WangPlugin.GUI
             // PID
             // 
             this.PID.AutoSize = true;
-            this.PID.Font = new System.Drawing.Font("黑体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.PID.Location = new System.Drawing.Point(16, 25);
+            this.PID.Font = new System.Drawing.Font("黑体", 9F);
+            this.PID.Location = new System.Drawing.Point(12, 27);
             this.PID.Name = "PID";
-            this.PID.Size = new System.Drawing.Size(125, 18);
+            this.PID.Size = new System.Drawing.Size(111, 15);
             this.PID.TabIndex = 3;
             this.PID.Text = "通过PID算性格";
             // 
             // Nature
             // 
             this.Nature.Enabled = false;
-            this.Nature.Location = new System.Drawing.Point(253, 23);
+            this.Nature.Location = new System.Drawing.Point(209, 23);
             this.Nature.Name = "Nature";
             this.Nature.Size = new System.Drawing.Size(100, 25);
             this.Nature.TabIndex = 4;
@@ -119,7 +99,7 @@ namespace WangPlugin.GUI
             // CloseBTN
             // 
             this.CloseBTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.CloseBTN.Location = new System.Drawing.Point(729, 51);
+            this.CloseBTN.Location = new System.Drawing.Point(315, 147);
             this.CloseBTN.Name = "CloseBTN";
             this.CloseBTN.Size = new System.Drawing.Size(100, 25);
             this.CloseBTN.TabIndex = 5;
@@ -129,7 +109,7 @@ namespace WangPlugin.GUI
             // 
             // Hex1
             // 
-            this.Hex1.Location = new System.Drawing.Point(147, 51);
+            this.Hex1.Location = new System.Drawing.Point(103, 54);
             this.Hex1.Name = "Hex1";
             this.Hex1.Size = new System.Drawing.Size(100, 25);
             this.Hex1.TabIndex = 6;
@@ -137,14 +117,14 @@ namespace WangPlugin.GUI
             // Dec1
             // 
             this.Dec1.Enabled = false;
-            this.Dec1.Location = new System.Drawing.Point(253, 51);
+            this.Dec1.Location = new System.Drawing.Point(209, 54);
             this.Dec1.Name = "Dec1";
             this.Dec1.Size = new System.Drawing.Size(100, 25);
             this.Dec1.TabIndex = 7;
             // 
             // Dec2
             // 
-            this.Dec2.Location = new System.Drawing.Point(147, 84);
+            this.Dec2.Location = new System.Drawing.Point(103, 85);
             this.Dec2.Name = "Dec2";
             this.Dec2.Size = new System.Drawing.Size(100, 25);
             this.Dec2.TabIndex = 8;
@@ -152,7 +132,7 @@ namespace WangPlugin.GUI
             // Hex2
             // 
             this.Hex2.Enabled = false;
-            this.Hex2.Location = new System.Drawing.Point(253, 82);
+            this.Hex2.Location = new System.Drawing.Point(209, 85);
             this.Hex2.Name = "Hex2";
             this.Hex2.Size = new System.Drawing.Size(100, 25);
             this.Hex2.TabIndex = 9;
@@ -160,7 +140,7 @@ namespace WangPlugin.GUI
             // CalcHTD
             // 
             this.CalcHTD.Font = new System.Drawing.Font("黑体", 9F);
-            this.CalcHTD.Location = new System.Drawing.Point(359, 52);
+            this.CalcHTD.Location = new System.Drawing.Point(315, 53);
             this.CalcHTD.Name = "CalcHTD";
             this.CalcHTD.Size = new System.Drawing.Size(100, 25);
             this.CalcHTD.TabIndex = 10;
@@ -171,7 +151,7 @@ namespace WangPlugin.GUI
             // CalcDTH
             // 
             this.CalcDTH.Font = new System.Drawing.Font("黑体", 9F);
-            this.CalcDTH.Location = new System.Drawing.Point(359, 82);
+            this.CalcDTH.Location = new System.Drawing.Point(315, 85);
             this.CalcDTH.Name = "CalcDTH";
             this.CalcDTH.Size = new System.Drawing.Size(100, 26);
             this.CalcDTH.TabIndex = 11;
@@ -181,14 +161,14 @@ namespace WangPlugin.GUI
             // 
             // TID
             // 
-            this.TID.Location = new System.Drawing.Point(517, 23);
+            this.TID.Location = new System.Drawing.Point(103, 116);
             this.TID.Name = "TID";
             this.TID.Size = new System.Drawing.Size(100, 25);
             this.TID.TabIndex = 12;
             // 
             // SID
             // 
-            this.SID.Location = new System.Drawing.Point(517, 53);
+            this.SID.Location = new System.Drawing.Point(103, 147);
             this.SID.Name = "SID";
             this.SID.Size = new System.Drawing.Size(100, 25);
             this.SID.TabIndex = 13;
@@ -196,7 +176,7 @@ namespace WangPlugin.GUI
             // CalcID
             // 
             this.CalcID.Font = new System.Drawing.Font("黑体", 9F);
-            this.CalcID.Location = new System.Drawing.Point(729, 23);
+            this.CalcID.Location = new System.Drawing.Point(315, 116);
             this.CalcID.Name = "CalcID";
             this.CalcID.Size = new System.Drawing.Size(100, 26);
             this.CalcID.TabIndex = 14;
@@ -207,27 +187,27 @@ namespace WangPlugin.GUI
             // HTC
             // 
             this.HTC.AutoSize = true;
-            this.HTC.Font = new System.Drawing.Font("黑体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.HTC.Location = new System.Drawing.Point(7, 55);
+            this.HTC.Font = new System.Drawing.Font("黑体", 9F);
+            this.HTC.Location = new System.Drawing.Point(6, 57);
             this.HTC.Name = "HTC";
-            this.HTC.Size = new System.Drawing.Size(134, 18);
+            this.HTC.Size = new System.Drawing.Size(119, 15);
             this.HTC.TabIndex = 15;
             this.HTC.Text = "16进制转10进制";
             // 
             // CTH
             // 
             this.CTH.AutoSize = true;
-            this.CTH.Font = new System.Drawing.Font("黑体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.CTH.Location = new System.Drawing.Point(7, 89);
+            this.CTH.Font = new System.Drawing.Font("黑体", 9F);
+            this.CTH.Location = new System.Drawing.Point(6, 88);
             this.CTH.Name = "CTH";
-            this.CTH.Size = new System.Drawing.Size(134, 18);
+            this.CTH.Size = new System.Drawing.Size(119, 15);
             this.CTH.TabIndex = 16;
             this.CTH.Text = "10进制转16进制";
             // 
             // TIDResult
             // 
             this.TIDResult.Enabled = false;
-            this.TIDResult.Location = new System.Drawing.Point(623, 24);
+            this.TIDResult.Location = new System.Drawing.Point(209, 116);
             this.TIDResult.Name = "TIDResult";
             this.TIDResult.Size = new System.Drawing.Size(100, 25);
             this.TIDResult.TabIndex = 17;
@@ -235,7 +215,7 @@ namespace WangPlugin.GUI
             // SIDResult
             // 
             this.SIDResult.Enabled = false;
-            this.SIDResult.Location = new System.Drawing.Point(623, 51);
+            this.SIDResult.Location = new System.Drawing.Point(209, 147);
             this.SIDResult.Name = "SIDResult";
             this.SIDResult.Size = new System.Drawing.Size(100, 25);
             this.SIDResult.TabIndex = 18;
@@ -244,7 +224,7 @@ namespace WangPlugin.GUI
             // 
             this.IDCheck.AutoSize = true;
             this.IDCheck.Font = new System.Drawing.Font("黑体", 9F);
-            this.IDCheck.Location = new System.Drawing.Point(475, 84);
+            this.IDCheck.Location = new System.Drawing.Point(78, 176);
             this.IDCheck.Name = "IDCheck";
             this.IDCheck.Size = new System.Drawing.Size(125, 19);
             this.IDCheck.TabIndex = 19;
@@ -255,136 +235,38 @@ namespace WangPlugin.GUI
             // 
             this.IDsCheck.AutoSize = true;
             this.IDsCheck.Font = new System.Drawing.Font("黑体", 9F);
-            this.IDsCheck.Location = new System.Drawing.Point(623, 84);
+            this.IDsCheck.Location = new System.Drawing.Point(209, 176);
             this.IDsCheck.Name = "IDsCheck";
             this.IDsCheck.Size = new System.Drawing.Size(125, 19);
             this.IDsCheck.TabIndex = 20;
             this.IDsCheck.Text = "7位ID转5位ID";
             this.IDsCheck.UseVisualStyleBackColor = true;
             // 
-            // BoxInput_TextBox
-            // 
-            this.BoxInput_TextBox.Location = new System.Drawing.Point(131, 162);
-            this.BoxInput_TextBox.Name = "BoxInput_TextBox";
-            this.BoxInput_TextBox.Size = new System.Drawing.Size(42, 25);
-            this.BoxInput_TextBox.TabIndex = 21;
-            // 
-            // PriceOutPut_TextBox
-            // 
-            this.PriceOutPut_TextBox.Location = new System.Drawing.Point(475, 194);
-            this.PriceOutPut_TextBox.Name = "PriceOutPut_TextBox";
-            this.PriceOutPut_TextBox.Size = new System.Drawing.Size(174, 25);
-            this.PriceOutPut_TextBox.TabIndex = 22;
-            // 
-            // PriceCalc_BTN
-            // 
-            this.PriceCalc_BTN.Location = new System.Drawing.Point(667, 193);
-            this.PriceCalc_BTN.Name = "PriceCalc_BTN";
-            this.PriceCalc_BTN.Size = new System.Drawing.Size(100, 26);
-            this.PriceCalc_BTN.TabIndex = 23;
-            this.PriceCalc_BTN.Text = "Calculate";
-            this.PriceCalc_BTN.UseVisualStyleBackColor = true;
-            this.PriceCalc_BTN.Click += new System.EventHandler(this.PriceCalc_BTN_Click);
-            // 
-            // Price
-            // 
-            this.Price.AutoSize = true;
-            this.Price.Font = new System.Drawing.Font("MV Boli", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Price.Location = new System.Drawing.Point(337, 119);
-            this.Price.Name = "Price";
-            this.Price.Size = new System.Drawing.Size(240, 40);
-            this.Price.TabIndex = 24;
-            this.Price.Text = "Price Calculator";
-            // 
-            // PricePerBox_TextBox
-            // 
-            this.PricePerBox_TextBox.Location = new System.Drawing.Point(131, 196);
-            this.PricePerBox_TextBox.Name = "PricePerBox_TextBox";
-            this.PricePerBox_TextBox.Size = new System.Drawing.Size(179, 25);
-            this.PricePerBox_TextBox.TabIndex = 25;
-            // 
-            // PricePerPKM_TextBox
-            // 
-            this.PricePerPKM_TextBox.Location = new System.Drawing.Point(475, 162);
-            this.PricePerPKM_TextBox.Name = "PricePerPKM_TextBox";
-            this.PricePerPKM_TextBox.Size = new System.Drawing.Size(174, 25);
-            this.PricePerPKM_TextBox.TabIndex = 26;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 195);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 26);
-            this.label1.TabIndex = 27;
-            this.label1.Text = "PricePerBox";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("MV Boli", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(340, 162);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 23);
-            this.label2.TabIndex = 28;
-            this.label2.Text = "PricePerPKM";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(354, 193);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(108, 26);
-            this.label3.TabIndex = 29;
-            this.label3.Text = "TotalPrice";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 161);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(119, 26);
-            this.label4.TabIndex = 30;
-            this.label4.Text = "BoxNumber";
-            // 
             // TIDLabel
             // 
             this.TIDLabel.AutoSize = true;
-            this.TIDLabel.Font = new System.Drawing.Font("黑体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.TIDLabel.Location = new System.Drawing.Point(472, 28);
+            this.TIDLabel.Font = new System.Drawing.Font("黑体", 9F);
+            this.TIDLabel.Location = new System.Drawing.Point(66, 118);
             this.TIDLabel.Name = "TIDLabel";
-            this.TIDLabel.Size = new System.Drawing.Size(44, 18);
+            this.TIDLabel.Size = new System.Drawing.Size(39, 15);
             this.TIDLabel.TabIndex = 31;
             this.TIDLabel.Text = "表ID";
             // 
             // SIDLabel
             // 
             this.SIDLabel.AutoSize = true;
-            this.SIDLabel.Font = new System.Drawing.Font("黑体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.SIDLabel.Location = new System.Drawing.Point(472, 57);
+            this.SIDLabel.Font = new System.Drawing.Font("黑体", 9F);
+            this.SIDLabel.Location = new System.Drawing.Point(66, 151);
             this.SIDLabel.Name = "SIDLabel";
-            this.SIDLabel.Size = new System.Drawing.Size(44, 18);
+            this.SIDLabel.Size = new System.Drawing.Size(39, 15);
             this.SIDLabel.TabIndex = 32;
             this.SIDLabel.Text = "里ID";
             // 
             // MutiCalcUI
             // 
-            this.ClientSize = new System.Drawing.Size(851, 249);
+            this.ClientSize = new System.Drawing.Size(424, 207);
             this.Controls.Add(this.SIDLabel);
             this.Controls.Add(this.TIDLabel);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.PricePerPKM_TextBox);
-            this.Controls.Add(this.PricePerBox_TextBox);
-            this.Controls.Add(this.Price);
-            this.Controls.Add(this.PriceCalc_BTN);
-            this.Controls.Add(this.PriceOutPut_TextBox);
-            this.Controls.Add(this.BoxInput_TextBox);
             this.Controls.Add(this.IDsCheck);
             this.Controls.Add(this.IDCheck);
             this.Controls.Add(this.SIDResult);
@@ -559,7 +441,8 @@ namespace WangPlugin.GUI
                 SIDResult.Text = SID5.ToString();
             }
         }
-
+        #region
+        /*
         private void PriceCalc_BTN_Click(object sender, EventArgs e)
         {
             var Box = Int16.Parse(BoxInput_TextBox.Text);
@@ -584,7 +467,8 @@ namespace WangPlugin.GUI
             PriceOutPut_TextBox.Text = Price.ToString();
             PricePerBox_TextBox.Text = PricePerBox.ToString();
             PricePerPKM_TextBox.Text = PricePerPKM.ToString();
-        }
+        }*/
+        #endregion
         private double PriceFunction(int Box)
         {
             double Price;

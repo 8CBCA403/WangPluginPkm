@@ -4,7 +4,6 @@ using PKHeX.Core;
 using PKHeX.Core.AutoMod;
 using System.Collections.Generic;
 using System.Linq;
-using System.IO;
 using System.ComponentModel;
 using System.Windows.Forms;
 namespace WangPlugin.GUI
@@ -24,7 +23,6 @@ namespace WangPlugin.GUI
         private CheckBox Form_CheckBox;
         private CheckBox Gender_CheckBox;
         private CheckBox Ability_CheckBox;
-
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
         private Button GEgg;
@@ -50,9 +48,9 @@ namespace WangPlugin.GUI
             // GEgg
             // 
             this.GEgg.Font = new System.Drawing.Font("黑体", 9F);
-            this.GEgg.Location = new System.Drawing.Point(249, 12);
+            this.GEgg.Location = new System.Drawing.Point(248, 10);
             this.GEgg.Name = "GEgg";
-            this.GEgg.Size = new System.Drawing.Size(104, 28);
+            this.GEgg.Size = new System.Drawing.Size(104, 25);
             this.GEgg.TabIndex = 0;
             this.GEgg.Text = "生成蛋";
             this.GEgg.UseVisualStyleBackColor = true;
@@ -61,24 +59,26 @@ namespace WangPlugin.GUI
             // Version
             // 
             this.Version.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Version.Location = new System.Drawing.Point(21, 12);
+            this.Version.Location = new System.Drawing.Point(21, 10);
+            this.Version.Multiline = true;
             this.Version.Name = "Version";
-            this.Version.Size = new System.Drawing.Size(95, 28);
+            this.Version.Size = new System.Drawing.Size(95, 25);
             this.Version.TabIndex = 1;
             this.Version.Text = "No Save";
             // 
             // Number_Box
             // 
             this.Number_Box.FormattingEnabled = true;
-            this.Number_Box.Location = new System.Drawing.Point(122, 13);
+            this.Number_Box.ItemHeight = 17;
+            this.Number_Box.Location = new System.Drawing.Point(122, 10);
             this.Number_Box.Name = "Number_Box";
-            this.Number_Box.Size = new System.Drawing.Size(121, 25);
+            this.Number_Box.Size = new System.Drawing.Size(120, 25);
             this.Number_Box.TabIndex = 2;
             // 
             // Form_CheckBox
             // 
             this.Form_CheckBox.AutoSize = true;
-            this.Form_CheckBox.Location = new System.Drawing.Point(21, 47);
+            this.Form_CheckBox.Location = new System.Drawing.Point(21, 41);
             this.Form_CheckBox.Name = "Form_CheckBox";
             this.Form_CheckBox.Size = new System.Drawing.Size(126, 21);
             this.Form_CheckBox.TabIndex = 3;
@@ -88,7 +88,7 @@ namespace WangPlugin.GUI
             // Gender_CheckBox
             // 
             this.Gender_CheckBox.AutoSize = true;
-            this.Gender_CheckBox.Location = new System.Drawing.Point(142, 47);
+            this.Gender_CheckBox.Location = new System.Drawing.Point(142, 41);
             this.Gender_CheckBox.Name = "Gender_CheckBox";
             this.Gender_CheckBox.Size = new System.Drawing.Size(94, 21);
             this.Gender_CheckBox.TabIndex = 4;
@@ -98,7 +98,7 @@ namespace WangPlugin.GUI
             // Ability_CheckBox
             // 
             this.Ability_CheckBox.AutoSize = true;
-            this.Ability_CheckBox.Location = new System.Drawing.Point(242, 47);
+            this.Ability_CheckBox.Location = new System.Drawing.Point(242, 41);
             this.Ability_CheckBox.Name = "Ability_CheckBox";
             this.Ability_CheckBox.Size = new System.Drawing.Size(94, 21);
             this.Ability_CheckBox.TabIndex = 5;
@@ -146,14 +146,10 @@ namespace WangPlugin.GUI
         }
         private void GEgg_Click(object sender, EventArgs e)
         {
-            if (B == BOX.ONE)
-                SetOne();
-            else if(B==BOX.BOX)
-                SetBox();
-           // if (Egg(Editor.Data, Editor, SAV))
-           //   MessageBox.Show($"Success!", "SuperWang");
-           // else
-           //   MessageBox.Show($"Can't Convert to Egg!", "SuperWang");
+        if (B == BOX.ONE)
+            SetOne();
+        else if(B==BOX.BOX)
+            SetBox();
         }
         public  PKM Egg(PKM pk, ISaveFileProvider SaveFileEditor)
         {
@@ -167,14 +163,12 @@ namespace WangPlugin.GUI
             {
                 var PreSpecies =PE.First();
                 pk.Species = PreSpecies.Species;
-
             }
             var setting = new SearchSettings
             {
                 Species = pk.Species,
                 SearchEgg = true,
                 Version = (int)SaveFileEditor.SAV.Version,
-
             };
             var search = EncounterUtil.SearchDatabase(setting, SaveFileEditor.SAV);
             var results = search.ToList();
@@ -196,7 +190,6 @@ namespace WangPlugin.GUI
                 pk.CurrentHandler = 0;
                 pk.Nature = pko.Nature;
                 pk.IVs = pko.IVs;
-                
                 if (pk.Gen2 == true)
                 {
                     if (pko.IsShiny == true)
@@ -310,35 +303,35 @@ namespace WangPlugin.GUI
                 }
                 else if (pk.Gen8 == true)
                 {
-                    if (Ability_CheckBox.Checked)
-                    {
-                        pk.Ability = pko.Ability;
-                    }
-                    pk.OT_Name = SaveFileEditor.SAV.OT;
-                    pk.Language = pko.Language;
-                    pk.PID = pko.PID;
-                    pk.Ball = pko.Ball;
-                    if (pko.Ball is 16 or 24)
-                        pk.Ball = 4;
-                    pk.IsNicknamed = true;
-                    if (pk.Language == 10 || pk.Language == 9)
-                    {
-                        pk.Nickname = "蛋";
-                    }
-                    if (pk.Language == 2)
-                    {
-                        pk.Nickname = "Egg";
-                    }
-                    pk.Egg_Location = 60002;
-                    if (pk.Version == 49 || pk.Version == 48)
-                    {
-                        pk.Egg_Location = 60010;
-                    }
-                    pk.Met_Location = 0;
-                    if (pk.Version == 49 || pk.Version == 48)
-                    {
-                        pk.Met_Location = 65535;
-                    }
+                if (Ability_CheckBox.Checked)
+                {
+                pk.Ability = pko.Ability;
+                }
+                pk.OT_Name = SaveFileEditor.SAV.OT;
+                pk.Language = pko.Language;
+                pk.PID = pko.PID;
+                pk.Ball = pko.Ball;
+                if (pko.Ball is 16 or 24)
+                    pk.Ball = 4;
+                pk.IsNicknamed = true;
+                if (pk.Language == 10 || pk.Language == 9)
+                {
+                    pk.Nickname = "蛋";
+                }
+                if (pk.Language == 2)
+                {
+                    pk.Nickname = "Egg";
+                }
+                pk.Egg_Location = 60002;
+                if (pk.Version == 49 || pk.Version == 48)
+                {
+                    pk.Egg_Location = 60010;
+                }
+                pk.Met_Location = 0;
+                if (pk.Version == 49 || pk.Version == 48)
+                {
+                    pk.Met_Location = 65535;
+                }
                 }
                 pk.OT_Friendship = 1;
                 pk.RefreshChecksum();
@@ -353,23 +346,18 @@ namespace WangPlugin.GUI
         }
         public void SetBox()
         {
-            int n = SAV.CurrentBox;
-            PKM[] PKL = SAV.SAV.GetBoxData(n);
-        //    MessageBox.Show( $"{PKL.Count()}");
-            for (int i = 0; i < PKL.Count(); i++)
-            {
-                var pk = PKL[i];
-                PKL[i] = Egg(pk, SAV); 
-            }
-         
-            if (PKL.Count() != 0)
-            {
-              
-             
-                    SAV.SAV.SetBoxData(PKL, n);
-                
-            }
-            SAV.ReloadSlots();
+        int n = SAV.CurrentBox;
+        PKM[] PKL = SAV.SAV.GetBoxData(n);
+        for (int i = 0; i < PKL.Count(); i++)
+        {
+        var pk = PKL[i];
+        PKL[i] = Egg(pk, SAV); 
+        }
+        if (PKL.Count() != 0)
+        {
+           SAV.SAV.SetBoxData(PKL, n);
+        }
+           SAV.ReloadSlots();
         }
         public void SetOne()
         {

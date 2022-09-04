@@ -72,6 +72,7 @@ namespace WangPlugin
             if (isShiny)
                 return (((uint)(TID ^ SID) ^ (pid & 0xFFFF) ^ (xor == 0 ? 0u : 1u)) << 16) | (pid & 0xFFFF); // force same shiny star type
             return pid ^ 0x1000_0000;
+           
         }
         private static int GetRareType(uint xor) => xor switch
         {
