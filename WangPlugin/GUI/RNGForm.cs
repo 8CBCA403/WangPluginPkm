@@ -23,10 +23,13 @@ namespace WangPlugin.GUI
         {
             None,
             Method1,
+            Method1_Unown,
             H1_BACD_R,
             Method1Roaming,
             Method2,
+            Method2_Unown,
             Method4,
+            Method4_Unown,
             ChainShiny,
             XDColo,
             Colo,
@@ -616,14 +619,17 @@ namespace WangPlugin.GUI
             }
             return IV;
         }
-        private bool GenPkm(ref PKM pk,uint seed)
+        private bool GenPkm(ref PKM pk,uint seed,byte form=0)
         {
             return RNGMethod switch
             {
                 MethodType.None=>NoMethod.GenPkm(ref pk, GetShinyType(), CheckIV()),
                 MethodType.Method1 => Method1RNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
+                MethodType.Method1_Unown=> UnownRNG.GenPkm(ref pk,1, seed, GetShinyType(), CheckIV(),form),
                 MethodType.Method2 => Method2RNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
+                MethodType.Method2_Unown => UnownRNG.GenPkm(ref pk, 2, seed, GetShinyType(), CheckIV(), form),
                 MethodType.Method4 => Method4RNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
+                MethodType.Method4_Unown => UnownRNG.GenPkm(ref pk, 4, seed, GetShinyType(), CheckIV(), form),
                 MethodType.XDColo => XDColoRNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
                 MethodType.Overworld8 => Overworld8RNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
                 MethodType.Roaming8b => Roaming8bRNG.GenPkm(ref pk, seed, Editor.Data.TID, Editor.Data.SID, GetShinyType(), CheckIV()),
@@ -639,8 +645,11 @@ namespace WangPlugin.GUI
             return RNGMethod switch
             {
                 MethodType.Method1 => Method1RNG.Next(seed),
+                MethodType.Method1_Unown=> UnownRNG.Next(seed),
                 MethodType.Method2 => Method2RNG.Next(seed),
+                MethodType.Method2_Unown => UnownRNG.Next(seed),
                 MethodType.Method4 => Method4RNG.Next(seed),
+                MethodType.Method4_Unown => UnownRNG.Next(seed),
                 MethodType.XDColo => XDColoRNG.Next(seed),
                 MethodType.Overworld8 => Overworld8RNG.Next(seed),
                 MethodType.Roaming8b => Roaming8bRNG.Next(seed),
@@ -749,6 +758,7 @@ namespace WangPlugin.GUI
                 {
                     seed = Util.Rand32();
                     var pk = Editor.Data;
+                    var p = Editor.Data.Clone();
                     while (true)
                     {
                         if (tokenSource1.IsCancellationRequested)
@@ -766,9 +776,8 @@ namespace WangPlugin.GUI
                                 break;
                         }
                        
-                        if (GenPkm(ref pk, seed))
+                        if (GenPkm(ref pk, seed,p.Form))
                             {
-                           
                             this.Invoke(() =>
                                 {
                                     MessageBox.Show($"Success！");
