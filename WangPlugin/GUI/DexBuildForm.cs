@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using WangPlugin.SortBase;
 using PKHeX.Core.Searching;
+using static WangPlugin.GUI.DistributionUI;
 
 namespace WangPlugin.GUI
 {
@@ -42,10 +43,14 @@ namespace WangPlugin.GUI
         };
         private LanguageBoxSelect7 type7 = LanguageBoxSelect7.ENG;
         private LanguageBoxSelect type = LanguageBoxSelect.ENG;
+        public MOD M = MOD.BOXGod;
         public List<VersionClass> L = new();
         private GroupBox groupBox1;
+        private ComboBox Mod_Select_Box;
+        private Button Gift_BTN;
         private OT_Gender typeG = OT_Gender.Male;
         private ISaveFileProvider SAV { get; }
+        private IPKMView Editor { get; }
         enum LanguageBoxSelect
         {
             JPN,
@@ -72,9 +77,17 @@ namespace WangPlugin.GUI
             Male,
             Female,
         }
+        public enum MOD
+        {
+            [Description("一箱剑盾神兽")]
+            BOXGod,
+            [Description("一组未知图腾")]
+            BOXUnown,
+        }
         public DexBuildForm(ISaveFileProvider sav, IPKMView editor)
         {
             SAV = sav;
+            Editor = editor;
             InitializeComponent();
             BindingData(SAV);
         }
@@ -116,6 +129,23 @@ namespace WangPlugin.GUI
             {
                 version =(VersionClass) this.SortBox.SelectedItem;
             };
+            this.Mod_Select_Box.DisplayMember = "Description";
+            this.Mod_Select_Box.ValueMember = "Value";
+            this.Mod_Select_Box.DataSource = Enum.GetValues(typeof(MOD))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+
+            this.Mod_Select_Box.SelectedIndexChanged += (_, __) =>
+            {
+                M = (MOD)Enum.Parse(typeof(MOD), this.Mod_Select_Box.SelectedValue.ToString(), false);
+            };
+            this.Mod_Select_Box.SelectedIndex = 0;
         }
         private void InitializeComponent()
         {
@@ -140,13 +170,15 @@ namespace WangPlugin.GUI
             this.Sort_BTN = new System.Windows.Forms.Button();
             this.DeleteBox_BTN = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Mod_Select_Box = new System.Windows.Forms.ComboBox();
+            this.Gift_BTN = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // BuildDex_BTN
             // 
             this.BuildDex_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.BuildDex_BTN.Location = new System.Drawing.Point(629, 26);
+            this.BuildDex_BTN.Location = new System.Drawing.Point(120, 133);
             this.BuildDex_BTN.Name = "BuildDex_BTN";
             this.BuildDex_BTN.Size = new System.Drawing.Size(102, 26);
             this.BuildDex_BTN.TabIndex = 0;
@@ -157,7 +189,7 @@ namespace WangPlugin.GUI
             // Gen_BTN
             // 
             this.Gen_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.Gen_BTN.Location = new System.Drawing.Point(398, 21);
+            this.Gen_BTN.Location = new System.Drawing.Point(331, 22);
             this.Gen_BTN.Name = "Gen_BTN";
             this.Gen_BTN.Size = new System.Drawing.Size(102, 25);
             this.Gen_BTN.TabIndex = 1;
@@ -167,43 +199,43 @@ namespace WangPlugin.GUI
             // 
             // TIDBox
             // 
-            this.TIDBox.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TIDBox.Location = new System.Drawing.Point(62, 22);
+            this.TIDBox.Font = new System.Drawing.Font("Arial", 9F);
+            this.TIDBox.Location = new System.Drawing.Point(52, 21);
             this.TIDBox.Name = "TIDBox";
-            this.TIDBox.Size = new System.Drawing.Size(100, 27);
+            this.TIDBox.Size = new System.Drawing.Size(73, 25);
             this.TIDBox.TabIndex = 2;
             this.TIDBox.Text = "10101";
             // 
             // SIDBox
             // 
-            this.SIDBox.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SIDBox.Location = new System.Drawing.Point(62, 55);
+            this.SIDBox.Font = new System.Drawing.Font("Arial", 9F);
+            this.SIDBox.Location = new System.Drawing.Point(52, 54);
             this.SIDBox.Name = "SIDBox";
-            this.SIDBox.Size = new System.Drawing.Size(100, 27);
+            this.SIDBox.Size = new System.Drawing.Size(73, 25);
             this.SIDBox.TabIndex = 3;
             this.SIDBox.Text = "01010";
             // 
             // OT_Name
             // 
-            this.OT_Name.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OT_Name.Location = new System.Drawing.Point(244, 22);
+            this.OT_Name.Font = new System.Drawing.Font("Arial", 9F);
+            this.OT_Name.Location = new System.Drawing.Point(192, 22);
             this.OT_Name.Name = "OT_Name";
-            this.OT_Name.Size = new System.Drawing.Size(149, 27);
+            this.OT_Name.Size = new System.Drawing.Size(133, 25);
             this.OT_Name.TabIndex = 4;
             this.OT_Name.Text = "Wang";
             // 
             // LanguageBox
             // 
             this.LanguageBox.FormattingEnabled = true;
-            this.LanguageBox.Location = new System.Drawing.Point(273, 53);
+            this.LanguageBox.Location = new System.Drawing.Point(210, 53);
             this.LanguageBox.Name = "LanguageBox";
-            this.LanguageBox.Size = new System.Drawing.Size(57, 25);
+            this.LanguageBox.Size = new System.Drawing.Size(53, 25);
             this.LanguageBox.TabIndex = 5;
             // 
             // GenderBox
             // 
             this.GenderBox.FormattingEnabled = true;
-            this.GenderBox.Location = new System.Drawing.Point(337, 53);
+            this.GenderBox.Location = new System.Drawing.Point(269, 53);
             this.GenderBox.Name = "GenderBox";
             this.GenderBox.Size = new System.Drawing.Size(56, 25);
             this.GenderBox.TabIndex = 6;
@@ -211,48 +243,48 @@ namespace WangPlugin.GUI
             // TIDLabel
             // 
             this.TIDLabel.AutoSize = true;
-            this.TIDLabel.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.TIDLabel.Font = new System.Drawing.Font("黑体", 9F);
             this.TIDLabel.Location = new System.Drawing.Point(7, 25);
             this.TIDLabel.Name = "TIDLabel";
-            this.TIDLabel.Size = new System.Drawing.Size(49, 20);
+            this.TIDLabel.Size = new System.Drawing.Size(39, 15);
             this.TIDLabel.TabIndex = 7;
             this.TIDLabel.Text = "表ID";
             // 
             // SIDLabel
             // 
             this.SIDLabel.AutoSize = true;
-            this.SIDLabel.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.SIDLabel.Font = new System.Drawing.Font("黑体", 9F);
             this.SIDLabel.Location = new System.Drawing.Point(7, 58);
             this.SIDLabel.Name = "SIDLabel";
             this.SIDLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.SIDLabel.Size = new System.Drawing.Size(49, 20);
+            this.SIDLabel.Size = new System.Drawing.Size(39, 15);
             this.SIDLabel.TabIndex = 8;
             this.SIDLabel.Text = "里ID";
             // 
             // OTLabel
             // 
             this.OTLabel.AutoSize = true;
-            this.OTLabel.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.OTLabel.Location = new System.Drawing.Point(169, 25);
+            this.OTLabel.Font = new System.Drawing.Font("黑体", 9F);
+            this.OTLabel.Location = new System.Drawing.Point(131, 26);
             this.OTLabel.Name = "OTLabel";
-            this.OTLabel.Size = new System.Drawing.Size(69, 20);
+            this.OTLabel.Size = new System.Drawing.Size(55, 15);
             this.OTLabel.TabIndex = 9;
             this.OTLabel.Text = "初训家";
             // 
             // LGLabel
             // 
             this.LGLabel.AutoSize = true;
-            this.LGLabel.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.LGLabel.Location = new System.Drawing.Point(168, 58);
+            this.LGLabel.Font = new System.Drawing.Font("黑体", 9F);
+            this.LGLabel.Location = new System.Drawing.Point(131, 58);
             this.LGLabel.Name = "LGLabel";
-            this.LGLabel.Size = new System.Drawing.Size(99, 20);
+            this.LGLabel.Size = new System.Drawing.Size(79, 15);
             this.LGLabel.TabIndex = 10;
             this.LGLabel.Text = "性别/语言";
             // 
             // LivingDex_BTN
             // 
             this.LivingDex_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.LivingDex_BTN.Location = new System.Drawing.Point(521, 28);
+            this.LivingDex_BTN.Location = new System.Drawing.Point(12, 133);
             this.LivingDex_BTN.Name = "LivingDex_BTN";
             this.LivingDex_BTN.Size = new System.Drawing.Size(102, 25);
             this.LivingDex_BTN.TabIndex = 11;
@@ -263,15 +295,15 @@ namespace WangPlugin.GUI
             // SortBox
             // 
             this.SortBox.FormattingEnabled = true;
-            this.SortBox.Location = new System.Drawing.Point(11, 84);
+            this.SortBox.Location = new System.Drawing.Point(12, 102);
             this.SortBox.Name = "SortBox";
-            this.SortBox.Size = new System.Drawing.Size(273, 25);
+            this.SortBox.Size = new System.Drawing.Size(318, 25);
             this.SortBox.TabIndex = 12;
             // 
             // Legal_BTN
             // 
             this.Legal_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.Legal_BTN.Location = new System.Drawing.Point(521, 58);
+            this.Legal_BTN.Location = new System.Drawing.Point(444, 132);
             this.Legal_BTN.Name = "Legal_BTN";
             this.Legal_BTN.Size = new System.Drawing.Size(102, 25);
             this.Legal_BTN.TabIndex = 13;
@@ -282,7 +314,7 @@ namespace WangPlugin.GUI
             // LegalAll_BTN
             // 
             this.LegalAll_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.LegalAll_BTN.Location = new System.Drawing.Point(629, 58);
+            this.LegalAll_BTN.Location = new System.Drawing.Point(445, 101);
             this.LegalAll_BTN.Name = "LegalAll_BTN";
             this.LegalAll_BTN.Size = new System.Drawing.Size(102, 25);
             this.LegalAll_BTN.TabIndex = 14;
@@ -293,7 +325,7 @@ namespace WangPlugin.GUI
             // ClearAll_BTN
             // 
             this.ClearAll_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.ClearAll_BTN.Location = new System.Drawing.Point(629, 90);
+            this.ClearAll_BTN.Location = new System.Drawing.Point(336, 133);
             this.ClearAll_BTN.Name = "ClearAll_BTN";
             this.ClearAll_BTN.Size = new System.Drawing.Size(102, 25);
             this.ClearAll_BTN.TabIndex = 15;
@@ -304,7 +336,7 @@ namespace WangPlugin.GUI
             // RandomPID_BTN
             // 
             this.RandomPID_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.RandomPID_BTN.Location = new System.Drawing.Point(398, 52);
+            this.RandomPID_BTN.Location = new System.Drawing.Point(331, 54);
             this.RandomPID_BTN.Name = "RandomPID_BTN";
             this.RandomPID_BTN.Size = new System.Drawing.Size(102, 25);
             this.RandomPID_BTN.TabIndex = 16;
@@ -315,7 +347,7 @@ namespace WangPlugin.GUI
             // Sort_BTN
             // 
             this.Sort_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.Sort_BTN.Location = new System.Drawing.Point(290, 83);
+            this.Sort_BTN.Location = new System.Drawing.Point(336, 101);
             this.Sort_BTN.Name = "Sort_BTN";
             this.Sort_BTN.Size = new System.Drawing.Size(102, 25);
             this.Sort_BTN.TabIndex = 17;
@@ -326,7 +358,7 @@ namespace WangPlugin.GUI
             // DeleteBox_BTN
             // 
             this.DeleteBox_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.DeleteBox_BTN.Location = new System.Drawing.Point(521, 90);
+            this.DeleteBox_BTN.Location = new System.Drawing.Point(228, 133);
             this.DeleteBox_BTN.Name = "DeleteBox_BTN";
             this.DeleteBox_BTN.Size = new System.Drawing.Size(102, 25);
             this.DeleteBox_BTN.TabIndex = 18;
@@ -336,9 +368,7 @@ namespace WangPlugin.GUI
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.Sort_BTN);
             this.groupBox1.Controls.Add(this.RandomPID_BTN);
-            this.groupBox1.Controls.Add(this.SortBox);
             this.groupBox1.Controls.Add(this.LGLabel);
             this.groupBox1.Controls.Add(this.OTLabel);
             this.groupBox1.Controls.Add(this.SIDLabel);
@@ -351,21 +381,44 @@ namespace WangPlugin.GUI
             this.groupBox1.Controls.Add(this.Gen_BTN);
             this.groupBox1.Location = new System.Drawing.Point(5, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(510, 121);
+            this.groupBox1.Size = new System.Drawing.Size(438, 90);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "编辑全部箱子";
             // 
+            // Mod_Select_Box
+            // 
+            this.Mod_Select_Box.FormattingEnabled = true;
+            this.Mod_Select_Box.Location = new System.Drawing.Point(448, 28);
+            this.Mod_Select_Box.Name = "Mod_Select_Box";
+            this.Mod_Select_Box.Size = new System.Drawing.Size(98, 25);
+            this.Mod_Select_Box.TabIndex = 68;
+            // 
+            // Gift_BTN
+            // 
+            this.Gift_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Gift_BTN.Location = new System.Drawing.Point(448, 60);
+            this.Gift_BTN.Name = "Gift_BTN";
+            this.Gift_BTN.Size = new System.Drawing.Size(100, 25);
+            this.Gift_BTN.TabIndex = 69;
+            this.Gift_BTN.Text = "开始生成";
+            this.Gift_BTN.UseVisualStyleBackColor = true;
+            this.Gift_BTN.Click += new System.EventHandler(this.Gift_BTN_Click);
+            // 
             // DexBuildForm
             // 
-            this.ClientSize = new System.Drawing.Size(738, 129);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.DeleteBox_BTN);
-            this.Controls.Add(this.ClearAll_BTN);
-            this.Controls.Add(this.LegalAll_BTN);
-            this.Controls.Add(this.Legal_BTN);
+            this.ClientSize = new System.Drawing.Size(559, 171);
+            this.Controls.Add(this.Gift_BTN);
+            this.Controls.Add(this.Mod_Select_Box);
+            this.Controls.Add(this.Sort_BTN);
             this.Controls.Add(this.LivingDex_BTN);
             this.Controls.Add(this.BuildDex_BTN);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.ClearAll_BTN);
+            this.Controls.Add(this.DeleteBox_BTN);
+            this.Controls.Add(this.SortBox);
+            this.Controls.Add(this.LegalAll_BTN);
+            this.Controls.Add(this.Legal_BTN);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -557,6 +610,68 @@ namespace WangPlugin.GUI
         {
             SAV.SAV.SortBoxes();
             SAV.ReloadSlots();
+        }
+        public void SetUnown(ISaveFileProvider SaveFileEditor)
+        {
+            List<PKM> PKL = new();
+            for (int i = 0; i < 28; i++)
+            {
+                var pk = GetUnown();
+                pk.Form = (byte)i;
+                pk.HealPP();
+                PKL.Add(pk);
+            }
+           
+            var BoxData = SAV.SAV.BoxData;
+            IList<PKM> arr2 = BoxData;
+            List<int> list = FindAllEmptySlots(arr2, 0);
+            if (PKL.Count != 0)
+            {
+                for (int i = 0; i < PKL.Count; i++)
+                {
+                    int index = list[i];
+                    SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
+                }
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                DexBuildForm.LegalBox(SAV);
+            }
+            SaveFileEditor.ReloadSlots();
+        }
+        public PKM GetUnown()
+        {
+            List<IEncounterInfo> Results;
+            IEncounterInfo enc;
+            var setting = new SearchSettings
+            {
+                Species = 201,
+                SearchEgg = false,
+                Version = (int)SAV.SAV.Version,
+            };
+            var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
+            var results = search.ToList();
+            PKM pk = Editor.Data;
+            
+            if (results.Count != 0)
+            {
+                Results = results;
+                enc = Results[0];
+                pk = enc.ConvertToPKM(SAV.SAV);
+            }
+            return pk;
+        }
+        private static List<int> FindAllEmptySlots(IList<PKM> data, int start)
+        {
+            List<int> list = new List<int>();
+            for (int i = start; i < data.Count; i++)
+            {
+                if (data[i].Species < 1)
+                {
+                    list.Add(i);
+                }
+            }
+            return list;
         }
         private void Gen_BTN_Click(object sender, EventArgs e)
         {
@@ -793,6 +908,19 @@ namespace WangPlugin.GUI
             }
             SaveFileEditor.ReloadSlots();
         }
-        
+
+        private void Gift_BTN_Click(object sender, EventArgs e)
+        {
+                switch (M)
+                {
+                    case MOD.BOXGod:
+                       // SetGodPokemon(SAV);
+                        break;
+                    case MOD.BOXUnown:
+                        SetUnown(SAV);
+                        break;
+                }
+                SAV.ReloadSlots();
+        }
     }
 }

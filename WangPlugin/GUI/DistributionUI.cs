@@ -85,7 +85,6 @@ namespace WangPlugin.GUI
             [Description("覆盖面板")]
             EDITER,
         }
-
         public Nature Ntype = Nature.Hardy;
         public Ball TBall = Ball.Poke;
         public Trainer Trainer;
@@ -108,12 +107,12 @@ namespace WangPlugin.GUI
         private ComboBox Clone_Select_Box;
         private ComboBox Trainer_Select_Box;
         private CheckBox Random_Trainer_Box;
-        private CheckBox Random_Name_Box;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
         private GroupBox groupBox4;
         private GroupBox groupBox5;
+        private CheckBox Random_Name_Box;
         public BindingList<Trainer> Tr=new();
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
@@ -149,8 +148,8 @@ namespace WangPlugin.GUI
             this.Clone_Select_Box = new System.Windows.Forms.ComboBox();
             this.Trainer_Select_Box = new System.Windows.Forms.ComboBox();
             this.Random_Trainer_Box = new System.Windows.Forms.CheckBox();
-            this.Random_Name_Box = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Random_Name_Box = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -199,7 +198,7 @@ namespace WangPlugin.GUI
             // Clone_BTN
             // 
             this.Clone_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.Clone_BTN.Location = new System.Drawing.Point(287, 49);
+            this.Clone_BTN.Location = new System.Drawing.Point(115, 49);
             this.Clone_BTN.Name = "Clone_BTN";
             this.Clone_BTN.Size = new System.Drawing.Size(100, 25);
             this.Clone_BTN.TabIndex = 20;
@@ -221,7 +220,7 @@ namespace WangPlugin.GUI
             // Gift_BTN
             // 
             this.Gift_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Gift_BTN.Location = new System.Drawing.Point(393, 49);
+            this.Gift_BTN.Location = new System.Drawing.Point(221, 49);
             this.Gift_BTN.Name = "Gift_BTN";
             this.Gift_BTN.Size = new System.Drawing.Size(100, 25);
             this.Gift_BTN.TabIndex = 35;
@@ -233,11 +232,11 @@ namespace WangPlugin.GUI
             // 
             this.SetTrainer_Box.AutoSize = true;
             this.SetTrainer_Box.Font = new System.Drawing.Font("黑体", 9F);
-            this.SetTrainer_Box.Location = new System.Drawing.Point(72, 24);
+            this.SetTrainer_Box.Location = new System.Drawing.Point(59, 24);
             this.SetTrainer_Box.Name = "SetTrainer_Box";
-            this.SetTrainer_Box.Size = new System.Drawing.Size(93, 19);
+            this.SetTrainer_Box.Size = new System.Drawing.Size(109, 19);
             this.SetTrainer_Box.TabIndex = 36;
-            this.SetTrainer_Box.Text = "指定群友";
+            this.SetTrainer_Box.Text = "指定训练家";
             this.SetTrainer_Box.UseVisualStyleBackColor = true;
             // 
             // AllRibbon_BTN
@@ -265,9 +264,9 @@ namespace WangPlugin.GUI
             // BallBox
             // 
             this.BallBox.FormattingEnabled = true;
-            this.BallBox.Location = new System.Drawing.Point(8, 49);
+            this.BallBox.Location = new System.Drawing.Point(382, 22);
             this.BallBox.Name = "BallBox";
-            this.BallBox.Size = new System.Drawing.Size(100, 23);
+            this.BallBox.Size = new System.Drawing.Size(62, 23);
             this.BallBox.TabIndex = 48;
             // 
             // Trainer_Box
@@ -293,7 +292,7 @@ namespace WangPlugin.GUI
             // 
             this.RandPID_Box.AutoSize = true;
             this.RandPID_Box.Font = new System.Drawing.Font("黑体", 9F);
-            this.RandPID_Box.Location = new System.Drawing.Point(384, 22);
+            this.RandPID_Box.Location = new System.Drawing.Point(298, 24);
             this.RandPID_Box.Name = "RandPID_Box";
             this.RandPID_Box.Size = new System.Drawing.Size(109, 19);
             this.RandPID_Box.TabIndex = 52;
@@ -337,7 +336,7 @@ namespace WangPlugin.GUI
             // 
             this.Ball_Box.AutoSize = true;
             this.Ball_Box.Font = new System.Drawing.Font("黑体", 9F);
-            this.Ball_Box.Location = new System.Drawing.Point(114, 51);
+            this.Ball_Box.Location = new System.Drawing.Point(450, 24);
             this.Ball_Box.Name = "Ball_Box";
             this.Ball_Box.Size = new System.Drawing.Size(61, 19);
             this.Ball_Box.TabIndex = 61;
@@ -355,7 +354,7 @@ namespace WangPlugin.GUI
             // Clone_Select_Box
             // 
             this.Clone_Select_Box.FormattingEnabled = true;
-            this.Clone_Select_Box.Location = new System.Drawing.Point(181, 49);
+            this.Clone_Select_Box.Location = new System.Drawing.Point(9, 51);
             this.Clone_Select_Box.Name = "Clone_Select_Box";
             this.Clone_Select_Box.Size = new System.Drawing.Size(100, 23);
             this.Clone_Select_Box.TabIndex = 63;
@@ -372,31 +371,20 @@ namespace WangPlugin.GUI
             // 
             this.Random_Trainer_Box.AutoSize = true;
             this.Random_Trainer_Box.Font = new System.Drawing.Font("黑体", 9F);
-            this.Random_Trainer_Box.Location = new System.Drawing.Point(171, 24);
+            this.Random_Trainer_Box.Location = new System.Drawing.Point(142, 24);
             this.Random_Trainer_Box.Name = "Random_Trainer_Box";
-            this.Random_Trainer_Box.Size = new System.Drawing.Size(93, 19);
+            this.Random_Trainer_Box.Size = new System.Drawing.Size(109, 19);
             this.Random_Trainer_Box.TabIndex = 65;
-            this.Random_Trainer_Box.Text = "随机群友";
+            this.Random_Trainer_Box.Text = "随机训练家";
             this.Random_Trainer_Box.UseVisualStyleBackColor = true;
-            // 
-            // Random_Name_Box
-            // 
-            this.Random_Name_Box.AutoSize = true;
-            this.Random_Name_Box.Font = new System.Drawing.Font("黑体", 9F);
-            this.Random_Name_Box.Location = new System.Drawing.Point(270, 22);
-            this.Random_Name_Box.Name = "Random_Name_Box";
-            this.Random_Name_Box.Size = new System.Drawing.Size(93, 19);
-            this.Random_Name_Box.TabIndex = 66;
-            this.Random_Name_Box.Text = "随机名字";
-            this.Random_Name_Box.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.RandPID_Box);
             this.groupBox1.Controls.Add(this.Random_Name_Box);
             this.groupBox1.Controls.Add(this.Random_Trainer_Box);
             this.groupBox1.Controls.Add(this.Clone_Select_Box);
             this.groupBox1.Controls.Add(this.Ball_Box);
-            this.groupBox1.Controls.Add(this.RandPID_Box);
             this.groupBox1.Controls.Add(this.BallBox);
             this.groupBox1.Controls.Add(this.SetTrainer_Box);
             this.groupBox1.Controls.Add(this.Gift_BTN);
@@ -408,6 +396,17 @@ namespace WangPlugin.GUI
             this.groupBox1.TabIndex = 67;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "复制器（复制面板）";
+            // 
+            // Random_Name_Box
+            // 
+            this.Random_Name_Box.AutoSize = true;
+            this.Random_Name_Box.Font = new System.Drawing.Font("黑体", 9F);
+            this.Random_Name_Box.Location = new System.Drawing.Point(226, 24);
+            this.Random_Name_Box.Name = "Random_Name_Box";
+            this.Random_Name_Box.Size = new System.Drawing.Size(93, 19);
+            this.Random_Name_Box.TabIndex = 68;
+            this.Random_Name_Box.Text = "随机名字";
+            this.Random_Name_Box.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -571,6 +570,7 @@ namespace WangPlugin.GUI
                     SetTrainer_Box.Enabled = !Random_Trainer_Box.Checked;
                 
             };
+           
         }
         private void LoadEH1_BTN_Click(object sender, EventArgs e)
         {
@@ -669,7 +669,7 @@ namespace WangPlugin.GUI
                     pk.ClearNickname();
 
                 }
-                else if(Random_Name_Box.Checked)
+               else if(Random_Name_Box.Checked)
                 {
                     pk.OT_Name = RandomString(3);
                     pk.OT_Gender = rand.Next(0, 2);
@@ -738,7 +738,7 @@ namespace WangPlugin.GUI
                     pk.ClearNickname();
 
                 }
-                else if (Random_Name_Box.Checked)
+             /*   else if (Random_Name_Box.Checked)
                 {
                     pk.OT_Name = RandomString(3);
                     pk.OT_Gender = rand.Next(0, 2);
@@ -746,7 +746,7 @@ namespace WangPlugin.GUI
                     pk.SID = rand.Next(65535);
                     pk.Language = 9;
                     pk.ClearNickname();
-                }
+                }*/
                 if (RandPID_Box.Checked)
                 {
                     pk.SetRandomEC();
@@ -798,7 +798,7 @@ namespace WangPlugin.GUI
                     pk.ClearNickname();
 
                 }
-                else if (Random_Name_Box.Checked)
+             else if (Random_Name_Box.Checked)
                 {
                     pk.OT_Name = RandomString(3);
                     pk.OT_Gender = rand.Next(0, 2);
@@ -844,6 +844,7 @@ namespace WangPlugin.GUI
             }
             SaveFileEditor.ReloadSlots();
         }
+        
         public PKM GetGodPkm(ushort s)
         {
             List<IEncounterInfo> Results;
@@ -870,6 +871,7 @@ namespace WangPlugin.GUI
             }
             return pk;
         }
+       
         private static List<int> FindAllEmptySlots(IList<PKM> data, int start)
         {
             List<int> list = new List<int>();

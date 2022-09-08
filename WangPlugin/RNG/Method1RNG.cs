@@ -61,6 +61,9 @@ namespace WangPlugin
                 }
                     return false;
             }
+            var Info = new LegalityAnalysis(pk);
+            if (Info.Info.FrameMatches == false)
+                return false;
             return true;
         }
         private static uint[] DvsToIVs(uint dvUpper, uint dvLower)
