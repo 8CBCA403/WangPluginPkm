@@ -775,7 +775,7 @@ namespace WangPlugin.GUI
             for (int i = 0; i < 30; i++)
             {
                 int j = rand.Next(0, c.Count());
-                var pk = GetGodPkm(c[j].Species);
+                var pk = SearchDatabase.GetGodPkm(SAV,Editor,c[j].Species);
                 if (SetTrainer_Box.Checked)
                 {
                     pk.OT_Name = Trainer.OT_Name;
@@ -844,34 +844,6 @@ namespace WangPlugin.GUI
             }
             SaveFileEditor.ReloadSlots();
         }
-        
-        public PKM GetGodPkm(ushort s)
-        {
-            List<IEncounterInfo> Results;
-            IEncounterInfo enc;
-            var setting = new SearchSettings
-            {
-                Species = s,
-                SearchEgg = false,
-                Version = (int)SAV.SAV.Version,
-            };
-            var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
-            var results = search.ToList();
-            PKM pk = Editor.Data ;
-            if (results.Count != 0)
-            {
-                for (int i = 0;; i++)
-                {
-                    Results = results;
-                    enc = Results[i];
-                    pk = enc.ConvertToPKM(SAV.SAV);
-                    if (pk.Met_Location==244)
-                        break;
-                }
-            }
-            return pk;
-        }
-       
         private static List<int> FindAllEmptySlots(IList<PKM> data, int start)
         {
             List<int> list = new List<int>();

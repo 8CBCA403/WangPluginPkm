@@ -70,8 +70,8 @@ namespace WangPlugin
                 return false;
             }
             var Info = new LegalityAnalysis(pk);
-            if (Info.Info.FrameMatches == false)
-                return false;
+          //  if (Info.Info.FrameMatches == false)
+            //    return false;
             return true;
         }
         internal static void GetIVsInt32(Span<int> result, uint r1, uint r2)

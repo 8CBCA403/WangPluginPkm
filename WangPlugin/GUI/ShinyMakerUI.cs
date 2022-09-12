@@ -165,7 +165,7 @@ namespace WangPlugin.GUI
         }
         public static void ShinySID(PKM pkm)
         {
-            if (!MythicalPool.MythicalFlag(pkm.Species))
+            if (!MythicalFlag.MFlag(pkm.Species))
             {
                 pkm.SetShinySID();
             }
@@ -212,17 +212,17 @@ namespace WangPlugin.GUI
         {
             PKM val = pkm.Clone();
             PKM va = pkm.Clone();
-            if (!MythicalPool.MythicalFlag(pkm.Species))
+            if (!MythicalFlag.MFlag(pkm.Species))
             {
                 bool EggFlag = val.IsEgg || val.WasEgg || val.IsTradedEgg || val.WasTradedEgg || val.Met_Level <= 1;
-                if (Version.Gen1VCFlag(val.Version) || Version.Gen2VCFlag(val.Version))
+                if (VersionFlag.Gen1VCFlag(val.Version) || VersionFlag.Gen2VCFlag(val.Version))
                 {
                     pkm.PID = ShinyPID(val);
                 }
-                if (Version.Gen3Flag(val.Version) ||
-                    Version.Gen4Flag(val.Version) ||
-                    Version.Gen5Flag(val.Version) ||
-                    Version.CXDFlag(val.Version))
+                if (VersionFlag.Gen3Flag(val.Version) ||
+                    VersionFlag.Gen4Flag(val.Version) ||
+                    VersionFlag.Gen5Flag(val.Version) ||
+                    VersionFlag.CXDFlag(val.Version))
                 {
                     if (EggFlag)
                     {
@@ -245,7 +245,7 @@ namespace WangPlugin.GUI
                         pkm.RefreshChecksum();
 
                     }
-                    if ((!EggFlag) && (!Version.CXDFlag(val.Version)))
+                    if ((!EggFlag) && (!VersionFlag.CXDFlag(val.Version)))
                     {
                         List<uint[]> list;
                         if (shinyflag == Shinytype.RandomStar)
@@ -279,7 +279,7 @@ namespace WangPlugin.GUI
                         }
                         pkm.RefreshChecksum();
                     }
-                    if (Version.CXDFlag(val.Version) && !GiftAndStarter.XDCGFFlag(val.Species))
+                    if (VersionFlag.CXDFlag(val.Version) && !GiftAndStarter.XDCGFFlag(val.Species))
                     {
 
                         List<uint[]> list;
@@ -308,13 +308,13 @@ namespace WangPlugin.GUI
                     }
 
                 }
-                if (Version.Gen6Flag(val.Version) ||
-                    Version.Gen7Flag(val.Version))
+                if (VersionFlag.Gen6Flag(val.Version) ||
+                    VersionFlag.Gen7Flag(val.Version))
                 {
                     pkm.PID = ShinyPID(val);
                     CommonEdits.SetRandomEC(pkm);
                 }
-                if (Version.Gen8SWSHFlag(val.Version))
+                if (VersionFlag.Gen8SWSHFlag(val.Version))
                 {
                     pkm.PID = Util.Rand32();
                     if (EggFlag||pkm.Met_Location==162)
@@ -349,12 +349,12 @@ namespace WangPlugin.GUI
                         }
                     }
                 }
-                if(Version.Gen8PLAFlag(val.Version))
+                if(VersionFlag.Gen8PLAFlag(val.Version))
                 {
                     pkm.PID = ShinyPID(val);
                     CommonEdits.SetRandomEC(pkm);
                 }
-                if(Version.Gen8BDSPFlag(val.Version))
+                if(VersionFlag.Gen8BDSPFlag(val.Version))
                 {
                     pkm.PID = ShinyPID(val);
                     CommonEdits.SetRandomEC(pkm);

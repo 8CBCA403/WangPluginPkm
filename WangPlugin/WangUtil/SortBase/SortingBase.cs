@@ -29,8 +29,8 @@ namespace WangPlugin.SortBase
         protected static Func<PKM, IComparable>[] GenerateSortingFunctions(Dictionary<Species, int>[] dexes)
         {
             Func<PKM, IComparable>[] sortFunctions = new Func<PKM, IComparable>[] {
-        (PKM p) => SortBetweenDexes(dexes, p),
-        (PKM p) => SortWithinDex(dexes, p),
+        (p) => SortBetweenDexes(dexes, p),
+        (p) => SortWithinDex(dexes, p),
       };
             return sortFunctions;
         }

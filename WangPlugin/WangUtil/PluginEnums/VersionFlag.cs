@@ -1,6 +1,6 @@
 ﻿namespace WangPlugin
 {
-    internal class Version
+    internal class VersionFlag
     {
         public static bool Gen3Flag(int Version)
         {

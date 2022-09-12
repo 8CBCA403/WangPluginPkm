@@ -8,8 +8,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Collections.Generic;
 using WangPlugin.SortBase;
-using PKHeX.Core.Searching;
-using static WangPlugin.GUI.DistributionUI;
+using WangPlugin.WangUtil.DexBase;
 
 namespace WangPlugin.GUI
 {
@@ -41,13 +40,20 @@ namespace WangPlugin.GUI
             Name = "按照全国图鉴顺序",
             Version = "National",
         };
+        public DexModClass mod = new DexModClass
+        {
+            Name = "一组帽子皮",
+            Value = "Pikachu",
+        };
         private LanguageBoxSelect7 type7 = LanguageBoxSelect7.ENG;
         private LanguageBoxSelect type = LanguageBoxSelect.ENG;
-        public MOD M = MOD.BOXGod;
+
         public List<VersionClass> L = new();
+        public List<DexModClass> ML = new();
         private GroupBox groupBox1;
         private ComboBox Mod_Select_Box;
         private Button Gift_BTN;
+        private Button button1;
         private OT_Gender typeG = OT_Gender.Male;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
@@ -77,13 +83,7 @@ namespace WangPlugin.GUI
             Male,
             Female,
         }
-        public enum MOD
-        {
-            [Description("一箱剑盾神兽")]
-            BOXGod,
-            [Description("一组未知图腾")]
-            BOXUnown,
-        }
+      
         public DexBuildForm(ISaveFileProvider sav, IPKMView editor)
         {
             SAV = sav;
@@ -129,23 +129,17 @@ namespace WangPlugin.GUI
             {
                 version =(VersionClass) this.SortBox.SelectedItem;
             };
-            this.Mod_Select_Box.DisplayMember = "Description";
-            this.Mod_Select_Box.ValueMember = "Value";
-            this.Mod_Select_Box.DataSource = Enum.GetValues(typeof(MOD))
-                .Cast<Enum>()
-                .Select(value => new
-                {
-                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
-                    value
-                })
-                .OrderBy(item => item.value)
-                .ToList();
 
+            ML = DexModClass.DexModList(sav);
+            var bindingSource2 = new BindingSource();
+            bindingSource2.DataSource = ML;
+            Mod_Select_Box.DataSource = bindingSource2.DataSource;
+            Mod_Select_Box.DisplayMember = "Name";
+            Mod_Select_Box.ValueMember = "Value";
             this.Mod_Select_Box.SelectedIndexChanged += (_, __) =>
             {
-                M = (MOD)Enum.Parse(typeof(MOD), this.Mod_Select_Box.SelectedValue.ToString(), false);
+                mod = (DexModClass)this.Mod_Select_Box.SelectedItem;
             };
-            this.Mod_Select_Box.SelectedIndex = 0;
         }
         private void InitializeComponent()
         {
@@ -172,6 +166,7 @@ namespace WangPlugin.GUI
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Mod_Select_Box = new System.Windows.Forms.ComboBox();
             this.Gift_BTN = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -405,9 +400,21 @@ namespace WangPlugin.GUI
             this.Gift_BTN.UseVisualStyleBackColor = true;
             this.Gift_BTN.Click += new System.EventHandler(this.Gift_BTN_Click);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.Location = new System.Drawing.Point(559, 59);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 25);
+            this.button1.TabIndex = 70;
+            this.button1.Text = "Form";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // DexBuildForm
             // 
-            this.ClientSize = new System.Drawing.Size(559, 171);
+            this.ClientSize = new System.Drawing.Size(671, 171);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.Gift_BTN);
             this.Controls.Add(this.Mod_Select_Box);
             this.Controls.Add(this.Sort_BTN);
@@ -610,57 +617,7 @@ namespace WangPlugin.GUI
         {
             SAV.SAV.SortBoxes();
             SAV.ReloadSlots();
-        }
-        public void SetUnown(ISaveFileProvider SaveFileEditor)
-        {
-            List<PKM> PKL = new();
-            for (int i = 0; i < 28; i++)
-            {
-                var pk = GetUnown();
-                pk.Form = (byte)i;
-                pk.HealPP();
-                PKL.Add(pk);
-            }
-           
-            var BoxData = SAV.SAV.BoxData;
-            IList<PKM> arr2 = BoxData;
-            List<int> list = FindAllEmptySlots(arr2, 0);
-            if (PKL.Count != 0)
-            {
-                for (int i = 0; i < PKL.Count; i++)
-                {
-                    int index = list[i];
-                    SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
-                }
-            }
-            for (int i = 0; i < 5; i++)
-            {
-                DexBuildForm.LegalBox(SAV);
-            }
-            SaveFileEditor.ReloadSlots();
-        }
-        public PKM GetUnown()
-        {
-            List<IEncounterInfo> Results;
-            IEncounterInfo enc;
-            var setting = new SearchSettings
-            {
-                Species = 201,
-                SearchEgg = false,
-                Version = (int)SAV.SAV.Version,
-            };
-            var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
-            var results = search.ToList();
-            PKM pk = Editor.Data;
-            
-            if (results.Count != 0)
-            {
-                Results = results;
-                enc = Results[0];
-                pk = enc.ConvertToPKM(SAV.SAV);
-            }
-            return pk;
-        }
+        } 
         private static List<int> FindAllEmptySlots(IList<PKM> data, int start)
         {
             List<int> list = new List<int>();
@@ -676,7 +633,9 @@ namespace WangPlugin.GUI
         private void Gen_BTN_Click(object sender, EventArgs e)
         {
             Gen(SAV);
+            SAV.ReloadSlots();
             MessageBox.Show("搞定了！");
+
         }
         private void BuildDex_BTN_Click(object sender, EventArgs e)
         {
@@ -836,15 +795,60 @@ namespace WangPlugin.GUI
             SAV.SAV.ModifyBoxes(ClearPKM,SAV.CurrentBox,SAV.CurrentBox);
             SAV.ReloadSlots();
         }
-        private void GODex_BTN_Click(object sender, EventArgs e)
-        {
-            GODex(SAV);
-        }
+       
         public static string RandomString(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[rand.Next(s.Length)]).ToArray());
+        }
+        private void Gift_BTN_Click(object sender, EventArgs e)
+        {
+            var PKL = new List<PKM>();
+                switch (mod.Value)
+                {
+                    case "Pikachu":
+                    PKL = PikachuDex.PikachuSets(SAV, Editor);
+                        break;
+                    case "Unown":
+                    PKL = UnownDex.UnownSets(SAV, Editor);
+                        break;
+                case "Mega":
+                    PKL = MegaDex.MegaSets(SAV, Editor);
+                    break;
+                case "Alola":
+                    PKL = AlolaformDex.AlolaSets(SAV, Editor);
+                        break;
+                    case "Galar":
+                    PKL = GalarformDex.GalarSets(SAV, Editor);
+                    break;
+                    case "Gigamax":
+                    PKL = GigamaxDex.GigamaxSets(SAV, Editor);
+                        break;
+                case "Hisui":
+                    PKL = HisuiformDex.HisuiSets(SAV, Editor);
+                    break;
+            }
+            var BoxData = SAV.SAV.BoxData;
+            IList<PKM> arr2 = BoxData;
+            List<int> list = FindAllEmptySlots(arr2, 0);
+            if (PKL.Count != 0)
+            {
+                for (int i = 0; i < PKL.Count; i++)
+                {
+                    int index = list[i];
+                    SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
+                }
+            }
+            LegalBox(SAV);
+            SAV.ReloadSlots();
+        }
+
+        #region
+        /*
+          private void GODex_BTN_Click(object sender, EventArgs e)
+        {
+            GODex(SAV);
         }
         private void GODex(ISaveFileProvider SaveFileEditor)
         {
@@ -907,20 +911,12 @@ namespace WangPlugin.GUI
                 }
             }
             SaveFileEditor.ReloadSlots();
-        }
+        }*/
+        #endregion
 
-        private void Gift_BTN_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-                switch (M)
-                {
-                    case MOD.BOXGod:
-                       // SetGodPokemon(SAV);
-                        break;
-                    case MOD.BOXUnown:
-                        SetUnown(SAV);
-                        break;
-                }
-                SAV.ReloadSlots();
+            MessageBox.Show($"{ Editor.Data.Form}");
         }
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace WangPlugin
 {
-    internal class MythicalPool
+    internal class MythicalFlag
     {
-        public static bool MythicalFlag(int Species)
+        public static bool MFlag(int Species)
         {
             if (Species is 151 or 251 or 385 or 489 or 490 or 492 or 493 or
                  494 or 648 or 649 or 719 or 720 or 721 or 801 or
