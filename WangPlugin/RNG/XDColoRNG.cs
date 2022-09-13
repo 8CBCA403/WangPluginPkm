@@ -8,31 +8,31 @@ namespace WangPlugin
         private const int shift = 16;
         private const int shift8 = 8;
 
-        public static uint Next(uint seed) => PKHeX.Core.RNG.XDRNG.Next(seed);
+        public static uint Next(uint seed) => XDRNG.Next(seed);
         public static bool GenPkm(ref PKM pk, uint seed,bool[] shiny, bool[] IV, uint Xor = 0)
         {
             int FlawlessIVs = 0;
             uint MAX = 31;
-            var rng = RNG.XDRNG;
+       
             var la = new LegalityAnalysis(pk);
             switch (pk.Species)
                 {
                     case (int)Species.Umbreon or (int)Species.Eevee: // Colo Umbreon, XD Eevee
-                        pk.TID = (int)((seed = rng.Next(seed)) >> 16);
-                        pk.SID = (int)((seed = rng.Next(seed)) >> 16);
-                        seed = rng.Advance(seed, 2); // PID calls consumed
+                        pk.TID = (int)((seed = XDRNG.Next(seed)) >> 16);
+                        pk.SID = (int)((seed = XDRNG.Next(seed)) >> 16);
+                        seed = XDRNG.Advance(seed, 2); // PID calls consumed
                         break;
                     case (int)Species.Espeon: // Colo Espeon
-                        pk.TID = (int)((seed = rng.Next(seed)) >> 16);
-                        pk.SID = (int)((seed = rng.Next(seed)) >> 16);
-                        seed = rng.Advance(seed, 9); // PID calls consumed, skip over Umbreon
+                        pk.TID = (int)((seed = XDRNG.Next(seed)) >> 16);
+                        pk.SID = (int)((seed = XDRNG.Next(seed)) >> 16);
+                        seed = XDRNG.Advance(seed, 9); // PID calls consumed, skip over Umbreon
                         break;
                 }
-                var A = rng.Next(seed); // IV1
-                var B = rng.Next(A); // IV2
-                var C = rng.Next(B); // Ability?
-                var D = rng.Next(C); // PID
-                var E = rng.Next(D); // PID
+                var A = XDRNG.Next(seed); // IV1
+                var B = XDRNG.Next(A); // IV2
+                var C = XDRNG.Next(B); // Ability?
+                var D = XDRNG.Next(C); // PID
+                var E = XDRNG.Next(D); // PID
                 pk.PID = (D & 0xFFFF0000) | E >> 16;
                 if(!CheckShiny(pk.PID,pk.TID,pk.SID,shiny, Xor))
                 {
@@ -74,10 +74,10 @@ namespace WangPlugin
                 pk.Nature = (int)(pk.PID % 100 % 25);
                 pk.RefreshAbility((int)(pk.PID & 1));
                 la = new LegalityAnalysis(pk);
-                if (!la.Info.PIDIVMatches)
+               /* if (!la.Info.PIDIVMatches)
                 {
                     return false;
-                }
+                }*/
             return true;
         }
         private static void GetIVsInt32(Span<int> result, uint r1, uint r2)

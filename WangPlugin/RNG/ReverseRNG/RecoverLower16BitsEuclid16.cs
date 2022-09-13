@@ -62,8 +62,8 @@ namespace WangPlugin
                 {
 
                     uint num = (seed = enumerator.Current);
-                    var B = RNG.XDRNG.Prev(seed);
-                    var A = RNG.XDRNG.Prev(B);
+                    var B = XDRNG.Prev(seed);
+                    var A = XDRNG.Prev(B);
 
                     var hi = A >> 16;
                     var lo = B >> 16; ;

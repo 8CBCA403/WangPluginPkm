@@ -18,7 +18,7 @@ namespace WangPlugin.WangUtil.DexBase
             switch (SAV.SAV.Version)
             {
                
-                case GameVersion.SW or GameVersion.SH:
+                case GameVersion.SW or GameVersion.SH or GameVersion.SWSH:
                     for (int i = 0; i < a.Count; i++)
                     {
                         pk =(PK8) SearchDatabase.SearchPKM(SAV, Editor, a[i], 45);

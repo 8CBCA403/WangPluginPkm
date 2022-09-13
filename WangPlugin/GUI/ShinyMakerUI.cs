@@ -233,7 +233,8 @@ namespace WangPlugin.GUI
                             pkm.Ball = 4;
                         }
                         pkm.RefreshAbility((int)(pkm.PID & 1));
-                        var abilityarray = pkm.PersonalInfo.Abilities;
+                        Span<int> abilityarray = stackalloc int[10]; ;
+                        pkm.PersonalInfo.GetAbilities(abilityarray);
                         if (abilityarray[0] == abilityarray[1])
                         {
                             pkm.AbilityNumber = 1;
@@ -272,7 +273,8 @@ namespace WangPlugin.GUI
                         pkm.StatNature = pkm.Nature;
                         pkm.EncryptionConstant = pkm.PID;
                         pkm.RefreshAbility((int)(pkm.PID & 1));
-                        var abilityarray = pkm.PersonalInfo.Abilities;
+                        Span<int> abilityarray = stackalloc int[10]; ;
+                        pkm.PersonalInfo.GetAbilities(abilityarray);
                         if (abilityarray[0] == abilityarray[1])
                         {
                             pkm.AbilityNumber = 1;

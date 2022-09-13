@@ -807,24 +807,66 @@ namespace WangPlugin.GUI
             var PKL = new List<PKM>();
                 switch (mod.Value)
                 {
-                    case "Pikachu":
-                    PKL = PikachuDex.PikachuSets(SAV, Editor);
-                        break;
-                    case "Unown":
+                case "CapPikachu":
+                    PKL = CapPikachuDex.CapPikachuSets(SAV, Editor);
+                    break;
+                case "Unown":
                     PKL = UnownDex.UnownSets(SAV, Editor);
-                        break;
+                    break;
+                case "Deoxys":
+                    PKL = DeoxysDex.DeoxysSets(SAV, Editor);
+                    break;
+                case "Burmy":
+                    PKL = BurmyDex.BurmySets(SAV, Editor);
+                    break;
+                case "Gastrodon":
+                    PKL=GastrodonDex.GastrodonSets(SAV, Editor);
+                    break;
+                case "Rotom":
+                    PKL = RotomDex.RotomSets(SAV, Editor);
+                    break;
+                case "Deerling":
+                    PKL = DeerlingDex.DeerlingSets(SAV, Editor);
+                    break;
+                case "Vivillon":
+                    PKL = VivillonDex.VivillonSets(SAV, Editor);
+                    break;
+                case "Flabébé":
+                    PKL = FlabébéDex.FlabébéSets(SAV, Editor);
+                    break;
+                case "Furfrou":
+                    PKL = FurfrouDex.FurfrouSets(SAV, Editor);
+                    break;
+                case "Pumpkaboo":
+                    PKL = PumpkabooDex.PumpkabooSets(SAV, Editor);
+                    break;
+                case "CosplayPikachu":
+                    PKL = CosplayPikachuDex.CosplayPikachuSets(SAV, Editor);
+                    break;
+                case "Oricorio":
+                    PKL = OricorioDex.OricorioSets(SAV, Editor);
+                    break;
+                case "Minior":
+                    PKL = MiniorDex.MiniorSets(SAV, Editor);
+                    break;
+                case "Alcremie":
+                    PKL = AlcremieDex.AlcremieSets(SAV, Editor);
+                    break;
+                case "Silvally":
+                    PKL = SilvallyDex.SilvallySets(SAV, Editor);
+                    break;
                 case "Mega":
                     PKL = MegaDex.MegaSets(SAV, Editor);
                     break;
                 case "Alola":
                     PKL = AlolaformDex.AlolaSets(SAV, Editor);
-                        break;
-                    case "Galar":
+                    break;
+                case "Galar":
                     PKL = GalarformDex.GalarSets(SAV, Editor);
                     break;
-                    case "Gigamax":
+                case "Gigamax":
                     PKL = GigamaxDex.GigamaxSets(SAV, Editor);
-                        break;
+                    break;
                 case "Hisui":
                     PKL = HisuiformDex.HisuiSets(SAV, Editor);
                     break;

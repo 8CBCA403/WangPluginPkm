@@ -29,7 +29,7 @@
     </PackageReference>
     <PackageReference Include="IndexRange" Version="1.0.2" />
     <PackageReference Include="Microsoft.Z3" Version="4.11.0" />
-    <PackageReference Include="PKHeX.Core" Version="22.8.31" />
+    <PackageReference Include="PKHeX.Core" Version="22.9.13" />
     <PackageReference Include="System.Memory" Version="4.5.5" />
   </ItemGroup>
   <ItemGroup>

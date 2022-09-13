@@ -7,16 +7,16 @@ namespace WangPlugin
     {
         private const int shift = 16;
 
-        public static uint Next(uint seed) => PKHeX.Core.RNG.LCRNG.Next(seed);
+        public static uint Next(uint seed) => LCRNG.Next(seed);
 
         public static bool GenPkm( ref PKM pk,uint seed,int SID,int TID, bool[] shiny, bool[] IV)
         {
-            var rng = PKHeX.Core.RNG.LCRNG;
+            
             uint X = seed;
-            var A = rng.Next(X);
-            var B = rng.Next(A);
-            var C = rng.Next(B);
-            var D = rng.Next(C);
+            var A = LCRNG.Next(X);
+            var B = LCRNG.Next(A);
+            var C = LCRNG.Next(B);
+            var D = LCRNG.Next(C);
             pk.PID = (A & 0xFFFF0000) | B >> 16;
             if (!CheckShiny(pk.PID, pk.TID, pk.SID,shiny))
             {

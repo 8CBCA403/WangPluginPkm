@@ -11,7 +11,7 @@ namespace WangPlugin
     internal class UnownRNG
     {
         private const int shift = 16;
-        public static uint Next(uint seed) => PKHeX.Core.RNG.LCRNG.Next(seed);
+        public static uint Next(uint seed) => LCRNG.Next(seed);
         public static bool GenPkm(ref PKM pk, int type, uint seed, bool[] shiny, bool[] IV,byte f )
         {
             var FlawlessIVs = 0;

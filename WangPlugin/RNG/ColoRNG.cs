@@ -8,18 +8,16 @@ namespace WangPlugin
         private const int shift = 16;
         private const int shift8 = 8;
 
-        public static uint Next(uint seed) => PKHeX.Core.RNG.XDRNG.Next(seed);
+        public static uint Next(uint seed) => XDRNG.Next(seed);
 
         public static bool GenPkm(ref PKM pk, uint seed, bool []shiny, bool[] IV)
         {
-            var rng = PKHeX.Core.RNG.XDRNG;
-           
-                var O = rng.Next(seed); // SID
-                var A = rng.Next(O); // PID
-                var B = rng.Next(A); // PID
-                var C = rng.Next(B); // Held Item
-                var D = rng.Next(C); // Version
-                var E = rng.Next(D); // OT Gender
+                var O = XDRNG.Next(seed); // SID
+                var A = XDRNG.Next(O); // PID
+                var B = XDRNG.Next(A); // PID
+                var C = XDRNG.Next(B); // Held Item
+                var D = XDRNG.Next(C); // Version
+                var E = XDRNG.Next(D); // OT Gender
                 const int TID = 40122;
                 var SID = (int)(O >> 16);
                 var pid1 = A >> 16;
@@ -38,7 +36,7 @@ namespace WangPlugin
                 pk.Version = (int)(D >> 31) + 1; 
                 pk.OT_Gender = (int)(E >> 31);
                 Span<int> ivs = stackalloc int[6];
-                rng.GetSequentialIVsInt32(E, ivs);
+                GetSequentialIVsUInt32(E, ivs);
             if (IV[0] && ivs[1] != 0)
             {
                 return false;
@@ -61,12 +59,12 @@ namespace WangPlugin
             result[1] = (((int)r1 >> 5) & 0x1F);
             result[0] = (int)(r1 & 0x1F);
         }
-        internal static void GetSequentialIVsInt32(this LCRNG rng, uint seed, Span<int> ivs)
+        internal static void GetSequentialIVsUInt32(uint seed, Span<int> IVs)
         {
             for (int i = 0; i < 6; i++)
             {
-                seed = rng.Next(seed);
-                ivs[i] = (int)(seed >> 27);
+                seed = Next(seed);
+                IVs[i] =(int)( seed >> 27);
             }
         }
         private static uint combineRNG(uint upper, uint lower, uint shift)

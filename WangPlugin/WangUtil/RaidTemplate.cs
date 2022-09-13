@@ -103,7 +103,8 @@ namespace WangPlugin
             }
 
             int abilityIdx = 0;
-            IReadOnlyList<int> abilities = PersonalTable.SWSH.GetFormEntry(Species, AltForm).Abilities;
+            Span<int> abilities = stackalloc int[10]; ;
+            PersonalTable.SWSH.GetFormEntry(Species, AltForm).GetAbilities(abilities);
             if (Ability < 3)
             {
                 abilityIdx = Ability;

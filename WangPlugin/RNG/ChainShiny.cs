@@ -7,11 +7,11 @@ namespace WangPlugin
     {
         private const int shift = 16;
 
-        public static uint Next(uint seed) => PKHeX.Core.RNG.LCRNG.Next(seed);
+        public static uint Next(uint seed) => LCRNG.Next(seed);
 
         public static bool GenPkm(ref PKM pk,uint seed, bool[] IV)
         {
-            uint Next() => (seed = PKHeX.Core.RNG.LCRNG.Next(seed)) >> 16;
+            uint Next() => (seed = LCRNG.Next(seed)) >> 16;
             uint lower = Next() & 7;
             uint upper = Next() & 7;
             for (int i = 0; i < 13; i++)

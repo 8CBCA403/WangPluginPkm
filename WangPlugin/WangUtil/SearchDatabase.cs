@@ -7,7 +7,7 @@ namespace WangPlugin
 {
     internal class SearchDatabase
     {
-        public static PKM SearchPKM(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version, int form = 0, bool egg=false, int location =0)
+        public static PKM SearchPKM(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version, int form = 0, bool egg=false, int location =0 ,int gender=0)
         {
             List<IEncounterInfo> Results;
             IEncounterInfo enc;
@@ -42,7 +42,17 @@ namespace WangPlugin
                             break;
                     }
                 }
-               
+                if(gender != 0)
+                {
+                    for (int i = 0; ; i++)
+                    {
+                        enc = Results[i];
+                        pk = enc.ConvertToPKM(SAV.SAV);
+                        if (pk.Gender == 1)
+                            break;
+                    }
+                }
+
             }
             return pk;
         }

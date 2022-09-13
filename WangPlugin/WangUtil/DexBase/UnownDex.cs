@@ -12,7 +12,8 @@ namespace WangPlugin.WangUtil.DexBase
             PKM pk;
             switch (SAV.SAV.Version)
             {
-                case GameVersion.GD or GameVersion.SI or GameVersion.C or GameVersion.GS:
+                case GameVersion.GD or GameVersion.SI or GameVersion.C or 
+                GameVersion.GS or GameVersion.GSC:
                     for (int i = 0; i < 26; i++)
                     {
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 201, 53);
@@ -20,7 +21,8 @@ namespace WangPlugin.WangUtil.DexBase
                         PKL.Add(pk);
                     }
                     break;
-                case GameVersion.S or GameVersion.E or GameVersion.R or GameVersion.FR or GameVersion.LG:
+                case GameVersion.S or GameVersion.E or GameVersion.R or 
+                GameVersion.FR or GameVersion.LG or GameVersion.RSE:
                     for (int i = 0; i < 28; i++)
                     {
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 201, 5);
@@ -28,7 +30,8 @@ namespace WangPlugin.WangUtil.DexBase
                         PKL.Add(pk);
                     }
                     break;
-                case GameVersion.D or GameVersion.P or GameVersion.SS or GameVersion.HG:
+                case GameVersion.D or GameVersion.P or GameVersion.SS or GameVersion.HG or
+                GameVersion.HGSS or GameVersion.DP or GameVersion.Pt or GameVersion.DPPt:
                     for (int i = 0; i < 28; i++)
                     {
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 201, 7);
@@ -36,7 +39,8 @@ namespace WangPlugin.WangUtil.DexBase
                         PKL.Add(pk);
                     }
                     break;
-                case GameVersion.B or GameVersion.W or GameVersion.B2 or GameVersion.W2:
+                case GameVersion.B or GameVersion.W or GameVersion.B2 or
+                GameVersion.W2 or GameVersion.BW or GameVersion.B2W2:
                     for (int i = 0; i < 28; i++)
                     {
                         PK4 pk4 = (PK4)SearchDatabase.SearchPKM(SAV, Editor, 201, 7);
@@ -44,7 +48,8 @@ namespace WangPlugin.WangUtil.DexBase
                         PKL.Add(pk4.ConvertToPK5());
                     }
                     break;
-                case GameVersion.X or GameVersion.Y or GameVersion.OR or GameVersion.AS:
+                case GameVersion.X or GameVersion.Y or GameVersion.OR or 
+                GameVersion.AS or GameVersion.XY or GameVersion.ORAS:
                     for (int i = 0; i < 28; i++)
                     {
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 201, 27);
@@ -52,7 +57,8 @@ namespace WangPlugin.WangUtil.DexBase
                         PKL.Add(pk);
                     }
                     break;
-                case GameVersion.SN or GameVersion.MN or GameVersion.US or GameVersion.UM:
+                case GameVersion.SN or GameVersion.MN or GameVersion.US 
+                or GameVersion.UM or GameVersion.SM or GameVersion.USUM:
                     for (int i = 0; i < 28; i++)
                     {
                         PK6 pk6 = (PK6)SearchDatabase.SearchPKM(SAV, Editor, 201, 27);
@@ -61,7 +67,7 @@ namespace WangPlugin.WangUtil.DexBase
                         PKL.Add(pk6.ConvertToPK7());
                     }
                     break;
-                case GameVersion.BD or GameVersion.SP:
+                case GameVersion.BD or GameVersion.SP or GameVersion.BDSP:
                     for (int i = 0; i < 28; i++)
                     {
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 201, 48);
