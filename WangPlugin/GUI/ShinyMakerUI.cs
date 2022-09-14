@@ -248,19 +248,28 @@ namespace WangPlugin.GUI
                     }
                     if ((!EggFlag) && (!VersionFlag.CXDFlag(val.Version)))
                     {
-                        List<uint[]> list;
+                        const int maxResults = LCRNG.MaxCountSeedsIV;
+                        Span<uint> seeds = stackalloc uint[maxResults];
+                        int count = 0;
                         if (shinyflag == Shinytype.RandomStar)
                         {
-                            do
+                            for (int i = 0; ; i++)
                             {
                                 val.PID = ShinyPIDLite(val);
-                                list = RecoverLower16BitsPID.CalcPIDIVsByLCRNG(val.PID);
-
+                                count = LCRNGReversal.GetSeeds(seeds, val.PID);
+                                if (count == 0)
+                                    val.PID = Util.Rand32();
+                                else
+                                    break;
                             }
-                            while (!val.IsShiny || list == null);
-                            uint[] iVs = RecoverLower16BitsPID.GetIVs(val, list);
-
-                            RecoverLower16BitsPID.SetIVsFromList(val, iVs);
+                            var reg = seeds[..count];
+                            int[] iv;
+                            foreach (var seed in reg)
+                            {
+                                iv= LCRNGReversal.SetValuesFromSeedLCRNG(val, seed);
+                                if (val.IsShiny)
+                                    val.IVs = iv;
+                            }
                         }
                         else
                         {
@@ -274,7 +283,7 @@ namespace WangPlugin.GUI
                         pkm.EncryptionConstant = pkm.PID;
                         pkm.RefreshAbility((int)(pkm.PID & 1));
                         Span<int> abilityarray = stackalloc int[10]; ;
-                        pkm.PersonalInfo.GetAbilities(abilityarray);
+                   //   pkm.PersonalInfo.GetAbilities(abilityarray);
                         if (abilityarray[0] == abilityarray[1])
                         {
                             pkm.AbilityNumber = 1;
@@ -284,18 +293,32 @@ namespace WangPlugin.GUI
                     if (VersionFlag.CXDFlag(val.Version) && !GiftAndStarter.XDCGFFlag(val.Species))
                     {
 
-                        List<uint[]> list;
+                        const int maxResults = XDRNG.MaxCountSeedsIV;
+                        Span<uint> seeds = stackalloc uint[maxResults];
+                        int count = 0;
                         if (shinyflag == Shinytype.RandomStar)
                         {
-                            do
+                            for (int i = 0; ; i++)
                             {
                                 val.PID = ShinyPIDLite(val);
-                                list = RecoverLower16BitsEuclid16.CalcPIDIVsByXDRNG(val.PID);
+                                count = XDRNGReversal.GetSeeds(seeds, val.PID);
+                                if (count == 0)
+                                    val.PID = Util.Rand32();
+                                var reg = seeds[..count];
+                                int[] iv;
+                                foreach (var seed in reg)
+                                {
+                                    iv = XDRNGReversal.SetValuesFromSeedXDRNG(val, seed);
+                                    if (val.IsShiny)
+                                        val.IVs = iv;
+                                }
+                                if (!val.IsShiny)
+                                {
+                                    continue;
+                                }
+                                else
+                                    break;
                             }
-                            while (!val.IsShiny || list == null);
-
-                            uint[] iVs = RecoverLower16BitsEuclid16.GetIVs(val, list);
-                            RecoverLower16BitsEuclid16.SetIVsFromList(val, iVs);
                         }
                         else
                         {
