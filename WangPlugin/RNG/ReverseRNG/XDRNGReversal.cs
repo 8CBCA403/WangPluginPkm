@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using PKHeX.Core;
-using System.Windows.Forms;
 using System.Runtime.CompilerServices;
-
 namespace WangPlugin
 {
     internal class XDRNGReversal
@@ -18,8 +14,6 @@ namespace WangPlugin
         public static uint seed = Util.Rand32();
         private const uint Sub = Add - 0xFFFF;
         private const ulong Base = (Mult + 1ul) * 0xFFFF;
-
-        
         [MethodImpl(MethodImplOptions.AggressiveInlining)] public static uint Prev(uint seed) => (seed * rMult) + rAdd;
        
 
@@ -79,7 +73,5 @@ namespace WangPlugin
             result[1] = (int)r1 >> 5 & 31;
             result[0] = (int)r1 & 31;
         }
-
-
     }
 }

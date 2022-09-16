@@ -1,7 +1,5 @@
 ﻿using PKHeX.Core;
 using System.Collections.Generic;
-
-
 namespace WangPlugin.WangUtil.DexBase
 {
     internal class BurmyDex

@@ -7,27 +7,25 @@ namespace WangPlugin
     {
         private const int shift = 16;
         private const int shift8 = 8;
-
         public static uint Next(uint seed) => XDRNG.Next(seed);
-
         public static bool GenPkm(ref PKM pk, uint seed, bool []shiny, bool[] IV)
         {
-                var O = XDRNG.Next(seed); // SID
-                var A = XDRNG.Next(O); // PID
-                var B = XDRNG.Next(A); // PID
-                var C = XDRNG.Next(B); // Held Item
-                var D = XDRNG.Next(C); // Version
-                var E = XDRNG.Next(D); // OT Gender
-                const int TID = 40122;
-                var SID = (int)(O >> 16);
-                var pid1 = A >> 16;
-                var pid2 = B >> 16;
-                pk.TID = TID;
-                pk.SID = SID;
-                var pid = pid1 << 16 | pid2;
-                if ((pid2 > 7 ? 0 : 1) != (pid1 ^ SID ^ TID))
-                    pid ^= 0x80000000;
-                pk.PID = pid;
+            var O = XDRNG.Next(seed); // SID
+            var A = XDRNG.Next(O); // PID
+            var B = XDRNG.Next(A); // PID
+            var C = XDRNG.Next(B); // Held Item
+            var D = XDRNG.Next(C); // Version
+            var E = XDRNG.Next(D); // OT Gender
+            const int TID = 40122;
+            var SID = (int)(O >> 16);
+            var pid1 = A >> 16;
+            var pid2 = B >> 16;
+            pk.TID = TID;
+            pk.SID = SID;
+            var pid = pid1 << 16 | pid2;
+            if ((pid2 > 7 ? 0 : 1) != (pid1 ^ SID ^ TID))
+                pid ^= 0x80000000;
+            pk.PID = pid;
             if (!CheckShiny(pk.PID, pk.TID, pk.SID,shiny))
             {
                 return false;
@@ -49,7 +47,6 @@ namespace WangPlugin
                 pk.Gender = GenderApplicator.GetSaneGender(pk);
             return true;
         }
-
         private static void GetIVsInt32(Span<int> result, uint r1, uint r2)
         {
             result[5] = (((int)r2 >> 10) & 0x1F);

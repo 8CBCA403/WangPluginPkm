@@ -78,7 +78,7 @@ namespace WangPlugin.WangUtil.DexBase
                 case GameVersion.PLA:
                     for (int i = 0; i < 28; i++)
                     {
-                        pk = SearchDatabase.SearchPKM(SAV, Editor, 201, 47);
+                        pk = SearchDatabase.SearchPKM(SAV, Editor, 201, 47,i);
                         pk.Form = (byte)i;
                         PKL.Add(pk);
                     }

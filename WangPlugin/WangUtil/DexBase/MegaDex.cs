@@ -1,11 +1,6 @@
 ﻿using PKHeX.Core;
 using PKHeX.Core.AutoMod;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace WangPlugin.WangUtil.DexBase
 {
     internal class MegaDex
@@ -61,59 +56,13 @@ namespace WangPlugin.WangUtil.DexBase
                                 PK6 pk6 = (PK6)SearchDatabase.SearchPKM(SAV, Editor, USUM[i], 25, 0, false);
                                 pk = pk6.ConvertToPK7();
                             }
-                            if (USUM[i] == 15)
-                            {
-                                pk.AbilityNumber = 1;
-                                pk.Ability = 68;
-                            }
-                            if (USUM[i] == 323)
-                            {
-                                pk.AbilityNumber = 1;
-                                pk.Ability = 40;
-                            }
-                            else if (USUM[i] == 373)
-                            {
-                                pk.AbilityNumber = 1;
-                                pk.Ability = 22;
-                            }
-                            else if (USUM[i] == 428)
-                            {
-                                pk.AbilityNumber = 1;
-                                pk.Ability = 56;
-                            }
-                            else if (USUM[i] == 475)
-                            {
-                                pk.Gender = 0;
-                                pk.Ability = 80;
-
-                            }
-                            else if (USUM[i] == 65)
-                            {
-                                pk.OT_Name = "wang";
-
-                            }
-                            else if (USUM[i] == 94)
-                            {
-                                pk.OT_Name = "wang";
-
-                            }
-                            else if (USUM[i] == 208)
-                            {
-                                pk.OT_Name = "wang";
-
-                            }
-                            else if (USUM[i] == 212)
-                            {
-                                pk.OT_Name = "wang";
-
-                            }
+                            pk.CurrentLevel = 100;
+                            pk.Species = USUM[i];
+                            ModifyAbilityAndOT(ref pk);
                             if (i < 49)
                             {
                                 pk.HeldItem = items[i];
                             }
-
-                            pk.CurrentLevel = 100;
-                            pk.Species = USUM[i];
                             pk.SetSuggestedMoves();
                             pk.HealPP();
                             pk.ClearNickname();
@@ -139,53 +88,9 @@ namespace WangPlugin.WangUtil.DexBase
                                 PK6 pk6 = (PK6)SearchDatabase.SearchPKM(SAV, Editor, USUM[i], 25, 0, false);
                                 pk = pk6.ConvertToPK7();
                             }
-
-                            if (USUM[i] == 15)
-                            {
-                                pk.AbilityNumber = 1;
-                                pk.Ability = 68;
-                            }
-                            if (USUM[i] == 323)
-                            {
-                                pk.AbilityNumber = 1;
-                                pk.Ability = 40;
-                            }
-                            else if (USUM[i] == 373)
-                            {
-                                pk.AbilityNumber = 1;
-                                pk.Ability = 22;
-                            }
-                            else if (USUM[i] == 428)
-                            {
-                                pk.AbilityNumber = 1;
-                                pk.Ability = 56;
-                            }
-                            else if (USUM[i] == 475)
-                            {
-                                pk.Gender = 0;
-                                pk.Ability = 80;
-
-                            }
-                            else if (USUM[i] == 65)
-                            {
-                                pk.OT_Name = "wang";
-
-                            }
-                            else if (USUM[i] == 94)
-                            {
-                                pk.OT_Name = "wang";
-
-                            }
-                            else if (USUM[i] == 208)
-                            {
-                                pk.OT_Name = "wang";
-
-                            }
-                            else if (USUM[i] == 212)
-                            {
-                                pk.OT_Name = "wang";
-
-                            }
+                            pk.CurrentLevel = 100;
+                            pk.Species = USUM[i];
+                            ModifyAbilityAndOT(ref pk);
                             if (i < 49)
                             {
                                 pk.HeldItem = items[i];
@@ -212,37 +117,13 @@ namespace WangPlugin.WangUtil.DexBase
                             {
                                 pk = SearchDatabase.SearchPKM(SAV, Editor, XY[i], 27, 0, false);
                             }
-                            else if (XY[i] == 65)
-                            {
-                                pk.OT_Name = "wang";
-
-                            }
-                            else if (XY[i] == 94)
-                            {
-                                pk.OT_Name = "wang";
-
-                            }
-                            else if (XY[i] == 212)
-                            {
-                                pk.OT_Name = "wang";
-
-                            }
-                            else if (XY[i] == 130)
-                            {
-                                pk.AbilityNumber = 1;
-                                pk.Ability = 22;
-                            }
-                            else if (XY[i] == 248)
-                            {
-                                pk.AbilityNumber=1;
-                                pk.Ability = 45;
-                            }
+                            pk.CurrentLevel = 100;
+                            pk.Species = XY[i];
+                            ModifyAbilityAndOT(ref pk);
                             if (i < 30)
                             {
                                 pk.HeldItem = itemsXY[i];
                             }
-                            pk.CurrentLevel = 100;
-                            pk.Species = XY[i];
                             pk.SetSuggestedMoves();
                             pk.HealPP();
                             pk.ClearNickname();
@@ -267,68 +148,13 @@ namespace WangPlugin.WangUtil.DexBase
                             {
                                 pk = SearchDatabase.SearchPKM(SAV, Editor, USUM[i], 27, 0, false);
                             }
-                            if (USUM[i] == 130)
-                            {
-                                pk.AbilityNumber = 1;
-                                pk.Ability = 22;
-                            }
-                            else if (USUM[i] == 248)
-                            {
-                                pk.AbilityNumber = 1;
-                                pk.Ability = 45;
-                            }
-                            else if (USUM[i] == 15)
-                            {
-                                pk.AbilityNumber = 1;
-                                pk.Ability = 68;
-                            }
-                            else if (USUM[i] == 323)
-                            {
-                                pk.AbilityNumber = 1;
-                                pk.Ability = 40;
-                            }
-                            else if (USUM[i] == 373)
-                            {
-                                pk.AbilityNumber = 1;
-                                pk.Ability = 22;
-                            }
-                            else if (USUM[i] == 428)
-                            {
-                                pk.AbilityNumber = 1;
-                                pk.Ability = 56;
-                            }
-                            else if (USUM[i] == 475)
-                            {
-                                pk.Gender = 0;
-                                pk.Ability = 80;
-
-                            }
-                            else if (USUM[i] == 65)
-                            {
-                                pk.OT_Name = "wang";
-
-                            }
-                            else if (USUM[i] == 94)
-                            {
-                                pk.OT_Name = "wang";
-
-                            }
-                            else if (USUM[i] == 208)
-                            {
-                                pk.OT_Name = "wang";
-
-                            }
-                            else if (USUM[i] == 212)
-                            {
-                                pk.OT_Name = "wang";
-
-                            }
+                            pk.CurrentLevel = 100;
+                            pk.Species = USUM[i];
+                            ModifyAbilityAndOT(ref pk);
                             if (i < 49)
                             {
                                 pk.HeldItem = items[i];
                             }
-                            pk.CurrentLevel = 100;
-                            pk.Species = USUM[i];
                             pk.SetSuggestedMoves();
                             pk.HealPP();
                             pk.ClearNickname();
@@ -338,6 +164,98 @@ namespace WangPlugin.WangUtil.DexBase
                     break;
             }
             return PKL;
+        }
+        public static void ModifyAbilityAndOT(ref PKM pk)
+        {
+            if (pk.Species == 130)
+            {
+                pk.AbilityNumber = 1;
+                pk.Ability = 22;
+            }
+            else if (pk.Species == 6)
+            {
+                pk.AbilityNumber = 1;
+                pk.Ability = 66;
+            }
+            else if (pk.Species == 248)
+            {
+                pk.AbilityNumber = 1;
+                pk.Ability = 45;
+            }
+            else if (pk.Species == 15)
+            {
+                pk.AbilityNumber = 1;
+                pk.Ability = 68;
+            }
+            else if (pk.Species == 94)
+            {
+                if (pk.Version > 27)
+                {
+                    pk.AbilityNumber = 1;
+                    pk.Ability = 130;
+                }
+                else
+                {
+                    pk.AbilityNumber = 1;
+                    pk.Ability = 26;
+                }
+            }
+            else if (pk.Species == 130)
+            {
+                pk.AbilityNumber = 1;
+                pk.Ability = 22;
+            }
+            else if (pk.Species == 181)
+            {
+                pk.AbilityNumber = 1;
+                pk.Ability = 9;
+            }
+            else if (pk.Species == 248)
+            {
+                pk.AbilityNumber = 1;
+                pk.Ability = 45;
+            }
+            else if (pk.Species == 323)
+            {
+                pk.AbilityNumber = 1;
+                pk.Ability = 40;
+            }
+            else if (pk.Species == 373)
+            {
+                pk.AbilityNumber = 1;
+                pk.Ability = 22;
+            }
+            else if (pk.Species == 428)
+            {
+                pk.AbilityNumber = 1;
+                pk.Ability = 56;
+            }
+            else if (pk.Species == 475)
+            {
+                pk.Gender = 0;
+                pk.Ability = 80;
+
+            }
+            if (pk.Species == 65)
+            {
+                pk.OT_Name = "wang";
+
+            }
+            else if (pk.Species == 94)
+            {
+                pk.OT_Name = "wang";
+
+            }
+            else if (pk.Species == 208)
+            {
+                pk.OT_Name = "wang";
+
+            }
+            else if (pk.Species == 212)
+            {
+                pk.OT_Name = "wang";
+
+            }
         }
     }
 }

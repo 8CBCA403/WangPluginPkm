@@ -113,7 +113,9 @@ namespace WangPlugin.GUI
         private GroupBox groupBox4;
         private GroupBox groupBox5;
         private CheckBox Random_Name_Box;
+        private CheckBox RandEC_Box;
         public BindingList<Trainer> Tr=new();
+       
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
         public DistributionUI(ISaveFileProvider sav, IPKMView editor)
@@ -149,6 +151,7 @@ namespace WangPlugin.GUI
             this.Trainer_Select_Box = new System.Windows.Forms.ComboBox();
             this.Random_Trainer_Box = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.RandEC_Box = new System.Windows.Forms.CheckBox();
             this.Random_Name_Box = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -264,7 +267,7 @@ namespace WangPlugin.GUI
             // BallBox
             // 
             this.BallBox.FormattingEnabled = true;
-            this.BallBox.Location = new System.Drawing.Point(382, 22);
+            this.BallBox.Location = new System.Drawing.Point(332, 49);
             this.BallBox.Name = "BallBox";
             this.BallBox.Size = new System.Drawing.Size(62, 23);
             this.BallBox.TabIndex = 48;
@@ -294,9 +297,9 @@ namespace WangPlugin.GUI
             this.RandPID_Box.Font = new System.Drawing.Font("黑体", 9F);
             this.RandPID_Box.Location = new System.Drawing.Point(298, 24);
             this.RandPID_Box.Name = "RandPID_Box";
-            this.RandPID_Box.Size = new System.Drawing.Size(109, 19);
+            this.RandPID_Box.Size = new System.Drawing.Size(85, 19);
             this.RandPID_Box.TabIndex = 52;
-            this.RandPID_Box.Text = "随机PID/EC";
+            this.RandPID_Box.Text = "随机PID";
             this.RandPID_Box.UseVisualStyleBackColor = true;
             // 
             // IVEVN_BTN
@@ -336,7 +339,7 @@ namespace WangPlugin.GUI
             // 
             this.Ball_Box.AutoSize = true;
             this.Ball_Box.Font = new System.Drawing.Font("黑体", 9F);
-            this.Ball_Box.Location = new System.Drawing.Point(450, 24);
+            this.Ball_Box.Location = new System.Drawing.Point(400, 51);
             this.Ball_Box.Name = "Ball_Box";
             this.Ball_Box.Size = new System.Drawing.Size(61, 19);
             this.Ball_Box.TabIndex = 61;
@@ -380,6 +383,7 @@ namespace WangPlugin.GUI
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.RandEC_Box);
             this.groupBox1.Controls.Add(this.RandPID_Box);
             this.groupBox1.Controls.Add(this.Random_Name_Box);
             this.groupBox1.Controls.Add(this.Random_Trainer_Box);
@@ -396,6 +400,17 @@ namespace WangPlugin.GUI
             this.groupBox1.TabIndex = 67;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "复制器（复制面板）";
+            // 
+            // RandEC_Box
+            // 
+            this.RandEC_Box.AutoSize = true;
+            this.RandEC_Box.Font = new System.Drawing.Font("黑体", 9F);
+            this.RandEC_Box.Location = new System.Drawing.Point(369, 24);
+            this.RandEC_Box.Name = "RandEC_Box";
+            this.RandEC_Box.Size = new System.Drawing.Size(77, 19);
+            this.RandEC_Box.TabIndex = 69;
+            this.RandEC_Box.Text = "随机EC";
+            this.RandEC_Box.UseVisualStyleBackColor = true;
             // 
             // Random_Name_Box
             // 
@@ -686,6 +701,10 @@ namespace WangPlugin.GUI
                 if (RandPID_Box.Checked)
                 {
                     pk.PID = rand.Rand32();
+                    
+                }
+                if(RandEC_Box.Checked)
+                {
                     pk.SetRandomEC();
                 }
                 if (ShinyBox.Checked)
@@ -749,8 +768,11 @@ namespace WangPlugin.GUI
                 }*/
                 if (RandPID_Box.Checked)
                 {
-                    pk.SetRandomEC();
                     pk.PID = Util.Rand32();
+                }
+                if (RandEC_Box.Checked)
+                {
+                    pk.SetRandomEC();
                 }
                 if (Editor.Data.IsShiny)
                 {
@@ -999,6 +1021,34 @@ namespace WangPlugin.GUI
         {
             SAV.SAV.ModifyBoxes(Level);
         }
+        private void Language_BTN_Click(object sender, EventArgs e)
+        {
+            PKM pk=null;
+            List<PKM> L = new();
+            for (int i = 1; i < 6; i++)
+            {
+                pk = SearchDatabase.MytheryLanguage(SAV, 890, 8, 0, i);
+                L.Add(pk);
+            }
+           for(int i=7;i<11;i++)
+            {
+                pk = SearchDatabase.MytheryLanguage(SAV, 890, 8, 0, i);
+                L.Add(pk);
+            }
+            var BoxData = SAV.SAV.BoxData;
+            IList<PKM> arr2 = BoxData;
+            List<int> list = FindAllEmptySlots(arr2, 0);
+            if (L.Count != 0)
+            {
+                for (int i = 0; i < L.Count; i++)
+                {
+                    int index = list[i];
+                    SAV.SAV.SetBoxSlotAtIndex(L[i], index);
+                }
+            }
+            SAV.ReloadSlots();
+        }
+        
         #region
         /* public void MytheryPK(PKM pk)
          {
@@ -1221,6 +1271,6 @@ namespace WangPlugin.GUI
          }*/
         #endregion
 
-     
+
     }
 }

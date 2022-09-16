@@ -149,7 +149,7 @@ namespace WangPlugin.WangUtil.DexBase
                         {
                             for (int j = 0; j < 2; j++)
                             {
-                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(422 + i), 47);
+                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(422 + i), 47,j);
                                 pk.Form = (byte)j;
                                 if (i == 1)
                                 {

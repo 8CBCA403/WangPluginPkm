@@ -42,8 +42,8 @@ namespace WangPlugin.GUI
         };
         public DexModClass mod = new DexModClass
         {
-            Name = "一组帽子皮",
-            Value = "Pikachu",
+            Name = "一组未知图腾",
+            Value = "Unown",
         };
         private LanguageBoxSelect7 type7 = LanguageBoxSelect7.ENG;
         private LanguageBoxSelect type = LanguageBoxSelect.ENG;
@@ -52,8 +52,7 @@ namespace WangPlugin.GUI
         public List<DexModClass> ML = new();
         private GroupBox groupBox1;
         private ComboBox Mod_Select_Box;
-        private Button Gift_BTN;
-        private Button button1;
+        private Button FormAndSubDex_BTN;
         private OT_Gender typeG = OT_Gender.Male;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
@@ -165,8 +164,7 @@ namespace WangPlugin.GUI
             this.DeleteBox_BTN = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Mod_Select_Box = new System.Windows.Forms.ComboBox();
-            this.Gift_BTN = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.FormAndSubDex_BTN = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -300,7 +298,7 @@ namespace WangPlugin.GUI
             this.Legal_BTN.Font = new System.Drawing.Font("黑体", 9F);
             this.Legal_BTN.Location = new System.Drawing.Point(444, 132);
             this.Legal_BTN.Name = "Legal_BTN";
-            this.Legal_BTN.Size = new System.Drawing.Size(102, 25);
+            this.Legal_BTN.Size = new System.Drawing.Size(125, 25);
             this.Legal_BTN.TabIndex = 13;
             this.Legal_BTN.Text = "合法化箱子";
             this.Legal_BTN.UseVisualStyleBackColor = true;
@@ -311,7 +309,7 @@ namespace WangPlugin.GUI
             this.LegalAll_BTN.Font = new System.Drawing.Font("黑体", 9F);
             this.LegalAll_BTN.Location = new System.Drawing.Point(445, 101);
             this.LegalAll_BTN.Name = "LegalAll_BTN";
-            this.LegalAll_BTN.Size = new System.Drawing.Size(102, 25);
+            this.LegalAll_BTN.Size = new System.Drawing.Size(124, 25);
             this.LegalAll_BTN.TabIndex = 14;
             this.LegalAll_BTN.Text = "合法化全部";
             this.LegalAll_BTN.UseVisualStyleBackColor = true;
@@ -386,36 +384,24 @@ namespace WangPlugin.GUI
             this.Mod_Select_Box.FormattingEnabled = true;
             this.Mod_Select_Box.Location = new System.Drawing.Point(448, 28);
             this.Mod_Select_Box.Name = "Mod_Select_Box";
-            this.Mod_Select_Box.Size = new System.Drawing.Size(98, 25);
+            this.Mod_Select_Box.Size = new System.Drawing.Size(121, 25);
             this.Mod_Select_Box.TabIndex = 68;
             // 
-            // Gift_BTN
+            // FormAndSubDex_BTN
             // 
-            this.Gift_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Gift_BTN.Location = new System.Drawing.Point(448, 60);
-            this.Gift_BTN.Name = "Gift_BTN";
-            this.Gift_BTN.Size = new System.Drawing.Size(100, 25);
-            this.Gift_BTN.TabIndex = 69;
-            this.Gift_BTN.Text = "开始生成";
-            this.Gift_BTN.UseVisualStyleBackColor = true;
-            this.Gift_BTN.Click += new System.EventHandler(this.Gift_BTN_Click);
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(559, 59);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 25);
-            this.button1.TabIndex = 70;
-            this.button1.Text = "Form";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.FormAndSubDex_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.FormAndSubDex_BTN.Location = new System.Drawing.Point(448, 60);
+            this.FormAndSubDex_BTN.Name = "FormAndSubDex_BTN";
+            this.FormAndSubDex_BTN.Size = new System.Drawing.Size(121, 25);
+            this.FormAndSubDex_BTN.TabIndex = 69;
+            this.FormAndSubDex_BTN.Text = "生成形态";
+            this.FormAndSubDex_BTN.UseVisualStyleBackColor = true;
+            this.FormAndSubDex_BTN.Click += new System.EventHandler(this.FormAndSubDex_Click);
             // 
             // DexBuildForm
             // 
-            this.ClientSize = new System.Drawing.Size(671, 171);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.Gift_BTN);
+            this.ClientSize = new System.Drawing.Size(579, 171);
+            this.Controls.Add(this.FormAndSubDex_BTN);
             this.Controls.Add(this.Mod_Select_Box);
             this.Controls.Add(this.Sort_BTN);
             this.Controls.Add(this.LivingDex_BTN);
@@ -802,9 +788,10 @@ namespace WangPlugin.GUI
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[rand.Next(s.Length)]).ToArray());
         }
-        private void Gift_BTN_Click(object sender, EventArgs e)
+        private void FormAndSubDex_Click(object sender, EventArgs e)
         {
             var PKL = new List<PKM>();
+            
                 switch (mod.Value)
                 {
                 case "CapPikachu":
@@ -825,8 +812,17 @@ namespace WangPlugin.GUI
                 case "Rotom":
                     PKL = RotomDex.RotomSets(SAV, Editor);
                     break;
+                case "Arceus":
+                    PKL = ArceusDex.ArceusSets(SAV, Editor);
+                    break;
                 case "Deerling":
                     PKL = DeerlingDex.DeerlingSets(SAV, Editor);
+                    break;
+                case "Incarnate":
+                    PKL = IncarnateDex.IncarnateSets(SAV, Editor);
+                    break;
+                case "Genesect":
+                    PKL = GenesectDex.GenesectSets(SAV, Editor);
                     break;
                 case "Vivillon":
                     PKL = VivillonDex.VivillonSets(SAV, Editor);
@@ -842,6 +838,12 @@ namespace WangPlugin.GUI
                     break;
                 case "CosplayPikachu":
                     PKL = CosplayPikachuDex.CosplayPikachuSets(SAV, Editor);
+                    break;
+                case "Zygarde":
+                    PKL = ZygardeDex.ZygardeSets(SAV, Editor);
+                    break; 
+                case "Rockruffy":
+                    PKL = RockruffyDex.RockruffySets(SAV, Editor);
                     break;
                 case "Oricorio":
                     PKL = OricorioDex.OricorioSets(SAV, Editor);
@@ -956,9 +958,6 @@ namespace WangPlugin.GUI
         }*/
         #endregion
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show($"{ Editor.Data.Form}");
-        }
+       
     }
 }

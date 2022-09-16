@@ -26,6 +26,22 @@ namespace WangPlugin.WangUtil.DexBase
                             pk = (PA8)SearchDatabase.SearchPKM(SAV, Editor, a[i], 47);
                             pk.Form = 18;
                         }
+                        else if (a[i] == 570)
+                        {
+                            pk = (PA8)SearchDatabase.SearchPKM(SAV, Editor, a[i], 47,1,false,0,0,3);
+                        }
+                        else if (a[i] == 571)
+                        {
+                            pk = (PA8)SearchDatabase.SearchPKM(SAV, Editor, a[i], 47, 1, false, 0, 0, 4);
+                        }
+                        else if (a[i] == 705 )
+                        {
+                            pk = (PA8)SearchDatabase.SearchPKM(SAV, Editor, a[i], 47, 1, false, 0, 0, 3);
+                        }
+                        else if ( a[i] == 706)
+                        {
+                            pk = (PA8)SearchDatabase.SearchPKM(SAV, Editor, a[i], 47, 1, false, 0, 0, 4);
+                        }
                         pk.CurrentLevel = 100;
                         pk.Species = a[i];
                         pk.ResetHeight();

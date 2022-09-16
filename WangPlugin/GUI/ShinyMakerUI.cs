@@ -283,7 +283,7 @@ namespace WangPlugin.GUI
                         pkm.EncryptionConstant = pkm.PID;
                         pkm.RefreshAbility((int)(pkm.PID & 1));
                         Span<int> abilityarray = stackalloc int[10]; ;
-                   //   pkm.PersonalInfo.GetAbilities(abilityarray);
+                        pkm.PersonalInfo.GetAbilities(abilityarray);
                         if (abilityarray[0] == abilityarray[1])
                         {
                             pkm.AbilityNumber = 1;

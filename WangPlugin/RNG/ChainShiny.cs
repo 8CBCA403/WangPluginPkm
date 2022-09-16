@@ -6,9 +6,7 @@ namespace WangPlugin
     internal static class ChainShiny
     {
         private const int shift = 16;
-
         public static uint Next(uint seed) => LCRNG.Next(seed);
-
         public static bool GenPkm(ref PKM pk,uint seed, bool[] IV)
         {
             uint Next() => (seed = LCRNG.Next(seed)) >> 16;

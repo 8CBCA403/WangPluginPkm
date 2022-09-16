@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using PKHeX.Core;
-
 namespace WangPlugin
 {
-
     internal class DexModClass
     {
         public string Name { get; set; }
         public string Value { get; set; }
-
         public static List<DexModClass> DexModList(ISaveFileProvider sav)
         {
             var L = new List<DexModClass>();
+            var G = sav.SAV.Generation;
+            var V = sav.SAV.Version;
             DexModClass CapPikachu = new DexModClass
             {
                 Name = "一组帽子皮",
@@ -42,12 +41,27 @@ namespace WangPlugin
                 Name = "洛托姆家族",
                 Value = "Rotom",
             };
+            DexModClass Arceus = new DexModClass
+            {
+                Name = "阿尔宙斯家族",
+                Value = "Arceus",
+            };
             DexModClass Deerling= new DexModClass
             {
                 Name = "四季鹿家族",
                 Value = "Deerling",
             };
-            DexModClass Vivillon = new DexModClass
+            DexModClass Incarnate = new DexModClass
+            {
+                Name = "化身家族",
+                Value = "Incarnate",
+            }; 
+            DexModClass Genesect = new DexModClass
+            {
+                Name = "盖诺赛克特家族",
+                Value = "Genesect",
+            }; 
+                DexModClass Vivillon = new DexModClass
             {
                 Name = "彩粉蝶家族",
                 Value = "Vivillon",
@@ -76,6 +90,16 @@ namespace WangPlugin
             {
                 Name = "花舞鸟家族",
                 Value = "Oricorio",
+            };
+            DexModClass Rockruffy = new DexModClass
+            {
+                Name = "岩岩狗家族",
+                Value = "Rockruffy",
+            };
+            DexModClass Zygarde = new DexModClass
+            {
+                Name = "基格尔德家族",
+                Value = "Zygarde",
             };
             DexModClass Minior = new DexModClass
             {
@@ -118,27 +142,76 @@ namespace WangPlugin
                 Value = "Hisui",
             };
             
-            L.Add(CapPikachu);
-            L.Add(Unown);
-            L.Add(Deoxys);
-            L.Add(Burmy);
-            L.Add(Gastrodon);
-            L.Add(Rotom);
-            L.Add(Deerling);
-            L.Add(Vivillon);
-            L.Add(Flabébé);
-            L.Add(Furfrou);
-            L.Add(Pumpkaboo);
-            L.Add(CosplayPikachu);
-            L.Add(Oricorio);
-            L.Add(Minior);
-            L.Add(Silvally);
-            L.Add(Alcremie);
-            L.Add(Mega);
-            L.Add(Alola);
-            L.Add(Galar);
-            L.Add(Gigamax); 
-            L.Add(Hisui);
+            if (G>=2&& V is not GameVersion.SW && V is not GameVersion.SH)
+            {
+                L.Add(Unown);
+            }
+            if (G >= 3 && G!= 8)
+            {
+                L.Add(Deoxys);
+            }
+            if (G >= 4)
+            {
+                if(V is not GameVersion.SW &&V is not GameVersion.SH)
+                L.Add(Burmy);
+                L.Add(Gastrodon);
+                L.Add(Rotom);
+                if(V is not GameVersion.SW && V is not GameVersion.SH && V is not GameVersion.BD&& V is not GameVersion.SP)
+                L.Add(Arceus);
+            }
+            if (G >= 5&& V is not GameVersion.BD && V is not GameVersion.SP && V is not GameVersion.PLA)
+            {
+                if (G != 8)
+                {
+                    L.Add(Deerling);
+                    L.Add(Incarnate);
+                }
+               
+                L.Add(Genesect);
+            }
+            if (G >= 6)
+            {
+                if(V==GameVersion.AS||V==GameVersion.OR)
+                    L.Add(CosplayPikachu);
+                if (G != 8)
+                {
+                    L.Add(Mega);
+                    L.Add(Vivillon);
+                    L.Add(Flabébé);
+                    L.Add(Furfrou);
+                    L.Add(Zygarde);
+                }
+                if(V!=GameVersion.PLA && V is not GameVersion.BD && V is not GameVersion.SP)
+                    L.Add(Pumpkaboo);
+                
+            }
+            if (G >= 7)
+            {
+                if (G != 8)
+                {
+                    L.Add(CapPikachu);
+                    L.Add(Oricorio);
+                    L.Add(Minior);
+                }
+                if (V != GameVersion.PLA && V is not GameVersion.BD && V is not GameVersion.SP)
+                {
+                    L.Add(Rockruffy);
+                    L.Add(Silvally);
+                    L.Add(Alola);
+                }
+            }
+            if (G == 8)
+            {
+                if (V is not GameVersion.PLA && V is not GameVersion.BD && V is not GameVersion.SP)
+                {
+                    L.Add(Alcremie);
+                    L.Add(Galar);
+                    L.Add(Gigamax);
+                }
+                else if (V is GameVersion.PLA)
+                L.Add(Hisui);
+            }
+            
             
             return L;
         }

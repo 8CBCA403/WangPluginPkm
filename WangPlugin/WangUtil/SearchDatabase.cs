@@ -2,12 +2,11 @@
 using PKHeX.Core;
 using System.Collections.Generic;
 using System.Linq;
-
 namespace WangPlugin
 {
     internal class SearchDatabase
     {
-        public static PKM SearchPKM(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version, int form = 0, bool egg=false, int location =0 ,int gender=0)
+        public static PKM SearchPKM(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version, int form = 0, bool egg = false, int location = 0, int gender = 0, int r = 0)
         {
             List<IEncounterInfo> Results;
             IEncounterInfo enc;
@@ -23,14 +22,14 @@ namespace WangPlugin
             if (form != 0)
             {
                 res = res.Where(pkm => pkm.Form == form);
-                if(res.Count()!=0)
-                results =res.ToList();
+                if (res.Count() != 0)
+                    results = res.ToList();
             }
             PKM pk = Editor.Data;
             if (results.Count != 0)
             {
                 Results = results;
-                enc = Results[0];
+                enc = Results[r];
                 pk = enc.ConvertToPKM(SAV.SAV);
                 if (location != 0)
                 {
@@ -42,7 +41,7 @@ namespace WangPlugin
                             break;
                     }
                 }
-                if(gender != 0)
+                if (gender != 0)
                 {
                     for (int i = 0; ; i++)
                     {
@@ -82,7 +81,7 @@ namespace WangPlugin
             }
             return pk;
         }
-        public static PKM MytheryPK(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version,int form=0)
+        public static PKM MytheryPK(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version, int form = 0)
         {
             var db = EncounterEvent.GetAllEvents();
             var RawDB = new List<MysteryGift>(db);
@@ -97,12 +96,42 @@ namespace WangPlugin
             {
                 foreach (MysteryGift gift in results)
                 {
+
                     pkc = gift.ConvertToPKM(SAV.SAV);
-                   // EntityConverter.TryMakePKMCompatible(pkc, pk, out var c, out pkc);
+                    // EntityConverter.TryMakePKMCompatible(pkc, pk, out var c, out pkc);
                     p.Add(pkc);
                 }
             }
             return p[0];
-            }
         }
+        public static PKM MytheryLanguage(ISaveFileProvider SAV, ushort species, int version, int form = 0,int language=1)
+        {
+            var db = EncounterEvent.GetAllEvents();
+            var RawDB = new List<MysteryGift>(db);
+            PKM pkc;
+            List<PKM> p = new();
+            string OT = "";
+            IEnumerable<MysteryGift> res = RawDB;
+            res = res.Where(pkm => pkm.Species == species);
+            res = res.Where(pkm => pkm.Form == form);
+            res = res.Where(pkm => pkm.Generation == version);
+            var results = res.ToArray();
+            if (results.Count() != 0)
+            {
+                foreach (MysteryGift gift in results)
+                {
+                    var g = (WC8)gift;
+                    OT = g.GetOT(language);
+                    pkc = gift.ConvertToPKM(SAV.SAV);
+                    p.Add(pkc);
+                }
+            }
+            p[0].Language = language;
+            p[0].OT_Name = OT;
+            p[0].ClearNickname();
+            return p[0];
+        }
+    
+    }
 }
+

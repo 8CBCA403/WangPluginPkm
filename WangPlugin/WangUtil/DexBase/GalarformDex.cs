@@ -33,7 +33,17 @@ namespace WangPlugin.WangUtil.DexBase
                         {
                             pk = SearchDatabase.SearchPKM(SAV, Editor, a[i], 45, 2, false);
                         }
-                       
+                        if (a[i] == 80)
+                        {
+                            pk.Form = 2;
+                            pk.Ability = 259;
+                            pk.AbilityNumber = 1;
+                        }
+                        if (a[i] == 199)
+                        {
+                            pk.Ability = 261;
+                            pk.AbilityNumber = 1;
+                        }
                         pk.CurrentLevel = 100;
                         pk.Species = a[i];
                         pk.ClearNickname();

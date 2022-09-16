@@ -17,18 +17,11 @@ namespace WangPlugin
             var b = low8;
             for (uint i = 0; i <= byte.MaxValue; i++)
             {
-                // the second rand() also has 16 bits that aren't known. It is a 16 bit value added to either side.
-                // to consider these bits and their impact, they can at most increment/decrement the result by 1.
-                // with the current calc setup, the search loop's calculated value may be -1 (loop does subtraction)
-                // since LCGs are linear (hence the name), there's no values in adjacent cells. (no collisions)
-                // if we mark the prior adjacent cell, we eliminate the need to check flags twice on each loop.
                 uint right = (Mult * i) + Add;
                 ushort val = (ushort)(right >> 16);
-
                 f[val] = true; b[val] = (byte)i;
                 --val;
                 f[val] = true; b[val] = (byte)i;
-                // now the search only has to access the flags array once per loop.
             }
         }
         public static int GetSeeds(Span<uint> result, uint pid)

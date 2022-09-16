@@ -102,6 +102,7 @@ namespace WangPlugin.GUI
         private TextBox Legal_Check_BOX3;
         private TextBox Legal_Check_BOX2;
         private TextBox Legal_Check_BOX5;
+        private Button GetSeedForMaxLair_BTN;
         public int[] DIV ={ 0, 1, 2, 3, 4, 5 ,6 };
         public RNGForm(ISaveFileProvider sav, IPKMView editor)
 
@@ -137,6 +138,7 @@ namespace WangPlugin.GUI
             this.Ability_Box = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.GetSeedForMaxLair_BTN = new System.Windows.Forms.Button();
             this.Legal_Check_BOX5 = new System.Windows.Forms.TextBox();
             this.Legal_Check_BOX4 = new System.Windows.Forms.TextBox();
             this.Legal_Check_BOX3 = new System.Windows.Forms.TextBox();
@@ -157,7 +159,7 @@ namespace WangPlugin.GUI
             // 
             // Search
             // 
-            this.Search.Location = new System.Drawing.Point(53, 146);
+            this.Search.Location = new System.Drawing.Point(55, 157);
             this.Search.Name = "Search";
             this.Search.Size = new System.Drawing.Size(124, 25);
             this.Search.TabIndex = 9;
@@ -176,7 +178,7 @@ namespace WangPlugin.GUI
             // 
             // Cancel
             // 
-            this.Cancel.Location = new System.Drawing.Point(183, 146);
+            this.Cancel.Location = new System.Drawing.Point(185, 157);
             this.Cancel.Name = "Cancel";
             this.Cancel.Size = new System.Drawing.Size(124, 25);
             this.Cancel.TabIndex = 11;
@@ -309,7 +311,7 @@ namespace WangPlugin.GUI
             this.groupBox1.Controls.Add(this.methodTypeBox);
             this.groupBox1.Location = new System.Drawing.Point(5, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(356, 182);
+            this.groupBox1.Size = new System.Drawing.Size(356, 210);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查找";
@@ -367,6 +369,7 @@ namespace WangPlugin.GUI
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.GetSeedForMaxLair_BTN);
             this.groupBox2.Controls.Add(this.Legal_Check_BOX5);
             this.groupBox2.Controls.Add(this.Legal_Check_BOX4);
             this.groupBox2.Controls.Add(this.Legal_Check_BOX3);
@@ -382,10 +385,20 @@ namespace WangPlugin.GUI
             this.groupBox2.Controls.Add(this.Check_BTN);
             this.groupBox2.Location = new System.Drawing.Point(372, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(291, 182);
+            this.groupBox2.Size = new System.Drawing.Size(291, 210);
             this.groupBox2.TabIndex = 31;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "检测(Raid/大冒险)";
+            // 
+            // GetSeedForMaxLair_BTN
+            // 
+            this.GetSeedForMaxLair_BTN.Location = new System.Drawing.Point(22, 178);
+            this.GetSeedForMaxLair_BTN.Name = "GetSeedForMaxLair_BTN";
+            this.GetSeedForMaxLair_BTN.Size = new System.Drawing.Size(254, 25);
+            this.GetSeedForMaxLair_BTN.TabIndex = 36;
+            this.GetSeedForMaxLair_BTN.Text = "为面板大冒险非闪神添加seed";
+            this.GetSeedForMaxLair_BTN.UseVisualStyleBackColor = true;
+            this.GetSeedForMaxLair_BTN.Click += new System.EventHandler(this.GetSeedForMaxLair_BTN_Click);
             // 
             // Legal_Check_BOX5
             // 
@@ -450,7 +463,7 @@ namespace WangPlugin.GUI
             // 
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(675, 198);
+            this.ClientSize = new System.Drawing.Size(679, 226);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -476,15 +489,15 @@ namespace WangPlugin.GUI
             this.MinIV_Box.DataSource =DIV;
             this.methodTypeBox.SelectedIndexChanged += (_, __) =>
             {
-                if (methodTypeBox.SelectedItem == methodTypeBox.Items[9]|| 
+                if (methodTypeBox.SelectedItem == methodTypeBox.Items[12]|| 
                 methodTypeBox.SelectedItem == methodTypeBox.Items[1]|| 
-                methodTypeBox.SelectedItem == methodTypeBox.Items[7])
+                methodTypeBox.SelectedItem == methodTypeBox.Items[10])
                 {
                     LockIV.Enabled = true;
                     LockIV.Checked = false;
                     VCheck.Enabled = false;
                 }
-                else if (methodTypeBox.SelectedItem == methodTypeBox.Items[10])
+                else if (methodTypeBox.SelectedItem == methodTypeBox.Items[13])
                 {
                     LockIV.Enabled = false;
                     LockIV.Checked = true;
@@ -911,6 +924,21 @@ namespace WangPlugin.GUI
                 });
             },
             tokenSource2.Token);
+        }
+
+        private void GetSeedForMaxLair_BTN_Click(object sender, EventArgs e)
+        {
+            var pk=Editor.Data;
+            var encounters = EncounterMovesetGenerator.GenerateEncounters(pk,SAV.SAV, pk.Moves);
+            foreach (var enc in encounters)
+            {
+                if (pk.Generation == 8 && pk.Met_Location== 244)
+                {
+                    FindNestPIDIV.PreSetPIDIV(pk, enc);
+                    break;
+                }
+            }
+            Editor.PopulateFields(pk);
         }
         #region
         /*    public void P(uint pid,int[] ivs,uint ec)
