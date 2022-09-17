@@ -55,6 +55,7 @@ namespace WangPlugin.WangUtil.DexBase
                             {
                                 PK6 pk6 = (PK6)SearchDatabase.SearchPKM(SAV, Editor, USUM[i], 25, 0, false);
                                 pk = pk6.ConvertToPK7();
+                                pk.Language = 2;
                             }
                             pk.CurrentLevel = 100;
                             pk.Species = USUM[i];
@@ -87,6 +88,7 @@ namespace WangPlugin.WangUtil.DexBase
                             {
                                 PK6 pk6 = (PK6)SearchDatabase.SearchPKM(SAV, Editor, USUM[i], 25, 0, false);
                                 pk = pk6.ConvertToPK7();
+                                pk.Language = 2;
                             }
                             pk.CurrentLevel = 100;
                             pk.Species = USUM[i];

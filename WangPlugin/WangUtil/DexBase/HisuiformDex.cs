@@ -42,6 +42,14 @@ namespace WangPlugin.WangUtil.DexBase
                         {
                             pk = (PA8)SearchDatabase.SearchPKM(SAV, Editor, a[i], 47, 1, false, 0, 0, 4);
                         }
+                        else if (a[i]==483)
+                        {
+                            pk.Form = 1;
+                        }
+                        else if (a[i] == 484)
+                        {
+                            pk.Form = 1;
+                        }
                         pk.CurrentLevel = 100;
                         pk.Species = a[i];
                         pk.ResetHeight();

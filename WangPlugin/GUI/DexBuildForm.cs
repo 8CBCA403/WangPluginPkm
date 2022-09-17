@@ -798,7 +798,12 @@ namespace WangPlugin.GUI
                     PKL = CapPikachuDex.CapPikachuSets(SAV, Editor);
                     break;
                 case "Unown":
-                    PKL = UnownDex.UnownSets(SAV, Editor);
+                    if (SAV.SAV.Version is GameVersion.SW or GameVersion.SH or GameVersion.SWSH)
+                        PKL = GastrodonDex.GastrodonSets(SAV, Editor);
+                    else
+                    {
+                        PKL = UnownDex.UnownSets(SAV, Editor);
+                    }
                     break;
                 case "Deoxys":
                     PKL = DeoxysDex.DeoxysSets(SAV, Editor);

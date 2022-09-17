@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using PKHeX.Core;
+using PKHeX.Core.AutoMod;
 
 namespace WangPlugin.WangUtil.DexBase
 {
@@ -22,11 +23,12 @@ namespace WangPlugin.WangUtil.DexBase
                     }
                     break;
                 case GameVersion.S or GameVersion.E or GameVersion.R or 
-                GameVersion.FR or GameVersion.LG or GameVersion.RSE:
+                GameVersion.FR or GameVersion.LG or GameVersion.RSE or GameVersion.RS:
                     for (int i = 0; i < 28; i++)
                     {
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 201, 5);
                         pk.Form = (byte)i;
+                        pk = SAV.SAV.Legalize(pk);
                         PKL.Add(pk);
                     }
                     break;
@@ -70,7 +72,7 @@ namespace WangPlugin.WangUtil.DexBase
                 case GameVersion.BD or GameVersion.SP or GameVersion.BDSP:
                     for (int i = 0; i < 28; i++)
                     {
-                        pk = SearchDatabase.SearchPKM(SAV, Editor, 201, 48);
+                        pk = SearchDatabase.SearchPKM(SAV, Editor, 201, 48,i);
                         pk.Form = (byte)i;
                         PKL.Add(pk);
                     }

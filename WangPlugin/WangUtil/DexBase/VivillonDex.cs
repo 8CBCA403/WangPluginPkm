@@ -216,10 +216,12 @@ namespace WangPlugin.WangUtil.DexBase
                                     break;
                                 case 18:
                                     var p = SearchDatabase.MytheryPK(SAV,Editor,666,6,18);
+                                    
                                     PKL.Add(p);
                                     break;
                                 case 19:
                                     p = SearchDatabase.MytheryPK(SAV, Editor, 666, 6, 19);
+                              
                                     PKL.Add(p);
                                     break;
                             }
@@ -386,10 +388,14 @@ namespace WangPlugin.WangUtil.DexBase
                                     break;
                                 case 18:
                                     var p =(PK6)SearchDatabase.MytheryPK(SAV, Editor, 666, 6, 18);
+                                    p.Language = 2;
+                                    p.ClearNickname();
                                     PKL.Add(p.ConvertToPK7());
                                     break;
                                 case 19:
                                     p = (PK6)SearchDatabase.MytheryPK(SAV, Editor, 666, 6, 19);
+                                    p.Language = 1;
+                                    p.ClearNickname();
                                     PKL.Add(p.ConvertToPK7());
                                     break;
                             }

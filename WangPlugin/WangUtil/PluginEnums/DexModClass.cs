@@ -159,15 +159,21 @@ namespace WangPlugin
                 if(V is not GameVersion.SW && V is not GameVersion.SH && V is not GameVersion.BD&& V is not GameVersion.SP)
                 L.Add(Arceus);
             }
-            if (G >= 5&& V is not GameVersion.BD && V is not GameVersion.SP && V is not GameVersion.PLA)
+            if (G >= 5&& V is not GameVersion.BD && V is not GameVersion.SP)
             {
-                if (G != 8)
+                if (G != 8 && V is not GameVersion.PLA)
                 {
                     L.Add(Deerling);
+                   
+                }
+                if (V is not GameVersion.PLA)
+                {
+                    L.Add(Genesect);
+                }
+                if (V is GameVersion.PLA&&V is not GameVersion.SW & V is not GameVersion.SH&& V is not GameVersion.SWSH)
+                {
                     L.Add(Incarnate);
                 }
-               
-                L.Add(Genesect);
             }
             if (G >= 6)
             {
