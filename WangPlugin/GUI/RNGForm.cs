@@ -11,31 +11,13 @@ namespace WangPlugin.GUI
 {
     public class RNGForm : Form
     {
-        private ComboBox methodTypeBox;
         private Button Search;
         private CancellationTokenSource tokenSource1 = new();
         private CancellationTokenSource tokenSource2 = new();
-        private TextBox Condition;
         private Button Cancel;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
-        public enum MethodType
-        {
-            None,
-            Method1,
-            Method1_Unown,
-            H1_BACD_R,
-            Method1Roaming,
-            Method2,
-            Method2_Unown,
-            Method4,
-            Method4_Unown,
-            ChainShiny,
-            XDColo,
-            Colo,
-            Overworld8,
-            Roaming8b,
-        }
+       
         public enum Gender
         {
             [Description("只能公")]
@@ -66,9 +48,6 @@ namespace WangPlugin.GUI
         }
         public Gender G = Gender.None;
         public Ability A = Ability.CD;
-        private MethodType RNGMethod = MethodType.None;
-        private TextBox SeedText;
-        private Label label1;
         private CheckBox UsePreSeed;
         private Button Check_BTN;
         private GroupBox groupBox1;
@@ -100,12 +79,8 @@ namespace WangPlugin.GUI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RNGForm));
-            this.methodTypeBox = new System.Windows.Forms.ComboBox();
             this.Search = new System.Windows.Forms.Button();
-            this.Condition = new System.Windows.Forms.TextBox();
             this.Cancel = new System.Windows.Forms.Button();
-            this.SeedText = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.UsePreSeed = new System.Windows.Forms.CheckBox();
             this.Check_BTN = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -128,65 +103,30 @@ namespace WangPlugin.GUI
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // methodTypeBox
-            // 
-            this.methodTypeBox.FormattingEnabled = true;
-            this.methodTypeBox.Location = new System.Drawing.Point(86, 24);
-            this.methodTypeBox.Name = "methodTypeBox";
-            this.methodTypeBox.Size = new System.Drawing.Size(124, 25);
-            this.methodTypeBox.TabIndex = 8;
-            // 
             // Search
             // 
-            this.Search.Location = new System.Drawing.Point(131, 178);
+            this.Search.Location = new System.Drawing.Point(99, 178);
             this.Search.Name = "Search";
-            this.Search.Size = new System.Drawing.Size(106, 25);
+            this.Search.Size = new System.Drawing.Size(92, 25);
             this.Search.TabIndex = 9;
             this.Search.Text = "开始查找";
             this.Search.UseVisualStyleBackColor = true;
             this.Search.Click += new System.EventHandler(this.Search_Click);
             // 
-            // Condition
-            // 
-            this.Condition.Cursor = System.Windows.Forms.Cursors.No;
-            this.Condition.Location = new System.Drawing.Point(216, 24);
-            this.Condition.Name = "Condition";
-            this.Condition.Size = new System.Drawing.Size(124, 25);
-            this.Condition.TabIndex = 10;
-            this.Condition.Text = "无事可做";
-            // 
             // Cancel
             // 
-            this.Cancel.Location = new System.Drawing.Point(244, 179);
+            this.Cancel.Location = new System.Drawing.Point(197, 178);
             this.Cancel.Name = "Cancel";
-            this.Cancel.Size = new System.Drawing.Size(106, 25);
+            this.Cancel.Size = new System.Drawing.Size(98, 25);
             this.Cancel.TabIndex = 11;
             this.Cancel.Text = "停止查找";
             this.Cancel.UseVisualStyleBackColor = true;
             this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
-            // SeedText
-            // 
-            this.SeedText.Cursor = System.Windows.Forms.Cursors.No;
-            this.SeedText.Location = new System.Drawing.Point(216, 58);
-            this.SeedText.Name = "SeedText";
-            this.SeedText.Size = new System.Drawing.Size(124, 25);
-            this.SeedText.TabIndex = 15;
-            this.SeedText.Text = "没有seed";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 17);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "RNG类型";
-            // 
             // UsePreSeed
             // 
             this.UsePreSeed.AutoSize = true;
-            this.UsePreSeed.Location = new System.Drawing.Point(11, 178);
+            this.UsePreSeed.Location = new System.Drawing.Point(6, 181);
             this.UsePreSeed.Name = "UsePreSeed";
             this.UsePreSeed.Size = new System.Drawing.Size(126, 21);
             this.UsePreSeed.TabIndex = 22;
@@ -207,24 +147,20 @@ namespace WangPlugin.GUI
             // 
             this.groupBox1.Controls.Add(this.Search);
             this.groupBox1.Controls.Add(this.UsePreSeed);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.SeedText);
             this.groupBox1.Controls.Add(this.Cancel);
-            this.groupBox1.Controls.Add(this.Condition);
-            this.groupBox1.Controls.Add(this.methodTypeBox);
             this.groupBox1.Controls.Add(this.ConditionForm);
             this.groupBox1.Location = new System.Drawing.Point(5, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(356, 210);
+            this.groupBox1.Size = new System.Drawing.Size(326, 210);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查找";
             // 
             // ConditionForm
             // 
-            this.ConditionForm.Location = new System.Drawing.Point(7, 52);
+            this.ConditionForm.Location = new System.Drawing.Point(7, 14);
             this.ConditionForm.Name = "ConditionForm";
-            this.ConditionForm.Size = new System.Drawing.Size(334, 131);
+            this.ConditionForm.Size = new System.Drawing.Size(313, 186);
             this.ConditionForm.TabIndex = 23;
             // 
             // MinIV_Box
@@ -294,7 +230,7 @@ namespace WangPlugin.GUI
             this.groupBox2.Controls.Add(this.Gender_Box);
             this.groupBox2.Controls.Add(this.MinIV_Box);
             this.groupBox2.Controls.Add(this.Check_BTN);
-            this.groupBox2.Location = new System.Drawing.Point(372, 4);
+            this.groupBox2.Location = new System.Drawing.Point(337, 4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(291, 210);
             this.groupBox2.TabIndex = 31;
@@ -374,7 +310,7 @@ namespace WangPlugin.GUI
             // 
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(679, 230);
+            this.ClientSize = new System.Drawing.Size(634, 222);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -395,14 +331,9 @@ namespace WangPlugin.GUI
         }
         private void BindingData()
         {
-            this.methodTypeBox.DataSource = Enum.GetNames(typeof(MethodType));
+          
             this.MinIV_Box.DataSource =DIV;
-            this.methodTypeBox.SelectedIndexChanged += (_, __) =>
-            {
-                RNGMethod = (MethodType)Enum.Parse(typeof(MethodType), this.methodTypeBox.SelectedItem.ToString(), false);
-                ConditionForm.rules.Method =RNGMethod;
-            };        
-            this.methodTypeBox.SelectedIndex = 0;
+           
             this.MinIV_Box.SelectedIndexChanged += (_, __) =>
             {
                 MinIV = int.Parse(MinIV_Box.SelectedItem.ToString());
@@ -441,42 +372,42 @@ namespace WangPlugin.GUI
         }
         private bool GenPkm(ref PKM pk,uint seed,byte form=0)
         {
-            return RNGMethod switch
+            return ConditionForm.rules.Method switch
             {
-                MethodType.None=>NoMethod.GenPkm(ref pk, ConditionForm.rules),
-                MethodType.Method1 => Method1RNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Method1_Unown=> UnownRNG.GenPkm(ref pk,1, seed, ConditionForm.rules, form),
-                MethodType.Method2 => Method2RNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Method2_Unown => UnownRNG.GenPkm(ref pk, 2, seed, ConditionForm.rules, form),
-                MethodType.Method4 => Method4RNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Method4_Unown => UnownRNG.GenPkm(ref pk, 4, seed, ConditionForm.rules, form),
-                MethodType.XDColo => XDColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Overworld8 => Overworld8RNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Roaming8b => Roaming8bRNG.GenPkm(ref pk, seed,  ConditionForm.rules),
-                MethodType.H1_BACD_R => H1_BACD_R.GenPkm(ref pk, seed & 0xFFFF, ConditionForm.rules),
-                MethodType.Method1Roaming => Method1Roaming.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Colo => ColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed, ConditionForm.rules),
+                PkmCondition.MethodType.None=>NoMethod.GenPkm(ref pk, ConditionForm.rules),
+                PkmCondition.MethodType.Method1 => Method1RNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                PkmCondition.MethodType.Method1_Unown=> UnownRNG.GenPkm(ref pk,1, seed, ConditionForm.rules, form),
+                PkmCondition.MethodType.Method2 => Method2RNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                PkmCondition.MethodType.Method2_Unown => UnownRNG.GenPkm(ref pk, 2, seed, ConditionForm.rules, form),
+                PkmCondition.MethodType.Method4 => Method4RNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                PkmCondition.MethodType.Method4_Unown => UnownRNG.GenPkm(ref pk, 4, seed, ConditionForm.rules, form),
+                PkmCondition.MethodType.XDColo => XDColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                PkmCondition.MethodType.Overworld8 => Overworld8RNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                PkmCondition.MethodType.Roaming8b => Roaming8bRNG.GenPkm(ref pk, seed,  ConditionForm.rules),
+                PkmCondition.MethodType.H1_BACD_R => H1_BACD_R.GenPkm(ref pk, seed & 0xFFFF, ConditionForm.rules),
+                PkmCondition.MethodType.Method1Roaming => Method1Roaming.GenPkm(ref pk, seed, ConditionForm.rules),
+                PkmCondition.MethodType.Colo => ColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                PkmCondition.MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed, ConditionForm.rules),
                 _ => throw new NotSupportedException(),
             };
         }
         private uint NextSeed(uint seed)
         {
-            return RNGMethod switch
+            return ConditionForm.rules.Method switch
             {
-                MethodType.Method1 => Method1RNG.Next(seed),
-                MethodType.Method1_Unown=> UnownRNG.Next(seed),
-                MethodType.Method2 => Method2RNG.Next(seed),
-                MethodType.Method2_Unown => UnownRNG.Next(seed),
-                MethodType.Method4 => Method4RNG.Next(seed),
-                MethodType.Method4_Unown => UnownRNG.Next(seed),
-                MethodType.XDColo => XDColoRNG.Next(seed),
-                MethodType.Overworld8 => Overworld8RNG.Next(seed),
-                MethodType.Roaming8b => Roaming8bRNG.Next(seed),
-                MethodType.H1_BACD_R => H1_BACD_R.Next(seed),
-                MethodType.Method1Roaming => Method1Roaming.Next(seed),
-                MethodType.Colo => ColoRNG.Next(seed),
-                MethodType.ChainShiny => ChainShiny.Next(seed),
+                PkmCondition.MethodType.Method1 => Method1RNG.Next(seed),
+                PkmCondition.MethodType.Method1_Unown=> UnownRNG.Next(seed),
+                PkmCondition.MethodType.Method2 => Method2RNG.Next(seed),
+                PkmCondition.MethodType.Method2_Unown => UnownRNG.Next(seed),
+                PkmCondition.MethodType.Method4 => Method4RNG.Next(seed),
+                PkmCondition.MethodType.Method4_Unown => UnownRNG.Next(seed),
+                PkmCondition.MethodType.XDColo => XDColoRNG.Next(seed),
+                PkmCondition.MethodType.Overworld8 => Overworld8RNG.Next(seed),
+                PkmCondition.MethodType.Roaming8b => Roaming8bRNG.Next(seed),
+                PkmCondition.MethodType.H1_BACD_R => H1_BACD_R.Next(seed),
+                PkmCondition.MethodType.Method1Roaming => Method1Roaming.Next(seed),
+                PkmCondition.MethodType.Colo => ColoRNG.Next(seed),
+                PkmCondition.MethodType.ChainShiny => ChainShiny.Next(seed),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -492,7 +423,7 @@ namespace WangPlugin.GUI
         private void Search_Click(object sender, EventArgs e)
         {
             GeneratorIsRunning(true);
-            Condition.Text = "searching...";
+            ConditionForm.ConditionBox.Text = "searching...";
             uint seed = 0;
             Queue<uint> SeedQueue = new Queue<uint>();
             var j = 0;
@@ -520,7 +451,7 @@ namespace WangPlugin.GUI
                     {
                         if (tokenSource1.IsCancellationRequested)
                         {
-                            Condition.Text = "Stop";
+                            ConditionForm.ConditionBox.Text = "Stop";
                             return;
                         }
                         for (int i = 0; i < j; i++)
@@ -540,7 +471,7 @@ namespace WangPlugin.GUI
                                     MessageBox.Show($"Success！");
                                     Editor.PopulateFields(pk, false);
                                     SAV.ReloadSlots();
-                                    SeedText.Text = $"{Convert.ToString(seed, 16)}";
+                                    ConditionForm.SeedBox.Text = $"{Convert.ToString(seed, 16)}";
                                 });
                                
                                 break;
@@ -552,7 +483,7 @@ namespace WangPlugin.GUI
                     this.Invoke(() =>
                     {
                         GeneratorIsRunning(false);
-                        Condition.Text = "Nothing to check";
+                        ConditionForm.ConditionBox.Text = "无事可做";
                     });
                 },
                 tokenSource1.Token);

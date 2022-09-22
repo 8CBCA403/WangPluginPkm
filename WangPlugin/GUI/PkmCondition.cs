@@ -8,6 +8,7 @@ namespace WangPlugin.GUI
     {
         public  CheckRules rules = new();
         private ShinyType selectedShiny = ShinyType.None;
+        private MethodType RNGMethod = MethodType.None;
         public enum  ShinyType
         {
             None,
@@ -15,6 +16,23 @@ namespace WangPlugin.GUI
             Star,
             Sqaure,
             ForceStar,
+        }
+        public enum MethodType
+        {
+            None,
+            Method1,
+            Method1_Unown,
+            H1_BACD_R,
+            Method1Roaming,
+            Method2,
+            Method2_Unown,
+            Method4,
+            Method4_Unown,
+            ChainShiny,
+            XDColo,
+            Colo,
+            Overworld8,
+            Roaming8b,
         }
         public PkmCondition()
         {
@@ -35,6 +53,13 @@ namespace WangPlugin.GUI
             this.SpdMax.DataBindings.Add("Text", rules, "maxSpD");
             this.SpeMin.DataBindings.Add("Text", rules, "minSpe");
             this.SpeMax.DataBindings.Add("Text", rules, "maxSpe");
+            this.MethodBox.DataSource = Enum.GetNames(typeof(MethodType));
+            this.MethodBox.SelectedIndexChanged += (_, __) =>
+            {
+                RNGMethod = (MethodType)Enum.Parse(typeof(MethodType), this.MethodBox.SelectedItem.ToString(), false);
+                rules.Method = RNGMethod;
+            };
+            this.MethodBox.SelectedIndex = 0;
             this.ShinyTypeBox1.DataSource = Enum.GetNames(typeof(ShinyType));
             this.ShinyTypeBox1.SelectedIndexChanged += (_, __) =>
             {

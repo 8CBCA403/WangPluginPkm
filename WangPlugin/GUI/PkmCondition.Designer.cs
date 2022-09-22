@@ -50,12 +50,16 @@
             this.SpeMax = new System.Windows.Forms.TextBox();
             this.ShinyTypeLabel1 = new System.Windows.Forms.Label();
             this.ShinyTypeBox1 = new System.Windows.Forms.ComboBox();
+            this.SeedBox = new System.Windows.Forms.TextBox();
+            this.MethodBox = new System.Windows.Forms.ComboBox();
+            this.ConditionBox = new System.Windows.Forms.TextBox();
+            this.RNGLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // HP_Label
             // 
             this.HP_Label.AutoSize = true;
-            this.HP_Label.Location = new System.Drawing.Point(58, 37);
+            this.HP_Label.Location = new System.Drawing.Point(73, 68);
             this.HP_Label.Name = "HP_Label";
             this.HP_Label.Size = new System.Drawing.Size(37, 15);
             this.HP_Label.TabIndex = 6;
@@ -64,7 +68,7 @@
             // Atk_Label
             // 
             this.Atk_Label.AutoSize = true;
-            this.Atk_Label.Location = new System.Drawing.Point(101, 36);
+            this.Atk_Label.Location = new System.Drawing.Point(116, 68);
             this.Atk_Label.Name = "Atk_Label";
             this.Atk_Label.Size = new System.Drawing.Size(37, 15);
             this.Atk_Label.TabIndex = 7;
@@ -73,7 +77,7 @@
             // Def_Label
             // 
             this.Def_Label.AutoSize = true;
-            this.Def_Label.Location = new System.Drawing.Point(147, 36);
+            this.Def_Label.Location = new System.Drawing.Point(159, 68);
             this.Def_Label.Name = "Def_Label";
             this.Def_Label.Size = new System.Drawing.Size(37, 15);
             this.Def_Label.TabIndex = 8;
@@ -82,7 +86,7 @@
             // Spa_Label
             // 
             this.Spa_Label.AutoSize = true;
-            this.Spa_Label.Location = new System.Drawing.Point(190, 36);
+            this.Spa_Label.Location = new System.Drawing.Point(202, 68);
             this.Spa_Label.Name = "Spa_Label";
             this.Spa_Label.Size = new System.Drawing.Size(37, 15);
             this.Spa_Label.TabIndex = 9;
@@ -91,7 +95,7 @@
             // Spd_Label
             // 
             this.Spd_Label.AutoSize = true;
-            this.Spd_Label.Location = new System.Drawing.Point(233, 36);
+            this.Spd_Label.Location = new System.Drawing.Point(245, 68);
             this.Spd_Label.Name = "Spd_Label";
             this.Spd_Label.Size = new System.Drawing.Size(37, 15);
             this.Spd_Label.TabIndex = 10;
@@ -100,7 +104,7 @@
             // Spe_Label
             // 
             this.Spe_Label.AutoSize = true;
-            this.Spe_Label.Location = new System.Drawing.Point(273, 36);
+            this.Spe_Label.Location = new System.Drawing.Point(288, 68);
             this.Spe_Label.Name = "Spe_Label";
             this.Spe_Label.Size = new System.Drawing.Size(37, 15);
             this.Spe_Label.TabIndex = 11;
@@ -108,7 +112,7 @@
             // 
             // HpMin
             // 
-            this.HpMin.Location = new System.Drawing.Point(61, 55);
+            this.HpMin.Location = new System.Drawing.Point(76, 95);
             this.HpMin.Name = "HpMin";
             this.HpMin.Size = new System.Drawing.Size(34, 25);
             this.HpMin.TabIndex = 12;
@@ -118,7 +122,7 @@
             // Min_Label
             // 
             this.Min_Label.AutoSize = true;
-            this.Min_Label.Location = new System.Drawing.Point(3, 58);
+            this.Min_Label.Location = new System.Drawing.Point(12, 98);
             this.Min_Label.Name = "Min_Label";
             this.Min_Label.Size = new System.Drawing.Size(52, 15);
             this.Min_Label.TabIndex = 13;
@@ -126,7 +130,7 @@
             // 
             // HpMax
             // 
-            this.HpMax.Location = new System.Drawing.Point(61, 86);
+            this.HpMax.Location = new System.Drawing.Point(76, 128);
             this.HpMax.Name = "HpMax";
             this.HpMax.Size = new System.Drawing.Size(34, 25);
             this.HpMax.TabIndex = 14;
@@ -136,7 +140,7 @@
             // Max_Label
             // 
             this.Max_Label.AutoSize = true;
-            this.Max_Label.Location = new System.Drawing.Point(3, 89);
+            this.Max_Label.Location = new System.Drawing.Point(12, 131);
             this.Max_Label.Name = "Max_Label";
             this.Max_Label.Size = new System.Drawing.Size(52, 15);
             this.Max_Label.TabIndex = 15;
@@ -144,7 +148,7 @@
             // 
             // AtkMin
             // 
-            this.AtkMin.Location = new System.Drawing.Point(104, 55);
+            this.AtkMin.Location = new System.Drawing.Point(119, 95);
             this.AtkMin.Name = "AtkMin";
             this.AtkMin.Size = new System.Drawing.Size(34, 25);
             this.AtkMin.TabIndex = 16;
@@ -153,7 +157,7 @@
             // 
             // AtkMax
             // 
-            this.AtkMax.Location = new System.Drawing.Point(104, 86);
+            this.AtkMax.Location = new System.Drawing.Point(119, 128);
             this.AtkMax.Name = "AtkMax";
             this.AtkMax.Size = new System.Drawing.Size(34, 25);
             this.AtkMax.TabIndex = 17;
@@ -162,7 +166,7 @@
             // 
             // DefMax
             // 
-            this.DefMax.Location = new System.Drawing.Point(147, 86);
+            this.DefMax.Location = new System.Drawing.Point(162, 128);
             this.DefMax.Name = "DefMax";
             this.DefMax.Size = new System.Drawing.Size(34, 25);
             this.DefMax.TabIndex = 18;
@@ -171,7 +175,7 @@
             // 
             // DefMin
             // 
-            this.DefMin.Location = new System.Drawing.Point(147, 55);
+            this.DefMin.Location = new System.Drawing.Point(162, 95);
             this.DefMin.Name = "DefMin";
             this.DefMin.Size = new System.Drawing.Size(34, 25);
             this.DefMin.TabIndex = 19;
@@ -180,7 +184,7 @@
             // 
             // SpaMin
             // 
-            this.SpaMin.Location = new System.Drawing.Point(190, 55);
+            this.SpaMin.Location = new System.Drawing.Point(205, 95);
             this.SpaMin.Name = "SpaMin";
             this.SpaMin.Size = new System.Drawing.Size(34, 25);
             this.SpaMin.TabIndex = 20;
@@ -189,7 +193,7 @@
             // 
             // SpaMax
             // 
-            this.SpaMax.Location = new System.Drawing.Point(190, 86);
+            this.SpaMax.Location = new System.Drawing.Point(205, 128);
             this.SpaMax.Name = "SpaMax";
             this.SpaMax.Size = new System.Drawing.Size(34, 25);
             this.SpaMax.TabIndex = 21;
@@ -198,7 +202,7 @@
             // 
             // SpdMin
             // 
-            this.SpdMin.Location = new System.Drawing.Point(236, 55);
+            this.SpdMin.Location = new System.Drawing.Point(248, 95);
             this.SpdMin.Name = "SpdMin";
             this.SpdMin.Size = new System.Drawing.Size(34, 25);
             this.SpdMin.TabIndex = 22;
@@ -207,7 +211,7 @@
             // 
             // SpdMax
             // 
-            this.SpdMax.Location = new System.Drawing.Point(236, 86);
+            this.SpdMax.Location = new System.Drawing.Point(248, 128);
             this.SpdMax.Name = "SpdMax";
             this.SpdMax.Size = new System.Drawing.Size(34, 25);
             this.SpdMax.TabIndex = 23;
@@ -216,7 +220,7 @@
             // 
             // SpeMin
             // 
-            this.SpeMin.Location = new System.Drawing.Point(276, 55);
+            this.SpeMin.Location = new System.Drawing.Point(291, 95);
             this.SpeMin.Name = "SpeMin";
             this.SpeMin.Size = new System.Drawing.Size(34, 25);
             this.SpeMin.TabIndex = 24;
@@ -225,7 +229,7 @@
             // 
             // SpeMax
             // 
-            this.SpeMax.Location = new System.Drawing.Point(276, 86);
+            this.SpeMax.Location = new System.Drawing.Point(291, 128);
             this.SpeMax.Name = "SpeMax";
             this.SpeMax.Size = new System.Drawing.Size(34, 25);
             this.SpeMax.TabIndex = 25;
@@ -235,7 +239,7 @@
             // ShinyTypeLabel1
             // 
             this.ShinyTypeLabel1.AutoSize = true;
-            this.ShinyTypeLabel1.Location = new System.Drawing.Point(3, 8);
+            this.ShinyTypeLabel1.Location = new System.Drawing.Point(3, 42);
             this.ShinyTypeLabel1.Name = "ShinyTypeLabel1";
             this.ShinyTypeLabel1.Size = new System.Drawing.Size(67, 15);
             this.ShinyTypeLabel1.TabIndex = 26;
@@ -244,15 +248,54 @@
             // ShinyTypeBox1
             // 
             this.ShinyTypeBox1.FormattingEnabled = true;
-            this.ShinyTypeBox1.Location = new System.Drawing.Point(95, 5);
+            this.ShinyTypeBox1.Location = new System.Drawing.Point(76, 39);
             this.ShinyTypeBox1.Name = "ShinyTypeBox1";
-            this.ShinyTypeBox1.Size = new System.Drawing.Size(129, 23);
+            this.ShinyTypeBox1.Size = new System.Drawing.Size(136, 23);
             this.ShinyTypeBox1.TabIndex = 27;
+            // 
+            // SeedBox
+            // 
+            this.SeedBox.Location = new System.Drawing.Point(218, 39);
+            this.SeedBox.Multiline = true;
+            this.SeedBox.Name = "SeedBox";
+            this.SeedBox.Size = new System.Drawing.Size(107, 23);
+            this.SeedBox.TabIndex = 28;
+            this.SeedBox.Text = "没有seed";
+            // 
+            // MethodBox
+            // 
+            this.MethodBox.FormattingEnabled = true;
+            this.MethodBox.Location = new System.Drawing.Point(76, 10);
+            this.MethodBox.Name = "MethodBox";
+            this.MethodBox.Size = new System.Drawing.Size(136, 23);
+            this.MethodBox.TabIndex = 29;
+            // 
+            // ConditionBox
+            // 
+            this.ConditionBox.Location = new System.Drawing.Point(218, 10);
+            this.ConditionBox.Multiline = true;
+            this.ConditionBox.Name = "ConditionBox";
+            this.ConditionBox.Size = new System.Drawing.Size(107, 23);
+            this.ConditionBox.TabIndex = 30;
+            this.ConditionBox.Text = "无事可做";
+            // 
+            // RNGLabel
+            // 
+            this.RNGLabel.AutoSize = true;
+            this.RNGLabel.Location = new System.Drawing.Point(3, 13);
+            this.RNGLabel.Name = "RNGLabel";
+            this.RNGLabel.Size = new System.Drawing.Size(61, 15);
+            this.RNGLabel.TabIndex = 31;
+            this.RNGLabel.Text = "RNG类型";
             // 
             // PkmCondition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.RNGLabel);
+            this.Controls.Add(this.ConditionBox);
+            this.Controls.Add(this.MethodBox);
+            this.Controls.Add(this.SeedBox);
             this.Controls.Add(this.ShinyTypeBox1);
             this.Controls.Add(this.ShinyTypeLabel1);
             this.Controls.Add(this.SpeMax);
@@ -276,7 +319,7 @@
             this.Controls.Add(this.Atk_Label);
             this.Controls.Add(this.HP_Label);
             this.Name = "PkmCondition";
-            this.Size = new System.Drawing.Size(329, 135);
+            this.Size = new System.Drawing.Size(347, 162);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -305,5 +348,9 @@
         private System.Windows.Forms.TextBox SpeMax;
         private System.Windows.Forms.Label ShinyTypeLabel1;
         private System.Windows.Forms.ComboBox ShinyTypeBox1;
+        public System.Windows.Forms.TextBox SeedBox;
+        private System.Windows.Forms.ComboBox MethodBox;
+        public System.Windows.Forms.TextBox ConditionBox;
+        private System.Windows.Forms.Label RNGLabel;
     }
 }

@@ -29,7 +29,7 @@ namespace WangPlugin
 
         public PkmCondition.ShinyType Shiny  { get; set; }
 
-        public RNGForm.MethodType Method { get; set; }
+        public PkmCondition.MethodType Method { get; set; }
         public bool CheckIV(CheckRules r, PKM pk)
         {
             if (pk.IV_HP < r.minHP || pk.IV_HP > r.maxHP)
@@ -66,7 +66,7 @@ namespace WangPlugin
         {
 
             Queue<uint> Getqeueu = new Queue<uint>();
-            if (r.Method == MethodType.Roaming8b &&
+            if (r.Method == PkmCondition.MethodType.Roaming8b &&
                 r.minHP==31&&
                 r.minAtk == 31 &&
                 r.minDef==31&&
@@ -77,49 +77,49 @@ namespace WangPlugin
             {
                 Getqeueu = SeedList.EnqueueSeed(1);
             }
-            else if (r.Method == MethodType.Roaming8b &&
+            else if (r.Method == PkmCondition.MethodType.Roaming8b &&
                 r.maxAtk == 0 &&
                 r.maxSpe == 0 &&
                 r.Shiny != PkmCondition.ShinyType.None)
             {
                 Getqeueu = SeedList.EnqueueSeed(2);
             }
-            else if (r.Method == MethodType.Roaming8b &&
+            else if (r.Method == PkmCondition.MethodType.Roaming8b &&
                 r.maxAtk == 0 &&
                 r.maxSpe != 0 &&
                 r.Shiny != PkmCondition.ShinyType.None)
             {
                 Getqeueu = SeedList.EnqueueSeed(3);
             }
-            else if (r.Method == MethodType.Roaming8b &&
+            else if (r.Method == PkmCondition.MethodType.Roaming8b &&
                 r.maxAtk != 0 &&
                 r.maxSpe == 0 &&
                 (r.Shiny != PkmCondition.ShinyType.None && r.Shiny != PkmCondition.ShinyType.Sqaure))
             {
                 Getqeueu = SeedList.EnqueueSeed(4);
             }
-            else if (r.Method == MethodType.Overworld8 &&
+            else if (r.Method == PkmCondition.MethodType.Overworld8 &&
               r.maxAtk == 0 &&
                 r.maxSpe != 0 &&
                r.Shiny == PkmCondition.ShinyType.Sqaure)
             {
                 Getqeueu = SeedList.EnqueueSeed(5);
             }
-            else if (r.Method == MethodType.Overworld8 &&
+            else if (r.Method == PkmCondition. MethodType.Overworld8 &&
               r.maxAtk != 0 &&
                r.maxSpe == 0 &&
               r.Shiny == PkmCondition.ShinyType.Sqaure)
             {
                 Getqeueu = SeedList.EnqueueSeed(6);
             }
-            else if (r.Method == MethodType.Overworld8 &&
+            else if (r.Method == PkmCondition.MethodType.Overworld8 &&
              r.maxAtk == 0 &&
               r.maxSpe == 0 &&
              r.Shiny == PkmCondition.ShinyType.Sqaure)
             {
                 Getqeueu = SeedList.EnqueueSeed(7);
             }
-            else if (r.Method == MethodType.Overworld8 &&
+            else if (r.Method == PkmCondition.MethodType.Overworld8 &&
              r.maxAtk!=0 &&
              r.maxSpe!=0 &&
              r.minAtk==31 &&
