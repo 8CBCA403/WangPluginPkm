@@ -9,10 +9,8 @@ namespace WangPlugin
         private const int shift8 = 8;
 
         public static uint Next(uint seed) => XDRNG.Next(seed);
-        public static bool GenPkm(ref PKM pk, uint seed,bool[] shiny, bool[] IV, uint Xor = 0)
+        public static bool GenPkm(ref PKM pk, uint seed, CheckRules r, uint Xor = 0)
         {
-            int FlawlessIVs = 0;
-            uint MAX = 31;
        
             var la = new LegalityAnalysis(pk);
             switch (pk.Species)
@@ -34,50 +32,25 @@ namespace WangPlugin
                 var D = XDRNG.Next(C); // PID
                 var E = XDRNG.Next(D); // PID
                 pk.PID = (D & 0xFFFF0000) | E >> 16;
-                if(!CheckShiny(pk.PID,pk.TID,pk.SID,shiny, Xor))
-                {
-                    return false;
-                }
-                Span<int> IVs = stackalloc int[6];
-                GetIVsInt32(IVs, A >> 16, B >> 16);
-            if (IV[0] && IVs[1] != 0)
+            if (!r.CheckShiny(r, pk))
             {
                 return false;
             }
-            if (IV[1] && IVs[3] != 0)
-            {
-                return false;
-            }
-            if (IV[2] == true)
-            {
-                for (int i = 0; i < 6; i++)
-                {
-                    if (IVs[i] == MAX)
-                        FlawlessIVs++;
-                }
-                if (FlawlessIVs is 3 or > 3)
-                {
-                    pk.SetIVs(IVs);
-                    pk.Nature = (int)(pk.PID % 100 % 25);
-                    pk.RefreshAbility((int)(pk.PID & 1));
-                     la = new LegalityAnalysis(pk);
-                    if (!la.Info.PIDIVMatches)
-                    {
-                        return false;
-                    }
-                    return true;
-                }
-                return false;
-            }
+            Span<int> IVs = stackalloc int[6];
+            GetIVsInt32(IVs, A >> 16, B >> 16);
             pk.SetIVs(IVs);
-
-                pk.Nature = (int)(pk.PID % 100 % 25);
+            if (!r.CheckIV(r, pk))
+            {
+                return false;
+            }
+            la = new LegalityAnalysis(pk);
+            if (!la.Info.PIDIVMatches)
+            {
+                return false;
+            }
+            pk.Nature = (int)(pk.PID % 100 % 25);
                 pk.RefreshAbility((int)(pk.PID & 1));
-                la = new LegalityAnalysis(pk);
-               /* if (!la.Info.PIDIVMatches)
-                {
-                    return false;
-                }*/
+               
             return true;
         }
         private static void GetIVsInt32(Span<int> result, uint r1, uint r2)

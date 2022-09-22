@@ -9,7 +9,7 @@ namespace WangPlugin
 
         public static uint Next(uint seed) => LCRNG.Next(seed);
 
-        public static bool GenPkm( ref PKM pk,uint seed,int SID,int TID, bool[] shiny, bool[] IV)
+        public static bool GenPkm( ref PKM pk,uint seed, CheckRules r)
         {
             
             uint X = seed;
@@ -18,17 +18,13 @@ namespace WangPlugin
             var C = LCRNG.Next(B);
             var D = LCRNG.Next(C);
             pk.PID = (A & 0xFFFF0000) | B >> 16;
-            if (!CheckShiny(pk.PID, pk.TID, pk.SID,shiny))
+            if (!r.CheckShiny(r, pk))
             {
                 return false;
             }
             Span<int> IVs = stackalloc int[6];
             GetIVsInt32(IVs, C >> 16, D >> 16);
-            if (IV[0] && IVs[1] != 0)
-            {
-                return false;
-            }
-            if (IV[1] && IVs[3] != 0)
+            if (!r.CheckIV(r, pk))
             {
                 return false;
             }
@@ -47,21 +43,6 @@ namespace WangPlugin
             result[1] = (int)r1 >> 5 & 31;
             result[0] = (int)r1 & 31;
         }
-        private static bool CheckShiny(uint pid, int TID, int SID, bool[] shiny)
-        {
-            var s = (uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF));
-            if (shiny[0])
-                return true;
-            else if (shiny[1] && s < 8)
-                return true;
-            else if (shiny[2] && s < 8 && s != 0)
-                return true;
-            else if (shiny[3] && s == 0)
-                return true;
-            else if (shiny[4] && s == 1)
-                return true;
-            else
-                return false;
-        }
+       
     }
 }

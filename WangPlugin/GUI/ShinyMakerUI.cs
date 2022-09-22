@@ -358,12 +358,12 @@ namespace WangPlugin.GUI
                         for (; ; )
                         {
                             uint seed = Util.Rand32();
-                            if (shinyflag != Shinytype.Xor && Overworld8RNG.GenPkm(ref pkm, seed, ShinyArray(), iv))
+                            if (shinyflag != Shinytype.Xor && Overworld8RNG.GenPkmQ(ref pkm, seed, ShinyArray(), iv))
                             {
                                 pkm.RefreshChecksum();
                                 break;
                             }
-                            else if (shinyflag == Shinytype.Xor && Overworld8RNG.GenPkm(ref pkm, seed, ShinyArray(), iv, XorNumber))
+                            else if (shinyflag == Shinytype.Xor && Overworld8RNG.GenPkmQ(ref pkm, seed, ShinyArray(), iv, XorNumber))
                             {
                                
                                 pkm.RefreshChecksum();

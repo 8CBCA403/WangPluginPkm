@@ -9,7 +9,7 @@ using System.ComponentModel;
 using System.Drawing;
 namespace WangPlugin.GUI
 {
-    internal class RNGForm : Form
+    public class RNGForm : Form
     {
         private ComboBox methodTypeBox;
         private Button Search;
@@ -19,7 +19,7 @@ namespace WangPlugin.GUI
         private Button Cancel;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
-        enum MethodType
+        public enum MethodType
         {
             None,
             Method1,
@@ -35,14 +35,6 @@ namespace WangPlugin.GUI
             Colo,
             Overworld8,
             Roaming8b,
-        }
-        enum ShinyType
-        {
-            None,
-            Shiny,
-            Star,
-            Sqaure,
-            ForceStar,
         }
         public enum Gender
         {
@@ -75,20 +67,12 @@ namespace WangPlugin.GUI
         public Gender G = Gender.None;
         public Ability A = Ability.CD;
         private MethodType RNGMethod = MethodType.None;
-        private ComboBox ShinyTypeBox;
-        private Label ShinyTypeLabel;
         private TextBox SeedText;
-        private CheckBox AtkCheck;
-        private CheckBox SpeCheck;
-        private CheckBox VCheck;
-        private CheckBox LockIV;
         private Label label1;
-        private CheckBox SpaCheck;
         private CheckBox UsePreSeed;
         private Button Check_BTN;
         private GroupBox groupBox1;
         private ComboBox MinIV_Box;
-        private ShinyType Stype = ShinyType.None;
         public int MinIV = 0;
         private ComboBox Gender_Box;
         private Label label2;
@@ -103,6 +87,7 @@ namespace WangPlugin.GUI
         private TextBox Legal_Check_BOX2;
         private TextBox Legal_Check_BOX5;
         private Button GetSeedForMaxLair_BTN;
+        private PkmCondition ConditionForm;
         public int[] DIV ={ 0, 1, 2, 3, 4, 5 ,6 };
         public RNGForm(ISaveFileProvider sav, IPKMView editor)
 
@@ -119,18 +104,12 @@ namespace WangPlugin.GUI
             this.Search = new System.Windows.Forms.Button();
             this.Condition = new System.Windows.Forms.TextBox();
             this.Cancel = new System.Windows.Forms.Button();
-            this.ShinyTypeBox = new System.Windows.Forms.ComboBox();
-            this.ShinyTypeLabel = new System.Windows.Forms.Label();
             this.SeedText = new System.Windows.Forms.TextBox();
-            this.AtkCheck = new System.Windows.Forms.CheckBox();
-            this.SpeCheck = new System.Windows.Forms.CheckBox();
-            this.VCheck = new System.Windows.Forms.CheckBox();
-            this.LockIV = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.SpaCheck = new System.Windows.Forms.CheckBox();
             this.UsePreSeed = new System.Windows.Forms.CheckBox();
             this.Check_BTN = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ConditionForm = new PkmCondition();
             this.MinIV_Box = new System.Windows.Forms.ComboBox();
             this.Gender_Box = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -159,9 +138,9 @@ namespace WangPlugin.GUI
             // 
             // Search
             // 
-            this.Search.Location = new System.Drawing.Point(55, 157);
+            this.Search.Location = new System.Drawing.Point(131, 178);
             this.Search.Name = "Search";
-            this.Search.Size = new System.Drawing.Size(124, 25);
+            this.Search.Size = new System.Drawing.Size(106, 25);
             this.Search.TabIndex = 9;
             this.Search.Text = "开始查找";
             this.Search.UseVisualStyleBackColor = true;
@@ -178,81 +157,22 @@ namespace WangPlugin.GUI
             // 
             // Cancel
             // 
-            this.Cancel.Location = new System.Drawing.Point(185, 157);
+            this.Cancel.Location = new System.Drawing.Point(244, 179);
             this.Cancel.Name = "Cancel";
-            this.Cancel.Size = new System.Drawing.Size(124, 25);
+            this.Cancel.Size = new System.Drawing.Size(106, 25);
             this.Cancel.TabIndex = 11;
             this.Cancel.Text = "停止查找";
             this.Cancel.UseVisualStyleBackColor = true;
             this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
-            // ShinyTypeBox
-            // 
-            this.ShinyTypeBox.FormattingEnabled = true;
-            this.ShinyTypeBox.Location = new System.Drawing.Point(86, 57);
-            this.ShinyTypeBox.Name = "ShinyTypeBox";
-            this.ShinyTypeBox.Size = new System.Drawing.Size(124, 25);
-            this.ShinyTypeBox.TabIndex = 13;
-            // 
-            // ShinyTypeLabel
-            // 
-            this.ShinyTypeLabel.AutoSize = true;
-            this.ShinyTypeLabel.Location = new System.Drawing.Point(8, 60);
-            this.ShinyTypeLabel.Name = "ShinyTypeLabel";
-            this.ShinyTypeLabel.Size = new System.Drawing.Size(72, 17);
-            this.ShinyTypeLabel.TabIndex = 14;
-            this.ShinyTypeLabel.Text = "闪光种类";
-            // 
             // SeedText
             // 
             this.SeedText.Cursor = System.Windows.Forms.Cursors.No;
-            this.SeedText.Location = new System.Drawing.Point(216, 57);
+            this.SeedText.Location = new System.Drawing.Point(216, 58);
             this.SeedText.Name = "SeedText";
             this.SeedText.Size = new System.Drawing.Size(124, 25);
             this.SeedText.TabIndex = 15;
             this.SeedText.Text = "没有seed";
-            // 
-            // AtkCheck
-            // 
-            this.AtkCheck.AutoSize = true;
-            this.AtkCheck.Location = new System.Drawing.Point(9, 93);
-            this.AtkCheck.Name = "AtkCheck";
-            this.AtkCheck.Size = new System.Drawing.Size(70, 21);
-            this.AtkCheck.TabIndex = 16;
-            this.AtkCheck.Text = "0物攻";
-            this.AtkCheck.UseVisualStyleBackColor = true;
-            // 
-            // SpeCheck
-            // 
-            this.SpeCheck.AutoSize = true;
-            this.SpeCheck.Location = new System.Drawing.Point(74, 93);
-            this.SpeCheck.Name = "SpeCheck";
-            this.SpeCheck.Size = new System.Drawing.Size(70, 21);
-            this.SpeCheck.TabIndex = 17;
-            this.SpeCheck.Text = "0速度";
-            this.SpeCheck.UseVisualStyleBackColor = true;
-            // 
-            // VCheck
-            // 
-            this.VCheck.AutoSize = true;
-            this.VCheck.Enabled = false;
-            this.VCheck.Location = new System.Drawing.Point(225, 93);
-            this.VCheck.Name = "VCheck";
-            this.VCheck.Size = new System.Drawing.Size(47, 21);
-            this.VCheck.TabIndex = 18;
-            this.VCheck.Text = "6V";
-            this.VCheck.UseVisualStyleBackColor = true;
-            // 
-            // LockIV
-            // 
-            this.LockIV.AutoSize = true;
-            this.LockIV.Enabled = false;
-            this.LockIV.Location = new System.Drawing.Point(268, 93);
-            this.LockIV.Name = "LockIV";
-            this.LockIV.Size = new System.Drawing.Size(63, 21);
-            this.LockIV.TabIndex = 19;
-            this.LockIV.Text = "锁3V";
-            this.LockIV.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -263,20 +183,10 @@ namespace WangPlugin.GUI
             this.label1.TabIndex = 20;
             this.label1.Text = "RNG类型";
             // 
-            // SpaCheck
-            // 
-            this.SpaCheck.AutoSize = true;
-            this.SpaCheck.Location = new System.Drawing.Point(138, 93);
-            this.SpaCheck.Name = "SpaCheck";
-            this.SpaCheck.Size = new System.Drawing.Size(94, 21);
-            this.SpaCheck.TabIndex = 21;
-            this.SpaCheck.Text = "随机特攻";
-            this.SpaCheck.UseVisualStyleBackColor = true;
-            // 
             // UsePreSeed
             // 
             this.UsePreSeed.AutoSize = true;
-            this.UsePreSeed.Location = new System.Drawing.Point(9, 120);
+            this.UsePreSeed.Location = new System.Drawing.Point(11, 178);
             this.UsePreSeed.Name = "UsePreSeed";
             this.UsePreSeed.Size = new System.Drawing.Size(126, 21);
             this.UsePreSeed.TabIndex = 22;
@@ -295,26 +205,27 @@ namespace WangPlugin.GUI
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.Search);
             this.groupBox1.Controls.Add(this.UsePreSeed);
-            this.groupBox1.Controls.Add(this.SpaCheck);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.LockIV);
-            this.groupBox1.Controls.Add(this.VCheck);
-            this.groupBox1.Controls.Add(this.SpeCheck);
-            this.groupBox1.Controls.Add(this.AtkCheck);
             this.groupBox1.Controls.Add(this.SeedText);
-            this.groupBox1.Controls.Add(this.ShinyTypeLabel);
-            this.groupBox1.Controls.Add(this.ShinyTypeBox);
             this.groupBox1.Controls.Add(this.Cancel);
             this.groupBox1.Controls.Add(this.Condition);
-            this.groupBox1.Controls.Add(this.Search);
             this.groupBox1.Controls.Add(this.methodTypeBox);
+            this.groupBox1.Controls.Add(this.ConditionForm);
             this.groupBox1.Location = new System.Drawing.Point(5, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(356, 210);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查找";
+            // 
+            // ConditionForm
+            // 
+            this.ConditionForm.Location = new System.Drawing.Point(7, 52);
+            this.ConditionForm.Name = "ConditionForm";
+            this.ConditionForm.Size = new System.Drawing.Size(334, 131);
+            this.ConditionForm.TabIndex = 23;
             // 
             // MinIV_Box
             // 
@@ -463,7 +374,7 @@ namespace WangPlugin.GUI
             // 
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(679, 226);
+            this.ClientSize = new System.Drawing.Size(679, 230);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -485,83 +396,17 @@ namespace WangPlugin.GUI
         private void BindingData()
         {
             this.methodTypeBox.DataSource = Enum.GetNames(typeof(MethodType));
-            this.ShinyTypeBox.DataSource = Enum.GetNames(typeof(ShinyType));
             this.MinIV_Box.DataSource =DIV;
             this.methodTypeBox.SelectedIndexChanged += (_, __) =>
             {
-                if (methodTypeBox.SelectedItem == methodTypeBox.Items[12]|| 
-                methodTypeBox.SelectedItem == methodTypeBox.Items[1]|| 
-                methodTypeBox.SelectedItem == methodTypeBox.Items[10])
-                {
-                    LockIV.Enabled = true;
-                    LockIV.Checked = false;
-                    VCheck.Enabled = false;
-                }
-                else if (methodTypeBox.SelectedItem == methodTypeBox.Items[13])
-                {
-                    LockIV.Enabled = false;
-                    LockIV.Checked = true;
-                    VCheck.Enabled = true;
-                    this.VCheck.CheckedChanged += (_, __) =>
-                    {
-                        if (VCheck.Checked == true)
-                        {
-                            AtkCheck.Enabled = false;
-                            SpeCheck.Enabled = false;
-                            AtkCheck.Checked = false;
-                            SpeCheck.Checked = false;
-                        }
-                        else
-                        {
-                            AtkCheck.Enabled = true;
-                            SpeCheck.Enabled = true;
-                        }
-
-                    };
-                    this.AtkCheck.CheckedChanged += (_, __) =>
-                    {
-                        if (AtkCheck.Checked == true)
-                        {
-                            VCheck.Checked = false;
-                            VCheck.Enabled = false;
-                        }
-                        else
-                        {
-                            VCheck.Enabled = true;
-                        }
-                    };
-                    this.SpeCheck.CheckedChanged += (_, __) =>
-                    {
-                        if (SpeCheck.Checked == true)
-                        {
-                            VCheck.Checked = false;
-                            VCheck.Enabled = false;
-                        }
-                        else
-                        {
-                            VCheck.Enabled = true;
-                        }
-                    };
-                }
-                else
-                {
-                    LockIV.Enabled = false;
-                    LockIV.Checked = false;
-                    VCheck.Enabled = false;
-                }
                 RNGMethod = (MethodType)Enum.Parse(typeof(MethodType), this.methodTypeBox.SelectedItem.ToString(), false);
+                ConditionForm.rules.Method =RNGMethod;
             };        
             this.methodTypeBox.SelectedIndex = 0;
-            this.ShinyTypeBox.SelectedIndexChanged += (_, __) =>
-            {
-                Stype = (ShinyType)Enum.Parse(typeof(ShinyType), this.ShinyTypeBox.SelectedItem.ToString(), false);
-            };
             this.MinIV_Box.SelectedIndexChanged += (_, __) =>
             {
                 MinIV = int.Parse(MinIV_Box.SelectedItem.ToString());
             };
-            this.ShinyTypeBox.SelectedIndex = 0;
-
             Gender_Box.DisplayMember = "Description";
             Gender_Box.ValueMember = "Value";
             Gender_Box.DataSource = Enum.GetValues(typeof(Gender))
@@ -573,7 +418,6 @@ namespace WangPlugin.GUI
                 })
                 .OrderBy(item => item.value)
                 .ToList();
-
             this.Gender_Box.SelectedIndexChanged += (_, __) =>
             {
                 G = (Gender)Enum.Parse(typeof(Gender), this.Gender_Box.SelectedValue.ToString(), false);
@@ -589,67 +433,30 @@ namespace WangPlugin.GUI
                 })
                 .OrderBy(item => item.value)
                 .ToList();
-
             this.Ability_Box.SelectedIndexChanged += (_, __) =>
             {
                 A = (Ability)Enum.Parse(typeof(Ability), this.Ability_Box.SelectedValue.ToString(), false);
             };
             Ability_Box.SelectedIndex = 0;
         }
-        private bool[] GetShinyType()
-        {
-            var shinytype = new bool[6] { false, false, false, false, false,false };
-            switch (Stype)
-            {
-                case ShinyType.None:
-                    shinytype[0] = true;
-                    break;
-                case ShinyType.Shiny:
-                    shinytype[1] = true;
-                    break;
-                case ShinyType.Star:
-                    shinytype[2] = true;
-                    break;
-                case ShinyType.Sqaure:
-                    shinytype[3] = true;
-                    break;
-                case ShinyType.ForceStar:
-                    shinytype[4] = true;
-                    break;
-            }
-            return shinytype;
-        }
-        private bool[] CheckIV()
-        {
-            var IV = new bool[3] { false, false,false};
-            if (AtkCheck.Checked)
-                IV[0] = true;
-            if (SpeCheck.Checked)
-                IV[1] = true;
-            if (LockIV.Checked)
-            {
-                IV[2] = true;
-            }
-            return IV;
-        }
         private bool GenPkm(ref PKM pk,uint seed,byte form=0)
         {
             return RNGMethod switch
             {
-                MethodType.None=>NoMethod.GenPkm(ref pk, GetShinyType(), CheckIV()),
-                MethodType.Method1 => Method1RNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
-                MethodType.Method1_Unown=> UnownRNG.GenPkm(ref pk,1, seed, GetShinyType(), CheckIV(),form),
-                MethodType.Method2 => Method2RNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
-                MethodType.Method2_Unown => UnownRNG.GenPkm(ref pk, 2, seed, GetShinyType(), CheckIV(), form),
-                MethodType.Method4 => Method4RNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
-                MethodType.Method4_Unown => UnownRNG.GenPkm(ref pk, 4, seed, GetShinyType(), CheckIV(), form),
-                MethodType.XDColo => XDColoRNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
-                MethodType.Overworld8 => Overworld8RNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
-                MethodType.Roaming8b => Roaming8bRNG.GenPkm(ref pk, seed, Editor.Data.TID, Editor.Data.SID, GetShinyType(), CheckIV()),
-                MethodType.H1_BACD_R => H1_BACD_R.GenPkm(ref pk, seed & 0xFFFF, Editor.Data.SID, Editor.Data.TID, GetShinyType(), CheckIV()),
-                MethodType.Method1Roaming => Method1Roaming.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
-                MethodType.Colo => ColoRNG.GenPkm(ref pk, seed, GetShinyType(), CheckIV()),
-                MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed, CheckIV()),
+                MethodType.None=>NoMethod.GenPkm(ref pk, ConditionForm.rules),
+                MethodType.Method1 => Method1RNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.Method1_Unown=> UnownRNG.GenPkm(ref pk,1, seed, ConditionForm.rules, form),
+                MethodType.Method2 => Method2RNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.Method2_Unown => UnownRNG.GenPkm(ref pk, 2, seed, ConditionForm.rules, form),
+                MethodType.Method4 => Method4RNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.Method4_Unown => UnownRNG.GenPkm(ref pk, 4, seed, ConditionForm.rules, form),
+                MethodType.XDColo => XDColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.Overworld8 => Overworld8RNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.Roaming8b => Roaming8bRNG.GenPkm(ref pk, seed,  ConditionForm.rules),
+                MethodType.H1_BACD_R => H1_BACD_R.GenPkm(ref pk, seed & 0xFFFF, ConditionForm.rules),
+                MethodType.Method1Roaming => Method1Roaming.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.Colo => ColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed, ConditionForm.rules),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -673,68 +480,6 @@ namespace WangPlugin.GUI
                 _ => throw new NotSupportedException(),
             };
         }
-        private Queue<uint> PreSetSeed()
-        {
-
-            Queue<uint> Getqeueu = new Queue<uint>();
-            if (RNGMethod == MethodType.Roaming8b &&
-                VCheck.Checked &&
-                Stype != ShinyType.None)
-            {
-                Getqeueu = SeedList.EnqueueSeed(1);
-            }
-            else if (RNGMethod == MethodType.Roaming8b&& 
-                AtkCheck.Checked&&
-                SpeCheck.Checked&&
-                Stype!=ShinyType.None)
-            {
-                Getqeueu = SeedList.EnqueueSeed(2);
-            }
-            else if (RNGMethod == MethodType.Roaming8b &&
-                AtkCheck.Checked &&
-                !SpeCheck.Checked &&
-                Stype != ShinyType.None)
-                {
-                Getqeueu = SeedList.EnqueueSeed(3);
-            }
-            else if(RNGMethod==MethodType.Roaming8b&&
-                !AtkCheck.Checked&&
-                SpeCheck.Checked &&
-                (Stype != ShinyType.None&&Stype!=ShinyType.Sqaure))
-            {
-                Getqeueu = SeedList.EnqueueSeed(4);
-            }
-            else if (RNGMethod == MethodType.Overworld8 &&
-               AtkCheck.Checked &&
-               !SpeCheck.Checked &&
-               Stype == ShinyType.Sqaure)
-            {
-                Getqeueu = SeedList.EnqueueSeed(5);
-            }
-            else if (RNGMethod == MethodType.Overworld8 &&
-              !AtkCheck.Checked &&
-              SpeCheck.Checked &&
-              Stype == ShinyType.Sqaure)
-            {
-                Getqeueu = SeedList.EnqueueSeed(6);
-            }
-            else if (RNGMethod == MethodType.Overworld8 &&
-             AtkCheck.Checked &&
-             SpeCheck.Checked &&
-             Stype == ShinyType.Sqaure)
-            {
-                Getqeueu = SeedList.EnqueueSeed(7);
-            }
-            else if (RNGMethod == MethodType.Overworld8 &&
-             !AtkCheck.Checked &&
-             !SpeCheck.Checked &&
-             SpaCheck.Checked &&
-             Stype == ShinyType.Sqaure)
-            {
-                Getqeueu = SeedList.EnqueueSeed(8);
-            }
-            return Getqeueu;
-        }
         private void GeneratorIsRunning(bool running)
         {
             Search.Enabled = !running;
@@ -743,7 +488,6 @@ namespace WangPlugin.GUI
         private void CheckerIsRunning(bool running)
         {
             Check_BTN.Enabled = !running;
-          //  Stop_Check_BTN.Enabled = running;
         }
         private void Search_Click(object sender, EventArgs e)
         {
@@ -754,7 +498,7 @@ namespace WangPlugin.GUI
             var j = 0;
             if (UsePreSeed.Checked == true)
             {
-                SeedQueue = PreSetSeed();
+                SeedQueue = CheckRules.PreSetSeed(ConditionForm.rules);
                 MessageBox.Show($"预设种子数量:{SeedQueue.Count}");
             }
             tokenSource1 = new();
@@ -925,7 +669,6 @@ namespace WangPlugin.GUI
             },
             tokenSource2.Token);
         }
-
         private void GetSeedForMaxLair_BTN_Click(object sender, EventArgs e)
         {
             var pk=Editor.Data;

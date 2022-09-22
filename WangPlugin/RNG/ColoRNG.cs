@@ -8,7 +8,7 @@ namespace WangPlugin
         private const int shift = 16;
         private const int shift8 = 8;
         public static uint Next(uint seed) => XDRNG.Next(seed);
-        public static bool GenPkm(ref PKM pk, uint seed, bool []shiny, bool[] IV)
+        public static bool GenPkm(ref PKM pk, uint seed, CheckRules r)
         {
             var O = XDRNG.Next(seed); // SID
             var A = XDRNG.Next(O); // PID
@@ -26,25 +26,22 @@ namespace WangPlugin
             if ((pid2 > 7 ? 0 : 1) != (pid1 ^ SID ^ TID))
                 pid ^= 0x80000000;
             pk.PID = pid;
-            if (!CheckShiny(pk.PID, pk.TID, pk.SID,shiny))
+            if (!r.CheckShiny(r, pk))
             {
                 return false;
             }
-                pk.HeldItem = (int)(C >> 31) + 169; 
+            pk.HeldItem = (int)(C >> 31) + 169; 
                 pk.Version = (int)(D >> 31) + 1; 
                 pk.OT_Gender = (int)(E >> 31);
                 Span<int> ivs = stackalloc int[6];
                 GetSequentialIVsUInt32(E, ivs);
-            if (IV[0] && ivs[1] != 0)
-            {
-                return false;
-            }
-            if (IV[1] && ivs[5] != 0)
-            {
-                return false;
-            }
+            
             pk.SetIVs(ivs);
-                pk.Gender = GenderApplicator.GetSaneGender(pk);
+            if (!r.CheckIV(r, pk))
+            {
+                return false;
+            }
+            pk.Gender = GenderApplicator.GetSaneGender(pk);
             return true;
         }
         private static void GetIVsInt32(Span<int> result, uint r1, uint r2)

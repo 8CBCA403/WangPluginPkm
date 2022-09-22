@@ -7,12 +7,12 @@ namespace WangPlugin
         private const int FlawlessIVs = 3;
         private const int UNSET = 255;
         public static uint Next(uint seed) => (uint)new Xoroshiro128Plus8b(seed).Next();
-        public static bool GenPkm(ref PKM pk, uint seed, int TID, int SID, bool[] shiny, bool[] IV)
+        public static bool GenPkm(ref PKM pk, uint seed, CheckRules r)
         {
             var xoro = new Xoroshiro128Plus8b(seed);
             var fakeTID = xoro.NextUInt();
             var pid = xoro.NextUInt();
-            pid = GetRevisedPID(fakeTID, pid, TID,SID);
+            pid = GetRevisedPID(fakeTID, pid, pk.TID,pk.SID);
           
             var ivs = new int[6] { UNSET, UNSET, UNSET, UNSET, UNSET, UNSET };
             var determined = 0;
@@ -31,16 +31,9 @@ namespace WangPlugin
                     ivs[i] = (int)xoro.NextUInt(32);
                 }
             }
-            if (IV[0] && ivs[1] != 0)
-            {
-                return false;
-            }
-            if (IV[1] && ivs[5] != 0)
-            {
-                return false;
-            }
+           
             pk.PID = pid;
-            if (!CheckShiny(pk.PID, pk.TID, pk.SID, shiny))
+            if (!r.CheckShiny(r, pk))
             {
                 return false;
             }
@@ -51,6 +44,10 @@ namespace WangPlugin
             pk.IV_SPA = ivs[3];
             pk.IV_SPD = ivs[4];
             pk.IV_SPE = ivs[5];
+            if (!r.CheckIV(r, pk))
+            {
+                return false;
+            }
             // Ability
             pk.SetAbilityIndex((int)xoro.NextUInt(2));
             // Remainder
@@ -85,21 +82,6 @@ namespace WangPlugin
             var xor = pid ^ oid;
             return (xor ^ (xor >> 16)) & 0xFFFF;
         }
-        private static bool CheckShiny(uint pid, int TID, int SID, bool[] shiny)
-        {
-            var s = (uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF));
-            if (shiny[0])
-                return true;
-            else if (shiny[1] && s < 16)
-                return true;
-            else if (shiny[2] && s < 16 && s != 0)
-                return true;
-            else if (shiny[3] && s == 0)
-                return true;
-            else if (shiny[4] && s == 1)
-                return true;
-            else
-                return false;
-        }
+      
     }
 }

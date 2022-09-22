@@ -7,7 +7,7 @@ namespace WangPlugin
     {
         private const int shift = 16;
         public static uint Next(uint seed) => LCRNG.Next(seed);
-        public static bool GenPkm(ref PKM pk,uint seed, bool[] IV)
+        public static bool GenPkm(ref PKM pk,uint seed, CheckRules r)
         {
             uint Next() => (seed = LCRNG.Next(seed)) >> 16;
             uint lower = Next() & 7;
@@ -19,17 +19,14 @@ namespace WangPlugin
             var pid = pk.PID;
             Span<int> IVs = stackalloc int[6];
             GetIVsInt32(IVs, Next(), Next());
-            if (IV[0] && IVs[1] != 0)
-            {
-                return false;
-            }
-            if (IV[1] && IVs[3] != 0)
+            pk.SetIVs(IVs);
+            if (!r.CheckIV(r, pk))
             {
                 return false;
             }
             pk.Nature = (int)(pid % 100 % 25);
             pk.RefreshAbility((int)(pk.PID & 1));
-            pk.SetIVs(IVs);
+            
             pk.Gender = GenderApplicator.GetSaneGender(pk);
             return true;
         }
