@@ -26,6 +26,8 @@ namespace WangPlugin.GUI
             Method1Roaming,
             Method2,
             Method2_Unown,
+            Method3,
+            Method3_Unown,
             Method4,
             Method4_Unown,
             ChainShiny,
@@ -82,7 +84,10 @@ namespace WangPlugin.GUI
             }
         }
 
-      
-       
+        private void SeedIntro_Click(object sender, EventArgs e)
+        {
+            var form = new SeedIntro();
+            form.Show();
+        }
     }
 }

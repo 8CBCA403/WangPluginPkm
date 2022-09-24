@@ -27,6 +27,10 @@ namespace WangPlugin.GUI
         private TextBox PIDHex;
         private Label TIDLabel;
         private Label SIDLabel;
+        private TextBox UnownPidTextBox;
+        private TextBox UnownFormBox;
+        private Label UnownLabel;
+        private Button FormCalc;
         public const double E = 2.7182818284590451;
         public MutiCalcUI()
         {
@@ -58,6 +62,10 @@ namespace WangPlugin.GUI
             this.IDsCheck = new System.Windows.Forms.CheckBox();
             this.TIDLabel = new System.Windows.Forms.Label();
             this.SIDLabel = new System.Windows.Forms.Label();
+            this.UnownPidTextBox = new System.Windows.Forms.TextBox();
+            this.UnownFormBox = new System.Windows.Forms.TextBox();
+            this.UnownLabel = new System.Windows.Forms.Label();
+            this.FormCalc = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CalcNature
@@ -224,7 +232,7 @@ namespace WangPlugin.GUI
             // 
             this.IDCheck.AutoSize = true;
             this.IDCheck.Font = new System.Drawing.Font("黑体", 9F);
-            this.IDCheck.Location = new System.Drawing.Point(78, 176);
+            this.IDCheck.Location = new System.Drawing.Point(78, 214);
             this.IDCheck.Name = "IDCheck";
             this.IDCheck.Size = new System.Drawing.Size(125, 19);
             this.IDCheck.TabIndex = 19;
@@ -235,7 +243,7 @@ namespace WangPlugin.GUI
             // 
             this.IDsCheck.AutoSize = true;
             this.IDsCheck.Font = new System.Drawing.Font("黑体", 9F);
-            this.IDsCheck.Location = new System.Drawing.Point(209, 176);
+            this.IDsCheck.Location = new System.Drawing.Point(209, 214);
             this.IDsCheck.Name = "IDsCheck";
             this.IDsCheck.Size = new System.Drawing.Size(125, 19);
             this.IDsCheck.TabIndex = 20;
@@ -262,9 +270,48 @@ namespace WangPlugin.GUI
             this.SIDLabel.TabIndex = 32;
             this.SIDLabel.Text = "里ID";
             // 
+            // UnownPidTextBox
+            // 
+            this.UnownPidTextBox.Location = new System.Drawing.Point(123, 178);
+            this.UnownPidTextBox.Name = "UnownPidTextBox";
+            this.UnownPidTextBox.Size = new System.Drawing.Size(129, 25);
+            this.UnownPidTextBox.TabIndex = 33;
+            // 
+            // UnownFormBox
+            // 
+            this.UnownFormBox.Location = new System.Drawing.Point(258, 178);
+            this.UnownFormBox.Name = "UnownFormBox";
+            this.UnownFormBox.Size = new System.Drawing.Size(51, 25);
+            this.UnownFormBox.TabIndex = 34;
+            // 
+            // UnownLabel
+            // 
+            this.UnownLabel.AutoSize = true;
+            this.UnownLabel.Font = new System.Drawing.Font("黑体", 9F);
+            this.UnownLabel.Location = new System.Drawing.Point(12, 182);
+            this.UnownLabel.Name = "UnownLabel";
+            this.UnownLabel.Size = new System.Drawing.Size(135, 15);
+            this.UnownLabel.TabIndex = 35;
+            this.UnownLabel.Text = "Gen3未知图腾形态";
+            // 
+            // FormCalc
+            // 
+            this.FormCalc.Font = new System.Drawing.Font("黑体", 9F);
+            this.FormCalc.Location = new System.Drawing.Point(315, 178);
+            this.FormCalc.Name = "FormCalc";
+            this.FormCalc.Size = new System.Drawing.Size(100, 25);
+            this.FormCalc.TabIndex = 36;
+            this.FormCalc.Text = "计算";
+            this.FormCalc.UseVisualStyleBackColor = true;
+            this.FormCalc.Click += new System.EventHandler(this.FormCalc_Click);
+            // 
             // MutiCalcUI
             // 
-            this.ClientSize = new System.Drawing.Size(424, 207);
+            this.ClientSize = new System.Drawing.Size(424, 245);
+            this.Controls.Add(this.FormCalc);
+            this.Controls.Add(this.UnownLabel);
+            this.Controls.Add(this.UnownFormBox);
+            this.Controls.Add(this.UnownPidTextBox);
             this.Controls.Add(this.SIDLabel);
             this.Controls.Add(this.TIDLabel);
             this.Controls.Add(this.IDsCheck);
@@ -399,7 +446,99 @@ namespace WangPlugin.GUI
            
             return Nature;
         }
-        private void CloseBTN_Click(object sender, EventArgs e)
+        private static string ShowForm(byte v)
+        {
+            string Form = "A";
+            switch(v)
+            {
+                case 0:
+                    Form = "A";
+                    break;
+                case 1:
+                    Form = "B";
+                    break;
+                case 2:
+                    Form = "C";
+                    break;
+                case 3:
+                    Form = "D";
+                    break;
+                case 4:
+                    Form = "E";
+                    break;
+                case 5:
+                    Form = "F";
+                    break;
+                case 6:
+                    Form = "G";
+                    break;
+                case 7:
+                    Form = "H";
+                    break;
+                case 8:
+                    Form = "I";
+                    break;
+                case 9:
+                    Form = "J";
+                    break;
+                case 10:
+                    Form = "K";
+                    break;
+                case 11:
+                    Form = "L";
+                    break;
+                case 12:
+                    Form = "M";
+                    break;
+                case 13:
+                    Form = "N";
+                    break;
+                case 14:
+                    Form = "O";
+                    break;
+                case 15:
+                    Form = "P";
+                    break;
+                case 16:
+                    Form = "Q";
+                    break;
+                case 17:
+                    Form = "R";
+                    break;
+                case 18:
+                    Form = "S";
+                    break;
+                case 19:
+                    Form = "T";
+                    break;
+                case 20:
+                    Form = "U";
+                    break;
+                case 21:
+                    Form = "V";
+                    break;
+                case 22:
+                    Form = "W";
+                    break;
+                case 23:
+                    Form = "X";
+                    break;
+                case 24:
+                    Form = "Y";
+                    break;
+                case 25:
+                    Form = "Z";
+                    break;
+                case 26:
+                    Form = "!";
+                    break;
+                case 27:
+                    Form = "?";
+                    break;
+            }
+            return Form;
+        }
+            private void CloseBTN_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -474,6 +613,14 @@ namespace WangPlugin.GUI
             double Price;
                 Price = (15 + (-2.69727717624839005266) * Math.Log(Box));
             return Price;
+        }
+
+        private void FormCalc_Click(object sender, EventArgs e)
+        {
+            var PID = uint.Parse(UnownPidTextBox.Text, System.Globalization.NumberStyles.HexNumber);
+            var value = ((PID & 0x3000000) >> 18) | ((PID & 0x30000) >> 12) | ((PID & 0x300) >> 6) | (PID & 0x3);
+            var s=(byte)(value % 28);
+            UnownFormBox.Text = ShowForm(s);
         }
     }
 }

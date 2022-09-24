@@ -54,6 +54,7 @@
             this.MethodBox = new System.Windows.Forms.ComboBox();
             this.ConditionBox = new System.Windows.Forms.TextBox();
             this.RNGLabel = new System.Windows.Forms.Label();
+            this.SeedIntro = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // HP_Label
@@ -288,10 +289,21 @@
             this.RNGLabel.TabIndex = 31;
             this.RNGLabel.Text = "RNG类型";
             // 
+            // SeedIntro
+            // 
+            this.SeedIntro.Location = new System.Drawing.Point(6, 64);
+            this.SeedIntro.Name = "SeedIntro";
+            this.SeedIntro.Size = new System.Drawing.Size(64, 23);
+            this.SeedIntro.TabIndex = 32;
+            this.SeedIntro.Text = "说明";
+            this.SeedIntro.UseVisualStyleBackColor = true;
+            this.SeedIntro.Click += new System.EventHandler(this.SeedIntro_Click);
+            // 
             // PkmCondition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.SeedIntro);
             this.Controls.Add(this.RNGLabel);
             this.Controls.Add(this.ConditionBox);
             this.Controls.Add(this.MethodBox);
@@ -352,5 +364,6 @@
         private System.Windows.Forms.ComboBox MethodBox;
         public System.Windows.Forms.TextBox ConditionBox;
         private System.Windows.Forms.Label RNGLabel;
+        private System.Windows.Forms.Button SeedIntro;
     }
 }

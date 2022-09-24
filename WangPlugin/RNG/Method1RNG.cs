@@ -36,10 +36,6 @@ namespace WangPlugin
             pk.Nature =(int)(pid %100% 25);
             pk.Gender = GenderApplicator.GetSaneGender(pk);
             pk.RefreshAbility((int)(pk.PID & 1));
-            
-            var Info = new LegalityAnalysis(pk);
-            if (Info.Info.FrameMatches == false)
-                return false;
             return true;
         }
         private static uint[] DvsToIVs(uint dvUpper, uint dvLower)

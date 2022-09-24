@@ -17,6 +17,9 @@ namespace WangPlugin
             uint p = 0;
             var A = Next(seed);
             var B = Next(A);
+            var skipBetweenPID = type is 3;
+            if (skipBetweenPID) // VBlank skip between PID rand() [RARE]
+                B = LCRNG.Next(B);
             var swappedPIDHalves = type is >= 1 and <= 4;
             if (swappedPIDHalves) // switched order of PID halves, "BA.."
             {
@@ -47,9 +50,6 @@ namespace WangPlugin
             {
                 return false;
             }
-            var Info = new LegalityAnalysis(pk);
-          //  if (Info.Info.FrameMatches == false)
-            //    return false;
             return true;
         }
         internal static void GetIVsInt32(Span<int> result, uint r1, uint r2)

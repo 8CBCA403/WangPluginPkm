@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using System.Drawing;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using WangPlugin.RNG;
+
 namespace WangPlugin.GUI
 {
     public class RNGForm : Form
@@ -379,6 +382,8 @@ namespace WangPlugin.GUI
                 PkmCondition.MethodType.Method1_Unown=> UnownRNG.GenPkm(ref pk,1, seed, ConditionForm.rules, form),
                 PkmCondition.MethodType.Method2 => Method2RNG.GenPkm(ref pk, seed, ConditionForm.rules),
                 PkmCondition.MethodType.Method2_Unown => UnownRNG.GenPkm(ref pk, 2, seed, ConditionForm.rules, form),
+                PkmCondition.MethodType.Method3=>Method3RNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                PkmCondition.MethodType.Method3_Unown => UnownRNG.GenPkm(ref pk, 3, seed, ConditionForm.rules, form),
                 PkmCondition.MethodType.Method4 => Method4RNG.GenPkm(ref pk, seed, ConditionForm.rules),
                 PkmCondition.MethodType.Method4_Unown => UnownRNG.GenPkm(ref pk, 4, seed, ConditionForm.rules, form),
                 PkmCondition.MethodType.XDColo => XDColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
@@ -399,6 +404,8 @@ namespace WangPlugin.GUI
                 PkmCondition.MethodType.Method1_Unown=> UnownRNG.Next(seed),
                 PkmCondition.MethodType.Method2 => Method2RNG.Next(seed),
                 PkmCondition.MethodType.Method2_Unown => UnownRNG.Next(seed),
+                PkmCondition.MethodType.Method3 => Method3RNG.Next(seed),
+                PkmCondition.MethodType.Method3_Unown => UnownRNG.Next(seed),
                 PkmCondition.MethodType.Method4 => Method4RNG.Next(seed),
                 PkmCondition.MethodType.Method4_Unown => UnownRNG.Next(seed),
                 PkmCondition.MethodType.XDColo => XDColoRNG.Next(seed),
@@ -420,26 +427,23 @@ namespace WangPlugin.GUI
         {
             Check_BTN.Enabled = !running;
         }
+        private static Random rng = new Random();
         private void Search_Click(object sender, EventArgs e)
         {
             GeneratorIsRunning(true);
             ConditionForm.ConditionBox.Text = "searching...";
             uint seed = 0;
-            Queue<uint> SeedQueue = new Queue<uint>();
-            var j = 0;
+            int i = 0;
+            List<uint> SeedList = new List<uint>();
             if (UsePreSeed.Checked == true)
             {
-                SeedQueue = CheckRules.PreSetSeed(ConditionForm.rules);
-                MessageBox.Show($"预设种子数量:{SeedQueue.Count}");
+                SeedList = CheckRules.PreSetSeed(ConditionForm.rules);
+                MessageBox.Show($"预设种子数量:{SeedList.Count}");
             }
             tokenSource1 = new();
             if (UsePreSeed.Checked == true)
             {
-                Random rd = new Random();
-                if (SeedQueue.Count >1)
-                    j = rd.Next(0, SeedQueue.Count);
-                else
-                    j = 1;
+                SeedList = SeedList.OrderBy(a => rng.Next()).ToList();
             }
             Task.Factory.StartNew(
                 () =>
@@ -447,6 +451,7 @@ namespace WangPlugin.GUI
                     seed = Util.Rand32();
                     var pk = Editor.Data;
                     var p = Editor.Data.Clone();
+                 
                     while (true)
                     {
                         if (tokenSource1.IsCancellationRequested)
@@ -454,15 +459,14 @@ namespace WangPlugin.GUI
                             ConditionForm.ConditionBox.Text = "Stop";
                             return;
                         }
-                        for (int i = 0; i < j; i++)
+
+                        if (SeedList.Count != 0&&i<= SeedList.Count)
                         {
-                            if (SeedQueue.Count != 0)
-                            {
-                                seed = SeedQueue.Dequeue();
-                            }
-                            else
-                                break;
+                            seed = SeedList[i];
+                            i++;
+                         //   MessageBox.Show($"次数:{i}");
                         }
+                       
                        
                         if (GenPkm(ref pk, seed,p.Form))
                             {

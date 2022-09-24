@@ -126,6 +126,7 @@ namespace WangPlugin.GUI
             this.Controls.Add(this.LoadBattleTeam_BTN);
             this.Font = new System.Drawing.Font("Arial", 10.2F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "BattleKingUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Super Wang";
