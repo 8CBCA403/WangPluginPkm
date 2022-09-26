@@ -5,14 +5,10 @@ namespace WangPlugin
 {
     internal static class XDColoRNG
     {
-        private const int shift = 16;
-        private const int shift8 = 8;
-
         public static uint Next(uint seed) => XDRNG.Next(seed);
-        public static bool GenPkm(ref PKM pk, uint seed, CheckRules r, uint Xor = 0)
+        public static bool GenPkm(ref PKM pk, uint seed, CheckRules r)
         {
-       
-            var la = new LegalityAnalysis(pk);
+      
             switch (pk.Species)
                 {
                     case (int)Species.Umbreon or (int)Species.Eevee: // Colo Umbreon, XD Eevee
@@ -43,14 +39,11 @@ namespace WangPlugin
             {
                 return false;
             }
-            la = new LegalityAnalysis(pk);
-            if (!la.Info.PIDIVMatches)
-            {
-                return false;
-            }
+        
             pk.Nature = (int)(pk.PID % 100 % 25);
-                pk.RefreshAbility((int)(pk.PID & 1));
-               
+            pk.RefreshAbility((int)(pk.PID & 1));
+            pk.Gender = GenderApplicator.GetSaneGender(pk);
+
             return true;
         }
         private static void GetIVsInt32(Span<int> result, uint r1, uint r2)
@@ -62,24 +55,7 @@ namespace WangPlugin
             result[1] = (((int)r1 >> 5) & 0x1F);
             result[0] = (int)(r1 & 0x1F);
         }
-        private static bool CheckShiny(uint pid, int TID, int SID, bool[] shiny, uint Xor = 0)
-        {
-            var s = (uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF));
-            if (shiny[0])
-                return true;
-            else if (shiny[1] && s < 16)
-                return true;
-            else if (shiny[2] && s < 16 && s != 0)
-                return true;
-            else if (shiny[3] && s == 0)
-                return true;
-            else if (shiny[4] && s == 1)
-                return true;
-            else if (shiny[5] && s == Xor)
-                return true;
-            else
-                return false;
-        }
+       
 
     }
 }

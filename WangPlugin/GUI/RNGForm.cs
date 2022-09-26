@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Drawing;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using WangPlugin.RNG;
+using System.Runtime.CompilerServices;
 
 namespace WangPlugin.GUI
 {
@@ -20,7 +21,6 @@ namespace WangPlugin.GUI
         private Button Cancel;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
-       
         public enum Gender
         {
             [Description("只能公")]
@@ -70,6 +70,8 @@ namespace WangPlugin.GUI
         private TextBox Legal_Check_BOX5;
         private Button GetSeedForMaxLair_BTN;
         private PkmCondition ConditionForm;
+        private CheckBox TeamLockBox;
+        private static Random rng = new Random();
         public int[] DIV ={ 0, 1, 2, 3, 4, 5 ,6 };
         public RNGForm(ISaveFileProvider sav, IPKMView editor)
 
@@ -87,6 +89,7 @@ namespace WangPlugin.GUI
             this.UsePreSeed = new System.Windows.Forms.CheckBox();
             this.Check_BTN = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.TeamLockBox = new System.Windows.Forms.CheckBox();
             this.ConditionForm = new PkmCondition();
             this.MinIV_Box = new System.Windows.Forms.ComboBox();
             this.Gender_Box = new System.Windows.Forms.ComboBox();
@@ -108,7 +111,7 @@ namespace WangPlugin.GUI
             // 
             // Search
             // 
-            this.Search.Location = new System.Drawing.Point(99, 178);
+            this.Search.Location = new System.Drawing.Point(50, 192);
             this.Search.Name = "Search";
             this.Search.Size = new System.Drawing.Size(92, 25);
             this.Search.TabIndex = 9;
@@ -118,7 +121,7 @@ namespace WangPlugin.GUI
             // 
             // Cancel
             // 
-            this.Cancel.Location = new System.Drawing.Point(197, 178);
+            this.Cancel.Location = new System.Drawing.Point(178, 192);
             this.Cancel.Name = "Cancel";
             this.Cancel.Size = new System.Drawing.Size(98, 25);
             this.Cancel.TabIndex = 11;
@@ -129,7 +132,7 @@ namespace WangPlugin.GUI
             // UsePreSeed
             // 
             this.UsePreSeed.AutoSize = true;
-            this.UsePreSeed.Location = new System.Drawing.Point(6, 181);
+            this.UsePreSeed.Location = new System.Drawing.Point(6, 171);
             this.UsePreSeed.Name = "UsePreSeed";
             this.UsePreSeed.Size = new System.Drawing.Size(126, 21);
             this.UsePreSeed.TabIndex = 22;
@@ -148,16 +151,27 @@ namespace WangPlugin.GUI
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.Cancel);
+            this.groupBox1.Controls.Add(this.TeamLockBox);
             this.groupBox1.Controls.Add(this.Search);
             this.groupBox1.Controls.Add(this.UsePreSeed);
-            this.groupBox1.Controls.Add(this.Cancel);
             this.groupBox1.Controls.Add(this.ConditionForm);
             this.groupBox1.Location = new System.Drawing.Point(5, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(326, 210);
+            this.groupBox1.Size = new System.Drawing.Size(326, 223);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查找";
+            // 
+            // TeamLockBox
+            // 
+            this.TeamLockBox.AutoSize = true;
+            this.TeamLockBox.Location = new System.Drawing.Point(138, 171);
+            this.TeamLockBox.Name = "TeamLockBox";
+            this.TeamLockBox.Size = new System.Drawing.Size(125, 21);
+            this.TeamLockBox.TabIndex = 24;
+            this.TeamLockBox.Text = "CXD使用队锁";
+            this.TeamLockBox.UseVisualStyleBackColor = true;
             // 
             // ConditionForm
             // 
@@ -313,7 +327,7 @@ namespace WangPlugin.GUI
             // 
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(634, 222);
+            this.ClientSize = new System.Drawing.Size(634, 230);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -334,7 +348,15 @@ namespace WangPlugin.GUI
         }
         private void BindingData()
         {
-          
+            if (SAV.SAV.Version is GameVersion.XD or GameVersion.COLO or GameVersion.CXD)
+            {
+                this.TeamLockBox.Enabled = true;
+            }
+            else
+            {
+                this.TeamLockBox.Enabled = false;
+                this.TeamLockBox.Checked = false;
+            }
             this.MinIV_Box.DataSource =DIV;
            
             this.MinIV_Box.SelectedIndexChanged += (_, __) =>
@@ -389,7 +411,9 @@ namespace WangPlugin.GUI
                 PkmCondition.MethodType.XDColo => XDColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
                 PkmCondition.MethodType.Overworld8 => Overworld8RNG.GenPkm(ref pk, seed, ConditionForm.rules),
                 PkmCondition.MethodType.Roaming8b => Roaming8bRNG.GenPkm(ref pk, seed,  ConditionForm.rules),
-                PkmCondition.MethodType.H1_BACD_R => H1_BACD_R.GenPkm(ref pk, seed & 0xFFFF, ConditionForm.rules),
+                PkmCondition.MethodType.BACD_R => BACD.GenPkm(ref pk, seed & 0xFFFF, ConditionForm.rules,0),
+                PkmCondition.MethodType.BACD_U => BACD.GenPkm(ref pk, seed , ConditionForm.rules,1),
+                PkmCondition.MethodType.BACD_R_S => BACD.GenPkm(ref pk, seed & 0xFFFF, ConditionForm.rules, 2),
                 PkmCondition.MethodType.Method1Roaming => Method1Roaming.GenPkm(ref pk, seed, ConditionForm.rules),
                 PkmCondition.MethodType.Colo => ColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
                 PkmCondition.MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed, ConditionForm.rules),
@@ -411,7 +435,9 @@ namespace WangPlugin.GUI
                 PkmCondition.MethodType.XDColo => XDColoRNG.Next(seed),
                 PkmCondition.MethodType.Overworld8 => Overworld8RNG.Next(seed),
                 PkmCondition.MethodType.Roaming8b => Roaming8bRNG.Next(seed),
-                PkmCondition.MethodType.H1_BACD_R => H1_BACD_R.Next(seed),
+                PkmCondition.MethodType.BACD_R => BACD.Next(seed),
+                PkmCondition.MethodType.BACD_U => BACD.Next(seed),
+                PkmCondition.MethodType.BACD_R_S => BACD.Next(seed),
                 PkmCondition.MethodType.Method1Roaming => Method1Roaming.Next(seed),
                 PkmCondition.MethodType.Colo => ColoRNG.Next(seed),
                 PkmCondition.MethodType.ChainShiny => ChainShiny.Next(seed),
@@ -427,7 +453,6 @@ namespace WangPlugin.GUI
         {
             Check_BTN.Enabled = !running;
         }
-        private static Random rng = new Random();
         private void Search_Click(object sender, EventArgs e)
         {
             GeneratorIsRunning(true);
@@ -449,6 +474,7 @@ namespace WangPlugin.GUI
                 () =>
                 {
                     seed = Util.Rand32();
+                    var cloneseed = seed;
                     var pk = Editor.Data;
                     var p = Editor.Data.Clone();
                  
@@ -464,10 +490,17 @@ namespace WangPlugin.GUI
                         {
                             seed = SeedList[i];
                             i++;
-                         //   MessageBox.Show($"次数:{i}");
+                     
                         }
-                       
-                       
+                        if (TeamLockBox.Checked==true)
+                        {
+                            if (LockCheck.ChooseLock(pk.Species, p, ref seed)==false)
+                            {
+                                cloneseed = NextSeed(cloneseed);
+                                seed = cloneseed;
+                                continue;
+                            }
+                        }
                         if (GenPkm(ref pk, seed,p.Form))
                             {
                             this.Invoke(() =>
@@ -477,11 +510,8 @@ namespace WangPlugin.GUI
                                     SAV.ReloadSlots();
                                     ConditionForm.SeedBox.Text = $"{Convert.ToString(seed, 16)}";
                                 });
-                               
                                 break;
                             }
-
-               
                         seed = NextSeed(seed);
                     }
                     this.Invoke(() =>

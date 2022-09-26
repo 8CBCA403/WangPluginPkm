@@ -3,21 +3,32 @@ using System;
 
 namespace WangPlugin
 {
-    internal static class H1_BACD_R
+    internal static class BACD
     {
         private const int shift = 16;
 
         public static uint Next(uint seed) => LCRNG.Next(seed);
 
-        public static bool GenPkm( ref PKM pk,uint seed, CheckRules r)
+        public static bool GenPkm( ref PKM pk,uint seed, CheckRules r,int type)
         {
-            
-            uint X = seed;
+            bool shiny = type is 2 ;
+            uint X = shiny ? LCRNG.Next(seed) : seed;
             var A = LCRNG.Next(X);
             var B = LCRNG.Next(A);
             var C = LCRNG.Next(B);
             var D = LCRNG.Next(C);
-            pk.PID = (A & 0xFFFF0000) | B >> 16;
+            if (shiny)
+            {
+                uint PID = (X & 0xFFFF0000) | ((uint)pk.SID ^ (uint)pk.TID ^ (X >> 16));
+                PID &= 0xFFFFFFF8;
+                PID |= (B >> 16) & 0x7; // lowest 3 bits
+
+                pk.PID = PID;
+            }
+            else
+            {
+                pk.PID = (A & 0xFFFF0000) | B >> 16;
+            }
             if (!r.CheckShiny(r, pk))
             {
                 return false;

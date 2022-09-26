@@ -77,266 +77,297 @@ namespace WangPlugin
         {
 
             List<uint> Getqeueu = new List<uint>();
-            if (r.Method == PkmCondition.MethodType.Roaming8b &&
-               CheckIV(r,IV.V6)&&r.Shiny != PkmCondition.ShinyType.None)
+            switch (r.Method)
             {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Roaming8_6V);
+                case PkmCondition.MethodType.Roaming8b:
+                    {
+                        if (r.Shiny != PkmCondition.ShinyType.None)
+                        {
+                            if (CheckIV(r, IV.V6))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Roaming8_6V);
+                            }
+                            else if (CheckIV(r, IV.A0S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Roaming8_0a0s);
+                            }
+                            else if (CheckIV(r, IV.A0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Roaming8_0a);
+                            }
+                            else if (CheckIV(r, IV.S0) && r.Shiny != PkmCondition.ShinyType.Sqaure)
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Roaming8_0s);
+                            }
+                        }
+                    break;
+                    }
+                case PkmCondition.MethodType.Overworld8:
+                    {
+                    if (CheckIV(r, IV.V0))
+                    {
+                        Getqeueu = SeedList.AddSeed(SeedList.SeedType.OverWorld8_0V);
+                    }
+                        if (r.Shiny == PkmCondition.ShinyType.Sqaure)
+                        {
+                            if (CheckIV(r, IV.A0S0SPA0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.OverWorld8_0a0spa0s);
+                            }
+                            else if (CheckIV(r, IV.A0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.OverWorld8_0a);
+                            }
+                            else if (CheckIV(r, IV.S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.OverWorld8_0s);
+                            }
+                            else if (CheckIV(r, IV.A0S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.OverWorld8_0a0s);
+                            }
+                            else if (CheckIV(r, IV.SPA0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.OverWorld8_0spa);
+                            }
+                        }
+                    break;
+                    }
+                case PkmCondition.MethodType.Method1:
+                    {
+                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        {
+                            if (CheckIV(r, IV.V0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_0V);
+                            }
+                            else if (CheckIV(r, IV.V6))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_6V);
+                            }
+                            else if (CheckIV(r, IV.A0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_0a);
+                            }
+                            else if (CheckIV(r, IV.S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_0s);
+                            }
+                            else if (CheckIV(r, IV.A0S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_0a0s);
+                            }
+                        }
+                        break;
+                    }
+                case PkmCondition.MethodType.Method2:
+                    {
+                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        {
+                            if (CheckIV(r, IV.V0) && r.Shiny == PkmCondition.ShinyType.None)
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_0V);
+                            }
+                            else if (CheckIV(r, IV.V6) && r.Shiny == PkmCondition.ShinyType.None)
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_6V);
+                            }
+                            else if (CheckIV(r, IV.A0) && r.Shiny == PkmCondition.ShinyType.None)
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_0a);
+                            }
+                            else if (CheckIV(r, IV.S0) && r.Shiny == PkmCondition.ShinyType.None)
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_0s);
+                            }
+                            else if (CheckIV(r, IV.A0S0) && r.Shiny == PkmCondition.ShinyType.None)
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_0a0s);
+                            }
+                        }
+                        break;
+                    }
+                case PkmCondition.MethodType.Method3:
+                    {
+                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        {
+                            if (CheckIV(r, IV.V0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_0V);
+                            }
+                            else if (CheckIV(r, IV.V6))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_6V);
+                            }
+                            else if (CheckIV(r, IV.A0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_0a);
+                            }
+                            else if (CheckIV(r, IV.S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_0s);
+                            }
+                            else if (CheckIV(r, IV.A0S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_0a0s);
+                            }
+                        }
+                        break;
+                    }
+                case PkmCondition.MethodType.Method4:
+                    {
+                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        {
+                            if (CheckIV(r, IV.V0) )
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_0V);
+                            }
+                            else if (CheckIV(r, IV.V6))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_6V);
+                            }
+                            else if (CheckIV(r, IV.A0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_0a);
+                            }
+                            else if (CheckIV(r, IV.S0) )
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_0s);
+                            }
+                            else if (CheckIV(r, IV.A0S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_0a0s);
+                            }
+                        }
+                        break;
+                    }
+                case PkmCondition.MethodType.Method1_Unown:
+                    {
+                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        {
+                            if (CheckIV(r, IV.V0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_Unown_0V);
+                            }
+                            else if (CheckIV(r, IV.V6))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_Unown_6V);
+                            }
+                            else if (CheckIV(r, IV.A0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_Unown_0a);
+                            }
+                            else if (CheckIV(r, IV.S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_Unown_0s);
+                            }
+                            else if (CheckIV(r, IV.A0S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_Unown_0a0s);
+                            }
+                        }
+                        break;
+                    }
+                case PkmCondition.MethodType.Method2_Unown:
+                    {
+                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        {
+                            if (CheckIV(r, IV.V0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_Unown_0V);
+                            }
+                            else if (CheckIV(r, IV.V6))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_Unown_6V);
+                            }
+                            else if (CheckIV(r, IV.A0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_Unown_0a);
+                            }
+                            else if (CheckIV(r, IV.S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_Unown_0s);
+                            }
+                            else if (CheckIV(r, IV.A0S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_Unown_0a0s);
+                            }
+                        }
+                        break;
+                    }
+                case PkmCondition.MethodType.Method3_Unown:
+                    {
+                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        {
+                            if (CheckIV(r, IV.V0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_Unown_0V);
+                            }
+                            else if (CheckIV(r, IV.V6))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_Unown_6V);
+                            }
+                            else if (CheckIV(r, IV.A0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_Unown_0a);
+                            }
+                            else if (CheckIV(r, IV.S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_Unown_0s);
+                            }
+                            else if (CheckIV(r, IV.A0S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_Unown_0a0s);
+                            }
+                        }
+                        break;
+                    }
+                case PkmCondition.MethodType.Method4_Unown:
+                    {
+                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        {
+                            if (CheckIV(r, IV.V0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_Unown_0V);
+                            }
+                            else if (CheckIV(r, IV.V6))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_Unown_6V);
+                            }
+                            else if (CheckIV(r, IV.A0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_Unown_0a);
+                            }
+                            else if (CheckIV(r, IV.S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_Unown_0s);
+                            }
+                            else if (CheckIV(r, IV.A0S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_Unown_0a0s);
+                            }
+                        }
+                        break;
+                    }
             }
-            else if (r.Method == PkmCondition.MethodType.Roaming8b &&
-              CheckIV(r, IV.A0S0 )&&r.Shiny != PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Roaming8_0a0s);
-            }
-            else if (r.Method == PkmCondition.MethodType.Roaming8b &&
-                CheckIV(r, IV.A0) &&r.Shiny != PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Roaming8_0a);
-            }
-            else if (r.Method == PkmCondition.MethodType.Roaming8b &&
-               CheckIV(r, IV.S0) &&(r.Shiny != PkmCondition.ShinyType.None && r.Shiny != PkmCondition.ShinyType.Sqaure))
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Roaming8_0s);
-            }
-            else if (r.Method == PkmCondition.MethodType.Overworld8 &&
-               CheckIV(r, IV.V0) )
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.OverWorld8_0V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Overworld8 &&
-              CheckIV(r, IV.A0S0SPA0) && r.Shiny == PkmCondition.ShinyType.Sqaure)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.OverWorld8_0a0spa0s);
-            }
-            else if (r.Method == PkmCondition.MethodType.Overworld8 &&
-               CheckIV(r, IV.A0) &&r.Shiny == PkmCondition.ShinyType.Sqaure)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.OverWorld8_0a);
-            }
-            else if (r.Method == PkmCondition.MethodType.Overworld8 &&
-             CheckIV(r, IV.S0) &&r.Shiny == PkmCondition.ShinyType.Sqaure)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.OverWorld8_0s);
-            }
-            else if (r.Method == PkmCondition.MethodType.Overworld8 &&
-             CheckIV(r, IV.A0S0) &&r.Shiny == PkmCondition.ShinyType.Sqaure)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.OverWorld8_0a0s);
-            }
-            else if (r.Method == PkmCondition.MethodType.Overworld8 &&
-           CheckIV(r, IV.SPA0) && r.Shiny == PkmCondition.ShinyType.Sqaure)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.OverWorld8_0spa);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method1 &&
-              CheckIV(r, IV.V0) &&r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_0V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method1 &&
-               CheckIV(r, IV.V6) &&r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_6V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method1 &&
-               CheckIV(r, IV.A0) &&r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_0a);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method1 &&
-            CheckIV(r, IV.S0) &&r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_0s);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method1 &&
-           CheckIV(r, IV.A0S0) &&r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_0a0s);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method2 &&
-           CheckIV(r, IV.V0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_0V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method2 &&
-           CheckIV(r, IV.V6) &&r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_6V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method2 &&
-           CheckIV(r, IV.A0) &&r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_0a);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method2 &&
-            CheckIV(r, IV.S0) &&r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_0s);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method2 &&
-             CheckIV(r, IV.A0S0) &&r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_0a0s);
-            }
+           
+          
+            
+        
 
 
-            else if (r.Method == PkmCondition.MethodType.Method3 &&
-          CheckIV(r, IV.V0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_0V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method3 &&
-           CheckIV(r, IV.V6) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_6V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method3 &&
-           CheckIV(r, IV.A0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_0a);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method3 &&
-            CheckIV(r, IV.S0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_0s);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method3 &&
-             CheckIV(r, IV.A0S0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_0a0s);
-            }
+         
+
+         
 
 
-            else if (r.Method == PkmCondition.MethodType.Method4 &&
-           CheckIV(r, IV.V0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_0V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method4 &&
-            CheckIV(r, IV.V6) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_6V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method4 &&
-            CheckIV(r, IV.A0) &&r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_0a);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method4 &&
-            CheckIV(r, IV.S0) &&r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_0s);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method4 &&
-             CheckIV(r, IV.A0S0) &&r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_0a0s);
-            }
+           
 
+            
 
-            else if (r.Method == PkmCondition.MethodType.Method1_Unown &&
-            CheckIV(r, IV.V0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_Unown_0V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method1_Unown &&
-               CheckIV(r, IV.V6) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_Unown_6V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method1_Unown &&
-               CheckIV(r, IV.A0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_Unown_0a);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method1_Unown &&
-            CheckIV(r, IV.S0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_Unown_0s);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method1_Unown &&
-           CheckIV(r, IV.A0S0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method1_Unown_0a0s);
-            }
+          
 
-
-            else if (r.Method == PkmCondition.MethodType.Method2_Unown &&
-           CheckIV(r, IV.V0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_Unown_0V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method2_Unown &&
-           CheckIV(r, IV.V6) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_Unown_6V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method2_Unown &&
-           CheckIV(r, IV.A0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_Unown_0a);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method2_Unown &&
-            CheckIV(r, IV.S0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_Unown_0s);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method2_Unown &&
-             CheckIV(r, IV.A0S0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_Unown_0a0s);
-            }
-
-            else if (r.Method == PkmCondition.MethodType.Method3_Unown &&
-       CheckIV(r, IV.V0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_Unown_0V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method3_Unown &&
-           CheckIV(r, IV.V6) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_Unown_6V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method3_Unown &&
-           CheckIV(r, IV.A0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_Unown_0a);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method3_Unown &&
-            CheckIV(r, IV.S0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_Unown_0s);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method3_Unown &&
-             CheckIV(r, IV.A0S0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method3_Unown_0a0s);
-            }
-
-            else if (r.Method == PkmCondition.MethodType.Method4_Unown &&
-           CheckIV(r, IV.V0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_Unown_0V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method4_Unown &&
-            CheckIV(r, IV.V6) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_Unown_6V);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method4_Unown &&
-            CheckIV(r, IV.A0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_Unown_0a);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method4_Unown &&
-            CheckIV(r, IV.S0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_Unown_0s);
-            }
-            else if (r.Method == PkmCondition.MethodType.Method4_Unown &&
-             CheckIV(r, IV.A0S0) && r.Shiny == PkmCondition.ShinyType.None)
-            {
-                Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_Unown_0a0s);
-            }
+           
             return Getqeueu;
             
         }

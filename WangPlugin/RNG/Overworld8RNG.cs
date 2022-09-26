@@ -18,6 +18,8 @@ namespace WangPlugin
         public static bool GenPkm(ref PKM pk,uint seed, CheckRules r)
         {
             int FlawlessIVs = 0;
+            if (pk.Species is 640 or 639 or 638)
+                FlawlessIVs = 3;
             var xoro = new Xoroshiro128Plus(seed);
 
             var ec= (uint)xoro.NextInt(uint.MaxValue);

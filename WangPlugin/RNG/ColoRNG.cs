@@ -10,6 +10,7 @@ namespace WangPlugin
         public static uint Next(uint seed) => XDRNG.Next(seed);
         public static bool GenPkm(ref PKM pk, uint seed, CheckRules r)
         {
+           
             var O = XDRNG.Next(seed); // SID
             var A = XDRNG.Next(O); // PID
             var B = XDRNG.Next(A); // PID
