@@ -10,924 +10,693 @@ namespace WangPlugin
 {
     public class Lockfun
     {
-        //Colo
-        public static bool Makuhita(ref uint seed)
+        public static bool FourNpcTeam(ref uint seed, NPCClass T1, NPCClass T2, NPCClass T3, NPCClass T4)
         {
-            if (TeamLockXD.GenPkm(seed, 355, 24, 0, 127))
+            if (TeamLockXD.GenPkm(seed, T1))
             {
                 seed = XDRNG.Next7(seed);
                 {
-                    if (TeamLockXD.GenPkm(seed, 167, 0, 1, 127))
+                    if (TeamLockXD.GenPkm(seed, T2))
                     {
                         seed = XDRNG.Next7(seed);
-
+                        if (TeamLockXD.GenPkm(seed, T3))
+                        {
+                            seed = XDRNG.Next7(seed);
+                            if (TeamLockXD.GenPkm(seed, T4))
+                            {
+                                seed = XDRNG.Next7(seed);
+                                return true;
+                            }
+                            else
+                                return false;
+                        }
+                        else
+                            return false;
+                    }
+                    else
+                        return false;
+                }
+            }
+            else
+                return false;
+        }
+        public static bool ThreeNpcTeam(ref uint seed, NPCClass T1, NPCClass T2, NPCClass T3)
+        {
+            if (TeamLockXD.GenPkm(seed, T1))
+            {
+                seed = XDRNG.Next7(seed);
+                {
+                    if (TeamLockXD.GenPkm(seed,T2))
+                    {
+                        seed = XDRNG.Next7(seed);
+                        if (TeamLockXD.GenPkm(seed,T3))
+                        {
+                            seed = XDRNG.Next7(seed);
+                            return true;
+                        }
+                        else
+                            return false;
+                    }
+                    else
+                        return false;
+                }
+            }
+            else
+                return false;
+        }
+        public static bool TwoNpcTeam(ref uint seed, NPCClass T1, NPCClass T2)
+        {
+            if (TeamLockXD.GenPkm(seed, T1))
+            {
+                seed = XDRNG.Next7(seed);
+                {
+                    if (TeamLockXD.GenPkm(seed, T2))
+                    {
+                        seed = XDRNG.Next7(seed);
                         return true;
                     }
                     else
                         return false;
                 }
             }
+            else
+                return false;
+        }
+        public static bool OneNpcTeam(ref uint seed, NPCClass T1)
+        {
+            if (TeamLockXD.GenPkm(seed, T1))
+            {
+                seed = XDRNG.Next7(seed);
+                {
+                    return true;
+                }
+            }
+            else
+                return false;
+        }
+        //Colo
+        public static bool Makuhita(ref uint seed)
+        {
+            if (TwoNpcTeam(ref seed, CMakuhita[0], CMakuhita[1]))
+                return true;
             else
                 return false;
         }
         public static bool Gligar(ref uint seed)
         {
-            if (TeamLockXD.GenPkm(seed, 216, 12, 0, 127))
-            {
-                seed = XDRNG.Next7(seed);
-                {
-                    if (TeamLockXD.GenPkm(seed,39, 6, 1, 191))
-                    {
-                        seed = XDRNG.Next7(seed);
-                        if (TeamLockXD.GenPkm(seed, 285, 18, 0, 127))
-                        {
-                            seed = XDRNG.Next7(seed);
-                            return true;
-                        }
-                        else
-                            return false;
-                    }
-                    else
-                        return false;
-                }
-            }
+            if (ThreeNpcTeam(ref seed, CGligar[0], CGligar[1], CGligar[2]))
+                return true;
             else
                 return false;
         }
         public static bool Murkrow(ref uint seed)
         {
-            if (TeamLockXD.GenPkm(seed, 318, 6, 0, 127))
-            {
-                seed = XDRNG.Next7(seed);
-                {
-                    if (TeamLockXD.GenPkm(seed, 274, 12, 1, 127))
-                    {
-                        seed = XDRNG.Next7(seed);
-                        if (TeamLockXD.GenPkm(seed, 228, 18,0, 127))
-                        {
-                            seed = XDRNG.Next7(seed);
-                            return true;
-                        }
-                        else
-                            return false;
-                    }
-                    else
-                        return false;
-                }
-            }
+            if (ThreeNpcTeam(ref seed, CMurkrow[0], CMurkrow[1], CMurkrow[2]))
+                return true;
             else
                 return false;
         }
-        public static bool Heracross(ref uint  seed)
+        public static bool Heracross(ref uint seed)
         {
-            if (TeamLockXD.GenPkm(seed, 284, 0, 0, 127))
-            {
-                seed = XDRNG.Next7(seed);
-                {
-                    if (TeamLockXD.GenPkm(seed, 168, 0, 1, 127))
-                    {
-                        seed = XDRNG.Next7(seed);
-                       
-                        return true;
-                    }
-                    else
-                        return false;
-                }
-            }
-            else 
+            if (TwoNpcTeam(ref seed, CHeracross[0], CHeracross[1]))
+                return true;
+            else
                 return false;
         }
         public static bool Ursaring(ref uint seed)
         {
-            if (TeamLockXD.GenPkm(seed, 67, 20, 1, 63))
-            {
-                seed = XDRNG.Next7(seed);
-                {
-                    if (TeamLockXD.GenPkm(seed, 259, 16, 0, 31))
-                    {
-                        seed = XDRNG.Next7(seed);
-                        if (TeamLockXD.GenPkm(seed, 275, 21, 1, 127))
-                        {
-                            seed = XDRNG.Next7(seed);
-                            return true;
-                        }
-                        else
-                            return false;
-                    }
-                    else
-                        return false;
-                }
-            }
+            if (ThreeNpcTeam(ref seed, CUrsaring[0], CUrsaring[1], CUrsaring[2]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Ralts(ref uint seed)
+        {
+            if (ThreeNpcTeam(ref seed, XRalts[0], XRalts[1], XRalts[2]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Poochyena(ref uint seed)
+        {
+            if (OneNpcTeam(ref seed, XPoochyena[0]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Ledyba(ref uint seed)
+        {
+            if (OneNpcTeam(ref seed, XLedyba[0]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Gulpin(ref uint seed)
+        {
+            if (TwoNpcTeam(ref seed, XGulpin[0], XGulpin[1]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Spinarak(ref uint seed)
+        {
+            if (TwoNpcTeam(ref seed, XSpinarak[0], XSpinarak[1]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Numel(ref uint seed)
+        {
+            if (ThreeNpcTeam(ref seed, XNumel[0], XNumel[1], XNumel[2]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Shroomish(ref uint seed)
+        {
+            if (TwoNpcTeam(ref seed, XShroomish[0], XShroomish[1]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Delcatty(ref uint seed)
+        {
+            if (ThreeNpcTeam(ref seed, XDelcatty[0], XDelcatty[1], XDelcatty[2]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Voltorb(ref uint seed)
+        {
+            if (ThreeNpcTeam(ref seed, XVoltorb[0], XVoltorb[1], XVoltorb[2]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Makuhita_XD(ref uint seed)
+        {
+            if (TwoNpcTeam(ref seed, XMakuhita[0], XMakuhita[1]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Vulpix(ref uint seed)
+        {
+            if (ThreeNpcTeam(ref seed, XVulpix[0], XVulpix[1], XVulpix[2]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Duskull(ref uint seed)
+        {
+            if (ThreeNpcTeam(ref seed, XDuskull[0], XDuskull[1], XDuskull[2]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Mawile(ref uint seed)
+        {
+            if (TwoNpcTeam(ref seed, XMawile[0], XMawile[1]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Snorunt(ref uint seed)
+        {
+            if (OneNpcTeam(ref seed, XSnorunt[0]))
+                return true;
+            else
+                return false;
+        }
+           public static bool Pineco(ref uint seed)
+        {
+            if (OneNpcTeam(ref seed, XPineco[0]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Natu(ref uint seed)
+        {
+            if (TwoNpcTeam(ref seed, XNatu[0], XNatu[1]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Roselia(ref uint seed)
+        {
+            if (TwoNpcTeam(ref seed, XRoselia[0], XRoselia[1]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Meowth(ref uint seed)
+        {
+            if (ThreeNpcTeam(ref seed, XMeowth[0], XMeowth[1], XMeowth[2]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Swinub(ref uint seed)
+        {
+            if (TwoNpcTeam(ref seed, XSwinub[0], XSwinub[1]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Spearow(ref uint seed)
+        {
+            if (TwoNpcTeam(ref seed, XSpearow[0], XSpearow[1]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Grimer(ref uint seed)
+        {
+            if (TwoNpcTeam(ref seed, XGrimer[0], XGrimer[1]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Seel(ref uint seed)
+        {
+            if (ThreeNpcTeam(ref seed, XSeel[0], XSeel[1], XSeel[2]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Lunatone(ref uint seed)
+        {
+            if (TwoNpcTeam(ref seed, XLunatone[0], XLunatone[1]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Nosepass(ref uint seed)
+        {
+            if (ThreeNpcTeam(ref seed, XNosepass[0], XNosepass[1], XNosepass[2]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Paras(ref uint seed)
+        {
+            if (TwoNpcTeam(ref seed, XParas[0], XParas[1]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Pidgeotto(ref uint seed)
+        {
+            if (TwoNpcTeam(ref seed, XPidgeotto[0], XPidgeotto[1]))
+                return true;
             else
                 return false;
         }
 
+        public static bool Tangela(ref uint seed)
+        {
+            if (ThreeNpcTeam(ref seed, XTangela[0], XTangela[1], XTangela[2]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Magneton(ref uint seed)
+        {
+            if (ThreeNpcTeam(ref seed, XMagneton[0], XMagneton[1], XMagneton[2]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Venomoth(ref uint seed)
+        {
+            if (ThreeNpcTeam(ref seed, XVenomoth[0], XVenomoth[1], XVenomoth[2]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Arbok(ref uint seed)
+        {
+            if (FourNpcTeam(ref seed, XArbok[0], XArbok[1], XArbok[2], XArbok[3]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Primeape(ref uint seed)
+        {
+            if (FourNpcTeam(ref seed, XPrimeape[0], XPrimeape[1], XPrimeape[2], XPrimeape[3]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Golduck(ref uint seed)
+        {
+            if (ThreeNpcTeam(ref seed, XGolduck[0], XGolduck[1], XGolduck[2]))
+                return true;
+            else
+                return false;
+        }
+        //Colo
+        public static readonly NPCClass[] CMakuhita = 
+       {
+            new NPCClass(355, 24, 0, 127), // Duskull (M) (Quirky)
+            new NPCClass(167, 00, 1, 127), // Spinarak (F) (Hardy)
+       };
+
+        public static readonly NPCClass[] CGligar = {
+            new NPCClass(216, 12, 0, 127), // Teddiursa (M) (Serious)
+            new NPCClass(039, 06, 1, 191), // Jigglypuff (F) (Docile)
+            new NPCClass(285, 18, 0, 127), // Shroomish (M) (Bashful)
+            };
+
+        public static readonly NPCClass[] CMurkrow = {
+            new NPCClass(318, 06, 0, 127), // Carvanha (M) (Docile)
+            new NPCClass(274, 12, 1, 127), // Nuzleaf (F) (Serious)
+            new NPCClass(228, 18, 0, 127), // Houndour (M) (Bashful)
+            };
+
+        public static readonly NPCClass[] CHeracross =  {
+            new NPCClass(284, 00, 0, 127), // Masquerain (M) (Hardy)
+            new NPCClass(168, 00, 1, 127), // Ariados (F) (Hardy)
+            };
+
+        public static readonly NPCClass[] CUrsaring =  {
+            new NPCClass(067, 20, 1, 063), // Machoke (F) (Calm)
+            new NPCClass(259, 16, 0, 031), // Marshtomp (M) (Mild)
+            new NPCClass(275, 21, 1, 127), // Shiftry (F) (Gentle)
+            };
+
         //XD
-        public static readonly TeamLock XRalts = new(
-      280, // Ralts
-      new[] {
-            new NPCLock(064, 00, 0, 063), // Kadabra (M) (Hardy)
-            new NPCLock(180, 06, 1, 127), // Flaaffy (F) (Docile)
-            new NPCLock(288, 18, 0, 127), // Vigoroth (M) (Bashful)
-      });
-
-        public static readonly TeamLock XPoochyena = new(
-            261, // Poochyena
-            new[] {
-            new NPCLock(041, 12, 1, 127), // Zubat (F) (Serious)
-            });
-
-        public static readonly TeamLock XLedyba = new(
-            165, // Ledyba
-            new[] {
-            new NPCLock(276, 00, 1, 127), // Taillow (F) (Hardy)
-            });
-
-        public static readonly TeamLock XSphealCipherLab = new(
-            363, // Spheal
-            "Cipher Lab",
-            new[] {
-            new NPCLock(116, 24, 0, 063), // Horsea (M) (Quirky)
-            new NPCLock(118, 12, 1, 127), // Goldeen (F) (Serious)
-            });
-
-        public static readonly TeamLock XSphealPhenacCityandPost = new(
-            363, // Spheal
-            "Phenac City and Post",
-            new[] {
-            new NPCLock(116, 24, 0, 063), // Horsea (M) (Quirky)
-            new NPCLock(118, 12, 1, 127), // Goldeen (F) (Serious)
-            new NPCLock(374, 00, 2, 255), // Beldum (-) (Hardy)
-            });
-
-        public static readonly TeamLock XGulpin = new(
-            316, // Gulpin
-            new[] {
-            new NPCLock(109, 12, 1, 127), // Koffing (F) (Serious)
-            new NPCLock(088, 06, 0, 127), // Grimer (M) (Docile)
-            });
-
-        public static readonly TeamLock XSeedotCipherLab = new(
-            273, // Seedot
-            "Cipher Lab",
-            new[] {
-            new NPCLock(043, 06, 0, 127), // Oddish (M) (Docile)
-            new NPCLock(331, 24, 1, 127), // Cacnea (F) (Quirky)
-            new NPCLock(285, 18, 1, 127), // Shroomish (F) (Bashful)
-            new NPCLock(270, 00, 0, 127), // Lotad (M) (Hardy)
-            new NPCLock(204, 12, 0, 127), // Pineco (M) (Serious)
-            });
-
-        public static readonly TeamLock XSeedotPhenacCity = new(
-            273, // Seedot
-            "Phenac City",
-            new[] {
-            new NPCLock(043, 06, 0, 127), // Oddish (M) (Docile)
-            new NPCLock(331, 24, 1, 127), // Cacnea (F) (Quirky)
-            new NPCLock(285, 00, 1, 127), // Shroomish (F) (Hardy)
-            new NPCLock(270, 00, 1, 127), // Lotad (F) (Hardy)
-            new NPCLock(204, 06, 0, 127), // Pineco (M) (Docile)
-            });
-
-        public static readonly TeamLock XSeedotPost = new(
-            273, // Seedot
-            "Post",
-            new[] {
-            new NPCLock(045, 06, 0, 127), // Vileplume (M) (Docile)
-            new NPCLock(332, 24, 1, 127), // Cacturne (F) (Quirky)
-            new NPCLock(286, 00, 1, 127), // Breloom (F) (Hardy)
-            new NPCLock(271, 00, 0, 127), // Lombre (M) (Hardy)
-            new NPCLock(205, 12, 0, 127), // Forretress (M) (Serious)
-            });
-
-        public static readonly TeamLock XSpinarak = new(
-            167, // Spinarak
-            new[] {
-            new NPCLock(220, 12, 1, 127), // Swinub (F) (Serious)
-            new NPCLock(353, 06, 0, 127), // Shuppet (M) (Docile)
-            });
-
-        public static readonly TeamLock XNumel = new(
-            322, // Numel
-            new[] {
-            new NPCLock(280, 06, 0, 127), // Ralts (M) (Docile)
-            new NPCLock(100, 00, 2, 255), // Voltorb (-) (Hardy)
-            new NPCLock(371, 24, 1, 127), // Bagon (F) (Quirky)
-            });
-
-        public static readonly TeamLock XShroomish = new(
-            285, // Shroomish
-            new[] {
-            new NPCLock(209, 24, 1, 191), // Snubbull (F) (Quirky)
-            new NPCLock(352, 00, 1, 127), // Kecleon (F) (Hardy)
-            });
-
-        public static readonly TeamLock XDelcatty = new(
-            301, // Delcatty
-            new[] {
-            new NPCLock(370, 06, 1, 191), // Luvdisc (F) (Docile)
-            new NPCLock(267, 00, 0, 127), // Beautifly (M) (Hardy)
-            new NPCLock(315, 24, 0, 127), // Roselia (M) (Quirky)
-            });
-
-        public static readonly TeamLock XVoltorb = new(
-            100, // Voltorb
-            new[] {
-            new NPCLock(271, 00, 0, 127), // Lombre (M) (Hardy)
-            new NPCLock(271, 18, 0, 127), // Lombre (M) (Bashful)
-            new NPCLock(271, 12, 1, 127), // Lombre (F) (Serious)
-            });
-
-        public static readonly TeamLock XMakuhita = new(
-            296, // Makuhita
-            new[] {
-            new NPCLock(352, 06, 0, 127), // Kecleon (M) (Docile)
-            new NPCLock(283, 18, 1, 127), // Surskit (F) (Bashful)
-            });
-
-        public static readonly TeamLock XVulpix = new(
-            037, // Vulpix
-            new[] {
-            new NPCLock(167, 00, 0, 127), // Spinarak (M) (Hardy)
-            new NPCLock(267, 06, 1, 127), // Beautifly (F) (Docile)
-            new NPCLock(269, 18, 0, 127), // Dustox (M) (Bashful)
-            });
-
-        public static readonly TeamLock XDuskull = new(
-            355, // Duskull
-            new[] {
-            new NPCLock(215, 12, 0, 127), // Sneasel (M) (Serious)
-            new NPCLock(193, 18, 1, 127), // Yanma (F) (Bashful)
-            new NPCLock(200, 24, 0, 127), // Misdreavus (M) (Quirky)
-            });
-
-        public static readonly TeamLock XMawile = new(
-            303, // Mawile
-            new[] {
-            new NPCLock(294, 06, 0, 127), // Loudred (M) (Docile)
-            new NPCLock(203, 18, 1, 127), // Girafarig (F) (Bashful)
-            });
-
-        public static readonly TeamLock XSnorunt = new(
-            361, // Snorunt
-            new[] {
-            new NPCLock(336, 06, 1, 127), // Seviper (F) (Docile)
-            });
-
-        public static readonly TeamLock XPineco = new(
-            204, // Pineco
-            new[] {
-            new NPCLock(198, 06, 0, 127), // Murkrow (M) (Docile)
-            });
-
-        public static readonly TeamLock XNatu = new(
-            177, // Natu
-            new[] {
-            new NPCLock(281, 00, 0, 127), // Kirlia (M) (Hardy)
-            new NPCLock(264, 00, 1, 127), // Linoone (F) (Hardy)
-            });
-
-        public static readonly TeamLock XRoselia = new(
-            315, // Roselia
-            new[] {
-            new NPCLock(223, 06, 0, 127), // Remoraid (M) (Docile)
-            new NPCLock(042, 18, 0, 127), // Golbat (M) (Bashful)
-            });
-
-        public static readonly TeamLock XMeowth = new(
-            052, // Meowth
-            new[] {
-            new NPCLock(064, 06, 0, 063), // Kadabra (M) (Docile)
-            new NPCLock(215, 00, 1, 127), // Sneasel (F) (Hardy)
-            new NPCLock(200, 18, 1, 127), // Misdreavus (F) (Bashful)
-            });
-
-        public static readonly TeamLock XSwinub = new(
-            220, // Swinub
-            new[] {
-            new NPCLock(324, 18, 1, 127), // Torkoal (F) (Bashful)
-            new NPCLock(274, 00, 0, 127), // Nuzleaf (M) (Hardy)
-            });
-
-        public static readonly TeamLock XSpearow = new(
-            021, // Spearow
-            new[] {
-            new NPCLock(279, 18, 0, 127), // Pelipper (M) (Bashful)
-            new NPCLock(309, 06, 1, 127), // Electrike (F) (Docile)
-            });
-
-        public static readonly TeamLock XGrimer = new(
-            088, // Grimer
-            new[] {
-            new NPCLock(358, 12, 0, 127), // Chimecho (M) (Serious)
-            new NPCLock(234, 18, 0, 127), // Stantler (M) (Bashful)
-            });
-
-        public static readonly TeamLock XSeel = new(
-            086, // Seel
-            new[] {
-            new NPCLock(163, 06, 0, 127), // Hoothoot (M) (Docile)
-            new NPCLock(075, 18, 0, 127), // Graveler (M) (Bashful)
-            new NPCLock(316, 18, 1, 127), // Gulpin (F) (Bashful)
-            });
-
-        public static readonly TeamLock XLunatone = new(
-            337, // Lunatone
-            new[] {
-            new NPCLock(171, 00, 1, 127), // Lanturn (F) (Hardy)
-            new NPCLock(195, 18, 0, 127), // Quagsire (M) (Bashful)
-            });
-
-        public static readonly TeamLock XNosepass = new(
-            299, // Nosepass
-            new[] {
-            new NPCLock(271, 00, 0, 127), // Lombre (M) (Hardy)
-            new NPCLock(271, 18, 0, 127), // Lombre (M) (Bashful)
-            new NPCLock(271, 12, 1, 127), // Lombre (F) (Serious)
-            });
-
-        public static readonly TeamLock XParas = new(
-            046, // Paras
-            new[] {
-            new NPCLock(336, 24, 0, 127), // Seviper (M) (Quirky)
-            new NPCLock(198, 06, 1, 127), // Murkrow (F) (Docile)
-            });
-
-        public static readonly TeamLock XGrowlithe = new(
-            058, // Growlithe
-            new[] {
-            new NPCLock(336, 24, 0, 127), // Seviper (M) (Quirky)
-            new NPCLock(198, 06, 1, 127), // Murkrow (F) (Docile)
-            new NPCLock(046), // Shadow Paras
-            });
-
-        public static readonly TeamLock XGrowlitheParasSeen = new(
-            058, // Growlithe
-            "Paras Seen",
-            new[] {
-            new NPCLock(336, 24, 0, 127), // Seviper (M) (Quirky)
-            new NPCLock(198, 06, 1, 127), // Murkrow (F) (Docile)
-            new NPCLock(046, true), // Shadow Paras (Seen)
-            });
-
-        public static readonly TeamLock XPidgeotto = new(
-            017, // Pidgeotto
-            new[] {
-            new NPCLock(015), // Shadow Beedrill
-            new NPCLock(162, 12, 0, 127), // Furret (M) (Serious)
-            new NPCLock(176, 18, 0, 031), // Togetic (M) (Bashful)
-            });
-
-        public static readonly TeamLock XPidgeottoBeedrillSeen = new(
-            017, // Pidgeotto
-            "Beedrill Seen",
-            new[] {
-            new NPCLock(015, true), // Shadow Beedrill (Seen)
-            new NPCLock(162, 12, 0, 127), // Furret (M) (Serious)
-            new NPCLock(176, 18, 0, 031), // Togetic (M) (Bashful)
-            });
-
-        public static readonly TeamLock XTangela = new(
-            114, // Tangela
-            new[] {
-            new NPCLock(038, 12, 1, 191), // Ninetales (F) (Serious)
-            new NPCLock(189, 06, 0, 127), // Jumpluff (M) (Docile)
-            new NPCLock(184, 00, 1, 127), // Azumarill (F) (Hardy)
-            });
-
-        public static readonly TeamLock XButterfree = new(
-            012, // Butterfree
-            new[] {
-            new NPCLock(038, 12, 1, 191), // Ninetales (F) (Serious)
-            new NPCLock(189, 06, 0, 127), // Jumpluff (M) (Docile)
-            new NPCLock(184, 00, 1, 127), // Azumarill (F) (Hardy)
-            new NPCLock(114), // Shadow Tangela
-            });
-
-        public static readonly TeamLock XButterfreeTangelaSeen = new(
-            012, // Butterfree
-            "Tangela Seen",
-            new[] {
-            new NPCLock(038, 12, 1, 191), // Ninetales (F) (Serious)
-            new NPCLock(189, 06, 0, 127), // Jumpluff (M) (Docile)
-            new NPCLock(184, 00, 1, 127), // Azumarill (F) (Hardy)
-            new NPCLock(114, true), // Shadow Tangela (Seen)
-            });
-
-        public static readonly TeamLock XMagneton = new(
-            082, // Magneton
-            new[] {
-            new NPCLock(292, 18, 2, 255), // Shedinja (-) (Bashful)
-            new NPCLock(202, 00, 0, 127), // Wobbuffet (M) (Hardy)
-            new NPCLock(329, 12, 1, 127), // Vibrava (F) (Serious)
-            });
-
-        public static readonly TeamLock XVenomoth = new(
-            049, // Venomoth
-            new[] {
-            new NPCLock(055, 18, 1, 127), // Golduck (F) (Bashful)
-            new NPCLock(237, 24, 0, 000), // Hitmontop (M) (Quirky)
-            new NPCLock(297, 12, 0, 063), // Hariyama (M) (Serious)
-            });
-
-        public static readonly TeamLock XWeepinbell = new(
-            070, // Weepinbell
-            new[] {
-            new NPCLock(055, 18, 1, 127), // Golduck (F) (Bashful)
-            new NPCLock(237, 24, 0, 000), // Hitmontop (M) (Quirky)
-            new NPCLock(297, 12, 0, 063), // Hariyama (M) (Serious)
-            new NPCLock(049), // Shadow Venomoth
-            });
-
-        public static readonly TeamLock XWeepinbellVenomothSeen = new(
-            070, // Weepinbell
-            "Venomoth Seen",
-            new[] {
-            new NPCLock(055, 18, 1, 127), // Golduck (F) (Bashful)
-            new NPCLock(237, 24, 0, 000), // Hitmontop (M) (Quirky)
-            new NPCLock(297, 12, 0, 063), // Hariyama (M) (Serious)
-            new NPCLock(049, true), // Shadow Venomoth (Seen)
-            });
-
-        public static readonly TeamLock XArbok = new(
-            024, // Arbok
-            new[] {
-            new NPCLock(367, 06, 0, 127), // Huntail (M) (Docile)
-            new NPCLock(332, 00, 1, 127), // Cacturne (F) (Hardy)
-            new NPCLock(110, 12, 1, 127), // Weezing (F) (Serious)
-            new NPCLock(217, 18, 1, 127), // Ursaring (F) (Bashful)
-            });
-
-        public static readonly TeamLock XPrimeape = new(
-            057, // Primeape
-            new[] {
-            new NPCLock(305, 18, 1, 127), // Lairon (F) (Bashful)
-            new NPCLock(364, 12, 1, 127), // Sealeo (F) (Serious)
-            new NPCLock(199, 06, 1, 127), // Slowking (F) (Docile)
-            new NPCLock(217, 24, 0, 127), // Ursaring (M) (Quirky)
-            });
-
-        public static readonly TeamLock XHypno = new(
-            097, // Hypno
-            new[] {
-            new NPCLock(305, 18, 1, 127), // Lairon (F) (Bashful)
-            new NPCLock(364, 12, 1, 127), // Sealeo (F) (Serious)
-            new NPCLock(199, 06, 1, 127), // Slowking (F) (Docile)
-            new NPCLock(217, 24, 0, 127), // Ursaring (M) (Quirky)
-            new NPCLock(057), // Shadow Primeape
-            });
-
-        public static readonly TeamLock XHypnoPrimeapeSeen = new(
-            097, // Hypno
-            "Primeape Seen",
-            new[] {
-            new NPCLock(305, 18, 1, 127), // Lairon (F) (Bashful)
-            new NPCLock(364, 12, 1, 127), // Sealeo (F) (Serious)
-            new NPCLock(199, 06, 1, 127), // Slowking (F) (Docile)
-            new NPCLock(217, 24, 0, 127), // Ursaring (M) (Quirky)
-            new NPCLock(057, true), // Shadow Primeape (Seen)
-            });
-
-        public static readonly TeamLock XGolduck = new(
-            055, // Golduck
-            new[] {
-            new NPCLock(342, 24, 0, 127), // Crawdaunt (M) (Quirky)
-            new NPCLock(279, 06, 1, 127), // Pelipper (F) (Docile)
-            new NPCLock(226, 18, 1, 127), // Mantine (F) (Bashful)
-            });
-
-        public static readonly TeamLock XSableye = new(
-            302, // Sableye
-            new[] {
-            new NPCLock(342, 24, 0, 127), // Crawdaunt (M) (Quirky)
-            new NPCLock(279, 06, 1, 127), // Pelipper (F) (Docile)
-            new NPCLock(226, 18, 1, 127), // Mantine (F) (Bashful)
-            new NPCLock(055), // Shadow Golduck
-            });
-
-        public static readonly TeamLock XSableyeGolduckSeen = new(
-            302, // Sableye
-            "Golduck Seen",
-            new[] {
-            new NPCLock(342, 24, 0, 127), // Crawdaunt (M) (Quirky)
-            new NPCLock(279, 06, 1, 127), // Pelipper (F) (Docile)
-            new NPCLock(226, 18, 1, 127), // Mantine (F) (Bashful)
-            new NPCLock(055, true), // Shadow Golduck (Seen)
-            });
-
-        public static readonly TeamLock XDodrio = new(
-            085, // Dodrio
-            new[] {
-            new NPCLock(178, 18, 1, 127), // Xatu (F) (Bashful)
-            });
-
-        public static readonly TeamLock XRaticate = new(
-            020, // Raticate
-            new[] {
-            new NPCLock(178, 18, 1, 127), // Xatu (F) (Bashful)
-            new NPCLock(085), // Shadow Dodrio
-            new NPCLock(340, 18, 0, 127), // Whiscash (M) (Bashful)
-            });
-
-        public static readonly TeamLock XRaticateDodrioSeen = new(
-            020, // Raticate
-            "Dodrio Seen",
-            new[] {
-            new NPCLock(178, 18, 1, 127), // Xatu (F) (Bashful)
-            new NPCLock(085, true), // Shadow Dodrio (Seen)
-            new NPCLock(340, 18, 0, 127), // Whiscash (M) (Bashful)
-            });
-
-        public static readonly TeamLock XFarfetchd = new(
-            083, // Farfetch’d
-            new[] {
-            new NPCLock(282, 12, 0, 127), // Gardevoir (M) (Serious)
-            new NPCLock(368, 00, 1, 127), // Gorebyss (F) (Hardy)
-            new NPCLock(315, 24, 0, 127), // Roselia (M) (Quirky)
-            });
-
-        public static readonly TeamLock XAltaria = new(
-            334, // Altaria
-            new[] {
-            new NPCLock(282, 12, 0, 127), // Gardevoir (M) (Serious)
-            new NPCLock(368, 00, 1, 127), // Gorebyss (F) (Hardy)
-            new NPCLock(315, 24, 0, 127), // Roselia (M) (Quirky)
-            new NPCLock(083), // Shadow Farfetch’d
-            });
-
-        public static readonly TeamLock XAltariaFarfetchdSeen = new(
-            334, // Altaria
-            "Farfetch'd Seen",
-            new[] {
-            new NPCLock(282, 12, 0, 127), // Gardevoir (M) (Serious)
-            new NPCLock(368, 00, 1, 127), // Gorebyss (F) (Hardy)
-            new NPCLock(315, 24, 0, 127), // Roselia (M) (Quirky)
-            new NPCLock(083, true), // Shadow Farfetch’d (Seen)
-            });
-
-        public static readonly TeamLock XKangaskhan = new(
-            115, // Kangaskhan
-            new[] {
-            new NPCLock(101, 00, 2, 255), // Electrode (-) (Hardy)
-            new NPCLock(200, 18, 1, 127), // Misdreavus (F) (Bashful)
-            new NPCLock(344, 12, 2, 255), // Claydol (-) (Serious)
-            });
-
-        public static readonly TeamLock XBanette = new(
-            354, // Banette
-            new[] {
-            new NPCLock(101, 00, 2, 255), // Electrode (-) (Hardy)
-            new NPCLock(200, 18, 1, 127), // Misdreavus (F) (Bashful)
-            new NPCLock(344, 12, 2, 255), // Claydol (-) (Serious)
-            new NPCLock(115), // Shadow Kangaskhan
-            });
-
-        public static readonly TeamLock XBanetteKangaskhanSeen = new(
-            354, // Banette
-            "Kangaskhan Seen",
-            new[] {
-            new NPCLock(101, 00, 2, 255), // Electrode (-) (Hardy)
-            new NPCLock(200, 18, 1, 127), // Misdreavus (F) (Bashful)
-            new NPCLock(344, 12, 2, 255), // Claydol (-) (Serious)
-            new NPCLock(115, true), // Shadow Kangaskhan (Seen)
-            });
-
-        public static readonly TeamLock XMagmar = new(
-            126, // Magmar
-            new[] {
-            new NPCLock(229, 18, 0, 127), // Houndoom (M) (Bashful)
-            new NPCLock(038, 18, 0, 191), // Ninetales (M) (Bashful)
-            new NPCLock(045, 00, 1, 127), // Vileplume (F) (Hardy)
-            });
-
-        public static readonly TeamLock XPinsir = new(
-            127, // Pinsir
-            new[] {
-            new NPCLock(229, 18, 0, 127), // Houndoom (M) (Bashful)
-            new NPCLock(038, 18, 0, 191), // Ninetales (M) (Bashful)
-            new NPCLock(045, 00, 1, 127), // Vileplume (F) (Hardy)
-            new NPCLock(126), // Shadow Magmar
-            });
-
-        public static readonly TeamLock XPinsirMagmarSeen = new(
-            127, // Pinsir
-            "Magmar Seen",
-            new[] {
-            new NPCLock(229, 18, 0, 127), // Houndoom (M) (Bashful)
-            new NPCLock(038, 18, 0, 191), // Ninetales (M) (Bashful)
-            new NPCLock(045, 00, 1, 127), // Vileplume (F) (Hardy)
-            new NPCLock(126, true), // Shadow Magmar (Seen)
-            });
-
-        public static readonly TeamLock XRapidash = new(
-            078, // Rapidash
-            new[] {
-            new NPCLock(323, 24, 0, 127), // Camerupt (M) (Quirky)
-            new NPCLock(110, 06, 0, 127), // Weezing (M) (Docile)
-            new NPCLock(089, 12, 1, 127), // Muk (F) (Serious)
-            });
-
-        public static readonly TeamLock XMagcargo = new(
-            219, // Magcargo
-            new[] {
-            new NPCLock(323, 24, 0, 127), // Camerupt (M) (Quirky)
-            new NPCLock(110, 06, 0, 127), // Weezing (M) (Docile)
-            new NPCLock(089, 12, 1, 127), // Muk (F) (Serious)
-            new NPCLock(078), // Shadow Rapidash
-            });
-
-        public static readonly TeamLock XMagcargoRapidashSeen = new(
-            219, // Magcargo
-            "Rapidash Seen",
-            new[] {
-            new NPCLock(323, 24, 0, 127), // Camerupt (M) (Quirky)
-            new NPCLock(110, 06, 0, 127), // Weezing (M) (Docile)
-            new NPCLock(089, 12, 1, 127), // Muk (F) (Serious)
-            new NPCLock(078, true), // Shadow Rapidash (Seen)
-            });
-
-        public static readonly TeamLock XHitmonchan = new(
-            107, // Hitmonchan
-            new[] {
-            new NPCLock(308, 24, 0, 127), // Medicham (M) (Quirky)
-            new NPCLock(076, 06, 1, 127), // Golem (F) (Docile)
-            new NPCLock(178, 18, 1, 127), // Xatu (F) (Bashful)
-            });
-
-        public static readonly TeamLock XHitmonlee = new(
-            106, // Hitmonlee
-            new[] {
-            new NPCLock(326, 18, 0, 127), // Grumpig (M) (Bashful)
-            new NPCLock(227, 12, 1, 127), // Skarmory (F) (Serious)
-            new NPCLock(375, 06, 2, 255), // Metang (-) (Docile)
-            new NPCLock(297, 24, 1, 063), // Hariyama (F) (Quirky)
-            });
-
-        public static readonly TeamLock XLickitung = new(
-            108, // Lickitung
-            new[] {
-            new NPCLock(171, 24, 0, 127), // Lanturn (M) (Quirky)
-            new NPCLock(082, 06, 2, 255), // Magneton (-) (Docile)
-            });
-
-        public static readonly TeamLock XScyther = new(
-            123, // Scyther
-            new[]
-            {
-            new NPCLock(234, 06, 1, 127), // Stantler (F) (Docile)
-            new NPCLock(295, 24, 0, 127), // Exploud (M) (Quirky)
-            });
-
-        public static readonly TeamLock XChansey = new(
-            113, // Chansey
-            new[] {
-            new NPCLock(234, 06, 1, 127), // Stantler (F) (Docile)
-            new NPCLock(295, 24, 0, 127), // Exploud (M) (Quirky)
-            new NPCLock(123), // Shadow Scyther
-            });
-
-        public static readonly TeamLock XChanseyScytherSeen = new(
-            113, // Chansey
-            "Scyther Seen",
-            new[] {
-            new NPCLock(234, 06, 1, 127), // Stantler (F) (Docile)
-            new NPCLock(295, 24, 0, 127), // Exploud (M) (Quirky)
-            new NPCLock(123, true), // Shadow Scyther (Seen)
-            });
-
-        public static readonly TeamLock XSolrock = new(
-            338, // Solrock
-            new[] {
-            new NPCLock(375, 24, 2, 255), // Metang (-) (Quirky)
-            new NPCLock(195, 06, 0, 127), // Quagsire (M) (Docile)
-            new NPCLock(212, 00, 1, 127), // Scizor (F) (Hardy)
-            });
-
-        public static readonly TeamLock XStarmie = new(
-            121, // Starmie
-            new[] {
-            new NPCLock(375, 24, 2, 255), // Metang (-) (Quirky)
-            new NPCLock(195, 06, 0, 127), // Quagsire (M) (Docile)
-            new NPCLock(212, 00, 1, 127), // Scizor (F) (Hardy)
-            new NPCLock(338), // Shadow Solrock
-            new NPCLock(351, 18, 0, 127), // Castform (M) (Bashful)
-            });
-
-        public static readonly TeamLock XStarmieSolrockSeen = new(
-            121, // Starmie
-            "Solrock Seen",
-            new[] {
-            new NPCLock(375, 24, 2, 255), // Metang (-) (Quirky)
-            new NPCLock(195, 06, 0, 127), // Quagsire (M) (Docile)
-            new NPCLock(212, 00, 1, 127), // Scizor (F) (Hardy)
-            new NPCLock(338, true), // Shadow Solrock (Seen)
-            new NPCLock(351, 18, 0, 127), // Castform (M) (Bashful)
-            });
-
-        public static readonly TeamLock XElectabuzz = new(
-            125, // Electabuzz
-            new[] {
-            new NPCLock(277), // Shadow Swellow
-            new NPCLock(065, 24, 0, 063), // Alakazam (M) (Quirky)
-            new NPCLock(230, 6, 1, 127), // Kingdra (F) (Docile)
-            new NPCLock(214, 18, 1, 127), // Heracross (F) (Bashful)
-            });
-
-        public static readonly TeamLock XElectabuzzSwellowSeen = new(
-            125, // Electabuzz
-            "Swellow Seen",
-            new[] {
-            new NPCLock(277, true), // Shadow Swellow (Seen)
-            new NPCLock(065, 24, 0, 063), // Alakazam (M) (Quirky)
-            new NPCLock(230, 6, 1, 127), // Kingdra (F) (Docile)
-            new NPCLock(214, 18, 1, 127), // Heracross (F) (Bashful)
-            });
-
-        public static readonly TeamLock XSnorlax = new(
-            143, // Snorlax
-            new[] {
-            new NPCLock(277), // Shadow Swellow
-            new NPCLock(065, 24, 0, 063), // Alakazam (M) (Quirky)
-            new NPCLock(230, 6, 1, 127), // Kingdra (F) (Docile)
-            new NPCLock(214, 18, 1, 127), // Heracross (F) (Bashful)
-            new NPCLock(125), // Shadow Electabuzz
-            });
-
-        public static readonly TeamLock XSnorlaxSwellowSeen = new(
-            143, // Snorlax
-            "Swellow Seen",
-            new[] {
-            new NPCLock(277, true), // Shadow Swellow (Seen)
-            new NPCLock(065, 24, 0, 063), // Alakazam (M) (Quirky)
-            new NPCLock(230, 6, 1, 127), // Kingdra (F) (Docile)
-            new NPCLock(214, 18, 1, 127), // Heracross (F) (Bashful)
-            new NPCLock(125), // Shadow Electabuzz
-            });
-
-        public static readonly TeamLock XSnorlaxSwellowElectabuzzSeen = new(
-            143, // Snorlax
-            "Swellow & Electabuzz Seen",
-            new[] {
-            new NPCLock(277, true), // Shadow Swellow (Seen)
-            new NPCLock(065, 24, 0, 063), // Alakazam (M) (Quirky)
-            new NPCLock(230, 6, 1, 127), // Kingdra (F) (Docile)
-            new NPCLock(214, 18, 1, 127), // Heracross (F) (Bashful)
-            new NPCLock(125, true), // Shadow Electabuzz
-            });
-
-        public static readonly TeamLock XPoliwrath = new(
-            062, // Poliwrath
-            new[] {
-            new NPCLock(199, 18, 0, 127), // Slowking (M) (Bashful)
-            new NPCLock(217, 18, 0, 127), // Ursaring (M) (Bashful)
-            new NPCLock(306, 24, 0, 127), // Aggron (M) (Quirky)
-            new NPCLock(365, 06, 1, 127), // Walrein (F) (Docile)
-            });
-
-        public static readonly TeamLock XMrMime = new(
-            122, // Mr. Mime
-            new[] {
-            new NPCLock(199, 18, 0, 127), // Slowking (M) (Bashful)
-            new NPCLock(217, 18, 0, 127), // Ursaring (M) (Bashful)
-            new NPCLock(306, 24, 0, 127), // Aggron (M) (Quirky)
-            new NPCLock(365, 06, 1, 127), // Walrein (F) (Docile)
-            new NPCLock(062), // Shadow Poliwrath
-            });
-
-        public static readonly TeamLock XMrMimePoliwrathSeen = new(
-            122, // Mr. Mime
-            "Poliwrath Seen",
-            new[] {
-            new NPCLock(199, 18, 0, 127), // Slowking (M) (Bashful)
-            new NPCLock(217, 18, 0, 127), // Ursaring (M) (Bashful)
-            new NPCLock(306, 24, 0, 127), // Aggron (M) (Quirky)
-            new NPCLock(365, 06, 1, 127), // Walrein (F) (Docile)
-            new NPCLock(062, true), // Shadow Poliwrath (Seen)
-            });
-
-        public static readonly TeamLock XDugtrio = new(
-            051, // Dugtrio
-            new[] {
-            new NPCLock(362, 00, 0, 127), // Glalie (M) (Hardy)
-            new NPCLock(181, 18, 0, 127), // Ampharos (M) (Bashful)
-            new NPCLock(286, 06, 1, 127), // Breloom (F) (Docile)
-            new NPCLock(232, 12, 0, 127), // Donphan (M) (Serious)
-            });
-
-        public static readonly TeamLock XManectric = new(
-            310, // Manectric
-            new[] {
-            new NPCLock(291, 06, 1, 127), // Ninjask (F) (Docile)
-            });
-
-        public static readonly TeamLock XSalamence = new(
-            373, // Salamence
-            new[] {
-            new NPCLock(291, 06, 1, 127), // Ninjask (F) (Docile)
-            new NPCLock(310), // Shadow Manectric
-            });
-
-        public static readonly TeamLock XMarowak = new(
-            105, // Marowak
-            new[] {
-            new NPCLock(291, 06, 1, 127), // Ninjask (F) (Docile)
-            new NPCLock(310), // Shadow Manectric
-            new NPCLock(373), // Shadow Salamence
-            new NPCLock(330, 24, 0, 127), // Flygon (M) (Quirky)
-            });
-
-        public static readonly TeamLock XLapras = new(
-            131, // Lapras
-            new[] {
-            new NPCLock(291, 06, 1, 127), // Ninjask (F) (Docile)
-            new NPCLock(310), // Shadow Manectric
-            new NPCLock(373), // Shadow Salamence
-            new NPCLock(330, 24, 0, 127), // Flygon (M) (Quirky)
-            new NPCLock(105), // Shadow Marowak
-            });
-
-        public static readonly TeamLock XSalamenceManectricSeen = new(
-            373, // Salamence
-            "Manectric Seen",
-            new[] {
-            new NPCLock(291, 06, 1, 127), // Ninjask (F) (Docile)
-            new NPCLock(310, true), // Shadow Manectric (Seen)
-            });
-
-        public static readonly TeamLock XMarowakManectricSeen = new(
-            105, // Marowak
-            "Manectric Seen",
-            new[] {
-            new NPCLock(291, 06, 1, 127), // Ninjask (F) (Docile)
-            new NPCLock(310, true), // Shadow Manectric (Seen)
-            new NPCLock(373), // Shadow Salamence
-            new NPCLock(330, 24, 0, 127), // Flygon (M) (Quirky)
-            });
-
-        public static readonly TeamLock XMarowakManectricSalamenceSeen = new(
-            105, // Marowak
-            "Manectric & Salamence Seen",
-            new[] {
-            new NPCLock(291, 06, 1, 127), // Ninjask (F) (Docile)
-            new NPCLock(310, true), // Shadow Manectric (Seen)
-            new NPCLock(373, true), // Shadow Salamence (Seen)
-            new NPCLock(330, 24, 0, 127), // Flygon (M) (Quirky)
-            });
-
-        public static readonly TeamLock XLaprasManectricSeen = new(
-            131, // Lapras
-            "Manectric Seen",
-            new[] {
-            new NPCLock(291, 06, 1, 127), // Ninjask (F) (Docile)
-            new NPCLock(310, true), // Shadow Manectric (Seen)
-            new NPCLock(373), // Shadow Salamence
-            new NPCLock(330, 24, 0, 127), // Flygon (M) (Quirky)
-            new NPCLock(105), // Shadow Marowak
-            });
-
-        public static readonly TeamLock XLaprasManectricSalamenceSeen = new(
-            131, // Lapras
-            "Manectric & Salamence Seen",
-            new[] {
-            new NPCLock(291, 06, 1, 127), // Ninjask (F) (Docile)
-            new NPCLock(310, true), // Shadow Manectric (Seen)
-            new NPCLock(373, true), // Shadow Salamence (Seen)
-            new NPCLock(330, 24, 0, 127), // Flygon (M) (Quirky)
-            new NPCLock(105), // Shadow Marowak
-            });
-
-        public static readonly TeamLock XLaprasManectricMarowakSeen = new(
-            131, // Lapras
-            "Manectric & Marowak Seen",
-            new[] {
-            new NPCLock(291, 06, 1, 127), // Ninjask (F) (Docile)
-            new NPCLock(310, true), // Shadow Manectric (Seen)
-            new NPCLock(373), // Shadow Salamence
-            new NPCLock(330, 24, 0, 127), // Flygon (M) (Quirky)
-            new NPCLock(105, true), // Shadow Marowak (Seen)
-            });
-
-        public static readonly TeamLock XLaprasManectricSalamenceMarowakSeen = new(
-            131, // Lapras
-            "Manectric & Salamence & Marowak Seen",
-            new[] {
-            new NPCLock(291, 06, 1, 127), // Ninjask (F) (Docile)
-            new NPCLock(310, true), // Shadow Manectric (Seen)
-            new NPCLock(373, true), // Shadow Salamence (Seen)
-            new NPCLock(330, 24, 0, 127), // Flygon (M) (Quirky)
-            new NPCLock(105, true), // Shadow Marowak (Seen)
-            });
-
-
-
-        public static readonly TeamLock XDragonite = new(
-            149, // Dragonite
-            new[] {
-            new NPCLock(272, 00, 0, 127), // Ludicolo (M) (Hardy)
-            new NPCLock(272, 18, 0, 127), // Ludicolo (M) (Bashful)
-            new NPCLock(272, 12, 1, 127), // Ludicolo (F) (Serious)
-            new NPCLock(272, 12, 1, 127), // Ludicolo (F) (Serious)
-            new NPCLock(272, 00, 0, 127), // Ludicolo (M) (Hardy)
-            });
+        public static readonly NPCClass[] XRalts = {
+            new NPCClass(064, 00, 0, 063), // Kadabra (M) (Hardy)
+            new NPCClass(180, 06, 1, 127), // Flaaffy (F) (Docile)
+            new NPCClass(288, 18, 0, 127), // Vigoroth (M) (Bashful)
+        };
+
+        public static readonly NPCClass[] XPoochyena = {
+            new NPCClass(041, 12, 1, 127), // Zubat (F) (Serious)
+            };
+
+        public static readonly NPCClass[] XLedyba = {
+            new NPCClass(276, 00, 1, 127), // Taillow (F) (Hardy)
+            };
+       
+
+        public static readonly NPCClass[] XGulpin = {
+            new NPCClass(109, 12, 1, 127), // Koffing (F) (Serious)
+            new NPCClass(088, 06, 0, 127), // Grimer (M) (Docile)
+            };
+
+        public static readonly NPCClass[] XSpinarak = {
+            new NPCClass(220, 12, 1, 127), // Swinub (F) (Serious)
+            new NPCClass(353, 06, 0, 127), // Shuppet (M) (Docile)
+            };
+
+        public static readonly NPCClass[] XNumel = {
+            new NPCClass(280, 06, 0, 127), // Ralts (M) (Docile)
+            new NPCClass(100, 00, 2, 255), // Voltorb (-) (Hardy)
+            new NPCClass(371, 24, 1, 127), // Bagon (F) (Quirky)
+            };
+
+        public static readonly NPCClass[] XShroomish = {
+            new NPCClass(209, 24, 1, 191), // Snubbull (F) (Quirky)
+            new NPCClass(352, 00, 1, 127), // Kecleon (F) (Hardy)
+            };
+
+        public static readonly NPCClass[] XDelcatty = {
+            new NPCClass(370, 06, 1, 191), // Luvdisc (F) (Docile)
+            new NPCClass(267, 00, 0, 127), // Beautifly (M) (Hardy)
+            new NPCClass(315, 24, 0, 127), // Roselia (M) (Quirky)
+            };
+
+        public static readonly NPCClass[] XVoltorb = {
+            new NPCClass(271, 00, 0, 127), // Lombre (M) (Hardy)
+            new NPCClass(271, 18, 0, 127), // Lombre (M) (Bashful)
+            new NPCClass(271, 12, 1, 127), // Lombre (F) (Serious)
+            };
+
+        public static readonly NPCClass[] XMakuhita = {
+            new NPCClass(352, 06, 0, 127), // Kecleon (M) (Docile)
+            new NPCClass(283, 18, 1, 127), // Surskit (F) (Bashful)
+            };
+
+        public static readonly NPCClass[] XVulpix = {
+            new NPCClass(167, 00, 0, 127), // Spinarak (M) (Hardy)
+            new NPCClass(267, 06, 1, 127), // Beautifly (F) (Docile)
+            new NPCClass(269, 18, 0, 127), // Dustox (M) (Bashful)
+            };
+
+        public static readonly NPCClass[] XDuskull = {
+            new NPCClass(215, 12, 0, 127), // Sneasel (M) (Serious)
+            new NPCClass(193, 18, 1, 127), // Yanma (F) (Bashful)
+            new NPCClass(200, 24, 0, 127), // Misdreavus (M) (Quirky)
+            };
+
+        public static readonly NPCClass[] XMawile = {
+            new NPCClass(294, 06, 0, 127), // Loudred (M) (Docile)
+            new NPCClass(203, 18, 1, 127), // Girafarig (F) (Bashful)
+            };
+
+        public static readonly NPCClass[] XSnorunt = {
+            new NPCClass(336, 06, 1, 127), // Seviper (F) (Docile)
+            };
+
+        public static readonly NPCClass[] XPineco = {
+            new NPCClass(198, 06, 0, 127), // Murkrow (M) (Docile)
+            };
+
+        public static readonly NPCClass[] XNatu = {
+            new NPCClass(281, 00, 0, 127), // Kirlia (M) (Hardy)
+            new NPCClass(264, 00, 1, 127), // Linoone (F) (Hardy)
+            };
+
+        public static readonly NPCClass[] XRoselia = {
+            new NPCClass(223, 06, 0, 127), // Remoraid (M) (Docile)
+            new NPCClass(042, 18, 0, 127), // Golbat (M) (Bashful)
+            };
+
+        public static readonly NPCClass[] XMeowth = {
+            new NPCClass(064, 06, 0, 063), // Kadabra (M) (Docile)
+            new NPCClass(215, 00, 1, 127), // Sneasel (F) (Hardy)
+            new NPCClass(200, 18, 1, 127), // Misdreavus (F) (Bashful)
+            };
+
+         public static readonly NPCClass[] XSwinub = {
+            new NPCClass(324, 18, 1, 127), // Torkoal (F) (Bashful)
+            new NPCClass(274, 00, 0, 127), // Nuzleaf (M) (Hardy)
+            };
+
+        public static readonly NPCClass[] XSpearow = {
+            new NPCClass(279, 18, 0, 127), // Pelipper (M) (Bashful)
+            new NPCClass(309, 06, 1, 127), // Electrike (F) (Docile)
+            };
+
+        public static readonly NPCClass[] XGrimer = {
+            new NPCClass(358, 12, 0, 127), // Chimecho (M) (Serious)
+            new NPCClass(234, 18, 0, 127), // Stantler (M) (Bashful)
+            };
+
+        public static readonly NPCClass[] XSeel = {
+            new NPCClass(163, 06, 0, 127), // Hoothoot (M) (Docile)
+            new NPCClass(075, 18, 0, 127), // Graveler (M) (Bashful)
+            new NPCClass(316, 18, 1, 127), // Gulpin (F) (Bashful)
+            };
+
+        public static readonly NPCClass[] XLunatone = {
+            new NPCClass(171, 00, 1, 127), // Lanturn (F) (Hardy)
+            new NPCClass(195, 18, 0, 127), // Quagsire (M) (Bashful)
+            };
+
+        public static readonly NPCClass[] XNosepass = {
+            new NPCClass(271, 00, 0, 127), // Lombre (M) (Hardy)
+            new NPCClass(271, 18, 0, 127), // Lombre (M) (Bashful)
+            new NPCClass(271, 12, 1, 127), // Lombre (F) (Serious)
+            };
+
+        public static readonly NPCClass[] XParas = 
+{
+            new NPCClass(336, 24, 0, 127), // Seviper (M) (Quirky)
+            new NPCClass(198, 06, 1, 127), // Murkrow (F) (Docile)
+            };
+        public static readonly NPCClass[] XPidgeotto = {
+           // new NPCClass(015), // Shadow Beedrill
+            new NPCClass(162, 12, 0, 127), // Furret (M) (Serious)
+            new NPCClass(176, 18, 0, 031), // Togetic (M) (Bashful)
+            };
+        public static readonly NPCClass[] XPidgeottoBeedrillSeen = {
+          //  new NPCClass(015, true), // Shadow Beedrill (Seen)
+            new NPCClass(162, 12, 0, 127), // Furret (M) (Serious)
+            new NPCClass(176, 18, 0, 031), // Togetic (M) (Bashful)
+            };
+        public static readonly NPCClass[] XTangela =  {
+            new NPCClass(038, 12, 1, 191), // Ninetales (F) (Serious)
+            new NPCClass(189, 06, 0, 127), // Jumpluff (M) (Docile)
+            new NPCClass(184, 00, 1, 127), // Azumarill (F) (Hardy)
+            };
+        public static readonly NPCClass[] XMagneton = {
+            new NPCClass(292, 18, 2, 255), // Shedinja (-) (Bashful)
+            new NPCClass(202, 00, 0, 127), // Wobbuffet (M) (Hardy)
+            new NPCClass(329, 12, 1, 127), // Vibrava (F) (Serious)
+            };
+        public static readonly NPCClass[] XVenomoth = {
+            new NPCClass(055, 18, 1, 127), // Golduck (F) (Bashful)
+            new NPCClass(237, 24, 0, 000), // Hitmontop (M) (Quirky)
+            new NPCClass(297, 12, 0, 063), // Hariyama (M) (Serious)
+            };
+        public static readonly NPCClass[] XArbok = {
+            new NPCClass(367, 06, 0, 127), // Huntail (M) (Docile)
+            new NPCClass(332, 00, 1, 127), // Cacturne (F) (Hardy)
+            new NPCClass(110, 12, 1, 127), // Weezing (F) (Serious)
+            new NPCClass(217, 18, 1, 127), // Ursaring (F) (Bashful)
+            };
+
+        public static readonly NPCClass[] XPrimeape = {
+            new NPCClass(305, 18, 1, 127), // Lairon (F) (Bashful)
+            new NPCClass(364, 12, 1, 127), // Sealeo (F) (Serious)
+            new NPCClass(199, 06, 1, 127), // Slowking (F) (Docile)
+            new NPCClass(217, 24, 0, 127), // Ursaring (M) (Quirky)
+            };
+
+        public static readonly NPCClass[] XGolduck = {
+            new NPCClass(342, 24, 0, 127), // Crawdaunt (M) (Quirky)
+            new NPCClass(279, 06, 1, 127), // Pelipper (F) (Docile)
+            new NPCClass(226, 18, 1, 127), // Mantine (F) (Bashful)
+            };
+
+        public static readonly NPCClass[] XDodrio =  {
+            new NPCClass(178, 18, 1, 127), // Xatu (F) (Bashful)
+            };
+
+        public static readonly NPCClass[] XRaticate = {
+            new NPCClass(178, 18, 1, 127), // Xatu (F) (Bashful)
+         //   new NPCClass(085), // Shadow Dodrio
+            new NPCClass(340, 18, 0, 127), // Whiscash (M) (Bashful)
+            };
+
+        public static readonly NPCClass[] XRaticateDodrioSeen = {
+            new NPCClass(178, 18, 1, 127), // Xatu (F) (Bashful)
+        //    new NPCClass(085, true), // Shadow Dodrio (Seen)
+            new NPCClass(340, 18, 0, 127), // Whiscash (M) (Bashful)
+            };
+
+        public static readonly NPCClass[] XFarfetchd = {
+            new NPCClass(282, 12, 0, 127), // Gardevoir (M) (Serious)
+            new NPCClass(368, 00, 1, 127), // Gorebyss (F) (Hardy)
+            new NPCClass(315, 24, 0, 127), // Roselia (M) (Quirky)
+            };
+        public static readonly NPCClass[] XKangaskhan =  {
+            new NPCClass(101, 00, 2, 255), // Electrode (-) (Hardy)
+            new NPCClass(200, 18, 1, 127), // Misdreavus (F) (Bashful)
+            new NPCClass(344, 12, 2, 255), // Claydol (-) (Serious)
+            };
+        public static readonly NPCClass[] XMagmar =  {
+            new NPCClass(229, 18, 0, 127), // Houndoom (M) (Bashful)
+            new NPCClass(038, 18, 0, 191), // Ninetales (M) (Bashful)
+            new NPCClass(045, 00, 1, 127), // Vileplume (F) (Hardy)
+            };
+        public static readonly NPCClass[] XRapidash =  {
+            new NPCClass(323, 24, 0, 127), // Camerupt (M) (Quirky)
+            new NPCClass(110, 06, 0, 127), // Weezing (M) (Docile)
+            new NPCClass(089, 12, 1, 127), // Muk (F) (Serious)
+            };
+        public static readonly NPCClass[] XHitmonchan = {
+            new NPCClass(308, 24, 0, 127), // Medicham (M) (Quirky)
+            new NPCClass(076, 06, 1, 127), // Golem (F) (Docile)
+            new NPCClass(178, 18, 1, 127), // Xatu (F) (Bashful)
+            };
+
+        public static readonly NPCClass[] XHitmonlee = {
+            new NPCClass(326, 18, 0, 127), // Grumpig (M) (Bashful)
+            new NPCClass(227, 12, 1, 127), // Skarmory (F) (Serious)
+            new NPCClass(375, 06, 2, 255), // Metang (-) (Docile)
+            new NPCClass(297, 24, 1, 063), // Hariyama (F) (Quirky)
+            };
+
+        public static readonly NPCClass[] XLickitung = {
+            new NPCClass(171, 24, 0, 127), // Lanturn (M) (Quirky)
+            new NPCClass(082, 06, 2, 255), // Magneton (-) (Docile)
+            };
+
+        public static readonly NPCClass[] XScyther = {
+            new NPCClass(234, 06, 1, 127), // Stantler (F) (Docile)
+            new NPCClass(295, 24, 0, 127), // Exploud (M) (Quirky)
+            };
+
+       
+        public static readonly NPCClass[] XSolrock = {
+            new NPCClass(375, 24, 2, 255), // Metang (-) (Quirky)
+            new NPCClass(195, 06, 0, 127), // Quagsire (M) (Docile)
+            new NPCClass(212, 00, 1, 127), // Scizor (F) (Hardy)
+            };
+
+        public static readonly NPCClass[] XStarmie = {
+            new NPCClass(375, 24, 2, 255), // Metang (-) (Quirky)
+            new NPCClass(195, 06, 0, 127), // Quagsire (M) (Docile)
+            new NPCClass(212, 00, 1, 127), // Scizor (F) (Hardy)
+     //       new NPCClass(338), // Shadow Solrock
+            new NPCClass(351, 18, 0, 127), // Castform (M) (Bashful)
+            };
+
+        public static readonly NPCClass[] XStarmieSolrockSeen = {
+            new NPCClass(375, 24, 2, 255), // Metang (-) (Quirky)
+            new NPCClass(195, 06, 0, 127), // Quagsire (M) (Docile)
+            new NPCClass(212, 00, 1, 127), // Scizor (F) (Hardy)
+      //      new NPCClass(338, true), // Shadow Solrock (Seen)
+            new NPCClass(351, 18, 0, 127), // Castform (M) (Bashful)
+            };
+
+        public static readonly NPCClass[] XElectabuzz = {
+      //      new NPCClass(277), // Shadow Swellow
+            new NPCClass(065, 24, 0, 063), // Alakazam (M) (Quirky)
+            new NPCClass(230, 6, 1, 127), // Kingdra (F) (Docile)
+            new NPCClass(214, 18, 1, 127), // Heracross (F) (Bashful)
+            };
+        public static readonly NPCClass[] XElectabuzzSwellowSeen = {
+       //     new NPCClass(277, true), // Shadow Swellow (Seen)
+            new NPCClass(065, 24, 0, 063), // Alakazam (M) (Quirky)
+            new NPCClass(230, 6, 1, 127), // Kingdra (F) (Docile)
+            new NPCClass(214, 18, 1, 127), // Heracross (F) (Bashful)
+            };
+        public static readonly NPCClass[] XPoliwrath = {
+            new NPCClass(199, 18, 0, 127), // Slowking (M) (Bashful)
+            new NPCClass(217, 18, 0, 127), // Ursaring (M) (Bashful)
+            new NPCClass(306, 24, 0, 127), // Aggron (M) (Quirky)
+            new NPCClass(365, 06, 1, 127), // Walrein (F) (Docile)
+            };
+        public static readonly NPCClass[] XDugtrio = {
+            new NPCClass(362, 00, 0, 127), // Glalie (M) (Hardy)
+            new NPCClass(181, 18, 0, 127), // Ampharos (M) (Bashful)
+            new NPCClass(286, 06, 1, 127), // Breloom (F) (Docile)
+            new NPCClass(232, 12, 0, 127), // Donphan (M) (Serious)
+            };
+
+        public static readonly NPCClass[] XManectric = {
+            new NPCClass(291, 06, 1, 127), // Ninjask (F) (Docile)
+            };
+        public static readonly NPCClass[] XMarowak = {
+            new NPCClass(291, 06, 1, 127), // Ninjask (F) (Docile)
+     //       new NPCClass(310), // Shadow Manectric
+     //       new NPCClass(373), // Shadow Salamence
+            new NPCClass(330, 24, 0, 127), // Flygon (M) (Quirky)
+            };
+        public static readonly NPCClass[] XMarowakManectricSeen = {
+            new NPCClass(291, 06, 1, 127), // Ninjask (F) (Docile)
+    //        new NPCClass(310, true), // Shadow Manectric (Seen)
+      //      new NPCClass(373), // Shadow Salamence
+            new NPCClass(330, 24, 0, 127), // Flygon (M) (Quirky)
+            };
+
+        public static readonly NPCClass[] XMarowakManectricSalamenceSeen = {
+            new NPCClass(291, 06, 1, 127), // Ninjask (F) (Docile)
+    //        new NPCClass(310, true), // Shadow Manectric (Seen)
+    //        new NPCClass(373, true), // Shadow Salamence (Seen)
+            new NPCClass(330, 24, 0, 127), // Flygon (M) (Quirky)
+            };
+        public static readonly NPCClass[] XDragonite = {
+            new NPCClass(272, 00, 0, 127), // Ludicolo (M) (Hardy)
+            new NPCClass(272, 18, 0, 127), // Ludicolo (M) (Bashful)
+            new NPCClass(272, 12, 1, 127), // Ludicolo (F) (Serious)
+            new NPCClass(272, 12, 1, 127), // Ludicolo (F) (Serious)
+            new NPCClass(272, 00, 0, 127), // Ludicolo (M) (Hardy)
+            };
     }
 }
