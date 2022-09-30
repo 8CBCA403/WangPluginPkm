@@ -86,7 +86,13 @@ namespace WangPlugin.GUI
             Method4_Unown.SubItems.Add($"P,L,P,L");
             Method4_Unown.SubItems.Add($"A,M,A,M");
             Method4_Unown.SubItems.Add($"S,G,S,G");
-            SeedInstroList.Items.Add(Method4_Unown);
+            var XDColo = new ListViewItem($"XDColo(非队锁情况,固定PID)");
+            XDColo.SubItems.Add($"4");
+            XDColo.SubItems.Add($"4");
+            XDColo.SubItems.Add($"2");
+            XDColo.SubItems.Add($"4");
+            XDColo.SubItems.Add($"6");
+            SeedInstroList.Items.Add(XDColo);
             var OverWorld8 = new ListViewItem($"OverWorld8(只有方块)");
             OverWorld8.SubItems.Add($"8");
             OverWorld8.SubItems.Add($"6");

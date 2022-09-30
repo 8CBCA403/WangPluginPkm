@@ -1,6 +1,4 @@
-﻿
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace WangPlugin
 {
@@ -47,7 +45,12 @@ namespace WangPlugin
             Method4_Unown_6V,
             Method4_Unown_0a,
             Method4_Unown_0s,
-            Method4_Unown_0a0s,
+            Method4_Unown_0a0s, 
+            XDColo_0V,
+            XDColo_6V,
+            XDColo_0a,
+            XDColo_0s,
+            XDColo_0a0s,
             OverWorld8_0V,
             OverWorld8_0a,
             OverWorld8_0s,
@@ -163,6 +166,20 @@ namespace WangPlugin
         {0x4d2bd8ea,0x559c99e5,0xcd2bd8ea,0xd59c99e5};
         public static List<uint> Method4_Unown_0a0s = new List<uint>()
         {0x66810912,0x6ef1ca0d,0xe6810912,0xeef1ca0d};
+
+
+        public static List<uint> XDColo_0V = new List<uint>()
+        {0x3802f4f1,0xc9c502ce,0xb802f4f1,  0x49c502ce};
+        public static List<uint> XDColo_6V = new List<uint>()
+        {0x108ec1ff,0x6d0aa645,0xfeccb422,  0x908ec1ff,0xed0aa645,0x7eccb422};
+        public static List<uint> XDColo_0a = new List<uint>()
+        {0xa405ca1e,0x2405ca1e,0x1243bc41,0x9243bc41 };
+        public static List<uint> XDColo_0s = new List<uint>()
+        {0xac493136,0x2c493136};
+        public static List<uint> XDColo_0a0s = new List<uint>()
+        {0x51824732,0x3fc03955,0xbfc03955,0xd1824732};
+
+
         public static List<uint> OverWorld8_0V = new List<uint>()
         {0x17033091,0x5249C75B,0x889603F7,0x8A1E82E8,0x9F642E63,
          0xC6C083FE,0xF445CBAC,0xFA153F53};
@@ -463,6 +480,36 @@ namespace WangPlugin
                     for (int i = 0; i < 4; i++)
                     {
                         SeedQueue.Add(Method4_Unown_0a0s[i]);
+                    }
+                    break;
+                case SeedType.XDColo_0V:
+                    for (int i = 0; i < 4; i++)
+                    {
+                        SeedQueue.Add(XDColo_0V[i]);
+                    }
+                    break;
+                case SeedType.XDColo_6V:
+                    for (int i = 0; i < 6; i++)
+                    {
+                        SeedQueue.Add(XDColo_6V[i]);
+                    }
+                    break;
+                case SeedType.XDColo_0a:
+                    for (int i = 0; i < 4; i++)
+                    {
+                        SeedQueue.Add(XDColo_0a[i]);
+                    }
+                    break;
+                case SeedType.XDColo_0s:
+                    for (int i = 0; i < 2; i++)
+                    {
+                        SeedQueue.Add(XDColo_0s[i]);
+                    }
+                    break;
+                case SeedType.XDColo_0a0s:
+                    for (int i = 0; i < 4; i++)
+                    {
+                        SeedQueue.Add(XDColo_0a0s[i]);
                     }
                     break;
                 case SeedType.OverWorld8_0V:

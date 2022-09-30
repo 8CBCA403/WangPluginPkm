@@ -72,6 +72,9 @@ namespace WangPlugin.GUI
         private PkmCondition ConditionForm;
         private CheckBox TeamLockBox;
         private static Random rng = new Random();
+        private TextBox PIDBox;
+        private Button ReverseCheck_BTN;
+        private TextBox SeedBox;
         public int[] DIV ={ 0, 1, 2, 3, 4, 5 ,6 };
         public RNGForm(ISaveFileProvider sav, IPKMView editor)
 
@@ -98,6 +101,8 @@ namespace WangPlugin.GUI
             this.Ability_Box = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.PIDBox = new System.Windows.Forms.TextBox();
+            this.ReverseCheck_BTN = new System.Windows.Forms.Button();
             this.GetSeedForMaxLair_BTN = new System.Windows.Forms.Button();
             this.Legal_Check_BOX5 = new System.Windows.Forms.TextBox();
             this.Legal_Check_BOX4 = new System.Windows.Forms.TextBox();
@@ -105,6 +110,7 @@ namespace WangPlugin.GUI
             this.Legal_Check_BOX2 = new System.Windows.Forms.TextBox();
             this.Legal_Check_BOX1 = new System.Windows.Forms.TextBox();
             this.Seed_Box = new System.Windows.Forms.TextBox();
+            this.SeedBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -123,7 +129,7 @@ namespace WangPlugin.GUI
             // 
             this.Cancel.Location = new System.Drawing.Point(178, 192);
             this.Cancel.Name = "Cancel";
-            this.Cancel.Size = new System.Drawing.Size(98, 25);
+            this.Cancel.Size = new System.Drawing.Size(92, 25);
             this.Cancel.TabIndex = 11;
             this.Cancel.Text = "停止查找";
             this.Cancel.UseVisualStyleBackColor = true;
@@ -134,16 +140,16 @@ namespace WangPlugin.GUI
             this.UsePreSeed.AutoSize = true;
             this.UsePreSeed.Location = new System.Drawing.Point(6, 171);
             this.UsePreSeed.Name = "UsePreSeed";
-            this.UsePreSeed.Size = new System.Drawing.Size(126, 21);
+            this.UsePreSeed.Size = new System.Drawing.Size(98, 19);
             this.UsePreSeed.TabIndex = 22;
             this.UsePreSeed.Text = "使用预设种子";
             this.UsePreSeed.UseVisualStyleBackColor = true;
             // 
             // Check_BTN
             // 
-            this.Check_BTN.Location = new System.Drawing.Point(22, 147);
+            this.Check_BTN.Location = new System.Drawing.Point(6, 147);
             this.Check_BTN.Name = "Check_BTN";
-            this.Check_BTN.Size = new System.Drawing.Size(124, 25);
+            this.Check_BTN.Size = new System.Drawing.Size(140, 25);
             this.Check_BTN.TabIndex = 23;
             this.Check_BTN.Text = "开始检测";
             this.Check_BTN.UseVisualStyleBackColor = true;
@@ -168,7 +174,7 @@ namespace WangPlugin.GUI
             this.TeamLockBox.AutoSize = true;
             this.TeamLockBox.Location = new System.Drawing.Point(138, 171);
             this.TeamLockBox.Name = "TeamLockBox";
-            this.TeamLockBox.Size = new System.Drawing.Size(125, 21);
+            this.TeamLockBox.Size = new System.Drawing.Size(99, 19);
             this.TeamLockBox.TabIndex = 24;
             this.TeamLockBox.Text = "CXD使用队锁";
             this.TeamLockBox.UseVisualStyleBackColor = true;
@@ -176,6 +182,7 @@ namespace WangPlugin.GUI
             // ConditionForm
             // 
             this.ConditionForm.Location = new System.Drawing.Point(7, 14);
+            this.ConditionForm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ConditionForm.Name = "ConditionForm";
             this.ConditionForm.Size = new System.Drawing.Size(313, 186);
             this.ConditionForm.TabIndex = 23;
@@ -183,56 +190,59 @@ namespace WangPlugin.GUI
             // MinIV_Box
             // 
             this.MinIV_Box.FormattingEnabled = true;
-            this.MinIV_Box.Location = new System.Drawing.Point(54, 55);
+            this.MinIV_Box.Location = new System.Drawing.Point(41, 55);
             this.MinIV_Box.Name = "MinIV_Box";
-            this.MinIV_Box.Size = new System.Drawing.Size(92, 25);
+            this.MinIV_Box.Size = new System.Drawing.Size(105, 23);
             this.MinIV_Box.TabIndex = 25;
             // 
             // Gender_Box
             // 
             this.Gender_Box.FormattingEnabled = true;
-            this.Gender_Box.Location = new System.Drawing.Point(67, 85);
+            this.Gender_Box.Location = new System.Drawing.Point(54, 85);
             this.Gender_Box.Name = "Gender_Box";
-            this.Gender_Box.Size = new System.Drawing.Size(79, 25);
+            this.Gender_Box.Size = new System.Drawing.Size(92, 23);
             this.Gender_Box.TabIndex = 26;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 58);
+            this.label2.Location = new System.Drawing.Point(6, 58);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 17);
+            this.label2.Size = new System.Drawing.Size(29, 15);
             this.label2.TabIndex = 27;
             this.label2.Text = "锁IV";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 89);
+            this.label3.Location = new System.Drawing.Point(7, 89);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 17);
+            this.label3.Size = new System.Drawing.Size(43, 15);
             this.label3.TabIndex = 28;
             this.label3.Text = "公母比";
             // 
             // Ability_Box
             // 
             this.Ability_Box.FormattingEnabled = true;
-            this.Ability_Box.Location = new System.Drawing.Point(54, 116);
+            this.Ability_Box.Location = new System.Drawing.Point(41, 116);
             this.Ability_Box.Name = "Ability_Box";
-            this.Ability_Box.Size = new System.Drawing.Size(92, 25);
+            this.Ability_Box.Size = new System.Drawing.Size(105, 23);
             this.Ability_Box.TabIndex = 29;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 120);
+            this.label4.Location = new System.Drawing.Point(7, 119);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 17);
+            this.label4.Size = new System.Drawing.Size(31, 15);
             this.label4.TabIndex = 30;
             this.label4.Text = "特性";
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.SeedBox);
+            this.groupBox2.Controls.Add(this.PIDBox);
+            this.groupBox2.Controls.Add(this.ReverseCheck_BTN);
             this.groupBox2.Controls.Add(this.GetSeedForMaxLair_BTN);
             this.groupBox2.Controls.Add(this.Legal_Check_BOX5);
             this.groupBox2.Controls.Add(this.Legal_Check_BOX4);
@@ -249,16 +259,33 @@ namespace WangPlugin.GUI
             this.groupBox2.Controls.Add(this.Check_BTN);
             this.groupBox2.Location = new System.Drawing.Point(337, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(291, 210);
+            this.groupBox2.Size = new System.Drawing.Size(291, 242);
             this.groupBox2.TabIndex = 31;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "检测(Raid/大冒险)";
             // 
+            // PIDBox
+            // 
+            this.PIDBox.Location = new System.Drawing.Point(6, 210);
+            this.PIDBox.Name = "PIDBox";
+            this.PIDBox.Size = new System.Drawing.Size(96, 21);
+            this.PIDBox.TabIndex = 37;
+            // 
+            // ReverseCheck_BTN
+            // 
+            this.ReverseCheck_BTN.Location = new System.Drawing.Point(210, 208);
+            this.ReverseCheck_BTN.Name = "ReverseCheck_BTN";
+            this.ReverseCheck_BTN.Size = new System.Drawing.Size(66, 25);
+            this.ReverseCheck_BTN.TabIndex = 25;
+            this.ReverseCheck_BTN.Text = "开始查找";
+            this.ReverseCheck_BTN.UseVisualStyleBackColor = true;
+            this.ReverseCheck_BTN.Click += new System.EventHandler(this.ReverseCheck_BTN_Click);
+            // 
             // GetSeedForMaxLair_BTN
             // 
-            this.GetSeedForMaxLair_BTN.Location = new System.Drawing.Point(22, 178);
+            this.GetSeedForMaxLair_BTN.Location = new System.Drawing.Point(6, 178);
             this.GetSeedForMaxLair_BTN.Name = "GetSeedForMaxLair_BTN";
-            this.GetSeedForMaxLair_BTN.Size = new System.Drawing.Size(254, 25);
+            this.GetSeedForMaxLair_BTN.Size = new System.Drawing.Size(270, 25);
             this.GetSeedForMaxLair_BTN.TabIndex = 36;
             this.GetSeedForMaxLair_BTN.Text = "为面板大冒险非闪神添加seed";
             this.GetSeedForMaxLair_BTN.UseVisualStyleBackColor = true;
@@ -323,11 +350,18 @@ namespace WangPlugin.GUI
             this.Seed_Box.TabIndex = 23;
             this.Seed_Box.Text = "没有seed";
             // 
+            // SeedBox
+            // 
+            this.SeedBox.Location = new System.Drawing.Point(108, 210);
+            this.SeedBox.Name = "SeedBox";
+            this.SeedBox.Size = new System.Drawing.Size(96, 21);
+            this.SeedBox.TabIndex = 38;
+            // 
             // RNGForm
             // 
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(634, 230);
+            this.ClientSize = new System.Drawing.Size(634, 249);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -416,6 +450,7 @@ namespace WangPlugin.GUI
                 PkmCondition.MethodType.BACD_R_S => BACD.GenPkm(ref pk, seed & 0xFFFF, ConditionForm.rules, 2),
                 PkmCondition.MethodType.Method1Roaming => Method1Roaming.GenPkm(ref pk, seed, ConditionForm.rules),
                 PkmCondition.MethodType.Colo => ColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                PkmCondition.MethodType.E_Reader => E_Reader.GenPkm(ref pk, seed, ConditionForm.rules),
                 PkmCondition.MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed, ConditionForm.rules),
                 _ => throw new NotSupportedException(),
             };
@@ -440,7 +475,8 @@ namespace WangPlugin.GUI
                 PkmCondition.MethodType.BACD_R_S => BACD.Next(seed),
                 PkmCondition.MethodType.Method1Roaming => Method1Roaming.Next(seed),
                 PkmCondition.MethodType.Colo => ColoRNG.Next(seed),
-                PkmCondition.MethodType.ChainShiny => ChainShiny.Next(seed),
+                PkmCondition.MethodType.E_Reader =>E_Reader.Next(seed),
+               PkmCondition.MethodType.ChainShiny => ChainShiny.Next(seed),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -503,6 +539,7 @@ namespace WangPlugin.GUI
                         }
                         if (GenPkm(ref pk, seed,p.Form))
                             {
+                           // MessageBox.Show($"Success！");
                             this.Invoke(() =>
                                 {
                                     MessageBox.Show($"Success！");
@@ -647,6 +684,21 @@ namespace WangPlugin.GUI
                 }
             }
             Editor.PopulateFields(pk);
+        }
+
+        private void ReverseCheck_BTN_Click(object sender, EventArgs e)
+        {
+            Span<uint> Seeds= stackalloc uint[10];
+            var HEX = "0x" + PIDBox.Text;
+            var PID = Convert.ToUInt32(HEX, 16);
+            XDRNGReversal.GetSeeds(Seeds,PID);
+            if (Seeds.Length != 0)
+            {
+                for (int i = 0; i < Seeds.Length; i++)
+                {
+                    MessageBox.Show($"{Seeds[i]:X}");
+                }
+            }
         }
         #region
         /*    public void P(uint pid,int[] ivs,uint ec)

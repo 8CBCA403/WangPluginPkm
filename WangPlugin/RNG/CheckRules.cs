@@ -100,14 +100,14 @@ namespace WangPlugin
                                 Getqeueu = SeedList.AddSeed(SeedList.SeedType.Roaming8_0s);
                             }
                         }
-                    break;
+                        break;
                     }
                 case PkmCondition.MethodType.Overworld8:
                     {
-                    if (CheckIV(r, IV.V0))
-                    {
-                        Getqeueu = SeedList.AddSeed(SeedList.SeedType.OverWorld8_0V);
-                    }
+                        if (CheckIV(r, IV.V0))
+                        {
+                            Getqeueu = SeedList.AddSeed(SeedList.SeedType.OverWorld8_0V);
+                        }
                         if (r.Shiny == PkmCondition.ShinyType.Sqaure)
                         {
                             if (CheckIV(r, IV.A0S0SPA0))
@@ -131,7 +131,7 @@ namespace WangPlugin
                                 Getqeueu = SeedList.AddSeed(SeedList.SeedType.OverWorld8_0spa);
                             }
                         }
-                    break;
+                        break;
                     }
                 case PkmCondition.MethodType.Method1:
                     {
@@ -218,7 +218,7 @@ namespace WangPlugin
                     {
                         if (r.Shiny == PkmCondition.ShinyType.None)
                         {
-                            if (CheckIV(r, IV.V0) )
+                            if (CheckIV(r, IV.V0))
                             {
                                 Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_0V);
                             }
@@ -230,7 +230,7 @@ namespace WangPlugin
                             {
                                 Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_0a);
                             }
-                            else if (CheckIV(r, IV.S0) )
+                            else if (CheckIV(r, IV.S0))
                             {
                                 Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_0s);
                             }
@@ -345,6 +345,33 @@ namespace WangPlugin
                             else if (CheckIV(r, IV.A0S0))
                             {
                                 Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method4_Unown_0a0s);
+                            }
+                        }
+                        break;
+                    }
+                case PkmCondition.MethodType.XDColo:
+                    {
+                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        {
+                            if (CheckIV(r, IV.V0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.XDColo_0V);
+                            }
+                            else if (CheckIV(r, IV.V6))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.XDColo_6V);
+                            }
+                            else if (CheckIV(r, IV.A0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.XDColo_0a);
+                            }
+                            else if (CheckIV(r, IV.S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.XDColo_0s);
+                            }
+                            else if (CheckIV(r, IV.A0S0))
+                            {
+                                Getqeueu = SeedList.AddSeed(SeedList.SeedType.XDColo_0a0s);
                             }
                         }
                         break;

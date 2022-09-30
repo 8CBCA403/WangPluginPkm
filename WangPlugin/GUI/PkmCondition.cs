@@ -35,6 +35,7 @@ namespace WangPlugin.GUI
             ChainShiny,
             XDColo,
             Colo,
+            E_Reader,
             Overworld8,
             Roaming8b,
         }
