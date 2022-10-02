@@ -23,6 +23,8 @@ namespace WangPlugin.GUI
         private CheckBox Form_CheckBox;
         private CheckBox Gender_CheckBox;
         private CheckBox Ability_CheckBox;
+        private CheckBox RelearnMovcheckBox;
+
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
         private Button GEgg;
@@ -43,6 +45,7 @@ namespace WangPlugin.GUI
             this.Form_CheckBox = new System.Windows.Forms.CheckBox();
             this.Gender_CheckBox = new System.Windows.Forms.CheckBox();
             this.Ability_CheckBox = new System.Windows.Forms.CheckBox();
+            this.RelearnMovcheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // GEgg
@@ -105,9 +108,20 @@ namespace WangPlugin.GUI
             this.Ability_CheckBox.Text = "保持特性";
             this.Ability_CheckBox.UseVisualStyleBackColor = true;
             // 
+            // RelearnMovcheckBox
+            // 
+            this.RelearnMovcheckBox.AutoSize = true;
+            this.RelearnMovcheckBox.Location = new System.Drawing.Point(21, 62);
+            this.RelearnMovcheckBox.Name = "RelearnMovcheckBox";
+            this.RelearnMovcheckBox.Size = new System.Drawing.Size(126, 21);
+            this.RelearnMovcheckBox.TabIndex = 6;
+            this.RelearnMovcheckBox.Text = "保持技能回忆";
+            this.RelearnMovcheckBox.UseVisualStyleBackColor = true;
+            // 
             // EggGeneratorUI
             // 
-            this.ClientSize = new System.Drawing.Size(373, 74);
+            this.ClientSize = new System.Drawing.Size(373, 95);
+            this.Controls.Add(this.RelearnMovcheckBox);
             this.Controls.Add(this.Ability_CheckBox);
             this.Controls.Add(this.Gender_CheckBox);
             this.Controls.Add(this.Form_CheckBox);
@@ -187,6 +201,8 @@ namespace WangPlugin.GUI
                     pk.Gender = pko.Gender;
                 if(Form_CheckBox.Checked)
                     pk.Form = pko.Form;
+                if (RelearnMovcheckBox.Checked)
+                    pk.RelearnMoves = pko.RelearnMoves;
                 pk.CurrentHandler = 0;
                 pk.Nature = pko.Nature;
                 pk.IVs = pko.IVs;

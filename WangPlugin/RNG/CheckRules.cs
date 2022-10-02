@@ -1,10 +1,6 @@
-﻿using System;
-using PKHeX.Core;
+﻿using PKHeX.Core;
 using System.Collections.Generic;
 using WangPlugin.GUI;
-using System.Security.Cryptography;
-using static WangPlugin.GUI.RNGForm;
-
 namespace WangPlugin
 {
     public partial class CheckRules
@@ -26,7 +22,6 @@ namespace WangPlugin
         //
         public uint minSpe { get; set; }
         public uint maxSpe { get; set; } = 31;
-
         public enum IV
         {
             V0,
@@ -39,8 +34,7 @@ namespace WangPlugin
         }
 
         public PkmCondition.ShinyType Shiny  { get; set; }
-
-        public PkmCondition.MethodType Method { get; set; }
+        public MethodType Method { get; set; }
         public bool CheckIV(CheckRules r, PKM pk)
         {
             if (pk.IV_HP < r.minHP || pk.IV_HP > r.maxHP)
@@ -79,7 +73,7 @@ namespace WangPlugin
             List<uint> Getqeueu = new List<uint>();
             switch (r.Method)
             {
-                case PkmCondition.MethodType.Roaming8b:
+                case MethodType.Roaming8b:
                     {
                         if (r.Shiny != PkmCondition.ShinyType.None)
                         {
@@ -102,7 +96,7 @@ namespace WangPlugin
                         }
                         break;
                     }
-                case PkmCondition.MethodType.Overworld8:
+                case MethodType.Overworld8:
                     {
                         if (CheckIV(r, IV.V0))
                         {
@@ -133,7 +127,7 @@ namespace WangPlugin
                         }
                         break;
                     }
-                case PkmCondition.MethodType.Method1:
+                case MethodType.Method1:
                     {
                         if (r.Shiny == PkmCondition.ShinyType.None)
                         {
@@ -160,7 +154,7 @@ namespace WangPlugin
                         }
                         break;
                     }
-                case PkmCondition.MethodType.Method2:
+                case MethodType.Method2:
                     {
                         if (r.Shiny == PkmCondition.ShinyType.None)
                         {
@@ -187,7 +181,7 @@ namespace WangPlugin
                         }
                         break;
                     }
-                case PkmCondition.MethodType.Method3:
+                case MethodType.Method3:
                     {
                         if (r.Shiny == PkmCondition.ShinyType.None)
                         {
@@ -214,7 +208,7 @@ namespace WangPlugin
                         }
                         break;
                     }
-                case PkmCondition.MethodType.Method4:
+                case MethodType.Method4:
                     {
                         if (r.Shiny == PkmCondition.ShinyType.None)
                         {
@@ -241,7 +235,7 @@ namespace WangPlugin
                         }
                         break;
                     }
-                case PkmCondition.MethodType.Method1_Unown:
+                case MethodType.Method1_Unown:
                     {
                         if (r.Shiny == PkmCondition.ShinyType.None)
                         {
@@ -268,7 +262,7 @@ namespace WangPlugin
                         }
                         break;
                     }
-                case PkmCondition.MethodType.Method2_Unown:
+                case MethodType.Method2_Unown:
                     {
                         if (r.Shiny == PkmCondition.ShinyType.None)
                         {
@@ -295,7 +289,7 @@ namespace WangPlugin
                         }
                         break;
                     }
-                case PkmCondition.MethodType.Method3_Unown:
+                case MethodType.Method3_Unown:
                     {
                         if (r.Shiny == PkmCondition.ShinyType.None)
                         {
@@ -322,7 +316,7 @@ namespace WangPlugin
                         }
                         break;
                     }
-                case PkmCondition.MethodType.Method4_Unown:
+                case MethodType.Method4_Unown:
                     {
                         if (r.Shiny == PkmCondition.ShinyType.None)
                         {
@@ -349,7 +343,7 @@ namespace WangPlugin
                         }
                         break;
                     }
-                case PkmCondition.MethodType.XDColo:
+                case MethodType.XDColo:
                     {
                         if (r.Shiny == PkmCondition.ShinyType.None)
                         {
@@ -398,7 +392,6 @@ namespace WangPlugin
             return Getqeueu;
             
         }
-
         public static bool CheckIV(CheckRules r,IV iv)
         {
             switch(iv)

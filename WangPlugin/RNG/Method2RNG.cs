@@ -5,9 +5,7 @@ namespace WangPlugin
     internal static class Method2RNG
     {
         private const int shift = 16;
-
         public static uint Next(uint seed) => LCRNG.Next(seed);
-
         public static bool GenPkm(ref PKM pk, uint seed, CheckRules r)
         {
             var pidLower = LCRNG.Next(seed) >> shift;

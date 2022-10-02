@@ -5,9 +5,7 @@ namespace WangPlugin
     internal class WangRandUtil
     {
         public static uint GetShinyXor(uint val) => (val >> 16) ^ (val & 0xFFFF);
-
         public static uint GetShinyValue(uint num) => GetShinyXor(num) >> 4;
-
         public static uint GetShinyType(uint pid, uint tidsid)
         {
             var p = GetShinyXor(pid);
@@ -18,7 +16,6 @@ namespace WangPlugin
                 return 1; // star
             return 0;
         }
-
         public static int GetNextShinyFrame(ulong seed)
         {
             var rng = new Xoroshiro128Plus(seed);

@@ -9,12 +9,11 @@ namespace WangPlugin
 {
     public class LockCheck
     {
-        public static bool ChooseLock(ushort s, PKM pk, ref uint seed)
+        public static bool ChooseLock(ushort Species, PKM pk, ref uint seed)
         {
-            switch (s)
+            switch (Species)
             {
-                case 296:
-                    {
+                case 296:{
                         if (pk.Met_Location == 5)
                         {
                             if (Lockfun.Makuhita(ref seed))
@@ -30,400 +29,343 @@ namespace WangPlugin
                                 return false;
                         }
                     }
-                case 207:
-                    {
+                case 207:{
                         if (Lockfun.Gligar(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 198:
-                    {
+                case 198:{
                         if (Lockfun.Murkrow(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 214:
-                    {
+                case 214:{
                         if (Lockfun.Heracross(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 217:
-                    {
+                case 217:{
                         if (Lockfun.Ursaring(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 280:
-                    {
+                case 280:{
                         if (Lockfun.Ralts(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 261:
-                    {
+                case 261:{
                         if (Lockfun.Poochyena(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 165:
-                    {
+                case 165:{
                         if (Lockfun.Ledyba(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 316:
-                    {
+                case 316:{
                         if (Lockfun.Gulpin(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 167:
-                    {
+                case 167:{
                         if (Lockfun.Spinarak(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 322:
-                    {
+                case 322:{
                         if (Lockfun.Numel(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 285:
-                    {
+                case 285:{
                         if (Lockfun.Shroomish(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 301:
-                    {
+                case 301:{
                         if (Lockfun.Delcatty(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 100:
-                    {
+                case 100:{
                         if (Lockfun.Voltorb(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 37:
-                    {
+                case 37:{
                         if (Lockfun.Vulpix(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 355:
-                    {
+                case 355:{
                         if (Lockfun.Duskull(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 303:
-                    {
+                case 303:{
                         if (Lockfun.Mawile(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 361:
-                    {
+                case 361:{
                         if (Lockfun.Snorunt(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 204:
-                    {
+                case 204:{
                         if (Lockfun.Pineco(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 177:
-                    {
+                case 177:{
                         if (Lockfun.Natu(ref seed))
                             return true;
                         else
                             return false;
                     }
-                  case 315:
-                    {
+                case 315:{
                         if (Lockfun.Roselia(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 52:
-                    {
+                case 52:{
                         if (Lockfun.Meowth(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 220:
-                    {
+                case 220:{
                         if (Lockfun.Swinub(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 21:
-                    {
+                case 21:{
                         if (Lockfun.Spearow(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 88:
-                    {
+                case 88:{
                         if (Lockfun.Grimer(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 86:
-                    {
+                case 86:{
                         if (Lockfun.Seel(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 337:
-                    {
+                case 337:{
                         if (Lockfun.Lunatone(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 299:
-                    {
+                case 299:{
                         if (Lockfun.Nosepass(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 46:
-                    {
+                case 46:{
                         if (Lockfun.Paras(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 17:
-                    {
+                case 17:{
                         if (Lockfun.Pidgeotto(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 114:
-                    {
+                case 114:{
                         if (Lockfun.Tangela(ref seed))
                             return true;
                         else
                             return false;
                      }
-                case 82:
-                    {
+                case 82:{
                         if (Lockfun.Magneton(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 49:
-                    {
+                case 49:{
                         if (Lockfun.Venomoth(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 24:
-                    {
+                case 24:{
                         if (Lockfun.Arbok(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 57:
-                    {
+                case 57:{ 
                         if (Lockfun.Primeape(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 55:
-                    {
+                case 55:{
                         if (Lockfun.Golduck(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 85:
-                    {
+                case 85:{
                         if (Lockfun.Dodrio(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 20:
-                    {
+                case 20:{
                         if (Lockfun.Raticate(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 83:
-                    {
+                case 83:{
                         if (Lockfun.Farfetchd(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 115:
-                    {
+                case 115:{
                         if (Lockfun.Kangaskhan(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 126:
-                    {
+                case 126:{
                         if (Lockfun.Magmar(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 78:
-                    {
+                case 78:{
                         if (Lockfun.Rapidash(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 107:
-                    {
+                case 107:{
                         if (Lockfun.Hitmonchan(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 106:
-                    {
+                case 106:{
                         if (Lockfun.Hitmonlee(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 108:
-                    {
+                case 108:{
                         if (Lockfun.Lickitung(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 123:
-                    {
+                case 123:{
                         if (Lockfun.Scyther(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 338:
-                    {
+                case 338:{
                         if (Lockfun.Solrock(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 121:
-                    {
+                case 121:{
                         if (Lockfun.Starmie(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 125:
-                    {
+                case 125:{
                         if (Lockfun.Electabuzz(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 62:
-                    {
+                case 62:{
                         if (Lockfun.Poliwrath(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 51:
-                    {
+                case 51:{
                         if (Lockfun.Dugtrio(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 310:
-                    {
+                case 310:{
                         if (Lockfun.Manectric(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 105:
-                    {
+                case 105:{
                         if (Lockfun.Marowak(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 149:
-                    {
+                case 149:{
                         if (Lockfun.Dragonite(ref seed)) 
                             return true;
                         else
                             return false;
                     }
-                case 175:
-                    {
+                case 175:{
                         if (Lockfun.Togepi(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 179:
-                    {
+                case 179:{
                         if (Lockfun.Mareep(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 212:
-                    {
+                case 212:{
                         if (Lockfun.Scizor(ref seed))
                             return true;
                         else
                             return false;
                     }
-                case 363:
-                    {
+                case 363:{
                         if (pk.Met_Location == 11)
                         {
                             if (Lockfun.SphealCipherLab(ref seed))
@@ -439,8 +381,7 @@ namespace WangPlugin
                                 return false;
                         }
                     }
-                case 273:
-                    {
+                case 273:{
                         if (pk.Met_Location == 11)
                         {
                             if (Lockfun.SeedotCipherLab(ref seed))

@@ -8,7 +8,6 @@ namespace WangPlugin
         public static uint Next(uint seed) => XDRNG.Next(seed);
         public static bool GenPkm(ref PKM pk, uint seed, CheckRules r)
         {
-      
             switch (pk.Species)
                 {
                     case (int)Species.Umbreon or (int)Species.Eevee: // Colo Umbreon, XD Eevee
@@ -55,7 +54,5 @@ namespace WangPlugin
             result[1] = (((int)r1 >> 5) & 0x1F);
             result[0] = (int)(r1 & 0x1F);
         }
-       
-
     }
 }

@@ -1,18 +1,10 @@
 ﻿using PKHeX.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace WangPlugin.RNG
 {
     internal class Method3RNG
     {
         private const int shift = 16;
-
         public static uint Next(uint seed) => LCRNG.Next(seed);
-
         public static bool GenPkm(ref PKM pk, uint seed, CheckRules r)
         {
             var pidLower = LCRNG.Next(seed) >> shift;
@@ -53,8 +45,6 @@ namespace WangPlugin.RNG
                 dvUpper & 0x1f,
             };
         }
-
-
         private static uint CombineRNG(uint upper, uint lower, uint shift)
         {
             return (upper << (int)shift) + lower;

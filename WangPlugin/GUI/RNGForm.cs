@@ -7,13 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using System.Drawing;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using WangPlugin.RNG;
-using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace WangPlugin.GUI
 {
-    public class RNGForm : Form
+    public partial class RNGForm : Form
     {
         private Button Search;
         private CancellationTokenSource tokenSource1 = new();
@@ -49,11 +48,18 @@ namespace WangPlugin.GUI
             [Description("只能特性一")]
             ONE,
         }
+       
         public Gender G = Gender.None;
         public Ability A = Ability.CD;
+        public List<RNGModClass> L = new ();
+        public RNGModClass MD = new RNGModClass
+        {
+            Name = "Mothed1,2,4",
+            Value = "M124",
+        };
         private CheckBox UsePreSeed;
         private Button Check_BTN;
-        private GroupBox groupBox1;
+        private GroupBox SearchGroupBox;
         private ComboBox MinIV_Box;
         public int MinIV = 0;
         private ComboBox Gender_Box;
@@ -61,7 +67,7 @@ namespace WangPlugin.GUI
         private Label label3;
         private ComboBox Ability_Box;
         private Label label4;
-        private GroupBox groupBox2;
+        private GroupBox CheckGroup_RaidBox;
         private TextBox Seed_Box;
         private TextBox Legal_Check_BOX1;
         private TextBox Legal_Check_BOX4;
@@ -75,6 +81,17 @@ namespace WangPlugin.GUI
         private TextBox PIDBox;
         private Button ReverseCheck_BTN;
         private TextBox SeedBox;
+        private GroupBox CheckGroup_ModBox;
+        private ComboBox Mod_ComboBox;
+        private Label Seedlabel;
+        private Label PIDlabel;
+        private Label Mlabel;
+        private Label ECLabel;
+        private TextBox ECBox;
+        private CheckBox IVCheck_Box;
+        private CheckBox PIDECCheck_Box;
+        private Label IVBox;
+        private TextBox IVTextBox;
         public int[] DIV ={ 0, 1, 2, 3, 4, 5 ,6 };
         public RNGForm(ISaveFileProvider sav, IPKMView editor)
 
@@ -83,302 +100,6 @@ namespace WangPlugin.GUI
             Editor = editor;
             InitializeComponent();
             BindingData();
-        }
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RNGForm));
-            this.Search = new System.Windows.Forms.Button();
-            this.Cancel = new System.Windows.Forms.Button();
-            this.UsePreSeed = new System.Windows.Forms.CheckBox();
-            this.Check_BTN = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.TeamLockBox = new System.Windows.Forms.CheckBox();
-            this.ConditionForm = new PkmCondition();
-            this.MinIV_Box = new System.Windows.Forms.ComboBox();
-            this.Gender_Box = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.Ability_Box = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.PIDBox = new System.Windows.Forms.TextBox();
-            this.ReverseCheck_BTN = new System.Windows.Forms.Button();
-            this.GetSeedForMaxLair_BTN = new System.Windows.Forms.Button();
-            this.Legal_Check_BOX5 = new System.Windows.Forms.TextBox();
-            this.Legal_Check_BOX4 = new System.Windows.Forms.TextBox();
-            this.Legal_Check_BOX3 = new System.Windows.Forms.TextBox();
-            this.Legal_Check_BOX2 = new System.Windows.Forms.TextBox();
-            this.Legal_Check_BOX1 = new System.Windows.Forms.TextBox();
-            this.Seed_Box = new System.Windows.Forms.TextBox();
-            this.SeedBox = new System.Windows.Forms.TextBox();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // Search
-            // 
-            this.Search.Location = new System.Drawing.Point(50, 192);
-            this.Search.Name = "Search";
-            this.Search.Size = new System.Drawing.Size(92, 25);
-            this.Search.TabIndex = 9;
-            this.Search.Text = "开始查找";
-            this.Search.UseVisualStyleBackColor = true;
-            this.Search.Click += new System.EventHandler(this.Search_Click);
-            // 
-            // Cancel
-            // 
-            this.Cancel.Location = new System.Drawing.Point(178, 192);
-            this.Cancel.Name = "Cancel";
-            this.Cancel.Size = new System.Drawing.Size(92, 25);
-            this.Cancel.TabIndex = 11;
-            this.Cancel.Text = "停止查找";
-            this.Cancel.UseVisualStyleBackColor = true;
-            this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
-            // 
-            // UsePreSeed
-            // 
-            this.UsePreSeed.AutoSize = true;
-            this.UsePreSeed.Location = new System.Drawing.Point(6, 171);
-            this.UsePreSeed.Name = "UsePreSeed";
-            this.UsePreSeed.Size = new System.Drawing.Size(98, 19);
-            this.UsePreSeed.TabIndex = 22;
-            this.UsePreSeed.Text = "使用预设种子";
-            this.UsePreSeed.UseVisualStyleBackColor = true;
-            // 
-            // Check_BTN
-            // 
-            this.Check_BTN.Location = new System.Drawing.Point(6, 147);
-            this.Check_BTN.Name = "Check_BTN";
-            this.Check_BTN.Size = new System.Drawing.Size(140, 25);
-            this.Check_BTN.TabIndex = 23;
-            this.Check_BTN.Text = "开始检测";
-            this.Check_BTN.UseVisualStyleBackColor = true;
-            this.Check_BTN.Click += new System.EventHandler(this.Check_BTN_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.Cancel);
-            this.groupBox1.Controls.Add(this.TeamLockBox);
-            this.groupBox1.Controls.Add(this.Search);
-            this.groupBox1.Controls.Add(this.UsePreSeed);
-            this.groupBox1.Controls.Add(this.ConditionForm);
-            this.groupBox1.Location = new System.Drawing.Point(5, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(326, 223);
-            this.groupBox1.TabIndex = 24;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "查找";
-            // 
-            // TeamLockBox
-            // 
-            this.TeamLockBox.AutoSize = true;
-            this.TeamLockBox.Location = new System.Drawing.Point(138, 171);
-            this.TeamLockBox.Name = "TeamLockBox";
-            this.TeamLockBox.Size = new System.Drawing.Size(99, 19);
-            this.TeamLockBox.TabIndex = 24;
-            this.TeamLockBox.Text = "CXD使用队锁";
-            this.TeamLockBox.UseVisualStyleBackColor = true;
-            // 
-            // ConditionForm
-            // 
-            this.ConditionForm.Location = new System.Drawing.Point(7, 14);
-            this.ConditionForm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.ConditionForm.Name = "ConditionForm";
-            this.ConditionForm.Size = new System.Drawing.Size(313, 186);
-            this.ConditionForm.TabIndex = 23;
-            // 
-            // MinIV_Box
-            // 
-            this.MinIV_Box.FormattingEnabled = true;
-            this.MinIV_Box.Location = new System.Drawing.Point(41, 55);
-            this.MinIV_Box.Name = "MinIV_Box";
-            this.MinIV_Box.Size = new System.Drawing.Size(105, 23);
-            this.MinIV_Box.TabIndex = 25;
-            // 
-            // Gender_Box
-            // 
-            this.Gender_Box.FormattingEnabled = true;
-            this.Gender_Box.Location = new System.Drawing.Point(54, 85);
-            this.Gender_Box.Name = "Gender_Box";
-            this.Gender_Box.Size = new System.Drawing.Size(92, 23);
-            this.Gender_Box.TabIndex = 26;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 58);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 15);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "锁IV";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 89);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 15);
-            this.label3.TabIndex = 28;
-            this.label3.Text = "公母比";
-            // 
-            // Ability_Box
-            // 
-            this.Ability_Box.FormattingEnabled = true;
-            this.Ability_Box.Location = new System.Drawing.Point(41, 116);
-            this.Ability_Box.Name = "Ability_Box";
-            this.Ability_Box.Size = new System.Drawing.Size(105, 23);
-            this.Ability_Box.TabIndex = 29;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 119);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 15);
-            this.label4.TabIndex = 30;
-            this.label4.Text = "特性";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.SeedBox);
-            this.groupBox2.Controls.Add(this.PIDBox);
-            this.groupBox2.Controls.Add(this.ReverseCheck_BTN);
-            this.groupBox2.Controls.Add(this.GetSeedForMaxLair_BTN);
-            this.groupBox2.Controls.Add(this.Legal_Check_BOX5);
-            this.groupBox2.Controls.Add(this.Legal_Check_BOX4);
-            this.groupBox2.Controls.Add(this.Legal_Check_BOX3);
-            this.groupBox2.Controls.Add(this.Legal_Check_BOX2);
-            this.groupBox2.Controls.Add(this.Legal_Check_BOX1);
-            this.groupBox2.Controls.Add(this.Seed_Box);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.Ability_Box);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.Gender_Box);
-            this.groupBox2.Controls.Add(this.MinIV_Box);
-            this.groupBox2.Controls.Add(this.Check_BTN);
-            this.groupBox2.Location = new System.Drawing.Point(337, 4);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(291, 242);
-            this.groupBox2.TabIndex = 31;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "检测(Raid/大冒险)";
-            // 
-            // PIDBox
-            // 
-            this.PIDBox.Location = new System.Drawing.Point(6, 210);
-            this.PIDBox.Name = "PIDBox";
-            this.PIDBox.Size = new System.Drawing.Size(96, 21);
-            this.PIDBox.TabIndex = 37;
-            // 
-            // ReverseCheck_BTN
-            // 
-            this.ReverseCheck_BTN.Location = new System.Drawing.Point(210, 208);
-            this.ReverseCheck_BTN.Name = "ReverseCheck_BTN";
-            this.ReverseCheck_BTN.Size = new System.Drawing.Size(66, 25);
-            this.ReverseCheck_BTN.TabIndex = 25;
-            this.ReverseCheck_BTN.Text = "开始查找";
-            this.ReverseCheck_BTN.UseVisualStyleBackColor = true;
-            this.ReverseCheck_BTN.Click += new System.EventHandler(this.ReverseCheck_BTN_Click);
-            // 
-            // GetSeedForMaxLair_BTN
-            // 
-            this.GetSeedForMaxLair_BTN.Location = new System.Drawing.Point(6, 178);
-            this.GetSeedForMaxLair_BTN.Name = "GetSeedForMaxLair_BTN";
-            this.GetSeedForMaxLair_BTN.Size = new System.Drawing.Size(270, 25);
-            this.GetSeedForMaxLair_BTN.TabIndex = 36;
-            this.GetSeedForMaxLair_BTN.Text = "为面板大冒险非闪神添加seed";
-            this.GetSeedForMaxLair_BTN.UseVisualStyleBackColor = true;
-            this.GetSeedForMaxLair_BTN.Click += new System.EventHandler(this.GetSeedForMaxLair_BTN_Click);
-            // 
-            // Legal_Check_BOX5
-            // 
-            this.Legal_Check_BOX5.Cursor = System.Windows.Forms.Cursors.No;
-            this.Legal_Check_BOX5.Location = new System.Drawing.Point(152, 147);
-            this.Legal_Check_BOX5.Multiline = true;
-            this.Legal_Check_BOX5.Name = "Legal_Check_BOX5";
-            this.Legal_Check_BOX5.Size = new System.Drawing.Size(124, 25);
-            this.Legal_Check_BOX5.TabIndex = 35;
-            this.Legal_Check_BOX5.Text = "无事可做";
-            // 
-            // Legal_Check_BOX4
-            // 
-            this.Legal_Check_BOX4.Cursor = System.Windows.Forms.Cursors.No;
-            this.Legal_Check_BOX4.Location = new System.Drawing.Point(152, 116);
-            this.Legal_Check_BOX4.Multiline = true;
-            this.Legal_Check_BOX4.Name = "Legal_Check_BOX4";
-            this.Legal_Check_BOX4.Size = new System.Drawing.Size(124, 25);
-            this.Legal_Check_BOX4.TabIndex = 34;
-            this.Legal_Check_BOX4.Text = "无事可做";
-            // 
-            // Legal_Check_BOX3
-            // 
-            this.Legal_Check_BOX3.Cursor = System.Windows.Forms.Cursors.No;
-            this.Legal_Check_BOX3.Location = new System.Drawing.Point(152, 86);
-            this.Legal_Check_BOX3.Multiline = true;
-            this.Legal_Check_BOX3.Name = "Legal_Check_BOX3";
-            this.Legal_Check_BOX3.Size = new System.Drawing.Size(124, 25);
-            this.Legal_Check_BOX3.TabIndex = 33;
-            this.Legal_Check_BOX3.Text = "无事可做";
-            // 
-            // Legal_Check_BOX2
-            // 
-            this.Legal_Check_BOX2.Cursor = System.Windows.Forms.Cursors.No;
-            this.Legal_Check_BOX2.Location = new System.Drawing.Point(152, 55);
-            this.Legal_Check_BOX2.Multiline = true;
-            this.Legal_Check_BOX2.Name = "Legal_Check_BOX2";
-            this.Legal_Check_BOX2.Size = new System.Drawing.Size(124, 25);
-            this.Legal_Check_BOX2.TabIndex = 32;
-            this.Legal_Check_BOX2.Text = "无事可做";
-            // 
-            // Legal_Check_BOX1
-            // 
-            this.Legal_Check_BOX1.Cursor = System.Windows.Forms.Cursors.No;
-            this.Legal_Check_BOX1.Location = new System.Drawing.Point(152, 24);
-            this.Legal_Check_BOX1.Multiline = true;
-            this.Legal_Check_BOX1.Name = "Legal_Check_BOX1";
-            this.Legal_Check_BOX1.Size = new System.Drawing.Size(124, 25);
-            this.Legal_Check_BOX1.TabIndex = 31;
-            this.Legal_Check_BOX1.Text = "无事可做";
-            // 
-            // Seed_Box
-            // 
-            this.Seed_Box.Location = new System.Drawing.Point(6, 24);
-            this.Seed_Box.Multiline = true;
-            this.Seed_Box.Name = "Seed_Box";
-            this.Seed_Box.Size = new System.Drawing.Size(140, 25);
-            this.Seed_Box.TabIndex = 23;
-            this.Seed_Box.Text = "没有seed";
-            // 
-            // SeedBox
-            // 
-            this.SeedBox.Location = new System.Drawing.Point(108, 210);
-            this.SeedBox.Name = "SeedBox";
-            this.SeedBox.Size = new System.Drawing.Size(96, 21);
-            this.SeedBox.TabIndex = 38;
-            // 
-            // RNGForm
-            // 
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(634, 249);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "RNGForm";
-            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Super Wang";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.ResumeLayout(false);
-
         }
         private void BindingData()
         {
@@ -391,6 +112,14 @@ namespace WangPlugin.GUI
                 this.TeamLockBox.Enabled = false;
                 this.TeamLockBox.Checked = false;
             }
+            PIDECCheck_Box.CheckedChanged += (_, __) =>
+            {
+                IVCheck_Box.Enabled = !PIDECCheck_Box.Checked;
+            };
+            IVCheck_Box.CheckedChanged += (_, __) =>
+            {
+                PIDECCheck_Box.Enabled = !IVCheck_Box.Checked;
+            };
             this.MinIV_Box.DataSource =DIV;
            
             this.MinIV_Box.SelectedIndexChanged += (_, __) =>
@@ -427,31 +156,32 @@ namespace WangPlugin.GUI
             {
                 A = (Ability)Enum.Parse(typeof(Ability), this.Ability_Box.SelectedValue.ToString(), false);
             };
-            Ability_Box.SelectedIndex = 0;
+            CheckPID();
+            Mod_ComboBox.SelectedIndex = 0;
         }
         private bool GenPkm(ref PKM pk,uint seed,byte form=0)
         {
             return ConditionForm.rules.Method switch
             {
-                PkmCondition.MethodType.None=>NoMethod.GenPkm(ref pk, ConditionForm.rules),
-                PkmCondition.MethodType.Method1 => Method1RNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                PkmCondition.MethodType.Method1_Unown=> UnownRNG.GenPkm(ref pk,1, seed, ConditionForm.rules, form),
-                PkmCondition.MethodType.Method2 => Method2RNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                PkmCondition.MethodType.Method2_Unown => UnownRNG.GenPkm(ref pk, 2, seed, ConditionForm.rules, form),
-                PkmCondition.MethodType.Method3=>Method3RNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                PkmCondition.MethodType.Method3_Unown => UnownRNG.GenPkm(ref pk, 3, seed, ConditionForm.rules, form),
-                PkmCondition.MethodType.Method4 => Method4RNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                PkmCondition.MethodType.Method4_Unown => UnownRNG.GenPkm(ref pk, 4, seed, ConditionForm.rules, form),
-                PkmCondition.MethodType.XDColo => XDColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                PkmCondition.MethodType.Overworld8 => Overworld8RNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                PkmCondition.MethodType.Roaming8b => Roaming8bRNG.GenPkm(ref pk, seed,  ConditionForm.rules),
-                PkmCondition.MethodType.BACD_R => BACD.GenPkm(ref pk, seed & 0xFFFF, ConditionForm.rules,0),
-                PkmCondition.MethodType.BACD_U => BACD.GenPkm(ref pk, seed , ConditionForm.rules,1),
-                PkmCondition.MethodType.BACD_R_S => BACD.GenPkm(ref pk, seed & 0xFFFF, ConditionForm.rules, 2),
-                PkmCondition.MethodType.Method1Roaming => Method1Roaming.GenPkm(ref pk, seed, ConditionForm.rules),
-                PkmCondition.MethodType.Colo => ColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                PkmCondition.MethodType.E_Reader => E_Reader.GenPkm(ref pk, seed, ConditionForm.rules),
-                PkmCondition.MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.None=>NoMethod.GenPkm(ref pk, ConditionForm.rules),
+                MethodType.Method1 => Method1RNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.Method1_Unown=> UnownRNG.GenPkm(ref pk,1, seed, ConditionForm.rules, form),
+                MethodType.Method2 => Method2RNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.Method2_Unown => UnownRNG.GenPkm(ref pk, 2, seed, ConditionForm.rules, form),
+                MethodType.Method3=>Method3RNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.Method3_Unown => UnownRNG.GenPkm(ref pk, 3, seed, ConditionForm.rules, form),
+                MethodType.Method4 => Method4RNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.Method4_Unown => UnownRNG.GenPkm(ref pk, 4, seed, ConditionForm.rules, form),
+                MethodType.XDColo => XDColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.Overworld8 => Overworld8RNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.Roaming8b => Roaming8bRNG.GenPkm(ref pk, seed,  ConditionForm.rules),
+                MethodType.BACD_R => BACD.GenPkm(ref pk, seed & 0xFFFF, ConditionForm.rules,0),
+                MethodType.BACD_U => BACD.GenPkm(ref pk, seed , ConditionForm.rules,1),
+                MethodType.BACD_R_S => BACD.GenPkm(ref pk, seed & 0xFFFF, ConditionForm.rules, 2),
+                MethodType.Method1Roaming => Method1Roaming.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.Colo => ColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.E_Reader => E_Reader.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed, ConditionForm.rules),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -459,24 +189,24 @@ namespace WangPlugin.GUI
         {
             return ConditionForm.rules.Method switch
             {
-                PkmCondition.MethodType.Method1 => Method1RNG.Next(seed),
-                PkmCondition.MethodType.Method1_Unown=> UnownRNG.Next(seed),
-                PkmCondition.MethodType.Method2 => Method2RNG.Next(seed),
-                PkmCondition.MethodType.Method2_Unown => UnownRNG.Next(seed),
-                PkmCondition.MethodType.Method3 => Method3RNG.Next(seed),
-                PkmCondition.MethodType.Method3_Unown => UnownRNG.Next(seed),
-                PkmCondition.MethodType.Method4 => Method4RNG.Next(seed),
-                PkmCondition.MethodType.Method4_Unown => UnownRNG.Next(seed),
-                PkmCondition.MethodType.XDColo => XDColoRNG.Next(seed),
-                PkmCondition.MethodType.Overworld8 => Overworld8RNG.Next(seed),
-                PkmCondition.MethodType.Roaming8b => Roaming8bRNG.Next(seed),
-                PkmCondition.MethodType.BACD_R => BACD.Next(seed),
-                PkmCondition.MethodType.BACD_U => BACD.Next(seed),
-                PkmCondition.MethodType.BACD_R_S => BACD.Next(seed),
-                PkmCondition.MethodType.Method1Roaming => Method1Roaming.Next(seed),
-                PkmCondition.MethodType.Colo => ColoRNG.Next(seed),
-                PkmCondition.MethodType.E_Reader =>E_Reader.Next(seed),
-               PkmCondition.MethodType.ChainShiny => ChainShiny.Next(seed),
+                MethodType.Method1 => Method1RNG.Next(seed),
+                MethodType.Method1_Unown=> UnownRNG.Next(seed),
+                MethodType.Method2 => Method2RNG.Next(seed),
+                MethodType.Method2_Unown => UnownRNG.Next(seed),
+                MethodType.Method3 => Method3RNG.Next(seed),
+                MethodType.Method3_Unown => UnownRNG.Next(seed),
+                MethodType.Method4 => Method4RNG.Next(seed),
+                MethodType.Method4_Unown => UnownRNG.Next(seed),
+                MethodType.XDColo => XDColoRNG.Next(seed),
+                MethodType.Overworld8 => Overworld8RNG.Next(seed),
+                MethodType.Roaming8b => Roaming8bRNG.Next(seed),
+                MethodType.BACD_R => BACD.Next(seed),
+                MethodType.BACD_U => BACD.Next(seed),
+                MethodType.BACD_R_S => BACD.Next(seed),
+                MethodType.Method1Roaming => Method1Roaming.Next(seed),
+                MethodType.Colo => ColoRNG.Next(seed),
+                MethodType.E_Reader =>E_Reader.Next(seed),
+                MethodType.ChainShiny => ChainShiny.Next(seed),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -685,70 +415,256 @@ namespace WangPlugin.GUI
             }
             Editor.PopulateFields(pk);
         }
-
         private void ReverseCheck_BTN_Click(object sender, EventArgs e)
         {
-            Span<uint> Seeds= stackalloc uint[10];
-            var HEX = "0x" + PIDBox.Text;
-            var PID = Convert.ToUInt32(HEX, 16);
-            XDRNGReversal.GetSeeds(Seeds,PID);
-            if (Seeds.Length != 0)
+            Span<uint> Seeds= stackalloc uint[6];
+            var S = Seeds.ToArray();
+            uint EC = 0;
+            uint PID = 0;
+            uint hp=0;
+            uint atk=0;
+            uint def=0;
+            uint spa=0;
+            uint spd=0;
+            uint spe=0;
+            Span<string> s = new();
+            var PIDHEX = "0x" + PIDBox.Text;
+            var IVString = IVTextBox.Text;
+            if (IVString.Length != 0)
             {
-                for (int i = 0; i < Seeds.Length; i++)
+                s = IVString.Split(',');
+                hp = Convert.ToUInt16(s[0]);
+                atk = Convert.ToUInt16(s[1]);
+                def = Convert.ToUInt16(s[2]);
+                spa = Convert.ToUInt16(s[3]);
+                spd = Convert.ToUInt16(s[4]);
+                spe = Convert.ToUInt16(s[5]);
+
+            }
+            if (PIDHEX != "0x")
+                PID = Convert.ToUInt32(PIDHEX, 16);
+            var ECHEX = "0x" + ECBox.Text;
+            if(ECHEX!="0x")
+            EC = Convert.ToUInt32(ECHEX, 16);
+            uint seed = 0;
+            if (PIDECCheck_Box.Checked)
+            {
+                switch (MD.Value)
                 {
-                    MessageBox.Show($"{Seeds[i]:X}");
+                    case "M124":
+                        {
+                            LCRNGReversal.GetSeeds(Seeds, PID);
+                            S = Seeds.ToArray();
+                            S = S.Where(val => val != 0).ToArray();
+                            break;
+                        }
+                    case "M3":
+                        {
+                            LCRNGReversalSkip.GetSeeds(Seeds, PID);
+                            S = Seeds.ToArray();
+                            S = S.Where(val => val != 0).ToArray();
+                            break;
+                        }
+                    case "M124U":
+                        {
+                            LCRNGReversal.GetSeeds(Seeds, PID,true);
+                            S = Seeds.ToArray();
+                            S = S.Where(val => val != 0).ToArray();
+                            break;
+                        }
+                    case "M3U":
+                        {
+                            LCRNGReversalSkip.GetSeeds(Seeds, PID, true);
+                            S = Seeds.ToArray();
+                            S = S.Where(val => val != 0).ToArray();
+                            break;
+                        }
+                    case "XDColo":
+                        {
+                            XDRNGReversal.GetSeeds(Seeds, PID);
+                            S = Seeds.ToArray();
+                            S = S.Where(val => val != 0).ToArray();
+                            for (int i = 0; i < S.Length; i++)
+                            {
+                                S[i] = XDRNG.Prev3(S[i]);
+                            }
+                            break;
+                        }
+                    case "Overworld8":
+                        {
+                            seed = Overworld8Reversal.GetOriginalSeed(EC, PID);   
+                            break;
+                        }
+                }
+                
+            }
+            if (IVCheck_Box.Checked)
+            {
+                switch (MD.Value)
+                {
+                    case "M1":
+                        {
+                            LCRNGReversal.GetSeedsIVs(Seeds, hp, atk, def, spa, spd, spe);
+                            S = Seeds.ToArray();
+                            S = S.Where(val => val != 0).ToArray();
+                            for(int i=0;i< S.Length;i++)
+                            {
+                                S[i]= LCRNG.Prev2(S[i]);
+                            }
+                            break;
+                        }
+                    case "M23":
+                        {
+                            LCRNGReversal.GetSeedsIVs(Seeds, hp, atk, def, spa, spd, spe);
+                            S = Seeds.ToArray();
+                            S = S.Where(val => val != 0).ToArray();
+                            for (int i = 0; i < S.Length; i++)
+                            {
+                                S[i] = LCRNG.Prev3(S[i]);
+                            }
+                            break;
+                        }
+                    case "M4":
+                        {
+                            LCRNGReversalSkip.GetSeedsIVs(Seeds, hp, atk, def, spa, spd, spe);
+                            S = Seeds.ToArray();
+                            S = S.Where(val => val != 0).ToArray();
+                            for (int i = 0; i < S.Length; i++)
+                            {
+                                S[i] = LCRNG.Prev3(S[i]);
+                            }
+                            break;
+                        }
+                    case "XDColo":
+                        {
+                            XDRNGReversal.GetSeeds(Seeds, hp, atk, def, spa, spd, spe);
+                            S = Seeds.ToArray();
+                            S = S.Where(val => val != 0).ToArray();
+                            break;
+                        }
                 }
             }
+            if (Seeds.Length != 0){
+                SeedBox.Text = PrintSeed(S,seed);
+            }
         }
-        #region
-        /*    public void P(uint pid,int[] ivs,uint ec)
+        private string PrintSeed(uint[] seeds,uint seed=0)
+        {
+            string result="";
+            if (seeds.Length != 0&&MD.Value!="Overworld8")
             {
-                var pidH = pid >> 16;
-                uint pidR = 0;
+                for (int i = 0; i < seeds.Length; i++)
+                {
+                    result += seeds[i].ToString("X")+'\n';
+                }
+            }
+            else if(seed!=0&&MD.Value == "Overworld8")
+            {
+                result = seed.ToString("X");
+            }
+            return result;
+        }
+        private void PIDECCheck_Box_CheckedChanged(object sender, EventArgs e)
+        {
+            if (PIDECCheck_Box.Checked){
+                CheckPID();
+            }
+            else{
+                CheckPID();
+            }
+         }
+        private void IVCheck_Box_CheckedChanged(object sender, EventArgs e)
+        {
+            if (IVCheck_Box.Checked){
+                CheckIV();
+            }
+            else{
+                CheckPID();
+            }
+            
+        }
+        public void CheckPID()
+        {
+            L = RNGModClass.RNGModList(false);
+            var bindingSource1 = new BindingSource();
+            bindingSource1.DataSource = L;
+            Mod_ComboBox.DataSource = bindingSource1.DataSource;
+            Mod_ComboBox.DisplayMember = "Name";
+            Mod_ComboBox.ValueMember = "Value";
+            this.Mod_ComboBox.SelectedIndexChanged += (_, __) =>
+            {
+                MD = (RNGModClass)this.Mod_ComboBox.SelectedItem;
+                if(MD.Value=="Overworld8")
+                {
+                    ECBox.Enabled = true;
+                }
+                else
+                    ECBox.Enabled = false;
+            };
+        }
+        public void CheckIV()
+        {
+            L = RNGModClass.RNGModList(true);
+            var bindingSource1 = new BindingSource();
+            bindingSource1.DataSource = L;
+            Mod_ComboBox.DataSource = bindingSource1.DataSource;
+            Mod_ComboBox.DisplayMember = "Name";
+            Mod_ComboBox.ValueMember = "Value";
+            this.Mod_ComboBox.SelectedIndexChanged += (_, __) =>
+            {
+                MD = (RNGModClass)this.Mod_ComboBox.SelectedItem;
+                ECBox.Enabled = false;
+            };
+        }
+            #region
+            /*    public void P(uint pid,int[] ivs,uint ec)
+                {
+                    var pidH = pid >> 16;
+                    uint pidR = 0;
 
-                ParallelOptions po = new ParallelOptions();
-                po.MaxDegreeOfParallelism = 2;
-                po.CancellationToken = cts.Token;
-                CTRIsRunning(true);
-                Task.Factory.StartNew(
-                  () =>
-                  {
-                      ParallelLoopResult result = Parallel.For(0, 0xffff, po, (i, state) =>
-                    {
-                        pidR = pidH << 16 | (uint)i;
-                        var seeds = Z3Search.GetSeeds(ec, pidR, ivs);
-                        if (FindFirstSeed(seeds, ivs) != "没找到Seed")
+                    ParallelOptions po = new ParallelOptions();
+                    po.MaxDegreeOfParallelism = 2;
+                    po.CancellationToken = cts.Token;
+                    CTRIsRunning(true);
+                    Task.Factory.StartNew(
+                      () =>
+                      {
+                          ParallelLoopResult result = Parallel.For(0, 0xffff, po, (i, state) =>
                         {
-                            MessageBox.Show($"{pidR:X2}");
-                            Legal_Check_BOX2.Text = "逆推成功!";
-                            Legal_Check_BOX2.BackColor = Color.Green;
-                            Seed_Box.Text = FindFirstSeed(seeds, ivs);
-                            Raidfinder(FindFirstSeed(seeds, ivs));
-                            state.Stop();
-                        }
-                    });
-                  });
+                            pidR = pidH << 16 | (uint)i;
+                            var seeds = Z3Search.GetSeeds(ec, pidR, ivs);
+                            if (FindFirstSeed(seeds, ivs) != "没找到Seed")
+                            {
+                                MessageBox.Show($"{pidR:X2}");
+                                Legal_Check_BOX2.Text = "逆推成功!";
+                                Legal_Check_BOX2.BackColor = Color.Green;
+                                Seed_Box.Text = FindFirstSeed(seeds, ivs);
+                                Raidfinder(FindFirstSeed(seeds, ivs));
+                                state.Stop();
+                            }
+                        });
+                      });
 
-            }
+                }
 
 
-            private void Stop_Check_BTN_Click(object sender, EventArgs e)
-            {
-                cts.Cancel();
-                Legal_Check_BOX1.Text = "无事可做";
-                Legal_Check_BOX1.BackColor = Color.White;
-                Legal_Check_BOX2.Text = "无事可做";
-                Legal_Check_BOX2.BackColor = Color.White;
-                Legal_Check_BOX3.Text = "无事可做";
-                Legal_Check_BOX3.BackColor = Color.White;
-                Legal_Check_BOX4.Text = "无事可做";
-                Legal_Check_BOX4.BackColor = Color.White;
-                Legal_Check_BOX5.Text = "无事可做";
-                Legal_Check_BOX5.BackColor = Color.White;
-                CTRIsRunning(false);
-            }
-        */
-        #endregion
-        //枚举
-    }
+                private void Stop_Check_BTN_Click(object sender, EventArgs e)
+                {
+                    cts.Cancel();
+                    Legal_Check_BOX1.Text = "无事可做";
+                    Legal_Check_BOX1.BackColor = Color.White;
+                    Legal_Check_BOX2.Text = "无事可做";
+                    Legal_Check_BOX2.BackColor = Color.White;
+                    Legal_Check_BOX3.Text = "无事可做";
+                    Legal_Check_BOX3.BackColor = Color.White;
+                    Legal_Check_BOX4.Text = "无事可做";
+                    Legal_Check_BOX4.BackColor = Color.White;
+                    Legal_Check_BOX5.Text = "无事可做";
+                    Legal_Check_BOX5.BackColor = Color.White;
+                    CTRIsRunning(false);
+                }
+            */
+            #endregion
+            //枚举
+        }
 }

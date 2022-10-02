@@ -6,9 +6,7 @@ namespace WangPlugin
     internal static class BACD
     {
         private const int shift = 16;
-
         public static uint Next(uint seed) => LCRNG.Next(seed);
-
         public static bool GenPkm( ref PKM pk,uint seed, CheckRules r,int type)
         {
             bool shiny = type is 2 ;

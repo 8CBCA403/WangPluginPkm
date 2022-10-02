@@ -1,6 +1,5 @@
 using PKHeX.Core;
 using System;
-
 namespace WangPlugin
 {
     internal static class ChainShiny

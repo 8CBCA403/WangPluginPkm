@@ -1,11 +1,5 @@
 ﻿using PKHeX.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
 namespace WangPlugin
 {
     internal class UnownRNG
@@ -61,15 +55,10 @@ namespace WangPlugin
             result[1] = (int)r1 >> 5 & 31;
             result[0] = (int)r1 & 31;
         }
-       
-       
         public static byte GetUnownForm(uint pid)
         {
             var value = ((pid & 0x3000000) >> 18) | ((pid & 0x30000) >> 12) | ((pid & 0x300) >> 6) | (pid & 0x3);
             return (byte)(value % 28);
         }
-       
-       
-
     }
 }

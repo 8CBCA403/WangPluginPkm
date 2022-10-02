@@ -57,6 +57,5 @@ namespace WangPlugin.RNG
                 pk.SetIV(i, 0);
             return true;
         }
-
     }
 }

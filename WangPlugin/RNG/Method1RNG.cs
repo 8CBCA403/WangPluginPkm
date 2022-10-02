@@ -7,7 +7,6 @@ namespace WangPlugin
     internal class Method1RNG
     {
         private const int shift = 16;
-
         public static uint Next(uint seed) => LCRNG.Next(seed);
 
         public static  bool GenPkm(ref PKM pk,uint seed,CheckRules r)
@@ -50,9 +49,7 @@ namespace WangPlugin
                 dvUpper & 0x1f,
             };
         }
-     
-       
-            private static uint CombineRNG(uint upper, uint lower, uint shift)
+        private static uint CombineRNG(uint upper, uint lower, uint shift)
         {
             return (upper << (int)shift) + lower;
         }

@@ -13,7 +13,6 @@ namespace WangPlugin
             var fakeTID = xoro.NextUInt();
             var pid = xoro.NextUInt();
             pid = GetRevisedPID(fakeTID, pid, pk.TID,pk.SID);
-          
             var ivs = new int[6] { UNSET, UNSET, UNSET, UNSET, UNSET, UNSET };
             var determined = 0;
             while (determined < FlawlessIVs)

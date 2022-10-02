@@ -2,17 +2,9 @@
 using WangPlugin.GUI;
 
 namespace WangPlugin
-
 {
-    /// <summary>
-    /// Contains logic for the Generation 8 (SW/SH) overworld spawns that walk around the overworld.
-    /// </summary>
-    /// <remarks>
-    /// Entities spawned into the overworld that can be encountered are assigned a 32bit seed, which can be immediately derived from the <see cref="PKM.EncryptionConstant"/>.
-    /// </remarks>
     public static class Overworld8RNG
     {
-        
         private const int UNSET = 255;
         public static uint Next(uint seed) => (uint)new Xoroshiro128Plus(seed).Next();
         public static bool GenPkm(ref PKM pk,uint seed, CheckRules r)
@@ -95,7 +87,6 @@ namespace WangPlugin
                 return pid;
             
         }
-
         public static bool GenPkmQ(ref PKM pk, uint seed, bool[] shiny, bool[] IV, uint Xor = 0)
         {
             int FlawlessIVs = 0;

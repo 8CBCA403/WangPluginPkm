@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PKHeX.Core.Searching;
 using System.IO;
 using PKHeX.Core;
 using System.Windows.Forms;
 using System.ComponentModel;
-
 namespace WangPlugin.GUI
 {
     internal class DistributionUI:Form
@@ -20,7 +18,6 @@ namespace WangPlugin.GUI
         private IVEVN V = IVEVN.ATK;
         private CLONE C = CLONE.BOX;
         private TRAINER T = TRAINER.BOX;
-  
         public enum Nature
         {
             Hardy,Lonely,Brave,Adamant,Naughty,Bold,Docile,Relaxed,
@@ -115,7 +112,6 @@ namespace WangPlugin.GUI
         private CheckBox Random_Name_Box;
         private CheckBox RandEC_Box;
         public BindingList<Trainer> Tr=new();
-       
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
         public DistributionUI(ISaveFileProvider sav, IPKMView editor)
@@ -1023,16 +1019,16 @@ namespace WangPlugin.GUI
         }
         private void Language_BTN_Click(object sender, EventArgs e)
         {
-            PKM pk=null;
+            PKM pk;
             List<PKM> L = new();
             for (int i = 1; i < 6; i++)
             {
-                pk = SearchDatabase.MytheryLanguage(SAV, 890, 8, 0, i);
+                pk = SearchDatabase.MytheryLanguage(SAV, Editor.Data.Species, Editor.Data.Generation , 0, i);
                 L.Add(pk);
             }
            for(int i=7;i<11;i++)
             {
-                pk = SearchDatabase.MytheryLanguage(SAV, 890, 8, 0, i);
+                pk = SearchDatabase.MytheryLanguage(SAV, Editor.Data.Species, Editor.Data.Generation, 0, i);
                 L.Add(pk);
             }
             var BoxData = SAV.SAV.BoxData;

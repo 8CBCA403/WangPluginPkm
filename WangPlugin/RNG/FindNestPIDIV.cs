@@ -27,7 +27,7 @@ namespace WangPlugin
                 }
             }
         }
-            public static void FindNestPID<T>( PK8 pk, T enc, bool shiny) where T : EncounterStatic8Nest<T>
+        public static void FindNestPID<T>( PK8 pk, T enc, bool shiny) where T : EncounterStatic8Nest<T>
         {
             // Preserve Nature, Form (all abilities should be possible in gen 8, so no need to early return on a mismatch for enc HA bool vs set HA bool)
             // Nest encounter RNG generation

@@ -9,9 +9,6 @@ namespace WangPlugin
         public const uint Add = 0x00269EC3;
         public const uint rMult = 0xB9B33155;
         public const uint rAdd = 0xA170F641;
-        public static long t0 = Add - 0xFFFF;
-        public static long t1 = 0xFFFF * ((long)Mult + 1);
-        public static uint seed = Util.Rand32();
         private const uint Sub = Add - 0xFFFF;
         private const ulong Base = (Mult + 1ul) * 0xFFFF;
         [MethodImpl(MethodImplOptions.AggressiveInlining)] public static uint Prev(uint seed) => (seed * rMult) + rAdd;
@@ -27,12 +24,35 @@ namespace WangPlugin
         {
             ulong t = second - (first * Mult) - Sub;
             ulong kmax = (Base - t) >> 32;
-
             int ctr = 0;
             for (ulong k = 0; k <= kmax; k++, t += 0x1_0000_0000) // at most 4 iterations
             {
                 if (t % Mult < 0x1_0000)
                     result[ctr++] = Prev(first | (ushort)(t / Mult));
+            }
+            return ctr;
+        }
+        public static int GetSeeds(Span<uint> result, uint hp, uint atk, uint def, uint spa, uint spd, uint spe)
+        {
+            var first = (hp | (atk << 5) | (def << 10)) << 16;
+            var second = (spe | (spa << 5) | (spd << 10)) << 16;
+            return GetSeedsIVs(result, first, second);
+        }
+
+        public static int GetSeedsIVs(Span<uint> result, uint first, uint second)
+        {
+            ulong t = (second - (first * Mult) - Sub) & 0x7FFF_FFFF;
+            ulong kmax = (Base - t) >> 31;
+
+            int ctr = 0;
+            for (ulong k = 0; k <= kmax; k++, t += 0x8000_0000) // at most 7 iterations
+            {
+                if (t % Mult < 0x1_0000)
+                {
+                    var s = Prev(first | (ushort)(t / Mult));
+                    result[ctr++] = s;
+                    result[ctr++] = s ^ 0x8000_0000; // top bit flip
+                }
             }
             return ctr;
         }

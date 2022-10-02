@@ -781,7 +781,6 @@ namespace WangPlugin.GUI
             SAV.SAV.ModifyBoxes(ClearPKM,SAV.CurrentBox,SAV.CurrentBox);
             SAV.ReloadSlots();
         }
-       
         public static string RandomString(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
