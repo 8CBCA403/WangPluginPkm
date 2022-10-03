@@ -65,5 +65,9 @@ namespace WangPlugin
             Console.WriteLine($"{Name} was provided with the file path, but chose to do nothing with it.");
             return false;
         }
+
+        internal class PkmCondition : global::WangPlugin.PkmCondition
+        {
+        }
     }
 }

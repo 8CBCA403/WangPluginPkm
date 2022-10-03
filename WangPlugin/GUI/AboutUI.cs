@@ -6,8 +6,7 @@ namespace WangPlugin.GUI
 {
     partial class AboutUI: Form
     {
-        private PictureBox PictureBox;
-        private RichTextBox AboutTextBox;
+        
         public AboutUI()
         {
             InitializeComponent();

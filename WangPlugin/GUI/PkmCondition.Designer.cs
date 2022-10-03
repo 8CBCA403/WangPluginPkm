@@ -1,4 +1,4 @@
-﻿namespace WangPlugin.GUI
+﻿namespace WangPlugin
 {
     partial class PkmCondition
     {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Forms;
 
 namespace WangPlugin.GUI
 {
@@ -17,7 +13,7 @@ namespace WangPlugin.GUI
             this.Check_BTN = new System.Windows.Forms.Button();
             this.SearchGroupBox = new System.Windows.Forms.GroupBox();
             this.TeamLockBox = new System.Windows.Forms.CheckBox();
-            this.ConditionForm = new PkmCondition();
+            this.ConditionForm = new WangPlugin.PkmCondition();
             this.MinIV_Box = new System.Windows.Forms.ComboBox();
             this.Gender_Box = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -350,6 +346,7 @@ namespace WangPlugin.GUI
             // 
             // IVTextBox
             // 
+            this.IVTextBox.Enabled = false;
             this.IVTextBox.Location = new System.Drawing.Point(68, 58);
             this.IVTextBox.Name = "IVTextBox";
             this.IVTextBox.Size = new System.Drawing.Size(124, 25);
@@ -433,5 +430,40 @@ namespace WangPlugin.GUI
             this.ResumeLayout(false);
 
         }
+        private Button Search;
+        private Button Cancel;
+        private CheckBox UsePreSeed;
+        private Button Check_BTN;
+        private GroupBox SearchGroupBox;
+        private ComboBox MinIV_Box;
+        private ComboBox Gender_Box;
+        private Label label2;
+        private Label label3;
+        private ComboBox Ability_Box;
+        private Label label4;
+        private GroupBox CheckGroup_RaidBox;
+        private TextBox Seed_Box;
+        private TextBox Legal_Check_BOX1;
+        private TextBox Legal_Check_BOX4;
+        private TextBox Legal_Check_BOX3;
+        private TextBox Legal_Check_BOX2;
+        private TextBox Legal_Check_BOX5;
+        private Button GetSeedForMaxLair_BTN;
+        private CheckBox TeamLockBox;
+        private TextBox PIDBox;
+        private Button ReverseCheck_BTN;
+        private TextBox SeedBox;
+        private GroupBox CheckGroup_ModBox;
+        private ComboBox Mod_ComboBox;
+        private Label Seedlabel;
+        private Label PIDlabel;
+        private Label Mlabel;
+        private Label ECLabel;
+        private TextBox ECBox;
+        private CheckBox IVCheck_Box;
+        private CheckBox PIDECCheck_Box;
+        private Label IVBox;
+        private TextBox IVTextBox;
+        private WangPlugin.PkmCondition ConditionForm;
     }
 }

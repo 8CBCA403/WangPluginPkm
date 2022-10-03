@@ -8,16 +8,14 @@ using System.Linq;
 using System.ComponentModel;
 using System.Drawing;
 using WangPlugin.RNG;
-using System.Security.Cryptography.X509Certificates;
 
 namespace WangPlugin.GUI
 {
     public partial class RNGForm : Form
     {
-        private Button Search;
+        
         private CancellationTokenSource tokenSource1 = new();
         private CancellationTokenSource tokenSource2 = new();
-        private Button Cancel;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
         public enum Gender
@@ -57,41 +55,10 @@ namespace WangPlugin.GUI
             Name = "Mothed1,2,4",
             Value = "M124",
         };
-        private CheckBox UsePreSeed;
-        private Button Check_BTN;
-        private GroupBox SearchGroupBox;
-        private ComboBox MinIV_Box;
+        
         public int MinIV = 0;
-        private ComboBox Gender_Box;
-        private Label label2;
-        private Label label3;
-        private ComboBox Ability_Box;
-        private Label label4;
-        private GroupBox CheckGroup_RaidBox;
-        private TextBox Seed_Box;
-        private TextBox Legal_Check_BOX1;
-        private TextBox Legal_Check_BOX4;
-        private TextBox Legal_Check_BOX3;
-        private TextBox Legal_Check_BOX2;
-        private TextBox Legal_Check_BOX5;
-        private Button GetSeedForMaxLair_BTN;
-        private PkmCondition ConditionForm;
-        private CheckBox TeamLockBox;
         private static Random rng = new Random();
-        private TextBox PIDBox;
-        private Button ReverseCheck_BTN;
-        private TextBox SeedBox;
-        private GroupBox CheckGroup_ModBox;
-        private ComboBox Mod_ComboBox;
-        private Label Seedlabel;
-        private Label PIDlabel;
-        private Label Mlabel;
-        private Label ECLabel;
-        private TextBox ECBox;
-        private CheckBox IVCheck_Box;
-        private CheckBox PIDECCheck_Box;
-        private Label IVBox;
-        private TextBox IVTextBox;
+      
         public int[] DIV ={ 0, 1, 2, 3, 4, 5 ,6 };
         public RNGForm(ISaveFileProvider sav, IPKMView editor)
 
@@ -601,6 +568,8 @@ namespace WangPlugin.GUI
                 else
                     ECBox.Enabled = false;
             };
+            IVTextBox.Enabled = false;
+            PIDBox.Enabled = true;
         }
         public void CheckIV()
         {
@@ -615,7 +584,9 @@ namespace WangPlugin.GUI
                 MD = (RNGModClass)this.Mod_ComboBox.SelectedItem;
                 ECBox.Enabled = false;
             };
-        }
+            IVTextBox.Enabled = true;
+            PIDBox.Enabled = false;
+        }   
             #region
             /*    public void P(uint pid,int[] ivs,uint ec)
                 {

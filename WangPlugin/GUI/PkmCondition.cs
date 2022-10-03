@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 
-namespace WangPlugin.GUI
+namespace WangPlugin
 {
     public partial class PkmCondition :  UserControl
     {
