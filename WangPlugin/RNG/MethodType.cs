@@ -16,6 +16,8 @@
         BACD_U,
         BACD_R_S,
         ChainShiny,
+        G5MGShiny,
+        Gen5Wild,
         XDColo,
         Colo,
         E_Reader,

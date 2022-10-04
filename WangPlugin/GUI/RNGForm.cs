@@ -149,6 +149,8 @@ namespace WangPlugin.GUI
                 MethodType.Colo => ColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
                 MethodType.E_Reader => E_Reader.GenPkm(ref pk, seed, ConditionForm.rules),
                 MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.G5MGShiny => G5MGShiny.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.Gen5Wild=>Gen5Wild.GenPkm(ref pk, seed, ConditionForm.rules),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -174,6 +176,8 @@ namespace WangPlugin.GUI
                 MethodType.Colo => ColoRNG.Next(seed),
                 MethodType.E_Reader =>E_Reader.Next(seed),
                 MethodType.ChainShiny => ChainShiny.Next(seed),
+                MethodType.G5MGShiny=>G5MGShiny.Next(seed),
+                MethodType.Gen5Wild => Gen5Wild.Next(seed),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -586,56 +590,62 @@ namespace WangPlugin.GUI
             };
             IVTextBox.Enabled = true;
             PIDBox.Enabled = false;
-        }   
-            #region
-            /*    public void P(uint pid,int[] ivs,uint ec)
-                {
-                    var pidH = pid >> 16;
-                    uint pidR = 0;
-
-                    ParallelOptions po = new ParallelOptions();
-                    po.MaxDegreeOfParallelism = 2;
-                    po.CancellationToken = cts.Token;
-                    CTRIsRunning(true);
-                    Task.Factory.StartNew(
-                      () =>
-                      {
-                          ParallelLoopResult result = Parallel.For(0, 0xffff, po, (i, state) =>
-                        {
-                            pidR = pidH << 16 | (uint)i;
-                            var seeds = Z3Search.GetSeeds(ec, pidR, ivs);
-                            if (FindFirstSeed(seeds, ivs) != "没找到Seed")
-                            {
-                                MessageBox.Show($"{pidR:X2}");
-                                Legal_Check_BOX2.Text = "逆推成功!";
-                                Legal_Check_BOX2.BackColor = Color.Green;
-                                Seed_Box.Text = FindFirstSeed(seeds, ivs);
-                                Raidfinder(FindFirstSeed(seeds, ivs));
-                                state.Stop();
-                            }
-                        });
-                      });
-
-                }
-
-
-                private void Stop_Check_BTN_Click(object sender, EventArgs e)
-                {
-                    cts.Cancel();
-                    Legal_Check_BOX1.Text = "无事可做";
-                    Legal_Check_BOX1.BackColor = Color.White;
-                    Legal_Check_BOX2.Text = "无事可做";
-                    Legal_Check_BOX2.BackColor = Color.White;
-                    Legal_Check_BOX3.Text = "无事可做";
-                    Legal_Check_BOX3.BackColor = Color.White;
-                    Legal_Check_BOX4.Text = "无事可做";
-                    Legal_Check_BOX4.BackColor = Color.White;
-                    Legal_Check_BOX5.Text = "无事可做";
-                    Legal_Check_BOX5.BackColor = Color.White;
-                    CTRIsRunning(false);
-                }
-            */
-            #endregion
-            //枚举
         }
+
+        private void Tutorial_Box_Click(object sender, EventArgs e)
+        {
+            var form = new SeedIntro();
+            form.Show();
+        }
+        #region
+        /*    public void P(uint pid,int[] ivs,uint ec)
+            {
+                var pidH = pid >> 16;
+                uint pidR = 0;
+
+                ParallelOptions po = new ParallelOptions();
+                po.MaxDegreeOfParallelism = 2;
+                po.CancellationToken = cts.Token;
+                CTRIsRunning(true);
+                Task.Factory.StartNew(
+                  () =>
+                  {
+                      ParallelLoopResult result = Parallel.For(0, 0xffff, po, (i, state) =>
+                    {
+                        pidR = pidH << 16 | (uint)i;
+                        var seeds = Z3Search.GetSeeds(ec, pidR, ivs);
+                        if (FindFirstSeed(seeds, ivs) != "没找到Seed")
+                        {
+                            MessageBox.Show($"{pidR:X2}");
+                            Legal_Check_BOX2.Text = "逆推成功!";
+                            Legal_Check_BOX2.BackColor = Color.Green;
+                            Seed_Box.Text = FindFirstSeed(seeds, ivs);
+                            Raidfinder(FindFirstSeed(seeds, ivs));
+                            state.Stop();
+                        }
+                    });
+                  });
+
+            }
+
+
+            private void Stop_Check_BTN_Click(object sender, EventArgs e)
+            {
+                cts.Cancel();
+                Legal_Check_BOX1.Text = "无事可做";
+                Legal_Check_BOX1.BackColor = Color.White;
+                Legal_Check_BOX2.Text = "无事可做";
+                Legal_Check_BOX2.BackColor = Color.White;
+                Legal_Check_BOX3.Text = "无事可做";
+                Legal_Check_BOX3.BackColor = Color.White;
+                Legal_Check_BOX4.Text = "无事可做";
+                Legal_Check_BOX4.BackColor = Color.White;
+                Legal_Check_BOX5.Text = "无事可做";
+                Legal_Check_BOX5.BackColor = Color.White;
+                CTRIsRunning(false);
+            }
+        */
+        #endregion
+        //枚举
+    }
 }

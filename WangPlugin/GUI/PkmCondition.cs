@@ -65,10 +65,6 @@ namespace WangPlugin
                 txtbox.Text = "0";
             }
         }
-        private void SeedIntro_Click(object sender, EventArgs e)
-        {
-            var form = new SeedIntro();
-            form.Show();
-        }
+     
     }
 }

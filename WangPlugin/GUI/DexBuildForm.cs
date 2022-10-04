@@ -525,6 +525,9 @@ namespace WangPlugin.GUI
                 case "Genesect":
                     PKL = GenesectDex.GenesectSets(SAV, Editor);
                     break;
+                case "DreamRadar":
+                    PKL = DreamRadarDex.DreamRadarSets(SAV, Editor);
+                    break;
                 case "Vivillon":
                     PKL = VivillonDex.VivillonSets(SAV, Editor);
                     break;

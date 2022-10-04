@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="TeamLockTextBox.Text" xml:space="preserve">
+    <value>Colo：幕下力士，天蝎，黑暗鸦，赫拉克罗斯，圈圈熊
+XD：海豹球，橡实果，拉鲁拉丝，土狼犬，芭瓢虫，溶食兽，圆丝蛛，呆火驼，蘑蘑菇，优雅猫，霹雳电球，幕下力士，六尾，夜巡灵，大嘴娃，雪童子，榛果球，天然雀，毒蔷薇，喵喵，小山猪，烈雀，臭泥，小海狮，月石，朝北鼻，派拉斯，蔓藤怪，三合一磁怪，摩鲁蛾，阿柏怪，火暴猴，哥达鸭，嘟嘟利，大葱鸭，袋兽，鸭嘴火兽，烈焰马，快拳郎，飞腿郎，大舌头，飞天螳螂，太阳岩，蚊香泳士，三地鼠，雷电兽，火焰鸟，快龙，嘎啦嘎啦，宝石海星，电击兽，拉达</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

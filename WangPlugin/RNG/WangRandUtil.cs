@@ -34,5 +34,11 @@ namespace WangPlugin
                 rng = new Xoroshiro128Plus(seed);
             }
         }
+
+        public static uint NextRand(uint seed)
+        {
+            var rnd = Util.Rand;
+            return rnd.Rand32();
+        }
     }
 }

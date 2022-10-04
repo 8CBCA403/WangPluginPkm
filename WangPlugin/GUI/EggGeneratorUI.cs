@@ -97,7 +97,11 @@ namespace WangPlugin.GUI
                 if(Form_CheckBox.Checked)
                     pk.Form = pko.Form;
                 if (RelearnMovcheckBox.Checked)
+                {
                     pk.RelearnMoves = pko.RelearnMoves;
+                    pk.Moves = pko.RelearnMoves;
+                    pk.HealPP();
+                }
                 pk.CurrentHandler = 0;
                 pk.Nature = pko.Nature;
                 pk.IVs = pko.IVs;

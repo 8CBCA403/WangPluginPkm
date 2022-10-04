@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using PKHeX.Core;
 namespace WangPlugin
 {
@@ -60,8 +61,15 @@ namespace WangPlugin
             {
                 Name = "盖诺赛克特家族",
                 Value = "Genesect",
-            }; 
-                DexModClass Vivillon = new DexModClass
+            };
+            DexModClass DreamRadar = new DexModClass
+            {
+                Name = "梦境雷达",
+                Value = "DreamRadar",
+            };
+           
+
+            DexModClass Vivillon = new DexModClass
             {
                 Name = "彩粉蝶家族",
                 Value = "Vivillon",
@@ -158,6 +166,10 @@ namespace WangPlugin
                 L.Add(Rotom);
                 if(V is not GameVersion.SW && V is not GameVersion.SH && V is not GameVersion.BD&& V is not GameVersion.SP)
                 L.Add(Arceus);
+            }
+            if(G==5)
+            {
+                L.Add(DreamRadar);
             }
             if (G >= 5&& V is not GameVersion.BD && V is not GameVersion.SP)
             {

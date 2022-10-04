@@ -42,6 +42,7 @@ namespace WangPlugin.GUI
             this.PIDlabel = new System.Windows.Forms.Label();
             this.Mlabel = new System.Windows.Forms.Label();
             this.Mod_ComboBox = new System.Windows.Forms.ComboBox();
+            this.Tutorial_Box = new System.Windows.Forms.Button();
             this.SearchGroupBox.SuspendLayout();
             this.CheckGroup_RaidBox.SuspendLayout();
             this.CheckGroup_ModBox.SuspendLayout();
@@ -186,7 +187,7 @@ namespace WangPlugin.GUI
             this.CheckGroup_RaidBox.Controls.Add(this.Gender_Box);
             this.CheckGroup_RaidBox.Controls.Add(this.MinIV_Box);
             this.CheckGroup_RaidBox.Controls.Add(this.Check_BTN);
-            this.CheckGroup_RaidBox.Location = new System.Drawing.Point(337, 4);
+            this.CheckGroup_RaidBox.Location = new System.Drawing.Point(700, 4);
             this.CheckGroup_RaidBox.Name = "CheckGroup_RaidBox";
             this.CheckGroup_RaidBox.Size = new System.Drawing.Size(286, 223);
             this.CheckGroup_RaidBox.TabIndex = 31;
@@ -197,7 +198,7 @@ namespace WangPlugin.GUI
             // 
             this.GetSeedForMaxLair_BTN.Location = new System.Drawing.Point(6, 178);
             this.GetSeedForMaxLair_BTN.Name = "GetSeedForMaxLair_BTN";
-            this.GetSeedForMaxLair_BTN.Size = new System.Drawing.Size(270, 25);
+            this.GetSeedForMaxLair_BTN.Size = new System.Drawing.Size(270, 37);
             this.GetSeedForMaxLair_BTN.TabIndex = 36;
             this.GetSeedForMaxLair_BTN.Text = "为面板大冒险非闪神添加seed";
             this.GetSeedForMaxLair_BTN.UseVisualStyleBackColor = true;
@@ -268,7 +269,7 @@ namespace WangPlugin.GUI
             this.SeedBox.Multiline = true;
             this.SeedBox.Name = "SeedBox";
             this.SeedBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.SeedBox.Size = new System.Drawing.Size(124, 95);
+            this.SeedBox.Size = new System.Drawing.Size(124, 83);
             this.SeedBox.TabIndex = 38;
             // 
             // PIDBox
@@ -280,7 +281,7 @@ namespace WangPlugin.GUI
             // 
             // ReverseCheck_BTN
             // 
-            this.ReverseCheck_BTN.Location = new System.Drawing.Point(68, 159);
+            this.ReverseCheck_BTN.Location = new System.Drawing.Point(45, 146);
             this.ReverseCheck_BTN.Name = "ReverseCheck_BTN";
             this.ReverseCheck_BTN.Size = new System.Drawing.Size(124, 25);
             this.ReverseCheck_BTN.TabIndex = 25;
@@ -303,9 +304,9 @@ namespace WangPlugin.GUI
             this.CheckGroup_ModBox.Controls.Add(this.SeedBox);
             this.CheckGroup_ModBox.Controls.Add(this.ReverseCheck_BTN);
             this.CheckGroup_ModBox.Controls.Add(this.PIDBox);
-            this.CheckGroup_ModBox.Location = new System.Drawing.Point(629, 4);
+            this.CheckGroup_ModBox.Location = new System.Drawing.Point(337, 4);
             this.CheckGroup_ModBox.Name = "CheckGroup_ModBox";
-            this.CheckGroup_ModBox.Size = new System.Drawing.Size(368, 223);
+            this.CheckGroup_ModBox.Size = new System.Drawing.Size(357, 181);
             this.CheckGroup_ModBox.TabIndex = 39;
             this.CheckGroup_ModBox.TabStop = false;
             this.CheckGroup_ModBox.Text = "逆推Seed";
@@ -314,7 +315,7 @@ namespace WangPlugin.GUI
             // 
             this.IVCheck_Box.AutoSize = true;
             this.IVCheck_Box.Enabled = false;
-            this.IVCheck_Box.Location = new System.Drawing.Point(45, 120);
+            this.IVCheck_Box.Location = new System.Drawing.Point(45, 118);
             this.IVCheck_Box.Name = "IVCheck_Box";
             this.IVCheck_Box.Size = new System.Drawing.Size(106, 21);
             this.IVCheck_Box.TabIndex = 44;
@@ -327,7 +328,7 @@ namespace WangPlugin.GUI
             this.PIDECCheck_Box.AutoSize = true;
             this.PIDECCheck_Box.Checked = true;
             this.PIDECCheck_Box.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.PIDECCheck_Box.Location = new System.Drawing.Point(45, 93);
+            this.PIDECCheck_Box.Location = new System.Drawing.Point(45, 92);
             this.PIDECCheck_Box.Name = "PIDECCheck_Box";
             this.PIDECCheck_Box.Size = new System.Drawing.Size(118, 21);
             this.PIDECCheck_Box.TabIndex = 25;
@@ -372,7 +373,7 @@ namespace WangPlugin.GUI
             // Seedlabel
             // 
             this.Seedlabel.AutoSize = true;
-            this.Seedlabel.Location = new System.Drawing.Point(184, 93);
+            this.Seedlabel.Location = new System.Drawing.Point(184, 92);
             this.Seedlabel.Name = "Seedlabel";
             this.Seedlabel.Size = new System.Drawing.Size(42, 17);
             this.Seedlabel.TabIndex = 39;
@@ -404,11 +405,22 @@ namespace WangPlugin.GUI
             this.Mod_ComboBox.Size = new System.Drawing.Size(124, 25);
             this.Mod_ComboBox.TabIndex = 37;
             // 
+            // Tutorial_Box
+            // 
+            this.Tutorial_Box.Location = new System.Drawing.Point(337, 193);
+            this.Tutorial_Box.Name = "Tutorial_Box";
+            this.Tutorial_Box.Size = new System.Drawing.Size(357, 31);
+            this.Tutorial_Box.TabIndex = 37;
+            this.Tutorial_Box.Text = "RNG面板使用说明，用前请阅读";
+            this.Tutorial_Box.UseVisualStyleBackColor = true;
+            this.Tutorial_Box.Click += new System.EventHandler(this.Tutorial_Box_Click);
+            // 
             // RNGForm
             // 
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1009, 231);
+            this.ClientSize = new System.Drawing.Size(996, 231);
+            this.Controls.Add(this.Tutorial_Box);
             this.Controls.Add(this.CheckGroup_ModBox);
             this.Controls.Add(this.CheckGroup_RaidBox);
             this.Controls.Add(this.SearchGroupBox);
@@ -465,5 +477,6 @@ namespace WangPlugin.GUI
         private Label IVBox;
         private TextBox IVTextBox;
         private WangPlugin.PkmCondition ConditionForm;
+        private Button Tutorial_Box;
     }
 }

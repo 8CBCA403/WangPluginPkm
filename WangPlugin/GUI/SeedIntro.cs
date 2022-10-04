@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-namespace WangPlugin
+namespace WangPlugin.GUI
 {
     public partial class SeedIntro : Form
     {
