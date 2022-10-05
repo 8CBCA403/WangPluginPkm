@@ -151,6 +151,8 @@ namespace WangPlugin.GUI
                 MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed, ConditionForm.rules),
                 MethodType.G5MGShiny => G5MGShiny.GenPkm(ref pk, seed, ConditionForm.rules),
                 MethodType.Gen5Wild=>Gen5Wild.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.PokeWalker=>PokeWalker.GenPkm(ref pk, ConditionForm.rules),
+                MethodType.PokeSpot=>PokeSpot.GenPkm(ref pk,seed, ConditionForm.rules),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -178,6 +180,8 @@ namespace WangPlugin.GUI
                 MethodType.ChainShiny => ChainShiny.Next(seed),
                 MethodType.G5MGShiny=>G5MGShiny.Next(seed),
                 MethodType.Gen5Wild => Gen5Wild.Next(seed),
+                MethodType.PokeWalker=>PokeWalker.Next(seed),
+                MethodType.PokeSpot=>PokeSpot.Next(seed),
                 _ => throw new NotSupportedException(),
             };
         }
