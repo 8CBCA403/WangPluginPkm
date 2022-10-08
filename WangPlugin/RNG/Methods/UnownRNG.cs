@@ -1,12 +1,13 @@
 ﻿using PKHeX.Core;
 using System;
-namespace WangPlugin
+
+namespace WangPlugin.RNG.Methods
 {
     internal class UnownRNG
     {
         private const int shift = 16;
         public static uint Next(uint seed) => LCRNG.Next(seed);
-        public static bool GenPkm(ref PKM pk, int type, uint seed, CheckRules r, byte f )
+        public static bool GenPkm(ref PKM pk, int type, uint seed, CheckRules r, byte f)
         {
             uint p = 0;
             var A = Next(seed);
@@ -17,7 +18,7 @@ namespace WangPlugin
             var swappedPIDHalves = type is >= 1 and <= 4;
             if (swappedPIDHalves) // switched order of PID halves, "BA.."
             {
-                p = (A & 0xFFFF0000) | (B >> 16);
+                p = A & 0xFFFF0000 | B >> 16;
                 pk.PID = p;
             }
             if (!r.CheckShiny(r, pk))
@@ -57,7 +58,7 @@ namespace WangPlugin
         }
         public static byte GetUnownForm(uint pid)
         {
-            var value = ((pid & 0x3000000) >> 18) | ((pid & 0x30000) >> 12) | ((pid & 0x300) >> 6) | (pid & 0x3);
+            var value = (pid & 0x3000000) >> 18 | (pid & 0x30000) >> 12 | (pid & 0x300) >> 6 | pid & 0x3;
             return (byte)(value % 28);
         }
     }

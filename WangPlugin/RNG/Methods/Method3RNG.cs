@@ -1,20 +1,17 @@
-using PKHeX.Core;
-using System.Data;
-using WangPlugin.GUI;
+﻿using PKHeX.Core;
 
-namespace WangPlugin
+namespace WangPlugin.RNG.Methods
 {
-    internal class Method1RNG
+    internal class Method3RNG
     {
         private const int shift = 16;
         public static uint Next(uint seed) => LCRNG.Next(seed);
-
-        public static  bool GenPkm(ref PKM pk,uint seed,CheckRules r)
+        public static bool GenPkm(ref PKM pk, uint seed, CheckRules r)
         {
             var pidLower = LCRNG.Next(seed) >> shift;
-            var pidUpper = LCRNG.Advance(seed, 2) >> shift;
-            var dvLower = LCRNG.Advance(seed, 3) >> shift;
-            var dvUpper = LCRNG.Advance(seed, 4) >> shift;
+            var pidUpper = LCRNG.Advance(seed, 3) >> shift;
+            var dvLower = LCRNG.Advance(seed, 4) >> shift;
+            var dvUpper = LCRNG.Advance(seed, 5) >> shift;
             var pid = CombineRNG(pidUpper, pidLower, shift);
             pk.PID = pid;
             if (!r.CheckShiny(r, pk))
@@ -32,8 +29,8 @@ namespace WangPlugin
             {
                 return false;
             }
-            pk.Nature =(int)(pid %100% 25);
-            pk.Gender = GenderApplicator.GetSaneGender(pk);
+            pk.Nature = (int)(pid % 100 % 25);
+            pk.Gender = pk.GetSaneGender();
             pk.RefreshAbility((int)(pk.PID & 1));
             return true;
         }
@@ -55,3 +52,4 @@ namespace WangPlugin
         }
     }
 }
+

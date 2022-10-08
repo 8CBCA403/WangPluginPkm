@@ -2,6 +2,9 @@
 using System.Windows.Forms;
 using PKHeX.Core;
 using System.Diagnostics;
+using WangPlugin.RNG.Methods;
+using Overworld8RNG = WangPlugin.RNG.Methods.Overworld8RNG;
+
 namespace WangPlugin.GUI
 {
     partial class ShinyMakerUI : Form

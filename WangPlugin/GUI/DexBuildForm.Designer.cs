@@ -26,8 +26,10 @@ namespace WangPlugin.GUI
             this.Sort_BTN = new System.Windows.Forms.Button();
             this.DeleteBox_BTN = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.Mod_Select_Box = new System.Windows.Forms.ComboBox();
             this.FormAndSubDex_BTN = new System.Windows.Forms.Button();
+            this.RandomEC_BTN = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,7 +47,7 @@ namespace WangPlugin.GUI
             // Gen_BTN
             // 
             this.Gen_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.Gen_BTN.Location = new System.Drawing.Point(331, 22);
+            this.Gen_BTN.Location = new System.Drawing.Point(330, 22);
             this.Gen_BTN.Name = "Gen_BTN";
             this.Gen_BTN.Size = new System.Drawing.Size(102, 25);
             this.Gen_BTN.TabIndex = 1;
@@ -192,11 +194,11 @@ namespace WangPlugin.GUI
             // RandomPID_BTN
             // 
             this.RandomPID_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.RandomPID_BTN.Location = new System.Drawing.Point(331, 54);
+            this.RandomPID_BTN.Location = new System.Drawing.Point(330, 54);
             this.RandomPID_BTN.Name = "RandomPID_BTN";
             this.RandomPID_BTN.Size = new System.Drawing.Size(102, 25);
             this.RandomPID_BTN.TabIndex = 16;
-            this.RandomPID_BTN.Text = "随机PID/EC";
+            this.RandomPID_BTN.Text = "随机PID";
             this.RandomPID_BTN.UseVisualStyleBackColor = true;
             this.RandomPID_BTN.Click += new System.EventHandler(this.RandomPID_BTN_Click);
             // 
@@ -224,6 +226,8 @@ namespace WangPlugin.GUI
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.RandomEC_BTN);
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.RandomPID_BTN);
             this.groupBox1.Controls.Add(this.LGLabel);
             this.groupBox1.Controls.Add(this.OTLabel);
@@ -237,15 +241,25 @@ namespace WangPlugin.GUI
             this.groupBox1.Controls.Add(this.Gen_BTN);
             this.groupBox1.Location = new System.Drawing.Point(5, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(438, 90);
+            this.groupBox1.Size = new System.Drawing.Size(549, 90);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "编辑全部箱子";
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("黑体", 9F);
+            this.button1.Location = new System.Drawing.Point(439, 662);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(102, 25);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "随机PID/EC";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Mod_Select_Box
             // 
             this.Mod_Select_Box.FormattingEnabled = true;
-            this.Mod_Select_Box.Location = new System.Drawing.Point(448, 28);
+            this.Mod_Select_Box.Location = new System.Drawing.Point(560, 29);
             this.Mod_Select_Box.Name = "Mod_Select_Box";
             this.Mod_Select_Box.Size = new System.Drawing.Size(121, 25);
             this.Mod_Select_Box.TabIndex = 68;
@@ -253,7 +267,7 @@ namespace WangPlugin.GUI
             // FormAndSubDex_BTN
             // 
             this.FormAndSubDex_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FormAndSubDex_BTN.Location = new System.Drawing.Point(448, 60);
+            this.FormAndSubDex_BTN.Location = new System.Drawing.Point(560, 60);
             this.FormAndSubDex_BTN.Name = "FormAndSubDex_BTN";
             this.FormAndSubDex_BTN.Size = new System.Drawing.Size(121, 25);
             this.FormAndSubDex_BTN.TabIndex = 69;
@@ -261,9 +275,20 @@ namespace WangPlugin.GUI
             this.FormAndSubDex_BTN.UseVisualStyleBackColor = true;
             this.FormAndSubDex_BTN.Click += new System.EventHandler(this.FormAndSubDex_Click);
             // 
+            // RandomEC_BTN
+            // 
+            this.RandomEC_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.RandomEC_BTN.Location = new System.Drawing.Point(440, 54);
+            this.RandomEC_BTN.Name = "RandomEC_BTN";
+            this.RandomEC_BTN.Size = new System.Drawing.Size(102, 25);
+            this.RandomEC_BTN.TabIndex = 18;
+            this.RandomEC_BTN.Text = "随机EC";
+            this.RandomEC_BTN.UseVisualStyleBackColor = true;
+            this.RandomEC_BTN.Click += new System.EventHandler(this.RandomEC_BTN_Click);
+            // 
             // DexBuildForm
             // 
-            this.ClientSize = new System.Drawing.Size(579, 171);
+            this.ClientSize = new System.Drawing.Size(687, 171);
             this.Controls.Add(this.FormAndSubDex_BTN);
             this.Controls.Add(this.Mod_Select_Box);
             this.Controls.Add(this.Sort_BTN);
@@ -309,5 +334,7 @@ namespace WangPlugin.GUI
         private Button RandomPID_BTN;
         private Button Sort_BTN;
         private Button DeleteBox_BTN;
+        private Button button1;
+        private Button RandomEC_BTN;
     }
 }

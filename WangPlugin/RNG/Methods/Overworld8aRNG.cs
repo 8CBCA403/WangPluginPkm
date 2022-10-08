@@ -1,6 +1,7 @@
 ﻿using PKHeX.Core;
 using System;
-namespace WangPlugin
+
+namespace WangPlugin.RNG.Methods
 {
     internal class Overworld8aRNG
     {
@@ -8,7 +9,7 @@ namespace WangPlugin
         private const int UNSET = 255;
         private static uint GetShinyPID(int tid, int sid, uint pid, int type)
         {
-            return (uint)(((tid ^ sid ^ (pid & 0xFFFF) ^ type) << 16) | (pid & 0xFFFF));
+            return (uint)((tid ^ sid ^ pid & 0xFFFF ^ type) << 16 | pid & 0xFFFF);
         }
 
         private static bool GetIsShiny(int tid, int sid, uint pid)
@@ -18,13 +19,13 @@ namespace WangPlugin
 
         private static uint GetShinyXor(int tid, int sid, uint pid)
         {
-            return GetShinyXor(pid, (uint)((sid << 16) | tid));
+            return GetShinyXor(pid, (uint)(sid << 16 | tid));
         }
 
         private static uint GetShinyXor(uint pid, uint oid)
         {
             var xor = pid ^ oid;
-            return (xor ^ (xor >> 16)) & 0xFFFF;
+            return (xor ^ xor >> 16) & 0xFFFF;
         }
         public static bool GenPkm(ref PKM pk, uint seed, CheckRules r)
         {
@@ -86,7 +87,7 @@ namespace WangPlugin
             pk.IV_SPD = ivs[4];
             pk.IV_SPE = ivs[5];
             pk.RefreshAbility((int)rand.NextInt(2));
-            pk.Gender = GenderApplicator.GetSaneGender(pk);
+            pk.Gender = pk.GetSaneGender();
             int nature = (int)rand.NextInt(25);
             pk.StatNature = pk.Nature = nature;
             PA8 pa = (PA8)pk;

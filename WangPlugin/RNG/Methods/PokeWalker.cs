@@ -1,6 +1,6 @@
 ﻿using PKHeX.Core;
 
-namespace WangPlugin.RNG
+namespace WangPlugin.RNG.Methods
 {
     internal class PokeWalker
     {
@@ -20,9 +20,9 @@ namespace WangPlugin.RNG
         {
             if (nature >= 24)
                 nature = 0;
-            uint pid = (uint)(((TID ^ SID) >> 8) ^ 0xFF) << 24; // the most significant byte of the PID is chosen so the Pokémon can never be shiny.
+            uint pid = (uint)((TID ^ SID) >> 8 ^ 0xFF) << 24; // the most significant byte of the PID is chosen so the Pokémon can never be shiny.
                                                                 // Ensure nature is set to required nature without affecting shininess
-            pid +=(uint)nature - (pid % 25);
+            pid += (uint)nature - pid % 25;
 
             if (gr is 0 or >= 0xFE) // non-dual gender
                 return pid;
@@ -37,18 +37,18 @@ namespace WangPlugin.RNG
 
             if (gender == 0) // Male
             {
-                pid += (uint)((((gr - (pid & 0xFF)) / 25) + 1) * 25);
+                pid += (uint)(((gr - (pid & 0xFF)) / 25 + 1) * 25);
                 if ((nature & 1) != (pid & 1))
                     pid += 25;
             }
             else
             {
-                pid -= (uint)(((((pid & 0xFF) - gr) / 25) + 1) * 25);
+                pid -= (uint)((((pid & 0xFF) - gr) / 25 + 1) * 25);
                 if ((nature & 1) != (pid & 1))
                     pid -= 25;
             }
             return pid;
         }
-       
+
     }
 }

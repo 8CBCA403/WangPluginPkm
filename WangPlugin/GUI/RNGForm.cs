@@ -7,7 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using System.Drawing;
-using WangPlugin.RNG;
+using WangPlugin.RNG.Methods;
+using Overworld8RNG = WangPlugin.RNG.Methods.Overworld8RNG;
+using Roaming8bRNG = WangPlugin.RNG.Methods.Roaming8bRNG;
 
 namespace WangPlugin.GUI
 {

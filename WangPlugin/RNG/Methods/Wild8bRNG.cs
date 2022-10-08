@@ -1,7 +1,7 @@
 ﻿using PKHeX.Core;
 using System;
 
-namespace WangPlugin.RNG
+namespace WangPlugin.RNG.Methods
 {
     internal class Wild8bRNG
     {
@@ -89,7 +89,7 @@ namespace WangPlugin.RNG
             }
             else
             {
-                var next = (((int)xors.NextUInt(253) + 1 < genderRatio) ? 1 : 0);
+                var next = (int)xors.NextUInt(253) + 1 < genderRatio ? 1 : 0;
                 if (criteria.Gender is 0 or 1 && next != criteria.Gender)
                     return false;
                 pk.Gender = next;
@@ -112,7 +112,7 @@ namespace WangPlugin.RNG
         private static uint GetRevisedPID(uint fakeTID, uint pid, ITrainerID tr)
         {
             var xor = GetShinyXor(pid, fakeTID);
-            var newXor = GetShinyXor(pid, (uint)(tr.TID | (tr.SID << 16)));
+            var newXor = GetShinyXor(pid, (uint)(tr.TID | tr.SID << 16));
 
             var fakeRare = GetRareType(xor);
             var newRare = GetRareType(newXor);
@@ -122,7 +122,7 @@ namespace WangPlugin.RNG
 
             var isShiny = xor < 16;
             if (isShiny)
-                return (((uint)(tr.TID ^ tr.SID) ^ (pid & 0xFFFF) ^ (xor == 0 ? 0u : 1u)) << 16) | (pid & 0xFFFF); // force same shiny star type
+                return ((uint)(tr.TID ^ tr.SID) ^ pid & 0xFFFF ^ (xor == 0 ? 0u : 1u)) << 16 | pid & 0xFFFF; // force same shiny star type
             return pid ^ 0x1000_0000;
         }
 
@@ -135,13 +135,13 @@ namespace WangPlugin.RNG
 
         private static uint GetShinyXor(int tid, int sid, uint pid)
         {
-            return GetShinyXor(pid, (uint)((sid << 16) | tid));
+            return GetShinyXor(pid, (uint)(sid << 16 | tid));
         }
 
         private static uint GetShinyXor(uint pid, uint oid)
         {
             var xor = pid ^ oid;
-            return (xor ^ (xor >> 16)) & 0xFFFF;
+            return (xor ^ xor >> 16) & 0xFFFF;
         }
     }
 

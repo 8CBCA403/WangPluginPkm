@@ -1,8 +1,8 @@
 using PKHeX.Core;
 
-namespace WangPlugin
+namespace WangPlugin.RNG.Methods
 {
-    internal static class Method2RNG
+    internal static class Method4RNG
     {
         private const int shift = 16;
         public static uint Next(uint seed) => LCRNG.Next(seed);
@@ -10,7 +10,7 @@ namespace WangPlugin
         {
             var pidLower = LCRNG.Next(seed) >> shift;
             var pidUpper = LCRNG.Advance(seed, 2) >> shift;
-            var dvLower = LCRNG.Advance(seed,4) >> shift;
+            var dvLower = LCRNG.Advance(seed, 3) >> shift;
             var dvUpper = LCRNG.Advance(seed, 5) >> shift;
             var pid = combineRNG(pidUpper, pidLower, shift);
             pk.PID = pid;
@@ -25,12 +25,13 @@ namespace WangPlugin
             pk.IV_SPA = (int)ivs[3];
             pk.IV_SPD = (int)ivs[4];
             pk.IV_SPE = (int)ivs[5];
+
             if (!r.CheckIV(r, pk))
             {
                 return false;
             }
             pk.Nature = (int)(pid % 100 % 25);
-            pk.Gender = GenderApplicator.GetSaneGender(pk);
+            pk.Gender = pk.GetSaneGender();
             pk.RefreshAbility((int)(pk.PID & 1));
             return true;
         }
@@ -50,6 +51,6 @@ namespace WangPlugin
         {
             return (upper << (int)shift) + lower;
         }
-      
+
     }
 }

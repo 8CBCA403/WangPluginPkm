@@ -34,7 +34,7 @@ namespace WangPlugin.GUI
         public List<DexModClass> ML = new();
        
         private OT_Gender typeG = OT_Gender.Male;
-        private ISaveFileProvider SAV { get; }
+        private  ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
         enum LanguageBoxSelect
         {
@@ -269,13 +269,14 @@ namespace WangPlugin.GUI
         {
             pkm.Species = 0;
         }
-        public static void RandomPKM(PKM pkm)
+        public  void RandomPKMPID(PKM pkm)
         {
             pkm.PID=Util.Rand32();
-            if (pkm.Generation >= 6)
-            {
-                pkm.SetRandomEC();
-            }
+           
+        }
+        public void RandomPKMEC(PKM pkm)
+        {
+            pkm.SetRandomEC();
         }
         public static string GetEnumDescription(Enum value)
         {
@@ -358,7 +359,7 @@ namespace WangPlugin.GUI
         }
         private void RandomPID_BTN_Click(object sender, EventArgs e)
         {
-            SAV.SAV.ModifyBoxes(RandomPKM);
+            SAV.SAV.ModifyBoxes(RandomPKMPID);
             SAV.ReloadSlots();
         }
         private void Sort_BTN_Click(object sender, EventArgs e)
@@ -592,6 +593,7 @@ namespace WangPlugin.GUI
             SAV.ReloadSlots();
         }
 
+
         #region
         /*
           private void GODex_BTN_Click(object sender, EventArgs e)
@@ -662,6 +664,10 @@ namespace WangPlugin.GUI
         }*/
         #endregion
 
-       
+        private void RandomEC_BTN_Click(object sender, EventArgs e)
+        {
+            SAV.SAV.ModifyBoxes(RandomPKMEC);
+            SAV.ReloadSlots();
+        }
     }
 }

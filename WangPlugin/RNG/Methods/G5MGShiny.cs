@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WangPlugin.RNG
+namespace WangPlugin.RNG.Methods
 {
     internal class G5MGShiny
     {
@@ -20,7 +20,7 @@ namespace WangPlugin.RNG
         }
         public static uint GetMG5ShinyPID(uint gval, uint av, int TID, int SID)
         {
-            uint PID = (uint)(((TID ^ SID ^ gval) << 16) | gval);
+            uint PID = (uint)((TID ^ SID ^ gval) << 16 | gval);
             if ((PID & 0x10000) != av << 16)
                 PID ^= 0x10000;
             return PID;

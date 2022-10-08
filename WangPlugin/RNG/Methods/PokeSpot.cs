@@ -1,10 +1,11 @@
 ﻿using PKHeX.Core;
-namespace WangPlugin.RNG
+
+namespace WangPlugin.RNG.Methods
 {
     internal class PokeSpot
     {
         public static uint Next(uint seed) => WangRandUtil.NextRand(seed);
-        public static bool GenPkm(ref PKM pk,uint seed, CheckRules r)
+        public static bool GenPkm(ref PKM pk, uint seed, CheckRules r)
         {
             int slot = 0;
             if (pk.Species is 27 or 187 or 41)
@@ -17,17 +18,17 @@ namespace WangPlugin.RNG
                 return false;
             var D = XDRNG.Next(seed); // PID
             var E = XDRNG.Next(D); // PID
-            pk.PID = (D & 0xFFFF0000) | (E >> 16);
+            pk.PID = D & 0xFFFF0000 | E >> 16;
             if (!r.CheckShiny(r, pk))
                 return false;
             pk.Gender = pk.GetSaneGender();
-            pk.Nature =(int) pk.PID % 25;
+            pk.Nature = (int)pk.PID % 25;
             pk.RefreshAbility((int)(pk.PID & 1));
-            pk.AbilityNumber =(int) (pk.PID & 1)+1;
+            pk.AbilityNumber = (int)(pk.PID & 1) + 1;
             pk.SetRandomIVs();
             return true;
         }
-       
+
         public static bool IsPokeSpotActivation(int slot, uint seed, out uint s)
         {
             s = seed;

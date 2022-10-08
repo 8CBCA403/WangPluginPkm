@@ -1,24 +1,23 @@
 ﻿using PKHeX.Core;
-using WangPlugin.GUI;
 
-namespace WangPlugin
+namespace WangPlugin.RNG.Methods
 {
     public static class Overworld8RNG
     {
         private const int UNSET = 255;
         public static uint Next(uint seed) => (uint)new Xoroshiro128Plus(seed).Next();
-        public static bool GenPkm(ref PKM pk,uint seed, CheckRules r)
+        public static bool GenPkm(ref PKM pk, uint seed, CheckRules r)
         {
             int FlawlessIVs = 0;
             if (pk.Species is 640 or 639 or 638)
                 FlawlessIVs = 3;
             var xoro = new Xoroshiro128Plus(seed);
 
-            var ec= (uint)xoro.NextInt(uint.MaxValue);
+            var ec = (uint)xoro.NextInt(uint.MaxValue);
             pk.EncryptionConstant = ec;
             // PID
             var pid = (uint)xoro.NextInt(uint.MaxValue);
-            uint revised_pid = GetRevisedPID(pid, pk.TID,pk.SID,r.Shiny);
+            uint revised_pid = GetRevisedPID(pid, pk.TID, pk.SID, r.Shiny);
             pk.PID = revised_pid;
             if (!r.CheckShiny(r, pk))
             {
@@ -26,7 +25,7 @@ namespace WangPlugin
             }
             // IVs
             var ivs = new int[6] { UNSET, UNSET, UNSET, UNSET, UNSET, UNSET };
-           
+
             const int MAX = 31;
             for (int i = 0; i < FlawlessIVs; i++)
             {
@@ -39,9 +38,9 @@ namespace WangPlugin
             for (int i = 0; i < ivs.Length; i++)
             {
                 if (ivs[i] == UNSET)
-                    ivs[i] = (int) xoro.NextInt(32);
+                    ivs[i] = (int)xoro.NextInt(32);
             }
-           
+
             pk.IV_HP = ivs[0];
             pk.IV_ATK = ivs[1];
             pk.IV_DEF = ivs[2];
@@ -56,36 +55,36 @@ namespace WangPlugin
             var scale = (IScaledSize)pk;
             scale.HeightScalar = (byte)((int)xoro.NextInt(0x81) + (int)xoro.NextInt(0x80));
             scale.WeightScalar = (byte)((int)xoro.NextInt(0x81) + (int)xoro.NextInt(0x80));
-            var ability = (1 << (int)xoro.NextInt(2));
-            if(pk.Species is (638 or 639 or 640))
+            var ability = 1 << (int)xoro.NextInt(2);
+            if (pk.Species is 638 or 639 or 640)
             {
                 if (ability != 1)
                     return false;
                 else
-                pk.AbilityNumber = ability;
+                    pk.AbilityNumber = ability;
             }
             else
                 pk.AbilityNumber = ability;
             pk.RefreshChecksum();
             return true;
         }
-        private static uint GetRevisedPID( uint pid, int TID, int SID, PkmCondition.ShinyType shiny)
+        private static uint GetRevisedPID(uint pid, int TID, int SID, PkmCondition.ShinyType shiny)
         {
-            uint s = (uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF));
-             if (shiny== PkmCondition.ShinyType.Sqaure&& s!=0)
+            uint s = (uint)(TID ^ SID) ^ pid >> 16 ^ pid & 0xFFFF;
+            if (shiny == PkmCondition.ShinyType.Sqaure && s != 0)
             {
-                pid = (((uint)(TID ^ SID) ^ (pid & 0xFFFF) ^ 0) << 16) | (pid & 0xFFFF);
+                pid = ((uint)(TID ^ SID) ^ pid & 0xFFFF ^ 0) << 16 | pid & 0xFFFF;
                 return pid;
             }
-        
-            else if (shiny == PkmCondition.ShinyType.None&& s<16)
+
+            else if (shiny == PkmCondition.ShinyType.None && s < 16)
             {
-                
+
                 return pid ^ 0x10000000;
             }
-            
-                return pid;
-            
+
+            return pid;
+
         }
         public static bool GenPkmQ(ref PKM pk, uint seed, bool[] shiny, bool[] IV, uint Xor = 0)
         {
@@ -139,8 +138,8 @@ namespace WangPlugin
             var scale = (IScaledSize)pk;
             scale.HeightScalar = (byte)((int)xoro.NextInt(0x81) + (int)xoro.NextInt(0x80));
             scale.WeightScalar = (byte)((int)xoro.NextInt(0x81) + (int)xoro.NextInt(0x80));
-            var ability = (1 << (int)xoro.NextInt(2));
-            if (pk.Species is (638 or 639 or 640))
+            var ability = 1 << (int)xoro.NextInt(2);
+            if (pk.Species is 638 or 639 or 640)
             {
                 if (ability != 1)
                     return false;
@@ -154,10 +153,10 @@ namespace WangPlugin
         }
         private static uint GetRevisedPIDQ(uint pid, int TID, int SID, bool[] shiny)
         {
-            uint s = (uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF));
+            uint s = (uint)(TID ^ SID) ^ pid >> 16 ^ pid & 0xFFFF;
             if (shiny[3] && s != 0)
             {
-                pid = (((uint)(TID ^ SID) ^ (pid & 0xFFFF) ^ 0) << 16) | (pid & 0xFFFF);
+                pid = ((uint)(TID ^ SID) ^ pid & 0xFFFF ^ 0) << 16 | pid & 0xFFFF;
                 return pid;
             }
 
@@ -172,7 +171,7 @@ namespace WangPlugin
         }
         private static bool CheckShiny(uint pid, int TID, int SID, bool[] shiny, uint Xor = 0)
         {
-            var s = (uint)(TID ^ SID) ^ ((pid >> 16) ^ (pid & 0xFFFF));
+            var s = (uint)(TID ^ SID) ^ pid >> 16 ^ pid & 0xFFFF;
             if (shiny[0])
                 return true;
             else if (shiny[1] && s < 16)

@@ -1,12 +1,12 @@
 using PKHeX.Core;
 
-namespace WangPlugin
+namespace WangPlugin.RNG.Methods
 {
     internal static class Method1Roaming
     {
         private const int shift = 16;
         public static uint Next(uint seed) => LCRNG.Next(seed);
-        public static bool  GenPkm(ref PKM pk,uint seed, CheckRules r)
+        public static bool GenPkm(ref PKM pk, uint seed, CheckRules r)
         {
             var pidLower = LCRNG.Next(seed) >> shift;
             var pidUpper = LCRNG.Advance(seed, 2) >> shift;
@@ -28,7 +28,7 @@ namespace WangPlugin
             pk.IV_SPA = (int)ivs[3];
             pk.IV_SPD = (int)ivs[4];
             pk.IV_SPE = (int)ivs[5];
-            pk.Nature =(int)(pid %100% 25);
+            pk.Nature = (int)(pid % 100 % 25);
             pk.AbilityNumber = (int)(pid & 1);
             return true;
         }
@@ -48,6 +48,6 @@ namespace WangPlugin
         {
             return (upper << (int)shift) + lower;
         }
-       
+
     }
 }
