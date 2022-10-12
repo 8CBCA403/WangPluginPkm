@@ -4,7 +4,7 @@ using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.Plugins
 {
-    internal class DistributionPlugin: WangPluginPkmPkm
+    internal class DistributionPlugin: WangPluginPkm
     {
         public override string Name => "派送器/Distribution Tools";
         public override int Priority => 8;

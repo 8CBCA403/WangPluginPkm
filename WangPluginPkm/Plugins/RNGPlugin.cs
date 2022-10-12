@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace WangPluginPkm.Plugins
 {
-     public class RNGPlugin:WangPluginPkmPkm
+     public class RNGPlugin:WangPluginPkm
     {
         public override string Name => "RNG面板/RNG Form";
         public override int Priority => 0;

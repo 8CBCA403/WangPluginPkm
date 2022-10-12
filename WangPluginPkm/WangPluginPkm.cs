@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 namespace WangPluginPkm
 {
-    public abstract class WangPluginPkmPkm : IPlugin
+    public abstract class WangPluginPkm : IPlugin
     {
         private const string ParentMenuName = "SuperWang";
         private const string ParentMenuText = "超王插件";

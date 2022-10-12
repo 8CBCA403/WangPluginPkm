@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using WangPluginPkm.GUI;
 namespace WangPluginPkm.Plugins
 {
-    internal class GP1Plugin: WangPluginPkmPkm
+    internal class GP1Plugin: WangPluginPkm
     {
         
             public override string Name => "GP1编辑器/GP1 Editor";

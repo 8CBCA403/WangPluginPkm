@@ -13,7 +13,7 @@ namespace WangPluginPkm.GUI
             this.Check_BTN = new System.Windows.Forms.Button();
             this.SearchGroupBox = new System.Windows.Forms.GroupBox();
             this.TeamLockBox = new System.Windows.Forms.CheckBox();
-            this.ConditionForm = new WangPluginPkmPkm.PkmCondition();
+            this.ConditionForm = new WangPluginPkm.PkmCondition();
             this.MinIV_Box = new System.Windows.Forms.ComboBox();
             this.Gender_Box = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -476,7 +476,7 @@ namespace WangPluginPkm.GUI
         private CheckBox PIDECCheck_Box;
         private Label IVBox;
         private TextBox IVTextBox;
-        private WangPluginPkmPkm.PkmCondition ConditionForm;
+        private WangPluginPkm.PkmCondition ConditionForm;
         private Button Tutorial_Box;
     }
 }

@@ -4,7 +4,7 @@ using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.Plugins
 {
-    internal class SimpleEditorPlugin: WangPluginPkmPkm
+    internal class SimpleEditorPlugin: WangPluginPkm
     {
         public override string Name => "常用功能/Simple Editor";
         public override int Priority => 5;

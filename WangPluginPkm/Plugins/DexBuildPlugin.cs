@@ -4,7 +4,7 @@ using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.Plugins
 {
-    internal class DexBuildPlugin: WangPluginPkmPkm
+    internal class DexBuildPlugin: WangPluginPkm
     {
         public override string Name => "图鉴制作器/Dex Builder";
         public override int Priority => 4;
