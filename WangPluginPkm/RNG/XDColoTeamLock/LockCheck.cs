@@ -13,6 +13,7 @@ namespace WangPluginPkm
         {
             switch (Species)
             {
+                #region
                 case 296:{
                         if (pk.Met_Location == 5)
                         {
@@ -347,12 +348,8 @@ namespace WangPluginPkm
                         else
                             return false;
                     }
-                case 175:{
-                        if (Lockfun.Togepi(ref seed))
-                            return true;
-                        else
-                            return false;
-                    }
+               
+              
                 case 179:{
                         if (Lockfun.Mareep(ref seed))
                             return true;
@@ -396,6 +393,119 @@ namespace WangPluginPkm
                             else
                                 return false;
                         }
+                    }
+                case 175:
+                    {
+                        if (Lockfun.Togepi(ref seed))
+                            return true;
+                        else
+                            return false;
+                    }
+                #endregion
+                case 12:
+                    {
+                        if (Lockfun.Butterfree(ref seed))
+                            return true;
+                        else
+                            return false;
+                    }
+                case 58:
+                    {
+                        if (Lockfun.Growlithe(ref seed))
+                            return true;
+                        else
+                            return false;
+                    }
+                case 59:
+                    {
+                        if (Lockfun.Growlithe(ref seed))
+                            return true;
+                        else
+                            return false;
+                    }
+                case 70:
+                    {
+                        if (Lockfun.Weepinbell(ref seed))
+                            return true;
+                        else
+                            return false;
+                    }
+                case 71:
+                    {
+                        if (Lockfun.Weepinbell(ref seed))
+                            return true;
+                        else
+                            return false;
+                    }
+                case 97:
+                    {
+                        if (Lockfun.Hypno(ref seed))
+                            return true;
+                        else
+                            return false;
+                    }
+                case 113:
+                    {
+                        if (Lockfun.Chansey(ref seed))
+                            return true;
+                        else
+                            return false;
+                    }
+                case 122:
+                    {
+                        if (Lockfun.MrMime(ref seed))
+                            return true;
+                        else
+                            return false;
+                    }
+                case 127:
+                    {
+                        if (Lockfun.Pinsir(ref seed))
+                            return true;
+                        else
+                            return false;
+                    }
+                case 131:
+                    {
+                        if (Lockfun.Lapras(ref seed))
+                            return true;
+                        else
+                            return false;
+                    }
+                case 143:
+                    {
+                        if (Lockfun.Snorlax(ref seed))
+                            return true;
+                        else
+                            return false;
+                    }
+                case 242:
+                    {
+                        if (Lockfun.Chansey(ref seed))
+                            return true;
+                        else
+                            return false;
+                    }
+                case 302:
+                    {
+                        if (Lockfun.Sableye(ref seed))
+                            return true;
+                        else
+                            return false;
+                    }
+                case 354:
+                    {
+                        if (Lockfun.Banette(ref seed))
+                            return true;
+                        else
+                            return false;
+                    }
+                case 373:
+                    {
+                        if (Lockfun.Salamence(ref seed))
+                            return true;
+                        else
+                            return false;
                     }
                 default:
                     return false;

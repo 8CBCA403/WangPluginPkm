@@ -8,7 +8,7 @@ namespace WangPluginPkm
     public abstract class WangPluginPkm : IPlugin
     {
         private const string ParentMenuName = "SuperWang";
-        private const string ParentMenuText = "超王插件";
+        private const string ParentMenuText = "超王插件PKM";
         private const string ParentMenuParent = "Menu_Tools";
         public abstract string Name { get; }
         public abstract int Priority { get; }
@@ -18,7 +18,6 @@ namespace WangPluginPkm
 
         public  void Initialize(params object[] args)
         {
-            Console.WriteLine($"Loading {Name}...");
             globalArgs = args;
             SaveFileEditor = (ISaveFileProvider)Array.Find(args, z => z is ISaveFileProvider);
             PKMEditor = (IPKMView)Array.Find(args, z => z is IPKMView);

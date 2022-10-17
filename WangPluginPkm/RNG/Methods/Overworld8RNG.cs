@@ -11,6 +11,11 @@ namespace WangPluginPkm.RNG.Methods
             int FlawlessIVs = 0;
             if (pk.Species is 640 or 639 or 638)
                 FlawlessIVs = 3;
+            else if (pk.Species is 144 or 145 or 146)
+            {
+                if (pk.Form == 1)
+                    FlawlessIVs = 3;
+            }
             var xoro = new Xoroshiro128Plus(seed);
 
             var ec = (uint)xoro.NextInt(uint.MaxValue);

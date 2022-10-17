@@ -130,6 +130,7 @@ namespace WangPluginPkm.GUI
         }
         private bool GenPkm(ref PKM pk,uint seed,byte form=0)
         {
+           
             return ConditionForm.rules.Method switch
             {
                 MethodType.None=>NoMethod.GenPkm(ref pk, ConditionForm.rules),

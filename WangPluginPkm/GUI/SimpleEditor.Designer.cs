@@ -58,7 +58,7 @@ namespace WangPluginPkm.GUI
             // 
             // SimpleEditor
             // 
-            this.ClientSize = new System.Drawing.Size(287, 115);
+            this.ClientSize = new System.Drawing.Size(287, 113);
             this.Controls.Add(this.Master);
             this.Controls.Add(this.LegalizeReport);
             this.Controls.Add(this.ClearRecord);

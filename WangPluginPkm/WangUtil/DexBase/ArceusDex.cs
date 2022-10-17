@@ -19,7 +19,7 @@ namespace WangPluginPkm.WangUtil.DexBase
                     {
                         for (int i = 0; i < 9; i++)
                         {
-                            pk = SearchDatabase.MytheryPK(SAV, Editor, 493, 4);
+                            pk = SearchDatabase.MytheryPK(SAV, 493, 4);
                             pk.Form = (byte)i;
                             if (i > 0)
                             {
@@ -30,7 +30,7 @@ namespace WangPluginPkm.WangUtil.DexBase
                         }
                         for (int i = 10; i > 9 && i < 18; i++)
                         {
-                            pk = SearchDatabase.MytheryPK(SAV, Editor, 493, 4);
+                            pk = SearchDatabase.MytheryPK(SAV, 493, 4);
                             pk.Form = (byte)i;
                             pk.HeldItem = Plate[i - 2];
                             pk.ClearNickname();
@@ -60,27 +60,27 @@ namespace WangPluginPkm.WangUtil.DexBase
                     {
                         for (int i = 0; i < 2; i++)
                         {
-                            pk = SearchDatabase.MytheryPK(SAV, Editor, 493, 6, i);
+                            pk = SearchDatabase.MytheryPK(SAV, 493, 6, i);
                             pk.ClearNickname();
                             PKL.Add(pk);
                         }
-                        pk = SearchDatabase.MytheryPK(SAV, Editor, 493, 6);
+                        pk = SearchDatabase.MytheryPK(SAV, 493, 6);
                         pk.Form = 2;
                         pk.HeldItem = 306;
                         pk.ClearNickname();
                         PKL.Add(pk);
                         for (int i = 3; i < 16; i++)
                         {
-                            pk = SearchDatabase.MytheryPK(SAV, Editor, 493, 6, i);
+                            pk = SearchDatabase.MytheryPK(SAV, 493, 6, i);
                             pk.ClearNickname();
                             PKL.Add(pk);
                         }
-                        pk = SearchDatabase.MytheryPK(SAV, Editor, 493, 6);
+                        pk = SearchDatabase.MytheryPK(SAV, 493, 6);
                         pk.Form = 16;
                         pk.HeldItem = 312;
                         pk.ClearNickname();
                         PKL.Add(pk);
-                        pk = SearchDatabase.MytheryPK(SAV, Editor, 493, 6, 17);
+                        pk = SearchDatabase.MytheryPK(SAV, 493, 6, 17);
                         pk.ClearNickname();
                         PKL.Add(pk);
 
@@ -91,7 +91,7 @@ namespace WangPluginPkm.WangUtil.DexBase
                     {
                         for (int i = 0; i < 18; i++)
                         {
-                            pk = SearchDatabase.MytheryPK(SAV, Editor, 493, 7);
+                            pk = SearchDatabase.MytheryPK(SAV, 493, 7);
                             pk.Form =(byte) i;
                             if(i>0)
                             {

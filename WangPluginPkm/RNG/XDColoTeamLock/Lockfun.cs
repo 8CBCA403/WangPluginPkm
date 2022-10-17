@@ -59,13 +59,15 @@ namespace WangPluginPkm
                         if (TeamLockXD.GenPkm(seed, T3))
                         {
                             seed = XDRNG.Next7(seed);
-                            if (TeamLockXD.GenPkm(seed, T4))
-                            {
-                                seed = XDRNG.Next7(seed);
-                                return true;
-                            }
-                            else
-                                return false;
+                            
+                                if (TeamLockXD.GenPkm(seed, T4))
+                                {
+                                    seed = XDRNG.Next7(seed);
+                                    return true;
+                                }
+                                else
+                                    return false;
+                           
                         }
                         else
                             return false;
@@ -86,7 +88,7 @@ namespace WangPluginPkm
                     if (TeamLockXD.GenPkm(seed,T2))
                     {
                         seed = XDRNG.Next7(seed);
-                        if (TeamLockXD.GenPkm(seed,T3))
+                        if (TeamLockXD.GenPkm(seed, T3))
                         {
                             seed = XDRNG.Next7(seed);
                             return true;
@@ -131,7 +133,7 @@ namespace WangPluginPkm
             else
                 return false;
         }
- 
+        #region
         public static bool Makuhita(ref uint seed)
         {
             if (TwoNpcTeam(ref seed, CMakuhita[0], CMakuhita[1]))
@@ -401,7 +403,7 @@ namespace WangPluginPkm
         }
         public static bool Raticate(ref uint seed)
         {
-            if (TwoNpcTeam(ref seed, XRaticate[0], XRaticate[1]))
+            if (ThreeNpcTeam(ref seed, XRaticate[0], XRaticate[1], XRaticate[2]))
                 return true;
             else
                 return false;
@@ -522,6 +524,10 @@ namespace WangPluginPkm
             else
                 return false;
         }
+
+       
+
+
         public static bool Togepi(ref uint seed)
         {
             if (ThreeNpcTeam(ref seed, ETogepi[0], ETogepi[1], ETogepi[2]))
@@ -585,6 +591,94 @@ namespace WangPluginPkm
             else
                 return false;
         }
+        #endregion
+
+        public static bool Butterfree(ref uint seed)
+        {
+            if (FourNpcTeam(ref seed, XButterfree[0], XButterfree[1], XButterfree[2], XButterfree[3]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Growlithe(ref uint seed)
+        {
+            if (ThreeNpcTeam(ref seed, XGrowlithe[0], XGrowlithe[1], XGrowlithe[2]))
+                return true;
+            else
+                return false;
+        }
+        public static bool MrMime(ref uint seed)
+        {
+            if (FiveNpcTeam(ref seed, XMrMime[0], XMrMime[1], XMrMime[2], XMrMime[3], XMrMime[4]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Weepinbell(ref uint seed)
+        {
+            if (FourNpcTeam(ref seed, XWeepinbell[0], XWeepinbell[1], XWeepinbell[2], XWeepinbell[3]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Hypno(ref uint seed)
+        {
+            if (FiveNpcTeam(ref seed, XHypno[0], XHypno[1], XHypno[2], XHypno[3], XHypno[4]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Chansey(ref uint seed)
+        {
+            if (ThreeNpcTeam(ref seed, XChansey[0], XChansey[1], XChansey[2]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Pinsir(ref uint seed)
+        {
+            if (FourNpcTeam(ref seed, XPinsir[0], XPinsir[1], XPinsir[2], XPinsir[3]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Lapras(ref uint seed)
+        {
+            if (FiveNpcTeam(ref seed, XLapras[0], XLapras[1], XLapras[2], XLapras[3], XLapras[4]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Snorlax(ref uint seed)
+        {
+            if (FiveNpcTeam(ref seed, XSnorlax[0], XSnorlax[1], XSnorlax[2], XSnorlax[3], XSnorlax[4]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Sableye(ref uint seed)
+        {
+            if (FourNpcTeam(ref seed, XSableye[0], XSableye[1], XSableye[2], XSableye[3]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Banette(ref uint seed)
+        {
+            if (FourNpcTeam(ref seed, XBanette[0], XBanette[1], XBanette[2], XBanette[3]))
+                return true;
+            else
+                return false;
+        }
+        public static bool Salamence(ref uint seed)
+        {
+            if (TwoNpcTeam(ref seed, XSalamence[0], XSalamence[1]))
+                return true;
+            else
+                return false;
+        }
+
+        #region
 
         //Colo
         public static readonly NPCClass[] CMakuhita = 
@@ -760,7 +854,7 @@ namespace WangPluginPkm
             };
         public static readonly NPCClass[] XRaticate = {
             new NPCClass(178, 18, 1, 127), // Xatu (F) (Bashful)
-         //   new NPCClass(085), // Shadow Dodrio
+            new NPCClass(085,0,0,0), // Shadow Dodrio
             new NPCClass(340, 18, 0, 127), // Whiscash (M) (Bashful)
             };
         public static readonly NPCClass[] XFarfetchd = {
@@ -884,6 +978,86 @@ namespace WangPluginPkm
             new NPCClass(271, 00, 0, 127), // Lombre (M) (Hardy)
             new NPCClass(205, 12, 0, 127), // Forretress (M) (Serious)
             };
+#endregion
+
+        //歧义
+        public static readonly NPCClass[] XButterfree =  {
+            new NPCClass(038, 12, 1, 191), // Ninetales (F) (Serious)
+            new NPCClass(189, 06, 0, 127), // Jumpluff (M) (Docile)
+            new NPCClass(184, 00, 1, 127), // Azumarill (F) (Hardy)
+            new NPCClass(114,0,0,0), // Shadow Tangela
+        };
+        public static readonly NPCClass[] XGrowlithe = 
+       {
+            new NPCClass(336, 24, 0, 127), // Seviper (M) (Quirky)
+            new NPCClass(198, 06, 1, 127), // Murkrow (F) (Docile)
+            new NPCClass(046, 0, 0, 0), // Murkrow (F) (Docile)
+
+       };
+        public static readonly NPCClass[] XMrMime = 
+         {
+            new NPCClass(199, 18, 0, 127), // Slowking (M) (Bashful)
+            new NPCClass(217, 18, 0, 127), // Ursaring (M) (Bashful)
+            new NPCClass(306, 24, 0, 127), // Aggron (M) (Quirky)
+            new NPCClass(365, 06, 1, 127), // Walrein (F) (Docile)
+            new NPCClass(062,0,0,0),
+           };
+        public static readonly NPCClass[] XWeepinbell =
+       {
+            new NPCClass(055, 18, 1, 127), // Golduck (F) (Bashful)
+            new NPCClass(237, 24, 0, 000), // Hitmontop (M) (Quirky)
+            new NPCClass(297, 12, 0, 063), // Hariyama (M) (Serious)
+            new NPCClass(049,0,0,0),
+
+       };
+        public static readonly NPCClass[] XHypno = {
+            new NPCClass(305, 18, 1, 127), // Lairon (F) (Bashful)
+            new NPCClass(364, 12, 1, 127), // Sealeo (F) (Serious)
+            new NPCClass(199, 06, 1, 127), // Slowking (F) (Docile)
+            new NPCClass(217, 24, 0, 127), // Ursaring (M) (Quirky)
+            new NPCClass(057,0,0,0), // Shadow Primeape
+        };
+        public static readonly NPCClass[] XChansey = {
+            new NPCClass(234, 06, 1, 127), // Stantler (F) (Docile)
+            new NPCClass(295, 24, 0, 127), // Exploud (M) (Quirky)
+            new NPCClass(123,0,0,0), // Shadow Scyther
+        };
+        public static readonly NPCClass[] XPinsir = {
+            new NPCClass(229, 18, 0, 127), // Houndoom (M) (Bashful)
+            new NPCClass(038, 18, 0, 191), // Ninetales (M) (Bashful)
+            new NPCClass(045, 00, 1, 127), // Vileplume (F) (Hardy)
+            new NPCClass(126,0,0,0), // Shadow Magmar
+       };
+        public static readonly NPCClass[] XLapras = {
+            new NPCClass(291, 06, 1, 127), // Ninjask (F) (Docile)
+            new NPCClass(310,0,0,0), // Shadow Manectric
+            new NPCClass(373,0,0,0), // Shadow Salamence
+            new NPCClass(330, 24, 0, 127), // Flygon (M) (Quirky)
+            new NPCClass(105,0,0,0), // Shadow Marowak
+        };
+        public static readonly NPCClass[] XSnorlax = {
+            new NPCClass(277,0,0,0), // Shadow Swellow
+            new NPCClass(065, 24, 0, 063), // Alakazam (M) (Quirky)
+            new NPCClass(230, 6, 1, 127), // Kingdra (F) (Docile)
+            new NPCClass(214, 18, 1, 127), // Heracross (F) (Bashful)
+            new NPCClass(125,0,0,0), // Shadow Electabuzz
+       };
+        public static readonly NPCClass[] XSableye =  {
+            new NPCClass(342, 24, 0, 127), // Crawdaunt (M) (Quirky)
+            new NPCClass(279, 06, 1, 127), // Pelipper (F) (Docile)
+            new NPCClass(226, 18, 1, 127), // Mantine (F) (Bashful)
+            new NPCClass(055,0,0,0), // Shadow Golduck
+         };
+        public static readonly NPCClass[] XBanette =  {
+            new NPCClass(101, 00, 2, 255), // Electrode (-) (Hardy)
+            new NPCClass(200, 18, 1, 127), // Misdreavus (F) (Bashful)
+            new NPCClass(344, 12, 2, 255), // Claydol (-) (Serious)
+            new NPCClass(115,0,0,0), // Shadow Kangaskhan
+       };
+        public static readonly NPCClass[] XSalamence =  {
+            new NPCClass(291, 06, 1, 127), // Ninjask (F) (Docile)
+            new NPCClass(310,0,0,0), // Shadow Manectric
+       };
         //E-Card
         public static readonly NPCClass[] ETogepi ={
             new NPCClass(302, 23, 0, 127), // Sableye (M) (Careful)

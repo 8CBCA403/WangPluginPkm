@@ -53,8 +53,8 @@ namespace WangPluginPkm.GUI
             this.TextBox.Size = new System.Drawing.Size(662, 100);
             this.TextBox.TabIndex = 1;
             this.TextBox.Text = "RNG面板使用说明\r\n1.本工具查找功能对象为PKHeX左侧面板精灵，使用前先将需要查找的精灵拖拽至左侧面板\r\n2.请使用本世代存档进行操作（如：现需要查找Met" +
-    "hod1类型Gen3小火龙则需要打开火红/叶绿存档进行操作，而不应打开如日月存档跨世代操作，可能出现卡死）\r\n3.如需特殊IV请使用预制种子，详情见下表。\r\n4.XDColo队锁只限于XDColo部分精灵," +
-    "详情见下表";
+    "hod1类型Gen3小火龙则需要打开火红/叶绿存档进行操作，而不应打开如日月存档跨世代操作，可能出现卡死）\r\n3.如需特殊IV请使用预制种子，详情见下表。\r\n4" +
+    ".XDColo队锁只限于XDColo部分精灵,详情见下表";
             // 
             // TeamLockTextBox
             // 

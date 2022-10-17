@@ -9,6 +9,7 @@ namespace WangPluginPkm.GUI
 {
     partial class SimpleEditor : Form
     {
+      
         private IPKMView Editor { get; }
         private ISaveFileProvider SAV { get; }
         public SimpleEditor(ISaveFileProvider sav, IPKMView editor)
@@ -69,9 +70,8 @@ namespace WangPluginPkm.GUI
             pk.ClearNickname();
             Editor.PopulateFields(pk, false);
             SAV.ReloadSlots();
-
         }
-        private PA8 GetMoveFromDataBase (PKM pk)
+        private PA8 GetMoveFromDataBase(PKM pk)
         {
             IEncounterInfo enc;
             LegalityAnalysis la;
@@ -101,12 +101,12 @@ namespace WangPluginPkm.GUI
                 }
                 if (PokeList.Count != 0)
                 {
-                    for(int i=0;i<PokeList.Count;i++)
+                    for (int i = 0; i < PokeList.Count; i++)
                     {
                         pkm = PokeList[i];
                         pkm.SetShiny();
                         la = new LegalityAnalysis(pkm);
-                        if (la.Valid&& pk.Species!=550)
+                        if (la.Valid && pk.Species != 550)
                             return PokeList[i];
                         if (pk.Species == 550 && pk.Gender == 0)
                             return PokeList[i + 1];
@@ -117,7 +117,7 @@ namespace WangPluginPkm.GUI
             }
             return p;
         }
-        private PA8 Handle_OTPokemon(PA8 pk,PKM pkm)
+        private PA8 Handle_OTPokemon(PA8 pk, PKM pkm)
         {
             pk.Language = pkm.Language;
             pk.PID = pkm.PID;
@@ -152,7 +152,72 @@ namespace WangPluginPkm.GUI
                 pk.IV_HP = 31;
                 pk.IV_DEF = 31;
             }
-                return pk;
+            return pk;
+        }
+
+        //处理神秘礼物
+        #region
+        private void SearchGift()
+        {
+
+            string r="";
+            var L=  SAV.SAV.GetBoxData(SAV.CurrentBox);
+            PKM pk;
+            int j = 1;
+            if (L.Count() != 0)
+            {
+                for (int i = 0; i < L.Count(); i++)
+                {
+                    pk = L[i];
+                    r += $"序号：{j}" + SearchDatabase.SearchMytheryGift(pk.Species, pk.Generation, pk.OT_Name, pk.SID, pk.TID, pk.Form);
+                    j++;
+                }
+            }
+            MessageBox.Show($"{r}");
+        }
+       
+        private void Check_Gift_Click(object sender, EventArgs e)
+        {
+            SearchGift();
+        }
+
+        private void ALLMG_Click(object sender, EventArgs e)
+        {
+            
+           
+            IList<PKM> BoxData;
+            for (ushort i = 1; i < 722; i++)
+            {
+                List<PKM> L = new();
+              
+                BoxData = SAV.SAV.BoxData;
+                IList<PKM> arr2 = BoxData;
+                List<int> list = FindAllEmptySlots(arr2, 0);
+                if (SearchDatabase.MytheryPKList(ref L, SAV, i, 6))
+                {
+                    for (int j = 0; j < L.Count; j++)
+                    {
+                        int index = list[j];
+                        SAV.SAV.SetBoxSlotAtIndex(L[j], index);
+                    }
+                }
+                SAV.ReloadSlots();
+            }
+         
+            
+        }
+        #endregion
+        private static List<int> FindAllEmptySlots(IList<PKM> data, int start)
+        {
+            List<int> list = new List<int>();
+            for (int i = start; i < data.Count; i++)
+            {
+                if (data[i].Species < 1)
+                {
+                    list.Add(i);
+                }
+            }
+            return list;
         }
     }
 }

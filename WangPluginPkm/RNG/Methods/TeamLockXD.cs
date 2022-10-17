@@ -14,6 +14,8 @@ namespace WangPluginPkm.RNG.Methods
             var C = XDRNG.Next(B); // Ability?
             var D = XDRNG.Next(C); // PID
             var E = XDRNG.Next(D); // PID
+            if (T.Gender == 0 && T.Nature == 0 && T.Ratio == 0)
+                return true;
             var PID = D & 0xFFFF0000 | E >> 16;
             var Gender = (PID & 0xFF) < T.Ratio ? 1 : 0;
             var Nature = (int)(PID % 25);

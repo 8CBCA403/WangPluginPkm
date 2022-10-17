@@ -47,7 +47,7 @@ namespace WangPluginPkm.WangUtil.DexBase
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 744, 32, 0, false);
                         pk.ClearNickname();
                         PKL.Add(pk);
-                        pk = SearchDatabase.MytheryPK(SAV, Editor, 744, 7, 1);
+                        pk = SearchDatabase.MytheryPK(SAV, 744, 7, 1);
                         pk.ClearNickname();
                         PKL.Add(pk);
                         for (int i = 0; i < 2; i++)
@@ -69,7 +69,7 @@ namespace WangPluginPkm.WangUtil.DexBase
                             pk.ClearNickname();
                             PKL.Add(pk);
                         }
-                        pk = SearchDatabase.MytheryPK(SAV, Editor, 744, 7, 1);
+                        pk = SearchDatabase.MytheryPK(SAV, 744, 7, 1);
                         pk.CurrentLevel = 50;
                         pk.Species = 745;
                         pk.Form = 2;

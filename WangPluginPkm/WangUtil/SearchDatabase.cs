@@ -6,6 +6,7 @@ namespace WangPluginPkm
 {
     internal class SearchDatabase
     {
+        public static GameStrings GameStrings = GameInfo.GetStrings("zh");
         public static PKM SearchPKM(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version, int form = 0, bool egg = false, int location = 0, int gender = 0, int r = 0)
         {
             List<IEncounterInfo> Results;
@@ -81,7 +82,7 @@ namespace WangPluginPkm
             }
             return pk;
         }
-        public static PKM MytheryPK(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version, int form = 0)
+        public static PKM MytheryPK(ISaveFileProvider SAV, ushort species, int version, int form = 0)
         {
             var db = EncounterEvent.GetAllEvents();
             var RawDB = new List<MysteryGift>(db);
@@ -101,8 +102,37 @@ namespace WangPluginPkm
                     // EntityConverter.TryMakePKMCompatible(pkc, pk, out var c, out pkc);
                     p.Add(pkc);
                 }
+
             }
             return p[0];
+        }
+        public static bool MytheryPKList(ref List<PKM> L,ISaveFileProvider SAV, ushort species, int version, int form = 0)
+        {
+            var db = EncounterEvent.GetAllEvents();
+            var RawDB = new List<MysteryGift>(db);
+            PKM pkc;
+
+            IEnumerable<MysteryGift> res = RawDB;
+            res = res.Where(pkm => pkm.Species == species);
+            res = res.Where(pkm => pkm.Form == form);
+            res = res.Where(pkm => pkm.Generation == version);
+            var results = res.ToArray();
+            if (results.Count() != 0)
+            {
+                foreach (MysteryGift gift in results)
+                {
+
+                    pkc = gift.ConvertToPKM(SAV.SAV);
+                    // EntityConverter.TryMakePKMCompatible(pkc, pk, out var c, out pkc);
+                    L.Add(pkc);
+                   
+                }
+                return true;
+            }
+            
+               
+                return false;
+            
         }
         public static PKM MytheryLanguage(ISaveFileProvider SAV, ushort species, int version, int form = 0,int language=1)
         {
@@ -131,7 +161,37 @@ namespace WangPluginPkm
             p[0].ClearNickname();
             return p[0];
         }
-    
+        public static string SearchMytheryGift(ushort species, int Generation, string otname,int sid,int tid, int form = 0)
+        {
+            var db = EncounterEvent.GetAllEvents();
+            var RawDB = new List<MysteryGift>(db);
+            string L="";
+            IEnumerable<MysteryGift> res = RawDB;
+            res = res.Where(pkm => pkm.Species == species);
+            res = res.Where(pkm => pkm.Form == form);
+            res = res.Where(pkm => pkm.Generation == Generation);
+            res = res.Where(pkm => pkm.OT_Name==otname);
+            res = res.Where(pkm=>pkm.SID==sid);
+            res = res.Where(pkm => pkm.TID == tid);
+            var results = res.ToArray();
+            WC6 WC6gift=new();
+           
+            if (results.Count() != 0)
+            {
+                MysteryGift gift = results[0];
+                    
+                    if (gift.Type == "WC6")
+                        WC6gift= (WC6)gift;
+                    
+                    L += $"Name:{GameStrings.Species[WC6gift.Species]}"+" "+$"CardHeader:{WC6gift.CardHeader}\n";
+              
+                
+            }
+            else
+                L = "无法匹配";
+            return L;
+        }
+
     }
 }
 
