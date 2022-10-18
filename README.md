@@ -68,5 +68,4 @@ which are used for unit testing.
 - Other great people for various help and research (OmegaDonut, Bond697, Kaphotics, SciresM, Zari, amab, Marin, Lean, etc)
 - And all the countless users who have helped improve this project with ideas and suggestions!
 
- 
-<img src="https://github.com/Wanghaoran86/WangPluginPkm/tree/main/WangPluginPkm/Resources/img/SW.jpg">
+
