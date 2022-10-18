@@ -69,4 +69,4 @@ which are used for unit testing.
 - And all the countless users who have helped improve this project with ideas and suggestions!
 
  
-<img src="https://github.com/Wanghaoran86/WangPlugin/blob/main/WangPlugin/Resources/img/SW.jpg">
+<img src="https://github.com/Wanghaoran86/WangPluginPkm/tree/main/WangPluginPkm/Resources/img/SW.jpg">
