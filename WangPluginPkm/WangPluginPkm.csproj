@@ -39,6 +39,9 @@
     <Reference Include="PKHeX.Core.Enhancements">
       <HintPath>deps\PKHeX.Core.Enhancements.dll</HintPath>
     </Reference>
+    <Reference Include="SysBot.Base">
+      <HintPath>deps\SysBot.Base.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
@@ -66,6 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\modpkm\" />
+    <Folder Include="WangUtil\USP.Core\" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
+    <PackageReference Include="Be.Windows.Forms.HexBox.Net5">
+      <Version>1.8.0</Version>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

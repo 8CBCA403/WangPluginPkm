@@ -73,7 +73,7 @@ namespace WangPluginPkm.GUI
             this.UsePreSeed.AutoSize = true;
             this.UsePreSeed.Location = new System.Drawing.Point(6, 171);
             this.UsePreSeed.Name = "UsePreSeed";
-            this.UsePreSeed.Size = new System.Drawing.Size(126, 21);
+            this.UsePreSeed.Size = new System.Drawing.Size(114, 21);
             this.UsePreSeed.TabIndex = 22;
             this.UsePreSeed.Text = "使用预设种子";
             this.UsePreSeed.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@ namespace WangPluginPkm.GUI
             this.TeamLockBox.AutoSize = true;
             this.TeamLockBox.Location = new System.Drawing.Point(138, 171);
             this.TeamLockBox.Name = "TeamLockBox";
-            this.TeamLockBox.Size = new System.Drawing.Size(125, 21);
+            this.TeamLockBox.Size = new System.Drawing.Size(117, 21);
             this.TeamLockBox.TabIndex = 24;
             this.TeamLockBox.Text = "CXD使用队锁";
             this.TeamLockBox.UseVisualStyleBackColor = true;
@@ -119,6 +119,7 @@ namespace WangPluginPkm.GUI
             this.ConditionForm.Name = "ConditionForm";
             this.ConditionForm.Size = new System.Drawing.Size(313, 186);
             this.ConditionForm.TabIndex = 23;
+
             // 
             // MinIV_Box
             // 
@@ -141,7 +142,7 @@ namespace WangPluginPkm.GUI
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 58);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 17);
+            this.label2.Size = new System.Drawing.Size(34, 17);
             this.label2.TabIndex = 27;
             this.label2.Text = "锁IV";
             // 
@@ -150,7 +151,7 @@ namespace WangPluginPkm.GUI
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(7, 89);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 17);
+            this.label3.Size = new System.Drawing.Size(50, 17);
             this.label3.TabIndex = 28;
             this.label3.Text = "公母比";
             // 
@@ -167,7 +168,7 @@ namespace WangPluginPkm.GUI
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(7, 119);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 17);
+            this.label4.Size = new System.Drawing.Size(36, 17);
             this.label4.TabIndex = 30;
             this.label4.Text = "特性";
             // 
@@ -317,7 +318,7 @@ namespace WangPluginPkm.GUI
             this.IVCheck_Box.Enabled = false;
             this.IVCheck_Box.Location = new System.Drawing.Point(45, 118);
             this.IVCheck_Box.Name = "IVCheck_Box";
-            this.IVCheck_Box.Size = new System.Drawing.Size(106, 21);
+            this.IVCheck_Box.Size = new System.Drawing.Size(98, 21);
             this.IVCheck_Box.TabIndex = 44;
             this.IVCheck_Box.Text = "使用IV反推";
             this.IVCheck_Box.UseVisualStyleBackColor = true;
@@ -330,7 +331,7 @@ namespace WangPluginPkm.GUI
             this.PIDECCheck_Box.CheckState = System.Windows.Forms.CheckState.Checked;
             this.PIDECCheck_Box.Location = new System.Drawing.Point(45, 92);
             this.PIDECCheck_Box.Name = "PIDECCheck_Box";
-            this.PIDECCheck_Box.Size = new System.Drawing.Size(118, 21);
+            this.PIDECCheck_Box.Size = new System.Drawing.Size(110, 21);
             this.PIDECCheck_Box.TabIndex = 25;
             this.PIDECCheck_Box.Text = "使用PID反推";
             this.PIDECCheck_Box.UseVisualStyleBackColor = true;
@@ -393,7 +394,7 @@ namespace WangPluginPkm.GUI
             this.Mlabel.AutoSize = true;
             this.Mlabel.Location = new System.Drawing.Point(6, 29);
             this.Mlabel.Name = "Mlabel";
-            this.Mlabel.Size = new System.Drawing.Size(72, 17);
+            this.Mlabel.Size = new System.Drawing.Size(64, 17);
             this.Mlabel.TabIndex = 37;
             this.Mlabel.Text = "模式选择";
             // 

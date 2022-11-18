@@ -69,7 +69,7 @@ namespace WangPluginPkm.GUI
             // 
             // ImportGP_BTN
             // 
-            this.ImportGP_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.ImportGP_BTN.Font = new System.Drawing.Font("SimHei", 9F);
             this.ImportGP_BTN.Location = new System.Drawing.Point(268, 183);
             this.ImportGP_BTN.Name = "ImportGP_BTN";
             this.ImportGP_BTN.Size = new System.Drawing.Size(96, 33);
@@ -80,7 +80,7 @@ namespace WangPluginPkm.GUI
             // 
             // ExportGP_BTN
             // 
-            this.ExportGP_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.ExportGP_BTN.Font = new System.Drawing.Font("SimHei", 9F);
             this.ExportGP_BTN.Location = new System.Drawing.Point(386, 183);
             this.ExportGP_BTN.Name = "ExportGP_BTN";
             this.ExportGP_BTN.Size = new System.Drawing.Size(96, 33);
@@ -91,7 +91,7 @@ namespace WangPluginPkm.GUI
             // 
             // Edit_GP
             // 
-            this.Edit_GP.Font = new System.Drawing.Font("黑体", 9F);
+            this.Edit_GP.Font = new System.Drawing.Font("SimHei", 9F);
             this.Edit_GP.Location = new System.Drawing.Point(153, 186);
             this.Edit_GP.Name = "Edit_GP";
             this.Edit_GP.Size = new System.Drawing.Size(96, 30);
@@ -131,7 +131,7 @@ namespace WangPluginPkm.GUI
             // SpeciesLabel
             // 
             this.SpeciesLabel.AutoSize = true;
-            this.SpeciesLabel.Font = new System.Drawing.Font("黑体", 9F);
+            this.SpeciesLabel.Font = new System.Drawing.Font("SimHei", 9F);
             this.SpeciesLabel.Location = new System.Drawing.Point(51, 27);
             this.SpeciesLabel.Name = "SpeciesLabel";
             this.SpeciesLabel.Size = new System.Drawing.Size(39, 15);
@@ -141,7 +141,7 @@ namespace WangPluginPkm.GUI
             // NickNameLabel
             // 
             this.NickNameLabel.AutoSize = true;
-            this.NickNameLabel.Font = new System.Drawing.Font("黑体", 9F);
+            this.NickNameLabel.Font = new System.Drawing.Font("SimHei", 9F);
             this.NickNameLabel.Location = new System.Drawing.Point(51, 57);
             this.NickNameLabel.Name = "NickNameLabel";
             this.NickNameLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -152,7 +152,7 @@ namespace WangPluginPkm.GUI
             // OT_Name_Label
             // 
             this.OT_Name_Label.AutoSize = true;
-            this.OT_Name_Label.Font = new System.Drawing.Font("黑体", 9F);
+            this.OT_Name_Label.Font = new System.Drawing.Font("SimHei", 9F);
             this.OT_Name_Label.Location = new System.Drawing.Point(3, 89);
             this.OT_Name_Label.Name = "OT_Name_Label";
             this.OT_Name_Label.Size = new System.Drawing.Size(87, 15);
@@ -217,7 +217,7 @@ namespace WangPluginPkm.GUI
             // Move1_label
             // 
             this.Move1_label.AutoSize = true;
-            this.Move1_label.Font = new System.Drawing.Font("黑体", 9F);
+            this.Move1_label.Font = new System.Drawing.Font("SimHei", 9F);
             this.Move1_label.Location = new System.Drawing.Point(332, 57);
             this.Move1_label.Name = "Move1_label";
             this.Move1_label.Size = new System.Drawing.Size(47, 15);
@@ -227,7 +227,7 @@ namespace WangPluginPkm.GUI
             // Move2_label
             // 
             this.Move2_label.AutoSize = true;
-            this.Move2_label.Font = new System.Drawing.Font("黑体", 9F);
+            this.Move2_label.Font = new System.Drawing.Font("SimHei", 9F);
             this.Move2_label.Location = new System.Drawing.Point(332, 86);
             this.Move2_label.Name = "Move2_label";
             this.Move2_label.Size = new System.Drawing.Size(47, 15);
@@ -244,7 +244,7 @@ namespace WangPluginPkm.GUI
             // 
             // CovertToPB7
             // 
-            this.CovertToPB7.Font = new System.Drawing.Font("黑体", 9F);
+            this.CovertToPB7.Font = new System.Drawing.Font("SimHei", 9F);
             this.CovertToPB7.Location = new System.Drawing.Point(32, 186);
             this.CovertToPB7.Name = "CovertToPB7";
             this.CovertToPB7.Size = new System.Drawing.Size(105, 30);
@@ -279,7 +279,7 @@ namespace WangPluginPkm.GUI
             // Time_Label
             // 
             this.Time_Label.AutoSize = true;
-            this.Time_Label.Font = new System.Drawing.Font("黑体", 9F);
+            this.Time_Label.Font = new System.Drawing.Font("SimHei", 9F);
             this.Time_Label.Location = new System.Drawing.Point(19, 117);
             this.Time_Label.Name = "Time_Label";
             this.Time_Label.Size = new System.Drawing.Size(71, 15);
@@ -289,7 +289,7 @@ namespace WangPluginPkm.GUI
             // AlolaForm_Check
             // 
             this.AlolaForm_Check.AutoSize = true;
-            this.AlolaForm_Check.Font = new System.Drawing.Font("黑体", 9F);
+            this.AlolaForm_Check.Font = new System.Drawing.Font("SimHei", 9F);
             this.AlolaForm_Check.Location = new System.Drawing.Point(210, 116);
             this.AlolaForm_Check.Name = "AlolaForm_Check";
             this.AlolaForm_Check.Size = new System.Drawing.Size(109, 19);
@@ -300,7 +300,7 @@ namespace WangPluginPkm.GUI
             // ShinyCheck
             // 
             this.ShinyCheck.AutoSize = true;
-            this.ShinyCheck.Font = new System.Drawing.Font("黑体", 9F);
+            this.ShinyCheck.Font = new System.Drawing.Font("SimHei", 9F);
             this.ShinyCheck.Location = new System.Drawing.Point(210, 85);
             this.ShinyCheck.Name = "ShinyCheck";
             this.ShinyCheck.Size = new System.Drawing.Size(61, 19);
@@ -318,7 +318,7 @@ namespace WangPluginPkm.GUI
             // GeoName_Label
             // 
             this.GeoName_Label.AutoSize = true;
-            this.GeoName_Label.Font = new System.Drawing.Font("黑体", 9F);
+            this.GeoName_Label.Font = new System.Drawing.Font("SimHei", 9F);
             this.GeoName_Label.Location = new System.Drawing.Point(19, 149);
             this.GeoName_Label.Name = "GeoName_Label";
             this.GeoName_Label.Size = new System.Drawing.Size(71, 15);
@@ -327,7 +327,7 @@ namespace WangPluginPkm.GUI
             // 
             // GP1Editor
             // 
-            this.ClientSize = new System.Drawing.Size(510, 228);
+            this.ClientSize = new System.Drawing.Size(517, 228);
             this.Controls.Add(this.GeoName_Label);
             this.Controls.Add(this.GeoName_TextBox);
             this.Controls.Add(this.ShinyCheck);

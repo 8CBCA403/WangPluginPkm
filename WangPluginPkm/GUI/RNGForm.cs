@@ -349,7 +349,7 @@ namespace WangPluginPkm.GUI
                             }
                         }
                     }
-                    else
+                   else
                     {
                         Legal_Check_BOX1.Text = "基本合法性检测通过！";
                         Legal_Check_BOX1.BackColor = Color.Green;
@@ -604,6 +604,8 @@ namespace WangPluginPkm.GUI
             var form = new SeedIntro();
             form.Show();
         }
+
+   
         #region
         /*    public void P(uint pid,int[] ivs,uint ec)
             {

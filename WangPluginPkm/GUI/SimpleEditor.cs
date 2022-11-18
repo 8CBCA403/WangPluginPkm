@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using PKHeX.Core.Searching;
 using System.Linq;
+using System.IO;
 
 namespace WangPluginPkm.GUI
 {
@@ -12,6 +13,8 @@ namespace WangPluginPkm.GUI
       
         private IPKMView Editor { get; }
         private ISaveFileProvider SAV { get; }
+        private PK8 gp = new();
+        private const string GoFilter = "Go Park Entity |*.pk9|All Files|*.*";
         public SimpleEditor(ISaveFileProvider sav, IPKMView editor)
         {
             Editor = editor;
@@ -218,6 +221,53 @@ namespace WangPluginPkm.GUI
                 }
             }
             return list;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PK8 pk;
+            pk=gp;
+            var o= PokeCrypto.EncryptArray8(pk.Data);
+            using var sfd = new SaveFileDialog
+            {
+                FileName = "A",
+                Filter = GoFilter,
+                FilterIndex = 0,
+                RestoreDirectory = true,
+            };
+
+            if (sfd.ShowDialog() != DialogResult.OK)
+                return;
+            File.WriteAllBytes(sfd.FileName,o);
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using var sfd = new OpenFileDialog
+            {
+                Filter = GoFilter,
+                FilterIndex = 0,
+                RestoreDirectory = true,
+            };
+            // Export
+            if (sfd.ShowDialog() != DialogResult.OK)
+                return;
+
+            string path = sfd.FileName;
+            ImportG9From(path);
+        }
+        private void ImportG9From(string path)
+        {
+            var data = File.ReadAllBytes(path);
+            if (data.Length != 344)
+            {
+                MessageBox.Show(MessageStrings.MsgFileLoadIncompatible);
+                return;
+            }
+            var gp1 = new PK8();
+            data.CopyTo(gp1.Data, 0);
+            gp = gp1;
         }
     }
 }
