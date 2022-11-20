@@ -1,10 +1,12 @@
 ﻿using Noexes.Base;
+using PKHeX.Core;
 using SysBot.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
-namespace USP.Core
+namespace NoexesCore
 {
     public abstract class NoexsExecutor<T> : IExecutor, IRAMEditor where T : class, INoexsBotConfig
     {
@@ -82,6 +84,42 @@ namespace USP.Core
                 return BitConverter.ToUInt64(data,0);
             });
             return Eval.Eval(evalStr);
+        }
+        public ulong GetPointerAddress( string ptr, bool heaprealtive = true)
+        {
+            if (string.IsNullOrWhiteSpace(ptr) || ptr.IndexOfAny(new[] { '-', '/', '*' }) != -1)
+                return 0;
+            while (ptr.Contains("]]"))
+                ptr = ptr.Replace("]]", "]+0]");
+            uint? finadd = null;
+           
+            if (!ptr.EndsWith("]"))
+            {
+                finadd = Util.GetHexValue(ptr.Split('+').Last());
+                ptr = ptr[..ptr.LastIndexOf('+')];
+            }
+            var jumps = ptr.Replace("main", "").Replace("[", "").Replace("]", "").Split(new[] { "+" }, StringSplitOptions.RemoveEmptyEntries);
+            
+            if (jumps.Length == 0)
+                return 0;
+           
+            var initaddress = Util.GetHexValue(jumps[0].Trim());
+            ulong address = BitConverter.ToUInt64(Connection.ReadBytesMain(initaddress, 0x8), 0);
+            
+            foreach (var j in jumps)
+            {
+                var val = Util.GetHexValue(j.Trim());
+                if (val == initaddress)
+                    continue;
+                address = BitConverter.ToUInt64(Connection.ReadBytesAbsolute(address + val, 0x8), 0);
+            }
+            if (finadd != null) address += (ulong)finadd;
+            if (heaprealtive)
+            {
+                ulong heap = Connection.GetHeapBase();
+                address -= heap;
+            }
+            return address;
         }
     }
 }

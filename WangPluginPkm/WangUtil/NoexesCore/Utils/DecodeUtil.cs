@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace USP.Core
+namespace NoexesCore
 {
     public static class DecodeUtil
     {

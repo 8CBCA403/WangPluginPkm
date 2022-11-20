@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace USP.Core
+namespace NoexesCore
 {
     internal static class SysBotUtil
     {

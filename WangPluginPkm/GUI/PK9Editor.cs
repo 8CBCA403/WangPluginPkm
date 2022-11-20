@@ -2,24 +2,24 @@
 using System.Windows.Forms;
 using System.IO;
 using System;
-using USP.Core;
 using WangPluginPkm.WangUtil;
-using System.Security.Cryptography;
+using SysBotBase;
 
 namespace WangPluginPkm.GUI
 {
     public partial class PK9Editor : Form
     {
-        private ISaveFileProvider SAV { get; }
-        private IPKMView Editor { get; }
-        private NoexsBot test;
+        private SysBotMini sysbot=new SysBotMini() 
+        { 
+            IP="192.168.3.10",
+            Port=6000,
+        };
         public PK9Editor(ISaveFileProvider sav, IPKMView editor)
         {
-            SAV = sav;
-            Editor = editor;
             InitializeComponent();
         }
         private PK9 pk = new();
+        private const string ptr = "[[[main+42FD510]+A90]+9B0]";
         private byte[] data1;
         private const string Pk9Filter = "Go Park Entity |*.pk9|All Files|*.*";
         private void EditPK9()
@@ -42,10 +42,17 @@ namespace WangPluginPkm.GUI
             pk.Ability = Convert.ToInt16(AbilityBox.Text);
             pk.AbilityNumber = Convert.ToInt16(AbilityNumberBox.Text);
             pk.HeldItem = Convert.ToInt16(HeldItemBox.Text);
-            pk.PID = Convert.ToUInt32(PIDtextBox.Text);
+            var HEX = "0x" + PIDtextBox.Text;
+            pk.PID = Convert.ToUInt32(HEX, 16);
+            pk.Ball = Convert.ToInt16(BallTextBox.Text);
+            pk.OT_Friendship = Convert.ToInt16(OTFtextBox.Text);
+            pk.Gender = Convert.ToSByte(GanderTextBox.Text);
+            pk.Language = Convert.ToSByte(languagetextBox.Text);
+            pk.StatTera = Convert.ToSByte(TeratextBox.Text);
         }
         private void LoadPK9()
         {
+            ECtextBox.Text = pk.EncryptionConstant.ToString("X");
             IV_HPBox.Text = pk.IV_HP.ToString();
             IV_ATKBox.Text = pk.IV_ATK.ToString();
             IV_DEFBox.Text = pk.IV_DEF.ToString();
@@ -59,6 +66,7 @@ namespace WangPluginPkm.GUI
             EV_SPEBox.Text = pk.EV_SPE.ToString();
             EV_SPDBox.Text = pk.EV_SPD.ToString();
             SpeciesBox.Text = pk.Species.ToString();
+            GanderTextBox.Text = pk.Gender.ToString();
             NatureBox.Text = pk.Nature.ToString();
             StatNatureBox.Text = pk.StatNature.ToString();
             AbilityBox.Text = pk.Ability.ToString();
@@ -79,7 +87,12 @@ namespace WangPluginPkm.GUI
             TidtextBox.Text = pk.TID.ToString();
             SidtextBox.Text = pk.SID.ToString();
             NametextBox.Text = pk.OT_Name.ToString();
-            PIDtextBox.Text = pk.PID.ToString();
+            PIDtextBox.Text = pk.PID.ToString("X");
+            BallTextBox.Text = pk.Ball.ToString();
+            OTFtextBox.Text = pk.OT_Friendship.ToString();
+            languagetextBox.Text = pk.Language.ToString();
+            TeratextBox.Text = pk.StatTera.ToString();
+            XortextBox.Text = ((pk.TID ^ pk.SID) ^ pk.PID >> 16 ^pk.PID & 0xFFFF).ToString();
         }
         private void ImportBTN_Click(object sender, System.EventArgs e)
         {
@@ -123,7 +136,8 @@ namespace WangPluginPkm.GUI
             var chkl = (byte)(chk & (0xFF));
             data.Data[7] = chkh;
             data.Data[6] = chkl;
-            File.WriteAllBytes(sfd.FileName, data.Data);
+            var da=PokeCrypto.EncryptArray8(data.Data);
+            File.WriteAllBytes(sfd.FileName, da);
         }
 
         private void ConnectBTN_Click(object sender, EventArgs e)
@@ -132,83 +146,33 @@ namespace WangPluginPkm.GUI
             var port = Convert.ToInt32(portTextBox.Text);
             try
             {
-                test = CoreUtil.GetNoexsBot(ip, port);
-                LB_pids.Items.Clear();
-                foreach (var p in test.ListPids())
-                {
-                    LB_pids.Items.Add(p);
-                }
-                LB_pids.SelectedIndexChanged += (_, __) =>
-                {
-                    TIDLabel.Text = $"[tid]{test.TitleIdPid((ulong)LB_pids.SelectedItem):X}";
-                };
+                sysbot.IP = ip;
+                sysbot.Port = port;
+                sysbot.Connect();
+                MessageBox.Show("连上了！");
             }
             catch (Exception ex)
             {
                 DialogResult = DialogResult.Cancel;
                 WinFormsUtil.Error(ex.Message);
-            }
-        }
-
-        private void Attach_BTN_Click(object sender, EventArgs e)
-        {
-            if (LB_pids.SelectedIndex != -1)
-            {
-                try
-                {
-                    if (test == null)
-                    {
-                        var ip = ipTextBox.Text;
-                        var port = Convert.ToInt32(portTextBox.Text);
-                        test = CoreUtil.GetNoexsBot(ip, port);
-                    }
-
-                    test.Attach((ulong)LB_pids.SelectedItem);
-                    DialogResult = DialogResult.OK;
-                 
-                }
-                catch (Exception ex)
-                {
-                    DialogResult = DialogResult.Cancel;
-                    WinFormsUtil.Error(ex.Message);
-                }
             }
         }
         private void Disconnect_BTN_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (test != null)
-                {
-                    test.Detach();
-                }
-            }
-            catch (Exception ex)
-            {
-                DialogResult = DialogResult.Cancel;
-                WinFormsUtil.Error(ex.Message);
-            }
-
+            sysbot.Disconnect();
         }
         private void Read_BTN_Click(object sender, EventArgs e)
         {
-            var Address = AddressBox.Text;
-            var Addr = ulong.Parse(Address, System.Globalization.NumberStyles.HexNumber);
-            data1=test.ReadAbsolute(Addr, 344);
-            var da = data1;
-            var Dedata=PokeCrypto.DecryptArray8(data1);
+            data1 = sysbot.ReadSlot((int)BOX_NUD.Value - 1, (int)SLOT_NUD.Value - 1, ptr);
+            var Dedata = PokeCrypto.DecryptArray8(data1);
             Dedata[6] = data1[6];
             Dedata[7] = data1[7];
-            var chk=PokeCrypto.GetCHK(Dedata, 344);
             Dedata.CopyTo(pk.Data, 0);
             LoadPK9();
-
         }
 
         private void Write_BTN_Click(object sender, EventArgs e)
         {
-            var Address = AddressBox.Text;
-            var Addr = ulong.Parse(Address, System.Globalization.NumberStyles.HexNumber);
             EditPK9();
             var data = pk;
             var chk = PokeCrypto.GetCHK(data.Data, 328);
@@ -217,31 +181,21 @@ namespace WangPluginPkm.GUI
             data.Data[7] = chkh;
             data.Data[6] = chkl;
             var endata = PokeCrypto.EncryptArray8(data.Data);
-            using var sfd = new SaveFileDialog
-            {
-                FileName = "test",
-                Filter = Pk9Filter,
-                FilterIndex = 0,
-                RestoreDirectory = true,
-            };
-
-            if (sfd.ShowDialog() != DialogResult.OK)
-                return;
-            File.WriteAllBytes(sfd.FileName, endata);
-            test.WriteAbsolute(endata, Addr);
+            sysbot.SendSlot(endata,(int)BOX_NUD.Value - 1, (int)SLOT_NUD.Value - 1, ptr);
+            // sysbot.WriteBytesAbsolute(endata, ad);
         }
         private void RandomPID_BTN_Click(object sender, EventArgs e)
         {
-            PIDtextBox.Text = Util.Rand32().ToString();
+            PIDtextBox.Text = Util.Rand32().ToString("X");
         }
 
         private void ShinyPID_BTN_Click(object sender, EventArgs e)
         {
             uint pid = Util.Rand32();
             pid = ((uint)(pk.TID ^ pk.SID) ^ pid & 0xFFFF ^ 1) << 16 | pid & 0xFFFF;
-            PIDtextBox.Text= pid.ToString();
+            PIDtextBox.Text= pid.ToString("X");
         }
+       
 
-      
     }
 }

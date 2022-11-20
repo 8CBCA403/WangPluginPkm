@@ -74,8 +74,8 @@ namespace Noexes.Base
             };
         }
 
-        public byte[] ReadBytes(uint offset, int length) => throw new NotImplementedException();
-        public byte[] ReadBytesMain(ulong offset, int length) => throw new NotImplementedException();
+        public byte[] ReadBytes(uint offset, int length) => ReadInternal(offset, length, SwitchOffsetType.Heap);
+        public byte[] ReadBytesMain(ulong offset, int length) => ReadInternal(offset,length,SwitchOffsetType.Main);
         public byte[] ReadBytesAbsolute(ulong offset, int length) => ReadInternal(offset, length, SwitchOffsetType.Absolute);
         public void WriteBytes(byte[] data, uint offset) => WriteMem(data, Heap_ + offset);
         public void WriteBytesMain(byte[] data, ulong offset) => WriteMem(data, Main_ + offset);

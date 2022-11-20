@@ -1,5 +1,5 @@
 ﻿
-namespace USP.Core
+namespace NoexesCore
 {
     public interface IRAMEditor
     {

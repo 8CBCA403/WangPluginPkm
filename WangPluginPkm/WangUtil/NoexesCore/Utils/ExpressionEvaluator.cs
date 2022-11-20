@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using static USP.Core.ExpressionEvaluator.Type;
+using static NoexesCore.ExpressionEvaluator.Type;
 
-namespace USP.Core
+namespace NoexesCore
 {
     public delegate ulong GetAddr(ulong addr);
 

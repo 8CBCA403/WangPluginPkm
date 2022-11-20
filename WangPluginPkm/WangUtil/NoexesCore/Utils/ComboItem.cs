@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace USP.Core
+namespace NoexesCore
 {
     public class ComboItem : IEquatable<ComboItem>
     {

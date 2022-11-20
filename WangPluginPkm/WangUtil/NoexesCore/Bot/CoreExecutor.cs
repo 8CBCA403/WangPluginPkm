@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace USP.Core
+namespace NoexesCore
 {
     public abstract class CoreExecutor<T> : IExecutor, IRAMEditor where T : class, IConsoleBotConfig
     {

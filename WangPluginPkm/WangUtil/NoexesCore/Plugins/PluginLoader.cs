@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace USP.Core
+namespace NoexesCore
 {
     public static class PluginLoader
     {

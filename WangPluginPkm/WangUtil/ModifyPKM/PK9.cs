@@ -11,6 +11,16 @@ namespace WangPluginPkm
         public PK9(byte[] data) => Data = data;
         public PK9() : this((byte[])Blank.Clone()) { }
         public  Span<byte> OT_Trash => Data.AsSpan(0xF8, 26);
+        public uint EncryptionConstant 
+        { 
+            get => ReadUInt32LittleEndian(Data.AsSpan(0x00)); 
+            set => WriteUInt32LittleEndian(Data.AsSpan(0x00), value); 
+        }
+        public int Language 
+        { 
+            get => Data[0xD5]; 
+            set => Data[0xD5] = (byte)value; 
+        }
         public ushort Species 
         { 
             get => ReadUInt16LittleEndian(Data.AsSpan(0x08)); 
@@ -18,8 +28,8 @@ namespace WangPluginPkm
         }
         public int Gender 
         { 
-            get => (Data[0x22] >> 2) & 0x3; 
-            set => Data[0x22] = (byte)((Data[0x22] & 0xF3) | (value << 2)); 
+            get => (Data[0x22] ) ; 
+            set => Data[0x22]  = (byte)value; 
         }
         public  int HeldItem 
         { 
@@ -61,6 +71,11 @@ namespace WangPluginPkm
         { 
             get => Data[0x21]; 
             set => Data[0x21] = (byte)value; 
+        }
+        public int StatTera
+        {
+            get => Data[0x95];
+            set => Data[0x95] = (byte)value;
         }
         public  byte Form 
         { 
@@ -137,6 +152,8 @@ namespace WangPluginPkm
         public int Move2_PPUps { get => Data[0x7F]; set => Data[0x7F] = (byte)value; }
         public int Move3_PPUps { get => Data[0x80]; set => Data[0x80] = (byte)value; }
         public int Move4_PPUps { get => Data[0x81]; set => Data[0x81] = (byte)value; }
+        public  int Ball { get => Data[0x124]; set => Data[0x124] = (byte)value; }
+        public  int OT_Friendship { get => Data[0x112]; set => Data[0x112] = (byte)value; }
         public  string OT_Name
         {
             get => StringConverter8.GetString(OT_Trash);

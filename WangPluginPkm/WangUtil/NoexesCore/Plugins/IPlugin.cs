@@ -1,5 +1,5 @@
 ﻿
-namespace USP.Core
+namespace NoexesCore
 {
     public delegate ulong EvalExecute(string expres);
     public delegate byte[] ReadBytes(ulong offset, int length);

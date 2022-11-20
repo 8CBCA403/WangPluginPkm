@@ -65,12 +65,12 @@
             this.PP4label = new System.Windows.Forms.Label();
             this.GanderTextBox = new System.Windows.Forms.TextBox();
             this.Ganderlabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.HPIVlabel = new System.Windows.Forms.Label();
+            this.AtkIVlabel = new System.Windows.Forms.Label();
+            this.DefIVlabel = new System.Windows.Forms.Label();
+            this.SpaIVlabel = new System.Windows.Forms.Label();
+            this.SpdIVlabel = new System.Windows.Forms.Label();
+            this.SpeIVlabel = new System.Windows.Forms.Label();
             this.Move1Box = new System.Windows.Forms.TextBox();
             this.Move2Box = new System.Windows.Forms.TextBox();
             this.Move3Box = new System.Windows.Forms.TextBox();
@@ -86,73 +86,85 @@
             this.ipTextBox = new System.Windows.Forms.TextBox();
             this.portTextBox = new System.Windows.Forms.TextBox();
             this.ConnectBTN = new System.Windows.Forms.Button();
-            this.LB_pids = new System.Windows.Forms.ListBox();
-            this.TIDLabel = new System.Windows.Forms.Label();
-            this.Attach_BTN = new System.Windows.Forms.Button();
             this.Read_BTN = new System.Windows.Forms.Button();
-            this.AddressBox = new System.Windows.Forms.TextBox();
             this.Write_BTN = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
+            this.TidLabel = new System.Windows.Forms.Label();
             this.TidtextBox = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
+            this.Sidlabel = new System.Windows.Forms.Label();
             this.SidtextBox = new System.Windows.Forms.TextBox();
             this.NameLabel = new System.Windows.Forms.Label();
             this.NametextBox = new System.Windows.Forms.TextBox();
             this.PIDtextBox = new System.Windows.Forms.TextBox();
             this.RandomPID_BTN = new System.Windows.Forms.Button();
             this.ShinyPID_BTN = new System.Windows.Forms.Button();
-            this.Disconnect_BTN = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
+            this.IPlabel = new System.Windows.Forms.Label();
+            this.PortLabel = new System.Windows.Forms.Label();
+            this.PIDLabel = new System.Windows.Forms.Label();
+            this.BallTextBox = new System.Windows.Forms.TextBox();
+            this.Balllabel = new System.Windows.Forms.Label();
+            this.OTFriendship_label = new System.Windows.Forms.Label();
+            this.OTFtextBox = new System.Windows.Forms.TextBox();
+            this.XorLabel = new System.Windows.Forms.Label();
+            this.XortextBox = new System.Windows.Forms.TextBox();
+            this.LanLabel = new System.Windows.Forms.Label();
+            this.languagetextBox = new System.Windows.Forms.TextBox();
+            this.TeraLabel = new System.Windows.Forms.Label();
+            this.TeratextBox = new System.Windows.Forms.TextBox();
+            this.ECtextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.BOX_NUD = new System.Windows.Forms.NumericUpDown();
+            this.SLOT_NUD = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Label = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.BOX_NUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SLOT_NUD)).BeginInit();
             this.SuspendLayout();
             // 
             // IV_HPBox
             // 
-            this.IV_HPBox.Location = new System.Drawing.Point(261, 37);
+            this.IV_HPBox.Location = new System.Drawing.Point(259, 46);
             this.IV_HPBox.Name = "IV_HPBox";
             this.IV_HPBox.Size = new System.Drawing.Size(36, 22);
             this.IV_HPBox.TabIndex = 0;
             // 
             // IV_ATKBox
             // 
-            this.IV_ATKBox.Location = new System.Drawing.Point(261, 65);
+            this.IV_ATKBox.Location = new System.Drawing.Point(259, 74);
             this.IV_ATKBox.Name = "IV_ATKBox";
             this.IV_ATKBox.Size = new System.Drawing.Size(36, 22);
             this.IV_ATKBox.TabIndex = 1;
             // 
             // IV_DEFBox
             // 
-            this.IV_DEFBox.Location = new System.Drawing.Point(261, 93);
+            this.IV_DEFBox.Location = new System.Drawing.Point(259, 102);
             this.IV_DEFBox.Name = "IV_DEFBox";
             this.IV_DEFBox.Size = new System.Drawing.Size(36, 22);
             this.IV_DEFBox.TabIndex = 2;
             // 
             // IV_SPABox
             // 
-            this.IV_SPABox.Location = new System.Drawing.Point(261, 121);
+            this.IV_SPABox.Location = new System.Drawing.Point(259, 130);
             this.IV_SPABox.Name = "IV_SPABox";
             this.IV_SPABox.Size = new System.Drawing.Size(36, 22);
             this.IV_SPABox.TabIndex = 3;
             // 
             // IV_SPEBox
             // 
-            this.IV_SPEBox.Location = new System.Drawing.Point(260, 176);
+            this.IV_SPEBox.Location = new System.Drawing.Point(259, 186);
             this.IV_SPEBox.Name = "IV_SPEBox";
             this.IV_SPEBox.Size = new System.Drawing.Size(36, 22);
             this.IV_SPEBox.TabIndex = 4;
             // 
             // IV_SPDBox
             // 
-            this.IV_SPDBox.Location = new System.Drawing.Point(260, 149);
+            this.IV_SPDBox.Location = new System.Drawing.Point(259, 159);
             this.IV_SPDBox.Name = "IV_SPDBox";
             this.IV_SPDBox.Size = new System.Drawing.Size(36, 22);
             this.IV_SPDBox.TabIndex = 5;
             // 
             // ImportBTN
             // 
-            this.ImportBTN.Location = new System.Drawing.Point(353, 177);
+            this.ImportBTN.Location = new System.Drawing.Point(13, 101);
             this.ImportBTN.Name = "ImportBTN";
             this.ImportBTN.Size = new System.Drawing.Size(94, 27);
             this.ImportBTN.TabIndex = 6;
@@ -162,7 +174,7 @@
             // 
             // ExportBTN
             // 
-            this.ExportBTN.Location = new System.Drawing.Point(456, 177);
+            this.ExportBTN.Location = new System.Drawing.Point(112, 101);
             this.ExportBTN.Name = "ExportBTN";
             this.ExportBTN.Size = new System.Drawing.Size(94, 27);
             this.ExportBTN.TabIndex = 7;
@@ -172,92 +184,92 @@
             // 
             // EV_HPBox
             // 
-            this.EV_HPBox.Location = new System.Drawing.Point(303, 37);
+            this.EV_HPBox.Location = new System.Drawing.Point(301, 46);
             this.EV_HPBox.Name = "EV_HPBox";
             this.EV_HPBox.Size = new System.Drawing.Size(36, 22);
             this.EV_HPBox.TabIndex = 8;
             // 
             // EV_ATKBox
             // 
-            this.EV_ATKBox.Location = new System.Drawing.Point(303, 65);
+            this.EV_ATKBox.Location = new System.Drawing.Point(301, 74);
             this.EV_ATKBox.Name = "EV_ATKBox";
             this.EV_ATKBox.Size = new System.Drawing.Size(36, 22);
             this.EV_ATKBox.TabIndex = 9;
             // 
             // EV_DEFBox
             // 
-            this.EV_DEFBox.Location = new System.Drawing.Point(303, 93);
+            this.EV_DEFBox.Location = new System.Drawing.Point(301, 102);
             this.EV_DEFBox.Name = "EV_DEFBox";
             this.EV_DEFBox.Size = new System.Drawing.Size(36, 22);
             this.EV_DEFBox.TabIndex = 10;
             // 
             // EV_SPABox
             // 
-            this.EV_SPABox.Location = new System.Drawing.Point(303, 121);
+            this.EV_SPABox.Location = new System.Drawing.Point(301, 130);
             this.EV_SPABox.Name = "EV_SPABox";
             this.EV_SPABox.Size = new System.Drawing.Size(36, 22);
             this.EV_SPABox.TabIndex = 11;
             // 
             // EV_SPEBox
             // 
-            this.EV_SPEBox.Location = new System.Drawing.Point(302, 177);
+            this.EV_SPEBox.Location = new System.Drawing.Point(301, 186);
             this.EV_SPEBox.Name = "EV_SPEBox";
             this.EV_SPEBox.Size = new System.Drawing.Size(36, 22);
             this.EV_SPEBox.TabIndex = 12;
             // 
             // EV_SPDBox
             // 
-            this.EV_SPDBox.Location = new System.Drawing.Point(302, 149);
+            this.EV_SPDBox.Location = new System.Drawing.Point(301, 158);
             this.EV_SPDBox.Name = "EV_SPDBox";
             this.EV_SPDBox.Size = new System.Drawing.Size(36, 22);
             this.EV_SPDBox.TabIndex = 13;
             // 
             // SpeciesBox
             // 
-            this.SpeciesBox.Location = new System.Drawing.Point(285, 9);
+            this.SpeciesBox.Location = new System.Drawing.Point(287, 15);
             this.SpeciesBox.Name = "SpeciesBox";
-            this.SpeciesBox.Size = new System.Drawing.Size(54, 22);
+            this.SpeciesBox.Size = new System.Drawing.Size(49, 22);
             this.SpeciesBox.TabIndex = 14;
             // 
             // NatureBox
             // 
-            this.NatureBox.Location = new System.Drawing.Point(411, 37);
+            this.NatureBox.Location = new System.Drawing.Point(406, 42);
             this.NatureBox.Name = "NatureBox";
-            this.NatureBox.Size = new System.Drawing.Size(36, 22);
+            this.NatureBox.Size = new System.Drawing.Size(35, 22);
             this.NatureBox.TabIndex = 15;
             // 
             // StatNatureBox
             // 
-            this.StatNatureBox.Location = new System.Drawing.Point(411, 65);
+            this.StatNatureBox.Location = new System.Drawing.Point(406, 70);
             this.StatNatureBox.Name = "StatNatureBox";
-            this.StatNatureBox.Size = new System.Drawing.Size(36, 22);
+            this.StatNatureBox.Size = new System.Drawing.Size(35, 22);
             this.StatNatureBox.TabIndex = 16;
             // 
             // AbilityNumberBox
             // 
-            this.AbilityNumberBox.Location = new System.Drawing.Point(411, 121);
+            this.AbilityNumberBox.Location = new System.Drawing.Point(406, 127);
             this.AbilityNumberBox.Name = "AbilityNumberBox";
-            this.AbilityNumberBox.Size = new System.Drawing.Size(36, 22);
+            this.AbilityNumberBox.Size = new System.Drawing.Size(35, 22);
             this.AbilityNumberBox.TabIndex = 17;
             // 
             // AbilityBox
             // 
-            this.AbilityBox.Location = new System.Drawing.Point(411, 93);
+            this.AbilityBox.Location = new System.Drawing.Point(406, 99);
             this.AbilityBox.Name = "AbilityBox";
-            this.AbilityBox.Size = new System.Drawing.Size(36, 22);
+            this.AbilityBox.Size = new System.Drawing.Size(35, 22);
             this.AbilityBox.TabIndex = 18;
             // 
             // HeldItemBox
             // 
-            this.HeldItemBox.Location = new System.Drawing.Point(411, 149);
+            this.HeldItemBox.Location = new System.Drawing.Point(406, 183);
             this.HeldItemBox.Name = "HeldItemBox";
-            this.HeldItemBox.Size = new System.Drawing.Size(36, 22);
+            this.HeldItemBox.Size = new System.Drawing.Size(35, 22);
             this.HeldItemBox.TabIndex = 19;
             // 
             // SpeciesLabel
             // 
             this.SpeciesLabel.AutoSize = true;
-            this.SpeciesLabel.Location = new System.Drawing.Point(222, 12);
+            this.SpeciesLabel.Location = new System.Drawing.Point(225, 18);
             this.SpeciesLabel.Name = "SpeciesLabel";
             this.SpeciesLabel.Size = new System.Drawing.Size(57, 16);
             this.SpeciesLabel.TabIndex = 20;
@@ -266,7 +278,7 @@
             // NaturalLabel
             // 
             this.NaturalLabel.AutoSize = true;
-            this.NaturalLabel.Location = new System.Drawing.Point(355, 39);
+            this.NaturalLabel.Location = new System.Drawing.Point(352, 46);
             this.NaturalLabel.Name = "NaturalLabel";
             this.NaturalLabel.Size = new System.Drawing.Size(50, 16);
             this.NaturalLabel.TabIndex = 21;
@@ -275,7 +287,7 @@
             // StatNatureLabel
             // 
             this.StatNatureLabel.AutoSize = true;
-            this.StatNatureLabel.Location = new System.Drawing.Point(344, 68);
+            this.StatNatureLabel.Location = new System.Drawing.Point(341, 77);
             this.StatNatureLabel.Name = "StatNatureLabel";
             this.StatNatureLabel.Size = new System.Drawing.Size(59, 16);
             this.StatNatureLabel.TabIndex = 22;
@@ -284,7 +296,7 @@
             // Abilitylabel
             // 
             this.Abilitylabel.AutoSize = true;
-            this.Abilitylabel.Location = new System.Drawing.Point(360, 96);
+            this.Abilitylabel.Location = new System.Drawing.Point(359, 106);
             this.Abilitylabel.Name = "Abilitylabel";
             this.Abilitylabel.Size = new System.Drawing.Size(43, 16);
             this.Abilitylabel.TabIndex = 23;
@@ -293,7 +305,7 @@
             // AbilityNumberlabel
             // 
             this.AbilityNumberlabel.AutoSize = true;
-            this.AbilityNumberlabel.Location = new System.Drawing.Point(350, 124);
+            this.AbilityNumberlabel.Location = new System.Drawing.Point(350, 133);
             this.AbilityNumberlabel.Name = "AbilityNumberlabel";
             this.AbilityNumberlabel.Size = new System.Drawing.Size(53, 16);
             this.AbilityNumberlabel.TabIndex = 24;
@@ -302,7 +314,7 @@
             // Itemlabel
             // 
             this.Itemlabel.AutoSize = true;
-            this.Itemlabel.Location = new System.Drawing.Point(371, 152);
+            this.Itemlabel.Location = new System.Drawing.Point(363, 188);
             this.Itemlabel.Name = "Itemlabel";
             this.Itemlabel.Size = new System.Drawing.Size(32, 16);
             this.Itemlabel.TabIndex = 25;
@@ -310,36 +322,36 @@
             // 
             // PP1TextBox
             // 
-            this.PP1TextBox.Location = new System.Drawing.Point(628, 9);
+            this.PP1TextBox.Location = new System.Drawing.Point(713, 14);
             this.PP1TextBox.Name = "PP1TextBox";
-            this.PP1TextBox.Size = new System.Drawing.Size(45, 22);
+            this.PP1TextBox.Size = new System.Drawing.Size(37, 22);
             this.PP1TextBox.TabIndex = 26;
             // 
             // PP2TextBox
             // 
-            this.PP2TextBox.Location = new System.Drawing.Point(628, 37);
+            this.PP2TextBox.Location = new System.Drawing.Point(713, 42);
             this.PP2TextBox.Name = "PP2TextBox";
-            this.PP2TextBox.Size = new System.Drawing.Size(45, 22);
+            this.PP2TextBox.Size = new System.Drawing.Size(37, 22);
             this.PP2TextBox.TabIndex = 27;
             // 
             // PP3TextBox
             // 
-            this.PP3TextBox.Location = new System.Drawing.Point(628, 65);
+            this.PP3TextBox.Location = new System.Drawing.Point(714, 70);
             this.PP3TextBox.Name = "PP3TextBox";
-            this.PP3TextBox.Size = new System.Drawing.Size(45, 22);
+            this.PP3TextBox.Size = new System.Drawing.Size(37, 22);
             this.PP3TextBox.TabIndex = 28;
             // 
             // PP4TextBox
             // 
-            this.PP4TextBox.Location = new System.Drawing.Point(628, 93);
+            this.PP4TextBox.Location = new System.Drawing.Point(713, 98);
             this.PP4TextBox.Name = "PP4TextBox";
-            this.PP4TextBox.Size = new System.Drawing.Size(45, 22);
+            this.PP4TextBox.Size = new System.Drawing.Size(37, 22);
             this.PP4TextBox.TabIndex = 29;
             // 
             // PP1label
             // 
             this.PP1label.AutoSize = true;
-            this.PP1label.Location = new System.Drawing.Point(590, 12);
+            this.PP1label.Location = new System.Drawing.Point(675, 17);
             this.PP1label.Name = "PP1label";
             this.PP1label.Size = new System.Drawing.Size(32, 16);
             this.PP1label.TabIndex = 30;
@@ -348,7 +360,7 @@
             // PP2label
             // 
             this.PP2label.AutoSize = true;
-            this.PP2label.Location = new System.Drawing.Point(590, 40);
+            this.PP2label.Location = new System.Drawing.Point(675, 45);
             this.PP2label.Name = "PP2label";
             this.PP2label.Size = new System.Drawing.Size(32, 16);
             this.PP2label.TabIndex = 31;
@@ -357,7 +369,7 @@
             // PP3label
             // 
             this.PP3label.AutoSize = true;
-            this.PP3label.Location = new System.Drawing.Point(590, 68);
+            this.PP3label.Location = new System.Drawing.Point(675, 73);
             this.PP3label.Name = "PP3label";
             this.PP3label.Size = new System.Drawing.Size(32, 16);
             this.PP3label.TabIndex = 32;
@@ -366,7 +378,7 @@
             // PP4label
             // 
             this.PP4label.AutoSize = true;
-            this.PP4label.Location = new System.Drawing.Point(590, 96);
+            this.PP4label.Location = new System.Drawing.Point(675, 101);
             this.PP4label.Name = "PP4label";
             this.PP4label.Size = new System.Drawing.Size(32, 16);
             this.PP4label.TabIndex = 33;
@@ -374,134 +386,134 @@
             // 
             // GanderTextBox
             // 
-            this.GanderTextBox.Location = new System.Drawing.Point(411, 9);
+            this.GanderTextBox.Location = new System.Drawing.Point(406, 15);
             this.GanderTextBox.Name = "GanderTextBox";
-            this.GanderTextBox.Size = new System.Drawing.Size(36, 22);
+            this.GanderTextBox.Size = new System.Drawing.Size(35, 22);
             this.GanderTextBox.TabIndex = 34;
             // 
             // Ganderlabel
             // 
             this.Ganderlabel.AutoSize = true;
-            this.Ganderlabel.Location = new System.Drawing.Point(351, 12);
+            this.Ganderlabel.Location = new System.Drawing.Point(350, 17);
             this.Ganderlabel.Name = "Ganderlabel";
             this.Ganderlabel.Size = new System.Drawing.Size(52, 16);
             this.Ganderlabel.TabIndex = 35;
-            this.Ganderlabel.Text = "Gander";
+            this.Ganderlabel.Text = "Gender";
             // 
-            // label1
+            // HPIVlabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(227, 40);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 16);
-            this.label1.TabIndex = 36;
-            this.label1.Text = "HP";
+            this.HPIVlabel.AutoSize = true;
+            this.HPIVlabel.Location = new System.Drawing.Point(225, 49);
+            this.HPIVlabel.Name = "HPIVlabel";
+            this.HPIVlabel.Size = new System.Drawing.Size(26, 16);
+            this.HPIVlabel.TabIndex = 36;
+            this.HPIVlabel.Text = "HP";
             // 
-            // label2
+            // AtkIVlabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(221, 68);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 16);
-            this.label2.TabIndex = 37;
-            this.label2.Text = "ATK";
+            this.AtkIVlabel.AutoSize = true;
+            this.AtkIVlabel.Location = new System.Drawing.Point(219, 77);
+            this.AtkIVlabel.Name = "AtkIVlabel";
+            this.AtkIVlabel.Size = new System.Drawing.Size(33, 16);
+            this.AtkIVlabel.TabIndex = 37;
+            this.AtkIVlabel.Text = "ATK";
             // 
-            // label3
+            // DefIVlabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(220, 96);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 16);
-            this.label3.TabIndex = 38;
-            this.label3.Text = "DEF";
+            this.DefIVlabel.AutoSize = true;
+            this.DefIVlabel.Location = new System.Drawing.Point(218, 105);
+            this.DefIVlabel.Name = "DefIVlabel";
+            this.DefIVlabel.Size = new System.Drawing.Size(34, 16);
+            this.DefIVlabel.TabIndex = 38;
+            this.DefIVlabel.Text = "DEF";
             // 
-            // label4
+            // SpaIVlabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(219, 124);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 16);
-            this.label4.TabIndex = 39;
-            this.label4.Text = "SPA";
+            this.SpaIVlabel.AutoSize = true;
+            this.SpaIVlabel.Location = new System.Drawing.Point(217, 133);
+            this.SpaIVlabel.Name = "SpaIVlabel";
+            this.SpaIVlabel.Size = new System.Drawing.Size(34, 16);
+            this.SpaIVlabel.TabIndex = 39;
+            this.SpaIVlabel.Text = "SPA";
             // 
-            // label5
+            // SpdIVlabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(219, 152);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 16);
-            this.label5.TabIndex = 40;
-            this.label5.Text = "SPD";
+            this.SpdIVlabel.AutoSize = true;
+            this.SpdIVlabel.Location = new System.Drawing.Point(217, 161);
+            this.SpdIVlabel.Name = "SpdIVlabel";
+            this.SpdIVlabel.Size = new System.Drawing.Size(35, 16);
+            this.SpdIVlabel.TabIndex = 40;
+            this.SpdIVlabel.Text = "SPD";
             // 
-            // label6
+            // SpeIVlabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(220, 180);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(34, 16);
-            this.label6.TabIndex = 41;
-            this.label6.Text = "SPE";
+            this.SpeIVlabel.AutoSize = true;
+            this.SpeIVlabel.Location = new System.Drawing.Point(218, 189);
+            this.SpeIVlabel.Name = "SpeIVlabel";
+            this.SpeIVlabel.Size = new System.Drawing.Size(34, 16);
+            this.SpeIVlabel.TabIndex = 41;
+            this.SpeIVlabel.Text = "SPE";
             // 
             // Move1Box
             // 
-            this.Move1Box.Location = new System.Drawing.Point(507, 9);
+            this.Move1Box.Location = new System.Drawing.Point(592, 14);
             this.Move1Box.Name = "Move1Box";
             this.Move1Box.Size = new System.Drawing.Size(43, 22);
             this.Move1Box.TabIndex = 42;
             // 
             // Move2Box
             // 
-            this.Move2Box.Location = new System.Drawing.Point(507, 37);
+            this.Move2Box.Location = new System.Drawing.Point(592, 42);
             this.Move2Box.Name = "Move2Box";
             this.Move2Box.Size = new System.Drawing.Size(43, 22);
             this.Move2Box.TabIndex = 43;
             // 
             // Move3Box
             // 
-            this.Move3Box.Location = new System.Drawing.Point(507, 65);
+            this.Move3Box.Location = new System.Drawing.Point(592, 70);
             this.Move3Box.Name = "Move3Box";
             this.Move3Box.Size = new System.Drawing.Size(43, 22);
             this.Move3Box.TabIndex = 44;
             // 
             // Move4Box
             // 
-            this.Move4Box.Location = new System.Drawing.Point(507, 93);
+            this.Move4Box.Location = new System.Drawing.Point(592, 98);
             this.Move4Box.Name = "Move4Box";
             this.Move4Box.Size = new System.Drawing.Size(43, 22);
             this.Move4Box.TabIndex = 45;
             // 
             // PP4Box
             // 
-            this.PP4Box.Location = new System.Drawing.Point(556, 93);
+            this.PP4Box.Location = new System.Drawing.Point(641, 98);
             this.PP4Box.Name = "PP4Box";
-            this.PP4Box.Size = new System.Drawing.Size(28, 22);
+            this.PP4Box.Size = new System.Drawing.Size(32, 22);
             this.PP4Box.TabIndex = 46;
             // 
             // PP2Box
             // 
-            this.PP2Box.Location = new System.Drawing.Point(556, 37);
+            this.PP2Box.Location = new System.Drawing.Point(641, 42);
             this.PP2Box.Name = "PP2Box";
-            this.PP2Box.Size = new System.Drawing.Size(28, 22);
+            this.PP2Box.Size = new System.Drawing.Size(32, 22);
             this.PP2Box.TabIndex = 47;
             // 
             // PP3Box
             // 
-            this.PP3Box.Location = new System.Drawing.Point(556, 65);
+            this.PP3Box.Location = new System.Drawing.Point(641, 70);
             this.PP3Box.Name = "PP3Box";
-            this.PP3Box.Size = new System.Drawing.Size(28, 22);
+            this.PP3Box.Size = new System.Drawing.Size(32, 22);
             this.PP3Box.TabIndex = 48;
             // 
             // PP1Box
             // 
-            this.PP1Box.Location = new System.Drawing.Point(556, 9);
+            this.PP1Box.Location = new System.Drawing.Point(641, 14);
             this.PP1Box.Name = "PP1Box";
-            this.PP1Box.Size = new System.Drawing.Size(28, 22);
+            this.PP1Box.Size = new System.Drawing.Size(32, 22);
             this.PP1Box.TabIndex = 49;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(453, 12);
+            this.label7.Location = new System.Drawing.Point(538, 20);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(48, 16);
             this.label7.TabIndex = 50;
@@ -510,7 +522,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(453, 40);
+            this.label8.Location = new System.Drawing.Point(538, 45);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(48, 16);
             this.label8.TabIndex = 51;
@@ -519,7 +531,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(453, 68);
+            this.label9.Location = new System.Drawing.Point(538, 73);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(48, 16);
             this.label9.TabIndex = 52;
@@ -528,7 +540,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(453, 96);
+            this.label10.Location = new System.Drawing.Point(538, 101);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(48, 16);
             this.label10.TabIndex = 53;
@@ -540,6 +552,7 @@
             this.ipTextBox.Name = "ipTextBox";
             this.ipTextBox.Size = new System.Drawing.Size(161, 22);
             this.ipTextBox.TabIndex = 55;
+            this.ipTextBox.Text = "192.168.3.10";
             // 
             // portTextBox
             // 
@@ -547,109 +560,74 @@
             this.portTextBox.Name = "portTextBox";
             this.portTextBox.Size = new System.Drawing.Size(62, 22);
             this.portTextBox.TabIndex = 56;
+            this.portTextBox.Text = "6000";
             // 
             // ConnectBTN
             // 
-            this.ConnectBTN.Location = new System.Drawing.Point(112, 36);
+            this.ConnectBTN.Location = new System.Drawing.Point(112, 35);
             this.ConnectBTN.Name = "ConnectBTN";
-            this.ConnectBTN.Size = new System.Drawing.Size(94, 23);
+            this.ConnectBTN.Size = new System.Drawing.Size(94, 27);
             this.ConnectBTN.TabIndex = 54;
             this.ConnectBTN.Text = "Connect";
             this.ConnectBTN.UseVisualStyleBackColor = true;
             this.ConnectBTN.Click += new System.EventHandler(this.ConnectBTN_Click);
             // 
-            // LB_pids
-            // 
-            this.LB_pids.FormattingEnabled = true;
-            this.LB_pids.ItemHeight = 16;
-            this.LB_pids.Location = new System.Drawing.Point(22, 110);
-            this.LB_pids.Name = "LB_pids";
-            this.LB_pids.ScrollAlwaysVisible = true;
-            this.LB_pids.Size = new System.Drawing.Size(185, 36);
-            this.LB_pids.TabIndex = 57;
-            // 
-            // TIDLabel
-            // 
-            this.TIDLabel.AutoSize = true;
-            this.TIDLabel.Location = new System.Drawing.Point(9, 91);
-            this.TIDLabel.Name = "TIDLabel";
-            this.TIDLabel.Size = new System.Drawing.Size(29, 16);
-            this.TIDLabel.TabIndex = 58;
-            this.TIDLabel.Text = "TID";
-            // 
-            // Attach_BTN
-            // 
-            this.Attach_BTN.Location = new System.Drawing.Point(22, 150);
-            this.Attach_BTN.Name = "Attach_BTN";
-            this.Attach_BTN.Size = new System.Drawing.Size(94, 23);
-            this.Attach_BTN.TabIndex = 59;
-            this.Attach_BTN.Text = "Attach";
-            this.Attach_BTN.UseVisualStyleBackColor = true;
-            this.Attach_BTN.Click += new System.EventHandler(this.Attach_BTN_Click);
-            // 
             // Read_BTN
             // 
-            this.Read_BTN.Location = new System.Drawing.Point(122, 149);
+            this.Read_BTN.Location = new System.Drawing.Point(13, 68);
             this.Read_BTN.Name = "Read_BTN";
-            this.Read_BTN.Size = new System.Drawing.Size(85, 23);
+            this.Read_BTN.Size = new System.Drawing.Size(94, 27);
             this.Read_BTN.TabIndex = 60;
             this.Read_BTN.Text = "Read";
             this.Read_BTN.UseVisualStyleBackColor = true;
             this.Read_BTN.Click += new System.EventHandler(this.Read_BTN_Click);
             // 
-            // AddressBox
-            // 
-            this.AddressBox.Location = new System.Drawing.Point(44, 65);
-            this.AddressBox.Name = "AddressBox";
-            this.AddressBox.Size = new System.Drawing.Size(162, 22);
-            this.AddressBox.TabIndex = 61;
-            // 
             // Write_BTN
             // 
-            this.Write_BTN.Location = new System.Drawing.Point(122, 176);
+            this.Write_BTN.Location = new System.Drawing.Point(112, 68);
             this.Write_BTN.Name = "Write_BTN";
-            this.Write_BTN.Size = new System.Drawing.Size(85, 23);
+            this.Write_BTN.Size = new System.Drawing.Size(94, 27);
             this.Write_BTN.TabIndex = 62;
             this.Write_BTN.Text = "Write";
             this.Write_BTN.UseVisualStyleBackColor = true;
             this.Write_BTN.Click += new System.EventHandler(this.Write_BTN_Click);
             // 
-            // label11
+            // TidLabel
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(453, 124);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(27, 16);
-            this.label11.TabIndex = 64;
-            this.label11.Text = "Tid";
+            this.TidLabel.AutoSize = true;
+            this.TidLabel.Location = new System.Drawing.Point(559, 157);
+            this.TidLabel.Name = "TidLabel";
+            this.TidLabel.Size = new System.Drawing.Size(27, 16);
+            this.TidLabel.TabIndex = 64;
+            this.TidLabel.Text = "Tid";
             // 
             // TidtextBox
             // 
-            this.TidtextBox.Location = new System.Drawing.Point(486, 121);
+            this.TidtextBox.Location = new System.Drawing.Point(592, 152);
             this.TidtextBox.Name = "TidtextBox";
-            this.TidtextBox.Size = new System.Drawing.Size(46, 22);
+            this.TidtextBox.Size = new System.Drawing.Size(61, 22);
             this.TidtextBox.TabIndex = 65;
             // 
-            // label12
+            // Sidlabel
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(453, 152);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(27, 16);
-            this.label12.TabIndex = 66;
-            this.label12.Text = "Sid";
+            this.Sidlabel.AutoSize = true;
+            this.Sidlabel.Location = new System.Drawing.Point(659, 155);
+            this.Sidlabel.Name = "Sidlabel";
+            this.Sidlabel.Size = new System.Drawing.Size(27, 16);
+            this.Sidlabel.TabIndex = 66;
+            this.Sidlabel.Text = "Sid";
             // 
             // SidtextBox
             // 
-            this.SidtextBox.Location = new System.Drawing.Point(486, 149);
+            this.SidtextBox.Location = new System.Drawing.Point(692, 152);
             this.SidtextBox.Name = "SidtextBox";
-            this.SidtextBox.Size = new System.Drawing.Size(46, 22);
+            this.SidtextBox.Size = new System.Drawing.Size(58, 22);
             this.SidtextBox.TabIndex = 67;
             // 
             // NameLabel
             // 
             this.NameLabel.AutoSize = true;
-            this.NameLabel.Location = new System.Drawing.Point(538, 124);
+            this.NameLabel.Location = new System.Drawing.Point(542, 127);
             this.NameLabel.Name = "NameLabel";
             this.NameLabel.Size = new System.Drawing.Size(44, 16);
             this.NameLabel.TabIndex = 68;
@@ -657,23 +635,23 @@
             // 
             // NametextBox
             // 
-            this.NametextBox.Location = new System.Drawing.Point(588, 121);
+            this.NametextBox.Location = new System.Drawing.Point(592, 126);
             this.NametextBox.Name = "NametextBox";
-            this.NametextBox.Size = new System.Drawing.Size(85, 22);
+            this.NametextBox.Size = new System.Drawing.Size(81, 22);
             this.NametextBox.TabIndex = 69;
             // 
             // PIDtextBox
             // 
-            this.PIDtextBox.Location = new System.Drawing.Point(573, 149);
+            this.PIDtextBox.Location = new System.Drawing.Point(51, 162);
             this.PIDtextBox.Name = "PIDtextBox";
-            this.PIDtextBox.Size = new System.Drawing.Size(100, 22);
+            this.PIDtextBox.Size = new System.Drawing.Size(87, 22);
             this.PIDtextBox.TabIndex = 70;
             // 
             // RandomPID_BTN
             // 
-            this.RandomPID_BTN.Location = new System.Drawing.Point(556, 177);
+            this.RandomPID_BTN.Location = new System.Drawing.Point(11, 190);
             this.RandomPID_BTN.Name = "RandomPID_BTN";
-            this.RandomPID_BTN.Size = new System.Drawing.Size(56, 27);
+            this.RandomPID_BTN.Size = new System.Drawing.Size(94, 27);
             this.RandomPID_BTN.TabIndex = 71;
             this.RandomPID_BTN.Text = "随机";
             this.RandomPID_BTN.UseVisualStyleBackColor = true;
@@ -681,85 +659,234 @@
             // 
             // ShinyPID_BTN
             // 
-            this.ShinyPID_BTN.Location = new System.Drawing.Point(618, 177);
+            this.ShinyPID_BTN.Location = new System.Drawing.Point(113, 190);
             this.ShinyPID_BTN.Name = "ShinyPID_BTN";
-            this.ShinyPID_BTN.Size = new System.Drawing.Size(55, 27);
+            this.ShinyPID_BTN.Size = new System.Drawing.Size(94, 27);
             this.ShinyPID_BTN.TabIndex = 72;
             this.ShinyPID_BTN.Text = "闪光";
             this.ShinyPID_BTN.UseVisualStyleBackColor = true;
             this.ShinyPID_BTN.Click += new System.EventHandler(this.ShinyPID_BTN_Click);
             // 
-            // Disconnect_BTN
+            // IPlabel
             // 
-            this.Disconnect_BTN.Location = new System.Drawing.Point(22, 176);
-            this.Disconnect_BTN.Name = "Disconnect_BTN";
-            this.Disconnect_BTN.Size = new System.Drawing.Size(94, 23);
-            this.Disconnect_BTN.TabIndex = 73;
-            this.Disconnect_BTN.Text = "Detach";
-            this.Disconnect_BTN.UseVisualStyleBackColor = true;
-            this.Disconnect_BTN.Click += new System.EventHandler(this.Disconnect_BTN_Click);
+            this.IPlabel.AutoSize = true;
+            this.IPlabel.Location = new System.Drawing.Point(20, 11);
+            this.IPlabel.Name = "IPlabel";
+            this.IPlabel.Size = new System.Drawing.Size(19, 16);
+            this.IPlabel.TabIndex = 74;
+            this.IPlabel.Text = "IP";
             // 
-            // label13
+            // PortLabel
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(20, 11);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(19, 16);
-            this.label13.TabIndex = 74;
-            this.label13.Text = "IP";
+            this.PortLabel.AutoSize = true;
+            this.PortLabel.Location = new System.Drawing.Point(8, 40);
+            this.PortLabel.Name = "PortLabel";
+            this.PortLabel.Size = new System.Drawing.Size(31, 16);
+            this.PortLabel.TabIndex = 75;
+            this.PortLabel.Text = "Port";
             // 
-            // label14
+            // PIDLabel
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(8, 40);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(31, 16);
-            this.label14.TabIndex = 75;
-            this.label14.Text = "Port";
+            this.PIDLabel.AutoSize = true;
+            this.PIDLabel.Location = new System.Drawing.Point(12, 165);
+            this.PIDLabel.Name = "PIDLabel";
+            this.PIDLabel.Size = new System.Drawing.Size(29, 16);
+            this.PIDLabel.TabIndex = 77;
+            this.PIDLabel.Text = "PID";
             // 
-            // label15
+            // BallTextBox
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 68);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(36, 16);
-            this.label15.TabIndex = 76;
-            this.label15.Text = "Addr";
+            this.BallTextBox.Location = new System.Drawing.Point(406, 155);
+            this.BallTextBox.Name = "BallTextBox";
+            this.BallTextBox.Size = new System.Drawing.Size(35, 22);
+            this.BallTextBox.TabIndex = 78;
             // 
-            // label16
+            // Balllabel
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(538, 153);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(29, 16);
-            this.label16.TabIndex = 77;
-            this.label16.Text = "PID";
+            this.Balllabel.AutoSize = true;
+            this.Balllabel.Location = new System.Drawing.Point(363, 162);
+            this.Balllabel.Name = "Balllabel";
+            this.Balllabel.Size = new System.Drawing.Size(30, 16);
+            this.Balllabel.TabIndex = 79;
+            this.Balllabel.Text = "Ball";
+            // 
+            // OTFriendship_label
+            // 
+            this.OTFriendship_label.AutoSize = true;
+            this.OTFriendship_label.Location = new System.Drawing.Point(447, 18);
+            this.OTFriendship_label.Name = "OTFriendship_label";
+            this.OTFriendship_label.Size = new System.Drawing.Size(34, 16);
+            this.OTFriendship_label.TabIndex = 80;
+            this.OTFriendship_label.Text = "OTF";
+            // 
+            // OTFtextBox
+            // 
+            this.OTFtextBox.Location = new System.Drawing.Point(486, 15);
+            this.OTFtextBox.Name = "OTFtextBox";
+            this.OTFtextBox.Size = new System.Drawing.Size(46, 22);
+            this.OTFtextBox.TabIndex = 81;
+            // 
+            // XorLabel
+            // 
+            this.XorLabel.AutoSize = true;
+            this.XorLabel.Location = new System.Drawing.Point(144, 165);
+            this.XorLabel.Name = "XorLabel";
+            this.XorLabel.Size = new System.Drawing.Size(27, 16);
+            this.XorLabel.TabIndex = 82;
+            this.XorLabel.Text = "Xor";
+            // 
+            // XortextBox
+            // 
+            this.XortextBox.Location = new System.Drawing.Point(169, 162);
+            this.XortextBox.Name = "XortextBox";
+            this.XortextBox.Size = new System.Drawing.Size(37, 22);
+            this.XortextBox.TabIndex = 83;
+            // 
+            // LanLabel
+            // 
+            this.LanLabel.AutoSize = true;
+            this.LanLabel.Location = new System.Drawing.Point(675, 129);
+            this.LanLabel.Name = "LanLabel";
+            this.LanLabel.Size = new System.Drawing.Size(37, 16);
+            this.LanLabel.TabIndex = 84;
+            this.LanLabel.Text = "Lang";
+            // 
+            // languagetextBox
+            // 
+            this.languagetextBox.Location = new System.Drawing.Point(713, 126);
+            this.languagetextBox.Name = "languagetextBox";
+            this.languagetextBox.Size = new System.Drawing.Size(37, 22);
+            this.languagetextBox.TabIndex = 85;
+            // 
+            // TeraLabel
+            // 
+            this.TeraLabel.AutoSize = true;
+            this.TeraLabel.Location = new System.Drawing.Point(447, 45);
+            this.TeraLabel.Name = "TeraLabel";
+            this.TeraLabel.Size = new System.Drawing.Size(36, 16);
+            this.TeraLabel.TabIndex = 86;
+            this.TeraLabel.Text = "Tera";
+            // 
+            // TeratextBox
+            // 
+            this.TeratextBox.Location = new System.Drawing.Point(486, 43);
+            this.TeratextBox.Name = "TeratextBox";
+            this.TeratextBox.Size = new System.Drawing.Size(46, 22);
+            this.TeratextBox.TabIndex = 87;
+            // 
+            // ECtextBox
+            // 
+            this.ECtextBox.Location = new System.Drawing.Point(592, 180);
+            this.ECtextBox.Name = "ECtextBox";
+            this.ECtextBox.Size = new System.Drawing.Size(158, 22);
+            this.ECtextBox.TabIndex = 88;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(561, 183);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(25, 16);
+            this.label1.TabIndex = 89;
+            this.label1.Text = "EC";
+            // 
+            // BOX_NUD
+            // 
+            this.BOX_NUD.Location = new System.Drawing.Point(51, 134);
+            this.BOX_NUD.Maximum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.BOX_NUD.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.BOX_NUD.Name = "BOX_NUD";
+            this.BOX_NUD.Size = new System.Drawing.Size(56, 22);
+            this.BOX_NUD.TabIndex = 90;
+            this.BOX_NUD.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // SLOT_NUD
+            // 
+            this.SLOT_NUD.Location = new System.Drawing.Point(152, 134);
+            this.SLOT_NUD.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.SLOT_NUD.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.SLOT_NUD.Name = "SLOT_NUD";
+            this.SLOT_NUD.Size = new System.Drawing.Size(54, 22);
+            this.SLOT_NUD.TabIndex = 91;
+            this.SLOT_NUD.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(11, 136);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(34, 16);
+            this.label2.TabIndex = 92;
+            this.label2.Text = "BOX";
+            // 
+            // Label
+            // 
+            this.Label.AutoSize = true;
+            this.Label.Location = new System.Drawing.Point(116, 136);
+            this.Label.Name = "Label";
+            this.Label.Size = new System.Drawing.Size(30, 16);
+            this.Label.TabIndex = 93;
+            this.Label.Text = "Slot";
             // 
             // PK9Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(689, 216);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.Disconnect_BTN);
+            this.ClientSize = new System.Drawing.Size(763, 229);
+            this.Controls.Add(this.Label);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.SLOT_NUD);
+            this.Controls.Add(this.BOX_NUD);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.ECtextBox);
+            this.Controls.Add(this.TeratextBox);
+            this.Controls.Add(this.TeraLabel);
+            this.Controls.Add(this.languagetextBox);
+            this.Controls.Add(this.LanLabel);
+            this.Controls.Add(this.XortextBox);
+            this.Controls.Add(this.XorLabel);
+            this.Controls.Add(this.OTFtextBox);
+            this.Controls.Add(this.OTFriendship_label);
+            this.Controls.Add(this.Balllabel);
+            this.Controls.Add(this.BallTextBox);
+            this.Controls.Add(this.PIDLabel);
+            this.Controls.Add(this.PortLabel);
+            this.Controls.Add(this.IPlabel);
             this.Controls.Add(this.ShinyPID_BTN);
             this.Controls.Add(this.RandomPID_BTN);
             this.Controls.Add(this.PIDtextBox);
             this.Controls.Add(this.NametextBox);
             this.Controls.Add(this.NameLabel);
             this.Controls.Add(this.SidtextBox);
-            this.Controls.Add(this.label12);
+            this.Controls.Add(this.Sidlabel);
             this.Controls.Add(this.TidtextBox);
-            this.Controls.Add(this.label11);
+            this.Controls.Add(this.TidLabel);
             this.Controls.Add(this.Write_BTN);
-            this.Controls.Add(this.AddressBox);
             this.Controls.Add(this.Read_BTN);
-            this.Controls.Add(this.Attach_BTN);
-            this.Controls.Add(this.TIDLabel);
-            this.Controls.Add(this.LB_pids);
             this.Controls.Add(this.portTextBox);
             this.Controls.Add(this.ipTextBox);
             this.Controls.Add(this.ConnectBTN);
@@ -775,12 +902,12 @@
             this.Controls.Add(this.Move3Box);
             this.Controls.Add(this.Move2Box);
             this.Controls.Add(this.Move1Box);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.SpeIVlabel);
+            this.Controls.Add(this.SpdIVlabel);
+            this.Controls.Add(this.SpaIVlabel);
+            this.Controls.Add(this.DefIVlabel);
+            this.Controls.Add(this.AtkIVlabel);
+            this.Controls.Add(this.HPIVlabel);
             this.Controls.Add(this.Ganderlabel);
             this.Controls.Add(this.GanderTextBox);
             this.Controls.Add(this.PP4label);
@@ -821,6 +948,8 @@
             this.Name = "PK9Editor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PK9Editor";
+            ((System.ComponentModel.ISupportInitialize)(this.BOX_NUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SLOT_NUD)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -864,12 +993,12 @@
         private System.Windows.Forms.Label PP4label;
         private System.Windows.Forms.TextBox GanderTextBox;
         private System.Windows.Forms.Label Ganderlabel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label HPIVlabel;
+        private System.Windows.Forms.Label AtkIVlabel;
+        private System.Windows.Forms.Label DefIVlabel;
+        private System.Windows.Forms.Label SpaIVlabel;
+        private System.Windows.Forms.Label SpdIVlabel;
+        private System.Windows.Forms.Label SpeIVlabel;
         private System.Windows.Forms.TextBox Move1Box;
         private System.Windows.Forms.TextBox Move2Box;
         private System.Windows.Forms.TextBox Move3Box;
@@ -885,25 +1014,35 @@
         private System.Windows.Forms.TextBox ipTextBox;
         private System.Windows.Forms.TextBox portTextBox;
         private System.Windows.Forms.Button ConnectBTN;
-        private System.Windows.Forms.ListBox LB_pids;
-        private System.Windows.Forms.Label TIDLabel;
-        private System.Windows.Forms.Button Attach_BTN;
         private System.Windows.Forms.Button Read_BTN;
-        private System.Windows.Forms.TextBox AddressBox;
         private System.Windows.Forms.Button Write_BTN;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label TidLabel;
         private System.Windows.Forms.TextBox TidtextBox;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label Sidlabel;
         private System.Windows.Forms.TextBox SidtextBox;
         private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.TextBox NametextBox;
         private System.Windows.Forms.TextBox PIDtextBox;
         private System.Windows.Forms.Button RandomPID_BTN;
         private System.Windows.Forms.Button ShinyPID_BTN;
-        private System.Windows.Forms.Button Disconnect_BTN;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label IPlabel;
+        private System.Windows.Forms.Label PortLabel;
+        private System.Windows.Forms.Label PIDLabel;
+        private System.Windows.Forms.TextBox BallTextBox;
+        private System.Windows.Forms.Label Balllabel;
+        private System.Windows.Forms.Label OTFriendship_label;
+        private System.Windows.Forms.TextBox OTFtextBox;
+        private System.Windows.Forms.Label XorLabel;
+        private System.Windows.Forms.TextBox XortextBox;
+        private System.Windows.Forms.Label LanLabel;
+        private System.Windows.Forms.TextBox languagetextBox;
+        private System.Windows.Forms.Label TeraLabel;
+        private System.Windows.Forms.TextBox TeratextBox;
+        private System.Windows.Forms.TextBox ECtextBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown BOX_NUD;
+        private System.Windows.Forms.NumericUpDown SLOT_NUD;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label Label;
     }
 }
