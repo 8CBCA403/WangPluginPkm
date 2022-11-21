@@ -5,7 +5,7 @@ using static System.Buffers.Binary.BinaryPrimitives;
 
 namespace WangPluginPkm
 {
-    internal class PK9
+    public class PK9
     {
         public byte[] Data;
         public PK9(byte[] data) => Data = data;
@@ -113,6 +113,7 @@ namespace WangPluginPkm
         public int Move2_PP { get => Data[0x7B]; set => Data[0x7B] = (byte)value; }
         public int Move3_PP { get => Data[0x7C]; set => Data[0x7C] = (byte)value; }
         public int Move4_PP { get => Data[0x7D]; set => Data[0x7D] = (byte)value; }
+       
         private uint IV32 
         { 
             get => ReadUInt32LittleEndian(Data.AsSpan(0x8C)); 
@@ -147,6 +148,35 @@ namespace WangPluginPkm
         { 
             get => (int)(IV32 >> 25) & 0x1F; 
             set => IV32 = (IV32 & ~(0x1Fu << 25)) | ((value > 31 ? 31u : (uint)value) << 25); 
+        }
+        public int[] IVs
+        {
+            get => new[] { IV_HP, IV_ATK, IV_DEF, IV_SPA, IV_SPD, IV_SPE };
+            set => SetIVs(value);
+        }
+
+        public void GetIVs(Span<int> value)
+        {
+            if (value.Length != 6)
+                return;
+            value[0] = IV_HP;
+            value[1] = IV_ATK;
+            value[2] = IV_DEF;
+            value[3] = IV_SPA;
+            value[4] = IV_SPD;
+            value[5] = IV_SPE;
+        }
+
+        public void SetIVs(ReadOnlySpan<int> value)
+        {
+            if (value.Length != 6)
+                return;
+            IV_HP = value[0];
+            IV_ATK = value[1];
+            IV_DEF = value[2];
+            IV_SPA = value[3];
+            IV_SPD = value[4];
+            IV_SPE = value[5];
         }
         public int Move1_PPUps { get => Data[0x7E]; set => Data[0x7E] = (byte)value; }
         public int Move2_PPUps { get => Data[0x7F]; set => Data[0x7F] = (byte)value; }

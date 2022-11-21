@@ -21,7 +21,7 @@ namespace WangPluginPkm.GUI
         private PK9 pk = new();
         private const string ptr = "[[[main+42FD510]+A90]+9B0]";
         private byte[] data1;
-        private const string Pk9Filter = "Go Park Entity |*.pk9|All Files|*.*";
+        private const string Pk9Filter = "PK9 Entity |*.pk9|All Files|*.*";
         private void EditPK9()
         {
             pk.IV_HP = Convert.ToInt16(IV_HPBox.Text);
