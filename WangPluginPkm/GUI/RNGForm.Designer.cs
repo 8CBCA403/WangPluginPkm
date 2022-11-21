@@ -21,13 +21,15 @@ namespace WangPluginPkm.GUI
             this.Ability_Box = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.CheckGroup_RaidBox = new System.Windows.Forms.GroupBox();
+            this.PK9Import_BTN = new System.Windows.Forms.Button();
+            this.CheckModcomboBox = new System.Windows.Forms.ComboBox();
             this.GetSeedForMaxLair_BTN = new System.Windows.Forms.Button();
-            this.Legal_Check_BOX5 = new System.Windows.Forms.TextBox();
             this.Legal_Check_BOX4 = new System.Windows.Forms.TextBox();
             this.Legal_Check_BOX3 = new System.Windows.Forms.TextBox();
             this.Legal_Check_BOX2 = new System.Windows.Forms.TextBox();
             this.Legal_Check_BOX1 = new System.Windows.Forms.TextBox();
             this.Seed_Box = new System.Windows.Forms.TextBox();
+            this.Legal_Check_BOX5 = new System.Windows.Forms.TextBox();
             this.SeedBox = new System.Windows.Forms.TextBox();
             this.PIDBox = new System.Windows.Forms.TextBox();
             this.ReverseCheck_BTN = new System.Windows.Forms.Button();
@@ -43,8 +45,6 @@ namespace WangPluginPkm.GUI
             this.Mlabel = new System.Windows.Forms.Label();
             this.Mod_ComboBox = new System.Windows.Forms.ComboBox();
             this.Tutorial_Box = new System.Windows.Forms.Button();
-            this.CheckModcomboBox = new System.Windows.Forms.ComboBox();
-            this.PK9Import_BTN = new System.Windows.Forms.Button();
             this.SearchGroupBox.SuspendLayout();
             this.CheckGroup_RaidBox.SuspendLayout();
             this.CheckGroup_ModBox.SuspendLayout();
@@ -198,6 +198,24 @@ namespace WangPluginPkm.GUI
             this.CheckGroup_RaidBox.TabStop = false;
             this.CheckGroup_RaidBox.Text = "检测(Raid/大冒险)";
             // 
+            // PK9Import_BTN
+            // 
+            this.PK9Import_BTN.Location = new System.Drawing.Point(152, 171);
+            this.PK9Import_BTN.Name = "PK9Import_BTN";
+            this.PK9Import_BTN.Size = new System.Drawing.Size(124, 25);
+            this.PK9Import_BTN.TabIndex = 46;
+            this.PK9Import_BTN.Text = "导入PK9";
+            this.PK9Import_BTN.UseVisualStyleBackColor = true;
+            this.PK9Import_BTN.Click += new System.EventHandler(this.PK9Import_BTN_Click);
+            // 
+            // CheckModcomboBox
+            // 
+            this.CheckModcomboBox.FormattingEnabled = true;
+            this.CheckModcomboBox.Location = new System.Drawing.Point(6, 23);
+            this.CheckModcomboBox.Name = "CheckModcomboBox";
+            this.CheckModcomboBox.Size = new System.Drawing.Size(140, 25);
+            this.CheckModcomboBox.TabIndex = 45;
+            // 
             // GetSeedForMaxLair_BTN
             // 
             this.GetSeedForMaxLair_BTN.Location = new System.Drawing.Point(22, 192);
@@ -207,17 +225,6 @@ namespace WangPluginPkm.GUI
             this.GetSeedForMaxLair_BTN.Text = "补seed";
             this.GetSeedForMaxLair_BTN.UseVisualStyleBackColor = true;
             this.GetSeedForMaxLair_BTN.Click += new System.EventHandler(this.GetSeedForMaxLair_BTN_Click);
-            // 
-            // Legal_Check_BOX5
-            // 
-            this.Legal_Check_BOX5.Cursor = System.Windows.Forms.Cursors.No;
-            this.Legal_Check_BOX5.Location = new System.Drawing.Point(152, 146);
-            this.Legal_Check_BOX5.Multiline = true;
-            this.Legal_Check_BOX5.Name = "Legal_Check_BOX5";
-            this.Legal_Check_BOX5.Size = new System.Drawing.Size(124, 25);
-            this.Legal_Check_BOX5.TabIndex = 35;
-            this.Legal_Check_BOX5.Text = "无事可做";
-            this.Legal_Check_BOX5.Visible = false;
             // 
             // Legal_Check_BOX4
             // 
@@ -267,6 +274,16 @@ namespace WangPluginPkm.GUI
             this.Seed_Box.Size = new System.Drawing.Size(140, 25);
             this.Seed_Box.TabIndex = 23;
             this.Seed_Box.Text = "没有seed";
+            // 
+            // Legal_Check_BOX5
+            // 
+            this.Legal_Check_BOX5.Cursor = System.Windows.Forms.Cursors.No;
+            this.Legal_Check_BOX5.Location = new System.Drawing.Point(152, 146);
+            this.Legal_Check_BOX5.Multiline = true;
+            this.Legal_Check_BOX5.Name = "Legal_Check_BOX5";
+            this.Legal_Check_BOX5.Size = new System.Drawing.Size(124, 25);
+            this.Legal_Check_BOX5.TabIndex = 35;
+            this.Legal_Check_BOX5.Text = "无事可做";
             // 
             // SeedBox
             // 
@@ -419,24 +436,6 @@ namespace WangPluginPkm.GUI
             this.Tutorial_Box.Text = "RNG面板使用说明，用前请阅读";
             this.Tutorial_Box.UseVisualStyleBackColor = true;
             this.Tutorial_Box.Click += new System.EventHandler(this.Tutorial_Box_Click);
-            // 
-            // CheckModcomboBox
-            // 
-            this.CheckModcomboBox.FormattingEnabled = true;
-            this.CheckModcomboBox.Location = new System.Drawing.Point(6, 23);
-            this.CheckModcomboBox.Name = "CheckModcomboBox";
-            this.CheckModcomboBox.Size = new System.Drawing.Size(140, 25);
-            this.CheckModcomboBox.TabIndex = 45;
-            // 
-            // PK9Import_BTN
-            // 
-            this.PK9Import_BTN.Location = new System.Drawing.Point(152, 146);
-            this.PK9Import_BTN.Name = "PK9Import_BTN";
-            this.PK9Import_BTN.Size = new System.Drawing.Size(124, 25);
-            this.PK9Import_BTN.TabIndex = 46;
-            this.PK9Import_BTN.Text = "导入PK9";
-            this.PK9Import_BTN.UseVisualStyleBackColor = true;
-            this.PK9Import_BTN.Click += new System.EventHandler(this.PK9Import_BTN_Click);
             // 
             // RNGForm
             // 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using PKHeX.Core;
 using System.Windows.Forms;
+using WangPluginPkm.RNG;
 
 namespace WangPluginPkm
 {
@@ -26,8 +27,9 @@ namespace WangPluginPkm
         const int NNature = 25;
 
         const int UNSET = -1;
-        public static void CalculateFromSeed(uint seed = 0)
+        public static PK9 CalculateFromSeed(int Miniv,uint seed = 0 )
         {
+            PK9 pk9 = new PK9();
             int i;
             var xoro = seed == 0 ? new Xoroshiro() : new Xoroshiro(seed);
             var personalRnd = xoro.NextUInt();
@@ -49,11 +51,12 @@ namespace WangPluginPkm
                     if (IsShiny(rareRnd))
                     rareRnd = ForceNonShiny(rareRnd);
             }
-
-
+            pk9.EncryptionConstant = personalRnd;
+            pk9.PID = rareRnd;
+            
             int[] ivs = { UNSET, UNSET, UNSET, UNSET, UNSET, UNSET };
             var determined = 0;
-            while (determined < NFlawless)
+            while (determined < Miniv)
             {
                 var idx = xoro.NextInt(NIV);
                 if (ivs[idx] != UNSET)
@@ -65,21 +68,21 @@ namespace WangPluginPkm
             for (i = 0; i < ivs.Length; i++)
                 if (ivs[i] == UNSET)
                     ivs[i] = (int)xoro.NextInt(IVMaxValue + 1);
-
-            var IV_HP = ivs[0];
-            var IV_ATK = ivs[1];
-            var IV_DEF = ivs[2];
-            var IV_SPA = ivs[3];
-            var IV_SPD = ivs[4];
-            var IV_SPE = ivs[5];
-
-            var ability = xoro.NextInt(NAbility);
+            pk9.IVs= ivs;
+            pk9.IV_HP = ivs[0];
+            pk9. IV_ATK = ivs[1];
+            pk9. IV_DEF = ivs[2];
+            pk9. IV_SPA = ivs[3];
+            pk9.IV_SPD = ivs[4];
+            pk9. IV_SPE = ivs[5];
+            
+            var ability =(int) xoro.NextInt(NAbility);
             var nature = xoro.NextInt(NNature);
             var nature2 = xoro.NextInt(NNature);
-
+            pk9.AbilityNumber = ability;
             var userString = isShiny ? $"(For TID {UserTID} and SID {UserSID} - Change settings in the code)" : "";
-
-            Console.WriteLine($"\nEC: {personalRnd:X}\n" +
+            return pk9;
+         /*   Console.WriteLine($"\nEC: {personalRnd:X}\n" +
                 $"PID: {rareRnd:X} {userString}\n" +
                 $"Shiny: {isShiny}\n" +
                 $"IVs: {IV_HP}/{IV_ATK}/{IV_DEF}/{IV_SPA}/{IV_SPD}/{IV_SPE}\n" +
@@ -87,6 +90,7 @@ namespace WangPluginPkm
                 $"Nature (without Gender call): {(Nature)nature}\n" +
                 $"Nature (with standard Gender call): {(Nature)nature2}\n" +
                 $"[Nature calculation might be inaccurate for some Pokémon]");
+         */
         }
 
         public static void ComputeShinySeed(uint seed = 0, bool showDetails = false)
@@ -119,21 +123,28 @@ namespace WangPluginPkm
             Console.WriteLine($"Shiny Seed: {seed:X}");
 
             if (showDetails)
-                CalculateFromSeed(seed);
+                CalculateFromSeed(1,seed);
         }
 
-        public static void CheckLegality(PK9 pk)
+        public static PK9 CheckLegality(PK9 pk,int miniv)
         {
             var originalSeed = ReverseSeed(pk.EncryptionConstant);
-            var isValid = IsValidEncounter(pk.EncryptionConstant, pk.PID, pk.IVs, pk.AbilityNumber,pk.Nature);
-            var reversedString = GetValidationString(originalSeed, isValid);
-            MessageBox.Show($"Original Seed: {reversedString:X}");
+            var isValid = IsValidEncounter(pk.EncryptionConstant, pk.PID, pk.IVs, pk.AbilityNumber, pk.Nature, miniv);
+            CheckResult r = new();
+            r.r = isValid;
+            r.seed = originalSeed;
+            var p=CalculateFromSeed(miniv, originalSeed);
+            p.seed = originalSeed;
+            //   var reversedString = GetValidationString(originalSeed, isValid);
+            //    MessageBox.Show($"Original Seed: {reversedString:X}");
+            return p;
         }
 
         private static uint ReverseSeed(uint EC) => EC - (uint)(Xoroshiro.XOROSHIRO_CONST & 0xFFFFFFFF);
 
-        private static bool IsValidEncounter(uint EC, uint PID, int[] IVS, int ABILITY, int NATURE)
+        private static bool[] IsValidEncounter(uint EC, uint PID, int[] IVS, int ABILITY, int NATURE,int Miniv)
         {
+            bool[] r = { false, false, false,false,false,false};
             var reversed = ReverseSeed(EC);
             var xoro = new Xoroshiro(reversed);
 
@@ -162,14 +173,14 @@ namespace WangPluginPkm
                     break;
             }
 
-            if (rareRnd != PID)
-                return false;
+            if (rareRnd == PID)
+                r[0] = true;
 
             if (!IsUnset(IVS))
             {
                 int[] ivs = { UNSET, UNSET, UNSET, UNSET, UNSET, UNSET };
                 var determined = 0;
-                while (determined < NFlawless)
+                while (determined < Miniv)
                 {
                     var idx = xoro.NextInt(NIV);
                     if (ivs[idx] != UNSET)
@@ -182,27 +193,27 @@ namespace WangPluginPkm
                     if (ivs[i] == UNSET)
                         ivs[i] = (int)xoro.NextInt(IVMaxValue + 1);
 
-                if (!Enumerable.SequenceEqual(ivs, IVS))
-                    return false;
+                if (Enumerable.SequenceEqual(ivs, IVS))
+                    r[1] = true;
 
                 if (ABILITY != UNSET)
                 {
                     var ability = (int)xoro.NextInt(NAbility);
-                    if (ability + 1 != ABILITY)
-                        return false;
+                    if (ability + 1 == ABILITY)
+                        r[2] = true;
 
                  //   if (NATURE != Nature.None)
                     {
                         var nature = (int)xoro.NextInt(NNature);
                         var nature2 =(int) xoro.NextInt(NNature);
 
-                        if (nature != NATURE && nature2 != NATURE)
-                            return false;
+                        if (nature == NATURE || nature2 == NATURE)
+                            r[3] = true;
                     }
                 }
             }
 
-            return true;
+            return r;
         }
 
         private static bool IsShiny(uint PID, ushort TID = UserTID, ushort SID = UserSID) =>

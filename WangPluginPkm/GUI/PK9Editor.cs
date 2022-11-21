@@ -44,6 +44,8 @@ namespace WangPluginPkm.GUI
             pk.HeldItem = Convert.ToInt16(HeldItemBox.Text);
             var HEX = "0x" + PIDtextBox.Text;
             pk.PID = Convert.ToUInt32(HEX, 16);
+            var ECHEX = "0x" + ECtextBox.Text;
+            pk.EncryptionConstant= Convert.ToUInt32(ECHEX, 16);
             pk.Ball = Convert.ToInt16(BallTextBox.Text);
             pk.OT_Friendship = Convert.ToInt16(OTFtextBox.Text);
             pk.Gender = Convert.ToSByte(GanderTextBox.Text);
@@ -195,7 +197,10 @@ namespace WangPluginPkm.GUI
             pid = ((uint)(pk.TID ^ pk.SID) ^ pid & 0xFFFF ^ 1) << 16 | pid & 0xFFFF;
             PIDtextBox.Text= pid.ToString("X");
         }
-       
 
+        private void RandomEC_BTN_Click(object sender, EventArgs e)
+        {
+            ECtextBox.Text = Util.Rand32().ToString("X");
+        }
     }
 }

@@ -8,6 +8,8 @@ namespace WangPluginPkm
     public class PK9
     {
         public byte[] Data;
+
+        public uint seed=0;
         public PK9(byte[] data) => Data = data;
         public PK9() : this((byte[])Blank.Clone()) { }
         public  Span<byte> OT_Trash => Data.AsSpan(0xF8, 26);

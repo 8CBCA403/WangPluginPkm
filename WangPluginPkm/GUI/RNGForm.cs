@@ -411,7 +411,60 @@ namespace WangPluginPkm.GUI
                     }
                 case CheckMod.SV:
                     {
-                        SVXoro.CheckLegality(newpk);
+                        var r=SVXoro.CheckLegality(newpk,MinIV);
+                        if(r.seed==0xffffffff)
+                        {
+                            Legal_Check_BOX2.Text = "逆推失败!没找到Seed";
+                            Legal_Check_BOX2.BackColor = Color.Red;
+                            Legal_Check_BOX3.Text = "无法检测PID/EC/IV";
+                            Legal_Check_BOX3.BackColor = Color.Red;
+                            Legal_Check_BOX4.Text = "无法检测性格性别";
+                            Legal_Check_BOX4.BackColor = Color.Red;
+                            Legal_Check_BOX5.Text = "无法检测身高体重";
+                            Legal_Check_BOX5.BackColor = Color.Red;
+                        }
+                        else
+                        {
+                            Legal_Check_BOX1.Text = $"逆推成功!";
+                            Legal_Check_BOX1.BackColor = Color.Green;
+                            Legal_Check_BOX2.Text = $"Seed{r.seed.ToString("X")}";
+                            Legal_Check_BOX2.BackColor = Color.Green;
+                            if (r.PID!=newpk.PID)
+                            {
+                                Legal_Check_BOX3.Text = "PID不匹配";
+                                Legal_Check_BOX3.BackColor = Color.Red;
+                            }
+                            else
+                            {
+                                Legal_Check_BOX3.Text = "PID匹配";
+                                Legal_Check_BOX3.BackColor = Color.Green;
+                            }
+                            if (r.IV_ATK!=newpk.IV_ATK||
+                                r.IV_DEF != newpk.IV_DEF ||
+                                r.IV_HP != newpk.IV_HP ||
+                                r.IV_SPA != newpk.IV_SPA ||
+                                r.IV_SPD != newpk.IV_SPD ||
+                                r.IV_SPE != newpk.IV_SPE)
+                            {
+                                Legal_Check_BOX4.Text = "IV不匹配";
+                                Legal_Check_BOX4.BackColor = Color.Red;
+                            }
+                            else
+                            {
+                                Legal_Check_BOX4.Text = "IV匹配";
+                                Legal_Check_BOX4.BackColor = Color.Green;
+                            }
+                            if (r.AbilityNumber+1 != newpk.AbilityNumber)
+                            {
+                                Legal_Check_BOX5.Text = "特性不匹配";
+                                Legal_Check_BOX5.BackColor = Color.Red;
+                            }
+                            else
+                            {
+                                Legal_Check_BOX5.Text = "特性匹配";
+                                Legal_Check_BOX5.BackColor = Color.Green;
+                            }
+                        }
                         break;
                     }
 
@@ -667,7 +720,7 @@ namespace WangPluginPkm.GUI
             Dedata[7] = data[7];
             Dedata.CopyTo(newpk.Data, 0);
             MessageBox.Show($"{newpk.IVs[0]}\n{newpk.IVs[1]}\n{newpk.IVs[2]}\n" +
-                $"{newpk.IVs[3]}\n{newpk.IVs[4]}\n{newpk.IVs[5]}\n{newpk.Nature}\n{newpk.AbilityNumber}");
+                $"{newpk.IVs[3]}\n{newpk.IVs[4]}\n{newpk.IVs[5]}\n");
         }
 
 
