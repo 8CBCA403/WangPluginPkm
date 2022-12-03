@@ -7,7 +7,7 @@ namespace WangPluginPkm.Plugins
     internal class AboutPlugin: WangPluginPkm
     {
         public override string Name => "关于/About";
-        public override int Priority => 11;
+        public override int Priority => 12;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {

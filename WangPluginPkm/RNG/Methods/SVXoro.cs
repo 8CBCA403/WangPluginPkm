@@ -82,18 +82,9 @@ namespace WangPluginPkm
             pk9.AbilityNumber = ability;
             var userString = isShiny ? $"(For TID {UserTID} and SID {UserSID} - Change settings in the code)" : "";
             return pk9;
-         /*   Console.WriteLine($"\nEC: {personalRnd:X}\n" +
-                $"PID: {rareRnd:X} {userString}\n" +
-                $"Shiny: {isShiny}\n" +
-                $"IVs: {IV_HP}/{IV_ATK}/{IV_DEF}/{IV_SPA}/{IV_SPD}/{IV_SPE}\n" +
-                $"Ability: {ability + 1}\n" +
-                $"Nature (without Gender call): {(Nature)nature}\n" +
-                $"Nature (with standard Gender call): {(Nature)nature2}\n" +
-                $"[Nature calculation might be inaccurate for some Pokémon]");
-         */
         }
 
-        public static void ComputeShinySeed(uint seed = 0, bool showDetails = false)
+        public static string ComputeShinySeed(uint seed = 0, bool showDetails = false)
         {
             var prev = seed == 0 ? Xoroshiro.XOROSHIRO_CONST : seed;
             var isShiny = false;
@@ -120,10 +111,10 @@ namespace WangPluginPkm
             }
 
             seed = ReverseSeed(personalRnd);
-            Console.WriteLine($"Shiny Seed: {seed:X}");
+            return $"{seed:X}";
 
-            if (showDetails)
-                CalculateFromSeed(1,seed);
+         //   if (showDetails)
+              //  CalculateFromSeed(1,seed);
         }
 
         public static PK9 CheckLegality(PK9 pk,int miniv)
@@ -134,13 +125,10 @@ namespace WangPluginPkm
             r.r = isValid;
             r.seed = originalSeed;
             var p=CalculateFromSeed(miniv, originalSeed);
-            p.seed = originalSeed;
-            //   var reversedString = GetValidationString(originalSeed, isValid);
-            //    MessageBox.Show($"Original Seed: {reversedString:X}");
             return p;
         }
 
-        private static uint ReverseSeed(uint EC) => EC - (uint)(Xoroshiro.XOROSHIRO_CONST & 0xFFFFFFFF);
+        public static uint ReverseSeed(uint EC) => EC - (uint)(Xoroshiro.XOROSHIRO_CONST & 0xFFFFFFFF);
 
         private static bool[] IsValidEncounter(uint EC, uint PID, int[] IVS, int ABILITY, int NATURE,int Miniv)
         {

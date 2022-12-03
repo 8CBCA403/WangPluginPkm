@@ -70,6 +70,7 @@ namespace WangPluginPkm.GUI
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.RandEC_BTN = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -79,7 +80,7 @@ namespace WangPluginPkm.GUI
             // 
             // LoadEH1_BTN
             // 
-            this.LoadEH1_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.LoadEH1_BTN.Font = new System.Drawing.Font("SimHei", 9F);
             this.LoadEH1_BTN.Location = new System.Drawing.Point(151, 16);
             this.LoadEH1_BTN.Name = "LoadEH1_BTN";
             this.LoadEH1_BTN.Size = new System.Drawing.Size(100, 25);
@@ -97,14 +98,14 @@ namespace WangPluginPkm.GUI
             // 
             this.BOX_TextBox.Location = new System.Drawing.Point(44, 17);
             this.BOX_TextBox.Name = "BOX_TextBox";
-            this.BOX_TextBox.Size = new System.Drawing.Size(100, 25);
+            this.BOX_TextBox.Size = new System.Drawing.Size(100, 22);
             this.BOX_TextBox.TabIndex = 1;
             this.BOX_TextBox.Text = "1";
             // 
             // BOX_Label
             // 
             this.BOX_Label.AutoSize = true;
-            this.BOX_Label.Font = new System.Drawing.Font("黑体", 9F);
+            this.BOX_Label.Font = new System.Drawing.Font("SimHei", 9F);
             this.BOX_Label.Location = new System.Drawing.Point(6, 21);
             this.BOX_Label.Name = "BOX_Label";
             this.BOX_Label.Size = new System.Drawing.Size(39, 15);
@@ -113,7 +114,7 @@ namespace WangPluginPkm.GUI
             // 
             // Clone_BTN
             // 
-            this.Clone_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.Clone_BTN.Font = new System.Drawing.Font("SimHei", 9F);
             this.Clone_BTN.Location = new System.Drawing.Point(115, 49);
             this.Clone_BTN.Name = "Clone_BTN";
             this.Clone_BTN.Size = new System.Drawing.Size(100, 25);
@@ -125,7 +126,7 @@ namespace WangPluginPkm.GUI
             // ShinyBox
             // 
             this.ShinyBox.AutoSize = true;
-            this.ShinyBox.Font = new System.Drawing.Font("黑体", 9F);
+            this.ShinyBox.Font = new System.Drawing.Font("SimHei", 9F);
             this.ShinyBox.Location = new System.Drawing.Point(8, 24);
             this.ShinyBox.Name = "ShinyBox";
             this.ShinyBox.Size = new System.Drawing.Size(61, 19);
@@ -135,7 +136,7 @@ namespace WangPluginPkm.GUI
             // 
             // Gift_BTN
             // 
-            this.Gift_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Gift_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Gift_BTN.Location = new System.Drawing.Point(221, 49);
             this.Gift_BTN.Name = "Gift_BTN";
             this.Gift_BTN.Size = new System.Drawing.Size(100, 25);
@@ -147,7 +148,7 @@ namespace WangPluginPkm.GUI
             // SetTrainer_Box
             // 
             this.SetTrainer_Box.AutoSize = true;
-            this.SetTrainer_Box.Font = new System.Drawing.Font("黑体", 9F);
+            this.SetTrainer_Box.Font = new System.Drawing.Font("SimHei", 9F);
             this.SetTrainer_Box.Location = new System.Drawing.Point(59, 24);
             this.SetTrainer_Box.Name = "SetTrainer_Box";
             this.SetTrainer_Box.Size = new System.Drawing.Size(109, 19);
@@ -157,7 +158,7 @@ namespace WangPluginPkm.GUI
             // 
             // AllRibbon_BTN
             // 
-            this.AllRibbon_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.AllRibbon_BTN.Font = new System.Drawing.Font("SimHei", 9F);
             this.AllRibbon_BTN.Location = new System.Drawing.Point(130, 18);
             this.AllRibbon_BTN.Name = "AllRibbon_BTN";
             this.AllRibbon_BTN.Size = new System.Drawing.Size(100, 25);
@@ -168,7 +169,7 @@ namespace WangPluginPkm.GUI
             // 
             // LoadTrainer_BTN
             // 
-            this.LoadTrainer_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.LoadTrainer_BTN.Font = new System.Drawing.Font("SimHei", 9F);
             this.LoadTrainer_BTN.Location = new System.Drawing.Point(114, 15);
             this.LoadTrainer_BTN.Name = "LoadTrainer_BTN";
             this.LoadTrainer_BTN.Size = new System.Drawing.Size(100, 25);
@@ -182,7 +183,7 @@ namespace WangPluginPkm.GUI
             this.BallBox.FormattingEnabled = true;
             this.BallBox.Location = new System.Drawing.Point(332, 49);
             this.BallBox.Name = "BallBox";
-            this.BallBox.Size = new System.Drawing.Size(62, 23);
+            this.BallBox.Size = new System.Drawing.Size(62, 24);
             this.BallBox.TabIndex = 48;
             // 
             // Trainer_Box
@@ -190,12 +191,12 @@ namespace WangPluginPkm.GUI
             this.Trainer_Box.FormattingEnabled = true;
             this.Trainer_Box.Location = new System.Drawing.Point(8, 17);
             this.Trainer_Box.Name = "Trainer_Box";
-            this.Trainer_Box.Size = new System.Drawing.Size(100, 23);
+            this.Trainer_Box.Size = new System.Drawing.Size(100, 24);
             this.Trainer_Box.TabIndex = 49;
             // 
             // Use_Trainer_BTN
             // 
-            this.Use_Trainer_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.Use_Trainer_BTN.Font = new System.Drawing.Font("SimHei", 9F);
             this.Use_Trainer_BTN.Location = new System.Drawing.Point(114, 49);
             this.Use_Trainer_BTN.Name = "Use_Trainer_BTN";
             this.Use_Trainer_BTN.Size = new System.Drawing.Size(100, 25);
@@ -207,7 +208,7 @@ namespace WangPluginPkm.GUI
             // RandPID_Box
             // 
             this.RandPID_Box.AutoSize = true;
-            this.RandPID_Box.Font = new System.Drawing.Font("黑体", 9F);
+            this.RandPID_Box.Font = new System.Drawing.Font("SimHei", 9F);
             this.RandPID_Box.Location = new System.Drawing.Point(298, 24);
             this.RandPID_Box.Name = "RandPID_Box";
             this.RandPID_Box.Size = new System.Drawing.Size(85, 19);
@@ -217,7 +218,7 @@ namespace WangPluginPkm.GUI
             // 
             // IVEVN_BTN
             // 
-            this.IVEVN_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.IVEVN_BTN.Font = new System.Drawing.Font("SimHei", 9F);
             this.IVEVN_BTN.Location = new System.Drawing.Point(118, 16);
             this.IVEVN_BTN.Name = "IVEVN_BTN";
             this.IVEVN_BTN.Size = new System.Drawing.Size(100, 25);
@@ -228,7 +229,7 @@ namespace WangPluginPkm.GUI
             // 
             // Move_Shop
             // 
-            this.Move_Shop.Font = new System.Drawing.Font("黑体", 9F);
+            this.Move_Shop.Font = new System.Drawing.Font("SimHei", 9F);
             this.Move_Shop.Location = new System.Drawing.Point(23, 18);
             this.Move_Shop.Name = "Move_Shop";
             this.Move_Shop.Size = new System.Drawing.Size(100, 25);
@@ -239,8 +240,8 @@ namespace WangPluginPkm.GUI
             // 
             // LevelMax_BTN
             // 
-            this.LevelMax_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.LevelMax_BTN.Location = new System.Drawing.Point(78, 49);
+            this.LevelMax_BTN.Font = new System.Drawing.Font("SimHei", 9F);
+            this.LevelMax_BTN.Location = new System.Drawing.Point(23, 49);
             this.LevelMax_BTN.Name = "LevelMax_BTN";
             this.LevelMax_BTN.Size = new System.Drawing.Size(100, 25);
             this.LevelMax_BTN.TabIndex = 59;
@@ -251,7 +252,7 @@ namespace WangPluginPkm.GUI
             // Ball_Box
             // 
             this.Ball_Box.AutoSize = true;
-            this.Ball_Box.Font = new System.Drawing.Font("黑体", 9F);
+            this.Ball_Box.Font = new System.Drawing.Font("SimHei", 9F);
             this.Ball_Box.Location = new System.Drawing.Point(400, 51);
             this.Ball_Box.Name = "Ball_Box";
             this.Ball_Box.Size = new System.Drawing.Size(61, 19);
@@ -264,7 +265,7 @@ namespace WangPluginPkm.GUI
             this.Edit_EVIVN_Box.FormattingEnabled = true;
             this.Edit_EVIVN_Box.Location = new System.Drawing.Point(6, 18);
             this.Edit_EVIVN_Box.Name = "Edit_EVIVN_Box";
-            this.Edit_EVIVN_Box.Size = new System.Drawing.Size(100, 23);
+            this.Edit_EVIVN_Box.Size = new System.Drawing.Size(100, 24);
             this.Edit_EVIVN_Box.TabIndex = 62;
             // 
             // Clone_Select_Box
@@ -272,7 +273,7 @@ namespace WangPluginPkm.GUI
             this.Clone_Select_Box.FormattingEnabled = true;
             this.Clone_Select_Box.Location = new System.Drawing.Point(9, 51);
             this.Clone_Select_Box.Name = "Clone_Select_Box";
-            this.Clone_Select_Box.Size = new System.Drawing.Size(100, 23);
+            this.Clone_Select_Box.Size = new System.Drawing.Size(100, 24);
             this.Clone_Select_Box.TabIndex = 63;
             // 
             // Trainer_Select_Box
@@ -280,13 +281,13 @@ namespace WangPluginPkm.GUI
             this.Trainer_Select_Box.FormattingEnabled = true;
             this.Trainer_Select_Box.Location = new System.Drawing.Point(8, 51);
             this.Trainer_Select_Box.Name = "Trainer_Select_Box";
-            this.Trainer_Select_Box.Size = new System.Drawing.Size(100, 23);
+            this.Trainer_Select_Box.Size = new System.Drawing.Size(100, 24);
             this.Trainer_Select_Box.TabIndex = 64;
             // 
             // Random_Trainer_Box
             // 
             this.Random_Trainer_Box.AutoSize = true;
-            this.Random_Trainer_Box.Font = new System.Drawing.Font("黑体", 9F);
+            this.Random_Trainer_Box.Font = new System.Drawing.Font("SimHei", 9F);
             this.Random_Trainer_Box.Location = new System.Drawing.Point(142, 24);
             this.Random_Trainer_Box.Name = "Random_Trainer_Box";
             this.Random_Trainer_Box.Size = new System.Drawing.Size(109, 19);
@@ -317,7 +318,7 @@ namespace WangPluginPkm.GUI
             // RandEC_Box
             // 
             this.RandEC_Box.AutoSize = true;
-            this.RandEC_Box.Font = new System.Drawing.Font("黑体", 9F);
+            this.RandEC_Box.Font = new System.Drawing.Font("SimHei", 9F);
             this.RandEC_Box.Location = new System.Drawing.Point(369, 24);
             this.RandEC_Box.Name = "RandEC_Box";
             this.RandEC_Box.Size = new System.Drawing.Size(77, 19);
@@ -328,7 +329,7 @@ namespace WangPluginPkm.GUI
             // Random_Name_Box
             // 
             this.Random_Name_Box.AutoSize = true;
-            this.Random_Name_Box.Font = new System.Drawing.Font("黑体", 9F);
+            this.Random_Name_Box.Font = new System.Drawing.Font("SimHei", 9F);
             this.Random_Name_Box.Location = new System.Drawing.Point(226, 24);
             this.Random_Name_Box.Name = "Random_Name_Box";
             this.Random_Name_Box.Size = new System.Drawing.Size(93, 19);
@@ -351,6 +352,7 @@ namespace WangPluginPkm.GUI
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.RandEC_BTN);
             this.groupBox3.Controls.Add(this.LevelMax_BTN);
             this.groupBox3.Controls.Add(this.Move_Shop);
             this.groupBox3.Controls.Add(this.AllRibbon_BTN);
@@ -384,6 +386,17 @@ namespace WangPluginPkm.GUI
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "编辑面板";
             // 
+            // RandEC_BTN
+            // 
+            this.RandEC_BTN.Font = new System.Drawing.Font("SimHei", 9F);
+            this.RandEC_BTN.Location = new System.Drawing.Point(130, 49);
+            this.RandEC_BTN.Name = "RandEC_BTN";
+            this.RandEC_BTN.Size = new System.Drawing.Size(100, 25);
+            this.RandEC_BTN.TabIndex = 60;
+            this.RandEC_BTN.Text = "随机EC";
+            this.RandEC_BTN.UseVisualStyleBackColor = true;
+            this.RandEC_BTN.Click += new System.EventHandler(this.RandEC_BTN_Click);
+            // 
             // DistributionUI
             // 
             this.ClientSize = new System.Drawing.Size(528, 251);
@@ -408,5 +421,7 @@ namespace WangPluginPkm.GUI
             this.ResumeLayout(false);
 
         }
+
+        private Button RandEC_BTN;
     }
 }

@@ -4,6 +4,9 @@ using System.IO;
 using System;
 using WangPluginPkm.WangUtil;
 using SysBotBase;
+using WangPluginPkm.WangUtil.PluginEnums;
+using WangPluginPkm.Properties;
+using System.Diagnostics;
 
 namespace WangPluginPkm.GUI
 {
@@ -17,9 +20,45 @@ namespace WangPluginPkm.GUI
         public PK9Editor(ISaveFileProvider sav, IPKMView editor)
         {
             InitializeComponent();
+            BindingData();
         }
         private PK9 pk = new();
-        private const string ptr = "[[[main+42FD510]+A90]+9B0]";
+      
+        public enum Mod
+        {
+            Box,
+            Party,
+        }
+       
+        public Mod mod=Mod.Box;
+    
+        private void BindingData()
+        {
+            BallBox.DataSource = Enum.GetNames(typeof(PKBall));
+            NatureBox.DataSource = Enum.GetNames(typeof(PKNature));
+            StatNatureBox.DataSource = Enum.GetNames(typeof(PKNature));
+            ModBox.DataSource=Enum.GetNames(typeof(Mod));
+            AbilityBox.DataSource=Enum.GetNames(typeof(PKAbility));
+            SpeciesBox.DataSource=Enum.GetNames(typeof(PKSpecies));
+            languageBox.DataSource = Enum.GetNames(typeof(PKLanguageID));
+            FirstMoveBox.DataSource = Enum.GetNames(typeof(PKMoves));
+            SecondMoveBox.DataSource = Enum.GetNames(typeof(PKMoves));
+            ThirdMoveBox.DataSource = Enum.GetNames(typeof(PKMoves));
+            ForthMoveBox.DataSource = Enum.GetNames(typeof(PKMoves));
+            OTGanderBox.DataSource = Enum.GetValues(typeof(OTGender));
+            TeraBox.DataSource = Enum.GetValues(typeof(MoveType));
+            ModBox.SelectedIndexChanged += (_, __) =>
+            {
+                mod = (Mod)Enum.Parse(typeof(Mod), this.ModBox.SelectedItem.ToString(), false);
+            };
+        }
+        private const string ptr = "[[[main+43A7778]+A90]+9B0]";
+        private const string pt1 = "[[[[main+43A77B8]+08]+30]+30]";
+        private const string pt2 = "[[[[main+43A77B8]+08]+38]+30]";
+        private const string pt3 = "[[[[main+43A77B8]+08]+40]+30]";
+        private const string pt4 = "[[[[main+43A77B8]+08]+50]+30]";
+        private const string pt5 = "[[[[main+43A77B8]+08]+58]+30]";
+        private const string pt6 = "[[[[main+43A77B8]+08]+60]+30]";
         private byte[] data1;
         private const string Pk9Filter = "PK9 Entity |*.pk9|All Files|*.*";
         private void EditPK9()
@@ -36,21 +75,28 @@ namespace WangPluginPkm.GUI
             pk.EV_SPA = Convert.ToInt16(EV_SPABox.Text);
             pk.EV_SPE = Convert.ToInt16(EV_SPEBox.Text);
             pk.EV_SPD = Convert.ToInt16(EV_SPDBox.Text);
-            pk.Species = Convert.ToUInt16(SpeciesBox.Text);
-            pk.Nature = Convert.ToInt16(NatureBox.Text);
-            pk.StatNature = Convert.ToInt16(StatNatureBox.Text);
-            pk.Ability = Convert.ToInt16(AbilityBox.Text);
+            pk.Species = Convert.ToUInt16(SpeciesBox.SelectedIndex);
+            pk.Nature = NatureBox.SelectedIndex;
+            pk.StatNature = StatNatureBox.SelectedIndex;
+            pk.Ability = AbilityBox.SelectedIndex;
             pk.AbilityNumber = Convert.ToInt16(AbilityNumberBox.Text);
             pk.HeldItem = Convert.ToInt16(HeldItemBox.Text);
+            pk.Move1 = Convert.ToUInt16(FirstMoveBox.SelectedIndex);
+            pk.Move2 = Convert.ToUInt16(SecondMoveBox.SelectedIndex);
+            pk.Move3 = Convert.ToUInt16(ThirdMoveBox.SelectedIndex);
+            pk.Move4 = Convert.ToUInt16(ForthMoveBox.SelectedIndex);
+            pk.EXP = Convert.ToUInt32(ExpBox.Text);
             var HEX = "0x" + PIDtextBox.Text;
             pk.PID = Convert.ToUInt32(HEX, 16);
             var ECHEX = "0x" + ECtextBox.Text;
             pk.EncryptionConstant= Convert.ToUInt32(ECHEX, 16);
-            pk.Ball = Convert.ToInt16(BallTextBox.Text);
+            pk.Ball =BallBox.SelectedIndex;
+            IDConvert5();
             pk.OT_Friendship = Convert.ToInt16(OTFtextBox.Text);
             pk.Gender = Convert.ToSByte(GanderTextBox.Text);
-            pk.Language = Convert.ToSByte(languagetextBox.Text);
-            pk.StatTera = Convert.ToSByte(TeratextBox.Text);
+            pk.Language = Convert.ToSByte(languageBox.SelectedIndex);
+            pk.TeraTypeOverride =(MoveType) Convert.ToSByte(TeraBox.SelectedIndex);
+            pk.OT_Gender = OTGanderBox.SelectedIndex;
         }
         private void LoadPK9()
         {
@@ -67,11 +113,11 @@ namespace WangPluginPkm.GUI
             EV_SPABox.Text = pk.EV_SPA.ToString();
             EV_SPEBox.Text = pk.EV_SPE.ToString();
             EV_SPDBox.Text = pk.EV_SPD.ToString();
-            SpeciesBox.Text = pk.Species.ToString();
+            SpeciesBox.SelectedIndex = pk.Species;
             GanderTextBox.Text = pk.Gender.ToString();
-            NatureBox.Text = pk.Nature.ToString();
-            StatNatureBox.Text = pk.StatNature.ToString();
-            AbilityBox.Text = pk.Ability.ToString();
+            NatureBox.SelectedIndex = pk.Nature;
+            StatNatureBox.SelectedIndex = pk.StatNature;
+            AbilityBox.SelectedIndex = pk.Ability;
             AbilityNumberBox.Text = pk.AbilityNumber.ToString();
             HeldItemBox.Text = pk.HeldItem.ToString();
             Move1Box.Text = pk.Move1.ToString();
@@ -86,15 +132,37 @@ namespace WangPluginPkm.GUI
             PP2TextBox.Text = pk.Move2_PPUps.ToString();
             PP3TextBox.Text = pk.Move3_PPUps.ToString();
             PP4TextBox.Text = pk.Move4_PPUps.ToString();
-            TidtextBox.Text = pk.TID.ToString();
-            SidtextBox.Text = pk.SID.ToString();
+            IDConvert7();
             NametextBox.Text = pk.OT_Name.ToString();
             PIDtextBox.Text = pk.PID.ToString("X");
-            BallTextBox.Text = pk.Ball.ToString();
+            BallBox.SelectedIndex = pk.Ball;
+            FirstMoveBox.SelectedIndex = pk.Move1;
+            SecondMoveBox.SelectedIndex = pk.Move2;
+            ThirdMoveBox.SelectedIndex = pk.Move3;
+            ForthMoveBox.SelectedIndex = pk.Move4;
             OTFtextBox.Text = pk.OT_Friendship.ToString();
-            languagetextBox.Text = pk.Language.ToString();
-            TeratextBox.Text = pk.StatTera.ToString();
+            languageBox.SelectedIndex = pk.Language;
+            TeraBox.Text = pk.TeraTypeOverride.ToString();
+            OTGanderBox.SelectedIndex=pk.OT_Gender;
             XortextBox.Text = ((pk.TID ^ pk.SID) ^ pk.PID >> 16 ^pk.PID & 0xFFFF).ToString();
+            MetDateBox.Text = $"{pk.Met_Day}/{pk.Met_Month}/{pk.Met_Year}";
+            ExpBox.Text = pk.EXP.ToString();
+        }
+        public void IDConvert7()
+        {
+           var TIDSID =(uint)( pk.TID + pk.SID* 65536);
+           var TID7 = TIDSID % 1_000_000;
+           var  SID7 = TIDSID / 1_000_000;
+            TidtextBox.Text = TID7.ToString();
+            SidtextBox.Text = SID7.ToString();
+        }
+        public void IDConvert5()
+        {
+           var TIDSID = Int32.Parse(TidtextBox.Text) + Int32.Parse(SidtextBox.Text) * 1_000_000;
+           var TID5 =TIDSID % 65536;
+           var  SID5 =TIDSID / 65536;
+           pk.TID = TID5;
+           pk.SID = SID5;
         }
         private void ImportBTN_Click(object sender, System.EventArgs e)
         {
@@ -113,11 +181,11 @@ namespace WangPluginPkm.GUI
                 MessageBox.Show(MessageStrings.MsgFileLoadIncompatible);
                 return;
             }
-            var Dedata = PokeCrypto.DecryptArray8(data);
-            Dedata[6] = data[6];
-            Dedata[7] = data[7];
-            Dedata.CopyTo(pk.Data, 0);
+            data.CopyTo(pk.Data, 0); 
             LoadPK9();
+    
+            var card = new Picture($"WangPluginPkm.Resources.PMico.pm"+ pk.Species.ToString().PadLeft(4, '0') + "_00_00_00_big.png");
+            PokeIco.Image = card.Image;
         }
         private void ExportBTN_Click(object sender, EventArgs e)
         {
@@ -133,13 +201,8 @@ namespace WangPluginPkm.GUI
 
             if (sfd.ShowDialog() != DialogResult.OK)
                 return;
-            var chk = PokeCrypto.GetCHK(data.Data, 328);
-            var chkh =(byte)(chk / 256);
-            var chkl = (byte)(chk & (0xFF));
-            data.Data[7] = chkh;
-            data.Data[6] = chkl;
-            var da=PokeCrypto.EncryptArray8(data.Data);
-            File.WriteAllBytes(sfd.FileName, da);
+           
+            File.WriteAllBytes(sfd.FileName, pk.Data);
         }
 
         private void ConnectBTN_Click(object sender, EventArgs e)
@@ -151,7 +214,7 @@ namespace WangPluginPkm.GUI
                 sysbot.IP = ip;
                 sysbot.Port = port;
                 sysbot.Connect();
-                MessageBox.Show("连上了！");
+                MessageBox.Show("Success！");
             }
             catch (Exception ex)
             {
@@ -165,12 +228,39 @@ namespace WangPluginPkm.GUI
         }
         private void Read_BTN_Click(object sender, EventArgs e)
         {
-            data1 = sysbot.ReadSlot((int)BOX_NUD.Value - 1, (int)SLOT_NUD.Value - 1, ptr);
-            var Dedata = PokeCrypto.DecryptArray8(data1);
+            if (mod == Mod.Box)
+                data1 = sysbot.ReadSlot((int)BOX_NUD.Value - 1, (int)SLOT_NUD.Value - 1, ptr);
+            else
+            {
+                switch (Party_NUD.Value)
+                {
+                    case 1:
+                        data1 = sysbot.ReadPSlot(pt1);
+                        break;
+                    case 2:
+                        data1 = sysbot.ReadPSlot(pt2);
+                        break;
+                    case 3:
+                        data1 = sysbot.ReadPSlot(pt3);
+                        break;
+                    case 4:
+                        data1 = sysbot.ReadPSlot(pt4);
+                        break;
+                    case 5:
+                        data1 = sysbot.ReadPSlot(pt3);
+                        break;
+                    case 6:
+                        data1 = sysbot.ReadPSlot(pt4);
+                        break;
+                }
+            }
+            var Dedata = PokeCrypto.DecryptArray9(data1);
             Dedata[6] = data1[6];
             Dedata[7] = data1[7];
             Dedata.CopyTo(pk.Data, 0);
             LoadPK9();
+            var card = new Picture($"WangPluginPkm.Resources.PMico.pm" + pk.Species.ToString().PadLeft(4, '0') + "_00_00_00_big.png");
+            PokeIco.Image = card.Image;
         }
 
         private void Write_BTN_Click(object sender, EventArgs e)
@@ -182,9 +272,35 @@ namespace WangPluginPkm.GUI
             var chkl = (byte)(chk & (0xFF));
             data.Data[7] = chkh;
             data.Data[6] = chkl;
-            var endata = PokeCrypto.EncryptArray8(data.Data);
-            sysbot.SendSlot(endata,(int)BOX_NUD.Value - 1, (int)SLOT_NUD.Value - 1, ptr);
-            // sysbot.WriteBytesAbsolute(endata, ad);
+            var endata = PokeCrypto.EncryptArray9(data.Data);
+            if (mod == Mod.Box)
+                sysbot.SendSlot(endata,(int)BOX_NUD.Value - 1, (int)SLOT_NUD.Value - 1, ptr);
+            else
+            {
+                switch (Party_NUD.Value)
+                {
+                    case 1:
+                        sysbot.SendPSlot(endata, pt1);
+                        break;
+                    case 2:
+                        sysbot.SendPSlot(endata, pt2);
+                        break;
+                    case 3:
+                        sysbot.SendPSlot(endata, pt3);
+                        break;
+                    case 4:
+                        sysbot.SendPSlot(endata, pt4);
+                        break;
+                    case 5:
+                        sysbot.SendPSlot(endata, pt5);
+                        break;
+                    case 6:
+                        sysbot.SendPSlot(endata, pt6);
+                        break;
+                }
+            }
+
+
         }
         private void RandomPID_BTN_Click(object sender, EventArgs e)
         {
@@ -202,5 +318,30 @@ namespace WangPluginPkm.GUI
         {
             ECtextBox.Text = Util.Rand32().ToString("X");
         }
+
+        private void WriteBox_Click(object sender, EventArgs e)
+        {
+            EditPK9();
+            for (int i = 1; i < 31; i++)
+            {
+                uint pid = Util.Rand32();
+                pk.PID = ((uint)(pk.TID ^ pk.SID) ^ pid & 0xFFFF ^ 1) << 16 | pid & 0xFFFF;
+                pk.EncryptionConstant = Util.Rand32();
+                var data = pk;
+                var chk = PokeCrypto.GetCHK(data.Data, 328);
+                var chkh = (byte)(chk / 256);
+                var chkl = (byte)(chk & (0xFF));
+                data.Data[7] = chkh;
+                data.Data[6] = chkl;
+                var endata = PokeCrypto.EncryptArray8(data.Data);
+                sysbot.SendSlot(endata, (int)BOX_NUD.Value - 1, i, ptr);
+            }
+        }
+
+      /*  private void RaidSeedBTN_Click(object sender, EventArgs e)
+        {
+           var a= SVXoro.ComputeShinySeed(Util.Rand32());
+            SeedBox.Text = a;
+        }*/
     }
 }

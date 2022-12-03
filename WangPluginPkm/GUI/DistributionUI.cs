@@ -515,6 +515,11 @@ namespace WangPluginPkm.GUI
             ((PK8)pk).DynamaxLevel = 10;
             pk.CurrentLevel = 100;
         }
+        private void EC(PKM pk)
+        {
+            pk.SetRandomEC();
+            pk.PID = (((uint)(pk.TID ^ pk.SID) ^ (pk.PID & 0xFFFF) ^ 1u) << 16) | (pk.PID & 0xFFFF);
+        }
         private void Allribbon(PKM pk)
         {
             RibbonApplicator.SetAllValidRibbons(pk);
@@ -647,7 +652,8 @@ namespace WangPluginPkm.GUI
             }
             SAV.ReloadSlots();
         }
-        
+
+
         #region
         /* public void MytheryPK(PKM pk)
          {
@@ -870,6 +876,9 @@ namespace WangPluginPkm.GUI
          }*/
         #endregion
 
-
+        private void RandEC_BTN_Click(object sender, EventArgs e)
+        {
+            SAV.SAV.ModifyBoxes(EC);
+        }
     }
 }

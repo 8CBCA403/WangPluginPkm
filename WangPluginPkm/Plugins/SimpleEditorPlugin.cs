@@ -7,7 +7,7 @@ namespace WangPluginPkm.Plugins
     internal class SimpleEditorPlugin: WangPluginPkm
     {
         public override string Name => "常用功能/Simple Editor";
-        public override int Priority => 5;
+        public override int Priority => 11;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {

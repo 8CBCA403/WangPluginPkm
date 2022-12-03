@@ -248,6 +248,20 @@ namespace WangPluginPkm.GUI
                     pk.Met_Location = 65535;
                 }
                 }
+                else if(pk.Gen9==true)
+                {
+                    pk.IsNicknamed=true;
+                    if (pk.Language == 10 || pk.Language == 9)
+                    {
+                        pk.Nickname = "蛋";
+                    }
+                    if (pk.Language == 2)
+                    {
+                        pk.Nickname = "Egg";
+                    }
+                    pk.Met_Location = 0;
+                    pk.StatNature = pk.Nature;
+                }
                 pk.OT_Friendship = 1;
                 pk.RefreshChecksum();
                 pk.SetBoxForm();

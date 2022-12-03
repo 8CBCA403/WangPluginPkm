@@ -411,8 +411,9 @@ namespace WangPluginPkm.GUI
                     }
                 case CheckMod.SV:
                     {
+                        newpk =(PK9)Editor.Data;
                         var r=SVXoro.CheckLegality(newpk,MinIV);
-                        if(r.seed==0xffffffff)
+                        if(SVXoro.ReverseSeed(r.EncryptionConstant) == 0xffffffff)
                         {
                             Legal_Check_BOX2.Text = "逆推失败!没找到Seed";
                             Legal_Check_BOX2.BackColor = Color.Red;
@@ -427,7 +428,7 @@ namespace WangPluginPkm.GUI
                         {
                             Legal_Check_BOX1.Text = $"逆推成功!";
                             Legal_Check_BOX1.BackColor = Color.Green;
-                            Legal_Check_BOX2.Text = $"Seed{r.seed.ToString("X")}";
+                            Legal_Check_BOX2.Text = $"Seed{SVXoro.ReverseSeed(r.EncryptionConstant).ToString("X")}";
                             Legal_Check_BOX2.BackColor = Color.Green;
                             if (r.PID!=newpk.PID)
                             {
@@ -697,31 +698,7 @@ namespace WangPluginPkm.GUI
             form.Show();
         }
 
-        private void PK9Import_BTN_Click(object sender, EventArgs e)
-        {
-           
-            using var sfd = new OpenFileDialog
-            {
-                Filter = Pk9Filter,
-                FilterIndex = 0,
-                RestoreDirectory = true,
-            };
-            if (sfd.ShowDialog() != DialogResult.OK)
-                return;
-            string path = sfd.FileName;
-            var data = File.ReadAllBytes(path);
-            if (data.Length != 344)
-            {
-                MessageBox.Show(MessageStrings.MsgFileLoadIncompatible);
-                return;
-            }
-            var Dedata = PokeCrypto.DecryptArray8(data);
-            Dedata[6] = data[6];
-            Dedata[7] = data[7];
-            Dedata.CopyTo(newpk.Data, 0);
-            MessageBox.Show($"{newpk.IVs[0]}\n{newpk.IVs[1]}\n{newpk.IVs[2]}\n" +
-                $"{newpk.IVs[3]}\n{newpk.IVs[4]}\n{newpk.IVs[5]}\n");
-        }
+       
 
 
         #region

@@ -21,7 +21,6 @@ namespace WangPluginPkm.GUI
             this.Ability_Box = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.CheckGroup_RaidBox = new System.Windows.Forms.GroupBox();
-            this.PK9Import_BTN = new System.Windows.Forms.Button();
             this.CheckModcomboBox = new System.Windows.Forms.ComboBox();
             this.GetSeedForMaxLair_BTN = new System.Windows.Forms.Button();
             this.Legal_Check_BOX4 = new System.Windows.Forms.TextBox();
@@ -82,7 +81,7 @@ namespace WangPluginPkm.GUI
             // 
             // Check_BTN
             // 
-            this.Check_BTN.Location = new System.Drawing.Point(152, 192);
+            this.Check_BTN.Location = new System.Drawing.Point(152, 177);
             this.Check_BTN.Name = "Check_BTN";
             this.Check_BTN.Size = new System.Drawing.Size(124, 25);
             this.Check_BTN.TabIndex = 23;
@@ -175,7 +174,6 @@ namespace WangPluginPkm.GUI
             // 
             // CheckGroup_RaidBox
             // 
-            this.CheckGroup_RaidBox.Controls.Add(this.PK9Import_BTN);
             this.CheckGroup_RaidBox.Controls.Add(this.CheckModcomboBox);
             this.CheckGroup_RaidBox.Controls.Add(this.GetSeedForMaxLair_BTN);
             this.CheckGroup_RaidBox.Controls.Add(this.Legal_Check_BOX4);
@@ -193,20 +191,10 @@ namespace WangPluginPkm.GUI
             this.CheckGroup_RaidBox.Controls.Add(this.Legal_Check_BOX5);
             this.CheckGroup_RaidBox.Location = new System.Drawing.Point(700, 4);
             this.CheckGroup_RaidBox.Name = "CheckGroup_RaidBox";
-            this.CheckGroup_RaidBox.Size = new System.Drawing.Size(286, 223);
+            this.CheckGroup_RaidBox.Size = new System.Drawing.Size(286, 220);
             this.CheckGroup_RaidBox.TabIndex = 31;
             this.CheckGroup_RaidBox.TabStop = false;
             this.CheckGroup_RaidBox.Text = "检测(Raid/大冒险)";
-            // 
-            // PK9Import_BTN
-            // 
-            this.PK9Import_BTN.Location = new System.Drawing.Point(152, 171);
-            this.PK9Import_BTN.Name = "PK9Import_BTN";
-            this.PK9Import_BTN.Size = new System.Drawing.Size(124, 25);
-            this.PK9Import_BTN.TabIndex = 46;
-            this.PK9Import_BTN.Text = "导入PK9";
-            this.PK9Import_BTN.UseVisualStyleBackColor = true;
-            this.PK9Import_BTN.Click += new System.EventHandler(this.PK9Import_BTN_Click);
             // 
             // CheckModcomboBox
             // 
@@ -218,7 +206,7 @@ namespace WangPluginPkm.GUI
             // 
             // GetSeedForMaxLair_BTN
             // 
-            this.GetSeedForMaxLair_BTN.Location = new System.Drawing.Point(22, 192);
+            this.GetSeedForMaxLair_BTN.Location = new System.Drawing.Point(22, 177);
             this.GetSeedForMaxLair_BTN.Name = "GetSeedForMaxLair_BTN";
             this.GetSeedForMaxLair_BTN.Size = new System.Drawing.Size(124, 25);
             this.GetSeedForMaxLair_BTN.TabIndex = 36;
@@ -500,7 +488,6 @@ namespace WangPluginPkm.GUI
         private TextBox IVTextBox;
         private WangPluginPkm.PkmCondition ConditionForm;
         private Button Tutorial_Box;
-        private Button PK9Import_BTN;
         private ComboBox CheckModcomboBox;
     }
 }

@@ -471,6 +471,11 @@ namespace WangPluginPkm.GUI
                         SortByRegionalDex(Gen8_Hisui.GetSortFunctions());
                         break;
                     }
+                case "SV":
+                    {
+                        SortByRegionalDex(Gen9__Paldea.GetSortFunctions());
+                        break;
+                    }
             }
             MessageBox.Show("排序完成", "SuperWang");
         }
@@ -577,6 +582,9 @@ namespace WangPluginPkm.GUI
                 case "Hisui":
                     PKL = HisuiformDex.HisuiSets(SAV, Editor);
                     break;
+                case "Paradox":
+                    PKL = ParadoxDex.ParadoxSets(SAV, Editor);
+                    break;
             }
             var BoxData = SAV.SAV.BoxData;
             IList<PKM> arr2 = BoxData;
@@ -589,7 +597,7 @@ namespace WangPluginPkm.GUI
                     SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
                 }
             }
-            LegalBox(SAV);
+          //  LegalBox(SAV);
             SAV.ReloadSlots();
         }
 

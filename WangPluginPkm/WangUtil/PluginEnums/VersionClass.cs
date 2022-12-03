@@ -116,7 +116,11 @@ namespace WangPluginPkm
                 Name = "Gen 8 洗翠图鉴（传说阿尔宙斯）顺序",
                 Version = "PLA",
             };
-
+            VersionClass SV = new VersionClass
+            {
+                Name = "Gen 9 帕底亚图鉴（朱紫）顺序",
+                Version = "SV",
+            };
 
             int gen = sav.SAV.Generation;
             GameVersion version = sav.SAV.Version;
@@ -183,6 +187,8 @@ namespace WangPluginPkm
                         L.Add(PLA);
                     }
                 }
+                if(gen >= 9) { L.Add(SV); }
+
             }
             return L;
         }

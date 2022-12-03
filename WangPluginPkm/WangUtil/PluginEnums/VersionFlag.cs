@@ -79,5 +79,12 @@
             else
                 return false;
         }
+        public static bool Gen9Flag(int Version)
+        {
+            if (Version is 50 or 51)
+                return true;
+            else
+                return false;
+        }
     }
 }

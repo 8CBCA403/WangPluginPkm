@@ -7,7 +7,7 @@ namespace WangPluginPkm.Plugins
     internal class DistributionPlugin: WangPluginPkm
     {
         public override string Name => "派送器/Distribution Tools";
-        public override int Priority => 8;
+        public override int Priority => 3;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {

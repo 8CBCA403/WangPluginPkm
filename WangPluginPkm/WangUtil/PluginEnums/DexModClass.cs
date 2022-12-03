@@ -149,7 +149,11 @@ namespace WangPluginPkm
                 Name = "一组洗翠形态",
                 Value = "Hisui",
             };
-            
+            DexModClass Paradox = new DexModClass
+            {
+                Name = "一组悖论种",
+                Value = "Paradox",
+            };
             if (G>=2&& V is not GameVersion.SW && V is not GameVersion.SH)
             {
                 L.Add(Unown);
@@ -228,6 +232,10 @@ namespace WangPluginPkm
                 }
                 else if (V is GameVersion.PLA)
                 L.Add(Hisui);
+            }
+            if(G==9)
+            {
+                L.Add(Paradox);
             }
             
             

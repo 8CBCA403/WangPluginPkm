@@ -6,7 +6,7 @@ namespace WangPluginPkm.Plugins
     public class MutiCalcPlugin: WangPluginPkm
     {
         public override string Name => "多功能计算器/Muti Calculator";
-        public override int Priority => 3;
+        public override int Priority => 10;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {

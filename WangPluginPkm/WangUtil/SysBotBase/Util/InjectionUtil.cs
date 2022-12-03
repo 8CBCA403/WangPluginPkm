@@ -55,6 +55,12 @@ namespace SysBotBase
             var slotstart = boxstart + (ulong)(slot * slotsize);
             return psb.ReadBytes(slotstart, slotsize);
         }
+        public static byte[] ReadPSlot(this SysBotMini psb,  string ptr)
+        {
+            var slotsize = 344;
+            var offset = psb.GetPointerAddress(ptr);
+            return psb.ReadBytes(offset, slotsize);
+        }
 
         public static void SendSlot(this SysBotMini psb, byte[] data, int box, int slot, string ptr)
         {
@@ -64,6 +70,11 @@ namespace SysBotBase
             var boxstart = b1s1 + (ulong)(box * boxsize);
             var slotstart = boxstart + (ulong)(slot * slotsize);
             psb.WriteBytes(data, slotstart);
+        }
+        public static void SendPSlot(this SysBotMini psb, byte[] data, string ptr)
+        {
+            var offset = psb.GetPointerAddress(ptr);
+            psb.WriteBytes(data, offset);
         }
 
     }
