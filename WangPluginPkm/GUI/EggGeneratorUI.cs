@@ -259,6 +259,7 @@ namespace WangPluginPkm.GUI
                     {
                         pk.Nickname = "Egg";
                     }
+                    pk.Version = 0;
                     pk.Met_Location = 0;
                     pk.StatNature = pk.Nature;
                 }

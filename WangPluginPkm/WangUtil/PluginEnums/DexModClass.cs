@@ -47,7 +47,7 @@ namespace WangPluginPkm
                 Name = "阿尔宙斯家族",
                 Value = "Arceus",
             };
-            DexModClass Deerling= new DexModClass
+            DexModClass Deerling = new DexModClass
             {
                 Name = "四季鹿家族",
                 Value = "Deerling",
@@ -56,7 +56,7 @@ namespace WangPluginPkm
             {
                 Name = "化身家族",
                 Value = "Incarnate",
-            }; 
+            };
             DexModClass Genesect = new DexModClass
             {
                 Name = "盖诺赛克特家族",
@@ -67,7 +67,7 @@ namespace WangPluginPkm
                 Name = "梦境雷达",
                 Value = "DreamRadar",
             };
-           
+
 
             DexModClass Vivillon = new DexModClass
             {
@@ -154,15 +154,25 @@ namespace WangPluginPkm
                 Name = "一组悖论种",
                 Value = "Paradox",
             };
-            if (G>=2&& V is not GameVersion.SW && V is not GameVersion.SH)
+            DexModClass Squawkabilly = new DexModClass
+            {
+                Name = "怒鹦哥家族",
+                Value = "Squawkabilly",
+            };
+            DexModClass Tatsugiri = new DexModClass
+            {
+                Name = "米立龙家族",
+                Value = "Tatsugiri",
+            };
+            if (G>=2&& V is not GameVersion.SW && V is not GameVersion.SH && G <= 8)
             {
                 L.Add(Unown);
             }
-            if (G >= 3 && G!= 8)
+            if (G >= 3 && G< 8)
             {
                 L.Add(Deoxys);
             }
-            if (G >= 4)
+            if (G >= 4 && G <= 8)
             {
                 if(V is not GameVersion.SW &&V is not GameVersion.SH)
                 L.Add(Burmy);
@@ -175,7 +185,7 @@ namespace WangPluginPkm
             {
                 L.Add(DreamRadar);
             }
-            if (G >= 5&& V is not GameVersion.BD && V is not GameVersion.SP)
+            if (G >= 5&& V is not GameVersion.BD && V is not GameVersion.SP && G <= 8)
             {
                 if (G != 8 && V is not GameVersion.PLA)
                 {
@@ -191,7 +201,7 @@ namespace WangPluginPkm
                     L.Add(Incarnate);
                 }
             }
-            if (G >= 6)
+            if (G >= 6 && G <= 8)
             {
                 if(V==GameVersion.AS||V==GameVersion.OR)
                     L.Add(CosplayPikachu);
@@ -207,7 +217,7 @@ namespace WangPluginPkm
                     L.Add(Pumpkaboo);
                 
             }
-            if (G >= 7)
+            if (G >= 7&&G<=8)
             {
                 if (G != 8)
                 {
@@ -235,10 +245,14 @@ namespace WangPluginPkm
             }
             if(G==9)
             {
+                L.Add(Rotom);
+                L.Add(Flabébé);
+                L.Add(Deerling);
+                L.Add(Oricorio);
+                L.Add(Squawkabilly);
+                L.Add(Tatsugiri);
                 L.Add(Paradox);
             }
-            
-            
             return L;
         }
     }

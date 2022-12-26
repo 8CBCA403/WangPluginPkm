@@ -68,9 +68,12 @@ namespace WangPluginPkm.GUI
             this.Random_Name_Box = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.MINSize_BTN = new System.Windows.Forms.Button();
+            this.MAXSize_BTN = new System.Windows.Forms.Button();
+            this.RandEC_BTN = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.RandEC_BTN = new System.Windows.Forms.Button();
+            this.ThreeFinder_BTN = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -81,7 +84,7 @@ namespace WangPluginPkm.GUI
             // LoadEH1_BTN
             // 
             this.LoadEH1_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.LoadEH1_BTN.Location = new System.Drawing.Point(151, 16);
+            this.LoadEH1_BTN.Location = new System.Drawing.Point(115, 16);
             this.LoadEH1_BTN.Name = "LoadEH1_BTN";
             this.LoadEH1_BTN.Size = new System.Drawing.Size(100, 25);
             this.LoadEH1_BTN.TabIndex = 0;
@@ -98,7 +101,7 @@ namespace WangPluginPkm.GUI
             // 
             this.BOX_TextBox.Location = new System.Drawing.Point(44, 17);
             this.BOX_TextBox.Name = "BOX_TextBox";
-            this.BOX_TextBox.Size = new System.Drawing.Size(100, 22);
+            this.BOX_TextBox.Size = new System.Drawing.Size(65, 22);
             this.BOX_TextBox.TabIndex = 1;
             this.BOX_TextBox.Text = "1";
             // 
@@ -159,7 +162,7 @@ namespace WangPluginPkm.GUI
             // AllRibbon_BTN
             // 
             this.AllRibbon_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.AllRibbon_BTN.Location = new System.Drawing.Point(130, 18);
+            this.AllRibbon_BTN.Location = new System.Drawing.Point(118, 17);
             this.AllRibbon_BTN.Name = "AllRibbon_BTN";
             this.AllRibbon_BTN.Size = new System.Drawing.Size(100, 25);
             this.AllRibbon_BTN.TabIndex = 37;
@@ -219,7 +222,7 @@ namespace WangPluginPkm.GUI
             // IVEVN_BTN
             // 
             this.IVEVN_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.IVEVN_BTN.Location = new System.Drawing.Point(118, 16);
+            this.IVEVN_BTN.Location = new System.Drawing.Point(6, 49);
             this.IVEVN_BTN.Name = "IVEVN_BTN";
             this.IVEVN_BTN.Size = new System.Drawing.Size(100, 25);
             this.IVEVN_BTN.TabIndex = 53;
@@ -230,7 +233,7 @@ namespace WangPluginPkm.GUI
             // Move_Shop
             // 
             this.Move_Shop.Font = new System.Drawing.Font("SimHei", 9F);
-            this.Move_Shop.Location = new System.Drawing.Point(23, 18);
+            this.Move_Shop.Location = new System.Drawing.Point(11, 17);
             this.Move_Shop.Name = "Move_Shop";
             this.Move_Shop.Size = new System.Drawing.Size(100, 25);
             this.Move_Shop.TabIndex = 58;
@@ -241,7 +244,7 @@ namespace WangPluginPkm.GUI
             // LevelMax_BTN
             // 
             this.LevelMax_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.LevelMax_BTN.Location = new System.Drawing.Point(23, 49);
+            this.LevelMax_BTN.Location = new System.Drawing.Point(11, 48);
             this.LevelMax_BTN.Name = "LevelMax_BTN";
             this.LevelMax_BTN.Size = new System.Drawing.Size(100, 25);
             this.LevelMax_BTN.TabIndex = 59;
@@ -310,7 +313,7 @@ namespace WangPluginPkm.GUI
             this.groupBox1.Controls.Add(this.Clone_BTN);
             this.groupBox1.Location = new System.Drawing.Point(18, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(501, 83);
+            this.groupBox1.Size = new System.Drawing.Size(472, 83);
             this.groupBox1.TabIndex = 67;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "复制器（复制面板）";
@@ -352,16 +355,52 @@ namespace WangPluginPkm.GUI
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.ThreeFinder_BTN);
+            this.groupBox3.Controls.Add(this.MINSize_BTN);
+            this.groupBox3.Controls.Add(this.MAXSize_BTN);
             this.groupBox3.Controls.Add(this.RandEC_BTN);
             this.groupBox3.Controls.Add(this.LevelMax_BTN);
             this.groupBox3.Controls.Add(this.Move_Shop);
             this.groupBox3.Controls.Add(this.AllRibbon_BTN);
             this.groupBox3.Location = new System.Drawing.Point(272, 101);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(247, 80);
+            this.groupBox3.Size = new System.Drawing.Size(338, 141);
             this.groupBox3.TabIndex = 69;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "编辑当前箱子";
+            // 
+            // MINSize_BTN
+            // 
+            this.MINSize_BTN.Font = new System.Drawing.Font("SimHei", 9F);
+            this.MINSize_BTN.Location = new System.Drawing.Point(224, 48);
+            this.MINSize_BTN.Name = "MINSize_BTN";
+            this.MINSize_BTN.Size = new System.Drawing.Size(100, 25);
+            this.MINSize_BTN.TabIndex = 62;
+            this.MINSize_BTN.Text = "一键小不点";
+            this.MINSize_BTN.UseVisualStyleBackColor = true;
+            this.MINSize_BTN.Click += new System.EventHandler(this.MINSize_BTN_Click);
+            // 
+            // MAXSize_BTN
+            // 
+            this.MAXSize_BTN.Font = new System.Drawing.Font("SimHei", 9F);
+            this.MAXSize_BTN.Location = new System.Drawing.Point(224, 17);
+            this.MAXSize_BTN.Name = "MAXSize_BTN";
+            this.MAXSize_BTN.Size = new System.Drawing.Size(100, 25);
+            this.MAXSize_BTN.TabIndex = 61;
+            this.MAXSize_BTN.Text = "一键大个子";
+            this.MAXSize_BTN.UseVisualStyleBackColor = true;
+            this.MAXSize_BTN.Click += new System.EventHandler(this.MAXSize_BTN_Click);
+            // 
+            // RandEC_BTN
+            // 
+            this.RandEC_BTN.Font = new System.Drawing.Font("SimHei", 9F);
+            this.RandEC_BTN.Location = new System.Drawing.Point(118, 48);
+            this.RandEC_BTN.Name = "RandEC_BTN";
+            this.RandEC_BTN.Size = new System.Drawing.Size(100, 25);
+            this.RandEC_BTN.TabIndex = 60;
+            this.RandEC_BTN.Text = "随机EC";
+            this.RandEC_BTN.UseVisualStyleBackColor = true;
+            this.RandEC_BTN.Click += new System.EventHandler(this.RandEC_BTN_Click);
             // 
             // groupBox4
             // 
@@ -370,7 +409,7 @@ namespace WangPluginPkm.GUI
             this.groupBox4.Controls.Add(this.BOX_Label);
             this.groupBox4.Location = new System.Drawing.Point(18, 192);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(257, 50);
+            this.groupBox4.Size = new System.Drawing.Size(224, 50);
             this.groupBox4.TabIndex = 70;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "EH1查看器";
@@ -379,27 +418,27 @@ namespace WangPluginPkm.GUI
             // 
             this.groupBox5.Controls.Add(this.Edit_EVIVN_Box);
             this.groupBox5.Controls.Add(this.IVEVN_BTN);
-            this.groupBox5.Location = new System.Drawing.Point(282, 192);
+            this.groupBox5.Location = new System.Drawing.Point(496, 12);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(237, 49);
+            this.groupBox5.Size = new System.Drawing.Size(114, 83);
             this.groupBox5.TabIndex = 71;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "编辑面板";
             // 
-            // RandEC_BTN
+            // ThreeFinder_BTN
             // 
-            this.RandEC_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.RandEC_BTN.Location = new System.Drawing.Point(130, 49);
-            this.RandEC_BTN.Name = "RandEC_BTN";
-            this.RandEC_BTN.Size = new System.Drawing.Size(100, 25);
-            this.RandEC_BTN.TabIndex = 60;
-            this.RandEC_BTN.Text = "随机EC";
-            this.RandEC_BTN.UseVisualStyleBackColor = true;
-            this.RandEC_BTN.Click += new System.EventHandler(this.RandEC_BTN_Click);
+            this.ThreeFinder_BTN.Font = new System.Drawing.Font("SimHei", 9F);
+            this.ThreeFinder_BTN.Location = new System.Drawing.Point(11, 79);
+            this.ThreeFinder_BTN.Name = "ThreeFinder_BTN";
+            this.ThreeFinder_BTN.Size = new System.Drawing.Size(100, 25);
+            this.ThreeFinder_BTN.TabIndex = 63;
+            this.ThreeFinder_BTN.Text = "土龙一家鼠";
+            this.ThreeFinder_BTN.UseVisualStyleBackColor = true;
+            this.ThreeFinder_BTN.Click += new System.EventHandler(this.ThreeFinder_BTN_Click);
             // 
             // DistributionUI
             // 
-            this.ClientSize = new System.Drawing.Size(528, 251);
+            this.ClientSize = new System.Drawing.Size(627, 251);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -423,5 +462,8 @@ namespace WangPluginPkm.GUI
         }
 
         private Button RandEC_BTN;
+        private Button MINSize_BTN;
+        private Button MAXSize_BTN;
+        private Button ThreeFinder_BTN;
     }
 }

@@ -21,12 +21,13 @@ namespace WangPluginPkm.GUI
             this.Xor_BTN = new System.Windows.Forms.Button();
             this.ForceStar = new System.Windows.Forms.Button();
             this.XorValue_Label = new System.Windows.Forms.Label();
+            this.RangeBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // ShinySID_BTN
             // 
-            this.ShinySID_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.ShinySID_BTN.Location = new System.Drawing.Point(12, 45);
+            this.ShinySID_BTN.Font = new System.Drawing.Font("SimHei", 9F);
+            this.ShinySID_BTN.Location = new System.Drawing.Point(130, 45);
             this.ShinySID_BTN.Name = "ShinySID_BTN";
             this.ShinySID_BTN.Size = new System.Drawing.Size(120, 30);
             this.ShinySID_BTN.TabIndex = 0;
@@ -36,19 +37,19 @@ namespace WangPluginPkm.GUI
             // 
             // RandomStar_BTN
             // 
-            this.RandomStar_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.RandomStar_BTN.Location = new System.Drawing.Point(12, 12);
+            this.RandomStar_BTN.Font = new System.Drawing.Font("SimHei", 9F);
+            this.RandomStar_BTN.Location = new System.Drawing.Point(130, 12);
             this.RandomStar_BTN.Name = "RandomStar_BTN";
             this.RandomStar_BTN.Size = new System.Drawing.Size(120, 30);
             this.RandomStar_BTN.TabIndex = 1;
-            this.RandomStar_BTN.Text = "随机闪光";
+            this.RandomStar_BTN.Text = "一键闪光";
             this.RandomStar_BTN.UseVisualStyleBackColor = true;
-            this.RandomStar_BTN.Click += new System.EventHandler(this.ForceStar_BTN_Click);
+            this.RandomStar_BTN.Click += new System.EventHandler(this.Shiny_BTN_Click);
             // 
             // ForceSquare_BTN
             // 
-            this.ForceSquare_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.ForceSquare_BTN.Location = new System.Drawing.Point(282, 12);
+            this.ForceSquare_BTN.Font = new System.Drawing.Font("SimHei", 9F);
+            this.ForceSquare_BTN.Location = new System.Drawing.Point(400, 12);
             this.ForceSquare_BTN.Name = "ForceSquare_BTN";
             this.ForceSquare_BTN.Size = new System.Drawing.Size(120, 30);
             this.ForceSquare_BTN.TabIndex = 2;
@@ -59,15 +60,15 @@ namespace WangPluginPkm.GUI
             // XorBox
             // 
             this.XorBox.FormattingEnabled = true;
-            this.XorBox.Location = new System.Drawing.Point(194, 48);
+            this.XorBox.Location = new System.Drawing.Point(312, 48);
             this.XorBox.Name = "XorBox";
-            this.XorBox.Size = new System.Drawing.Size(73, 23);
+            this.XorBox.Size = new System.Drawing.Size(73, 24);
             this.XorBox.TabIndex = 3;
             // 
             // Xor_BTN
             // 
-            this.Xor_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.Xor_BTN.Location = new System.Drawing.Point(282, 45);
+            this.Xor_BTN.Font = new System.Drawing.Font("SimHei", 9F);
+            this.Xor_BTN.Location = new System.Drawing.Point(400, 45);
             this.Xor_BTN.Name = "Xor_BTN";
             this.Xor_BTN.Size = new System.Drawing.Size(120, 30);
             this.Xor_BTN.TabIndex = 4;
@@ -77,8 +78,8 @@ namespace WangPluginPkm.GUI
             // 
             // ForceStar
             // 
-            this.ForceStar.Font = new System.Drawing.Font("黑体", 9F);
-            this.ForceStar.Location = new System.Drawing.Point(147, 12);
+            this.ForceStar.Font = new System.Drawing.Font("SimHei", 9F);
+            this.ForceStar.Location = new System.Drawing.Point(265, 12);
             this.ForceStar.Name = "ForceStar";
             this.ForceStar.Size = new System.Drawing.Size(120, 30);
             this.ForceStar.TabIndex = 5;
@@ -90,16 +91,25 @@ namespace WangPluginPkm.GUI
             // 
             this.XorValue_Label.AutoSize = true;
             this.XorValue_Label.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.XorValue_Label.Location = new System.Drawing.Point(143, 49);
+            this.XorValue_Label.Location = new System.Drawing.Point(261, 49);
             this.XorValue_Label.Name = "XorValue_Label";
             this.XorValue_Label.Size = new System.Drawing.Size(45, 19);
             this.XorValue_Label.TabIndex = 6;
             this.XorValue_Label.Text = "Xor=";
             // 
+            // RangeBox
+            // 
+            this.RangeBox.FormattingEnabled = true;
+            this.RangeBox.Location = new System.Drawing.Point(12, 12);
+            this.RangeBox.Name = "RangeBox";
+            this.RangeBox.Size = new System.Drawing.Size(112, 24);
+            this.RangeBox.TabIndex = 7;
+            // 
             // ShinyMakerUI
             // 
             this.AllowDrop = true;
-            this.ClientSize = new System.Drawing.Size(414, 80);
+            this.ClientSize = new System.Drawing.Size(549, 82);
+            this.Controls.Add(this.RangeBox);
             this.Controls.Add(this.XorValue_Label);
             this.Controls.Add(this.ForceStar);
             this.Controls.Add(this.Xor_BTN);
@@ -117,5 +127,7 @@ namespace WangPluginPkm.GUI
             this.PerformLayout();
 
         }
+
+        private ComboBox RangeBox;
     }
 }

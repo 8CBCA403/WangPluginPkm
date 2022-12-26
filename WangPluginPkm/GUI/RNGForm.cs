@@ -54,8 +54,7 @@ namespace WangPluginPkm.GUI
         {
             [Description("剑盾Raid/大冒险")]
             SWSH,
-            [Description("朱紫太晶Raid")]
-            SV,
+           
         }
         public Gender G = Gender.None;
         public Ability A = Ability.CD;
@@ -409,7 +408,7 @@ namespace WangPluginPkm.GUI
                             tokenSource2.Token);
                         break;
                     }
-                case CheckMod.SV:
+              /*  case CheckMod.SV:
                     {
                         newpk =(PK9)Editor.Data;
                         var r=SVXoro.CheckLegality(newpk,MinIV);
@@ -467,7 +466,7 @@ namespace WangPluginPkm.GUI
                             }
                         }
                         break;
-                    }
+                    }*/
 
             }
         

@@ -11,7 +11,7 @@ namespace Noexes.Base
         {
             var cmd = GetCommands(NoexsCommandsEnum.Poke8);
             cmd.AddRange(BitConverter.GetBytes(address));
-            cmd.AddRange(BitConverter.GetBytes(value));
+            cmd.AddRange(BitConverter.GetBytes((short)value));
             return cmd.ToArray();
         }
 
@@ -19,7 +19,7 @@ namespace Noexes.Base
         {
             var cmd = GetCommands(NoexsCommandsEnum.Poke16);
             cmd.AddRange(BitConverter.GetBytes(address));
-            cmd.AddRange(BitConverter.GetBytes(value));
+            cmd.AddRange(BitConverter.GetBytes((short)value));
             return cmd.ToArray();
         }
 

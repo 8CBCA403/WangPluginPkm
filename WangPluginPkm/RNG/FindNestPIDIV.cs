@@ -61,7 +61,7 @@ namespace WangPluginPkm
 
             pk.Species = iterPKM.Species; // possible evolution
             // can be ability capsuled
-            if (FormInfo.IsFormChangeable(pk.Species, pk.Form, iterPKM.Form, pk.Format))
+            if (FormInfo.IsFormChangeable(pk.Species, pk.Form, iterPKM.Form,(EntityContext)pk.Format, (EntityContext)iterPKM.Format))
                 pk.Form = iterPKM.Form; // set alt form if it can be freely changed!
             pk.RefreshAbility(iterPKM.AbilityNumber >> 1);
             pk.StatNature = iterPKM.StatNature;
@@ -76,7 +76,7 @@ namespace WangPluginPkm
                 return false;
             if (template.Gender != pk.Gender) // match gender
                 return false;
-            if (template.Form != pk.Form && !FormInfo.IsFormChangeable(pk.Species, pk.Form, template.Form, pk.Format)) // match form -- Toxtricity etc
+            if (template.Form != pk.Form && !FormInfo.IsFormChangeable(pk.Species, pk.Form, template.Form, (EntityContext)pk.Format,(EntityContext)template.Format)) // match form -- Toxtricity etc
                 return false;
             return true;
         }

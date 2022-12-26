@@ -5,6 +5,8 @@ using System.IO;
 using PKHeX.Core;
 using System.Windows.Forms;
 using System.ComponentModel;
+using static System.Net.Mime.MediaTypeNames;
+
 namespace WangPluginPkm.GUI
 {
     partial class DistributionUI:Form
@@ -500,25 +502,48 @@ namespace WangPluginPkm.GUI
         private void Handle_MoveShop(PKM pk)
         {
             LegalityAnalysis la;
-
-            for (int q = 0; q < 100; q++)
+            if (SAV.SAV.Generation == 8)
             {
-                ((PK8)pk).SetMoveRecordFlag(q, true);
-                la = new LegalityAnalysis(pk);
-                if (!la.Valid)
-                    ((PK8)pk).SetMoveRecordFlag(q, false);
+                
+                for (int q = 0; q < 100; q++)
+                {
+                    ((PK8)pk).SetMoveRecordFlag(q, true);
+                    la = new LegalityAnalysis(pk);
+                    if (!la.Valid)
+                        ((PK8)pk).SetMoveRecordFlag(q, false);
+                }
+            }
+            else if(SAV.SAV.Generation==9)
+            {
+                if(pk is ITechRecord t)
+                {
+                    t.SetRecordFlags();
+                }
+             /*   for (int q = 0; q < 171; q++)
+                { 
+                   ((PK9)pk).SetMoveRecordFlag(q, true);
+                    la = new LegalityAnalysis(pk);
+                    if (!la.Valid)
+                        ((PK9)pk).SetMoveRecordFlag(q, false);
+                }*/
             }
             SAV.ReloadSlots();
         }
         private void Level(PKM pk)
         {
-            ((PK8)pk).DynamaxLevel = 10;
+            if(SAV.SAV.Version is GameVersion.SH or GameVersion.SW or GameVersion.SWSH)
+            { ((PK8)pk).DynamaxLevel = 10;
+                }
             pk.CurrentLevel = 100;
         }
         private void EC(PKM pk)
         {
-            pk.SetRandomEC();
-            pk.PID = (((uint)(pk.TID ^ pk.SID) ^ (pk.PID & 0xFFFF) ^ 1u) << 16) | (pk.PID & 0xFFFF);
+            if (pk.Species is not 946 or 917 or 998 or 999 or 996 or 997 or 995 or 997)
+            {
+                if (pk.Met_Location != 30024)
+                    pk.SetRandomEC();
+            }
+           
         }
         private void Allribbon(PKM pk)
         {
@@ -540,7 +565,14 @@ namespace WangPluginPkm.GUI
         }
         private void Gift_BTN_Click(object sender, EventArgs e)
         {
-            SetGodPokemon(SAV);
+            if (SAV.SAV.Version is GameVersion.SW or GameVersion.SH or GameVersion.SWSH)
+            {
+                SetGodPokemon(SAV);
+            }
+            else
+            {
+                MessageBox.Show("目前只支持剑盾！");
+            }
             SAV.ReloadSlots();
         }
         private void AllRibbon_BTN_Click(object sender, EventArgs e)
@@ -619,11 +651,13 @@ namespace WangPluginPkm.GUI
         }
         private void Move_Shop_Click(object sender, EventArgs e)
         {
-            SAV.SAV.ModifyBoxes(Handle_MoveShop);
+            int i = SAV.CurrentBox;
+            SAV.SAV.ModifyBoxes(Handle_MoveShop,i,i);
         }
         private void LevelMax_BTN_Click(object sender, EventArgs e)
         {
-            SAV.SAV.ModifyBoxes(Level);
+            int i = SAV.CurrentBox;
+            SAV.SAV.ModifyBoxes(Level,i,i);
         }
         private void Language_BTN_Click(object sender, EventArgs e)
         {
@@ -878,7 +912,83 @@ namespace WangPluginPkm.GUI
 
         private void RandEC_BTN_Click(object sender, EventArgs e)
         {
+
             SAV.SAV.ModifyBoxes(EC);
+        }
+        public  void MAXSize(PKM pkm)
+        {
+            if(SAV.SAV.Generation==9)
+            {
+                if (pkm.Met_Location != 30024 && pkm.Species != 998
+                    && pkm.Species != 999 && pkm.Species != 996
+                    && pkm.Species != 995 && pkm.Species != 994
+                    && pkm.Species != 997)
+                {
+                    ((PK9)pkm).HeightScalar = 255;
+                    ((PK9)pkm).WeightScalar = 255;
+                    ((PK9)pkm).Scale = 255;
+                    ((PK9)pkm).RibbonMarkMini = false;
+                    ((PK9)pkm).RibbonMarkJumbo = true;
+                }
+            }
+        }
+        public void MINSize(PKM pkm)
+        {
+            if (SAV.SAV.Generation == 9)
+            {
+                if (pkm.Met_Location != 30024 && pkm.Species != 998
+                    && pkm.Species != 999 && pkm.Species != 996
+                    && pkm.Species != 995 && pkm.Species != 994
+                    && pkm.Species != 997)
+                {
+                    if ((!(pkm.Species == 944&&pkm.Met_Location==32))&&
+                        (!(pkm.Species == 952&&pkm.Met_Location==40))&& 
+                        (!(pkm.Species == 959&&pkm.Met_Location==22))&&
+                        (!(pkm.Species == 962&&pkm.Met_Location==20))&&
+                        (!(pkm.Species == 978&&pkm.Met_Location==24))&&
+                        (!(pkm.Species == 986&&pkm.Met_Location==24)))
+                    {
+                        ((PK9)pkm).HeightScalar = 1;
+                        ((PK9)pkm).WeightScalar = 1;
+                        ((PK9)pkm).Scale = 0;
+                        ((PK9)pkm).RibbonMarkMini = true;
+                        ((PK9)pkm).RibbonMarkJumbo = false;
+                    }
+                }
+            }
+        }
+        private void MAXSize_BTN_Click(object sender, EventArgs e)
+        {
+            int i = SAV.CurrentBox;
+            SAV.SAV.ModifyBoxes(MAXSize, i, i);
+            SAV.ReloadSlots();
+        }
+
+        private void MINSize_BTN_Click(object sender, EventArgs e)
+        {
+            int i = SAV.CurrentBox;
+            SAV.SAV.ModifyBoxes(MINSize, i, i);
+            SAV.ReloadSlots();
+        }
+
+        private void ThreeFinder_BTN_Click(object sender, EventArgs e)
+        {
+            int i = SAV.CurrentBox;
+            SAV.SAV.ModifyBoxes(FindThree, i, i);
+            SAV.ReloadSlots();
+        }
+        public void FindThree(PKM pk)
+        {
+            if (pk.Species == 946)
+            {
+                pk.Form = 1;
+                pk.SetRandomEC();
+            }
+            else if (pk.Species == 917)
+            {
+                pk.Form = 1;
+                pk.SetRandomEC();
+            }
         }
     }
 }

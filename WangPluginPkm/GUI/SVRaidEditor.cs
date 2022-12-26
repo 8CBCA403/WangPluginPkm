@@ -90,7 +90,7 @@ namespace WangPluginPkm.GUI
        
         private void SeedGenBTN_Click(object sender, EventArgs e)
         {
-            SVXoro.ComputeShinySeed(Util.Rand32());
+           // SVXoro.ComputeShinySeed(Util.Rand32());
         }
     }
 }

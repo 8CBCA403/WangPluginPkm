@@ -112,9 +112,11 @@ namespace WangPluginPkm.GUI
             ML = DexModClass.DexModList(sav);
             var bindingSource2 = new BindingSource();
             bindingSource2.DataSource = ML;
+            mod = ML[0];
             Mod_Select_Box.DataSource = bindingSource2.DataSource;
             Mod_Select_Box.DisplayMember = "Name";
             Mod_Select_Box.ValueMember = "Value";
+            Mod_Select_Box.SelectedIndex = 0;
             this.Mod_Select_Box.SelectedIndexChanged += (_, __) =>
             {
                 mod = (DexModClass)this.Mod_Select_Box.SelectedItem;
@@ -584,6 +586,12 @@ namespace WangPluginPkm.GUI
                     break;
                 case "Paradox":
                     PKL = ParadoxDex.ParadoxSets(SAV, Editor);
+                    break;
+                case "Squawkabilly":
+                    PKL=SquawkabillyDex.SquawkabillySets(SAV, Editor);
+                    break;
+                case "Tatsugiri":
+                    PKL = TatsugiriDex.TatsugiriSets(SAV, Editor);
                     break;
             }
             var BoxData = SAV.SAV.BoxData;

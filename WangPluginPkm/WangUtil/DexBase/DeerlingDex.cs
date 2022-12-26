@@ -74,6 +74,26 @@ namespace WangPluginPkm.WangUtil.DexBase
                         }
                     }
                     break;
+                case GameVersion.SL or GameVersion.VL or GameVersion.SV:
+                    {
+                        for (int i = 0; i < 2; i++)
+                        {
+                            for (int j = 0; j < 4; j++)
+                            {
+                                pk = SearchDatabase.SearchPKM(SAV, Editor, 585, 50, j, true);
+                                {
+                                    if (i == 1)
+                                    {
+                                        pk = Edit(pk);
+                                    }
+                                }
+                                pk.Form = (byte)j;
+                                pk.ClearNickname();
+                                PKL.Add(pk);
+                            }
+                        }
+                    }
+                    break;
             }
             return PKL;
          }

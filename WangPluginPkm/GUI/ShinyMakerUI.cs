@@ -2,8 +2,10 @@
 using System.Windows.Forms;
 using PKHeX.Core;
 using System.Diagnostics;
-using WangPluginPkm.RNG.Methods;
+using System.Linq;
 using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
+using System.ComponentModel;
+using static WangPluginPkm.GUI.DistributionUI;
 
 namespace WangPluginPkm.GUI
 {
@@ -11,6 +13,14 @@ namespace WangPluginPkm.GUI
     {
         public  static uint XorNumber;
         public static Stopwatch sw = new();
+        private ShinyRange T = ShinyRange.BOX;
+        public enum ShinyRange
+        {
+            [Description("闪一箱")]
+            BOX,
+            [Description("闪全部")]
+            All,
+        }
         public enum Shinytype
         {
             Sid,
@@ -42,12 +52,34 @@ namespace WangPluginPkm.GUI
                 XorNumber=Convert.ToUInt16(this.XorBox.SelectedItem.ToString());
             };
             this.XorBox.SelectedIndex = 0;
+            this.RangeBox.DisplayMember = "Description";
+            this.RangeBox.ValueMember = "Value";
+            this.RangeBox.DataSource = Enum.GetValues(typeof(ShinyRange))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+
+            this.RangeBox.SelectedIndexChanged += (_, __) =>
+            {
+                T = (ShinyRange)Enum.Parse(typeof(ShinyRange), this.RangeBox.SelectedValue.ToString(), false);
+            };
+            this.RangeBox.SelectedIndex = 0;
         }
-        public static void SetShiny(ISaveFileProvider SaveFileEditor)
+        public static void SetAllShiny(ISaveFileProvider SaveFileEditor)
         {
             var sav = SaveFileEditor.SAV;
             sav.ModifyBoxes(ShinyFunction);
-           
+            SaveFileEditor.ReloadSlots();
+        }
+        public static void SetBoxShiny(ISaveFileProvider SaveFileEditor,int i)
+        {
+            var sav = SaveFileEditor.SAV;
+            sav.ModifyBoxes(ShinyFunction,i,i);
             SaveFileEditor.ReloadSlots();
         }
         public static void ShinySID(PKM pkm)
@@ -81,6 +113,7 @@ namespace WangPluginPkm.GUI
         }
         private static int ShinySIDLite(PKM val, int f = 0)
         {
+
             if (shinyflag == Shinytype.Star && f == 0)
                 val.SID = SetShinySID(val.TID, val.PID, Shinytype.Star);
             else if (shinyflag == Shinytype.Square && f == 0)
@@ -314,17 +347,39 @@ namespace WangPluginPkm.GUI
         private void ShinySID_BTN_Click(object sender, EventArgs e)
         {
             sw.Start();
-            SAV.SAV.ModifyBoxes(ShinySID);
+            switch (T)
+            {
+                case ShinyRange.BOX:
+                    int i = SAV.CurrentBox;
+                    SAV.SAV.ModifyBoxes(ShinySID,i,i);
+                    break;
+                case ShinyRange.All:
+                    SAV.SAV.ModifyBoxes(ShinySID);
+                    break;
+            }
+            SAV.ReloadSlots();
             sw.Stop();
             MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒","SuperWang");
         }
-        private void ForceStar_BTN_Click(object sender, EventArgs e)
+        private void Shiny_BTN_Click(object sender, EventArgs e)
         {
             sw.Start();
-            shinyflag = Shinytype.RandomStar;
-            SetShiny(SAV);
+            switch (T)
+            {
+                case ShinyRange.BOX:
+                  
+                    int i = SAV.CurrentBox;
+                    shinyflag = Shinytype.RandomStar;
+                    SetBoxShiny(SAV,i);
+                    break;
+                case ShinyRange.All:
+                    shinyflag = Shinytype.RandomStar;
+                    SetAllShiny(SAV);
+                    break;
+            }
             sw.Stop();
             MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+            sw.Reset();
         }
         private static bool[] ShinyArray()
         {
@@ -351,8 +406,19 @@ namespace WangPluginPkm.GUI
         private void ForceSquare_BTN_Click(object sender, EventArgs e)
         {
             sw.Start();
-            shinyflag = Shinytype.Square;
-            SetShiny(SAV);
+            switch (T)
+            {
+                case ShinyRange.BOX:
+
+                    int i = SAV.CurrentBox;
+                    shinyflag = Shinytype.Square; ;
+                    SetBoxShiny(SAV, i);
+                    break;
+                case ShinyRange.All:
+                    shinyflag = Shinytype.Square; ;
+                    SetAllShiny(SAV);
+                    break;
+            }
             sw.Stop();
             MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
             sw.Reset();
@@ -360,8 +426,19 @@ namespace WangPluginPkm.GUI
         private void Xor_BTN_Click(object sender, EventArgs e)
         {
             sw.Start();
-            shinyflag = Shinytype.Xor;
-            SetShiny(SAV);
+            switch (T)
+            {
+                case ShinyRange.BOX:
+
+                    int i = SAV.CurrentBox;
+                    shinyflag = Shinytype.Xor;
+                    SetBoxShiny(SAV, i);
+                    break;
+                case ShinyRange.All:
+                    shinyflag = Shinytype.Xor;
+                    SetAllShiny(SAV);
+                    break;
+            }
             sw.Stop();
             MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
             sw.Reset();
@@ -369,8 +446,19 @@ namespace WangPluginPkm.GUI
         private void ForceStar_Click(object sender, EventArgs e)
         {
             sw.Start();
-            shinyflag = Shinytype.Star;
-            SetShiny(SAV);
+            switch (T)
+            {
+                case ShinyRange.BOX:
+
+                    int i = SAV.CurrentBox;
+                    shinyflag = Shinytype.Star;
+                    SetBoxShiny(SAV, i);
+                    break;
+                case ShinyRange.All:
+                    shinyflag = Shinytype.Star;
+                    SetAllShiny(SAV);
+                    break;
+            }
             sw.Stop();
             MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
             sw.Reset();

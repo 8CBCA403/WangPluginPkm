@@ -13,8 +13,8 @@ namespace WangPluginPkm.GUI
         private GP1M gp = new();
         private GP1 gpm = new();
         
-        private const string GoFilter = "Go Park Entity |*.gp1|All Files|*.*";
-        private const string PK8Filter = "SWSH/PLA pokemon file |*.pb8|*.pa8|All Files|*.*";
+        private const string GoFilter ="Go Park Entity |*.gp1|All Files|*.*";
+        private const string PK8Filter ="SWSH/PLA pokemon file |*.pb8|*.pa8|All Files|*.*";
        
         private GenderType Gtype = GenderType.None;
         enum GenderType
