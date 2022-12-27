@@ -21,6 +21,7 @@ namespace WangPluginPkm.GUI
             this.Ability_Box = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.CheckGroup_RaidBox = new System.Windows.Forms.GroupBox();
+            this.CheckModcomboBox = new System.Windows.Forms.ComboBox();
             this.GetSeedForMaxLair_BTN = new System.Windows.Forms.Button();
             this.Legal_Check_BOX4 = new System.Windows.Forms.TextBox();
             this.Legal_Check_BOX3 = new System.Windows.Forms.TextBox();
@@ -43,7 +44,6 @@ namespace WangPluginPkm.GUI
             this.Mlabel = new System.Windows.Forms.Label();
             this.Mod_ComboBox = new System.Windows.Forms.ComboBox();
             this.Tutorial_Box = new System.Windows.Forms.Button();
-            this.CheckModcomboBox = new System.Windows.Forms.ComboBox();
             this.SearchGroupBox.SuspendLayout();
             this.CheckGroup_RaidBox.SuspendLayout();
             this.CheckGroup_ModBox.SuspendLayout();
@@ -196,6 +196,14 @@ namespace WangPluginPkm.GUI
             this.CheckGroup_RaidBox.TabStop = false;
             this.CheckGroup_RaidBox.Text = "检测(Raid/大冒险)";
             // 
+            // CheckModcomboBox
+            // 
+            this.CheckModcomboBox.FormattingEnabled = true;
+            this.CheckModcomboBox.Location = new System.Drawing.Point(6, 23);
+            this.CheckModcomboBox.Name = "CheckModcomboBox";
+            this.CheckModcomboBox.Size = new System.Drawing.Size(140, 25);
+            this.CheckModcomboBox.TabIndex = 45;
+            // 
             // GetSeedForMaxLair_BTN
             // 
             this.GetSeedForMaxLair_BTN.Location = new System.Drawing.Point(22, 177);
@@ -219,7 +227,7 @@ namespace WangPluginPkm.GUI
             // Legal_Check_BOX3
             // 
             this.Legal_Check_BOX3.Cursor = System.Windows.Forms.Cursors.No;
-            this.Legal_Check_BOX3.Location = new System.Drawing.Point(152, 85);
+            this.Legal_Check_BOX3.Location = new System.Drawing.Point(152, 84);
             this.Legal_Check_BOX3.Multiline = true;
             this.Legal_Check_BOX3.Name = "Legal_Check_BOX3";
             this.Legal_Check_BOX3.Size = new System.Drawing.Size(124, 25);
@@ -229,7 +237,7 @@ namespace WangPluginPkm.GUI
             // Legal_Check_BOX2
             // 
             this.Legal_Check_BOX2.Cursor = System.Windows.Forms.Cursors.No;
-            this.Legal_Check_BOX2.Location = new System.Drawing.Point(152, 54);
+            this.Legal_Check_BOX2.Location = new System.Drawing.Point(152, 53);
             this.Legal_Check_BOX2.Multiline = true;
             this.Legal_Check_BOX2.Name = "Legal_Check_BOX2";
             this.Legal_Check_BOX2.Size = new System.Drawing.Size(124, 25);
@@ -416,14 +424,6 @@ namespace WangPluginPkm.GUI
             this.Tutorial_Box.Text = "RNG面板使用说明，用前请阅读";
             this.Tutorial_Box.UseVisualStyleBackColor = true;
             this.Tutorial_Box.Click += new System.EventHandler(this.Tutorial_Box_Click);
-            // 
-            // CheckModcomboBox
-            // 
-            this.CheckModcomboBox.FormattingEnabled = true;
-            this.CheckModcomboBox.Location = new System.Drawing.Point(6, 23);
-            this.CheckModcomboBox.Name = "CheckModcomboBox";
-            this.CheckModcomboBox.Size = new System.Drawing.Size(140, 25);
-            this.CheckModcomboBox.TabIndex = 45;
             // 
             // RNGForm
             // 

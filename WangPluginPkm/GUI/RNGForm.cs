@@ -7,10 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using System.Drawing;
-using System.IO;
+using WangPluginPkm.WangUtil.TeraRaidBase;
 using WangPluginPkm.RNG.Methods;
 using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
 using Roaming8bRNG = WangPluginPkm.RNG.Methods.Roaming8bRNG;
+using System.Security.Cryptography;
+using WangPluginPkm.Properties;
 
 namespace WangPluginPkm.GUI
 {
@@ -76,6 +78,7 @@ namespace WangPluginPkm.GUI
         {
             SAV = sav;
             Editor = editor;
+           
             InitializeComponent();
             BindingData();
         }
@@ -298,116 +301,115 @@ namespace WangPluginPkm.GUI
         }
         private void Check_BTN_Click(object sender, EventArgs e)
         {
-            switch (C)                
+
+            string T = "";
+            CheckerIsRunning(true);
+            Legal_Check_BOX1.Text = "正在检测基本合法性";
+            Legal_Check_BOX2.Text = "正在反推Seed";
+            Legal_Check_BOX3.Text = "正在检测PID/EC/IV";
+            Legal_Check_BOX4.Text = "正在检测特性，性别";
+            Legal_Check_BOX5.Text = "正在检测身高体重";
+            tokenSource2 = new();
+            var la = new LegalityAnalysis(Editor.Data);
+            Task.Factory.StartNew(
+            () =>
             {
-                case CheckMod.SWSH:
+                uint ec = Editor.Data.EncryptionConstant;
+                uint pid = Editor.Data.PID;
+                int[] ivs = { Editor.Data.IV_HP, Editor.Data.IV_ATK, Editor.Data.IV_DEF, Editor.Data.IV_SPA, Editor.Data.IV_SPD, Editor.Data.IV_SPE };
+                var seeds = Z3Search.GetSeeds(ec, pid, ivs);
+               // var seeds = BruteForceSearch.FindSeeds(ec, pid,(uint) Editor.Data.TID,(uint) Editor.Data.SID);
+               
+                #region
+                /*  if (la.Valid == true && Strong_Box.Checked==true)
                     {
-                        string T = "";
-                        CheckerIsRunning(true);
-                        Legal_Check_BOX1.Text = "正在检测基本合法性";
-                        Legal_Check_BOX2.Text = "正在反推Seed";
-                        Legal_Check_BOX3.Text = "正在检测PID/EC/IV";
-                        Legal_Check_BOX4.Text = "正在检测特性，性别";
-                        Legal_Check_BOX5.Text = "正在检测身高体重";
-                        tokenSource2 = new();
-                        var la = new LegalityAnalysis(Editor.Data);
-                        Task.Factory.StartNew(
-                            () =>
+                        Legal_Check_BOX1.Text = "基本合法性检测通过！";
+                        Legal_Check_BOX1.BackColor = Color.Green;
+                        var t = la.EncounterOriginal;
+                        int r = t.Location;
+                        if (r is 162 or 244)
+                        {
+                            P(pid, ivs, ec);
+                        }
+                    }*/
+                #endregion//枚举
+                if (la.Valid == true)
+                    {
+                        Legal_Check_BOX1.Text = "合法性检测通过！";
+                        Legal_Check_BOX1.BackColor = Color.Green;
+                        var t = la.EncounterOriginal;
+                        int r = t.Location;
+                        if (r is 162 or 244)
+                        {
+                            if (Gen8DenMax.FindFirstSeed(seeds, ivs) == "没找到Seed")
                             {
-                                uint ec = Editor.Data.EncryptionConstant;
-                                uint pid = Editor.Data.PID;
-                                int[] ivs = { Editor.Data.IV_HP, Editor.Data.IV_ATK, Editor.Data.IV_DEF, Editor.Data.IV_SPA, Editor.Data.IV_SPD, Editor.Data.IV_SPE };
-                                var seeds = Z3Search.GetSeeds(ec, pid, ivs);
-                                #region
-                                /*  if (la.Valid == true && Strong_Box.Checked==true)
-                                    {
-                                        Legal_Check_BOX1.Text = "基本合法性检测通过！";
-                                        Legal_Check_BOX1.BackColor = Color.Green;
-                                        var t = la.EncounterOriginal;
-                                        int r = t.Location;
-                                        if (r is 162 or 244)
-                                        {
-                                            P(pid, ivs, ec);
-                                        }
-                                    }*/
-                                #endregion//枚举
-                                if (la.Valid == true)
+                                Legal_Check_BOX2.Text = "逆推失败!没找到Seed";
+                                Legal_Check_BOX2.BackColor = Color.Red;
+                                Legal_Check_BOX3.Text = "无法检测PID/EC/IV";
+                                Legal_Check_BOX3.BackColor = Color.Red;
+                                Legal_Check_BOX4.Text = "无法检测性格性别";
+                                Legal_Check_BOX4.BackColor = Color.Red;
+                                Legal_Check_BOX5.Text = "无法检测身高体重";
+                                Legal_Check_BOX5.BackColor = Color.Red;
+                            }
+                            else
+                            {
+                                Legal_Check_BOX2.Text = "逆推成功!";
+                                Legal_Check_BOX2.BackColor = Color.Green;
+                                Seed_Box.Text = Gen8DenMax.FindFirstSeed(seeds, ivs);
+                                T = Gen8DenMax.Raidfinder(Seed_Box.Text, Editor.Data, MinIV, A, G);
+                                var S = T.Split('\n');
+                                if (S.Count() != 0)
                                 {
-                                    Legal_Check_BOX1.Text = "合法性检测通过！";
-                                    Legal_Check_BOX1.BackColor = Color.Green;
-                                    var t = la.EncounterOriginal;
-                                    int r = t.Location;
-                                    if (r is 162 or 244)
-                                    {
-                                        if (Gen8DenMax.FindFirstSeed(seeds, ivs) == "没找到Seed")
-                                        {
-                                            Legal_Check_BOX2.Text = "逆推失败!没找到Seed";
-                                            Legal_Check_BOX2.BackColor = Color.Red;
-                                            Legal_Check_BOX3.Text = "无法检测PID/EC/IV";
-                                            Legal_Check_BOX3.BackColor = Color.Red;
-                                            Legal_Check_BOX4.Text = "无法检测性格性别";
-                                            Legal_Check_BOX4.BackColor = Color.Red;
-                                            Legal_Check_BOX5.Text = "无法检测身高体重";
-                                            Legal_Check_BOX5.BackColor = Color.Red;
-                                        }
-                                        else
-                                        {
-                                            Legal_Check_BOX2.Text = "逆推成功!";
-                                            Legal_Check_BOX2.BackColor = Color.Green;
-                                            Seed_Box.Text = Gen8DenMax.FindFirstSeed(seeds, ivs);
-                                            T = Gen8DenMax.Raidfinder(Seed_Box.Text, Editor.Data, MinIV, A, G);
-                                            var S = T.Split('\n');
-                                            if (S.Count() != 0)
-                                            {
-                                                Legal_Check_BOX3.Text = S[0];
-                                                if (S[1] == "Green")
-                                                    Legal_Check_BOX3.BackColor = Color.Green;
-                                                else if (S[1] == "Orange")
-                                                    Legal_Check_BOX3.BackColor = Color.Orange;
-                                                Legal_Check_BOX4.Text = S[2];
-                                                if (S[3] == "Green")
-                                                    Legal_Check_BOX4.BackColor = Color.Green;
-                                                else if (S[3] == "Orange")
-                                                    Legal_Check_BOX4.BackColor = Color.Orange;
-                                                Legal_Check_BOX5.Text = S[4];
-                                                if (S[5] == "Green")
-                                                    Legal_Check_BOX5.BackColor = Color.Green;
-                                                else if (S[5] == "Orange")
-                                                    Legal_Check_BOX5.BackColor = Color.Orange;
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        Legal_Check_BOX1.Text = "基本合法性检测通过！";
-                                        Legal_Check_BOX1.BackColor = Color.Green;
-                                        Legal_Check_BOX2.Text = "无需寻找Seed";
-                                        Legal_Check_BOX2.BackColor = Color.Green;
-                                        Legal_Check_BOX3.Text = "无需检测PID/EC/IV";
+                                    Legal_Check_BOX3.Text = S[0];
+                                    if (S[1] == "Green")
                                         Legal_Check_BOX3.BackColor = Color.Green;
-                                        Legal_Check_BOX4.Text = "无需检测性格性别";
+                                    else if (S[1] == "Orange")
+                                        Legal_Check_BOX3.BackColor = Color.Orange;
+                                    Legal_Check_BOX4.Text = S[2];
+                                    if (S[3] == "Green")
                                         Legal_Check_BOX4.BackColor = Color.Green;
-                                        Legal_Check_BOX5.Text = "无需检测身高体重";
+                                    else if (S[3] == "Orange")
+                                        Legal_Check_BOX4.BackColor = Color.Orange;
+                                    Legal_Check_BOX5.Text = S[4];
+                                    if (S[5] == "Green")
                                         Legal_Check_BOX5.BackColor = Color.Green;
-                                    }
+                                    else if (S[5] == "Orange")
+                                        Legal_Check_BOX5.BackColor = Color.Orange;
                                 }
-                                else
-                                {
-                                    Legal_Check_BOX1.Text = "基本合法性检测未通过！";
-                                    Legal_Check_BOX1.BackColor = Color.Red;
-                                    Legal_Check_BOX2.Text = "无事可做";
-                                    Legal_Check_BOX3.Text = "无事可做";
-                                    Legal_Check_BOX4.Text = "无事可做";
-                                    Legal_Check_BOX5.Text = "无事可做";
-                                }
-                                this.Invoke(() =>
-                                {
-                                    CheckerIsRunning(false);
-                                });
-                            },
-                            tokenSource2.Token);
-                        break;
+                            }
+                        }
+                        else
+                        {
+                            Legal_Check_BOX1.Text = "基本合法性检测通过！";
+                            Legal_Check_BOX1.BackColor = Color.Green;
+                            Legal_Check_BOX2.Text = "无需寻找Seed";
+                            Legal_Check_BOX2.BackColor = Color.Green;
+                            Legal_Check_BOX3.Text = "无需检测PID/EC/IV";
+                            Legal_Check_BOX3.BackColor = Color.Green;
+                            Legal_Check_BOX4.Text = "无需检测性格性别";
+                            Legal_Check_BOX4.BackColor = Color.Green;
+                            Legal_Check_BOX5.Text = "无需检测身高体重";
+                            Legal_Check_BOX5.BackColor = Color.Green;
+                        }
                     }
+                    else
+                    {
+                        Legal_Check_BOX1.Text = "基本合法性检测未通过！";
+                        Legal_Check_BOX1.BackColor = Color.Red;
+                        Legal_Check_BOX2.Text = "无事可做";
+                        Legal_Check_BOX3.Text = "无事可做";
+                        Legal_Check_BOX4.Text = "无事可做";
+                        Legal_Check_BOX5.Text = "无事可做";
+                    }
+                    this.Invoke(() =>
+                    {
+                        CheckerIsRunning(false);
+                    });
+                },
+                tokenSource2.Token);
+                       
+                    
               /*  case CheckMod.SV:
                     {
                         newpk =(PK9)Editor.Data;
@@ -470,7 +472,7 @@ namespace WangPluginPkm.GUI
 
             }
         
-        }
+        
         private void GetSeedForMaxLair_BTN_Click(object sender, EventArgs e)
         {
             var pk=Editor.Data;
