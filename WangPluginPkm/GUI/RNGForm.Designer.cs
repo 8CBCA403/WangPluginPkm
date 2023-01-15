@@ -210,7 +210,7 @@ namespace WangPluginPkm.GUI
             this.GetSeedForMaxLair_BTN.Name = "GetSeedForMaxLair_BTN";
             this.GetSeedForMaxLair_BTN.Size = new System.Drawing.Size(124, 25);
             this.GetSeedForMaxLair_BTN.TabIndex = 36;
-            this.GetSeedForMaxLair_BTN.Text = "补seed";
+            this.GetSeedForMaxLair_BTN.Text = "修正PID/Seed";
             this.GetSeedForMaxLair_BTN.UseVisualStyleBackColor = true;
             this.GetSeedForMaxLair_BTN.Click += new System.EventHandler(this.GetSeedForMaxLair_BTN_Click);
             // 
@@ -434,7 +434,7 @@ namespace WangPluginPkm.GUI
             this.Controls.Add(this.CheckGroup_ModBox);
             this.Controls.Add(this.CheckGroup_RaidBox);
             this.Controls.Add(this.SearchGroupBox);
-            this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

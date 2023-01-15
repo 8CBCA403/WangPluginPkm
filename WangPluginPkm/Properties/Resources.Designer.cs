@@ -142,6 +142,16 @@ namespace WangPluginPkm.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] encounter_gem_paldea {
+            get {
+                object obj = ResourceManager.GetObject("encounter_gem_paldea", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap GoPark {

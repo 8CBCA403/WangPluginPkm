@@ -68,12 +68,14 @@ namespace WangPluginPkm.GUI
             this.Random_Name_Box = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Random_EncBTN = new System.Windows.Forms.Button();
+            this.ThreeFinder_BTN = new System.Windows.Forms.Button();
             this.MINSize_BTN = new System.Windows.Forms.Button();
             this.MAXSize_BTN = new System.Windows.Forms.Button();
             this.RandEC_BTN = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.ThreeFinder_BTN = new System.Windows.Forms.Button();
+            this.Random_EggBTN = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -355,6 +357,8 @@ namespace WangPluginPkm.GUI
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.Random_EggBTN);
+            this.groupBox3.Controls.Add(this.Random_EncBTN);
             this.groupBox3.Controls.Add(this.ThreeFinder_BTN);
             this.groupBox3.Controls.Add(this.MINSize_BTN);
             this.groupBox3.Controls.Add(this.MAXSize_BTN);
@@ -368,6 +372,28 @@ namespace WangPluginPkm.GUI
             this.groupBox3.TabIndex = 69;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "编辑当前箱子";
+            // 
+            // Random_EncBTN
+            // 
+            this.Random_EncBTN.Font = new System.Drawing.Font("SimHei", 9F);
+            this.Random_EncBTN.Location = new System.Drawing.Point(118, 79);
+            this.Random_EncBTN.Name = "Random_EncBTN";
+            this.Random_EncBTN.Size = new System.Drawing.Size(100, 25);
+            this.Random_EncBTN.TabIndex = 64;
+            this.Random_EncBTN.Text = "随机相遇日";
+            this.Random_EncBTN.UseVisualStyleBackColor = true;
+            this.Random_EncBTN.Click += new System.EventHandler(this.Random_EncBTN_Click);
+            // 
+            // ThreeFinder_BTN
+            // 
+            this.ThreeFinder_BTN.Font = new System.Drawing.Font("SimHei", 9F);
+            this.ThreeFinder_BTN.Location = new System.Drawing.Point(11, 79);
+            this.ThreeFinder_BTN.Name = "ThreeFinder_BTN";
+            this.ThreeFinder_BTN.Size = new System.Drawing.Size(100, 25);
+            this.ThreeFinder_BTN.TabIndex = 63;
+            this.ThreeFinder_BTN.Text = "土龙一家鼠";
+            this.ThreeFinder_BTN.UseVisualStyleBackColor = true;
+            this.ThreeFinder_BTN.Click += new System.EventHandler(this.ThreeFinder_BTN_Click);
             // 
             // MINSize_BTN
             // 
@@ -425,16 +451,16 @@ namespace WangPluginPkm.GUI
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "编辑面板";
             // 
-            // ThreeFinder_BTN
+            // Random_EggBTN
             // 
-            this.ThreeFinder_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.ThreeFinder_BTN.Location = new System.Drawing.Point(11, 79);
-            this.ThreeFinder_BTN.Name = "ThreeFinder_BTN";
-            this.ThreeFinder_BTN.Size = new System.Drawing.Size(100, 25);
-            this.ThreeFinder_BTN.TabIndex = 63;
-            this.ThreeFinder_BTN.Text = "土龙一家鼠";
-            this.ThreeFinder_BTN.UseVisualStyleBackColor = true;
-            this.ThreeFinder_BTN.Click += new System.EventHandler(this.ThreeFinder_BTN_Click);
+            this.Random_EggBTN.Font = new System.Drawing.Font("SimHei", 9F);
+            this.Random_EggBTN.Location = new System.Drawing.Point(224, 79);
+            this.Random_EggBTN.Name = "Random_EggBTN";
+            this.Random_EggBTN.Size = new System.Drawing.Size(100, 25);
+            this.Random_EggBTN.TabIndex = 65;
+            this.Random_EggBTN.Text = "随机孵蛋日";
+            this.Random_EggBTN.UseVisualStyleBackColor = true;
+            this.Random_EggBTN.Click += new System.EventHandler(this.Random_EggBTN_Click);
             // 
             // DistributionUI
             // 
@@ -465,5 +491,7 @@ namespace WangPluginPkm.GUI
         private Button MINSize_BTN;
         private Button MAXSize_BTN;
         private Button ThreeFinder_BTN;
+        private Button Random_EncBTN;
+        private Button Random_EggBTN;
     }
 }

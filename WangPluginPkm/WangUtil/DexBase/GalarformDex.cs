@@ -44,6 +44,10 @@ namespace WangPluginPkm.WangUtil.DexBase
                             pk.Ability = 261;
                             pk.AbilityNumber = 1;
                         }
+                        if (a[i] == 110)
+                        {
+                            pk.Form = 1;
+                        }
                         pk.CurrentLevel = 100;
                         pk.Species = a[i];
                         pk.ClearNickname();

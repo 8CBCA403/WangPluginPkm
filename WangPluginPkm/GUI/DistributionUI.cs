@@ -6,12 +6,15 @@ using PKHeX.Core;
 using System.Windows.Forms;
 using System.ComponentModel;
 using static System.Net.Mime.MediaTypeNames;
+using Microsoft.VisualBasic;
+using System.Diagnostics;
 
 namespace WangPluginPkm.GUI
 {
     partial class DistributionUI:Form
     {
         private const string TrainerFilter = "Trainer Info |*.txt|All Files|*.*";
+        private int Counter = 0;
         private IVEVN V = IVEVN.ATK;
         private CLONE C = CLONE.BOX;
         private TRAINER T = TRAINER.BOX;
@@ -990,5 +993,81 @@ namespace WangPluginPkm.GUI
                 pk.SetRandomEC();
             }
         }
+
+        private void Random_EncBTN_Click(object sender, EventArgs e)
+        {
+            Counter = 0;
+            ProcessBox(SAV.CurrentBox,false);
+        }
+        private void Random_EggBTN_Click(object sender, EventArgs e)
+        {
+            Counter = 0;
+            ProcessBox(SAV.CurrentBox, true);
+        }
+        private void ProcessBox(int box,bool mod)
+        {
+            if ((uint)box >= SAV.SAV.BoxCount)
+                throw new ArgumentOutOfRangeException(nameof(box), "Value was more than BoxCount");
+            var data = SAV.SAV.GetBoxData(box);
+            if (mod == false)
+            {
+                ProcessPokemon(data);
+            }
+            else
+            {
+                ProcessEGG(data);
+            }
+            if (Counter > 0) SAV.SAV.SetBoxData(data, box);
+        }
+        private void ProcessEGG(IEnumerable<PKM> data)
+        {
+            var rand = new Random();
+
+            foreach (var pokemon in data)
+            {
+                if (pokemon.Species <= 0 || pokemon is { WasEgg: false, IsEgg: false }) continue;
+                var releaseDate = new ReleaseDate(SAV.SAV.Version);
+                var baseDate = releaseDate.Date;
+
+                var days = (DateTime.Today - baseDate).Days;
+                var newEggMetDate = baseDate.AddDays(rand.Next(days));
+                pokemon.Egg_Day = newEggMetDate.Day;
+                pokemon.Egg_Year = newEggMetDate.Year - 2000;
+                pokemon.Egg_Month = newEggMetDate.Month;
+
+                
+
+                Counter++;
+            }
+        }
+        private void ProcessPokemon(IEnumerable<PKM> data)
+        {
+            var rand = new Random();
+
+            foreach (var pokemon in data)
+            {
+                if (pokemon.Species <= 0) 
+                    continue;
+                var releaseDate = new ReleaseDate(SAV.SAV.Version);
+                var baseDate = PokemonEggCheck(pokemon, releaseDate.Date);
+                var days = (DateTime.Today - baseDate).Days;
+                var newMetDate = baseDate.AddDays(rand.Next(days));
+                pokemon.Met_Day = newMetDate.Day;
+                pokemon.Met_Year = newMetDate.Year - 2000;
+                pokemon.Met_Month = newMetDate.Month;
+                Counter++;
+            }
+        }
+        private DateTime PokemonEggCheck(PKM pokemon, DateTime gameReleaseDate)
+#pragma warning restore CA1822
+        {
+            if (pokemon.EggMetDate is not null)
+            {
+                return (DateTime)pokemon.EggMetDate;
+            }
+            return gameReleaseDate;
+        }
+
+        
     }
 }
