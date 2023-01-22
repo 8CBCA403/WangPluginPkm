@@ -6,10 +6,10 @@ namespace WangPluginPkm
     {
         public static uint GetShinyXor(uint val) => (val >> 16) ^ (val & 0xFFFF);
         public static uint GetShinyValue(uint num) => GetShinyXor(num) >> 4;
-        public static uint GetShinyType(uint pid, uint tidsid)
+        public static uint GetShinyType(uint pid, uint TID16SID16)
         {
             var p = GetShinyXor(pid);
-            var t = GetShinyXor(tidsid);
+            var t = GetShinyXor(TID16SID16);
             if (p == t)
                 return 2; // square;
             if ((p ^ t) < 0x10)
@@ -22,9 +22,9 @@ namespace WangPluginPkm
             for (int i = 0; ; i++)
             {
                 uint _ = (uint)rng.NextInt(0xFFFFFFFF); // EC
-                uint SIDTID = (uint)rng.NextInt(0xFFFFFFFF);
+                uint SID16TID16 = (uint)rng.NextInt(0xFFFFFFFF);
                 uint PID = (uint)rng.NextInt(0xFFFFFFFF);
-                var type = GetShinyType(PID, SIDTID);
+                var type = GetShinyType(PID, SID16TID16);
                 if (type != 0)
                     return i;
 

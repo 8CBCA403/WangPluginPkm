@@ -23,7 +23,7 @@ namespace WangPluginPkm.GUI
         }
         public enum Shinytype
         {
-            Sid,
+            SID16,
             Star,
             Square,
             RandomStar,
@@ -82,7 +82,7 @@ namespace WangPluginPkm.GUI
             sav.ModifyBoxes(ShinyFunction,i,i);
             SaveFileEditor.ReloadSlots();
         }
-        public static void ShinySID(PKM pkm)
+        public static void ShinySID16(PKM pkm)
         {
             if (!MythicalFlag.MFlag(pkm.Species))
             {
@@ -95,32 +95,32 @@ namespace WangPluginPkm.GUI
             var r = (uint)myObject.Next(1, 8);
             if (pk.Gen8 == true)
                 r = (uint)myObject.Next(1, 16);
-            return (((uint)(pk.TID ^ pk.SID) ^ (pk.PID & 0xFFFF) ^ r) << 16) | (pk.PID & 0xFFFF);
+            return (((uint)(pk.TID16 ^ pk.SID16) ^ (pk.PID & 0xFFFF) ^ r) << 16) | (pk.PID & 0xFFFF);
         }
         private static uint ShinyPID(PKM val,int f=0)
         {
             if (shinyflag == Shinytype.RandomStar&&f==0)
                 val.PID = RandomStar(val);
             else if (shinyflag == Shinytype.Star && f == 0)
-                val.PID = (((uint)(val.TID ^ val.SID) ^ (val.PID & 0xFFFF) ^ 1u) << 16) | (val.PID & 0xFFFF);
+                val.PID = (((uint)(val.TID16 ^ val.SID16) ^ (val.PID & 0xFFFF) ^ 1u) << 16) | (val.PID & 0xFFFF);
             else if (shinyflag == Shinytype.Square && f == 0)
-                val.PID = (((uint)(val.TID ^ val.SID) ^ (val.PID & 0xFFFF) ^ 0u) << 16) | (val.PID & 0xFFFF);
+                val.PID = (((uint)(val.TID16 ^ val.SID16) ^ (val.PID & 0xFFFF) ^ 0u) << 16) | (val.PID & 0xFFFF);
             else if (shinyflag == Shinytype.Xor && f == 0)
-                val.PID = (((uint)(val.TID ^ val.SID) ^ (val.PID & 0xFFFF) ^ XorNumber) << 16) | (val.PID & 0xFFFF);
+                val.PID = (((uint)(val.TID16 ^ val.SID16) ^ (val.PID & 0xFFFF) ^ XorNumber) << 16) | (val.PID & 0xFFFF);
             else if(f==1)
-                val.PID = (((uint)(val.TID ^ val.SID) ^ (val.PID & 0xFFFF) ^ 1u) << 16) | (val.PID & 0xFFFF);
+                val.PID = (((uint)(val.TID16 ^ val.SID16) ^ (val.PID & 0xFFFF) ^ 1u) << 16) | (val.PID & 0xFFFF);
             return val.PID;
         }
-        private static int ShinySIDLite(PKM val, int f = 0)
+        private static int ShinySID16Lite(PKM val, int f = 0)
         {
 
             if (shinyflag == Shinytype.Star && f == 0)
-                val.SID = SetShinySID(val.TID, val.PID, Shinytype.Star);
+                val.SID16 = SetShinySID16(val.TID16, val.PID, Shinytype.Star);
             else if (shinyflag == Shinytype.Square && f == 0)
-                val.SID = SetShinySID(val.TID, val.PID, Shinytype.Square);
+                val.SID16 = SetShinySID16(val.TID16, val.PID, Shinytype.Square);
             else if (shinyflag == Shinytype.Xor && f == 0)
-                val.SID = SetShinySID(val.TID, val.PID, Shinytype.Xor); ;
-            return val.SID;
+                val.SID16 = SetShinySID16(val.TID16, val.PID, Shinytype.Xor); ;
+            return val.SID16;
         }
         private static uint ShinyPIDLite(PKM val, int f = 0)
         {
@@ -193,7 +193,7 @@ namespace WangPluginPkm.GUI
                         }
                         else
                         {
-                            pkm.SID = ShinySIDLite(val);
+                            pkm.SID16 =(ushort) ShinySID16Lite(val);
                         }
                         pkm.PID = val.PID;
                         pkm.IVs = val.IVs;
@@ -242,7 +242,7 @@ namespace WangPluginPkm.GUI
                         }
                         else
                         {
-                            pkm.SID = ShinySIDLite(val);
+                            pkm.SID16 =(ushort)ShinySID16Lite(val);
                         }
                         pkm.PID = val.PID;
                         pkm.IVs = val.IVs;
@@ -313,8 +313,8 @@ namespace WangPluginPkm.GUI
             var la = new LegalityAnalysis(pkm);
             if (!la.Valid)
             {
-                pkm.TID = va.TID;
-                pkm.SID = va.SID;
+                pkm.TID16 = va.TID16;
+                pkm.SID16 = va.SID16;
                 pkm.PID = va.PID;
                 pkm.IVs = va.IVs;
                 pkm.Ability = va.Ability;
@@ -330,10 +330,10 @@ namespace WangPluginPkm.GUI
                 }
             }
         }
-        public static int SetShinySID(int TID,uint PID,Shinytype shiny=Shinytype.Square)
+        public static ushort SetShinySID16(ushort TID16,uint PID,Shinytype shiny=Shinytype.Square)
         {
  
-            var xor = TID ^ (PID >> 16) ^ (PID & 0xFFFF);
+            var xor = TID16 ^ (PID >> 16) ^ (PID & 0xFFFF);
             uint bits = shiny switch
             {
                 Shinytype.Square => 0,
@@ -341,20 +341,20 @@ namespace WangPluginPkm.GUI
                 Shinytype.Xor=> XorNumber,
                _=>0,
             };
-            int SID = (int)xor ^ (int)bits;
-            return SID; 
+            ushort SID16 = (ushort)(xor ^ bits);
+            return SID16; 
         }
-        private void ShinySID_BTN_Click(object sender, EventArgs e)
+        private void ShinySID16_BTN_Click(object sender, EventArgs e)
         {
             sw.Start();
             switch (T)
             {
                 case ShinyRange.BOX:
                     int i = SAV.CurrentBox;
-                    SAV.SAV.ModifyBoxes(ShinySID,i,i);
+                    SAV.SAV.ModifyBoxes(ShinySID16,i,i);
                     break;
                 case ShinyRange.All:
-                    SAV.SAV.ModifyBoxes(ShinySID);
+                    SAV.SAV.ModifyBoxes(ShinySID16);
                     break;
             }
             SAV.ReloadSlots();

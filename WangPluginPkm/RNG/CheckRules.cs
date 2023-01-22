@@ -53,7 +53,7 @@ namespace WangPluginPkm
         }
         public bool CheckShiny(CheckRules r, PKM pk)
         {
-            var s = (uint)(pk.TID ^ pk.SID) ^ ((pk.PID >> 16) ^ (pk.PID & 0xFFFF));
+            var s = (uint)(pk.TID16 ^ pk.SID16) ^ ((pk.PID >> 16) ^ (pk.PID & 0xFFFF));
             if (r.Shiny== PkmCondition.ShinyType.None)
                 return true;
             else if (r.Shiny == PkmCondition.ShinyType.Shiny && s < 8)

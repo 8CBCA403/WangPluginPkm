@@ -14,7 +14,7 @@ namespace WangPluginPkm.RNG.Methods
             uint upper = Next() & 7;
             for (int i = 0; i < 13; i++)
                 lower |= (Next() & 1) << 3 + i;
-            upper = (uint)(lower ^ pk.TID ^ pk.SID) & 0xFFF8 | upper & 0x7;
+            upper = (uint)(lower ^ pk.TID16 ^ pk.SID16) & 0xFFF8 | upper & 0x7;
             pk.PID = upper << 16 | lower;
             var pid = pk.PID;
             Span<int> IVs = stackalloc int[6];

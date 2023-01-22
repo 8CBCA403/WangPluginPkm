@@ -22,7 +22,7 @@ namespace WangPluginPkm.RNG.Methods
             pk.EncryptionConstant = ec;
             // PID
             var pid = (uint)xoro.NextInt(uint.MaxValue);
-            uint revised_pid = GetRevisedPID(pid, pk.TID, pk.SID, r.Shiny);
+            uint revised_pid = GetRevisedPID(pid, pk.TID16, pk.SID16, r.Shiny);
             pk.PID = revised_pid;
             if (!r.CheckShiny(r, pk))
             {
@@ -73,12 +73,12 @@ namespace WangPluginPkm.RNG.Methods
             pk.RefreshChecksum();
             return true;
         }
-        private static uint GetRevisedPID(uint pid, int TID, int SID, PkmCondition.ShinyType shiny)
+        private static uint GetRevisedPID(uint pid, int TID16, int SID16, PkmCondition.ShinyType shiny)
         {
-            uint s = (uint)(TID ^ SID) ^ pid >> 16 ^ pid & 0xFFFF;
+            uint s = (uint)(TID16 ^ SID16) ^ pid >> 16 ^ pid & 0xFFFF;
             if (shiny == PkmCondition.ShinyType.Sqaure && s != 0)
             {
-                pid = ((uint)(TID ^ SID) ^ pid & 0xFFFF ^ 0) << 16 | pid & 0xFFFF;
+                pid = ((uint)(TID16 ^ SID16) ^ pid & 0xFFFF ^ 0) << 16 | pid & 0xFFFF;
                 return pid;
             }
 
@@ -102,9 +102,9 @@ namespace WangPluginPkm.RNG.Methods
             pk.EncryptionConstant = ec;
             // PID
             var pid = (uint)xoro.NextInt(uint.MaxValue);
-            uint revised_pid = GetRevisedPIDQ(pid, pk.TID, pk.SID, shiny);
+            uint revised_pid = GetRevisedPIDQ(pid, pk.TID16, pk.SID16, shiny);
             pk.PID = revised_pid;
-            if (!CheckShiny(pk.PID, pk.TID, pk.SID, shiny, Xor))
+            if (!CheckShiny(pk.PID, pk.TID16, pk.SID16, shiny, Xor))
             {
                 return false;
             }
@@ -156,12 +156,12 @@ namespace WangPluginPkm.RNG.Methods
             pk.RefreshChecksum();
             return true;
         }
-        private static uint GetRevisedPIDQ(uint pid, int TID, int SID, bool[] shiny)
+        private static uint GetRevisedPIDQ(uint pid, int TID16, int SID16, bool[] shiny)
         {
-            uint s = (uint)(TID ^ SID) ^ pid >> 16 ^ pid & 0xFFFF;
+            uint s = (uint)(TID16 ^ SID16) ^ pid >> 16 ^ pid & 0xFFFF;
             if (shiny[3] && s != 0)
             {
-                pid = ((uint)(TID ^ SID) ^ pid & 0xFFFF ^ 0) << 16 | pid & 0xFFFF;
+                pid = ((uint)(TID16 ^ SID16) ^ pid & 0xFFFF ^ 0) << 16 | pid & 0xFFFF;
                 return pid;
             }
 
@@ -174,9 +174,9 @@ namespace WangPluginPkm.RNG.Methods
             return pid;
 
         }
-        private static bool CheckShiny(uint pid, int TID, int SID, bool[] shiny, uint Xor = 0)
+        private static bool CheckShiny(uint pid, int TID16, int SID16, bool[] shiny, uint Xor = 0)
         {
-            var s = (uint)(TID ^ SID) ^ pid >> 16 ^ pid & 0xFFFF;
+            var s = (uint)(TID16 ^ SID16) ^ pid >> 16 ^ pid & 0xFFFF;
             if (shiny[0])
                 return true;
             else if (shiny[1] && s < 16)

@@ -56,8 +56,8 @@ namespace WangPluginPkm.GUI
                 pk.Language = Editor.Data.Language;
                 pk.ClearNickname();
                 pk.OT_Name = "Homelander";
-                pk.TrainerID7= 074074;
-                pk.TrainerSID7 =0007;
+                pk.DisplayTID = 074074;
+                pk.DisplaySID =0007;
                 PKL.Add(pk);
             }
             if(PKL.Count!=0)

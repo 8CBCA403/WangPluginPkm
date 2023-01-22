@@ -14,18 +14,18 @@ namespace WangPluginPkm.GUI
         private TextBox Hex2;
         private Button CalcHTD;
         private Button CalcDTH;
-        private TextBox TID;
-        private TextBox SID;
+        private TextBox TID16;
+        private TextBox SID16;
         private Button CalcID;
         private Label HTC;
         private Label CTH;
-        private TextBox TIDResult;
-        private TextBox SIDResult;
+        private TextBox TID16Result;
+        private TextBox SID16Result;
         private CheckBox IDCheck;
         private CheckBox IDsCheck;
         private TextBox PIDHex;
-        private Label TIDLabel;
-        private Label SIDLabel;
+        private Label TID16Label;
+        private Label SID16Label;
         private TextBox UnownPidTextBox;
         private TextBox UnownFormBox;
         private Label UnownLabel;
@@ -44,17 +44,17 @@ namespace WangPluginPkm.GUI
             this.Hex2 = new System.Windows.Forms.TextBox();
             this.CalcHTD = new System.Windows.Forms.Button();
             this.CalcDTH = new System.Windows.Forms.Button();
-            this.TID = new System.Windows.Forms.TextBox();
-            this.SID = new System.Windows.Forms.TextBox();
+            this.TID16 = new System.Windows.Forms.TextBox();
+            this.SID16 = new System.Windows.Forms.TextBox();
             this.CalcID = new System.Windows.Forms.Button();
             this.HTC = new System.Windows.Forms.Label();
             this.CTH = new System.Windows.Forms.Label();
-            this.TIDResult = new System.Windows.Forms.TextBox();
-            this.SIDResult = new System.Windows.Forms.TextBox();
+            this.TID16Result = new System.Windows.Forms.TextBox();
+            this.SID16Result = new System.Windows.Forms.TextBox();
             this.IDCheck = new System.Windows.Forms.CheckBox();
             this.IDsCheck = new System.Windows.Forms.CheckBox();
-            this.TIDLabel = new System.Windows.Forms.Label();
-            this.SIDLabel = new System.Windows.Forms.Label();
+            this.TID16Label = new System.Windows.Forms.Label();
+            this.SID16Label = new System.Windows.Forms.Label();
             this.UnownPidTextBox = new System.Windows.Forms.TextBox();
             this.UnownFormBox = new System.Windows.Forms.TextBox();
             this.UnownLabel = new System.Windows.Forms.Label();
@@ -160,19 +160,19 @@ namespace WangPluginPkm.GUI
             this.CalcDTH.UseVisualStyleBackColor = true;
             this.CalcDTH.Click += new System.EventHandler(this.CalcDTH_Click);
             // 
-            // TID
+            // TID16
             // 
-            this.TID.Location = new System.Drawing.Point(103, 116);
-            this.TID.Name = "TID";
-            this.TID.Size = new System.Drawing.Size(100, 25);
-            this.TID.TabIndex = 12;
+            this.TID16.Location = new System.Drawing.Point(103, 116);
+            this.TID16.Name = "TID16";
+            this.TID16.Size = new System.Drawing.Size(100, 25);
+            this.TID16.TabIndex = 12;
             // 
-            // SID
+            // SID16
             // 
-            this.SID.Location = new System.Drawing.Point(103, 147);
-            this.SID.Name = "SID";
-            this.SID.Size = new System.Drawing.Size(100, 25);
-            this.SID.TabIndex = 13;
+            this.SID16.Location = new System.Drawing.Point(103, 147);
+            this.SID16.Name = "SID16";
+            this.SID16.Size = new System.Drawing.Size(100, 25);
+            this.SID16.TabIndex = 13;
             // 
             // CalcID
             // 
@@ -205,21 +205,21 @@ namespace WangPluginPkm.GUI
             this.CTH.TabIndex = 16;
             this.CTH.Text = "10进制转16进制";
             // 
-            // TIDResult
+            // TID16Result
             // 
-            this.TIDResult.Enabled = false;
-            this.TIDResult.Location = new System.Drawing.Point(209, 116);
-            this.TIDResult.Name = "TIDResult";
-            this.TIDResult.Size = new System.Drawing.Size(100, 25);
-            this.TIDResult.TabIndex = 17;
+            this.TID16Result.Enabled = false;
+            this.TID16Result.Location = new System.Drawing.Point(209, 116);
+            this.TID16Result.Name = "TID16Result";
+            this.TID16Result.Size = new System.Drawing.Size(100, 25);
+            this.TID16Result.TabIndex = 17;
             // 
-            // SIDResult
+            // SID16Result
             // 
-            this.SIDResult.Enabled = false;
-            this.SIDResult.Location = new System.Drawing.Point(209, 147);
-            this.SIDResult.Name = "SIDResult";
-            this.SIDResult.Size = new System.Drawing.Size(100, 25);
-            this.SIDResult.TabIndex = 18;
+            this.SID16Result.Enabled = false;
+            this.SID16Result.Location = new System.Drawing.Point(209, 147);
+            this.SID16Result.Name = "SID16Result";
+            this.SID16Result.Size = new System.Drawing.Size(100, 25);
+            this.SID16Result.TabIndex = 18;
             // 
             // IDCheck
             // 
@@ -243,25 +243,25 @@ namespace WangPluginPkm.GUI
             this.IDsCheck.Text = "7位ID转5位ID";
             this.IDsCheck.UseVisualStyleBackColor = true;
             // 
-            // TIDLabel
+            // TID16Label
             // 
-            this.TIDLabel.AutoSize = true;
-            this.TIDLabel.Font = new System.Drawing.Font("黑体", 9F);
-            this.TIDLabel.Location = new System.Drawing.Point(66, 118);
-            this.TIDLabel.Name = "TIDLabel";
-            this.TIDLabel.Size = new System.Drawing.Size(39, 15);
-            this.TIDLabel.TabIndex = 31;
-            this.TIDLabel.Text = "表ID";
+            this.TID16Label.AutoSize = true;
+            this.TID16Label.Font = new System.Drawing.Font("黑体", 9F);
+            this.TID16Label.Location = new System.Drawing.Point(66, 118);
+            this.TID16Label.Name = "TID16Label";
+            this.TID16Label.Size = new System.Drawing.Size(39, 15);
+            this.TID16Label.TabIndex = 31;
+            this.TID16Label.Text = "表ID";
             // 
-            // SIDLabel
+            // SID16Label
             // 
-            this.SIDLabel.AutoSize = true;
-            this.SIDLabel.Font = new System.Drawing.Font("黑体", 9F);
-            this.SIDLabel.Location = new System.Drawing.Point(66, 151);
-            this.SIDLabel.Name = "SIDLabel";
-            this.SIDLabel.Size = new System.Drawing.Size(39, 15);
-            this.SIDLabel.TabIndex = 32;
-            this.SIDLabel.Text = "里ID";
+            this.SID16Label.AutoSize = true;
+            this.SID16Label.Font = new System.Drawing.Font("黑体", 9F);
+            this.SID16Label.Location = new System.Drawing.Point(66, 151);
+            this.SID16Label.Name = "SID16Label";
+            this.SID16Label.Size = new System.Drawing.Size(39, 15);
+            this.SID16Label.TabIndex = 32;
+            this.SID16Label.Text = "里ID";
             // 
             // UnownPidTextBox
             // 
@@ -305,17 +305,17 @@ namespace WangPluginPkm.GUI
             this.Controls.Add(this.UnownLabel);
             this.Controls.Add(this.UnownFormBox);
             this.Controls.Add(this.UnownPidTextBox);
-            this.Controls.Add(this.SIDLabel);
-            this.Controls.Add(this.TIDLabel);
+            this.Controls.Add(this.SID16Label);
+            this.Controls.Add(this.TID16Label);
             this.Controls.Add(this.IDsCheck);
             this.Controls.Add(this.IDCheck);
-            this.Controls.Add(this.SIDResult);
-            this.Controls.Add(this.TIDResult);
+            this.Controls.Add(this.SID16Result);
+            this.Controls.Add(this.TID16Result);
             this.Controls.Add(this.CTH);
             this.Controls.Add(this.HTC);
             this.Controls.Add(this.CalcID);
-            this.Controls.Add(this.SID);
-            this.Controls.Add(this.TID);
+            this.Controls.Add(this.SID16);
+            this.Controls.Add(this.TID16);
             this.Controls.Add(this.CalcDTH);
             this.Controls.Add(this.CalcHTD);
             this.Controls.Add(this.Hex2);

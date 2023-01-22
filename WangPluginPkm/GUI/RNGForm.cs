@@ -319,7 +319,7 @@ namespace WangPluginPkm.GUI
                             uint pid = Editor.Data.PID;
                             int[] ivs = { Editor.Data.IV_HP, Editor.Data.IV_ATK, Editor.Data.IV_DEF, Editor.Data.IV_SPA, Editor.Data.IV_SPD, Editor.Data.IV_SPE };
                             var seeds = Z3Search.GetSeeds(ec, pid, ivs);
-                            // var seeds = BruteForceSearch.FindSeeds(ec, pid,(uint) Editor.Data.TID,(uint) Editor.Data.SID);
+                            // var seeds = BruteForceSearch.FindSeeds(ec, pid,(uint) Editor.Data.TID16,(uint) Editor.Data.SID16);
                             if (la.Valid == true)
                             {
                                 Legal_Check_BOX1.Text = "合法性检测通过！";
@@ -417,7 +417,7 @@ namespace WangPluginPkm.GUI
                                 if (la.Valid == true)
                                 {
                                     Seed_Box.Text = $"{seed:X8}";
-                                    var r = TeraRaid.CalcResult(seed, Editor.Data.TrainerID7, Editor.Data.TrainerSID7,GameProgress.Unlocked6Stars, GameVersion.VL,0);
+                                    var r = TeraRaid.CalcResult(seed, Editor.Data.TrainerID7, Editor.Data.TrainerSID167,GameProgress.Unlocked6Stars, GameVersion.VL,0);
                                     Legal_Check_BOX1.Text = "搞定";
                                     Legal_Check_BOX2.Text = "搞定";
                                     Legal_Check_BOX3.Text = "搞定";
@@ -469,7 +469,7 @@ namespace WangPluginPkm.GUI
             {
                if(pk.Met_Location==30024)
                 {
-                    pk.PID=(((uint)(pk.TID ^ pk.SID) ^ (pk.PID & 0xFFFF) ^ 1u) << 16) | (pk.PID & 0xFFFF);
+                    pk.PID=(((uint)(pk.TID16 ^ pk.SID16) ^ (pk.PID & 0xFFFF) ^ 1u) << 16) | (pk.PID & 0xFFFF);
                 }
             }
             Editor.PopulateFields(pk);

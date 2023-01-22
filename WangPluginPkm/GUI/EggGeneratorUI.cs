@@ -89,8 +89,8 @@ namespace WangPluginPkm.GUI
                 pkm = enc.ConvertToPKM(SaveFileEditor.SAV, criteria);
                 pk = pkm;
                 pk.IsEgg = true;
-                pk.TrainerID7 = SaveFileEditor.SAV.TrainerID7;
-                pk.TrainerSID7 = SaveFileEditor.SAV.TrainerSID7;
+                pk.DisplayTID = SaveFileEditor.SAV.DisplayTID;
+                pk.DisplaySID = SaveFileEditor.SAV.DisplaySID;
                 pk.OT_Gender = SaveFileEditor.SAV.Gender;
                 if (Gender_CheckBox.Checked)
                     pk.Gender = pko.Gender;

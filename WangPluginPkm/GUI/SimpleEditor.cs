@@ -126,8 +126,8 @@ namespace WangPluginPkm.GUI
             pk.PID = pkm.PID;
             pk.EncryptionConstant = pkm.EncryptionConstant;
             pk.OT_Name = pkm.OT_Name;
-            pk.TrainerID7 = pkm.TrainerID7;
-            pk.TrainerSID7 = pkm.TrainerSID7;
+            pk.DisplayTID = pkm.DisplayTID;
+            pk.DisplaySID = pkm.DisplaySID;
             pk.OT_Gender = pkm.OT_Gender;
             pk.IVs = pkm.IVs;
             pk.EV_ATK = pkm.EV_ATK;
@@ -172,7 +172,7 @@ namespace WangPluginPkm.GUI
                 for (int i = 0; i < L.Count(); i++)
                 {
                     pk = L[i];
-                    r += $"序号：{j}" + SearchDatabase.SearchMytheryGift(pk.Species, pk.Generation, pk.OT_Name, pk.SID, pk.TID, pk.Form);
+                    r += $"序号：{j}" + SearchDatabase.SearchMytheryGift(pk.Species, pk.Generation, pk.OT_Name, pk.SID16, pk.TID16, pk.Form);
                     j++;
                 }
             }

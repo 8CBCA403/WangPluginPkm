@@ -48,7 +48,7 @@ namespace WangPluginPkm
             var real_pid = ctx.MkBV(pid, 64);
 
             var ec_check = AdvanceSymbolic(ctx, ref s0, ref s1);
-            var tidsid = AdvanceSymbolic(ctx, ref s0, ref s1);
+            var TID16SID16 = AdvanceSymbolic(ctx, ref s0, ref s1);
             var pid_check = AdvanceSymbolic(ctx, ref s0, ref s1);
 
             var exp = ctx.MkEq(ec_check, real_ec);
@@ -56,7 +56,7 @@ namespace WangPluginPkm
             if (shiny)
             {
                 exp = ctx.MkAnd(exp, ctx.MkEq(ctx.MkBVAND(pid_check, and_val16), ctx.MkBVAND(real_pid, and_val16)));
-                var st = ctx.MkBVAND(tidsid, and_val);
+                var st = ctx.MkBVAND(TID16SID16, and_val);
                 var tsv = ctx.MkBVXOR(ctx.MkBVUDiv(st, bit16), ctx.MkBVAND(st, and_val16));
                 var psv = ctx.MkBVXOR(ctx.MkBVUDiv(pid_check, bit16), ctx.MkBVAND(pid_check, and_val16));
                 return ctx.MkAnd(exp, ctx.MkBVSLE(ctx.MkBVXOR(tsv, psv), comp_with));

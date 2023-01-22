@@ -11,20 +11,20 @@ namespace WangPluginPkm.RNG.Methods
         public static bool GenPkm(ref PKM pk, uint seed, CheckRules r)
         {
 
-            var O = XDRNG.Next(seed); // SID
+            var O = XDRNG.Next(seed); // SID16
             var A = XDRNG.Next(O); // PID
             var B = XDRNG.Next(A); // PID
             var C = XDRNG.Next(B); // Held Item
             var D = XDRNG.Next(C); // Version
             var E = XDRNG.Next(D); // OT Gender
-            const int TID = 40122;
-            var SID = (int)(O >> 16);
+            const int TID16 = 40122;
+            var SID16 = (ushort)(O >> 16);
             var pid1 = A >> 16;
             var pid2 = B >> 16;
-            pk.TID = TID;
-            pk.SID = SID;
+            pk.TID16 = TID16;
+            pk.SID16 = SID16;
             var pid = pid1 << 16 | pid2;
-            if ((pid2 > 7 ? 0 : 1) != (pid1 ^ SID ^ TID))
+            if ((pid2 > 7 ? 0 : 1) != (pid1 ^ SID16 ^ TID16))
                 pid ^= 0x80000000;
             pk.PID = pid;
             if (!r.CheckShiny(r, pk))
@@ -66,9 +66,9 @@ namespace WangPluginPkm.RNG.Methods
         {
             return (upper << (int)shift) + lower;
         }
-        private static bool CheckShiny(uint pid, int TID, int SID, bool[] shiny)
+        private static bool CheckShiny(uint pid, int TID16, int SID16, bool[] shiny)
         {
-            var s = (uint)(TID ^ SID) ^ pid >> 16 ^ pid & 0xFFFF;
+            var s = (uint)(TID16 ^ SID16) ^ pid >> 16 ^ pid & 0xFFFF;
             if (shiny[0])
                 return true;
             else if (shiny[1] && s < 8)

@@ -161,7 +161,7 @@ namespace WangPluginPkm
             p[0].ClearNickname();
             return p[0];
         }
-        public static string SearchMytheryGift(ushort species, int Generation, string otname,int sid,int tid, int form = 0)
+        public static string SearchMytheryGift(ushort species, int Generation, string otname,int SID16,int TID16, int form = 0)
         {
             var db = EncounterEvent.GetAllEvents();
             var RawDB = new List<MysteryGift>(db);
@@ -171,8 +171,8 @@ namespace WangPluginPkm
             res = res.Where(pkm => pkm.Form == form);
             res = res.Where(pkm => pkm.Generation == Generation);
             res = res.Where(pkm => pkm.OT_Name==otname);
-            res = res.Where(pkm=>pkm.SID==sid);
-            res = res.Where(pkm => pkm.TID == tid);
+            res = res.Where(pkm=>pkm.SID16==SID16);
+            res = res.Where(pkm => pkm.TID16 == TID16);
             var results = res.ToArray();
             WC6 WC6gift=new();
            

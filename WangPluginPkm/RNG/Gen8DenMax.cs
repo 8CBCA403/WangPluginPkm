@@ -36,7 +36,7 @@ namespace WangPluginPkm
             ulong seed = ulong.Parse(s, NumberStyles.HexNumber);
             Xoroshiro128Plus xoroshiro128Plus = new Xoroshiro128Plus(seed);
             var EC = (uint)xoroshiro128Plus.NextInt(4294967295uL);
-            var TID = (uint)xoroshiro128Plus.NextInt(4294967295uL);
+            var TID16 = (uint)xoroshiro128Plus.NextInt(4294967295uL);
             var PID = (uint)xoroshiro128Plus.NextInt(4294967295uL);
             short num = Convert.ToInt16(MinIV);
             int[] array = new int[6] { -1, -1, -1, -1, -1, -1 };
@@ -185,14 +185,14 @@ namespace WangPluginPkm
                  ulong finalcount = ulong.MaxValue - initialseedvalue;
                  for (ulong num2 = 0uL; num2 < finalcount; num2++)
             {
-                uint num14 = (TID >> 16) ^ (TID & 0xFFFFu);
+                uint num14 = (TID16 >> 16) ^ (TID16 & 0xFFFFu);
                 uint num15 = num14 / 16u;
                 uint num16 = (PID >> 16) ^ (PID & 0xFFFFu);
                 uint num17 = num16 / 16u;
                 uint num18 = 0u;
                 uint num19 = 0u;
                 string text3 = Editor.Data.TrainerID7.ToString();
-                string text4 = Editor.Data.TrainerSID7.ToString();
+                string text4 = Editor.Data.TrainerSID167.ToString();
                 ulong num20 = Convert.ToUInt64(text4.PadLeft(4, '0') + text3.PadLeft(6, '0'));
                 string text5 = $"{num20:X}".ToUpper().PadLeft(8, '0');
                 string s1 = text5.Substring(4, 4);
@@ -223,7 +223,7 @@ namespace WangPluginPkm
                         squaretest = true;
                         uint num21 = PID & 0xFFFFu;
                         uint num22 = num18 ^ num21;
-                        TID = (num22 << 16) + num21;
+                        TID16 = (num22 << 16) + num21;
 
                     }
                     else

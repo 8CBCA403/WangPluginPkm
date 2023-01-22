@@ -31,7 +31,7 @@ namespace WangPluginPkm
         public virtual string? TeraType => GetTeraType(Seed);
 #nullable disable
         public virtual uint EC => GenericRaidData[0];
-        /* public virtual uint TIDSID => GenericRaidData[1]; */ // Unneeded
+        /* public virtual uint TID16SID16 => GenericRaidData[1]; */ // Unneeded
         public virtual uint PID => GenericRaidData[2];
         public virtual bool IsShiny => GenericRaidData[3] == 1;
 
@@ -64,10 +64,10 @@ namespace WangPluginPkm
         {
             var rng = new Xoroshiro128Plus(Seed);
             uint EC = (uint)rng.NextInt();
-            uint TIDSID = (uint)rng.NextInt();
+            uint TID16SID16 = (uint)rng.NextInt();
             uint PID = (uint)rng.NextInt();
-            var Shiny = (((PID >> 16) ^ (PID & 0xFFFF)) >> 4) == (((TIDSID >> 16) ^ (TIDSID & 0xFFFF)) >> 4) ? 1 : 0;
-            return new uint[] { EC, TIDSID, PID, (uint)Shiny };
+            var Shiny = (((PID >> 16) ^ (PID & 0xFFFF)) >> 4) == (((TID16SID16 >> 16) ^ (TID16SID16 & 0xFFFF)) >> 4) ? 1 : 0;
+            return new uint[] { EC, TID16SID16, PID, (uint)Shiny };
         }
 
         private static int[] GetIVs(uint Seed, int FlawlessIVs)

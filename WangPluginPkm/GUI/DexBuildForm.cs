@@ -201,13 +201,13 @@ namespace WangPluginPkm.GUI
         public void Gen(ISaveFileProvider SaveFileEditor)
         {
             var sav = SaveFileEditor.SAV;
-            sav.ModifyBoxes(SetID);
+            sav.ModifyBoxes(SeTID16);
             SaveFileEditor.ReloadSlots();
         }
-        public void SetID(PKM pkm)
+        public void SeTID16(PKM pkm)
         {
-            var TID = Int32.Parse(TIDBox.Text);
-            var SID = Int32.Parse(SIDBox.Text);
+            var TID16 = ushort.Parse(TID16Box.Text);
+            var SID16 = ushort.Parse(SID16Box.Text);
             var Name = OT_Name.Text;
             
             if (SAV.SAV.Version is GameVersion.SN or GameVersion.MN or GameVersion.US or GameVersion.UM or
@@ -219,13 +219,13 @@ namespace WangPluginPkm.GUI
             if (SAV.SAV.Version is GameVersion.SN or GameVersion.MN or GameVersion.US or GameVersion.UM or
                GameVersion.GP or GameVersion.GE or GameVersion.SW or GameVersion.SH or GameVersion.PLA or GameVersion.BD or GameVersion.SP)
             {
-                pkm.TrainerID7 = TID;
-                pkm.TrainerSID7 = SID;
+                pkm.DisplayTID = TID16;
+                pkm.DisplaySID = SID16;
             }
             else
             {
-                pkm.TID = TID;
-                pkm.SID = SID;
+                pkm.TID16 = TID16;
+                pkm.SID16 = SID16;
                 
             }
             pkm.OT_Gender = GetGender();

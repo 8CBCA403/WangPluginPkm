@@ -113,7 +113,7 @@ namespace WangPluginPkm.GUI
             bindingSource1.DataSource = Tr;
             Trainer_Box.DataSource = bindingSource1.DataSource;
             Trainer_Box.DisplayMember = "OT_Name";
-            Trainer_Box.ValueMember = "Tid";
+            Trainer_Box.ValueMember = "TID16";
        
             BallBox.SelectedIndexChanged += (_, __) =>
             {
@@ -272,8 +272,8 @@ namespace WangPluginPkm.GUI
                 {
                     pk.OT_Name = Trainer.OT_Name;
                     pk.OT_Gender = Trainer.Gender;
-                    pk.TrainerID7 = Trainer.Tid;
-                    pk.TrainerSID7 = Trainer.Sid;
+                    pk.DisplayTID= Trainer.TID16;
+                    pk.DisplaySID = Trainer.SID16;
                     pk.Language = Trainer.Language;
                     pk.ClearNickname();
                 }
@@ -282,8 +282,8 @@ namespace WangPluginPkm.GUI
                     var T = RandomT(Tr,i);
                     pk.OT_Name = T.OT_Name;
                     pk.OT_Gender = T.Gender;
-                    pk.TrainerID7 = T.Tid;
-                    pk.TrainerSID7 = T.Sid;
+                    pk.DisplayTID= T.TID16;
+                    pk.DisplaySID = T.SID16;
                     pk.Language = T.Language;
                     pk.ClearNickname();
 
@@ -292,8 +292,8 @@ namespace WangPluginPkm.GUI
                 {
                     pk.OT_Name = RandomString(3);
                     pk.OT_Gender = rand.Next(0, 2);
-                    pk.TID = rand.Next(65535);
-                    pk.SID = rand.Next(65535);
+                    pk.TID16 = (ushort)rand.Next(1 << 16);
+                    pk.SID16 = (ushort)rand.Next(1 << 16);
                     pk.Language = 9;
                     pk.ClearNickname();
                 }
@@ -345,8 +345,8 @@ namespace WangPluginPkm.GUI
                 {
                     pk.OT_Name = Trainer.OT_Name;
                     pk.OT_Gender = Trainer.Gender;
-                    pk.TrainerID7 = Trainer.Tid;
-                    pk.TrainerSID7 = Trainer.Sid;
+                    pk.DisplayTID= Trainer.TID16;
+                    pk.DisplaySID = Trainer.SID16;
                     pk.Language = Trainer.Language;
                     pk.ClearNickname();
                 }
@@ -355,8 +355,8 @@ namespace WangPluginPkm.GUI
                     var T = RandomT(Tr, i);
                     pk.OT_Name = T.OT_Name;
                     pk.OT_Gender = T.Gender;
-                    pk.TrainerID7 = T.Tid;
-                    pk.TrainerSID7 = T.Sid;
+                    pk.DisplayTID= T.TID16;
+                    pk.DisplaySID = T.SID16;
                     pk.Language = T.Language;
                     pk.ClearNickname();
 
@@ -365,8 +365,8 @@ namespace WangPluginPkm.GUI
                 {
                     pk.OT_Name = RandomString(3);
                     pk.OT_Gender = rand.Next(0, 2);
-                    pk.TID = rand.Next(65535);
-                    pk.SID = rand.Next(65535);
+                    pk.TID16 = rand.Next(65535);
+                    pk.SID16 = rand.Next(65535);
                     pk.Language = 9;
                     pk.ClearNickname();
                 }*/
@@ -406,8 +406,8 @@ namespace WangPluginPkm.GUI
                 {
                     pk.OT_Name = Trainer.OT_Name;
                     pk.OT_Gender = Trainer.Gender;
-                    pk.TrainerID7 = Trainer.Tid;
-                    pk.TrainerSID7 = Trainer.Sid;
+                    pk.DisplayTID= Trainer.TID16;
+                    pk.DisplaySID = Trainer.SID16;
                     pk.Language = Trainer.Language;
                     pk.ClearNickname();
 
@@ -418,8 +418,8 @@ namespace WangPluginPkm.GUI
                     var T = RandomT(Tr,j);
                     pk.OT_Name = T.OT_Name;
                     pk.OT_Gender = T.Gender;
-                    pk.TrainerID7 = T.Tid;
-                    pk.TrainerSID7 = T.Sid;
+                    pk.DisplayTID= T.TID16;
+                    pk.DisplaySID = T.SID16;
                     pk.Language = T.Language;
                     pk.ClearNickname();
 
@@ -428,8 +428,8 @@ namespace WangPluginPkm.GUI
                 {
                     pk.OT_Name = RandomString(3);
                     pk.OT_Gender = rand.Next(0, 2);
-                    pk.TID = rand.Next(65535);
-                    pk.SID = rand.Next(65535);
+                    pk.TID16 = (ushort)rand.Next(1 << 16);
+                    pk.SID16 = (ushort)rand.Next(1 << 16);
                     pk.Language = 9;
                     pk.ClearNickname();
                 }
@@ -484,7 +484,7 @@ namespace WangPluginPkm.GUI
         }
         private static uint Shiny(PKM pk)
         {
-            return (((uint)(pk.TID ^ pk.SID) ^ (pk.PID & 0xFFFF) ^ 1) << 16) | (pk.PID & 0xFFFF);
+            return (((uint)(pk.TID16 ^ pk.SID16) ^ (pk.PID & 0xFFFF) ^ 1) << 16) | (pk.PID & 0xFFFF);
         }
         private static Trainer RandomT(IList<Trainer> T,int i)
         {
@@ -496,8 +496,8 @@ namespace WangPluginPkm.GUI
         private void UseTrainer(PKM pk)
         {
             pk.OT_Name = Trainer.OT_Name;
-            pk.TrainerID7 = Trainer.Tid;
-            pk.TrainerSID7 = Trainer.Sid;
+            pk.DisplayTID= Trainer.TID16;
+            pk.DisplaySID = Trainer.SID16;
             pk.Language = Trainer.Language;
             pk.OT_Gender = Trainer.Gender;
             Editor.PopulateFields(pk);
@@ -617,8 +617,8 @@ namespace WangPluginPkm.GUI
                     foreach (PKM pk in p)
                     {
                         pk.OT_Name = Trainer.OT_Name;
-                        pk.TrainerID7 = Trainer.Tid;
-                        pk.TrainerSID7 = Trainer.Sid;
+                        pk.DisplayTID= Trainer.TID16;
+                        pk.DisplaySID = Trainer.SID16;
                         pk.Language = Trainer.Language;
                         pk.OT_Gender = Trainer.Gender;
                         pk.ClearNickname();
@@ -891,8 +891,8 @@ namespace WangPluginPkm.GUI
                          var T = RandomT(Tr, i);
                          pkc.OT_Name = T.OT_Name;
                          pkc.OT_Gender = T.Gender;
-                         pkc.TrainerID7 = T.Tid;
-                         pkc.TrainerSID7 = T.Sid;
+                         pkc.DisplayTID= T.TID16;
+                         pkc.DisplaySID = T.SID16;
                          pkc.Language = T.Language;
 
                      }
@@ -1028,15 +1028,11 @@ namespace WangPluginPkm.GUI
                 if (pokemon.Species <= 0 || pokemon is { WasEgg: false, IsEgg: false }) continue;
                 var releaseDate = new ReleaseDate(SAV.SAV.Version);
                 var baseDate = releaseDate.Date;
-
                 var days = (DateTime.Today - baseDate).Days;
                 var newEggMetDate = baseDate.AddDays(rand.Next(days));
                 pokemon.Egg_Day = newEggMetDate.Day;
                 pokemon.Egg_Year = newEggMetDate.Year - 2000;
                 pokemon.Egg_Month = newEggMetDate.Month;
-
-                
-
                 Counter++;
             }
         }
@@ -1063,7 +1059,9 @@ namespace WangPluginPkm.GUI
         {
             if (pokemon.EggMetDate is not null)
             {
-                return (DateTime)pokemon.EggMetDate;
+                DateOnly dateTime = (DateOnly)pokemon.EggMetDate;
+                var Time=dateTime.ToDateTime(TimeOnly.Parse("00:00 PM"));
+                return Time ;
             }
             return gameReleaseDate;
         }

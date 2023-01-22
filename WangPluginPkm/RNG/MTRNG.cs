@@ -4,7 +4,7 @@
 
 /* C# Version Copyright (C) 2001-2004 Akihilo Kramot (Takel).  */
 /* C# porting from a C-program for MT19937, originaly coded by */
-/* Takuji Nishimura and Makoto Matsumoto, considering the suggestions by */
+/* Takuji Nishimura and Makoto Matsumoto, conSID16ering the suggestions by */
 /* Topher Cooper and Marc Rieffel in July-Aug. 1997.           */
 /* This library is free software under the Artistic license:   */
 /*                                                             */

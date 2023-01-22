@@ -10,9 +10,9 @@ namespace WangPluginPkm.RNG.Methods
         public static bool GenPkm(ref PKM pk, uint seed, CheckRules r)
         {
             var xoro = new Xoroshiro128Plus8b(seed);
-            var fakeTID = xoro.NextUInt();
+            var fakeTID16 = xoro.NextUInt();
             var pid = xoro.NextUInt();
-            pid = GetRevisedPID(fakeTID, pid, pk.TID, pk.SID);
+            pid = GetRevisedPID(fakeTID16, pid, pk.TID16, pk.SID16);
             var ivs = new int[6] { UNSET, UNSET, UNSET, UNSET, UNSET, UNSET };
             var determined = 0;
             while (determined < FlawlessIVs)
@@ -56,17 +56,17 @@ namespace WangPluginPkm.RNG.Methods
             pk.RefreshChecksum();
             return true;
         }
-        private static uint GetRevisedPID(uint fakeTID, uint pid, int TID, int SID)
+        private static uint GetRevisedPID(uint fakeTID16, uint pid, int TID16, int SID16)
         {
-            var xor = GetShinyXor(pid, fakeTID);
-            var newXor = GetShinyXor(pid, (uint)(TID | SID << 16));
+            var xor = GetShinyXor(pid, fakeTID16);
+            var newXor = GetShinyXor(pid, (uint)(TID16 | SID16 << 16));
             var fakeRare = GetRareType(xor);
             var newRare = GetRareType(newXor);
             if (fakeRare == newRare)
                 return pid;
             var isShiny = xor < 16;
             if (isShiny)
-                return ((uint)(TID ^ SID) ^ pid & 0xFFFF ^ (xor == 0 ? 0u : 1u)) << 16 | pid & 0xFFFF; // force same shiny star type
+                return ((uint)(TID16 ^ SID16) ^ pid & 0xFFFF ^ (xor == 0 ? 0u : 1u)) << 16 | pid & 0xFFFF; // force same shiny star type
             return pid ^ 0x1000_0000;
 
         }

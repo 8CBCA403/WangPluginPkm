@@ -7,19 +7,19 @@ namespace WangPluginPkm.RNG.Methods
     {
         private const int MaxRollCount = 7;
         private const int UNSET = 255;
-        private static uint GetShinyPID(int tid, int sid, uint pid, int type)
+        private static uint GetShinyPID(int TID16, int SID16, uint pid, int type)
         {
-            return (uint)((tid ^ sid ^ pid & 0xFFFF ^ type) << 16 | pid & 0xFFFF);
+            return (uint)((TID16 ^ SID16 ^ pid & 0xFFFF ^ type) << 16 | pid & 0xFFFF);
         }
 
-        private static bool GetIsShiny(int tid, int sid, uint pid)
+        private static bool GetIsShiny(int TID16, int SID16, uint pid)
         {
-            return GetShinyXor(tid, sid, pid) < 16;
+            return GetShinyXor(TID16, SID16, pid) < 16;
         }
 
-        private static uint GetShinyXor(int tid, int sid, uint pid)
+        private static uint GetShinyXor(int TID16, int SID16, uint pid)
         {
-            return GetShinyXor(pid, (uint)(sid << 16 | tid));
+            return GetShinyXor(pid, (uint)(SID16 << 16 | TID16));
         }
 
         private static uint GetShinyXor(uint pid, uint oid)
@@ -36,14 +36,14 @@ namespace WangPluginPkm.RNG.Methods
             pk.EncryptionConstant = (uint)rand.NextInt();
 
             // PID
-            var fakeTID = (uint)rand.NextInt();
+            var fakeTID16 = (uint)rand.NextInt();
             uint pid = (uint)rand.NextInt();
             bool isShiny = false;
             if (r.Shiny == PkmCondition.ShinyType.Shiny) // let's decide if it's shiny or not!
             {
                 for (int i = 1; i < 12; i++)
                 {
-                    isShiny = GetShinyXor(pid, fakeTID) < 16;
+                    isShiny = GetShinyXor(pid, fakeTID16) < 16;
                     if (isShiny)
                         break;
                     pid = (uint)rand.NextInt();
@@ -57,7 +57,7 @@ namespace WangPluginPkm.RNG.Methods
 
             ForceShinyState(pk, isShiny, ref pid);
 
-            var xor = GetShinyXor(pk.TID, pk.SID, pid);
+            var xor = GetShinyXor(pk.TID16, pk.SID16, pid);
             if (!r.CheckShiny(r, pk))
             {
                 return false;
@@ -114,12 +114,12 @@ namespace WangPluginPkm.RNG.Methods
         {
             if (isShiny)
             {
-                if (!GetIsShiny(pk.TID, pk.SID, pid))
-                    pid = GetShinyPID(pk.TID, pk.SID, pid, 0);
+                if (!GetIsShiny(pk.TID16, pk.SID16, pid))
+                    pid = GetShinyPID(pk.TID16, pk.SID16, pid, 0);
             }
             else
             {
-                if (GetIsShiny(pk.TID, pk.SID, pid))
+                if (GetIsShiny(pk.TID16, pk.SID16, pid))
                     pid ^= 0x1000_0000;
             }
         }

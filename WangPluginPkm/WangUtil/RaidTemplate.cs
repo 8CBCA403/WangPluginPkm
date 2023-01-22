@@ -58,14 +58,14 @@ namespace WangPluginPkm
 
         public bool CanObtainWith(int stars) => Probabilities[stars] > 0;
 
-        public RaidPKM ConvertToPKM(ulong seed, uint tid, uint sid)
+        public RaidPKM ConvertToPKM(ulong seed, uint TID16, uint SID16)
         {
             var rng = new Xoroshiro128Plus(seed);
             uint EC = (uint)rng.NextInt();
-            uint SIDTID = (uint)rng.NextInt();
+            uint SID16TID16 = (uint)rng.NextInt();
             uint PID = (uint)rng.NextInt();
 
-            var shinytype = WangRandUtil.GetShinyType(PID, SIDTID);
+            var shinytype = WangRandUtil.GetShinyType(PID, SID16TID16);
             if (ShinyType == 2 && shinytype == 0)
             {
                 shinytype = 2;
@@ -74,8 +74,8 @@ namespace WangPluginPkm
             {
                 shinytype = 3;
             }
-            uint tsv = WangRandUtil.GetShinyValue((sid << 16) | tid);
-            PID = GetFinalPID(tid, sid, PID, SIDTID, tsv, ShinyType);
+            uint tsv = WangRandUtil.GetShinyValue((SID16 << 16) | TID16);
+            PID = GetFinalPID(TID16, SID16, PID, SID16TID16, tsv, ShinyType);
 
             int[] ivs = { -1, -1, -1, -1, -1, -1 };
             for (int i = 0; i < 6; i++)
@@ -149,9 +149,9 @@ namespace WangPluginPkm
             return new RaidPKM(Species, AltForm, EC, PID, ivs, ability, abilityIdx, gender, nature, deviation, shinytype, IsGigantamax, ShinyType);
         }
 
-        public static uint GetFinalPID(uint tid, uint sid, uint new_pid, uint tidsid, uint tsv, sbyte fixedShiny)
+        public static uint GetFinalPID(uint TID16, uint SID16, uint new_pid, uint TID16SID16, uint tsv, sbyte fixedShiny)
         {
-            var shinytype = WangRandUtil.GetShinyType(new_pid, tidsid);
+            var shinytype = WangRandUtil.GetShinyType(new_pid, TID16SID16);
             if (fixedShiny == 2 && shinytype == 0)
             {
                 shinytype = 2;
@@ -170,7 +170,7 @@ namespace WangPluginPkm
 
             if (psv == tsv)
                 return new_pid; // already shiny
-            return (new_pid & 0xFFFF) | (tid ^ sid ^ new_pid ^ (2 - shinytype)) << 16;
+            return (new_pid & 0xFFFF) | (TID16 ^ SID16 ^ new_pid ^ (2 - shinytype)) << 16;
         }
     }
 }

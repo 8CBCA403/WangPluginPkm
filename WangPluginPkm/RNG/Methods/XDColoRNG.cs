@@ -11,13 +11,13 @@ namespace WangPluginPkm.RNG.Methods
             switch (pk.Species)
             {
                 case (int)Species.Umbreon or (int)Species.Eevee: // Colo Umbreon, XD Eevee
-                    pk.TID = (int)((seed = XDRNG.Next(seed)) >> 16);
-                    pk.SID = (int)((seed = XDRNG.Next(seed)) >> 16);
+                    pk.TID16 = (ushort)((seed = XDRNG.Next(seed)) >> 16);
+                    pk.SID16 = (ushort)((seed = XDRNG.Next(seed)) >> 16);
                     seed = XDRNG.Advance(seed, 2); // PID calls consumed
                     break;
                 case (int)Species.Espeon: // Colo Espeon
-                    pk.TID = (int)((seed = XDRNG.Next(seed)) >> 16);
-                    pk.SID = (int)((seed = XDRNG.Next(seed)) >> 16);
+                    pk.TID16 = (ushort)((seed = XDRNG.Next(seed)) >> 16);
+                    pk.SID16 = (ushort)((seed = XDRNG.Next(seed)) >> 16);
                     seed = XDRNG.Advance(seed, 9); // PID calls consumed, skip over Umbreon
                     break;
             }

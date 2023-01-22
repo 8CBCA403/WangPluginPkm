@@ -56,7 +56,7 @@ namespace WangPluginPkm
             if (shiny)
             {
                 // Dynamax Adventure shinies are always XOR 1
-                pk.PID = SimpleEdits.GetShinyPID(pk.TID, pk.SID, pk.PID, 1);
+                pk.PID = SimpleEdits.GetShinyPID(pk.TID16, pk.SID16, pk.PID, 1);
             }
 
             pk.Species = iterPKM.Species; // possible evolution

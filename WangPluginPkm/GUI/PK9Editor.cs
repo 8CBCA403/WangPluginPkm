@@ -144,25 +144,25 @@ namespace WangPluginPkm.GUI
             languageBox.SelectedIndex = pk.Language;
             TeraBox.Text = pk.TeraTypeOverride.ToString();
             OTGanderBox.SelectedIndex=pk.OT_Gender;
-            XortextBox.Text = ((pk.TID ^ pk.SID) ^ pk.PID >> 16 ^pk.PID & 0xFFFF).ToString();
+            XortextBox.Text = ((pk.TID16 ^ pk.SID16) ^ pk.PID >> 16 ^pk.PID & 0xFFFF).ToString();
             MetDateBox.Text = $"{pk.Met_Day}/{pk.Met_Month}/{pk.Met_Year}";
             ExpBox.Text = pk.EXP.ToString();
         }
         public void IDConvert7()
         {
-           var TIDSID =(uint)( pk.TID + pk.SID* 65536);
-           var TID7 = TIDSID % 1_000_000;
-           var  SID7 = TIDSID / 1_000_000;
-            TidtextBox.Text = TID7.ToString();
-            SidtextBox.Text = SID7.ToString();
+           var TID16SID16 =(uint)( pk.TID16 + pk.SID16* 65536);
+           var TID167 = TID16SID16 % 1_000_000;
+           var  SID167 = TID16SID16 / 1_000_000;
+            TID16textBox.Text = TID167.ToString();
+            SID16textBox.Text = SID167.ToString();
         }
         public void IDConvert5()
         {
-           var TIDSID = Int32.Parse(TidtextBox.Text) + Int32.Parse(SidtextBox.Text) * 1_000_000;
-           var TID5 =TIDSID % 65536;
-           var  SID5 =TIDSID / 65536;
-           pk.TID = TID5;
-           pk.SID = SID5;
+           var TID16SID16 = ushort.Parse(TID16textBox.Text) + ushort.Parse(SID16textBox.Text) * 1_000_000;
+           var TID16 =(ushort)(TID16SID16 % 65536);
+           var  SID16 = (ushort)(TID16SID16 / 65536);
+           pk.TID16 = TID16;
+           pk.SID16 = SID16;
         }
         private void ImportBTN_Click(object sender, System.EventArgs e)
         {
@@ -267,7 +267,7 @@ namespace WangPluginPkm.GUI
         {
             EditPK9();
             var data = pk;
-            var chk = PokeCrypto.GetCHK(data.Data, 328);
+            var chk = PokeCrypto.GetCHK(data.Data);
             var chkh = (byte)(chk / 256);
             var chkl = (byte)(chk & (0xFF));
             data.Data[7] = chkh;
@@ -310,7 +310,7 @@ namespace WangPluginPkm.GUI
         private void ShinyPID_BTN_Click(object sender, EventArgs e)
         {
             uint pid = Util.Rand32();
-            pid = ((uint)(pk.TID ^ pk.SID) ^ pid & 0xFFFF ^ 1) << 16 | pid & 0xFFFF;
+            pid = ((uint)(pk.TID16 ^ pk.SID16) ^ pid & 0xFFFF ^ 1) << 16 | pid & 0xFFFF;
             PIDtextBox.Text= pid.ToString("X");
         }
 
@@ -325,10 +325,10 @@ namespace WangPluginPkm.GUI
             for (int i = 1; i < 31; i++)
             {
                 uint pid = Util.Rand32();
-                pk.PID = ((uint)(pk.TID ^ pk.SID) ^ pid & 0xFFFF ^ 1) << 16 | pid & 0xFFFF;
+                pk.PID = ((uint)(pk.TID16 ^ pk.SID16) ^ pid & 0xFFFF ^ 1) << 16 | pid & 0xFFFF;
                 pk.EncryptionConstant = Util.Rand32();
                 var data = pk;
-                var chk = PokeCrypto.GetCHK(data.Data, 328);
+                var chk = PokeCrypto.GetCHK(data.Data);
                 var chkh = (byte)(chk / 256);
                 var chkl = (byte)(chk & (0xFF));
                 data.Data[7] = chkh;

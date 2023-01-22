@@ -10,7 +10,7 @@ namespace WangPluginPkm
         {
             var rng = new Xoroshiro128Plus(seed);
             rng.NextInt(); // EC
-            rng.NextInt(); // TID
+            rng.NextInt(); // TID16
             rng.NextInt(); // PID
             int[] check_ivs = { -1, -1, -1, -1, -1, -1 };
             for (int i = 0; i < fixed_ivs; i++)
@@ -38,18 +38,18 @@ namespace WangPluginPkm
             return true;
         }
 
-        public static IEnumerable<ulong> FindSeeds(uint ec, uint pid, uint tid, uint sid, sbyte fixedShiny = 0)
+        public static IEnumerable<ulong> FindSeeds(uint ec, uint pid, uint TID16, uint SID16, sbyte fixedShiny = 0)
         {
             var fixed_val = GetSeedStart(ec);
-            uint tsv = (tid ^ sid) >> 4;
+            uint tsv = (TID16 ^ SID16) >> 4;
             ulong seed = fixed_val;
             do
             {
                 var rng = new Xoroshiro128Plus(seed);
                 rng.NextInt(); // EC
-                uint tidsid = (uint)rng.NextInt();
+                uint TID16SID16 = (uint)rng.NextInt();
                 uint new_pid = (uint)rng.NextInt();
-                new_pid = RaidTemplate.GetFinalPID(tid, sid, new_pid, tidsid, tsv, fixedShiny);
+                new_pid = RaidTemplate.GetFinalPID(TID16, SID16, new_pid, TID16SID16, tsv, fixedShiny);
                 if (new_pid == pid)
                     yield return seed;
                 seed += 0x1_0000_0000;

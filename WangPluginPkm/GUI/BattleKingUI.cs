@@ -16,10 +16,7 @@ namespace WangPluginPkm.GUI
         public  List<ShowdownSet> Sets = new();
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
-        private static readonly EncounterOrder[] EncounterPriority =
-       {
-            EncounterOrder.Egg, EncounterOrder.Static, EncounterOrder.Trade, EncounterOrder.Slot, EncounterOrder.Mystery,
-        };
+       
         public BattleKingUI(ISaveFileProvider sav, IPKMView editor)
         {
             InitializeComponent();
@@ -54,7 +51,7 @@ namespace WangPluginPkm.GUI
                     }
                     if (!info.Valid)
                     {
-                        MessageBox.Show("The data inside the URL are not valid Showdown Sets");
+                        MessageBox.Show("The data inSID16e the URL are not valid Showdown Sets");
                         return;
                     }
                     if (info.Source == TeamPasteInfo.PasteSource.None)

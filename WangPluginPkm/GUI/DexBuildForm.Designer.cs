@@ -8,13 +8,13 @@ namespace WangPluginPkm.GUI
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DexBuildForm));
             this.BuildDex_BTN = new System.Windows.Forms.Button();
             this.Gen_BTN = new System.Windows.Forms.Button();
-            this.TIDBox = new System.Windows.Forms.TextBox();
-            this.SIDBox = new System.Windows.Forms.TextBox();
+            this.TID16Box = new System.Windows.Forms.TextBox();
+            this.SID16Box = new System.Windows.Forms.TextBox();
             this.OT_Name = new System.Windows.Forms.TextBox();
             this.LanguageBox = new System.Windows.Forms.ComboBox();
             this.GenderBox = new System.Windows.Forms.ComboBox();
-            this.TIDLabel = new System.Windows.Forms.Label();
-            this.SIDLabel = new System.Windows.Forms.Label();
+            this.TID16Label = new System.Windows.Forms.Label();
+            this.SID16Label = new System.Windows.Forms.Label();
             this.OTLabel = new System.Windows.Forms.Label();
             this.LGLabel = new System.Windows.Forms.Label();
             this.LivingDex_BTN = new System.Windows.Forms.Button();
@@ -55,23 +55,23 @@ namespace WangPluginPkm.GUI
             this.Gen_BTN.UseVisualStyleBackColor = true;
             this.Gen_BTN.Click += new System.EventHandler(this.Gen_BTN_Click);
             // 
-            // TIDBox
+            // TID16Box
             // 
-            this.TIDBox.Font = new System.Drawing.Font("Arial", 9F);
-            this.TIDBox.Location = new System.Drawing.Point(52, 21);
-            this.TIDBox.Name = "TIDBox";
-            this.TIDBox.Size = new System.Drawing.Size(73, 25);
-            this.TIDBox.TabIndex = 2;
-            this.TIDBox.Text = "10101";
+            this.TID16Box.Font = new System.Drawing.Font("Arial", 9F);
+            this.TID16Box.Location = new System.Drawing.Point(52, 21);
+            this.TID16Box.Name = "TID16Box";
+            this.TID16Box.Size = new System.Drawing.Size(73, 25);
+            this.TID16Box.TabIndex = 2;
+            this.TID16Box.Text = "10101";
             // 
-            // SIDBox
+            // SID16Box
             // 
-            this.SIDBox.Font = new System.Drawing.Font("Arial", 9F);
-            this.SIDBox.Location = new System.Drawing.Point(52, 54);
-            this.SIDBox.Name = "SIDBox";
-            this.SIDBox.Size = new System.Drawing.Size(73, 25);
-            this.SIDBox.TabIndex = 3;
-            this.SIDBox.Text = "01010";
+            this.SID16Box.Font = new System.Drawing.Font("Arial", 9F);
+            this.SID16Box.Location = new System.Drawing.Point(52, 54);
+            this.SID16Box.Name = "SID16Box";
+            this.SID16Box.Size = new System.Drawing.Size(73, 25);
+            this.SID16Box.TabIndex = 3;
+            this.SID16Box.Text = "01010";
             // 
             // OT_Name
             // 
@@ -98,26 +98,26 @@ namespace WangPluginPkm.GUI
             this.GenderBox.Size = new System.Drawing.Size(56, 25);
             this.GenderBox.TabIndex = 6;
             // 
-            // TIDLabel
+            // TID16Label
             // 
-            this.TIDLabel.AutoSize = true;
-            this.TIDLabel.Font = new System.Drawing.Font("黑体", 9F);
-            this.TIDLabel.Location = new System.Drawing.Point(7, 25);
-            this.TIDLabel.Name = "TIDLabel";
-            this.TIDLabel.Size = new System.Drawing.Size(39, 15);
-            this.TIDLabel.TabIndex = 7;
-            this.TIDLabel.Text = "表ID";
+            this.TID16Label.AutoSize = true;
+            this.TID16Label.Font = new System.Drawing.Font("黑体", 9F);
+            this.TID16Label.Location = new System.Drawing.Point(7, 25);
+            this.TID16Label.Name = "TID16Label";
+            this.TID16Label.Size = new System.Drawing.Size(39, 15);
+            this.TID16Label.TabIndex = 7;
+            this.TID16Label.Text = "表ID";
             // 
-            // SIDLabel
+            // SID16Label
             // 
-            this.SIDLabel.AutoSize = true;
-            this.SIDLabel.Font = new System.Drawing.Font("黑体", 9F);
-            this.SIDLabel.Location = new System.Drawing.Point(7, 58);
-            this.SIDLabel.Name = "SIDLabel";
-            this.SIDLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.SIDLabel.Size = new System.Drawing.Size(39, 15);
-            this.SIDLabel.TabIndex = 8;
-            this.SIDLabel.Text = "里ID";
+            this.SID16Label.AutoSize = true;
+            this.SID16Label.Font = new System.Drawing.Font("黑体", 9F);
+            this.SID16Label.Location = new System.Drawing.Point(7, 58);
+            this.SID16Label.Name = "SID16Label";
+            this.SID16Label.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.SID16Label.Size = new System.Drawing.Size(39, 15);
+            this.SID16Label.TabIndex = 8;
+            this.SID16Label.Text = "里ID";
             // 
             // OTLabel
             // 
@@ -231,13 +231,13 @@ namespace WangPluginPkm.GUI
             this.groupBox1.Controls.Add(this.RandomPID_BTN);
             this.groupBox1.Controls.Add(this.LGLabel);
             this.groupBox1.Controls.Add(this.OTLabel);
-            this.groupBox1.Controls.Add(this.SIDLabel);
-            this.groupBox1.Controls.Add(this.TIDLabel);
+            this.groupBox1.Controls.Add(this.SID16Label);
+            this.groupBox1.Controls.Add(this.TID16Label);
             this.groupBox1.Controls.Add(this.GenderBox);
             this.groupBox1.Controls.Add(this.LanguageBox);
             this.groupBox1.Controls.Add(this.OT_Name);
-            this.groupBox1.Controls.Add(this.SIDBox);
-            this.groupBox1.Controls.Add(this.TIDBox);
+            this.groupBox1.Controls.Add(this.SID16Box);
+            this.groupBox1.Controls.Add(this.TID16Box);
             this.groupBox1.Controls.Add(this.Gen_BTN);
             this.groupBox1.Location = new System.Drawing.Point(5, 6);
             this.groupBox1.Name = "groupBox1";
@@ -317,13 +317,13 @@ namespace WangPluginPkm.GUI
         private Button FormAndSubDex_BTN;
         private Button BuildDex_BTN;
         private Button Gen_BTN;
-        private TextBox TIDBox;
-        private TextBox SIDBox;
+        private TextBox TID16Box;
+        private TextBox SID16Box;
         private ComboBox LanguageBox;
         private TextBox OT_Name;
         private ComboBox GenderBox;
-        private Label TIDLabel;
-        private Label SIDLabel;
+        private Label TID16Label;
+        private Label SID16Label;
         private Label OTLabel;
         private Label LGLabel;
         private Button LivingDex_BTN;

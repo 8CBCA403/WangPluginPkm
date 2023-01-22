@@ -13,10 +13,10 @@ namespace WangPluginPkm.RNG.Methods
             pk.EncryptionConstant = xors.NextUInt();
 
             // PID
-            var fakeTID = xors.NextUInt(); // fakeTID
+            var fakeTID16 = xors.NextUInt(); // fakeTID16
             var pid = xors.NextUInt();
-            pid = GetRevisedPID(fakeTID, pid, pk);
-            var xor = GetShinyXor(pk.TID, pk.SID, pid);
+            pid = GetRevisedPID(fakeTID16, pid, pk);
+            var xor = GetShinyXor(pk.TID16, pk.SID16, pid);
             var type = GetRareType(xor);
             if (shiny == Shiny.Never)
             {
@@ -109,10 +109,10 @@ namespace WangPluginPkm.RNG.Methods
             // Item, don't care
             return true;
         }
-        private static uint GetRevisedPID(uint fakeTID, uint pid, ITrainerID tr)
+        private static uint GetRevisedPID(uint fakeTID16, uint pid, ITrainerID32 tr)
         {
-            var xor = GetShinyXor(pid, fakeTID);
-            var newXor = GetShinyXor(pid, (uint)(tr.TID | tr.SID << 16));
+            var xor = GetShinyXor(pid, fakeTID16);
+            var newXor = GetShinyXor(pid, tr.ID32);
 
             var fakeRare = GetRareType(xor);
             var newRare = GetRareType(newXor);
@@ -122,7 +122,7 @@ namespace WangPluginPkm.RNG.Methods
 
             var isShiny = xor < 16;
             if (isShiny)
-                return ((uint)(tr.TID ^ tr.SID) ^ pid & 0xFFFF ^ (xor == 0 ? 0u : 1u)) << 16 | pid & 0xFFFF; // force same shiny star type
+                return ((uint)(tr.TID16 ^ tr.SID16) ^ pid & 0xFFFF ^ (xor == 0 ? 0u : 1u)) << 16 | pid & 0xFFFF; // force same shiny star type
             return pid ^ 0x1000_0000;
         }
 
@@ -133,9 +133,9 @@ namespace WangPluginPkm.RNG.Methods
             _ => Shiny.Never,
         };
 
-        private static uint GetShinyXor(int tid, int sid, uint pid)
+        private static uint GetShinyXor(int TID16, int SID16, uint pid)
         {
-            return GetShinyXor(pid, (uint)(sid << 16 | tid));
+            return GetShinyXor(pid, (uint)(SID16 << 16 | TID16));
         }
 
         private static uint GetShinyXor(uint pid, uint oid)

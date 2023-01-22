@@ -221,26 +221,26 @@ namespace WangPluginPkm.GUI
         }
         private void CalcID_Click(object sender, EventArgs e)
         {
-            uint TIDSID;
-            uint TID5;
-            uint SID5;
-            uint TID7;
-            uint SID7;
+            uint TID16SID16;
+            uint TID165;
+            uint SID165;
+            uint TID167;
+            uint SID167;
             if (IDCheck.Checked == true)
             {
-                TIDSID = UInt32.Parse(TID.Text) + UInt32.Parse(SID.Text) * 65536;
-                TID7 = TIDSID % 1_000_000;
-                SID7 = TIDSID / 1_000_000;
-                TIDResult.Text = TID7.ToString();
-                SIDResult.Text = SID7.ToString();
+                TID16SID16 = UInt32.Parse(TID16.Text) + UInt32.Parse(SID16.Text) * 65536;
+                TID167 = TID16SID16 % 1_000_000;
+                SID167 = TID16SID16 / 1_000_000;
+                TID16Result.Text = TID167.ToString();
+                SID16Result.Text = SID167.ToString();
             }
             else if(IDsCheck.Checked == true)
             {
-                TIDSID = UInt32.Parse(TID.Text) + UInt32.Parse(SID.Text) * 1_000_000;
-                TID5 = TIDSID % 65536;
-                SID5 = TIDSID / 65536;
-                TIDResult.Text = TID5.ToString();
-                SIDResult.Text = SID5.ToString();
+                TID16SID16 = UInt32.Parse(TID16.Text) + UInt32.Parse(SID16.Text) * 1_000_000;
+                TID165 = TID16SID16 % 65536;
+                SID165 = TID16SID16 / 65536;
+                TID16Result.Text = TID165.ToString();
+                SID16Result.Text = SID165.ToString();
             }
         }
         #region

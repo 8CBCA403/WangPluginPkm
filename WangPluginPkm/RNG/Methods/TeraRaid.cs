@@ -22,7 +22,7 @@ namespace WangPluginPkm.RNG.Methods
             const uint PID_1 = 0xC9E69326; // 0xD68E8499 for PID_2
             return pk.PID == PID_1 ? Seed_1 : Seed_2; // don't care if the PID != second's case. Other validation will check.
         }
-        public static uint? CalcResult(ulong Seed,int tid7,int sid7, GameProgress progress, GameVersion G, uint calc)
+        public static uint? CalcResult(ulong Seed,int TID167,int SID167, GameProgress progress, GameVersion G, uint calc)
         {
             var seed = (uint)(Seed & 0xFFFFFFFF);
         
@@ -33,7 +33,7 @@ namespace WangPluginPkm.RNG.Methods
                 MessageBox.Show("空2");
                 return null;
             }
-            //TeraUtil.CalcRNG(seed, tid7, sid7, encounter, calc);
+            //TeraUtil.CalcRNG(seed, TID167, SID167, encounter, calc);
             return encounter.Species;
         }
     }

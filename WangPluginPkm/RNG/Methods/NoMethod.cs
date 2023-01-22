@@ -37,15 +37,15 @@ namespace WangPluginPkm.RNG.Methods
             }
             else if (S == PkmCondition.ShinyType.Star)
             {
-                return ((uint)(pk.TID ^ pk.SID) ^ pk.PID & 0xFFFF ^ r) << 16 | pk.PID & 0xFFFF;
+                return ((uint)(pk.TID16 ^ pk.SID16) ^ pk.PID & 0xFFFF ^ r) << 16 | pk.PID & 0xFFFF;
             }
             else if (S == PkmCondition.ShinyType.Sqaure)
             {
-                return ((uint)(pk.TID ^ pk.SID) ^ pk.PID & 0xFFFF ^ 0u) << 16 | pk.PID & 0xFFFF;
+                return ((uint)(pk.TID16 ^ pk.SID16) ^ pk.PID & 0xFFFF ^ 0u) << 16 | pk.PID & 0xFFFF;
             }
 
             else if (S == PkmCondition.ShinyType.Star)
-                return ((uint)(pk.TID ^ pk.SID) ^ pk.PID & 0xFFFF ^ 1u) << 16 | pk.PID & 0xFFFF;
+                return ((uint)(pk.TID16 ^ pk.SID16) ^ pk.PID & 0xFFFF ^ 1u) << 16 | pk.PID & 0xFFFF;
             else
                 return pk.PID;
         }

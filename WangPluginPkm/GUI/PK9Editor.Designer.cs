@@ -84,10 +84,10 @@
             this.ConnectBTN = new System.Windows.Forms.Button();
             this.Read_BTN = new System.Windows.Forms.Button();
             this.Write_BTN = new System.Windows.Forms.Button();
-            this.TidLabel = new System.Windows.Forms.Label();
-            this.TidtextBox = new System.Windows.Forms.TextBox();
-            this.Sidlabel = new System.Windows.Forms.Label();
-            this.SidtextBox = new System.Windows.Forms.TextBox();
+            this.TID16Label = new System.Windows.Forms.Label();
+            this.TID16textBox = new System.Windows.Forms.TextBox();
+            this.SID16label = new System.Windows.Forms.Label();
+            this.SID16textBox = new System.Windows.Forms.TextBox();
             this.NameLabel = new System.Windows.Forms.Label();
             this.NametextBox = new System.Windows.Forms.TextBox();
             this.PIDtextBox = new System.Windows.Forms.TextBox();
@@ -583,37 +583,37 @@
             this.Write_BTN.UseVisualStyleBackColor = true;
             this.Write_BTN.Click += new System.EventHandler(this.Write_BTN_Click);
             // 
-            // TidLabel
+            // TID16Label
             // 
-            this.TidLabel.AutoSize = true;
-            this.TidLabel.Location = new System.Drawing.Point(230, 412);
-            this.TidLabel.Name = "TidLabel";
-            this.TidLabel.Size = new System.Drawing.Size(27, 16);
-            this.TidLabel.TabIndex = 64;
-            this.TidLabel.Text = "Tid";
+            this.TID16Label.AutoSize = true;
+            this.TID16Label.Location = new System.Drawing.Point(230, 412);
+            this.TID16Label.Name = "TID16Label";
+            this.TID16Label.Size = new System.Drawing.Size(27, 16);
+            this.TID16Label.TabIndex = 64;
+            this.TID16Label.Text = "TID16";
             // 
-            // TidtextBox
+            // TID16textBox
             // 
-            this.TidtextBox.Location = new System.Drawing.Point(263, 408);
-            this.TidtextBox.Name = "TidtextBox";
-            this.TidtextBox.Size = new System.Drawing.Size(61, 22);
-            this.TidtextBox.TabIndex = 65;
+            this.TID16textBox.Location = new System.Drawing.Point(263, 408);
+            this.TID16textBox.Name = "TID16textBox";
+            this.TID16textBox.Size = new System.Drawing.Size(61, 22);
+            this.TID16textBox.TabIndex = 65;
             // 
-            // Sidlabel
+            // SID16label
             // 
-            this.Sidlabel.AutoSize = true;
-            this.Sidlabel.Location = new System.Drawing.Point(330, 410);
-            this.Sidlabel.Name = "Sidlabel";
-            this.Sidlabel.Size = new System.Drawing.Size(27, 16);
-            this.Sidlabel.TabIndex = 66;
-            this.Sidlabel.Text = "Sid";
+            this.SID16label.AutoSize = true;
+            this.SID16label.Location = new System.Drawing.Point(330, 410);
+            this.SID16label.Name = "SID16label";
+            this.SID16label.Size = new System.Drawing.Size(27, 16);
+            this.SID16label.TabIndex = 66;
+            this.SID16label.Text = "SID16";
             // 
-            // SidtextBox
+            // SID16textBox
             // 
-            this.SidtextBox.Location = new System.Drawing.Point(363, 407);
-            this.SidtextBox.Name = "SidtextBox";
-            this.SidtextBox.Size = new System.Drawing.Size(58, 22);
-            this.SidtextBox.TabIndex = 67;
+            this.SID16textBox.Location = new System.Drawing.Point(363, 407);
+            this.SID16textBox.Name = "SID16textBox";
+            this.SID16textBox.Size = new System.Drawing.Size(58, 22);
+            this.SID16textBox.TabIndex = 67;
             // 
             // NameLabel
             // 
@@ -1078,10 +1078,10 @@
             this.Controls.Add(this.PIDtextBox);
             this.Controls.Add(this.NametextBox);
             this.Controls.Add(this.NameLabel);
-            this.Controls.Add(this.SidtextBox);
-            this.Controls.Add(this.Sidlabel);
-            this.Controls.Add(this.TidtextBox);
-            this.Controls.Add(this.TidLabel);
+            this.Controls.Add(this.SID16textBox);
+            this.Controls.Add(this.SID16label);
+            this.Controls.Add(this.TID16textBox);
+            this.Controls.Add(this.TID16Label);
             this.Controls.Add(this.Write_BTN);
             this.Controls.Add(this.Read_BTN);
             this.Controls.Add(this.portTextBox);
@@ -1208,10 +1208,10 @@
         private System.Windows.Forms.Button ConnectBTN;
         private System.Windows.Forms.Button Read_BTN;
         private System.Windows.Forms.Button Write_BTN;
-        private System.Windows.Forms.Label TidLabel;
-        private System.Windows.Forms.TextBox TidtextBox;
-        private System.Windows.Forms.Label Sidlabel;
-        private System.Windows.Forms.TextBox SidtextBox;
+        private System.Windows.Forms.Label TID16Label;
+        private System.Windows.Forms.TextBox TID16textBox;
+        private System.Windows.Forms.Label SID16label;
+        private System.Windows.Forms.TextBox SID16textBox;
         private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.TextBox NametextBox;
         private System.Windows.Forms.TextBox PIDtextBox;

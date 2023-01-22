@@ -210,9 +210,9 @@ namespace Noexes.Base
             lock (_sync)
             {
                 Send(NoexsCommand.GetTitleID(pid));
-                var tid = ReadLong();
+                var TID16 = ReadLong();
                 ReadResult();
-                return tid;
+                return TID16;
             }
         }
 

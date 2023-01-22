@@ -4,7 +4,7 @@ namespace WangPluginPkm.GUI
 {
     partial class ShinyMakerUI
     {
-        private Button ShinySID_BTN;
+        private Button ShinySID16_BTN;
         private Button RandomStar_BTN;
         private Button ForceSquare_BTN;
         private ComboBox XorBox;
@@ -14,7 +14,7 @@ namespace WangPluginPkm.GUI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShinyMakerUI));
-            this.ShinySID_BTN = new System.Windows.Forms.Button();
+            this.ShinySID16_BTN = new System.Windows.Forms.Button();
             this.RandomStar_BTN = new System.Windows.Forms.Button();
             this.ForceSquare_BTN = new System.Windows.Forms.Button();
             this.XorBox = new System.Windows.Forms.ComboBox();
@@ -24,16 +24,16 @@ namespace WangPluginPkm.GUI
             this.RangeBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // ShinySID_BTN
+            // ShinySID16_BTN
             // 
-            this.ShinySID_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.ShinySID_BTN.Location = new System.Drawing.Point(130, 45);
-            this.ShinySID_BTN.Name = "ShinySID_BTN";
-            this.ShinySID_BTN.Size = new System.Drawing.Size(120, 30);
-            this.ShinySID_BTN.TabIndex = 0;
-            this.ShinySID_BTN.Text = "随机SID闪光";
-            this.ShinySID_BTN.UseVisualStyleBackColor = true;
-            this.ShinySID_BTN.Click += new System.EventHandler(this.ShinySID_BTN_Click);
+            this.ShinySID16_BTN.Font = new System.Drawing.Font("SimHei", 9F);
+            this.ShinySID16_BTN.Location = new System.Drawing.Point(130, 45);
+            this.ShinySID16_BTN.Name = "ShinySID16_BTN";
+            this.ShinySID16_BTN.Size = new System.Drawing.Size(120, 30);
+            this.ShinySID16_BTN.TabIndex = 0;
+            this.ShinySID16_BTN.Text = "随机SID16闪光";
+            this.ShinySID16_BTN.UseVisualStyleBackColor = true;
+            this.ShinySID16_BTN.Click += new System.EventHandler(this.ShinySID16_BTN_Click);
             // 
             // RandomStar_BTN
             // 
@@ -116,7 +116,7 @@ namespace WangPluginPkm.GUI
             this.Controls.Add(this.XorBox);
             this.Controls.Add(this.ForceSquare_BTN);
             this.Controls.Add(this.RandomStar_BTN);
-            this.Controls.Add(this.ShinySID_BTN);
+            this.Controls.Add(this.ShinySID16_BTN);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;

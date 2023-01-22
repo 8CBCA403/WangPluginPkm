@@ -190,7 +190,7 @@ namespace WangPluginPkm.WangUtil.TeraRaid
             return (byte)PersonalTable.SV.GetFormEntry(enc.Species, enc.Form).Gender;
         }
 
-        public static TeraDetails CalcRNG(uint seed, int tid, int sid, EncounterRaid9 encounter, uint calc = 0)
+        public static TeraDetails CalcRNG(uint seed, ushort TID16, ushort SID16, EncounterRaid9 encounter, uint calc = 0)
         {
             var param = new GenerateParam9
             {
@@ -209,8 +209,8 @@ namespace WangPluginPkm.WangUtil.TeraRaid
             {
                 Species = encounter.Species,
                 Form = encounter.Form,
-                TrainerID7 = tid,
-                TrainerSID7 = sid,
+                DisplayTID = TID16,
+                DisplaySID = SID16,
                 TeraTypeOriginal = (MoveType)Tera9RNG.GetTeraType(seed, encounter.TeraType, encounter.Species, encounter.Form),
             };
 

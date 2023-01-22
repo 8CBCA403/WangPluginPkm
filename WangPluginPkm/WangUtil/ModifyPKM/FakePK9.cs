@@ -38,12 +38,12 @@ namespace WangPluginPkm
             get => ReadUInt16LittleEndian(Data.AsSpan(0x0A)); 
             set => WriteUInt16LittleEndian(Data.AsSpan(0x0A), (ushort)value); 
         }
-        public  int TID 
+        public  int TID16 
         { 
             get => ReadUInt16LittleEndian(Data.AsSpan(0x0C)); 
             set => WriteUInt16LittleEndian(Data.AsSpan(0x0C), (ushort)value); 
         }
-        public  int SID 
+        public  int SID16 
         { 
             get => ReadUInt16LittleEndian(Data.AsSpan(0x0E)); 
             set => WriteUInt16LittleEndian(Data.AsSpan(0x0E), (ushort)value); 

@@ -17,7 +17,7 @@ namespace WangPluginPkm.RNG.Methods
             var D = LCRNG.Next(C);
             if (shiny)
             {
-                uint PID = X & 0xFFFF0000 | (uint)pk.SID ^ (uint)pk.TID ^ X >> 16;
+                uint PID = X & 0xFFFF0000 | (uint)pk.SID16 ^ (uint)pk.TID16 ^ X >> 16;
                 PID &= 0xFFFFFFF8;
                 PID |= B >> 16 & 0x7; // lowest 3 bits
 
