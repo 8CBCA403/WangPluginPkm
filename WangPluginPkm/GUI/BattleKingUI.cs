@@ -23,7 +23,11 @@ namespace WangPluginPkm.GUI
             SAV = sav;
             Editor = editor;
         }
-        
+     
+     //   private static readonly EncounterOrder[] EncounterPriority =
+    //   {
+     //       EncounterOrder.Egg, EncounterOrder.Static, EncounterOrder.Trade, EncounterOrder.Slot, EncounterOrder.Mystery,
+    //    };
         private void IsRunning(bool running)
         {
             ImportPKM_BTN.Enabled = !running;
