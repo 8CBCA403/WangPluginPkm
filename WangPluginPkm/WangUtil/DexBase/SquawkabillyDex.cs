@@ -19,7 +19,7 @@ namespace WangPluginPkm.WangUtil.DexBase
                     {
                         for (int j = 0; j < 4; j++)
                         {
-                            pk = SearchDatabase.SearchPKM(SAV, Editor, 960, 50, j, false);
+                            pk = SearchDatabase.SearchPKM(SAV, Editor, (int)Species.Squawkabilly, 50, j, false);
                             pk.ClearNickname();
                             PKL.Add(pk);
                         }
