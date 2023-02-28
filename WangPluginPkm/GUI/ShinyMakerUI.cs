@@ -84,10 +84,9 @@ namespace WangPluginPkm.GUI
         }
         public static void ShinySID16(PKM pkm)
         {
-            if (!MythicalFlag.MFlag(pkm.Species))
-            {
+            
                 pkm.SetShinySID();
-            }
+            
         }
         private static uint RandomStar(PKM pk)
         {

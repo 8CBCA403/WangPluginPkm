@@ -248,6 +248,7 @@ namespace WangPluginPkm
                 L.Add(Rotom);
                 L.Add(Flabébé);
                 L.Add(Deerling);
+                L.Add(Vivillon);
                 L.Add(Oricorio);
                 L.Add(Squawkabilly);
                 L.Add(Tatsugiri);

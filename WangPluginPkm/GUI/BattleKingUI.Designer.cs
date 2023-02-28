@@ -19,11 +19,12 @@ namespace WangPluginPkm.GUI
             this.ImportPKM_BTN = new System.Windows.Forms.Button();
             this.ConditionBox = new System.Windows.Forms.TextBox();
             this.ClearAllBox_BTN = new System.Windows.Forms.Button();
+            this.ChineseCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // LoadBattleTeam_BTN
             // 
-            this.LoadBattleTeam_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.LoadBattleTeam_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.LoadBattleTeam_BTN.Location = new System.Drawing.Point(423, 194);
             this.LoadBattleTeam_BTN.Name = "LoadBattleTeam_BTN";
             this.LoadBattleTeam_BTN.Size = new System.Drawing.Size(149, 32);
@@ -50,8 +51,8 @@ namespace WangPluginPkm.GUI
             // 
             // LoadTeamFromPSCode_BTN
             // 
-            this.LoadTeamFromPSCode_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.LoadTeamFromPSCode_BTN.Location = new System.Drawing.Point(78, 194);
+            this.LoadTeamFromPSCode_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LoadTeamFromPSCode_BTN.Location = new System.Drawing.Point(122, 194);
             this.LoadTeamFromPSCode_BTN.Name = "LoadTeamFromPSCode_BTN";
             this.LoadTeamFromPSCode_BTN.Size = new System.Drawing.Size(197, 32);
             this.LoadTeamFromPSCode_BTN.TabIndex = 4;
@@ -61,7 +62,7 @@ namespace WangPluginPkm.GUI
             // 
             // ImportPKM_BTN
             // 
-            this.ImportPKM_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.ImportPKM_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ImportPKM_BTN.Location = new System.Drawing.Point(639, 83);
             this.ImportPKM_BTN.Name = "ImportPKM_BTN";
             this.ImportPKM_BTN.Size = new System.Drawing.Size(206, 30);
@@ -81,7 +82,7 @@ namespace WangPluginPkm.GUI
             // 
             // ClearAllBox_BTN
             // 
-            this.ClearAllBox_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            this.ClearAllBox_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ClearAllBox_BTN.Location = new System.Drawing.Point(639, 129);
             this.ClearAllBox_BTN.Name = "ClearAllBox_BTN";
             this.ClearAllBox_BTN.Size = new System.Drawing.Size(206, 29);
@@ -90,9 +91,20 @@ namespace WangPluginPkm.GUI
             this.ClearAllBox_BTN.UseVisualStyleBackColor = true;
             this.ClearAllBox_BTN.Click += new System.EventHandler(this.ClearAllBox_BTN_Click);
             // 
+            // ChineseCheckBox
+            // 
+            this.ChineseCheckBox.AutoSize = true;
+            this.ChineseCheckBox.Location = new System.Drawing.Point(12, 200);
+            this.ChineseCheckBox.Name = "ChineseCheckBox";
+            this.ChineseCheckBox.Size = new System.Drawing.Size(91, 23);
+            this.ChineseCheckBox.TabIndex = 8;
+            this.ChineseCheckBox.Text = "中文指令";
+            this.ChineseCheckBox.UseVisualStyleBackColor = true;
+            // 
             // BattleKingUI
             // 
             this.ClientSize = new System.Drawing.Size(856, 231);
+            this.Controls.Add(this.ChineseCheckBox);
             this.Controls.Add(this.ClearAllBox_BTN);
             this.Controls.Add(this.ConditionBox);
             this.Controls.Add(this.ImportPKM_BTN);
@@ -100,7 +112,7 @@ namespace WangPluginPkm.GUI
             this.Controls.Add(this.PSBox);
             this.Controls.Add(this.UrlBox);
             this.Controls.Add(this.LoadBattleTeam_BTN);
-            this.Font = new System.Drawing.Font("Arial", 10.2F);
+            this.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "BattleKingUI";
@@ -117,5 +129,6 @@ namespace WangPluginPkm.GUI
         private TextBox ConditionBox;
         private Button ClearAllBox_BTN;
         private Button LoadBattleTeam_BTN;
+        private CheckBox ChineseCheckBox;
     }
 }

@@ -74,6 +74,10 @@ namespace WangPluginPkm.GUI
             var text = GetTextShowdownData(PSBox.Text.TrimEnd());
             if (string.IsNullOrWhiteSpace(text))
                 return;
+            if(ChineseCheckBox.Checked)
+            {
+               text= PSTranslator<PK9>.Chinese2Showdown(text);
+            }
             Import(text!);
         }
         private void ClearAllBox_BTN_Click(object sender, EventArgs e)

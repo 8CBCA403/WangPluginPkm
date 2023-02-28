@@ -62,7 +62,7 @@ namespace WangPluginPkm.WangUtil.DexBase
                     {
                         for (int i = 0; i < 20; i++)
                         {
-                            pk = SearchDatabase.SearchPKM(SAV, Editor, 666, 26,0,true);
+                            pk = SearchDatabase.SearchPKM(SAV, Editor, 666, 26, 0, true);
                             pk.CurrentLevel = 50;
                             pk.Species = 666;
                             pk.ClearNickname();
@@ -79,7 +79,7 @@ namespace WangPluginPkm.WangUtil.DexBase
                                     PKL.Add(pk);
                                     break;
                                 case 1:
-                                     a = r.Next(0, VivillonCountryTable[1].Length);
+                                    a = r.Next(0, VivillonCountryTable[1].Length);
                                     c = VivillonCountryTable[1][a];
                                     pk6.Country = c;
                                     pk6.ConsoleRegion = CountryToRegionCountry(c);
@@ -215,17 +215,17 @@ namespace WangPluginPkm.WangUtil.DexBase
                                     PKL.Add(pk);
                                     break;
                                 case 18:
-                                    var p = SearchDatabase.MytheryPK(SAV,666,6,18);
-                                    
+                                    var p = SearchDatabase.MytheryPK(SAV, 666, 6, 18);
+
                                     PKL.Add(p);
                                     break;
                                 case 19:
                                     p = SearchDatabase.MytheryPK(SAV, 666, 6, 19);
-                              
+
                                     PKL.Add(p);
                                     break;
                             }
-                           
+
                         }
                     }
                     break;
@@ -387,7 +387,7 @@ namespace WangPluginPkm.WangUtil.DexBase
                                     PKL.Add(pk);
                                     break;
                                 case 18:
-                                    var p =(PK6)SearchDatabase.MytheryPK(SAV, 666, 6, 18);
+                                    var p = (PK6)SearchDatabase.MytheryPK(SAV, 666, 6, 18);
                                     p.Language = 2;
                                     p.ClearNickname();
                                     PKL.Add(p.ConvertToPK7());
@@ -401,6 +401,17 @@ namespace WangPluginPkm.WangUtil.DexBase
                             }
 
                         }
+                    }
+                    break;
+                case GameVersion.SL or GameVersion.VL or GameVersion.SV:
+                     for (int i = 0; i < 19; i++)
+                    {
+                        pk = SearchDatabase.SearchPKM(SAV, Editor, 666, (int)SAV.SAV.Version, 0, false);
+                        pk.CurrentLevel = 50;
+                        pk.Species = 666;
+                        pk.ClearNickname();
+                        pk.Form = (byte)i;
+                        PKL.Add(pk);
                     }
                     break;
             }
