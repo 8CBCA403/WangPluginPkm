@@ -57,6 +57,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="RNGmenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -276,7 +279,7 @@
         KMZrFhQUCWGr/fbDnwQeLC6ysrpKZ3c3b16/zuLmJg/X10mTX2/gfGsr33jtNc6eP082nebnn3zCOyMj
         rJC388fX15mbneXUuXNcvXKFqaUlHqyvkwIipslweztvX7vGuQsXkMBnt27xdw8esAikxM6yXbBjMmSB
         yUyGv/vsM1qam+nu7uaF69fdfkklkzx5/Ji///RT7qyskJWSD+/fp6e/n/bOTs6//LLbB7GNDRbHxuga
-        HCQSDHJ/bIyZVIpTID16ysSTf6QGEUYEVK3rt/n9MDA3T39HD+2jW3DdvxOI/u3ePdzz5jKplECMHNR4/o
+        HCQSDHJ/bIyZVIptIdysSTf6QGEUYEVK3rt/n9MDA3T39HD+2jW3DdvxOI/u3ePdzz5jKplECMHNR4/o
         7umh9/RpBq5ccfe1sllWp6ZYvn2b3itXCAnB0uwsy5ub+ZTqmhqunz/PtVdeoa6pic3VVf7uvff44eho
         vp/w+EdU9V/VApzn5qDI4AgTyrElgIIyVi+KCb2qBfiM/GqWn0oEzogv7ApBxyZ11p9LAY9jMT68c4df
         bWlh8NQpfrumJq8FxOO0NDYyfPo0re3tpFMpPvr0U/7m1i2mLMuNy0+nUnx05w7dvb10DQzw333rW7w0
@@ -350,7 +353,7 @@
         tCxi+yA1TQAaGkcMMSn5N4kEC/H4M7+WNgE0NKoYmgA0NKoYmgA0NKoYmgA0NKoYmgA0NKoYmgA0NKoY
         J4cAqjibS6NyCCHcVzWj4jwAE2gUguwR6jhLSqLZLKszMyxGIliWddhNqgpkpCR72I3YB4QQxGIx1tbW
         6OzsLP84IJrJnKjkmYrvZcA0+Xf19TTncken7FNKAqkUnX/wB2Rqao50mudJgQH8h+1t/p/t7cNuSsUQ
-        QpDL5QgGgzQ1NZV1jATqhOD/nJvj2gmqHK2YACJC8FowSID16xBK2HiYnDbkFVIRWPcz+ZPOxmPDdEgfXG
+        QpDL5QgGgzQ1NZV1jATqhOD/nJvj2gmqHK2YACJC8FowSIdxBK2HiYnDbkFVIRWPcz+ZPOxmPDdEgfXG
         RqipOeymHBj2pc0c2fH1KJLSCYaosv4+iT6D6voHNTQ0CqAJQEOjiqEJQEOjiqEJQEOjiqEJQEOjiqEJ
         QEOjiqEJQEOjiqEJQEOjinH4ac06bfd4Qgidcn0CUDEBpKRkLJdjPZt96oxAwzCoi0YJnKDc6mqBAeRM
         k+ZQ6KmfA2eVpkQicdi3VXWomAAmLIvf2dzEesqFQaSUtLa18W//9b/mxRdfxCpzNR+No4P/RUr+8QFo

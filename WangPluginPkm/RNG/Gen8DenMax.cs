@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using WangPluginPkm.GUI;
 using PKHeX.Core;
+using WangPluginPkm.WangUtil.PluginEnums;
 namespace WangPluginPkm
 {
     internal class Gen8DenMax
@@ -20,7 +21,7 @@ namespace WangPluginPkm
             }
             return "没找到Seed";
         }
-        public static string Raidfinder(string s, PKM pk,int MinIV,RNGForm.Ability A, RNGForm.Gender G)
+        public static string Raidfinder(string s, PKM pk,int MinIV, int A, int G)
         {
             string T1;
             string T2;
@@ -60,13 +61,13 @@ namespace WangPluginPkm
             int ability = 0;
             switch (A)
             {
-                case RNGForm.Ability.ND:
+                case 0:
                     ability = (int)xoroshiro128Plus.NextInt(2uL);
                     break;
-                case RNGForm.Ability.CD:
+                case 1:
                     ability = (int)xoroshiro128Plus.NextInt(3uL);
                     break;
-                case RNGForm.Ability.ONE:
+                case 2:
                     ability = 1;
                     break;
             }
@@ -74,28 +75,28 @@ namespace WangPluginPkm
             int num6;
             switch (G)
             {
-                case RNGForm.Gender.M:
+                case 0:
                     num5 = 0;
                     break;
-                case RNGForm.Gender.OFSM:
+                case 1:
                     num5 = 31;
                     break;
-                case RNGForm.Gender.OFTM:
+                case 2:
                     num5 = 63;
                     break;
-                case RNGForm.Gender.OFOM:
+                case 3:
                     num5 = 127;
                     break;
-                case RNGForm.Gender.TFOM:
+                case 4:
                     num5 = 191;
                     break;
-                case RNGForm.Gender.SFOM:
+                case 5:
                     num5 = 22;
                     break;
-                case RNGForm.Gender.F:
+                case 6:
                     num5 = 254;
                     break;
-                case RNGForm.Gender.None:
+                case 7:
                     num5 = 255;
                     break;
             }

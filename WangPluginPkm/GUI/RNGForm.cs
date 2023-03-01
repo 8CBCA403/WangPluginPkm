@@ -8,70 +8,36 @@ using System.Linq;
 using System.ComponentModel;
 using System.Drawing;
 using WangPluginPkm.RNG.Methods;
+using static WangPluginPkm.WangUtil.PluginEnums.GUIEnums;
 using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
 using Roaming8bRNG = WangPluginPkm.RNG.Methods.Roaming8bRNG;
-using WangPluginPkm.WangUtil.PluginEnums;
-using WangPluginPkm.WangUtil.TeraRaid;
 
 namespace WangPluginPkm.GUI
 {
-    public partial class RNGForm : Form
+    internal partial class RNGForm : Form
     {
-        
-        private CancellationTokenSource tokenSource1 = new();
-        private CancellationTokenSource tokenSource2 = new();
+
+        private CancellationTokenSource SearchtokenSource = new();
+        private CancellationTokenSource ChecktokenSource = new();
         private const string Pk9Filter = "PK9 Entity |*.pk9|All Files|*.*";
+        private bool CheckFlag = true;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
-        public enum Gender
-        {
-            [Description("只能公")]
-            M,
-            [Description("1母:7公")]
-            OFSM,
-            [Description("1母:3公")]
-            OFTM,
-            [Description("1母:1公")]
-            OFOM,
-            [Description("3母:1公")]
-            TFOM,
-            [Description("7母:1公")]
-            SFOM,
-            [Description("只能母")]
-            F,
-            [Description("无性别")]
-            None,
-        }
-        public enum Ability
-        {
-            [Description("无梦特")]
-            ND,
-            [Description("有梦特")]
-            CD,
-            [Description("只能特性一")]
-            ONE,
-        }
-        public enum CheckMod
-        {
-            [Description("剑盾Raid/大冒险")]
-            SWSH,
-           
-        }
-        public Gender G = Gender.None;
-        public Ability A = Ability.CD;
-        public CheckMod C = CheckMod.SWSH;
+
+        public int G = 0;
+        public int A = 0;
         public PK9 newpk = new();
-        public List<RNGModClass> L = new ();
+        public List<RNGModClass> L = new();
         public RNGModClass MD = new RNGModClass
         {
             Name = "Mothed1,2,4",
             Value = "M124",
         };
-        
+
         public int MinIV = 0;
         private static Random rng = new Random();
-      
-        public int[] DIV ={ 0, 1, 2, 3, 4, 5 ,6 };
+
+        public int[] DIV = { 0, 1, 2, 3, 4, 5, 6 };
         public RNGForm(ISaveFileProvider sav, IPKMView editor)
 
         {
@@ -99,88 +65,55 @@ namespace WangPluginPkm.GUI
             {
                 PIDECCheck_Box.Enabled = !IVCheck_Box.Checked;
             };
-            this.MinIV_Box.DataSource =DIV;
-           
+            this.MinIV_Box.DataSource = DIV;
+
             this.MinIV_Box.SelectedIndexChanged += (_, __) =>
             {
                 MinIV = int.Parse(MinIV_Box.SelectedItem.ToString());
             };
-            Gender_Box.DisplayMember = "Description";
-            Gender_Box.ValueMember = "Value";
-            Gender_Box.DataSource = Enum.GetValues(typeof(Gender))
-                .Cast<Enum>()
-                .Select(value => new
-                {
-                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
-                    value
-                })
-                .OrderBy(item => item.value)
-                .ToList();
+            Gender_Box.DataSource = Enum.GetValues(typeof(RNGFormGender));
             this.Gender_Box.SelectedIndexChanged += (_, __) =>
             {
-                G = (Gender)Enum.Parse(typeof(Gender), this.Gender_Box.SelectedValue.ToString(), false);
+                G = Gender_Box.SelectedIndex;
             };
-            Ability_Box.DisplayMember = "Description";
-            Ability_Box.ValueMember = "Value";
-            Ability_Box.DataSource = Enum.GetValues(typeof(Ability))
-                .Cast<Enum>()
-                .Select(value => new
-                {
-                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
-                    value
-                })
-                .OrderBy(item => item.value)
-                .ToList();
+            Ability_Box.DataSource = Enum.GetValues(typeof(RNGFormAbility));
             this.Ability_Box.SelectedIndexChanged += (_, __) =>
             {
-                A = (Ability)Enum.Parse(typeof(Ability), this.Ability_Box.SelectedValue.ToString(), false);
+                A = Ability_Box.SelectedIndex;
             };
             CheckPID();
-            Mod_ComboBox.SelectedIndex = 0;
-            CheckModcomboBox.DisplayMember = "Description";
-            CheckModcomboBox.ValueMember = "Value";
-            CheckModcomboBox.DataSource = Enum.GetValues(typeof(CheckMod))
-                .Cast<Enum>()
-                .Select(value => new
-                {
-                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
-                    value
-                })
-                .OrderBy(item => item.value)
-                .ToList();
-            this.CheckModcomboBox.SelectedIndexChanged += (_, __) =>
-            {
-                C = (CheckMod)Enum.Parse(typeof(CheckMod), this.CheckModcomboBox.SelectedValue.ToString(), false);
-            };
+
         }
-        private bool GenPkm(ref PKM pk,uint seed,byte form=0)
+
+        #region //Search
+        private bool GenPkm(ref PKM pk, uint seed, byte form = 0)
         {
-           
+
             return ConditionForm.rules.Method switch
             {
-                MethodType.None=>NoMethod.GenPkm(ref pk, ConditionForm.rules),
+                MethodType.None => NoMethod.GenPkm(ref pk, ConditionForm.rules),
                 MethodType.Method1 => Method1RNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Method1_Unown=> UnownRNG.GenPkm(ref pk,1, seed, ConditionForm.rules, form),
+                MethodType.Method1_Unown => UnownRNG.GenPkm(ref pk, 1, seed, ConditionForm.rules, form),
                 MethodType.Method2 => Method2RNG.GenPkm(ref pk, seed, ConditionForm.rules),
                 MethodType.Method2_Unown => UnownRNG.GenPkm(ref pk, 2, seed, ConditionForm.rules, form),
-                MethodType.Method3=>Method3RNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.Method3 => Method3RNG.GenPkm(ref pk, seed, ConditionForm.rules),
                 MethodType.Method3_Unown => UnownRNG.GenPkm(ref pk, 3, seed, ConditionForm.rules, form),
                 MethodType.Method4 => Method4RNG.GenPkm(ref pk, seed, ConditionForm.rules),
                 MethodType.Method4_Unown => UnownRNG.GenPkm(ref pk, 4, seed, ConditionForm.rules, form),
                 MethodType.XDColo => XDColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
                 MethodType.Overworld8 => Overworld8RNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Roaming8b => Roaming8bRNG.GenPkm(ref pk, seed,  ConditionForm.rules),
-                MethodType.BACD_R => BACD.GenPkm(ref pk, seed & 0xFFFF, ConditionForm.rules,0),
-                MethodType.BACD_U => BACD.GenPkm(ref pk, seed , ConditionForm.rules,1),
+                MethodType.Roaming8b => Roaming8bRNG.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.BACD_R => BACD.GenPkm(ref pk, seed & 0xFFFF, ConditionForm.rules, 0),
+                MethodType.BACD_U => BACD.GenPkm(ref pk, seed, ConditionForm.rules, 1),
                 MethodType.BACD_R_S => BACD.GenPkm(ref pk, seed & 0xFFFF, ConditionForm.rules, 2),
                 MethodType.Method1Roaming => Method1Roaming.GenPkm(ref pk, seed, ConditionForm.rules),
                 MethodType.Colo => ColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
                 MethodType.E_Reader => E_Reader.GenPkm(ref pk, seed, ConditionForm.rules),
                 MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed, ConditionForm.rules),
                 MethodType.G5MGShiny => G5MGShiny.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Gen5Wild=>Gen5Wild.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.PokeWalker=>PokeWalker.GenPkm(ref pk, ConditionForm.rules),
-                MethodType.PokeSpot=>PokeSpot.GenPkm(ref pk,seed, ConditionForm.rules),
+                MethodType.Gen5Wild => Gen5Wild.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.PokeWalker => PokeWalker.GenPkm(ref pk, ConditionForm.rules),
+                MethodType.PokeSpot => PokeSpot.GenPkm(ref pk, seed, ConditionForm.rules),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -189,7 +122,7 @@ namespace WangPluginPkm.GUI
             return ConditionForm.rules.Method switch
             {
                 MethodType.Method1 => Method1RNG.Next(seed),
-                MethodType.Method1_Unown=> UnownRNG.Next(seed),
+                MethodType.Method1_Unown => UnownRNG.Next(seed),
                 MethodType.Method2 => Method2RNG.Next(seed),
                 MethodType.Method2_Unown => UnownRNG.Next(seed),
                 MethodType.Method3 => Method3RNG.Next(seed),
@@ -204,12 +137,12 @@ namespace WangPluginPkm.GUI
                 MethodType.BACD_R_S => BACD.Next(seed),
                 MethodType.Method1Roaming => Method1Roaming.Next(seed),
                 MethodType.Colo => ColoRNG.Next(seed),
-                MethodType.E_Reader =>E_Reader.Next(seed),
+                MethodType.E_Reader => E_Reader.Next(seed),
                 MethodType.ChainShiny => ChainShiny.Next(seed),
-                MethodType.G5MGShiny=>G5MGShiny.Next(seed),
+                MethodType.G5MGShiny => G5MGShiny.Next(seed),
                 MethodType.Gen5Wild => Gen5Wild.Next(seed),
-                MethodType.PokeWalker=>PokeWalker.Next(seed),
-                MethodType.PokeSpot=>PokeSpot.Next(seed),
+                MethodType.PokeWalker => PokeWalker.Next(seed),
+                MethodType.PokeSpot => PokeSpot.Next(seed),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -218,10 +151,7 @@ namespace WangPluginPkm.GUI
             Search.Enabled = !running;
             Cancel.Enabled = running;
         }
-        private void CheckerIsRunning(bool running)
-        {
-            Check_BTN.Enabled = !running;
-        }
+
         private void Search_Click(object sender, EventArgs e)
         {
             GeneratorIsRunning(true);
@@ -234,7 +164,7 @@ namespace WangPluginPkm.GUI
                 SeedList = CheckRules.PreSetSeed(ConditionForm.rules);
                 MessageBox.Show($"预设种子数量:{SeedList.Count}");
             }
-            tokenSource1 = new();
+            SearchtokenSource = new();
             if (UsePreSeed.Checked == true)
             {
                 SeedList = SeedList.OrderBy(a => rng.Next()).ToList();
@@ -246,33 +176,33 @@ namespace WangPluginPkm.GUI
                     var cloneseed = seed;
                     var pk = Editor.Data;
                     var p = Editor.Data.Clone();
-                 
+
                     while (true)
                     {
-                        if (tokenSource1.IsCancellationRequested)
+                        if (SearchtokenSource.IsCancellationRequested)
                         {
                             ConditionForm.ConditionBox.Text = "Stop";
                             return;
                         }
 
-                        if (SeedList.Count != 0&&i<= SeedList.Count)
+                        if (SeedList.Count != 0 && i <= SeedList.Count)
                         {
                             seed = SeedList[i];
                             i++;
-                     
+
                         }
-                        if (TeamLockBox.Checked==true)
+                        if (TeamLockBox.Checked == true)
                         {
-                            if (LockCheck.ChooseLock(pk.Species, p, ref seed)==false)
+                            if (LockCheck.ChooseLock(pk.Species, p, ref seed) == false)
                             {
                                 cloneseed = NextSeed(cloneseed);
                                 seed = cloneseed;
                                 continue;
                             }
                         }
-                        if (GenPkm(ref pk, seed,p.Form))
-                            {
-                           // MessageBox.Show($"Success！");
+                        if (GenPkm(ref pk, seed, p.Form))
+                        {
+                            // MessageBox.Show($"Success！");
                             this.Invoke(() =>
                                 {
                                     MessageBox.Show($"Success！");
@@ -280,8 +210,8 @@ namespace WangPluginPkm.GUI
                                     SAV.ReloadSlots();
                                     ConditionForm.SeedBox.Text = $"{Convert.ToString(seed, 16)}";
                                 });
-                                break;
-                            }
+                            break;
+                        }
                         seed = NextSeed(seed);
                     }
                     this.Invoke(() =>
@@ -290,170 +220,49 @@ namespace WangPluginPkm.GUI
                         ConditionForm.ConditionBox.Text = "无事可做";
                     });
                 },
-                tokenSource1.Token);
+                SearchtokenSource.Token);
         }
         private void Cancel_Click(object sender, EventArgs e)
         {
-            tokenSource1.Cancel();
+            SearchtokenSource.Cancel();
             GeneratorIsRunning(false);
         }
-        private void Check_BTN_Click(object sender, EventArgs e)
+        #endregion
+
+        #region //Check
+        private void FastCheck_BTN_Click(object sender, EventArgs e)
         {
-            switch (C)
-            {
-                case CheckMod.SWSH:
-                    {
-                        string T = "";
-                        CheckerIsRunning(true);
-                        Legal_Check_BOX1.Text = "正在检测基本合法性";
-                        Legal_Check_BOX2.Text = "正在反推Seed";
-                        Legal_Check_BOX3.Text = "正在检测PID/EC/IV";
-                        Legal_Check_BOX4.Text = "正在检测特性，性别";
-                        Legal_Check_BOX5.Text = "正在检测身高体重";
-                        tokenSource2 = new();
-                        var la = new LegalityAnalysis(Editor.Data);
-                        Task.Factory.StartNew(
-                        () =>
-                        {
-                            uint ec = Editor.Data.EncryptionConstant;
-                            uint pid = Editor.Data.PID;
-                            int[] ivs = { Editor.Data.IV_HP, Editor.Data.IV_ATK, Editor.Data.IV_DEF, Editor.Data.IV_SPA, Editor.Data.IV_SPD, Editor.Data.IV_SPE };
-                            var seeds = Z3Search.GetSeeds(ec, pid, ivs);
-                            // var seeds = BruteForceSearch.FindSeeds(ec, pid,(uint) Editor.Data.TID16,(uint) Editor.Data.SID16);
-                            if (la.Valid == true)
-                            {
-                                Legal_Check_BOX1.Text = "合法性检测通过！";
-                                Legal_Check_BOX1.BackColor = Color.Green;
-                                var t = la.EncounterOriginal;
-                                int r = t.Location;
-                                if (r is 162 or 244)
-                                {
-                                    if (Gen8DenMax.FindFirstSeed(seeds, ivs) == "没找到Seed")
-                                    {
-                                        Legal_Check_BOX2.Text = "逆推失败!没找到Seed";
-                                        Legal_Check_BOX2.BackColor = Color.Red;
-                                        Legal_Check_BOX3.Text = "无法检测PID/EC/IV";
-                                        Legal_Check_BOX3.BackColor = Color.Red;
-                                        Legal_Check_BOX4.Text = "无法检测性格性别";
-                                        Legal_Check_BOX4.BackColor = Color.Red;
-                                        Legal_Check_BOX5.Text = "无法检测身高体重";
-                                        Legal_Check_BOX5.BackColor = Color.Red;
-                                    }
-                                    else
-                                    {
-                                        Legal_Check_BOX2.Text = "逆推成功!";
-                                        Legal_Check_BOX2.BackColor = Color.Green;
-                                        Seed_Box.Text = Gen8DenMax.FindFirstSeed(seeds, ivs);
-                                        T = Gen8DenMax.Raidfinder(Seed_Box.Text, Editor.Data, MinIV, A, G);
-                                        var S = T.Split('\n');
-                                        if (S.Count() != 0)
-                                        {
-                                            Legal_Check_BOX3.Text = S[0];
-                                            if (S[1] == "Green")
-                                                Legal_Check_BOX3.BackColor = Color.Green;
-                                            else if (S[1] == "Orange")
-                                                Legal_Check_BOX3.BackColor = Color.Orange;
-                                            Legal_Check_BOX4.Text = S[2];
-                                            if (S[3] == "Green")
-                                                Legal_Check_BOX4.BackColor = Color.Green;
-                                            else if (S[3] == "Orange")
-                                                Legal_Check_BOX4.BackColor = Color.Orange;
-                                            Legal_Check_BOX5.Text = S[4];
-                                            if (S[5] == "Green")
-                                                Legal_Check_BOX5.BackColor = Color.Green;
-                                            else if (S[5] == "Orange")
-                                                Legal_Check_BOX5.BackColor = Color.Orange;
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    Legal_Check_BOX1.Text = "基本合法性检测通过！";
-                                    Legal_Check_BOX1.BackColor = Color.Green;
-                                    Legal_Check_BOX2.Text = "无需寻找Seed";
-                                    Legal_Check_BOX2.BackColor = Color.Green;
-                                    Legal_Check_BOX3.Text = "无需检测PID/EC/IV";
-                                    Legal_Check_BOX3.BackColor = Color.Green;
-                                    Legal_Check_BOX4.Text = "无需检测性格性别";
-                                    Legal_Check_BOX4.BackColor = Color.Green;
-                                    Legal_Check_BOX5.Text = "无需检测身高体重";
-                                    Legal_Check_BOX5.BackColor = Color.Green;
-                                }
-                            }
-                            else
-                            {
-                                Legal_Check_BOX1.Text = "基本合法性检测未通过！";
-                                Legal_Check_BOX1.BackColor = Color.Red;
-                                Legal_Check_BOX2.Text = "无事可做";
-                                Legal_Check_BOX3.Text = "无事可做";
-                                Legal_Check_BOX4.Text = "无事可做";
-                                Legal_Check_BOX5.Text = "无事可做";
-                            }
-                            this.Invoke(() =>
-                        {
-                            CheckerIsRunning(false);
-                        });
-                        },
-                            tokenSource2.Token);
-                        break;
-                    }
-                    /*case CheckMod.SV:
-                        {
-                            CheckerIsRunning(true);
-                            Legal_Check_BOX1.Text = "正在检测基本合法性";
-                            Legal_Check_BOX2.Text = "正在反推Seed";
-                            Legal_Check_BOX3.Text = "正在检测PID/EC/IV";
-                            Legal_Check_BOX4.Text = "正在检测特性，性别";
-                            Legal_Check_BOX5.Text = "正在检测身高体重";
-                            tokenSource2 = new();
-                            var la = new LegalityAnalysis(Editor.Data);
-                            Task.Factory.StartNew(
-                            () =>
-                            {
-                                GameProgress p = GameProgress.None;
-                                if(SAV.SAV is SAV9SV sv)
-                                p = TeraUtil.GetProgress(sv);
-                                var seed=TeraRaid.GetOriginalSeed(Editor.Data);
-                                if (la.Valid == true)
-                                {
-                                    Seed_Box.Text = $"{seed:X8}";
-                                    var r = TeraRaid.CalcResult(seed, Editor.Data.TrainerID7, Editor.Data.TrainerSID167,GameProgress.Unlocked6Stars, GameVersion.VL,0);
-                                    Legal_Check_BOX1.Text = "搞定";
-                                    Legal_Check_BOX2.Text = "搞定";
-                                    Legal_Check_BOX3.Text = "搞定";
-                                    Legal_Check_BOX4.Text = "搞定";
-                                    Legal_Check_BOX5.Text = "搞定";
-                                    Legal_Check_BOX3.Text = $"{r}";
-                                    //  Legal_Check_BOX3.Text = $"{r.HP}/{r.ATK}/{r.DEF}/{r.SPA}/{r.SPD}/{r.SPE}";
-                                }
-                                else
-                                {
-                                    Legal_Check_BOX1.Text = "基本合法性检测未通过！";
-                                    Legal_Check_BOX1.BackColor = Color.Red;
-                                    Legal_Check_BOX2.Text = "无事可做";
-                                    Legal_Check_BOX3.Text = "无事可做";
-                                    Legal_Check_BOX4.Text = "无事可做";
-                                    Legal_Check_BOX5.Text = "无事可做";
-                                }
-                                this.Invoke(() =>
-                                {
-
-                                    CheckerIsRunning(false);
-                                });
-                            },
-                                tokenSource2.Token);
-                        }
-                        break;
-                }*/
-            }
-
+            CheckerIsRunning(true);
+            CheckFlag = true;
+            SWSHSeedCheck(CheckFlag);
         }
-        
-        
+        private void SlowCheck_BTN_Click(object sender, EventArgs e)
+        {
+            CheckerIsRunning(true);
+            CheckFlag = false;
+            SWSHSeedCheck(CheckFlag);
+        }
+        private void CheckerIsRunning(bool running)
+        {
+            FastCheck_BTN.Enabled = !running;
+            SlowCheck.Enabled = !running;
+        }
         private void GetSeedForMaxLair_BTN_Click(object sender, EventArgs e)
         {
-            var pk=Editor.Data;
-            var encounters = EncounterMovesetGenerator.GenerateEncounters(pk,SAV.SAV, pk.Moves);
+            var pk = Editor.Data;
+            if (pk.Generation == 9)
+            {
+                if (pk.Met_Location == Locations.TeraCavern9)
+                {
+                    pk.PID = (((uint)(pk.TID16 ^ pk.SID16) ^ (pk.PID & 0xFFFF) ^ 1u) << 16) | (pk.PID & 0xFFFF);
+                }
+            }
+            Editor.PopulateFields(pk);
+        }
+        private void FixLairSeed_Click(object sender, EventArgs e)
+        {
+            var pk = Editor.Data;
+            var encounters = EncounterMovesetGenerator.GenerateEncounters(pk, SAV.SAV, pk.Moves);
             if (pk.Generation == 8)
             {
                 foreach (var enc in encounters)
@@ -465,27 +274,123 @@ namespace WangPluginPkm.GUI
                     }
                 }
             }
-            else if(pk.Generation==9)
-            {
-               if(pk.Met_Location==30024)
-                {
-                    pk.PID=(((uint)(pk.TID16 ^ pk.SID16) ^ (pk.PID & 0xFFFF) ^ 1u) << 16) | (pk.PID & 0xFFFF);
-                }
-            }
-            Editor.PopulateFields(pk);
         }
+        private void SWSHSeedCheck(bool checkflag)
+        {
+            string T = "";
+            Legal_Check_BOX1.Text = "正在检测基本合法性";
+            Legal_Check_BOX2.Text = "正在反推Seed";
+            Legal_Check_BOX3.Text = "正在检测PID/EC/IV";
+            Legal_Check_BOX4.Text = "正在检测特性，性别";
+            Legal_Check_BOX5.Text = "正在检测身高体重";
+            ChecktokenSource = new();
+            var la = new LegalityAnalysis(Editor.Data);
+            Task.Factory.StartNew(
+                () =>
+                {
+                    uint ec = Editor.Data.EncryptionConstant;
+                    uint pid = Editor.Data.PID;
+                    int[] ivs = { Editor.Data.IV_HP, Editor.Data.IV_ATK, Editor.Data.IV_DEF, Editor.Data.IV_SPA, Editor.Data.IV_SPD, Editor.Data.IV_SPE };
+                    IEnumerable<ulong> seeds = Enumerable.Empty<ulong>();
+                    if (checkflag)
+                    {
+                        seeds = Z3Search.GetSeeds(ec, pid);
+                    }
+                    //注意！剑盾raid seed快速逆推注意需要在根目录放置Microsoft.Z3.dll与libz3.dll
+                    //https://github.com/Z3Prover/z3
+                    //https://stackoverflow.com/questions/11136324/an-error-appears-when-running-z3-in-c-sharp
+                    else
+                        seeds = BruteForceSearch.FindSeeds(ec, pid, Editor.Data.TID16, Editor.Data.SID16);//慢速逆推暂时弃用了
+
+                    if (la.Valid == true)
+                    {
+                        Legal_Check_BOX1.Text = "合法性检测通过！";
+                        Legal_Check_BOX1.BackColor = Color.Green;
+                        var t = la.EncounterOriginal;
+                        int r = t.Location;
+                        if (r is 162 or 244)
+                        {
+                            if (Gen8DenMax.FindFirstSeed(seeds, ivs) == "没找到Seed")
+                            {
+                                Legal_Check_BOX2.Text = "逆推失败!没找到Seed";
+                                Legal_Check_BOX2.BackColor = Color.Red;
+                                Legal_Check_BOX3.Text = "无法检测PID/EC/IV";
+                                Legal_Check_BOX3.BackColor = Color.Red;
+                                Legal_Check_BOX4.Text = "无法检测性格性别";
+                                Legal_Check_BOX4.BackColor = Color.Red;
+                                Legal_Check_BOX5.Text = "无法检测身高体重";
+                                Legal_Check_BOX5.BackColor = Color.Red;
+                            }
+                            else
+                            {
+                                Legal_Check_BOX2.Text = "逆推成功!";
+                                Legal_Check_BOX2.BackColor = Color.Green;
+                                Seed_Box.Text = Gen8DenMax.FindFirstSeed(seeds, ivs);
+                                T = Gen8DenMax.Raidfinder(Seed_Box.Text, Editor.Data, MinIV, A, G);
+                                var S = T.Split('\n');
+                                if (S.Count() != 0)
+                                {
+                                    Legal_Check_BOX3.Text = S[0];
+                                    if (S[1] == "Green")
+                                        Legal_Check_BOX3.BackColor = Color.Green;
+                                    else if (S[1] == "Orange")
+                                        Legal_Check_BOX3.BackColor = Color.Orange;
+                                    Legal_Check_BOX4.Text = S[2];
+                                    if (S[3] == "Green")
+                                        Legal_Check_BOX4.BackColor = Color.Green;
+                                    else if (S[3] == "Orange")
+                                        Legal_Check_BOX4.BackColor = Color.Orange;
+                                    Legal_Check_BOX5.Text = S[4];
+                                    if (S[5] == "Green")
+                                        Legal_Check_BOX5.BackColor = Color.Green;
+                                    else if (S[5] == "Orange")
+                                        Legal_Check_BOX5.BackColor = Color.Orange;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Legal_Check_BOX1.Text = "基本合法性检测通过！";
+                            Legal_Check_BOX1.BackColor = Color.Green;
+                            Legal_Check_BOX2.Text = "无需寻找Seed";
+                            Legal_Check_BOX2.BackColor = Color.Green;
+                            Legal_Check_BOX3.Text = "无需检测PID/EC/IV";
+                            Legal_Check_BOX3.BackColor = Color.Green;
+                            Legal_Check_BOX4.Text = "无需检测性格性别";
+                            Legal_Check_BOX4.BackColor = Color.Green;
+                            Legal_Check_BOX5.Text = "无需检测身高体重";
+                            Legal_Check_BOX5.BackColor = Color.Green;
+                        }
+                    }
+                    else
+                    {
+                        Legal_Check_BOX1.Text = "基本合法性检测未通过！";
+                        Legal_Check_BOX1.BackColor = Color.Red;
+                        Legal_Check_BOX2.Text = "无事可做";
+                        Legal_Check_BOX3.Text = "无事可做";
+                        Legal_Check_BOX4.Text = "无事可做";
+                        Legal_Check_BOX5.Text = "无事可做";
+                    }
+                    this.Invoke(() =>
+                    { CheckerIsRunning(false); }
+                );
+                }, ChecktokenSource.Token);
+        }
+        #endregion
+
+        #region //Reverse
         private void ReverseCheck_BTN_Click(object sender, EventArgs e)
         {
-            Span<uint> Seeds= stackalloc uint[6];
+            Span<uint> Seeds = stackalloc uint[6];
             var S = Seeds.ToArray();
             uint EC = 0;
             uint PID = 0;
-            uint hp=0;
-            uint atk=0;
-            uint def=0;
-            uint spa=0;
-            uint spd=0;
-            uint spe=0;
+            uint hp = 0;
+            uint atk = 0;
+            uint def = 0;
+            uint spa = 0;
+            uint spd = 0;
+            uint spe = 0;
             Span<string> s = new();
             var PIDHEX = "0x" + PIDBox.Text;
             var IVString = IVTextBox.Text;
@@ -503,8 +408,8 @@ namespace WangPluginPkm.GUI
             if (PIDHEX != "0x")
                 PID = Convert.ToUInt32(PIDHEX, 16);
             var ECHEX = "0x" + ECBox.Text;
-            if(ECHEX!="0x")
-            EC = Convert.ToUInt32(ECHEX, 16);
+            if (ECHEX != "0x")
+                EC = Convert.ToUInt32(ECHEX, 16);
             uint seed = 0;
             if (PIDECCheck_Box.Checked)
             {
@@ -526,7 +431,7 @@ namespace WangPluginPkm.GUI
                         }
                     case "M124U":
                         {
-                            LCRNGReversal.GetSeeds(Seeds, PID,true);
+                            LCRNGReversal.GetSeeds(Seeds, PID, true);
                             S = Seeds.ToArray();
                             S = S.Where(val => val != 0).ToArray();
                             break;
@@ -551,11 +456,11 @@ namespace WangPluginPkm.GUI
                         }
                     case "Overworld8":
                         {
-                            seed = Overworld8Reversal.GetOriginalSeed(EC, PID);   
+                            seed = Overworld8Reversal.GetOriginalSeed(EC, PID);
                             break;
                         }
                 }
-                
+
             }
             if (IVCheck_Box.Checked)
             {
@@ -566,9 +471,9 @@ namespace WangPluginPkm.GUI
                             LCRNGReversal.GetSeedsIVs(Seeds, hp, atk, def, spa, spd, spe);
                             S = Seeds.ToArray();
                             S = S.Where(val => val != 0).ToArray();
-                            for(int i=0;i< S.Length;i++)
+                            for (int i = 0; i < S.Length; i++)
                             {
-                                S[i]= LCRNG.Prev2(S[i]);
+                                S[i] = LCRNG.Prev2(S[i]);
                             }
                             break;
                         }
@@ -603,21 +508,22 @@ namespace WangPluginPkm.GUI
                         }
                 }
             }
-            if (Seeds.Length != 0){
-                SeedBox.Text = PrintSeed(S,seed);
+            if (Seeds.Length != 0)
+            {
+                SeedBox.Text = PrintSeed(S, seed);
             }
         }
-        private string PrintSeed(uint[] seeds,uint seed=0)
+        private string PrintSeed(uint[] seeds, uint seed = 0)
         {
-            string result="";
-            if (seeds.Length != 0&&MD.Value!="Overworld8")
+            string result = "";
+            if (seeds.Length != 0 && MD.Value != "Overworld8")
             {
                 for (int i = 0; i < seeds.Length; i++)
                 {
-                    result += seeds[i].ToString("X")+'\n';
+                    result += seeds[i].ToString("X") + '\n';
                 }
             }
-            else if(seed!=0&&MD.Value == "Overworld8")
+            else if (seed != 0 && MD.Value == "Overworld8")
             {
                 result = seed.ToString("X");
             }
@@ -625,24 +531,28 @@ namespace WangPluginPkm.GUI
         }
         private void PIDECCheck_Box_CheckedChanged(object sender, EventArgs e)
         {
-            if (PIDECCheck_Box.Checked){
+            if (PIDECCheck_Box.Checked)
+            {
                 CheckPID();
             }
-            else{
+            else
+            {
                 CheckPID();
             }
-         }
+        }
         private void IVCheck_Box_CheckedChanged(object sender, EventArgs e)
         {
-            if (IVCheck_Box.Checked){
+            if (IVCheck_Box.Checked)
+            {
                 CheckIV();
             }
-            else{
+            else
+            {
                 CheckPID();
             }
-            
+
         }
-        public void CheckPID()
+        private void CheckPID()
         {
             L = RNGModClass.RNGModList(false);
             var bindingSource1 = new BindingSource();
@@ -653,7 +563,7 @@ namespace WangPluginPkm.GUI
             this.Mod_ComboBox.SelectedIndexChanged += (_, __) =>
             {
                 MD = (RNGModClass)this.Mod_ComboBox.SelectedItem;
-                if(MD.Value=="Overworld8")
+                if (MD.Value == "Overworld8")
                 {
                     ECBox.Enabled = true;
                 }
@@ -663,7 +573,7 @@ namespace WangPluginPkm.GUI
             IVTextBox.Enabled = false;
             PIDBox.Enabled = true;
         }
-        public void CheckIV()
+        private void CheckIV()
         {
             L = RNGModClass.RNGModList(true);
             var bindingSource1 = new BindingSource();
@@ -679,11 +589,15 @@ namespace WangPluginPkm.GUI
             IVTextBox.Enabled = true;
             PIDBox.Enabled = false;
         }
+        #endregion
 
-        private void Tutorial_Box_Click(object sender, EventArgs e)
+        //Help
+        private void ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new SeedIntro();
             form.Show();
         }
+
+
     }
 }
