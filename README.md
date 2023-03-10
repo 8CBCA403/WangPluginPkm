@@ -6,6 +6,13 @@
  使用方法见wiki
  
  Credits (in no particular order)
+- Manu098vm 
+(https://github.com/Manu098vm/SVResearches)
+(https://github.com/Manu098vm/Tera-Finder)
+- PiousVenom 
+(https://github.com/PiousVenom/PKHeX-Plugin-RandomDates)
+- foohyfooh 
+(https://github.com/foohyfooh/PKHeXInsertionPlugin)
  - Wang.Song BDSPRoaming
 (https://github.com/g0dw5)
 - Caleeeeeeeeeeeee PIDFinder 猎游者
