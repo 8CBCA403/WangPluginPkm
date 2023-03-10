@@ -394,7 +394,7 @@ namespace WangPluginPkm.GUI
             tabPage2.Padding = new Padding(3);
             tabPage2.Size = new System.Drawing.Size(535, 246);
             tabPage2.TabIndex = 1;
-            tabPage2.Text = "EH1Veiwer";
+            tabPage2.Text = "EH1Viewer";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBox4
@@ -443,14 +443,14 @@ namespace WangPluginPkm.GUI
             OpenFile_Dialog.Filter = "PokemonHomefile (*.eh1)|*.eh1|All files (*.*)|*.*";
             OpenFile_Dialog.Multiselect = true;
             // 
-            // GP1Editor
+            // ExtraFileEditor
             // 
             ClientSize = new System.Drawing.Size(565, 294);
             Controls.Add(PKM_TabControl);
             Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
-            Name = "GP1Editor";
+            Name = "ExtraFileEditor";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Super Wang";
             PKM_TabControl.ResumeLayout(false);
