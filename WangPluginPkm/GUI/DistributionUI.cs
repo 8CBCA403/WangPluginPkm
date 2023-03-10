@@ -5,90 +5,23 @@ using System.IO;
 using PKHeX.Core;
 using System.Windows.Forms;
 using System.ComponentModel;
-using static System.Net.Mime.MediaTypeNames;
-using Microsoft.VisualBasic;
-using System.Diagnostics;
-
+using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
+using static WangPluginPkm.PluginUtil.Functions.DistributionFunctions;
 namespace WangPluginPkm.GUI
 {
-    partial class DistributionUI:Form
+    partial class DistributionUI : Form
     {
         private const string TrainerFilter = "Trainer Info |*.txt|All Files|*.*";
         private int Counter = 0;
-        private IVEVN V = IVEVN.ATK;
-        private CLONE C = CLONE.BOX;
-        private TRAINER T = TRAINER.BOX;
-        public enum Nature
-        {
-            Hardy,Lonely,Brave,Adamant,Naughty,Bold,Docile,Relaxed,
-            Impish,Lax,Timid,Hasty,Serious,Jolly,Naive,Modest,
-            Mild,Quiet,Bashful,Rash,Calm,Gentle,Sassy,Careful,Quirky,
-        }
-        public enum Ball
-        {
-            None = 0,
-            Master = 1,
-            Ultra = 2,
-            Great = 3,
-            Poke = 4,
-            Safari = 5,
-            Net = 6,
-            Dive = 7,
-            Nest = 8,
-            Repeat = 9,
-            Timer = 10,
-            Luxury = 11,
-            Premier = 12,
-            Dusk = 13,
-            Heal = 14,
-            Quick = 15,
-            Cherish = 16,
-            Fast = 17,
-            Level = 18,
-            Lure = 19,
-            Heavy = 20,
-            Love = 21,
-            Friend = 22,
-            Moon = 23,
-            Sport = 24,
-            Dream = 25,
-            Beast = 26,
-        }
-        public enum IVEVN
-        {
-            [Description("物攻")]
-            ATK,
-            [Description("特攻")]
-            SPA,
-            [Description("0速物攻")]
-            Z_ATK,
-            [Description("0速特攻")]
-            Z_SPA,
-            [Description("肉盾")]
-            TANK,
-
-        }
-        public enum CLONE 
-        {
-            [Description("复制一箱")]
-            BOX,
-            [Description("竖向复制5只")]
-            FIVE,
-        }
-        public enum TRAINER 
-        {
-            [Description("覆盖一箱")]
-            BOX,
-            [Description("覆盖面板")]
-            EDITER,
-        }
-        public Nature Ntype = Nature.Hardy;
-        public Ball TBall = Ball.Poke;
+        private int IVEVValue = 0;
+        private int CloneValue = 0;
+        private int TrainerValue = 0;
+        public Nature type = Nature.Hardy;
+        public Ball ball = Ball.Poke;
         public Trainer Trainer;
         private static Random rand = new();
-        public int number=0;
-
-        public BindingList<Trainer> Tr=new();
+        public int number = 0;
+        public BindingList<Trainer> Tr = new();
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
         public DistributionUI(ISaveFileProvider sav, IPKMView editor)
@@ -98,10 +31,10 @@ namespace WangPluginPkm.GUI
             InitializeComponent();
             BindingData();
         }
-        
+
         private void BindingData()
         {
-            string[] lines = Properties.Resources.Trainers.Split('\n') ;
+            string[] lines = Properties.Resources.Trainers.Split('\n');
             foreach (string line in lines)
             {
                 Tr.Add(Trainer.ConvertToTrainer(line));
@@ -114,89 +47,48 @@ namespace WangPluginPkm.GUI
             Trainer_Box.DataSource = bindingSource1.DataSource;
             Trainer_Box.DisplayMember = "OT_Name";
             Trainer_Box.ValueMember = "TID16";
-       
+
             BallBox.SelectedIndexChanged += (_, __) =>
             {
-                TBall = (Ball)Enum.Parse(typeof(Ball), this.BallBox.SelectedItem.ToString(), false);
+                ball = (Ball)Enum.Parse(typeof(Ball), this.BallBox.SelectedItem.ToString(), false);
             };
             Trainer_Box.SelectedIndexChanged += (_, __) =>
             {
-                Trainer =(Trainer) this.Trainer_Box.SelectedItem;
+                Trainer = (Trainer)this.Trainer_Box.SelectedItem;
             };
-            BallBox.SelectedIndex = 0;
-            Edit_EVIVN_Box.DisplayMember = "Description";
-            Edit_EVIVN_Box.ValueMember = "Value";
-            Edit_EVIVN_Box.DataSource = Enum.GetValues(typeof(IVEVN))
-                .Cast<Enum>()
-                .Select(value => new
-                {
-                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
-                    value
-                })
-                .OrderBy(item => item.value)
-                .ToList();
 
+            Edit_EVIVN_Box.DataSource = Enum.GetValues(typeof(DisFormIVEV));
             this.Edit_EVIVN_Box.SelectedIndexChanged += (_, __) =>
             {
-                V = (IVEVN)Enum.Parse(typeof(IVEVN), this.Edit_EVIVN_Box.SelectedValue.ToString(), false);
+                IVEVValue = Edit_EVIVN_Box.SelectedIndex;
             };
-            this.Edit_EVIVN_Box.SelectedIndex = 0;
-
-            this.Clone_Select_Box.DisplayMember = "Description";
-            this.Clone_Select_Box.ValueMember = "Value";
-            this.Clone_Select_Box.DataSource = Enum.GetValues(typeof(CLONE))
-                .Cast<Enum>()
-                .Select(value => new
-                {
-                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
-                    value
-                })
-                .OrderBy(item => item.value)
-                .ToList();
-
+            this.Clone_Select_Box.DataSource = Enum.GetValues(typeof(DisFormClone));
             this.Clone_Select_Box.SelectedIndexChanged += (_, __) =>
             {
-                C = (CLONE)Enum.Parse(typeof(CLONE), this.Clone_Select_Box.SelectedValue.ToString(), false);
+                CloneValue =Clone_Select_Box.SelectedIndex;
             };
-            this.Clone_Select_Box.SelectedIndex = 0;
-
-            this.Trainer_Select_Box.DisplayMember = "Description";
-            this.Trainer_Select_Box.ValueMember = "Value";
-            this.Trainer_Select_Box.DataSource = Enum.GetValues(typeof(TRAINER))
-                .Cast<Enum>()
-                .Select(value => new
-                {
-                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
-                    value
-                })
-                .OrderBy(item => item.value)
-                .ToList();
-
+            this.Trainer_Select_Box.DataSource = Enum.GetValues(typeof(DisFormTrainer));
+             
             this.Trainer_Select_Box.SelectedIndexChanged += (_, __) =>
             {
-                T = (TRAINER)Enum.Parse(typeof(TRAINER), this.Trainer_Select_Box.SelectedValue.ToString(), false);
+                TrainerValue = Trainer_Select_Box.SelectedIndex;
             };
-            this.Trainer_Select_Box.SelectedIndex = 0;
-            SetTrainer_Box.CheckedChanged+= (_, __) =>
+            SetTrainer_Box.CheckedChanged += (_, __) =>
             {
-               
-                    Random_Trainer_Box.Enabled = !SetTrainer_Box.Checked;
-                
+                Random_Trainer_Box.Enabled = !SetTrainer_Box.Checked;
             };
             Random_Trainer_Box.CheckedChanged += (_, __) =>
             {
-                
-                    SetTrainer_Box.Enabled = !Random_Trainer_Box.Checked;
-                
+                SetTrainer_Box.Enabled = !Random_Trainer_Box.Checked;
             };
-           
+
         }
         private void LoadEH1_BTN_Click(object sender, EventArgs e)
         {
             List<PKM> PK = new();
             var i = 0;
             DialogResult dr = this.OpenFile_Dialog.ShowDialog();
-            int BOX=Int16.Parse(BOX_TextBox.Text)-1;
+            int BOX = Int16.Parse(BOX_TextBox.Text) - 1;
             if (dr == DialogResult.OK)
             {
                 foreach (String file in OpenFile_Dialog.FileNames)
@@ -216,17 +108,17 @@ namespace WangPluginPkm.GUI
                 }
             }
         }
-        private void ConvertPKM(string file,int n,ref List<PKM> p)
+        private void ConvertPKM(string file, int n, ref List<PKM> p)
         {
             var data = File.ReadAllBytes(file);
             PKM pk;
-           
+
             var pkh = DecryptEH1(data);
             if (SAV.SAV.Version is GameVersion.SH or GameVersion.SW)
             {
                 pk = pkh.ConvertToPK8();
                 p.Add(pk);
-                
+
             }
             else if (SAV.SAV.Version is GameVersion.PLA)
             {
@@ -251,16 +143,11 @@ namespace WangPluginPkm.GUI
             }
             return null;
         }
-        public static string RandomString(int length)
-        {
-            const string chars = "赵钱孙李周吴正旺小鱼儿新子颜缘分振哥毅力建国云宗光辉老查丽鱼安娜牛";
-            return new string(Enumerable.Repeat(chars, length)
-                .Select(s => s[rand.Next(s.Length)]).ToArray());
-        }
-        public void SetPkm(ISaveFileProvider SaveFileEditor)
+       
+        public void SetPkm()
         {
             List<PKM> PKL = new();
-            for (int i = 0; i <30; i++)
+            for (int i = 0; i < 30; i++)
             {
                 var pk = Editor.Data.Clone();
                 pk.StatNature = Editor.Data.StatNature;
@@ -272,23 +159,23 @@ namespace WangPluginPkm.GUI
                 {
                     pk.OT_Name = Trainer.OT_Name;
                     pk.OT_Gender = Trainer.Gender;
-                    pk.DisplayTID= Trainer.TID16;
+                    pk.DisplayTID = Trainer.TID16;
                     pk.DisplaySID = Trainer.SID16;
                     pk.Language = Trainer.Language;
                     pk.ClearNickname();
                 }
-                else if(Random_Trainer_Box.Checked)
+                else if (Random_Trainer_Box.Checked)
                 {
-                    var T = RandomT(Tr,i);
+                    var T = RandomT(Tr, i);
                     pk.OT_Name = T.OT_Name;
                     pk.OT_Gender = T.Gender;
-                    pk.DisplayTID= T.TID16;
+                    pk.DisplayTID = T.TID16;
                     pk.DisplaySID = T.SID16;
                     pk.Language = T.Language;
                     pk.ClearNickname();
 
                 }
-               else if(Random_Name_Box.Checked)
+                else if (Random_Name_Box.Checked)
                 {
                     pk.OT_Name = RandomString(3);
                     pk.OT_Gender = rand.Next(0, 2);
@@ -300,20 +187,20 @@ namespace WangPluginPkm.GUI
                 pk.StatNature = pk.Nature;
                 if (Ball_Box.Checked)
                 {
-                    pk.Ball = (int)TBall;
+                    pk.Ball = (int)ball;
                 }
                 if (RandPID_Box.Checked)
                 {
                     pk.PID = rand.Rand32();
-                    
+
                 }
-                if(RandEC_Box.Checked)
+                if (RandEC_Box.Checked)
                 {
                     pk.SetRandomEC();
                 }
                 if (ShinyBox.Checked)
                     pk.PID = Shiny(pk);
-          
+
                 PKL.Add(pk);
             }
             var BoxData = SAV.SAV.BoxData;
@@ -327,9 +214,9 @@ namespace WangPluginPkm.GUI
                     SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
                 }
             }
-            SaveFileEditor.ReloadSlots();
+            SAV.ReloadSlots();
         }
-        private void SetFivePKM(ISaveFileProvider SaveFileEditor)
+        private void SetFivePKM()
         {
 
             List<PKM> PKL = new();
@@ -345,7 +232,7 @@ namespace WangPluginPkm.GUI
                 {
                     pk.OT_Name = Trainer.OT_Name;
                     pk.OT_Gender = Trainer.Gender;
-                    pk.DisplayTID= Trainer.TID16;
+                    pk.DisplayTID = Trainer.TID16;
                     pk.DisplaySID = Trainer.SID16;
                     pk.Language = Trainer.Language;
                     pk.ClearNickname();
@@ -355,21 +242,12 @@ namespace WangPluginPkm.GUI
                     var T = RandomT(Tr, i);
                     pk.OT_Name = T.OT_Name;
                     pk.OT_Gender = T.Gender;
-                    pk.DisplayTID= T.TID16;
+                    pk.DisplayTID = T.TID16;
                     pk.DisplaySID = T.SID16;
                     pk.Language = T.Language;
                     pk.ClearNickname();
 
                 }
-             /*   else if (Random_Name_Box.Checked)
-                {
-                    pk.OT_Name = RandomString(3);
-                    pk.OT_Gender = rand.Next(0, 2);
-                    pk.TID16 = rand.Next(65535);
-                    pk.SID16 = rand.Next(65535);
-                    pk.Language = 9;
-                    pk.ClearNickname();
-                }*/
                 if (RandPID_Box.Checked)
                 {
                     pk.PID = Util.Rand32();
@@ -392,39 +270,39 @@ namespace WangPluginPkm.GUI
                 SAV.SAV.SetBoxSlotAtIndex(PKL[i], n, i * 6 + number);
             }
             number++;
-            SaveFileEditor.ReloadSlots();
+            SAV.ReloadSlots();
         }
-        public void SetGodPokemon(ISaveFileProvider SaveFileEditor)
+        public void SetGodPokemon()
         {
             List<PKM> PKL = new();
             List<SWSHGod> c = new(SWSHGod.CreateList());
             for (int i = 0; i < 30; i++)
             {
                 int j = rand.Next(0, c.Count());
-                var pk = SearchDatabase.GetGodPkm(SAV,Editor,c[j].Species);
+                var pk = SearchDatabase.GetGodPkm(SAV, Editor, c[j].Species);
                 if (SetTrainer_Box.Checked)
                 {
                     pk.OT_Name = Trainer.OT_Name;
                     pk.OT_Gender = Trainer.Gender;
-                    pk.DisplayTID= Trainer.TID16;
+                    pk.DisplayTID = Trainer.TID16;
                     pk.DisplaySID = Trainer.SID16;
                     pk.Language = Trainer.Language;
                     pk.ClearNickname();
 
                 }
 
-                else if(Random_Trainer_Box.Checked)
+                else if (Random_Trainer_Box.Checked)
                 {
-                    var T = RandomT(Tr,j);
+                    var T = RandomT(Tr, j);
                     pk.OT_Name = T.OT_Name;
                     pk.OT_Gender = T.Gender;
-                    pk.DisplayTID= T.TID16;
+                    pk.DisplayTID = T.TID16;
                     pk.DisplaySID = T.SID16;
                     pk.Language = T.Language;
                     pk.ClearNickname();
 
                 }
-             else if (Random_Name_Box.Checked)
+                else if (Random_Name_Box.Checked)
                 {
                     pk.OT_Name = RandomString(3);
                     pk.OT_Gender = rand.Next(0, 2);
@@ -433,7 +311,7 @@ namespace WangPluginPkm.GUI
                     pk.Language = 9;
                     pk.ClearNickname();
                 }
-                
+
                 pk.IVs = c[j].IVs;
                 pk.SetEVs(c[j].EVs);
                 pk.Nature = c[j].Nature;
@@ -445,7 +323,7 @@ namespace WangPluginPkm.GUI
                 pk.HealPP();
                 if (Ball_Box.Checked)
                 {
-                    pk.Ball = (int)TBall;
+                    pk.Ball = (int)ball;
                 }
                 if (RandPID_Box.Checked)
                 {
@@ -468,35 +346,20 @@ namespace WangPluginPkm.GUI
                     SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
                 }
             }
-            SaveFileEditor.ReloadSlots();
+            SAV.ReloadSlots();
         }
-        private static List<int> FindAllEmptySlots(IList<PKM> data, int start)
+       
+        private static Trainer RandomT(IList<Trainer> T, int i)
         {
-            List<int> list = new List<int>();
-            for (int i = start; i < data.Count; i++)
-            {
-                if (data[i].Species < 1)
-                {
-                    list.Add(i);
-                }
-            }
-            return list;
-        }
-        private static uint Shiny(PKM pk)
-        {
-            return (((uint)(pk.TID16 ^ pk.SID16) ^ (pk.PID & 0xFFFF) ^ 1) << 16) | (pk.PID & 0xFFFF);
-        }
-        private static Trainer RandomT(IList<Trainer> T,int i)
-        {
-            Random ra = new(unchecked((int)Util.Rand32())+i);
-            int randIndex = ra.Next(0,T.Count);
+            Random ra = new(unchecked((int)Util.Rand32()) + i);
+            int randIndex = ra.Next(0, T.Count);
             var RandomTrainer = T[randIndex];
             return RandomTrainer;
         }
         private void UseTrainer(PKM pk)
         {
             pk.OT_Name = Trainer.OT_Name;
-            pk.DisplayTID= Trainer.TID16;
+            pk.DisplayTID = Trainer.TID16;
             pk.DisplaySID = Trainer.SID16;
             pk.Language = Trainer.Language;
             pk.OT_Gender = Trainer.Gender;
@@ -507,7 +370,7 @@ namespace WangPluginPkm.GUI
             LegalityAnalysis la;
             if (SAV.SAV.Generation == 8)
             {
-                
+
                 for (int q = 0; q < 100; q++)
                 {
                     ((PK8)pk).SetMoveRecordFlag(q, true);
@@ -516,27 +379,21 @@ namespace WangPluginPkm.GUI
                         ((PK8)pk).SetMoveRecordFlag(q, false);
                 }
             }
-            else if(SAV.SAV.Generation==9)
+            else if (SAV.SAV.Generation == 9)
             {
-                if(pk is ITechRecord t)
+                if (pk is ITechRecord t)
                 {
                     t.SetRecordFlags();
                 }
-             /*   for (int q = 0; q < 171; q++)
-                { 
-                   ((PK9)pk).SetMoveRecordFlag(q, true);
-                    la = new LegalityAnalysis(pk);
-                    if (!la.Valid)
-                        ((PK9)pk).SetMoveRecordFlag(q, false);
-                }*/
             }
             SAV.ReloadSlots();
         }
         private void Level(PKM pk)
         {
-            if(SAV.SAV.Version is GameVersion.SH or GameVersion.SW or GameVersion.SWSH)
-            { ((PK8)pk).DynamaxLevel = 10;
-                }
+            if (SAV.SAV.Version is GameVersion.SH or GameVersion.SW or GameVersion.SWSH)
+            {
+                ((PK8)pk).DynamaxLevel = 10;
+            }
             pk.CurrentLevel = 100;
         }
         private void EC(PKM pk)
@@ -546,7 +403,7 @@ namespace WangPluginPkm.GUI
                 if (pk.Met_Location != 30024)
                     pk.SetRandomEC();
             }
-           
+
         }
         private void Allribbon(PKM pk)
         {
@@ -554,14 +411,14 @@ namespace WangPluginPkm.GUI
         }
         private void Clone_BTN_Click(object sender, EventArgs e)
         {
-            switch (C)
+            switch (CloneValue)
             {
-               case CLONE.BOX:
-                    SetPkm(SAV);
+                case 0:
+                    SetPkm();
                     SAV.ReloadSlots();
                     break;
-               case CLONE.FIVE:
-                    SetFivePKM(SAV);
+                case 1:
+                    SetFivePKM();
                     SAV.ReloadSlots();
                     break;
             }
@@ -570,7 +427,7 @@ namespace WangPluginPkm.GUI
         {
             if (SAV.SAV.Version is GameVersion.SW or GameVersion.SH or GameVersion.SWSH)
             {
-                SetGodPokemon(SAV);
+                SetGodPokemon();
             }
             else
             {
@@ -596,58 +453,58 @@ namespace WangPluginPkm.GUI
 
             string path = sfd.FileName;
             string[] lines = File.ReadAllLines(path);
-            foreach(string line in lines)
+            foreach (string line in lines)
             {
-               Tr.Add(Trainer.ConvertToTrainer(line));
+                Tr.Add(Trainer.ConvertToTrainer(line));
             }
             if (Tr.Count != 0)
                 Trainer = Tr[0];
-         
+
         }
         private void Use_Trainer_BTN_Click(object sender, EventArgs e)
         {
-            switch (T)
+            switch (TrainerValue)
             {
-            case TRAINER.BOX:
-                PKM[] p;
-                int i = SAV.CurrentBox;
-                p = SAV.SAV.GetBoxData(i);
-                if (p.Count() != 0)
-                {
-                    foreach (PKM pk in p)
+                case 0:
+                    PKM[] p;
+                    int i = SAV.CurrentBox;
+                    p = SAV.SAV.GetBoxData(i);
+                    if (p.Count() != 0)
                     {
-                        pk.OT_Name = Trainer.OT_Name;
-                        pk.DisplayTID= Trainer.TID16;
-                        pk.DisplaySID = Trainer.SID16;
-                        pk.Language = Trainer.Language;
-                        pk.OT_Gender = Trainer.Gender;
-                        pk.ClearNickname();
+                        foreach (PKM pk in p)
+                        {
+                            pk.OT_Name = Trainer.OT_Name;
+                            pk.DisplayTID = Trainer.TID16;
+                            pk.DisplaySID = Trainer.SID16;
+                            pk.Language = Trainer.Language;
+                            pk.OT_Gender = Trainer.Gender;
+                            pk.ClearNickname();
+                        }
                     }
-                }
-                SAV.SAV.SetBoxData(p, i);
-                break;
-            case TRAINER.EDITER:
-                UseTrainer(Editor.Data);
-                break;
+                    SAV.SAV.SetBoxData(p, i);
+                    break;
+                case 1:
+                    UseTrainer(Editor.Data);
+                    break;
             }
         }
         private void IVEVN_BTN_Click(object sender, EventArgs e)
         {
-            switch (V)
+            switch (IVEVValue)
             {
-                case IVEVN.ATK:
+                case 0:
                     CommonIVEVSetting.ATKIVEV(Editor.Data, Editor);
                     break;
-                case IVEVN.SPA:
+                case 1:
                     CommonIVEVSetting.SPAIVEV(Editor.Data, Editor);
                     break;
-                case IVEVN.Z_ATK:
+                case 2:
                     CommonIVEVSetting.ATK_0SPEIVEV(Editor.Data, Editor);
                     break;
-                case IVEVN.Z_SPA:
+                case 3:
                     CommonIVEVSetting.SPA_0SPEIVEV(Editor.Data, Editor);
                     break;
-                case IVEVN.TANK:
+                case 4:
                     CommonIVEVSetting.TANKIVEV(Editor.Data, Editor);
                     break;
             }
@@ -655,12 +512,12 @@ namespace WangPluginPkm.GUI
         private void Move_Shop_Click(object sender, EventArgs e)
         {
             int i = SAV.CurrentBox;
-            SAV.SAV.ModifyBoxes(Handle_MoveShop,i,i);
+            SAV.SAV.ModifyBoxes(Handle_MoveShop, i, i);
         }
         private void LevelMax_BTN_Click(object sender, EventArgs e)
         {
             int i = SAV.CurrentBox;
-            SAV.SAV.ModifyBoxes(Level,i,i);
+            SAV.SAV.ModifyBoxes(Level, i, i);
         }
         private void Language_BTN_Click(object sender, EventArgs e)
         {
@@ -668,10 +525,10 @@ namespace WangPluginPkm.GUI
             List<PKM> L = new();
             for (int i = 1; i < 6; i++)
             {
-                pk = SearchDatabase.MytheryLanguage(SAV, Editor.Data.Species, Editor.Data.Generation , 0, i);
+                pk = SearchDatabase.MytheryLanguage(SAV, Editor.Data.Species, Editor.Data.Generation, 0, i);
                 L.Add(pk);
             }
-           for(int i=7;i<11;i++)
+            for (int i = 7; i < 11; i++)
             {
                 pk = SearchDatabase.MytheryLanguage(SAV, Editor.Data.Species, Editor.Data.Generation, 0, i);
                 L.Add(pk);
@@ -689,8 +546,156 @@ namespace WangPluginPkm.GUI
             }
             SAV.ReloadSlots();
         }
+        private void RandEC_BTN_Click(object sender, EventArgs e)
+        {
 
+            SAV.SAV.ModifyBoxes(EC);
+        }
+        public void MAXSize(PKM pkm)
+        {
+            if (SAV.SAV.Generation == 9)
+            {
+                if (pkm.Met_Location != 30024 && pkm.Species != 998
+                    && pkm.Species != 999 && pkm.Species != 996
+                    && pkm.Species != 995 && pkm.Species != 994
+                    && pkm.Species != 997)
+                {
+                    ((PK9)pkm).HeightScalar = 255;
+                    ((PK9)pkm).WeightScalar = 255;
+                    ((PK9)pkm).Scale = 255;
+                    ((PK9)pkm).RibbonMarkMini = false;
+                    ((PK9)pkm).RibbonMarkJumbo = true;
+                }
+            }
+        }
+        public void MINSize(PKM pkm)
+        {
+            if (SAV.SAV.Generation == 9)
+            {
+                if (pkm.Met_Location != 30024 && pkm.Species != 998
+                    && pkm.Species != 999 && pkm.Species != 996
+                    && pkm.Species != 995 && pkm.Species != 994
+                    && pkm.Species != 997)
+                {
+                    if ((!(pkm.Species == 944 && pkm.Met_Location == 32)) &&
+                        (!(pkm.Species == 952 && pkm.Met_Location == 40)) &&
+                        (!(pkm.Species == 959 && pkm.Met_Location == 22)) &&
+                        (!(pkm.Species == 962 && pkm.Met_Location == 20)) &&
+                        (!(pkm.Species == 978 && pkm.Met_Location == 24)) &&
+                        (!(pkm.Species == 986 && pkm.Met_Location == 24)))
+                    {
+                        ((PK9)pkm).HeightScalar = 1;
+                        ((PK9)pkm).WeightScalar = 1;
+                        ((PK9)pkm).Scale = 0;
+                        ((PK9)pkm).RibbonMarkMini = true;
+                        ((PK9)pkm).RibbonMarkJumbo = false;
+                    }
+                }
+            }
+        }
+        private void MAXSize_BTN_Click(object sender, EventArgs e)
+        {
+            int i = SAV.CurrentBox;
+            SAV.SAV.ModifyBoxes(MAXSize, i, i);
+            SAV.ReloadSlots();
+        }
+        private void MINSize_BTN_Click(object sender, EventArgs e)
+        {
+            int i = SAV.CurrentBox;
+            SAV.SAV.ModifyBoxes(MINSize, i, i);
+            SAV.ReloadSlots();
+        }
+        private void ThreeFinder_BTN_Click(object sender, EventArgs e)
+        {
+            int i = SAV.CurrentBox;
+            SAV.SAV.ModifyBoxes(FindThree, i, i);
+            SAV.ReloadSlots();
+        }
+        public void FindThree(PKM pk)
+        {
+            if (pk.Species == 946)
+            {
+                pk.Form = 1;
+                pk.SetRandomEC();
+            }
+            else if (pk.Species == 917)
+            {
+                pk.Form = 1;
+                pk.SetRandomEC();
+            }
+        }
 
+        private void Random_EncBTN_Click(object sender, EventArgs e)
+        {
+            Counter = 0;
+            ProcessBox(SAV.CurrentBox, false);
+        }
+        private void Random_EggBTN_Click(object sender, EventArgs e)
+        {
+            Counter = 0;
+            ProcessBox(SAV.CurrentBox, true);
+        }
+        private void ProcessBox(int box, bool mod)
+        {
+            if ((uint)box >= SAV.SAV.BoxCount)
+                throw new ArgumentOutOfRangeException(nameof(box), "Value was more than BoxCount");
+            var data = SAV.SAV.GetBoxData(box);
+            if (mod == false)
+            {
+                ProcessPokemon(data);
+            }
+            else
+            {
+                ProcessEGG(data);
+            }
+            if (Counter > 0) SAV.SAV.SetBoxData(data, box);
+        }
+        private void ProcessEGG(IEnumerable<PKM> data)
+        {
+            var rand = new Random();
+
+            foreach (var pokemon in data)
+            {
+                if (pokemon.Species <= 0 || pokemon is { WasEgg: false, IsEgg: false }) continue;
+                var releaseDate = new ReleaseDate(SAV.SAV.Version);
+                var baseDate = releaseDate.Date;
+                var days = (DateTime.Today - baseDate).Days;
+                var newEggMetDate = baseDate.AddDays(rand.Next(days));
+                pokemon.Egg_Day = newEggMetDate.Day;
+                pokemon.Egg_Year = newEggMetDate.Year - 2000;
+                pokemon.Egg_Month = newEggMetDate.Month;
+                Counter++;
+            }
+        }
+        private void ProcessPokemon(IEnumerable<PKM> data)
+        {
+            var rand = new Random();
+
+            foreach (var pokemon in data)
+            {
+                if (pokemon.Species <= 0)
+                    continue;
+                var releaseDate = new ReleaseDate(SAV.SAV.Version);
+                var baseDate = PokemonEggCheck(pokemon, releaseDate.Date);
+                var days = (DateTime.Today - baseDate).Days;
+                var newMetDate = baseDate.AddDays(rand.Next(days));
+                pokemon.Met_Day = newMetDate.Day;
+                pokemon.Met_Year = newMetDate.Year - 2000;
+                pokemon.Met_Month = newMetDate.Month;
+                Counter++;
+            }
+        }
+        private DateTime PokemonEggCheck(PKM pokemon, DateTime gameReleaseDate)
+#pragma warning restore CA1822
+        {
+            if (pokemon.EggMetDate is not null)
+            {
+                DateOnly dateTime = (DateOnly)pokemon.EggMetDate;
+                var Time = dateTime.ToDateTime(TimeOnly.Parse("00:00 PM"));
+                return Time;
+            }
+            return gameReleaseDate;
+        }
         #region
         /* public void MytheryPK(PKM pk)
          {
@@ -913,159 +918,6 @@ namespace WangPluginPkm.GUI
          }*/
         #endregion
 
-        private void RandEC_BTN_Click(object sender, EventArgs e)
-        {
 
-            SAV.SAV.ModifyBoxes(EC);
-        }
-        public  void MAXSize(PKM pkm)
-        {
-            if(SAV.SAV.Generation==9)
-            {
-                if (pkm.Met_Location != 30024 && pkm.Species != 998
-                    && pkm.Species != 999 && pkm.Species != 996
-                    && pkm.Species != 995 && pkm.Species != 994
-                    && pkm.Species != 997)
-                {
-                    ((PK9)pkm).HeightScalar = 255;
-                    ((PK9)pkm).WeightScalar = 255;
-                    ((PK9)pkm).Scale = 255;
-                    ((PK9)pkm).RibbonMarkMini = false;
-                    ((PK9)pkm).RibbonMarkJumbo = true;
-                }
-            }
-        }
-        public void MINSize(PKM pkm)
-        {
-            if (SAV.SAV.Generation == 9)
-            {
-                if (pkm.Met_Location != 30024 && pkm.Species != 998
-                    && pkm.Species != 999 && pkm.Species != 996
-                    && pkm.Species != 995 && pkm.Species != 994
-                    && pkm.Species != 997)
-                {
-                    if ((!(pkm.Species == 944&&pkm.Met_Location==32))&&
-                        (!(pkm.Species == 952&&pkm.Met_Location==40))&& 
-                        (!(pkm.Species == 959&&pkm.Met_Location==22))&&
-                        (!(pkm.Species == 962&&pkm.Met_Location==20))&&
-                        (!(pkm.Species == 978&&pkm.Met_Location==24))&&
-                        (!(pkm.Species == 986&&pkm.Met_Location==24)))
-                    {
-                        ((PK9)pkm).HeightScalar = 1;
-                        ((PK9)pkm).WeightScalar = 1;
-                        ((PK9)pkm).Scale = 0;
-                        ((PK9)pkm).RibbonMarkMini = true;
-                        ((PK9)pkm).RibbonMarkJumbo = false;
-                    }
-                }
-            }
-        }
-        private void MAXSize_BTN_Click(object sender, EventArgs e)
-        {
-            int i = SAV.CurrentBox;
-            SAV.SAV.ModifyBoxes(MAXSize, i, i);
-            SAV.ReloadSlots();
-        }
-
-        private void MINSize_BTN_Click(object sender, EventArgs e)
-        {
-            int i = SAV.CurrentBox;
-            SAV.SAV.ModifyBoxes(MINSize, i, i);
-            SAV.ReloadSlots();
-        }
-
-        private void ThreeFinder_BTN_Click(object sender, EventArgs e)
-        {
-            int i = SAV.CurrentBox;
-            SAV.SAV.ModifyBoxes(FindThree, i, i);
-            SAV.ReloadSlots();
-        }
-        public void FindThree(PKM pk)
-        {
-            if (pk.Species == 946)
-            {
-                pk.Form = 1;
-                pk.SetRandomEC();
-            }
-            else if (pk.Species == 917)
-            {
-                pk.Form = 1;
-                pk.SetRandomEC();
-            }
-        }
-
-        private void Random_EncBTN_Click(object sender, EventArgs e)
-        {
-            Counter = 0;
-            ProcessBox(SAV.CurrentBox,false);
-        }
-        private void Random_EggBTN_Click(object sender, EventArgs e)
-        {
-            Counter = 0;
-            ProcessBox(SAV.CurrentBox, true);
-        }
-        private void ProcessBox(int box,bool mod)
-        {
-            if ((uint)box >= SAV.SAV.BoxCount)
-                throw new ArgumentOutOfRangeException(nameof(box), "Value was more than BoxCount");
-            var data = SAV.SAV.GetBoxData(box);
-            if (mod == false)
-            {
-                ProcessPokemon(data);
-            }
-            else
-            {
-                ProcessEGG(data);
-            }
-            if (Counter > 0) SAV.SAV.SetBoxData(data, box);
-        }
-        private void ProcessEGG(IEnumerable<PKM> data)
-        {
-            var rand = new Random();
-
-            foreach (var pokemon in data)
-            {
-                if (pokemon.Species <= 0 || pokemon is { WasEgg: false, IsEgg: false }) continue;
-                var releaseDate = new ReleaseDate(SAV.SAV.Version);
-                var baseDate = releaseDate.Date;
-                var days = (DateTime.Today - baseDate).Days;
-                var newEggMetDate = baseDate.AddDays(rand.Next(days));
-                pokemon.Egg_Day = newEggMetDate.Day;
-                pokemon.Egg_Year = newEggMetDate.Year - 2000;
-                pokemon.Egg_Month = newEggMetDate.Month;
-                Counter++;
-            }
-        }
-        private void ProcessPokemon(IEnumerable<PKM> data)
-        {
-            var rand = new Random();
-
-            foreach (var pokemon in data)
-            {
-                if (pokemon.Species <= 0) 
-                    continue;
-                var releaseDate = new ReleaseDate(SAV.SAV.Version);
-                var baseDate = PokemonEggCheck(pokemon, releaseDate.Date);
-                var days = (DateTime.Today - baseDate).Days;
-                var newMetDate = baseDate.AddDays(rand.Next(days));
-                pokemon.Met_Day = newMetDate.Day;
-                pokemon.Met_Year = newMetDate.Year - 2000;
-                pokemon.Met_Month = newMetDate.Month;
-                Counter++;
-            }
-        }
-        private DateTime PokemonEggCheck(PKM pokemon, DateTime gameReleaseDate)
-#pragma warning restore CA1822
-        {
-            if (pokemon.EggMetDate is not null)
-            {
-                DateOnly dateTime = (DateOnly)pokemon.EggMetDate;
-                var Time=dateTime.ToDateTime(TimeOnly.Parse("00:00 PM"));
-                return Time ;
-            }
-            return gameReleaseDate;
-        }
-
-        
     }
 }

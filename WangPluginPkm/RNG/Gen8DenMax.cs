@@ -62,10 +62,10 @@ namespace WangPluginPkm
             switch (A)
             {
                 case 0:
-                    ability = (int)xoroshiro128Plus.NextInt(2uL);
+                    ability = (int)xoroshiro128Plus.NextInt(3uL);
                     break;
                 case 1:
-                    ability = (int)xoroshiro128Plus.NextInt(3uL);
+                    ability = (int)xoroshiro128Plus.NextInt(2uL);
                     break;
                 case 2:
                     ability = 1;
@@ -91,7 +91,7 @@ namespace WangPluginPkm
                     num5 = 191;
                     break;
                 case 5:
-                    num5 = 22;
+                    num5 = 225;
                     break;
                 case 6:
                     num5 = 254;

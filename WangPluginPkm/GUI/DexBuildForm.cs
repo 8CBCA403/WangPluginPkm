@@ -3,18 +3,17 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Linq;
 using PKHeX.Core;
-using PKHeX.Core.AutoMod;
-using System.ComponentModel;
-using System.Reflection;
 using System.Collections.Generic;
 using WangPluginPkm.SortBase;
 using WangPluginPkm.WangUtil.DexBase;
+using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
+using static WangPluginPkm.PluginUtil.Functions.DexBuildFunctions;
+using System.Text.RegularExpressions;
 
 namespace WangPluginPkm.GUI
 {
     partial class DexBuildForm : Form
     {
-       
         private static Random rand = new Random();
         public static Stopwatch sw = new();
         public VersionClass version = new VersionClass
@@ -27,42 +26,13 @@ namespace WangPluginPkm.GUI
             Name = "一组未知图腾",
             Value = "Unown",
         };
-        private LanguageBoxSelect7 type7 = LanguageBoxSelect7.ENG;
-        private LanguageBoxSelect type = LanguageBoxSelect.ENG;
-
+        private DexFormLanguage7 type7 = DexFormLanguage7.ENG;
+        private DexFormLanguage5 type5 = DexFormLanguage5.ENG;
+        private DexFormOTGender typeG = DexFormOTGender.Male;
         public List<VersionClass> L = new();
         public List<DexModClass> ML = new();
-       
-        private OT_Gender typeG = OT_Gender.Male;
-        private  ISaveFileProvider SAV { get; }
+        private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
-        enum LanguageBoxSelect
-        {
-            JPN,
-            ENG,
-            FRE,
-            ITA,
-            GRE,
-            ESP,
-        }
-        enum LanguageBoxSelect7
-        {
-            JPN,
-            ENG,
-            FRE,
-            ITA,
-            GRE,
-            ESP,
-            KOR,
-            CHS,
-            CHT,
-        }
-        enum OT_Gender
-        {
-            Male,
-            Female,
-        }
-      
         public DexBuildForm(ISaveFileProvider sav, IPKMView editor)
         {
             SAV = sav;
@@ -72,29 +42,28 @@ namespace WangPluginPkm.GUI
         }
         private void BindingData(ISaveFileProvider sav)
         {
-            if (sav.SAV.Version is GameVersion.SN or GameVersion.MN or GameVersion.US or GameVersion.UM or
-                GameVersion.GP or GameVersion.GE or GameVersion.SW or GameVersion.SH or GameVersion.PLA or GameVersion.BD or GameVersion.SP)
+            if (VersionFlag.ID7Flag(SAV.SAV.Version))
             {
-                this.LanguageBox.DataSource = Enum.GetNames(typeof(LanguageBoxSelect7));
-                this.GenderBox.DataSource = Enum.GetNames(typeof(OT_Gender));
+                this.LanguageBox.DataSource = Enum.GetNames(typeof(DexFormLanguage7));
+                this.GenderBox.DataSource = Enum.GetNames(typeof(DexFormOTGender));
                 this.LanguageBox.SelectedIndexChanged += (_, __) =>
                 {
-                    type7 = (LanguageBoxSelect7)Enum.Parse(typeof(LanguageBoxSelect7), this.LanguageBox.SelectedItem.ToString(), false);
+                    type7 = (DexFormLanguage7)Enum.Parse(typeof(DexFormLanguage7), this.LanguageBox.SelectedItem.ToString(), false);
                 };
             }
             else
             {
-                this.LanguageBox.DataSource = Enum.GetNames(typeof(LanguageBoxSelect));
-                this.GenderBox.DataSource = Enum.GetNames(typeof(OT_Gender));
+                this.LanguageBox.DataSource = Enum.GetNames(typeof(DexFormLanguage5));
+                this.GenderBox.DataSource = Enum.GetNames(typeof(DexFormOTGender));
                 this.LanguageBox.SelectedIndexChanged += (_, __) =>
                 {
-                    type = (LanguageBoxSelect)Enum.Parse(typeof(LanguageBoxSelect), this.LanguageBox.SelectedItem.ToString(), false);
+                    type5 = (DexFormLanguage5)Enum.Parse(typeof(DexFormLanguage5), this.LanguageBox.SelectedItem.ToString(), false);
                 };
 
             }
             this.GenderBox.SelectedIndexChanged += (_, __) =>
             {
-                typeG = (OT_Gender)Enum.Parse(typeof(OT_Gender), this.GenderBox.SelectedItem.ToString(), false);
+                typeG = (DexFormOTGender)Enum.Parse(typeof(DexFormOTGender), this.GenderBox.SelectedItem.ToString(), false);
             };
             this.LanguageBox.SelectedIndex = 0;
             this.GenderBox.SelectedIndex = 0;
@@ -106,7 +75,7 @@ namespace WangPluginPkm.GUI
             SortBox.ValueMember = "Version";
             this.SortBox.SelectedIndexChanged += (_, __) =>
             {
-                version =(VersionClass) this.SortBox.SelectedItem;
+                version = (VersionClass)this.SortBox.SelectedItem;
             };
 
             ML = DexModClass.DexModList(sav);
@@ -122,176 +91,35 @@ namespace WangPluginPkm.GUI
                 mod = (DexModClass)this.Mod_Select_Box.SelectedItem;
             };
         }
-       
-        private int GetLanguageBox7()
-        {
-            var T = 1;
-            switch (type7)
-            {
-                case LanguageBoxSelect7.JPN:
-                    T = 1;
-                    break;
-                case LanguageBoxSelect7.ENG:
-                    T = 2;
-                    break;
-                case LanguageBoxSelect7.FRE:
-                    T = 3;
-                    break;
-                case LanguageBoxSelect7.ITA:
-                    T = 4;
-                    break;
-                case LanguageBoxSelect7.GRE:
-                    T = 5;
-                    break;
-                case LanguageBoxSelect7.ESP:
-                    T = 7;
-                    break;
-                case LanguageBoxSelect7.KOR:
-                    T = 8;
-                    break;
-                case LanguageBoxSelect7.CHS:
-                    T = 9;
-                    break;
-                case LanguageBoxSelect7.CHT:
-                    T = 10;
-                    break;
-            }
-            return T;
-        }
-        private int GetLanguageBox()
-        {
-            var T = 1;
-            switch (type)
-            {
-                case LanguageBoxSelect.JPN:
-                    T = 1;
-                    break;
-                case LanguageBoxSelect.ENG:
-                    T = 2;
-                    break;
-                case LanguageBoxSelect.FRE:
-                    T = 3;
-                    break;
-                case LanguageBoxSelect.ITA:
-                    T = 4;
-                    break;
-                case LanguageBoxSelect.GRE:
-                    T = 5;
-                    break;
-                case LanguageBoxSelect.ESP:
-                    T = 7;
-                    break;
-            }
-            return T;
-        }
-        private int GetGender()
-        {
-            var T = 0;
-            switch (typeG)
-            {
-                case OT_Gender.Male:
-                    T = 0;
-                    break;
-                case OT_Gender.Female:
-                    T = 1;
-                    break;
-            }
-            return T;
-        }
         public void Gen(ISaveFileProvider SaveFileEditor)
         {
             var sav = SaveFileEditor.SAV;
-            sav.ModifyBoxes(SeTID16);
+            sav.ModifyBoxes(SetID);
             SaveFileEditor.ReloadSlots();
         }
-        public void SeTID16(PKM pkm)
+        public void SetID(PKM pkm)
         {
-            var TID16 = ushort.Parse(TID16Box.Text);
-            var SID16 = ushort.Parse(SID16Box.Text);
+            var TID16 = uint.Parse(TID16Box.Text);
+            var SID16 = uint.Parse(SID16Box.Text);
             var Name = OT_Name.Text;
-            
-            if (SAV.SAV.Version is GameVersion.SN or GameVersion.MN or GameVersion.US or GameVersion.UM or
-                 GameVersion.GP or GameVersion.GE or GameVersion.SW or GameVersion.SH or GameVersion.PLA or GameVersion.BD or GameVersion.SP)
-                pkm.Language=GetLanguageBox7();
+            if (VersionFlag.ID7Flag(SAV.SAV.Version))
+                pkm.Language = GetLanguageBox7(type7);
             else
-                pkm.Language = GetLanguageBox();
+                pkm.Language = GetLanguageBox5(type5);
             pkm.OT_Name = Name;
-            if (SAV.SAV.Version is GameVersion.SN or GameVersion.MN or GameVersion.US or GameVersion.UM or
-               GameVersion.GP or GameVersion.GE or GameVersion.SW or GameVersion.SH or GameVersion.PLA or GameVersion.BD or GameVersion.SP)
+            if (VersionFlag.ID7Flag(SAV.SAV.Version))
             {
-                pkm.DisplayTID = TID16;
-                pkm.DisplaySID = SID16;
+                pkm.TrainerTID7 = TID16;
+                pkm.TrainerSID7 = SID16;
             }
             else
             {
-                pkm.TID16 = TID16;
-                pkm.SID16 = SID16;
-                
+                pkm.TID16 = (ushort)TID16;
+                pkm.SID16 = (ushort)SID16;
+
             }
-            pkm.OT_Gender = GetGender();
+            pkm.OT_Gender = GetGender(typeG);
             pkm.ClearNickname();
-        }
-        public void UnionPKM(ISaveFileProvider SaveFileEditor)
-        {
-            var sav = SaveFileEditor.SAV;
-            var a = sav.GetAllPKM();
-            var pkms = sav.GenerateLivingDex(out int attempts).ToList();
-            foreach (var item in a)
-            {
-                var pk=pkms.Find(x => x.Species==item.Species);
-                pkms.Remove(pk);
-            }
-            var o = a.Union(pkms);
-            o=o.OrderBySpecies();
-            var bd = sav.BoxData;
-            o.CopyTo(bd);
-            sav.BoxData = bd;
-            SaveFileEditor.ReloadSlots();
-        }
-        public void LivingDex(ISaveFileProvider SaveFileEditor)
-        {
-            var sav = SaveFileEditor.SAV;
-            var pkms = sav.GenerateLivingDex(out int attempts);
-            var bd = sav.BoxData;
-            pkms.CopyTo(bd);
-            sav.BoxData = bd;
-            SaveFileEditor.ReloadSlots();
-        }
-        public static void LegalBox(ISaveFileProvider SaveFileEditor)
-        {
-            var sav = SaveFileEditor.SAV;
-            sav.LegalizeBox(sav.CurrentBox);
-        }
-        public static void LegalAll(ISaveFileProvider SaveFileEditor)
-        {
-            var sav = SaveFileEditor.SAV;
-            sav.LegalizeBoxes();
-        }
-        public static void ClearPKM(PKM pkm)
-        {
-            pkm.Species = 0;
-        }
-        public  void RandomPKMPID(PKM pkm)
-        {
-            pkm.PID=Util.Rand32();
-           
-        }
-        public void RandomPKMEC(PKM pkm)
-        {
-            pkm.SetRandomEC();
-        }
-        public static string GetEnumDescription(Enum value)
-        {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
-
-            DescriptionAttribute[] attributes = fi.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
-
-            if (attributes != null && attributes.Any())
-            {
-                return attributes.First().Description;
-            }
-
-            return value.ToString();
         }
         private void SortByRegionalDex(Func<PKM, IComparable>[] sortFunctions)
         {
@@ -303,7 +131,7 @@ namespace WangPluginPkm.GUI
         {
             SAV.SAV.SortBoxes();
             SAV.ReloadSlots();
-        } 
+        }
         private static List<int> FindAllEmptySlots(IList<PKM> data, int start)
         {
             List<int> list = new List<int>();
@@ -483,7 +311,7 @@ namespace WangPluginPkm.GUI
         }
         private void DeleteBox_BTN_Click(object sender, EventArgs e)
         {
-            SAV.SAV.ModifyBoxes(ClearPKM,SAV.CurrentBox,SAV.CurrentBox);
+            SAV.SAV.ModifyBoxes(ClearPKM, SAV.CurrentBox, SAV.CurrentBox);
             SAV.ReloadSlots();
         }
         public static string RandomString(int length)
@@ -495,9 +323,9 @@ namespace WangPluginPkm.GUI
         private void FormAndSubDex_Click(object sender, EventArgs e)
         {
             var PKL = new List<PKM>();
-            
-                switch (mod.Value)
-                {
+
+            switch (mod.Value)
+            {
                 case "CapPikachu":
                     PKL = CapPikachuDex.CapPikachuSets(SAV, Editor);
                     break;
@@ -516,7 +344,7 @@ namespace WangPluginPkm.GUI
                     PKL = BurmyDex.BurmySets(SAV, Editor);
                     break;
                 case "Gastrodon":
-                    PKL=GastrodonDex.GastrodonSets(SAV, Editor);
+                    PKL = GastrodonDex.GastrodonSets(SAV, Editor);
                     break;
                 case "Rotom":
                     PKL = RotomDex.RotomSets(SAV, Editor);
@@ -553,7 +381,7 @@ namespace WangPluginPkm.GUI
                     break;
                 case "Zygarde":
                     PKL = ZygardeDex.ZygardeSets(SAV, Editor);
-                    break; 
+                    break;
                 case "Rockruffy":
                     PKL = RockruffyDex.RockruffySets(SAV, Editor);
                     break;
@@ -588,7 +416,7 @@ namespace WangPluginPkm.GUI
                     PKL = ParadoxDex.ParadoxSets(SAV, Editor);
                     break;
                 case "Squawkabilly":
-                    PKL=SquawkabillyDex.SquawkabillySets(SAV, Editor);
+                    PKL = SquawkabillyDex.SquawkabillySets(SAV, Editor);
                     break;
                 case "Tatsugiri":
                     PKL = TatsugiriDex.TatsugiriSets(SAV, Editor);
@@ -605,11 +433,14 @@ namespace WangPluginPkm.GUI
                     SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
                 }
             }
-          //  LegalBox(SAV);
+            //  LegalBox(SAV);
             SAV.ReloadSlots();
         }
-
-
+        private void RandomEC_BTN_Click(object sender, EventArgs e)
+        {
+            SAV.SAV.ModifyBoxes(RandomPKMEC);
+            SAV.ReloadSlots();
+        }
         #region
         /*
           private void GODex_BTN_Click(object sender, EventArgs e)
@@ -680,10 +511,65 @@ namespace WangPluginPkm.GUI
         }*/
         #endregion
 
-        private void RandomEC_BTN_Click(object sender, EventArgs e)
+
+        //https://github.com/foohyfooh/PKHeXInsertionPlugin
+        private void Insertion_BTN_Click(object sender, EventArgs e)
         {
-            SAV.SAV.ModifyBoxes(RandomPKMEC);
-            SAV.ReloadSlots();
+            int boxNum = (int)BoxnumericUpDown.Value;
+            int slotNum = (int)SoltnumericUpDown.Value;
+            var MAXBox = SAV.SAV.BoxCount;
+            var MAXBoxSlot = SAV.SAV.BoxSlotCount;
+            var MAXSlot = SAV.SAV.SlotCount;
+            bool hadError = false;
+            string errorText = string.Empty;
+            if (boxNum < 1 || boxNum > MAXBox)
+            {
+                errorText = $"Box Number should be between 1 and {MAXBox}";
+                hadError = true;
+            }
+
+            if (slotNum < 1 || slotNum > MAXBoxSlot)
+            {
+                if (errorText.Length > 0) errorText += "\n";
+                errorText += $"Slot Number should be between 1 and {MAXBoxSlot}";
+                hadError = true;
+            }
+
+            if (hadError)
+            {
+                MessageBox.Show(errorText);
+                return;
+            }
+
+            int boxIndex = (boxNum - 1) * MAXBoxSlot + (slotNum - 1);
+            PKM prevMon = SAV.SAV.GetBoxSlotAtIndex(boxIndex), currMon = SAV.SAV.BlankPKM;
+            if (prevMon.Species != (int)Species.None)
+            {
+                SAV.SAV.SetBoxSlotAtIndex(SAV.SAV.BlankPKM, boxIndex);
+                boxIndex++;
+                while (boxIndex < MAXSlot)
+                {
+                    currMon = SAV.SAV.GetBoxSlotAtIndex(boxIndex);
+                    SAV.SAV.SetBoxSlotAtIndex(prevMon, boxIndex, PKMImportSetting.UseDefault, PKMImportSetting.Skip);
+                    if (currMon.Species == (int)Species.None) break;
+                    prevMon = currMon;
+                    boxIndex++;
+                }
+                if (currMon.Species != (int)Species.None)
+                {
+                    MessageBox.Show($"Box {MAXBox} Slot {MAXSlot} was erased");
+                }
+                SAV.ReloadSlots();
+
+            }
+            else
+            {
+                MessageBox.Show($"Box {boxNum} Slot {slotNum} is already empty");
+            }
         }
+
+        [GeneratedRegex("[^0-9]")]
+        private static partial Regex NotNumberRegex();
     }
 }
+

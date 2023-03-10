@@ -43,17 +43,47 @@ namespace WangPluginPkm.GUI
             RNGFormTabControl = new TabControl();
             ReverseSeedPage = new TabPage();
             SWSHPage = new TabPage();
+            Seed_Label = new Label();
             SlowCheck = new Button();
             FixLairSeed = new Button();
             TeraSeedPage = new TabPage();
+            AbilitytextBox = new TextBox();
+            Gen9IvcomboBox = new ComboBox();
+            numHeight = new NumericUpDown();
+            CheckTeraSeed_BTN = new Button();
+            numScale = new NumericUpDown();
+            label5 = new Label();
+            label2 = new Label();
+            lblScale = new Label();
+            txtPID = new TextBox();
+            GendertextBox = new TextBox();
+            lblNature = new Label();
+            numWeight = new NumericUpDown();
+            Gen9AbilitycomboBox = new ComboBox();
+            lblHeight = new Label();
+            label3 = new Label();
+            lblWeight = new Label();
+            Tera9genderComboBox = new ComboBox();
+            label1 = new Label();
+            lblPID = new Label();
+            txtEC = new TextBox();
+            cmbNature = new ComboBox();
+            IVstextBox = new TextBox();
+            label4 = new Label();
+            IVlabel = new Label();
+            TeraSeedBox = new TextBox();
+            label = new Label();
+            lblEC = new Label();
             RNGmenuStrip = new MenuStrip();
             ToolStripMenuItem = new ToolStripMenuItem();
-            Seed_Label = new Label();
             SearchGroupBox.SuspendLayout();
             RNGFormTabControl.SuspendLayout();
             ReverseSeedPage.SuspendLayout();
             SWSHPage.SuspendLayout();
             TeraSeedPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numHeight).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numScale).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numWeight).BeginInit();
             RNGmenuStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -182,51 +212,51 @@ namespace WangPluginPkm.GUI
             // 
             // FixPidForTera_BTN
             // 
-            FixPidForTera_BTN.Location = new System.Drawing.Point(113, 149);
+            FixPidForTera_BTN.Location = new System.Drawing.Point(175, 166);
             FixPidForTera_BTN.Name = "FixPidForTera_BTN";
-            FixPidForTera_BTN.Size = new System.Drawing.Size(159, 25);
+            FixPidForTera_BTN.Size = new System.Drawing.Size(111, 25);
             FixPidForTera_BTN.TabIndex = 36;
-            FixPidForTera_BTN.Text = "修正太晶坑闪光PID";
+            FixPidForTera_BTN.Text = "修正PID";
             FixPidForTera_BTN.UseVisualStyleBackColor = true;
-            FixPidForTera_BTN.Click += GetSeedForMaxLair_BTN_Click;
+            FixPidForTera_BTN.Click += FixPidForTera_BTN_Click;
             // 
             // Legal_Check_BOX4
             // 
             Legal_Check_BOX4.Cursor = Cursors.No;
-            Legal_Check_BOX4.Location = new System.Drawing.Point(198, 98);
+            Legal_Check_BOX4.Location = new System.Drawing.Point(219, 98);
             Legal_Check_BOX4.Multiline = true;
             Legal_Check_BOX4.Name = "Legal_Check_BOX4";
-            Legal_Check_BOX4.Size = new System.Drawing.Size(124, 25);
+            Legal_Check_BOX4.Size = new System.Drawing.Size(125, 25);
             Legal_Check_BOX4.TabIndex = 34;
             Legal_Check_BOX4.Text = "无事可做";
             // 
             // Legal_Check_BOX3
             // 
             Legal_Check_BOX3.Cursor = Cursors.No;
-            Legal_Check_BOX3.Location = new System.Drawing.Point(198, 67);
+            Legal_Check_BOX3.Location = new System.Drawing.Point(219, 67);
             Legal_Check_BOX3.Multiline = true;
             Legal_Check_BOX3.Name = "Legal_Check_BOX3";
-            Legal_Check_BOX3.Size = new System.Drawing.Size(124, 25);
+            Legal_Check_BOX3.Size = new System.Drawing.Size(125, 25);
             Legal_Check_BOX3.TabIndex = 33;
             Legal_Check_BOX3.Text = "无事可做";
             // 
             // Legal_Check_BOX2
             // 
             Legal_Check_BOX2.Cursor = Cursors.No;
-            Legal_Check_BOX2.Location = new System.Drawing.Point(198, 36);
+            Legal_Check_BOX2.Location = new System.Drawing.Point(219, 36);
             Legal_Check_BOX2.Multiline = true;
             Legal_Check_BOX2.Name = "Legal_Check_BOX2";
-            Legal_Check_BOX2.Size = new System.Drawing.Size(124, 25);
+            Legal_Check_BOX2.Size = new System.Drawing.Size(125, 25);
             Legal_Check_BOX2.TabIndex = 32;
             Legal_Check_BOX2.Text = "无事可做";
             // 
             // Legal_Check_BOX1
             // 
             Legal_Check_BOX1.Cursor = Cursors.No;
-            Legal_Check_BOX1.Location = new System.Drawing.Point(198, 6);
+            Legal_Check_BOX1.Location = new System.Drawing.Point(219, 6);
             Legal_Check_BOX1.Multiline = true;
             Legal_Check_BOX1.Name = "Legal_Check_BOX1";
-            Legal_Check_BOX1.Size = new System.Drawing.Size(124, 25);
+            Legal_Check_BOX1.Size = new System.Drawing.Size(125, 25);
             Legal_Check_BOX1.TabIndex = 31;
             Legal_Check_BOX1.Text = "无事可做";
             // 
@@ -242,10 +272,10 @@ namespace WangPluginPkm.GUI
             // Legal_Check_BOX5
             // 
             Legal_Check_BOX5.Cursor = Cursors.No;
-            Legal_Check_BOX5.Location = new System.Drawing.Point(198, 129);
+            Legal_Check_BOX5.Location = new System.Drawing.Point(219, 129);
             Legal_Check_BOX5.Multiline = true;
             Legal_Check_BOX5.Name = "Legal_Check_BOX5";
-            Legal_Check_BOX5.Size = new System.Drawing.Size(124, 25);
+            Legal_Check_BOX5.Size = new System.Drawing.Size(125, 25);
             Legal_Check_BOX5.TabIndex = 35;
             Legal_Check_BOX5.Text = "无事可做";
             // 
@@ -267,7 +297,7 @@ namespace WangPluginPkm.GUI
             // 
             // ReverseCheck_BTN
             // 
-            ReverseCheck_BTN.Location = new System.Drawing.Point(58, 139);
+            ReverseCheck_BTN.Location = new System.Drawing.Point(46, 139);
             ReverseCheck_BTN.Name = "ReverseCheck_BTN";
             ReverseCheck_BTN.Size = new System.Drawing.Size(124, 25);
             ReverseCheck_BTN.TabIndex = 25;
@@ -279,7 +309,7 @@ namespace WangPluginPkm.GUI
             // 
             IVCheck_Box.AutoSize = true;
             IVCheck_Box.Enabled = false;
-            IVCheck_Box.Location = new System.Drawing.Point(58, 111);
+            IVCheck_Box.Location = new System.Drawing.Point(46, 111);
             IVCheck_Box.Name = "IVCheck_Box";
             IVCheck_Box.Size = new System.Drawing.Size(98, 21);
             IVCheck_Box.TabIndex = 44;
@@ -292,7 +322,7 @@ namespace WangPluginPkm.GUI
             PIDECCheck_Box.AutoSize = true;
             PIDECCheck_Box.Checked = true;
             PIDECCheck_Box.CheckState = CheckState.Checked;
-            PIDECCheck_Box.Location = new System.Drawing.Point(58, 85);
+            PIDECCheck_Box.Location = new System.Drawing.Point(46, 85);
             PIDECCheck_Box.Name = "PIDECCheck_Box";
             PIDECCheck_Box.Size = new System.Drawing.Size(110, 21);
             PIDECCheck_Box.TabIndex = 25;
@@ -303,7 +333,7 @@ namespace WangPluginPkm.GUI
             // IVBox
             // 
             IVBox.AutoSize = true;
-            IVBox.Location = new System.Drawing.Point(55, 54);
+            IVBox.Location = new System.Drawing.Point(43, 54);
             IVBox.Name = "IVBox";
             IVBox.Size = new System.Drawing.Size(20, 17);
             IVBox.TabIndex = 43;
@@ -312,7 +342,7 @@ namespace WangPluginPkm.GUI
             // IVTextBox
             // 
             IVTextBox.Enabled = false;
-            IVTextBox.Location = new System.Drawing.Point(81, 51);
+            IVTextBox.Location = new System.Drawing.Point(69, 51);
             IVTextBox.Name = "IVTextBox";
             IVTextBox.Size = new System.Drawing.Size(124, 25);
             IVTextBox.TabIndex = 42;
@@ -355,7 +385,7 @@ namespace WangPluginPkm.GUI
             // Mlabel
             // 
             Mlabel.AutoSize = true;
-            Mlabel.Location = new System.Drawing.Point(19, 22);
+            Mlabel.Location = new System.Drawing.Point(7, 22);
             Mlabel.Name = "Mlabel";
             Mlabel.Size = new System.Drawing.Size(64, 17);
             Mlabel.TabIndex = 37;
@@ -364,7 +394,7 @@ namespace WangPluginPkm.GUI
             // Mod_ComboBox
             // 
             Mod_ComboBox.FormattingEnabled = true;
-            Mod_ComboBox.Location = new System.Drawing.Point(80, 17);
+            Mod_ComboBox.Location = new System.Drawing.Point(68, 17);
             Mod_ComboBox.Name = "Mod_ComboBox";
             Mod_ComboBox.Size = new System.Drawing.Size(124, 25);
             Mod_ComboBox.TabIndex = 37;
@@ -377,7 +407,7 @@ namespace WangPluginPkm.GUI
             RNGFormTabControl.Location = new System.Drawing.Point(344, 31);
             RNGFormTabControl.Name = "RNGFormTabControl";
             RNGFormTabControl.SelectedIndex = 0;
-            RNGFormTabControl.Size = new System.Drawing.Size(393, 223);
+            RNGFormTabControl.Size = new System.Drawing.Size(381, 232);
             RNGFormTabControl.TabIndex = 45;
             // 
             // ReverseSeedPage
@@ -399,7 +429,7 @@ namespace WangPluginPkm.GUI
             ReverseSeedPage.Location = new System.Drawing.Point(4, 26);
             ReverseSeedPage.Name = "ReverseSeedPage";
             ReverseSeedPage.Padding = new Padding(3);
-            ReverseSeedPage.Size = new System.Drawing.Size(385, 193);
+            ReverseSeedPage.Size = new System.Drawing.Size(373, 202);
             ReverseSeedPage.TabIndex = 0;
             ReverseSeedPage.Text = "Seed逆推";
             // 
@@ -422,16 +452,25 @@ namespace WangPluginPkm.GUI
             SWSHPage.Controls.Add(Seed_Box);
             SWSHPage.Controls.Add(Ability_Box);
             SWSHPage.Controls.Add(AbilityLabel);
-            SWSHPage.Location = new System.Drawing.Point(4, 26);
+            SWSHPage.Location = new System.Drawing.Point(4, 29);
             SWSHPage.Name = "SWSHPage";
             SWSHPage.Padding = new Padding(3);
-            SWSHPage.Size = new System.Drawing.Size(385, 193);
+            SWSHPage.Size = new System.Drawing.Size(373, 199);
             SWSHPage.TabIndex = 1;
             SWSHPage.Text = "剑盾Raid检测";
             // 
+            // Seed_Label
+            // 
+            Seed_Label.AutoSize = true;
+            Seed_Label.Location = new System.Drawing.Point(6, 9);
+            Seed_Label.Name = "Seed_Label";
+            Seed_Label.Size = new System.Drawing.Size(42, 17);
+            Seed_Label.TabIndex = 47;
+            Seed_Label.Text = "Seed";
+            // 
             // SlowCheck
             // 
-            SlowCheck.Location = new System.Drawing.Point(198, 160);
+            SlowCheck.Location = new System.Drawing.Point(219, 160);
             SlowCheck.Name = "SlowCheck";
             SlowCheck.Size = new System.Drawing.Size(124, 25);
             SlowCheck.TabIndex = 48;
@@ -452,13 +491,272 @@ namespace WangPluginPkm.GUI
             // TeraSeedPage
             // 
             TeraSeedPage.BackColor = System.Drawing.Color.WhiteSmoke;
+            TeraSeedPage.Controls.Add(AbilitytextBox);
+            TeraSeedPage.Controls.Add(Gen9IvcomboBox);
+            TeraSeedPage.Controls.Add(numHeight);
+            TeraSeedPage.Controls.Add(CheckTeraSeed_BTN);
             TeraSeedPage.Controls.Add(FixPidForTera_BTN);
-            TeraSeedPage.Location = new System.Drawing.Point(4, 29);
+            TeraSeedPage.Controls.Add(numScale);
+            TeraSeedPage.Controls.Add(label5);
+            TeraSeedPage.Controls.Add(label2);
+            TeraSeedPage.Controls.Add(lblScale);
+            TeraSeedPage.Controls.Add(txtPID);
+            TeraSeedPage.Controls.Add(GendertextBox);
+            TeraSeedPage.Controls.Add(lblNature);
+            TeraSeedPage.Controls.Add(numWeight);
+            TeraSeedPage.Controls.Add(Gen9AbilitycomboBox);
+            TeraSeedPage.Controls.Add(lblHeight);
+            TeraSeedPage.Controls.Add(label3);
+            TeraSeedPage.Controls.Add(lblWeight);
+            TeraSeedPage.Controls.Add(Tera9genderComboBox);
+            TeraSeedPage.Controls.Add(label1);
+            TeraSeedPage.Controls.Add(lblPID);
+            TeraSeedPage.Controls.Add(txtEC);
+            TeraSeedPage.Controls.Add(cmbNature);
+            TeraSeedPage.Controls.Add(IVstextBox);
+            TeraSeedPage.Controls.Add(label4);
+            TeraSeedPage.Controls.Add(IVlabel);
+            TeraSeedPage.Controls.Add(TeraSeedBox);
+            TeraSeedPage.Controls.Add(label);
+            TeraSeedPage.Controls.Add(lblEC);
+            TeraSeedPage.Location = new System.Drawing.Point(4, 26);
             TeraSeedPage.Name = "TeraSeedPage";
             TeraSeedPage.Padding = new Padding(3);
-            TeraSeedPage.Size = new System.Drawing.Size(385, 190);
+            TeraSeedPage.Size = new System.Drawing.Size(373, 202);
             TeraSeedPage.TabIndex = 2;
-            TeraSeedPage.Text = "朱紫太晶坑Seed";
+            TeraSeedPage.Text = "朱紫太晶坑检测";
+            // 
+            // AbilitytextBox
+            // 
+            AbilitytextBox.Location = new System.Drawing.Point(292, 38);
+            AbilitytextBox.MaxLength = 8;
+            AbilitytextBox.Name = "AbilitytextBox";
+            AbilitytextBox.Size = new System.Drawing.Size(63, 25);
+            AbilitytextBox.TabIndex = 90;
+            // 
+            // Gen9IvcomboBox
+            // 
+            Gen9IvcomboBox.FormattingEnabled = true;
+            Gen9IvcomboBox.Location = new System.Drawing.Point(158, 10);
+            Gen9IvcomboBox.Name = "Gen9IvcomboBox";
+            Gen9IvcomboBox.Size = new System.Drawing.Size(34, 25);
+            Gen9IvcomboBox.TabIndex = 80;
+            // 
+            // numHeight
+            // 
+            numHeight.Location = new System.Drawing.Point(210, 72);
+            numHeight.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
+            numHeight.Name = "numHeight";
+            numHeight.Size = new System.Drawing.Size(47, 25);
+            numHeight.TabIndex = 63;
+            // 
+            // CheckTeraSeed_BTN
+            // 
+            CheckTeraSeed_BTN.Location = new System.Drawing.Point(175, 133);
+            CheckTeraSeed_BTN.Name = "CheckTeraSeed_BTN";
+            CheckTeraSeed_BTN.Size = new System.Drawing.Size(111, 25);
+            CheckTeraSeed_BTN.TabIndex = 78;
+            CheckTeraSeed_BTN.Text = "检测";
+            CheckTeraSeed_BTN.UseVisualStyleBackColor = true;
+            CheckTeraSeed_BTN.Click += CheckTeraSeed_BTN_Click;
+            // 
+            // numScale
+            // 
+            numScale.Location = new System.Drawing.Point(210, 103);
+            numScale.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
+            numScale.Name = "numScale";
+            numScale.Size = new System.Drawing.Size(47, 25);
+            numScale.TabIndex = 60;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(263, 44);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(36, 17);
+            label5.TabIndex = 89;
+            label5.Text = "特性";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(123, 13);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(34, 17);
+            label2.TabIndex = 81;
+            label2.Text = "锁IV";
+            // 
+            // lblScale
+            // 
+            lblScale.AutoSize = true;
+            lblScale.Location = new System.Drawing.Point(169, 106);
+            lblScale.Name = "lblScale";
+            lblScale.Size = new System.Drawing.Size(40, 17);
+            lblScale.TabIndex = 48;
+            lblScale.Text = "大小:";
+            // 
+            // txtPID
+            // 
+            txtPID.Location = new System.Drawing.Point(67, 72);
+            txtPID.MaxLength = 8;
+            txtPID.Name = "txtPID";
+            txtPID.Size = new System.Drawing.Size(100, 25);
+            txtPID.TabIndex = 59;
+            // 
+            // GendertextBox
+            // 
+            GendertextBox.Location = new System.Drawing.Point(210, 38);
+            GendertextBox.MaxLength = 8;
+            GendertextBox.Name = "GendertextBox";
+            GendertextBox.Size = new System.Drawing.Size(47, 25);
+            GendertextBox.TabIndex = 88;
+            // 
+            // lblNature
+            // 
+            lblNature.AutoSize = true;
+            lblNature.Location = new System.Drawing.Point(27, 137);
+            lblNature.Name = "lblNature";
+            lblNature.Size = new System.Drawing.Size(40, 17);
+            lblNature.TabIndex = 71;
+            lblNature.Text = "性格:";
+            // 
+            // numWeight
+            // 
+            numWeight.Location = new System.Drawing.Point(308, 72);
+            numWeight.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
+            numWeight.Name = "numWeight";
+            numWeight.Size = new System.Drawing.Size(47, 25);
+            numWeight.TabIndex = 62;
+            // 
+            // Gen9AbilitycomboBox
+            // 
+            Gen9AbilitycomboBox.FormattingEnabled = true;
+            Gen9AbilitycomboBox.Location = new System.Drawing.Point(49, 10);
+            Gen9AbilitycomboBox.Name = "Gen9AbilitycomboBox";
+            Gen9AbilitycomboBox.Size = new System.Drawing.Size(70, 25);
+            Gen9AbilitycomboBox.TabIndex = 82;
+            // 
+            // lblHeight
+            // 
+            lblHeight.AutoSize = true;
+            lblHeight.Location = new System.Drawing.Point(169, 75);
+            lblHeight.Name = "lblHeight";
+            lblHeight.Size = new System.Drawing.Size(40, 17);
+            lblHeight.TabIndex = 52;
+            lblHeight.Text = "身高:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(15, 13);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(36, 17);
+            label3.TabIndex = 83;
+            label3.Text = "特性";
+            // 
+            // lblWeight
+            // 
+            lblWeight.AutoSize = true;
+            lblWeight.Location = new System.Drawing.Point(263, 75);
+            lblWeight.Name = "lblWeight";
+            lblWeight.Size = new System.Drawing.Size(40, 17);
+            lblWeight.TabIndex = 51;
+            lblWeight.Text = "体重:";
+            // 
+            // Tera9genderComboBox
+            // 
+            Tera9genderComboBox.FormattingEnabled = true;
+            Tera9genderComboBox.Location = new System.Drawing.Point(232, 10);
+            Tera9genderComboBox.Name = "Tera9genderComboBox";
+            Tera9genderComboBox.Size = new System.Drawing.Size(70, 25);
+            Tera9genderComboBox.TabIndex = 80;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(195, 13);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(36, 17);
+            label1.TabIndex = 81;
+            label1.Text = "公母";
+            // 
+            // lblPID
+            // 
+            lblPID.AutoSize = true;
+            lblPID.Location = new System.Drawing.Point(34, 75);
+            lblPID.Name = "lblPID";
+            lblPID.Size = new System.Drawing.Size(36, 17);
+            lblPID.TabIndex = 49;
+            lblPID.Text = "PID:";
+            // 
+            // txtEC
+            // 
+            txtEC.Location = new System.Drawing.Point(67, 103);
+            txtEC.MaxLength = 8;
+            txtEC.Name = "txtEC";
+            txtEC.Size = new System.Drawing.Size(100, 25);
+            txtEC.TabIndex = 58;
+            // 
+            // cmbNature
+            // 
+            cmbNature.FormattingEnabled = true;
+            cmbNature.Items.AddRange(new object[] { "Hardy", "Lonely", "Brave", "Adamant", "Naughty", "Bold", "Docile", "Relaxed", "Impish", "Lax", "Timid", "Hasty", "Serious", "Jolly", "Naive", "Modest", "Mild", "Quiet", "Bashful", "Rash", "Calm", "Gentle", "Sassy", "Careful", "Quirky" });
+            cmbNature.Location = new System.Drawing.Point(67, 134);
+            cmbNature.Name = "cmbNature";
+            cmbNature.Size = new System.Drawing.Size(102, 25);
+            cmbNature.TabIndex = 72;
+            // 
+            // IVstextBox
+            // 
+            IVstextBox.Location = new System.Drawing.Point(49, 165);
+            IVstextBox.MaxLength = 8;
+            IVstextBox.Name = "IVstextBox";
+            IVstextBox.Size = new System.Drawing.Size(120, 25);
+            IVstextBox.TabIndex = 84;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(176, 44);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(33, 17);
+            label4.TabIndex = 87;
+            label4.Text = "性别";
+            // 
+            // IVlabel
+            // 
+            IVlabel.AutoSize = true;
+            IVlabel.Location = new System.Drawing.Point(6, 168);
+            IVlabel.Name = "IVlabel";
+            IVlabel.Size = new System.Drawing.Size(40, 17);
+            IVlabel.TabIndex = 85;
+            IVlabel.Text = "个体:";
+            // 
+            // TeraSeedBox
+            // 
+            TeraSeedBox.Location = new System.Drawing.Point(67, 41);
+            TeraSeedBox.MaxLength = 8;
+            TeraSeedBox.Name = "TeraSeedBox";
+            TeraSeedBox.Size = new System.Drawing.Size(100, 25);
+            TeraSeedBox.TabIndex = 79;
+            // 
+            // label
+            // 
+            label.AutoSize = true;
+            label.Location = new System.Drawing.Point(21, 46);
+            label.Name = "label";
+            label.Size = new System.Drawing.Size(46, 17);
+            label.TabIndex = 86;
+            label.Text = "Seed:";
+            // 
+            // lblEC
+            // 
+            lblEC.AutoSize = true;
+            lblEC.Location = new System.Drawing.Point(34, 106);
+            lblEC.Name = "lblEC";
+            lblEC.Size = new System.Drawing.Size(33, 17);
+            lblEC.TabIndex = 47;
+            lblEC.Text = "EC:";
             // 
             // RNGmenuStrip
             // 
@@ -466,7 +764,7 @@ namespace WangPluginPkm.GUI
             RNGmenuStrip.Items.AddRange(new ToolStripItem[] { ToolStripMenuItem });
             RNGmenuStrip.Location = new System.Drawing.Point(0, 0);
             RNGmenuStrip.Name = "RNGmenuStrip";
-            RNGmenuStrip.Size = new System.Drawing.Size(752, 28);
+            RNGmenuStrip.Size = new System.Drawing.Size(737, 28);
             RNGmenuStrip.TabIndex = 46;
             RNGmenuStrip.Text = "menuStrip1";
             // 
@@ -477,20 +775,11 @@ namespace WangPluginPkm.GUI
             ToolStripMenuItem.Text = "使用说明";
             ToolStripMenuItem.Click += ToolStripMenuItem_Click;
             // 
-            // Seed_Label
-            // 
-            Seed_Label.AutoSize = true;
-            Seed_Label.Location = new System.Drawing.Point(6, 9);
-            Seed_Label.Name = "Seed_Label";
-            Seed_Label.Size = new System.Drawing.Size(42, 17);
-            Seed_Label.TabIndex = 47;
-            Seed_Label.Text = "Seed";
-            // 
             // RNGForm
             // 
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             BackColor = System.Drawing.SystemColors.Control;
-            ClientSize = new System.Drawing.Size(752, 264);
+            ClientSize = new System.Drawing.Size(737, 271);
             Controls.Add(RNGFormTabControl);
             Controls.Add(SearchGroupBox);
             Controls.Add(RNGmenuStrip);
@@ -511,6 +800,10 @@ namespace WangPluginPkm.GUI
             SWSHPage.ResumeLayout(false);
             SWSHPage.PerformLayout();
             TeraSeedPage.ResumeLayout(false);
+            TeraSeedPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numHeight).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numScale).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numWeight).EndInit();
             RNGmenuStrip.ResumeLayout(false);
             RNGmenuStrip.PerformLayout();
             ResumeLayout(false);
@@ -559,5 +852,32 @@ namespace WangPluginPkm.GUI
         private Button FixLairSeed;
         private Button SlowCheck;
         private Label Seed_Label;
+        private TextBox txtPID;
+        private Label lblEC;
+        private Label lblScale;
+        private ComboBox cmbNature;
+        private Label lblPID;
+        private Label lblNature;
+        private Label lblWeight;
+        private Label lblHeight;
+        private NumericUpDown numHeight;
+        private TextBox txtEC;
+        private NumericUpDown numWeight;
+        private NumericUpDown numScale;
+        private Button CheckTeraSeed_BTN;
+        private TextBox TeraSeedBox;
+        private ComboBox Tera9genderComboBox;
+        private Label label1;
+        private ComboBox Gen9IvcomboBox;
+        private Label label2;
+        private ComboBox Gen9AbilitycomboBox;
+        private Label label3;
+        private Label label;
+        private Label IVlabel;
+        private TextBox IVstextBox;
+        private TextBox AbilitytextBox;
+        private Label label5;
+        private TextBox GendertextBox;
+        private Label label4;
     }
 }

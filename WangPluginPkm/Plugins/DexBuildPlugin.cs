@@ -1,10 +1,12 @@
-﻿using System;
+﻿using PKHeX.Core;
+using System;
 using System.Windows.Forms;
 using WangPluginPkm.GUI;
 
+
 namespace WangPluginPkm.Plugins
 {
-    internal class DexBuildPlugin: WangPluginPkm
+    internal  class DexBuildPlugin: WangPluginPkm
     {
         public override string Name => "图鉴制作器/Dex Builder";
         public override int Priority => 4;
@@ -27,5 +29,6 @@ namespace WangPluginPkm.Plugins
             var form = new DexBuildForm(SaveFileEditor,PKMEditor);
             form.Show();
         }
+      
     }
 }

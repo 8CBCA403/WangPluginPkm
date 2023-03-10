@@ -8,9 +8,12 @@ using System.Linq;
 using System.ComponentModel;
 using System.Drawing;
 using WangPluginPkm.RNG.Methods;
-using static WangPluginPkm.WangUtil.PluginEnums.GUIEnums;
+using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
+using static WangPluginPkm.PluginUtil.PluginEnums.TeraEnum;
 using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
 using Roaming8bRNG = WangPluginPkm.RNG.Methods.Roaming8bRNG;
+using WangPluginPkm.WangUtil.ModifyPKM;
+using static WangPluginPkm.CheckRules;
 
 namespace WangPluginPkm.GUI
 {
@@ -21,23 +24,25 @@ namespace WangPluginPkm.GUI
         private CancellationTokenSource ChecktokenSource = new();
         private const string Pk9Filter = "PK9 Entity |*.pk9|All Files|*.*";
         private bool CheckFlag = true;
+        private PK9 PK = null!;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
 
-        public int G = 0;
-        public int A = 0;
+        public int GanderValue = 0;
+        public int AbilityValue = 0;
+        public int MinIV = 0;
+        public int Gen9GanderValue = 0;
+        public int Gen9AbilityValue = 0;
+        public int Gen9MinIV = 0;
         public PK9 newpk = new();
         public List<RNGModClass> L = new();
+        private static Random rng = new Random();
+        public int[] DIV = { 0, 1, 2, 3, 4, 5, 6 };
         public RNGModClass MD = new RNGModClass
         {
             Name = "Mothed1,2,4",
             Value = "M124",
         };
-
-        public int MinIV = 0;
-        private static Random rng = new Random();
-
-        public int[] DIV = { 0, 1, 2, 3, 4, 5, 6 };
         public RNGForm(ISaveFileProvider sav, IPKMView editor)
 
         {
@@ -74,12 +79,28 @@ namespace WangPluginPkm.GUI
             Gender_Box.DataSource = Enum.GetValues(typeof(RNGFormGender));
             this.Gender_Box.SelectedIndexChanged += (_, __) =>
             {
-                G = Gender_Box.SelectedIndex;
+                GanderValue = Gender_Box.SelectedIndex;
             };
             Ability_Box.DataSource = Enum.GetValues(typeof(RNGFormAbility));
             this.Ability_Box.SelectedIndexChanged += (_, __) =>
             {
-                A = Ability_Box.SelectedIndex;
+                AbilityValue = Ability_Box.SelectedIndex;
+            };
+            Tera9genderComboBox.DataSource = Enum.GetValues(typeof(RNGFormGender));
+            this.Tera9genderComboBox.SelectedIndexChanged += (_, __) =>
+            {
+                Gen9GanderValue = Tera9genderComboBox.SelectedIndex;
+            };
+            Gen9AbilitycomboBox.DataSource = Enum.GetValues(typeof(RNGFormAbility));
+            this.Gen9AbilitycomboBox.SelectedIndexChanged += (_, __) =>
+            {
+                Gen9AbilityValue = Gen9AbilitycomboBox.SelectedIndex;
+            };
+            this.Gen9IvcomboBox.DataSource = DIV;
+
+            this.Gen9IvcomboBox.SelectedIndexChanged += (_, __) =>
+            {
+                Gen9MinIV = Gen9IvcomboBox.SelectedIndex;
             };
             CheckPID();
 
@@ -229,7 +250,7 @@ namespace WangPluginPkm.GUI
         }
         #endregion
 
-        #region //Check
+        #region //剑盾Check
         private void FastCheck_BTN_Click(object sender, EventArgs e)
         {
             CheckerIsRunning(true);
@@ -247,18 +268,7 @@ namespace WangPluginPkm.GUI
             FastCheck_BTN.Enabled = !running;
             SlowCheck.Enabled = !running;
         }
-        private void GetSeedForMaxLair_BTN_Click(object sender, EventArgs e)
-        {
-            var pk = Editor.Data;
-            if (pk.Generation == 9)
-            {
-                if (pk.Met_Location == Locations.TeraCavern9)
-                {
-                    pk.PID = (((uint)(pk.TID16 ^ pk.SID16) ^ (pk.PID & 0xFFFF) ^ 1u) << 16) | (pk.PID & 0xFFFF);
-                }
-            }
-            Editor.PopulateFields(pk);
-        }
+
         private void FixLairSeed_Click(object sender, EventArgs e)
         {
             var pk = Editor.Data;
@@ -326,7 +336,7 @@ namespace WangPluginPkm.GUI
                                 Legal_Check_BOX2.Text = "逆推成功!";
                                 Legal_Check_BOX2.BackColor = Color.Green;
                                 Seed_Box.Text = Gen8DenMax.FindFirstSeed(seeds, ivs);
-                                T = Gen8DenMax.Raidfinder(Seed_Box.Text, Editor.Data, MinIV, A, G);
+                                T = Gen8DenMax.Raidfinder(Seed_Box.Text, Editor.Data, MinIV, AbilityValue, GanderValue);
                                 var S = T.Split('\n');
                                 if (S.Count() != 0)
                                 {
@@ -591,13 +601,120 @@ namespace WangPluginPkm.GUI
         }
         #endregion
 
+        #region //太晶坑检测
+        private void FixPidForTera_BTN_Click(object sender, EventArgs e)
+        {
+            var pk = Editor.Data;
+            if (pk.Generation == 9)
+            {
+                if (pk.Met_Location == Locations.TeraCavern9)
+                {
+                    pk.PID = (((uint)(pk.TID16 ^ pk.SID16) ^ (pk.PID & 0xFFFF) ^ 1u) << 16) | (pk.PID & 0xFFFF);
+                }
+            }
+            Editor.PopulateFields(pk);
+        }
+        private void CheckTeraSeed_BTN_Click(object sender, EventArgs e)
+        {
+            var pk = (PK9)Editor.Data;
+            byte num5 = 0;
+            switch (Gen9GanderValue)
+            {
+                case 0:
+                    num5 = 0;
+                    break;
+                case 1:
+                    num5 = 31;
+                    break;
+                case 2:
+                    num5 = 63;
+                    break;
+                case 3:
+                    num5 = 127;
+                    break;
+                case 4:
+                    num5 = 191;
+                    break;
+                case 5:
+                    num5 = 225;
+                    break;
+                case 6:
+                    num5 = 254;
+                    break;
+                case 7:
+                    num5 = 255;
+                    break;
+            }
+            GenerateParam9 enc = new()
+            {
+                Species = pk.Species,
+                GenderRatio = num5,
+                Ability = (AbilityPermission)(Gen9AbilityValue - 1),
+                Nature = (Nature)pk.Nature,
+                FlawlessIVs = (byte)Gen9MinIV,
+                ScaleType = SizeType9.RANDOM,
+                Scale = 0,
+                Weight = 0,
+                Height = 0,
+                RollCount = 1,
+                Shiny = Shiny.Random,
+                IVs = new IndividualValueSet()
+                {
+                    HP = (sbyte)pk.IV_HP,
+                    ATK = (sbyte)pk.IV_ATK,
+                    DEF = (sbyte)pk.IV_DEF,
+                    SPA = (sbyte)pk.IV_SPA,
+                    SPD = (sbyte)pk.IV_SPD,
+                    SPE = (sbyte)pk.IV_SPE,
+                }
+
+            };
+            var seed = Tera9RNG.GetOriginalSeed(pk);
+            var value = RNG.Methods.Encounter9RNG.SeedToValue(pk, enc, seed);
+            string GenderText = "";
+            string AbilityText = "";
+            TeraSeedBox.Text = $"{seed:X8}";
+            txtEC.Text = $"{value.EC:X8}";
+            txtPID.Text = $"{value.PID:X8}";
+            cmbNature.Text = $"{((Nature)value.nature).ToString()}";
+            numHeight.Value = value.Height;
+            numWeight.Value = value.Weight;
+            numScale.Value = value.Size;
+            IVstextBox.Text = $"{value.ivs[0]},{value.ivs[1]},{value.ivs[2]},{value.ivs[3]},{value.ivs[4]},{value.ivs[5]}";
+            switch (value.gender)
+            {
+                case 0:
+                    GenderText = "公";
+                    break;
+                case 1:
+                    GenderText = "母";
+                    break;
+                case 2:
+                    GenderText = "无性别";
+                    break;
+            }
+            GendertextBox.Text = $"{GenderText}";
+            switch (value.ability)
+            {
+                case 1:
+                    AbilityText = "特性一";
+                    break;
+                case 2:
+                    AbilityText = "特性二";
+                    break;
+                case 4:
+                    AbilityText = "梦特";
+                    break;
+            }
+            AbilitytextBox.Text = $"{AbilityText}";
+        }
+        #endregion
         //Help
         private void ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new SeedIntro();
             form.Show();
         }
-
 
     }
 }

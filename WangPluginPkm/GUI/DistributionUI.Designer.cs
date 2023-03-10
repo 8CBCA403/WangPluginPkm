@@ -41,450 +41,503 @@ namespace WangPluginPkm.GUI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DistributionUI));
-            this.LoadEH1_BTN = new System.Windows.Forms.Button();
-            this.OpenFile_Dialog = new System.Windows.Forms.OpenFileDialog();
-            this.BOX_TextBox = new System.Windows.Forms.TextBox();
-            this.BOX_Label = new System.Windows.Forms.Label();
-            this.Clone_BTN = new System.Windows.Forms.Button();
-            this.ShinyBox = new System.Windows.Forms.CheckBox();
-            this.Gift_BTN = new System.Windows.Forms.Button();
-            this.SetTrainer_Box = new System.Windows.Forms.CheckBox();
-            this.AllRibbon_BTN = new System.Windows.Forms.Button();
-            this.LoadTrainer_BTN = new System.Windows.Forms.Button();
-            this.BallBox = new System.Windows.Forms.ComboBox();
-            this.Trainer_Box = new System.Windows.Forms.ComboBox();
-            this.Use_Trainer_BTN = new System.Windows.Forms.Button();
-            this.RandPID_Box = new System.Windows.Forms.CheckBox();
-            this.IVEVN_BTN = new System.Windows.Forms.Button();
-            this.Move_Shop = new System.Windows.Forms.Button();
-            this.LevelMax_BTN = new System.Windows.Forms.Button();
-            this.Ball_Box = new System.Windows.Forms.CheckBox();
-            this.Edit_EVIVN_Box = new System.Windows.Forms.ComboBox();
-            this.Clone_Select_Box = new System.Windows.Forms.ComboBox();
-            this.Trainer_Select_Box = new System.Windows.Forms.ComboBox();
-            this.Random_Trainer_Box = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.RandEC_Box = new System.Windows.Forms.CheckBox();
-            this.Random_Name_Box = new System.Windows.Forms.CheckBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.Random_EncBTN = new System.Windows.Forms.Button();
-            this.ThreeFinder_BTN = new System.Windows.Forms.Button();
-            this.MINSize_BTN = new System.Windows.Forms.Button();
-            this.MAXSize_BTN = new System.Windows.Forms.Button();
-            this.RandEC_BTN = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.Random_EggBTN = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.SuspendLayout();
+            LoadEH1_BTN = new Button();
+            OpenFile_Dialog = new OpenFileDialog();
+            BOX_TextBox = new TextBox();
+            BOX_Label = new Label();
+            Clone_BTN = new Button();
+            ShinyBox = new CheckBox();
+            Gift_BTN = new Button();
+            SetTrainer_Box = new CheckBox();
+            AllRibbon_BTN = new Button();
+            LoadTrainer_BTN = new Button();
+            BallBox = new ComboBox();
+            Trainer_Box = new ComboBox();
+            Use_Trainer_BTN = new Button();
+            RandPID_Box = new CheckBox();
+            IVEVN_BTN = new Button();
+            Move_Shop = new Button();
+            LevelMax_BTN = new Button();
+            Ball_Box = new CheckBox();
+            Edit_EVIVN_Box = new ComboBox();
+            Clone_Select_Box = new ComboBox();
+            Trainer_Select_Box = new ComboBox();
+            Random_Trainer_Box = new CheckBox();
+            groupBox1 = new GroupBox();
+            RandEC_Box = new CheckBox();
+            Random_Name_Box = new CheckBox();
+            groupBox2 = new GroupBox();
+            groupBox3 = new GroupBox();
+            Random_EggBTN = new Button();
+            Random_EncBTN = new Button();
+            ThreeFinder_BTN = new Button();
+            MINSize_BTN = new Button();
+            MAXSize_BTN = new Button();
+            RandEC_BTN = new Button();
+            groupBox4 = new GroupBox();
+            groupBox5 = new GroupBox();
+            DitributiontabControl = new TabControl();
+            CopyPage = new TabPage();
+            EditBoxPage = new TabPage();
+            EH1Page = new TabPage();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
+            groupBox4.SuspendLayout();
+            groupBox5.SuspendLayout();
+            DitributiontabControl.SuspendLayout();
+            CopyPage.SuspendLayout();
+            EditBoxPage.SuspendLayout();
+            EH1Page.SuspendLayout();
+            SuspendLayout();
             // 
             // LoadEH1_BTN
             // 
-            this.LoadEH1_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.LoadEH1_BTN.Location = new System.Drawing.Point(115, 16);
-            this.LoadEH1_BTN.Name = "LoadEH1_BTN";
-            this.LoadEH1_BTN.Size = new System.Drawing.Size(100, 25);
-            this.LoadEH1_BTN.TabIndex = 0;
-            this.LoadEH1_BTN.Text = "读取EH1";
-            this.LoadEH1_BTN.UseVisualStyleBackColor = true;
-            this.LoadEH1_BTN.Click += new System.EventHandler(this.LoadEH1_BTN_Click);
+            LoadEH1_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LoadEH1_BTN.Location = new System.Drawing.Point(115, 16);
+            LoadEH1_BTN.Name = "LoadEH1_BTN";
+            LoadEH1_BTN.Size = new System.Drawing.Size(100, 25);
+            LoadEH1_BTN.TabIndex = 0;
+            LoadEH1_BTN.Text = "读取EH1";
+            LoadEH1_BTN.UseVisualStyleBackColor = true;
+            LoadEH1_BTN.Click += LoadEH1_BTN_Click;
             // 
             // OpenFile_Dialog
             // 
-            this.OpenFile_Dialog.Filter = "PokemonHomefile (*.eh1)|*.eh1|All files (*.*)|*.*";
-            this.OpenFile_Dialog.Multiselect = true;
+            OpenFile_Dialog.Filter = "PokemonHomefile (*.eh1)|*.eh1|All files (*.*)|*.*";
+            OpenFile_Dialog.Multiselect = true;
             // 
             // BOX_TextBox
             // 
-            this.BOX_TextBox.Location = new System.Drawing.Point(44, 17);
-            this.BOX_TextBox.Name = "BOX_TextBox";
-            this.BOX_TextBox.Size = new System.Drawing.Size(65, 22);
-            this.BOX_TextBox.TabIndex = 1;
-            this.BOX_TextBox.Text = "1";
+            BOX_TextBox.Location = new System.Drawing.Point(44, 17);
+            BOX_TextBox.Name = "BOX_TextBox";
+            BOX_TextBox.Size = new System.Drawing.Size(65, 27);
+            BOX_TextBox.TabIndex = 1;
+            BOX_TextBox.Text = "1";
             // 
             // BOX_Label
             // 
-            this.BOX_Label.AutoSize = true;
-            this.BOX_Label.Font = new System.Drawing.Font("SimHei", 9F);
-            this.BOX_Label.Location = new System.Drawing.Point(6, 21);
-            this.BOX_Label.Name = "BOX_Label";
-            this.BOX_Label.Size = new System.Drawing.Size(39, 15);
-            this.BOX_Label.TabIndex = 2;
-            this.BOX_Label.Text = "箱子";
+            BOX_Label.AutoSize = true;
+            BOX_Label.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            BOX_Label.Location = new System.Drawing.Point(6, 21);
+            BOX_Label.Name = "BOX_Label";
+            BOX_Label.Size = new System.Drawing.Size(39, 15);
+            BOX_Label.TabIndex = 2;
+            BOX_Label.Text = "箱子";
             // 
             // Clone_BTN
             // 
-            this.Clone_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.Clone_BTN.Location = new System.Drawing.Point(115, 49);
-            this.Clone_BTN.Name = "Clone_BTN";
-            this.Clone_BTN.Size = new System.Drawing.Size(100, 25);
-            this.Clone_BTN.TabIndex = 20;
-            this.Clone_BTN.Text = "开始复制";
-            this.Clone_BTN.UseVisualStyleBackColor = true;
-            this.Clone_BTN.Click += new System.EventHandler(this.Clone_BTN_Click);
+            Clone_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Clone_BTN.Location = new System.Drawing.Point(115, 49);
+            Clone_BTN.Name = "Clone_BTN";
+            Clone_BTN.Size = new System.Drawing.Size(100, 25);
+            Clone_BTN.TabIndex = 20;
+            Clone_BTN.Text = "开始复制";
+            Clone_BTN.UseVisualStyleBackColor = true;
+            Clone_BTN.Click += Clone_BTN_Click;
             // 
             // ShinyBox
             // 
-            this.ShinyBox.AutoSize = true;
-            this.ShinyBox.Font = new System.Drawing.Font("SimHei", 9F);
-            this.ShinyBox.Location = new System.Drawing.Point(8, 24);
-            this.ShinyBox.Name = "ShinyBox";
-            this.ShinyBox.Size = new System.Drawing.Size(61, 19);
-            this.ShinyBox.TabIndex = 28;
-            this.ShinyBox.Text = "闪光";
-            this.ShinyBox.UseVisualStyleBackColor = true;
+            ShinyBox.AutoSize = true;
+            ShinyBox.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ShinyBox.Location = new System.Drawing.Point(8, 24);
+            ShinyBox.Name = "ShinyBox";
+            ShinyBox.Size = new System.Drawing.Size(61, 19);
+            ShinyBox.TabIndex = 28;
+            ShinyBox.Text = "闪光";
+            ShinyBox.UseVisualStyleBackColor = true;
             // 
             // Gift_BTN
             // 
-            this.Gift_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Gift_BTN.Location = new System.Drawing.Point(221, 49);
-            this.Gift_BTN.Name = "Gift_BTN";
-            this.Gift_BTN.Size = new System.Drawing.Size(100, 25);
-            this.Gift_BTN.TabIndex = 35;
-            this.Gift_BTN.Text = "一箱神兽";
-            this.Gift_BTN.UseVisualStyleBackColor = true;
-            this.Gift_BTN.Click += new System.EventHandler(this.Gift_BTN_Click);
+            Gift_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Gift_BTN.Location = new System.Drawing.Point(221, 49);
+            Gift_BTN.Name = "Gift_BTN";
+            Gift_BTN.Size = new System.Drawing.Size(100, 25);
+            Gift_BTN.TabIndex = 35;
+            Gift_BTN.Text = "一箱神兽";
+            Gift_BTN.UseVisualStyleBackColor = true;
+            Gift_BTN.Click += Gift_BTN_Click;
             // 
             // SetTrainer_Box
             // 
-            this.SetTrainer_Box.AutoSize = true;
-            this.SetTrainer_Box.Font = new System.Drawing.Font("SimHei", 9F);
-            this.SetTrainer_Box.Location = new System.Drawing.Point(59, 24);
-            this.SetTrainer_Box.Name = "SetTrainer_Box";
-            this.SetTrainer_Box.Size = new System.Drawing.Size(109, 19);
-            this.SetTrainer_Box.TabIndex = 36;
-            this.SetTrainer_Box.Text = "指定训练家";
-            this.SetTrainer_Box.UseVisualStyleBackColor = true;
+            SetTrainer_Box.AutoSize = true;
+            SetTrainer_Box.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            SetTrainer_Box.Location = new System.Drawing.Point(59, 24);
+            SetTrainer_Box.Name = "SetTrainer_Box";
+            SetTrainer_Box.Size = new System.Drawing.Size(109, 19);
+            SetTrainer_Box.TabIndex = 36;
+            SetTrainer_Box.Text = "指定训练家";
+            SetTrainer_Box.UseVisualStyleBackColor = true;
             // 
             // AllRibbon_BTN
             // 
-            this.AllRibbon_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.AllRibbon_BTN.Location = new System.Drawing.Point(118, 17);
-            this.AllRibbon_BTN.Name = "AllRibbon_BTN";
-            this.AllRibbon_BTN.Size = new System.Drawing.Size(100, 25);
-            this.AllRibbon_BTN.TabIndex = 37;
-            this.AllRibbon_BTN.Text = "全段带";
-            this.AllRibbon_BTN.UseVisualStyleBackColor = true;
-            this.AllRibbon_BTN.Click += new System.EventHandler(this.AllRibbon_BTN_Click);
+            AllRibbon_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            AllRibbon_BTN.Location = new System.Drawing.Point(122, 26);
+            AllRibbon_BTN.Name = "AllRibbon_BTN";
+            AllRibbon_BTN.Size = new System.Drawing.Size(100, 25);
+            AllRibbon_BTN.TabIndex = 37;
+            AllRibbon_BTN.Text = "全段带";
+            AllRibbon_BTN.UseVisualStyleBackColor = true;
+            AllRibbon_BTN.Click += AllRibbon_BTN_Click;
             // 
             // LoadTrainer_BTN
             // 
-            this.LoadTrainer_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.LoadTrainer_BTN.Location = new System.Drawing.Point(114, 15);
-            this.LoadTrainer_BTN.Name = "LoadTrainer_BTN";
-            this.LoadTrainer_BTN.Size = new System.Drawing.Size(100, 25);
-            this.LoadTrainer_BTN.TabIndex = 39;
-            this.LoadTrainer_BTN.Text = "导入训练家";
-            this.LoadTrainer_BTN.UseVisualStyleBackColor = true;
-            this.LoadTrainer_BTN.Click += new System.EventHandler(this.LoadTrainer_BTN_Click);
+            LoadTrainer_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LoadTrainer_BTN.Location = new System.Drawing.Point(118, 18);
+            LoadTrainer_BTN.Name = "LoadTrainer_BTN";
+            LoadTrainer_BTN.Size = new System.Drawing.Size(100, 25);
+            LoadTrainer_BTN.TabIndex = 39;
+            LoadTrainer_BTN.Text = "导入训练家";
+            LoadTrainer_BTN.UseVisualStyleBackColor = true;
+            LoadTrainer_BTN.Click += LoadTrainer_BTN_Click;
             // 
             // BallBox
             // 
-            this.BallBox.FormattingEnabled = true;
-            this.BallBox.Location = new System.Drawing.Point(332, 49);
-            this.BallBox.Name = "BallBox";
-            this.BallBox.Size = new System.Drawing.Size(62, 24);
-            this.BallBox.TabIndex = 48;
+            BallBox.FormattingEnabled = true;
+            BallBox.Location = new System.Drawing.Point(332, 49);
+            BallBox.Name = "BallBox";
+            BallBox.Size = new System.Drawing.Size(62, 28);
+            BallBox.TabIndex = 48;
             // 
             // Trainer_Box
             // 
-            this.Trainer_Box.FormattingEnabled = true;
-            this.Trainer_Box.Location = new System.Drawing.Point(8, 17);
-            this.Trainer_Box.Name = "Trainer_Box";
-            this.Trainer_Box.Size = new System.Drawing.Size(100, 24);
-            this.Trainer_Box.TabIndex = 49;
+            Trainer_Box.FormattingEnabled = true;
+            Trainer_Box.Location = new System.Drawing.Point(8, 17);
+            Trainer_Box.Name = "Trainer_Box";
+            Trainer_Box.Size = new System.Drawing.Size(100, 28);
+            Trainer_Box.TabIndex = 49;
             // 
             // Use_Trainer_BTN
             // 
-            this.Use_Trainer_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.Use_Trainer_BTN.Location = new System.Drawing.Point(114, 49);
-            this.Use_Trainer_BTN.Name = "Use_Trainer_BTN";
-            this.Use_Trainer_BTN.Size = new System.Drawing.Size(100, 25);
-            this.Use_Trainer_BTN.TabIndex = 50;
-            this.Use_Trainer_BTN.Text = "应用训练家";
-            this.Use_Trainer_BTN.UseVisualStyleBackColor = true;
-            this.Use_Trainer_BTN.Click += new System.EventHandler(this.Use_Trainer_BTN_Click);
+            Use_Trainer_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Use_Trainer_BTN.Location = new System.Drawing.Point(330, 17);
+            Use_Trainer_BTN.Name = "Use_Trainer_BTN";
+            Use_Trainer_BTN.Size = new System.Drawing.Size(100, 25);
+            Use_Trainer_BTN.TabIndex = 50;
+            Use_Trainer_BTN.Text = "应用训练家";
+            Use_Trainer_BTN.UseVisualStyleBackColor = true;
+            Use_Trainer_BTN.Click += Use_Trainer_BTN_Click;
             // 
             // RandPID_Box
             // 
-            this.RandPID_Box.AutoSize = true;
-            this.RandPID_Box.Font = new System.Drawing.Font("SimHei", 9F);
-            this.RandPID_Box.Location = new System.Drawing.Point(298, 24);
-            this.RandPID_Box.Name = "RandPID_Box";
-            this.RandPID_Box.Size = new System.Drawing.Size(85, 19);
-            this.RandPID_Box.TabIndex = 52;
-            this.RandPID_Box.Text = "随机PID";
-            this.RandPID_Box.UseVisualStyleBackColor = true;
+            RandPID_Box.AutoSize = true;
+            RandPID_Box.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            RandPID_Box.Location = new System.Drawing.Point(298, 24);
+            RandPID_Box.Name = "RandPID_Box";
+            RandPID_Box.Size = new System.Drawing.Size(85, 19);
+            RandPID_Box.TabIndex = 52;
+            RandPID_Box.Text = "随机PID";
+            RandPID_Box.UseVisualStyleBackColor = true;
             // 
             // IVEVN_BTN
             // 
-            this.IVEVN_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.IVEVN_BTN.Location = new System.Drawing.Point(6, 49);
-            this.IVEVN_BTN.Name = "IVEVN_BTN";
-            this.IVEVN_BTN.Size = new System.Drawing.Size(100, 25);
-            this.IVEVN_BTN.TabIndex = 53;
-            this.IVEVN_BTN.Text = "覆盖三维";
-            this.IVEVN_BTN.UseVisualStyleBackColor = true;
-            this.IVEVN_BTN.Click += new System.EventHandler(this.IVEVN_BTN_Click);
+            IVEVN_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            IVEVN_BTN.Location = new System.Drawing.Point(118, 19);
+            IVEVN_BTN.Name = "IVEVN_BTN";
+            IVEVN_BTN.Size = new System.Drawing.Size(100, 25);
+            IVEVN_BTN.TabIndex = 53;
+            IVEVN_BTN.Text = "覆盖三维";
+            IVEVN_BTN.UseVisualStyleBackColor = true;
+            IVEVN_BTN.Click += IVEVN_BTN_Click;
             // 
             // Move_Shop
             // 
-            this.Move_Shop.Font = new System.Drawing.Font("SimHei", 9F);
-            this.Move_Shop.Location = new System.Drawing.Point(11, 17);
-            this.Move_Shop.Name = "Move_Shop";
-            this.Move_Shop.Size = new System.Drawing.Size(100, 25);
-            this.Move_Shop.TabIndex = 58;
-            this.Move_Shop.Text = "全部技能";
-            this.Move_Shop.UseVisualStyleBackColor = true;
-            this.Move_Shop.Click += new System.EventHandler(this.Move_Shop_Click);
+            Move_Shop.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Move_Shop.Location = new System.Drawing.Point(15, 26);
+            Move_Shop.Name = "Move_Shop";
+            Move_Shop.Size = new System.Drawing.Size(100, 25);
+            Move_Shop.TabIndex = 58;
+            Move_Shop.Text = "全部技能";
+            Move_Shop.UseVisualStyleBackColor = true;
+            Move_Shop.Click += Move_Shop_Click;
             // 
             // LevelMax_BTN
             // 
-            this.LevelMax_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.LevelMax_BTN.Location = new System.Drawing.Point(11, 48);
-            this.LevelMax_BTN.Name = "LevelMax_BTN";
-            this.LevelMax_BTN.Size = new System.Drawing.Size(100, 25);
-            this.LevelMax_BTN.TabIndex = 59;
-            this.LevelMax_BTN.Text = "等级最大";
-            this.LevelMax_BTN.UseVisualStyleBackColor = true;
-            this.LevelMax_BTN.Click += new System.EventHandler(this.LevelMax_BTN_Click);
+            LevelMax_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LevelMax_BTN.Location = new System.Drawing.Point(15, 57);
+            LevelMax_BTN.Name = "LevelMax_BTN";
+            LevelMax_BTN.Size = new System.Drawing.Size(100, 25);
+            LevelMax_BTN.TabIndex = 59;
+            LevelMax_BTN.Text = "等级最大";
+            LevelMax_BTN.UseVisualStyleBackColor = true;
+            LevelMax_BTN.Click += LevelMax_BTN_Click;
             // 
             // Ball_Box
             // 
-            this.Ball_Box.AutoSize = true;
-            this.Ball_Box.Font = new System.Drawing.Font("SimHei", 9F);
-            this.Ball_Box.Location = new System.Drawing.Point(400, 51);
-            this.Ball_Box.Name = "Ball_Box";
-            this.Ball_Box.Size = new System.Drawing.Size(61, 19);
-            this.Ball_Box.TabIndex = 61;
-            this.Ball_Box.Text = "球种";
-            this.Ball_Box.UseVisualStyleBackColor = true;
+            Ball_Box.AutoSize = true;
+            Ball_Box.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Ball_Box.Location = new System.Drawing.Point(400, 51);
+            Ball_Box.Name = "Ball_Box";
+            Ball_Box.Size = new System.Drawing.Size(61, 19);
+            Ball_Box.TabIndex = 61;
+            Ball_Box.Text = "球种";
+            Ball_Box.UseVisualStyleBackColor = true;
             // 
             // Edit_EVIVN_Box
             // 
-            this.Edit_EVIVN_Box.FormattingEnabled = true;
-            this.Edit_EVIVN_Box.Location = new System.Drawing.Point(6, 18);
-            this.Edit_EVIVN_Box.Name = "Edit_EVIVN_Box";
-            this.Edit_EVIVN_Box.Size = new System.Drawing.Size(100, 24);
-            this.Edit_EVIVN_Box.TabIndex = 62;
+            Edit_EVIVN_Box.FormattingEnabled = true;
+            Edit_EVIVN_Box.Location = new System.Drawing.Point(8, 18);
+            Edit_EVIVN_Box.Name = "Edit_EVIVN_Box";
+            Edit_EVIVN_Box.Size = new System.Drawing.Size(100, 28);
+            Edit_EVIVN_Box.TabIndex = 62;
             // 
             // Clone_Select_Box
             // 
-            this.Clone_Select_Box.FormattingEnabled = true;
-            this.Clone_Select_Box.Location = new System.Drawing.Point(9, 51);
-            this.Clone_Select_Box.Name = "Clone_Select_Box";
-            this.Clone_Select_Box.Size = new System.Drawing.Size(100, 24);
-            this.Clone_Select_Box.TabIndex = 63;
+            Clone_Select_Box.FormattingEnabled = true;
+            Clone_Select_Box.Location = new System.Drawing.Point(5, 48);
+            Clone_Select_Box.Name = "Clone_Select_Box";
+            Clone_Select_Box.Size = new System.Drawing.Size(100, 28);
+            Clone_Select_Box.TabIndex = 63;
             // 
             // Trainer_Select_Box
             // 
-            this.Trainer_Select_Box.FormattingEnabled = true;
-            this.Trainer_Select_Box.Location = new System.Drawing.Point(8, 51);
-            this.Trainer_Select_Box.Name = "Trainer_Select_Box";
-            this.Trainer_Select_Box.Size = new System.Drawing.Size(100, 24);
-            this.Trainer_Select_Box.TabIndex = 64;
+            Trainer_Select_Box.FormattingEnabled = true;
+            Trainer_Select_Box.Location = new System.Drawing.Point(224, 17);
+            Trainer_Select_Box.Name = "Trainer_Select_Box";
+            Trainer_Select_Box.Size = new System.Drawing.Size(100, 28);
+            Trainer_Select_Box.TabIndex = 64;
             // 
             // Random_Trainer_Box
             // 
-            this.Random_Trainer_Box.AutoSize = true;
-            this.Random_Trainer_Box.Font = new System.Drawing.Font("SimHei", 9F);
-            this.Random_Trainer_Box.Location = new System.Drawing.Point(142, 24);
-            this.Random_Trainer_Box.Name = "Random_Trainer_Box";
-            this.Random_Trainer_Box.Size = new System.Drawing.Size(109, 19);
-            this.Random_Trainer_Box.TabIndex = 65;
-            this.Random_Trainer_Box.Text = "随机训练家";
-            this.Random_Trainer_Box.UseVisualStyleBackColor = true;
+            Random_Trainer_Box.AutoSize = true;
+            Random_Trainer_Box.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Random_Trainer_Box.Location = new System.Drawing.Point(142, 24);
+            Random_Trainer_Box.Name = "Random_Trainer_Box";
+            Random_Trainer_Box.Size = new System.Drawing.Size(109, 19);
+            Random_Trainer_Box.TabIndex = 65;
+            Random_Trainer_Box.Text = "随机训练家";
+            Random_Trainer_Box.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.RandEC_Box);
-            this.groupBox1.Controls.Add(this.RandPID_Box);
-            this.groupBox1.Controls.Add(this.Random_Name_Box);
-            this.groupBox1.Controls.Add(this.Random_Trainer_Box);
-            this.groupBox1.Controls.Add(this.Clone_Select_Box);
-            this.groupBox1.Controls.Add(this.Ball_Box);
-            this.groupBox1.Controls.Add(this.BallBox);
-            this.groupBox1.Controls.Add(this.SetTrainer_Box);
-            this.groupBox1.Controls.Add(this.Gift_BTN);
-            this.groupBox1.Controls.Add(this.ShinyBox);
-            this.groupBox1.Controls.Add(this.Clone_BTN);
-            this.groupBox1.Location = new System.Drawing.Point(18, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(472, 83);
-            this.groupBox1.TabIndex = 67;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "复制器（复制面板）";
+            groupBox1.Controls.Add(RandEC_Box);
+            groupBox1.Controls.Add(RandPID_Box);
+            groupBox1.Controls.Add(Random_Name_Box);
+            groupBox1.Controls.Add(Random_Trainer_Box);
+            groupBox1.Controls.Add(Clone_Select_Box);
+            groupBox1.Controls.Add(Ball_Box);
+            groupBox1.Controls.Add(BallBox);
+            groupBox1.Controls.Add(SetTrainer_Box);
+            groupBox1.Controls.Add(Gift_BTN);
+            groupBox1.Controls.Add(ShinyBox);
+            groupBox1.Controls.Add(Clone_BTN);
+            groupBox1.Location = new System.Drawing.Point(6, 9);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new System.Drawing.Size(472, 83);
+            groupBox1.TabIndex = 67;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "复制器（复制面板）";
             // 
             // RandEC_Box
             // 
-            this.RandEC_Box.AutoSize = true;
-            this.RandEC_Box.Font = new System.Drawing.Font("SimHei", 9F);
-            this.RandEC_Box.Location = new System.Drawing.Point(369, 24);
-            this.RandEC_Box.Name = "RandEC_Box";
-            this.RandEC_Box.Size = new System.Drawing.Size(77, 19);
-            this.RandEC_Box.TabIndex = 69;
-            this.RandEC_Box.Text = "随机EC";
-            this.RandEC_Box.UseVisualStyleBackColor = true;
+            RandEC_Box.AutoSize = true;
+            RandEC_Box.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            RandEC_Box.Location = new System.Drawing.Point(369, 24);
+            RandEC_Box.Name = "RandEC_Box";
+            RandEC_Box.Size = new System.Drawing.Size(77, 19);
+            RandEC_Box.TabIndex = 69;
+            RandEC_Box.Text = "随机EC";
+            RandEC_Box.UseVisualStyleBackColor = true;
             // 
             // Random_Name_Box
             // 
-            this.Random_Name_Box.AutoSize = true;
-            this.Random_Name_Box.Font = new System.Drawing.Font("SimHei", 9F);
-            this.Random_Name_Box.Location = new System.Drawing.Point(226, 24);
-            this.Random_Name_Box.Name = "Random_Name_Box";
-            this.Random_Name_Box.Size = new System.Drawing.Size(93, 19);
-            this.Random_Name_Box.TabIndex = 68;
-            this.Random_Name_Box.Text = "随机名字";
-            this.Random_Name_Box.UseVisualStyleBackColor = true;
+            Random_Name_Box.AutoSize = true;
+            Random_Name_Box.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Random_Name_Box.Location = new System.Drawing.Point(226, 24);
+            Random_Name_Box.Name = "Random_Name_Box";
+            Random_Name_Box.Size = new System.Drawing.Size(93, 19);
+            Random_Name_Box.TabIndex = 68;
+            Random_Name_Box.Text = "随机名字";
+            Random_Name_Box.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.Trainer_Select_Box);
-            this.groupBox2.Controls.Add(this.Use_Trainer_BTN);
-            this.groupBox2.Controls.Add(this.Trainer_Box);
-            this.groupBox2.Controls.Add(this.LoadTrainer_BTN);
-            this.groupBox2.Location = new System.Drawing.Point(19, 101);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(223, 80);
-            this.groupBox2.TabIndex = 68;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "训练家";
+            groupBox2.Controls.Add(Trainer_Select_Box);
+            groupBox2.Controls.Add(Use_Trainer_BTN);
+            groupBox2.Controls.Add(Trainer_Box);
+            groupBox2.Controls.Add(LoadTrainer_BTN);
+            groupBox2.Location = new System.Drawing.Point(3, 94);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new System.Drawing.Size(475, 63);
+            groupBox2.TabIndex = 68;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "训练家";
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.Random_EggBTN);
-            this.groupBox3.Controls.Add(this.Random_EncBTN);
-            this.groupBox3.Controls.Add(this.ThreeFinder_BTN);
-            this.groupBox3.Controls.Add(this.MINSize_BTN);
-            this.groupBox3.Controls.Add(this.MAXSize_BTN);
-            this.groupBox3.Controls.Add(this.RandEC_BTN);
-            this.groupBox3.Controls.Add(this.LevelMax_BTN);
-            this.groupBox3.Controls.Add(this.Move_Shop);
-            this.groupBox3.Controls.Add(this.AllRibbon_BTN);
-            this.groupBox3.Location = new System.Drawing.Point(272, 101);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(338, 141);
-            this.groupBox3.TabIndex = 69;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "编辑当前箱子";
-            // 
-            // Random_EncBTN
-            // 
-            this.Random_EncBTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.Random_EncBTN.Location = new System.Drawing.Point(118, 79);
-            this.Random_EncBTN.Name = "Random_EncBTN";
-            this.Random_EncBTN.Size = new System.Drawing.Size(100, 25);
-            this.Random_EncBTN.TabIndex = 64;
-            this.Random_EncBTN.Text = "随机相遇日";
-            this.Random_EncBTN.UseVisualStyleBackColor = true;
-            this.Random_EncBTN.Click += new System.EventHandler(this.Random_EncBTN_Click);
-            // 
-            // ThreeFinder_BTN
-            // 
-            this.ThreeFinder_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.ThreeFinder_BTN.Location = new System.Drawing.Point(11, 79);
-            this.ThreeFinder_BTN.Name = "ThreeFinder_BTN";
-            this.ThreeFinder_BTN.Size = new System.Drawing.Size(100, 25);
-            this.ThreeFinder_BTN.TabIndex = 63;
-            this.ThreeFinder_BTN.Text = "土龙一家鼠";
-            this.ThreeFinder_BTN.UseVisualStyleBackColor = true;
-            this.ThreeFinder_BTN.Click += new System.EventHandler(this.ThreeFinder_BTN_Click);
-            // 
-            // MINSize_BTN
-            // 
-            this.MINSize_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.MINSize_BTN.Location = new System.Drawing.Point(224, 48);
-            this.MINSize_BTN.Name = "MINSize_BTN";
-            this.MINSize_BTN.Size = new System.Drawing.Size(100, 25);
-            this.MINSize_BTN.TabIndex = 62;
-            this.MINSize_BTN.Text = "一键小不点";
-            this.MINSize_BTN.UseVisualStyleBackColor = true;
-            this.MINSize_BTN.Click += new System.EventHandler(this.MINSize_BTN_Click);
-            // 
-            // MAXSize_BTN
-            // 
-            this.MAXSize_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.MAXSize_BTN.Location = new System.Drawing.Point(224, 17);
-            this.MAXSize_BTN.Name = "MAXSize_BTN";
-            this.MAXSize_BTN.Size = new System.Drawing.Size(100, 25);
-            this.MAXSize_BTN.TabIndex = 61;
-            this.MAXSize_BTN.Text = "一键大个子";
-            this.MAXSize_BTN.UseVisualStyleBackColor = true;
-            this.MAXSize_BTN.Click += new System.EventHandler(this.MAXSize_BTN_Click);
-            // 
-            // RandEC_BTN
-            // 
-            this.RandEC_BTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.RandEC_BTN.Location = new System.Drawing.Point(118, 48);
-            this.RandEC_BTN.Name = "RandEC_BTN";
-            this.RandEC_BTN.Size = new System.Drawing.Size(100, 25);
-            this.RandEC_BTN.TabIndex = 60;
-            this.RandEC_BTN.Text = "随机EC";
-            this.RandEC_BTN.UseVisualStyleBackColor = true;
-            this.RandEC_BTN.Click += new System.EventHandler(this.RandEC_BTN_Click);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.BOX_TextBox);
-            this.groupBox4.Controls.Add(this.LoadEH1_BTN);
-            this.groupBox4.Controls.Add(this.BOX_Label);
-            this.groupBox4.Location = new System.Drawing.Point(18, 192);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(224, 50);
-            this.groupBox4.TabIndex = 70;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "EH1查看器";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.Edit_EVIVN_Box);
-            this.groupBox5.Controls.Add(this.IVEVN_BTN);
-            this.groupBox5.Location = new System.Drawing.Point(496, 12);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(114, 83);
-            this.groupBox5.TabIndex = 71;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "编辑面板";
+            groupBox3.Controls.Add(Random_EggBTN);
+            groupBox3.Controls.Add(Random_EncBTN);
+            groupBox3.Controls.Add(ThreeFinder_BTN);
+            groupBox3.Controls.Add(MINSize_BTN);
+            groupBox3.Controls.Add(MAXSize_BTN);
+            groupBox3.Controls.Add(RandEC_BTN);
+            groupBox3.Controls.Add(LevelMax_BTN);
+            groupBox3.Controls.Add(Move_Shop);
+            groupBox3.Controls.Add(AllRibbon_BTN);
+            groupBox3.Location = new System.Drawing.Point(8, 13);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new System.Drawing.Size(469, 204);
+            groupBox3.TabIndex = 69;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "编辑当前箱子";
             // 
             // Random_EggBTN
             // 
-            this.Random_EggBTN.Font = new System.Drawing.Font("SimHei", 9F);
-            this.Random_EggBTN.Location = new System.Drawing.Point(224, 79);
-            this.Random_EggBTN.Name = "Random_EggBTN";
-            this.Random_EggBTN.Size = new System.Drawing.Size(100, 25);
-            this.Random_EggBTN.TabIndex = 65;
-            this.Random_EggBTN.Text = "随机孵蛋日";
-            this.Random_EggBTN.UseVisualStyleBackColor = true;
-            this.Random_EggBTN.Click += new System.EventHandler(this.Random_EggBTN_Click);
+            Random_EggBTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Random_EggBTN.Location = new System.Drawing.Point(334, 57);
+            Random_EggBTN.Name = "Random_EggBTN";
+            Random_EggBTN.Size = new System.Drawing.Size(100, 25);
+            Random_EggBTN.TabIndex = 65;
+            Random_EggBTN.Text = "随机孵蛋日";
+            Random_EggBTN.UseVisualStyleBackColor = true;
+            Random_EggBTN.Click += Random_EggBTN_Click;
+            // 
+            // Random_EncBTN
+            // 
+            Random_EncBTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Random_EncBTN.Location = new System.Drawing.Point(228, 57);
+            Random_EncBTN.Name = "Random_EncBTN";
+            Random_EncBTN.Size = new System.Drawing.Size(100, 25);
+            Random_EncBTN.TabIndex = 64;
+            Random_EncBTN.Text = "随机相遇日";
+            Random_EncBTN.UseVisualStyleBackColor = true;
+            Random_EncBTN.Click += Random_EncBTN_Click;
+            // 
+            // ThreeFinder_BTN
+            // 
+            ThreeFinder_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ThreeFinder_BTN.Location = new System.Drawing.Point(15, 88);
+            ThreeFinder_BTN.Name = "ThreeFinder_BTN";
+            ThreeFinder_BTN.Size = new System.Drawing.Size(100, 25);
+            ThreeFinder_BTN.TabIndex = 63;
+            ThreeFinder_BTN.Text = "土龙一家鼠";
+            ThreeFinder_BTN.UseVisualStyleBackColor = true;
+            ThreeFinder_BTN.Click += ThreeFinder_BTN_Click;
+            // 
+            // MINSize_BTN
+            // 
+            MINSize_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            MINSize_BTN.Location = new System.Drawing.Point(334, 26);
+            MINSize_BTN.Name = "MINSize_BTN";
+            MINSize_BTN.Size = new System.Drawing.Size(100, 25);
+            MINSize_BTN.TabIndex = 62;
+            MINSize_BTN.Text = "一键小不点";
+            MINSize_BTN.UseVisualStyleBackColor = true;
+            MINSize_BTN.Click += MINSize_BTN_Click;
+            // 
+            // MAXSize_BTN
+            // 
+            MAXSize_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            MAXSize_BTN.Location = new System.Drawing.Point(228, 26);
+            MAXSize_BTN.Name = "MAXSize_BTN";
+            MAXSize_BTN.Size = new System.Drawing.Size(100, 25);
+            MAXSize_BTN.TabIndex = 61;
+            MAXSize_BTN.Text = "一键大个子";
+            MAXSize_BTN.UseVisualStyleBackColor = true;
+            MAXSize_BTN.Click += MAXSize_BTN_Click;
+            // 
+            // RandEC_BTN
+            // 
+            RandEC_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            RandEC_BTN.Location = new System.Drawing.Point(122, 57);
+            RandEC_BTN.Name = "RandEC_BTN";
+            RandEC_BTN.Size = new System.Drawing.Size(100, 25);
+            RandEC_BTN.TabIndex = 60;
+            RandEC_BTN.Text = "随机EC";
+            RandEC_BTN.UseVisualStyleBackColor = true;
+            RandEC_BTN.Click += RandEC_BTN_Click;
+            // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(BOX_TextBox);
+            groupBox4.Controls.Add(LoadEH1_BTN);
+            groupBox4.Controls.Add(BOX_Label);
+            groupBox4.Location = new System.Drawing.Point(21, 17);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new System.Drawing.Size(224, 50);
+            groupBox4.TabIndex = 70;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "EH1查看器";
+            // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(Edit_EVIVN_Box);
+            groupBox5.Controls.Add(IVEVN_BTN);
+            groupBox5.Location = new System.Drawing.Point(3, 163);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new System.Drawing.Size(228, 53);
+            groupBox5.TabIndex = 71;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "编辑面板";
+            // 
+            // DitributiontabControl
+            // 
+            DitributiontabControl.Controls.Add(CopyPage);
+            DitributiontabControl.Controls.Add(EditBoxPage);
+            DitributiontabControl.Controls.Add(EH1Page);
+            DitributiontabControl.Location = new System.Drawing.Point(12, 12);
+            DitributiontabControl.Name = "DitributiontabControl";
+            DitributiontabControl.SelectedIndex = 0;
+            DitributiontabControl.Size = new System.Drawing.Size(501, 256);
+            DitributiontabControl.TabIndex = 72;
+            // 
+            // CopyPage
+            // 
+            CopyPage.Controls.Add(groupBox1);
+            CopyPage.Controls.Add(groupBox5);
+            CopyPage.Controls.Add(groupBox2);
+            CopyPage.Location = new System.Drawing.Point(4, 29);
+            CopyPage.Name = "CopyPage";
+            CopyPage.Padding = new Padding(3);
+            CopyPage.Size = new System.Drawing.Size(493, 223);
+            CopyPage.TabIndex = 0;
+            CopyPage.Text = "复制器";
+            CopyPage.UseVisualStyleBackColor = true;
+            // 
+            // EditBoxPage
+            // 
+            EditBoxPage.Controls.Add(groupBox3);
+            EditBoxPage.Location = new System.Drawing.Point(4, 29);
+            EditBoxPage.Name = "EditBoxPage";
+            EditBoxPage.Padding = new Padding(3);
+            EditBoxPage.Size = new System.Drawing.Size(493, 223);
+            EditBoxPage.TabIndex = 1;
+            EditBoxPage.Text = "杂项编辑";
+            EditBoxPage.UseVisualStyleBackColor = true;
+            // 
+            // EH1Page
+            // 
+            EH1Page.Controls.Add(groupBox4);
+            EH1Page.Location = new System.Drawing.Point(4, 29);
+            EH1Page.Name = "EH1Page";
+            EH1Page.Padding = new Padding(3);
+            EH1Page.Size = new System.Drawing.Size(493, 223);
+            EH1Page.TabIndex = 2;
+            EH1Page.Text = "EH1查看器";
+            EH1Page.UseVisualStyleBackColor = true;
             // 
             // DistributionUI
             // 
-            this.ClientSize = new System.Drawing.Size(627, 251);
-            this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "DistributionUI";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SuperWang";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            ClientSize = new System.Drawing.Size(529, 273);
+            Controls.Add(DitributiontabControl);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            Name = "DistributionUI";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "SuperWang";
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
+            groupBox5.ResumeLayout(false);
+            DitributiontabControl.ResumeLayout(false);
+            CopyPage.ResumeLayout(false);
+            EditBoxPage.ResumeLayout(false);
+            EH1Page.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         private Button RandEC_BTN;
@@ -493,5 +546,9 @@ namespace WangPluginPkm.GUI
         private Button ThreeFinder_BTN;
         private Button Random_EncBTN;
         private Button Random_EggBTN;
+        private TabControl DitributiontabControl;
+        private TabPage CopyPage;
+        private TabPage EditBoxPage;
+        private TabPage EH1Page;
     }
 }

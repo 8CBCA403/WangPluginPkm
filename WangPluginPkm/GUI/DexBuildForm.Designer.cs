@@ -6,313 +6,387 @@ namespace WangPluginPkm.GUI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DexBuildForm));
-            this.BuildDex_BTN = new System.Windows.Forms.Button();
-            this.Gen_BTN = new System.Windows.Forms.Button();
-            this.TID16Box = new System.Windows.Forms.TextBox();
-            this.SID16Box = new System.Windows.Forms.TextBox();
-            this.OT_Name = new System.Windows.Forms.TextBox();
-            this.LanguageBox = new System.Windows.Forms.ComboBox();
-            this.GenderBox = new System.Windows.Forms.ComboBox();
-            this.TID16Label = new System.Windows.Forms.Label();
-            this.SID16Label = new System.Windows.Forms.Label();
-            this.OTLabel = new System.Windows.Forms.Label();
-            this.LGLabel = new System.Windows.Forms.Label();
-            this.LivingDex_BTN = new System.Windows.Forms.Button();
-            this.SortBox = new System.Windows.Forms.ComboBox();
-            this.Legal_BTN = new System.Windows.Forms.Button();
-            this.LegalAll_BTN = new System.Windows.Forms.Button();
-            this.ClearAll_BTN = new System.Windows.Forms.Button();
-            this.RandomPID_BTN = new System.Windows.Forms.Button();
-            this.Sort_BTN = new System.Windows.Forms.Button();
-            this.DeleteBox_BTN = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.Mod_Select_Box = new System.Windows.Forms.ComboBox();
-            this.FormAndSubDex_BTN = new System.Windows.Forms.Button();
-            this.RandomEC_BTN = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
-            this.SuspendLayout();
+            BuildDex_BTN = new Button();
+            Gen_BTN = new Button();
+            TID16Box = new TextBox();
+            SID16Box = new TextBox();
+            OT_Name = new TextBox();
+            LanguageBox = new ComboBox();
+            GenderBox = new ComboBox();
+            TID16Label = new Label();
+            SID16Label = new Label();
+            OTLabel = new Label();
+            LGLabel = new Label();
+            LivingDex_BTN = new Button();
+            SortBox = new ComboBox();
+            Legal_BTN = new Button();
+            LegalAll_BTN = new Button();
+            RandomPID_BTN = new Button();
+            Sort_BTN = new Button();
+            RandomEC_BTN = new Button();
+            Mod_Select_Box = new ComboBox();
+            FormAndSubDex_BTN = new Button();
+            DexTabControl = new TabControl();
+            IDPage = new TabPage();
+            DeleteBox_BTN = new Button();
+            ClearAll_BTN = new Button();
+            DexBuilder = new TabPage();
+            Insertion_BTN = new Button();
+            Solt_Label = new Label();
+            Box_Label = new Label();
+            SoltnumericUpDown = new NumericUpDown();
+            BoxnumericUpDown = new NumericUpDown();
+            DexTabControl.SuspendLayout();
+            IDPage.SuspendLayout();
+            DexBuilder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)SoltnumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)BoxnumericUpDown).BeginInit();
+            SuspendLayout();
             // 
             // BuildDex_BTN
             // 
-            this.BuildDex_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.BuildDex_BTN.Location = new System.Drawing.Point(120, 133);
-            this.BuildDex_BTN.Name = "BuildDex_BTN";
-            this.BuildDex_BTN.Size = new System.Drawing.Size(102, 26);
-            this.BuildDex_BTN.TabIndex = 0;
-            this.BuildDex_BTN.Text = "补齐图鉴";
-            this.BuildDex_BTN.UseVisualStyleBackColor = true;
-            this.BuildDex_BTN.Click += new System.EventHandler(this.BuildDex_BTN_Click);
+            BuildDex_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            BuildDex_BTN.Location = new System.Drawing.Point(113, 67);
+            BuildDex_BTN.Name = "BuildDex_BTN";
+            BuildDex_BTN.Size = new System.Drawing.Size(102, 26);
+            BuildDex_BTN.TabIndex = 0;
+            BuildDex_BTN.Text = "补齐图鉴";
+            BuildDex_BTN.UseVisualStyleBackColor = true;
+            BuildDex_BTN.Click += BuildDex_BTN_Click;
             // 
             // Gen_BTN
             // 
-            this.Gen_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.Gen_BTN.Location = new System.Drawing.Point(330, 22);
-            this.Gen_BTN.Name = "Gen_BTN";
-            this.Gen_BTN.Size = new System.Drawing.Size(102, 25);
-            this.Gen_BTN.TabIndex = 1;
-            this.Gen_BTN.Text = "开始覆盖ID";
-            this.Gen_BTN.UseVisualStyleBackColor = true;
-            this.Gen_BTN.Click += new System.EventHandler(this.Gen_BTN_Click);
+            Gen_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Gen_BTN.Location = new System.Drawing.Point(229, 70);
+            Gen_BTN.Name = "Gen_BTN";
+            Gen_BTN.Size = new System.Drawing.Size(102, 25);
+            Gen_BTN.TabIndex = 1;
+            Gen_BTN.Text = "开始覆盖ID";
+            Gen_BTN.UseVisualStyleBackColor = true;
+            Gen_BTN.Click += Gen_BTN_Click;
             // 
             // TID16Box
             // 
-            this.TID16Box.Font = new System.Drawing.Font("Arial", 9F);
-            this.TID16Box.Location = new System.Drawing.Point(52, 21);
-            this.TID16Box.Name = "TID16Box";
-            this.TID16Box.Size = new System.Drawing.Size(73, 25);
-            this.TID16Box.TabIndex = 2;
-            this.TID16Box.Text = "10101";
+            TID16Box.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            TID16Box.Location = new System.Drawing.Point(58, 6);
+            TID16Box.Name = "TID16Box";
+            TID16Box.Size = new System.Drawing.Size(57, 25);
+            TID16Box.TabIndex = 2;
+            TID16Box.Text = "101010";
             // 
             // SID16Box
             // 
-            this.SID16Box.Font = new System.Drawing.Font("Arial", 9F);
-            this.SID16Box.Location = new System.Drawing.Point(52, 54);
-            this.SID16Box.Name = "SID16Box";
-            this.SID16Box.Size = new System.Drawing.Size(73, 25);
-            this.SID16Box.TabIndex = 3;
-            this.SID16Box.Text = "01010";
+            SID16Box.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            SID16Box.Location = new System.Drawing.Point(58, 39);
+            SID16Box.Name = "SID16Box";
+            SID16Box.Size = new System.Drawing.Size(57, 25);
+            SID16Box.TabIndex = 3;
+            SID16Box.Text = "1111";
             // 
             // OT_Name
             // 
-            this.OT_Name.Font = new System.Drawing.Font("Arial", 9F);
-            this.OT_Name.Location = new System.Drawing.Point(192, 22);
-            this.OT_Name.Name = "OT_Name";
-            this.OT_Name.Size = new System.Drawing.Size(133, 25);
-            this.OT_Name.TabIndex = 4;
-            this.OT_Name.Text = "Wang";
+            OT_Name.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            OT_Name.Location = new System.Drawing.Point(182, 6);
+            OT_Name.Name = "OT_Name";
+            OT_Name.Size = new System.Drawing.Size(151, 25);
+            OT_Name.TabIndex = 4;
+            OT_Name.Text = "Wang";
             // 
             // LanguageBox
             // 
-            this.LanguageBox.FormattingEnabled = true;
-            this.LanguageBox.Location = new System.Drawing.Point(210, 53);
-            this.LanguageBox.Name = "LanguageBox";
-            this.LanguageBox.Size = new System.Drawing.Size(53, 25);
-            this.LanguageBox.TabIndex = 5;
+            LanguageBox.FormattingEnabled = true;
+            LanguageBox.Location = new System.Drawing.Point(198, 38);
+            LanguageBox.Name = "LanguageBox";
+            LanguageBox.Size = new System.Drawing.Size(53, 25);
+            LanguageBox.TabIndex = 5;
             // 
             // GenderBox
             // 
-            this.GenderBox.FormattingEnabled = true;
-            this.GenderBox.Location = new System.Drawing.Point(269, 53);
-            this.GenderBox.Name = "GenderBox";
-            this.GenderBox.Size = new System.Drawing.Size(56, 25);
-            this.GenderBox.TabIndex = 6;
+            GenderBox.FormattingEnabled = true;
+            GenderBox.Location = new System.Drawing.Point(257, 38);
+            GenderBox.Name = "GenderBox";
+            GenderBox.Size = new System.Drawing.Size(74, 25);
+            GenderBox.TabIndex = 6;
             // 
             // TID16Label
             // 
-            this.TID16Label.AutoSize = true;
-            this.TID16Label.Font = new System.Drawing.Font("黑体", 9F);
-            this.TID16Label.Location = new System.Drawing.Point(7, 25);
-            this.TID16Label.Name = "TID16Label";
-            this.TID16Label.Size = new System.Drawing.Size(39, 15);
-            this.TID16Label.TabIndex = 7;
-            this.TID16Label.Text = "表ID";
+            TID16Label.AutoSize = true;
+            TID16Label.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            TID16Label.Location = new System.Drawing.Point(13, 10);
+            TID16Label.Name = "TID16Label";
+            TID16Label.Size = new System.Drawing.Size(39, 15);
+            TID16Label.TabIndex = 7;
+            TID16Label.Text = "表ID";
             // 
             // SID16Label
             // 
-            this.SID16Label.AutoSize = true;
-            this.SID16Label.Font = new System.Drawing.Font("黑体", 9F);
-            this.SID16Label.Location = new System.Drawing.Point(7, 58);
-            this.SID16Label.Name = "SID16Label";
-            this.SID16Label.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.SID16Label.Size = new System.Drawing.Size(39, 15);
-            this.SID16Label.TabIndex = 8;
-            this.SID16Label.Text = "里ID";
+            SID16Label.AutoSize = true;
+            SID16Label.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            SID16Label.Location = new System.Drawing.Point(13, 43);
+            SID16Label.Name = "SID16Label";
+            SID16Label.RightToLeft = RightToLeft.No;
+            SID16Label.Size = new System.Drawing.Size(39, 15);
+            SID16Label.TabIndex = 8;
+            SID16Label.Text = "里ID";
             // 
             // OTLabel
             // 
-            this.OTLabel.AutoSize = true;
-            this.OTLabel.Font = new System.Drawing.Font("黑体", 9F);
-            this.OTLabel.Location = new System.Drawing.Point(131, 26);
-            this.OTLabel.Name = "OTLabel";
-            this.OTLabel.Size = new System.Drawing.Size(55, 15);
-            this.OTLabel.TabIndex = 9;
-            this.OTLabel.Text = "初训家";
+            OTLabel.AutoSize = true;
+            OTLabel.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            OTLabel.Location = new System.Drawing.Point(121, 10);
+            OTLabel.Name = "OTLabel";
+            OTLabel.Size = new System.Drawing.Size(55, 15);
+            OTLabel.TabIndex = 9;
+            OTLabel.Text = "初训家";
             // 
             // LGLabel
             // 
-            this.LGLabel.AutoSize = true;
-            this.LGLabel.Font = new System.Drawing.Font("黑体", 9F);
-            this.LGLabel.Location = new System.Drawing.Point(131, 58);
-            this.LGLabel.Name = "LGLabel";
-            this.LGLabel.Size = new System.Drawing.Size(79, 15);
-            this.LGLabel.TabIndex = 10;
-            this.LGLabel.Text = "性别/语言";
+            LGLabel.AutoSize = true;
+            LGLabel.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LGLabel.Location = new System.Drawing.Point(121, 42);
+            LGLabel.Name = "LGLabel";
+            LGLabel.Size = new System.Drawing.Size(79, 15);
+            LGLabel.TabIndex = 10;
+            LGLabel.Text = "语言/性别";
             // 
             // LivingDex_BTN
             // 
-            this.LivingDex_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.LivingDex_BTN.Location = new System.Drawing.Point(12, 133);
-            this.LivingDex_BTN.Name = "LivingDex_BTN";
-            this.LivingDex_BTN.Size = new System.Drawing.Size(102, 25);
-            this.LivingDex_BTN.TabIndex = 11;
-            this.LivingDex_BTN.Text = "生成全图鉴";
-            this.LivingDex_BTN.UseVisualStyleBackColor = true;
-            this.LivingDex_BTN.Click += new System.EventHandler(this.LivingDex_BTN_Click);
+            LivingDex_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LivingDex_BTN.Location = new System.Drawing.Point(5, 68);
+            LivingDex_BTN.Name = "LivingDex_BTN";
+            LivingDex_BTN.Size = new System.Drawing.Size(102, 25);
+            LivingDex_BTN.TabIndex = 11;
+            LivingDex_BTN.Text = "生成全图鉴";
+            LivingDex_BTN.UseVisualStyleBackColor = true;
+            LivingDex_BTN.Click += LivingDex_BTN_Click;
             // 
             // SortBox
             // 
-            this.SortBox.FormattingEnabled = true;
-            this.SortBox.Location = new System.Drawing.Point(12, 102);
-            this.SortBox.Name = "SortBox";
-            this.SortBox.Size = new System.Drawing.Size(318, 25);
-            this.SortBox.TabIndex = 12;
+            SortBox.FormattingEnabled = true;
+            SortBox.Location = new System.Drawing.Point(5, 7);
+            SortBox.Name = "SortBox";
+            SortBox.Size = new System.Drawing.Size(210, 25);
+            SortBox.TabIndex = 12;
             // 
             // Legal_BTN
             // 
-            this.Legal_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.Legal_BTN.Location = new System.Drawing.Point(444, 132);
-            this.Legal_BTN.Name = "Legal_BTN";
-            this.Legal_BTN.Size = new System.Drawing.Size(125, 25);
-            this.Legal_BTN.TabIndex = 13;
-            this.Legal_BTN.Text = "合法化箱子";
-            this.Legal_BTN.UseVisualStyleBackColor = true;
-            this.Legal_BTN.Click += new System.EventHandler(this.Legal_BTN_Click);
+            Legal_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Legal_BTN.Location = new System.Drawing.Point(221, 68);
+            Legal_BTN.Name = "Legal_BTN";
+            Legal_BTN.Size = new System.Drawing.Size(103, 25);
+            Legal_BTN.TabIndex = 13;
+            Legal_BTN.Text = "合法化箱子";
+            Legal_BTN.UseVisualStyleBackColor = true;
+            Legal_BTN.Click += Legal_BTN_Click;
             // 
             // LegalAll_BTN
             // 
-            this.LegalAll_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.LegalAll_BTN.Location = new System.Drawing.Point(445, 101);
-            this.LegalAll_BTN.Name = "LegalAll_BTN";
-            this.LegalAll_BTN.Size = new System.Drawing.Size(124, 25);
-            this.LegalAll_BTN.TabIndex = 14;
-            this.LegalAll_BTN.Text = "合法化全部";
-            this.LegalAll_BTN.UseVisualStyleBackColor = true;
-            this.LegalAll_BTN.Click += new System.EventHandler(this.LegalAll_BTN_Click);
-            // 
-            // ClearAll_BTN
-            // 
-            this.ClearAll_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.ClearAll_BTN.Location = new System.Drawing.Point(336, 133);
-            this.ClearAll_BTN.Name = "ClearAll_BTN";
-            this.ClearAll_BTN.Size = new System.Drawing.Size(102, 25);
-            this.ClearAll_BTN.TabIndex = 15;
-            this.ClearAll_BTN.Text = "删除全部";
-            this.ClearAll_BTN.UseVisualStyleBackColor = true;
-            this.ClearAll_BTN.Click += new System.EventHandler(this.ClearAll_BTN_Click);
+            LegalAll_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LegalAll_BTN.Location = new System.Drawing.Point(222, 37);
+            LegalAll_BTN.Name = "LegalAll_BTN";
+            LegalAll_BTN.Size = new System.Drawing.Size(102, 25);
+            LegalAll_BTN.TabIndex = 14;
+            LegalAll_BTN.Text = "合法化全部";
+            LegalAll_BTN.UseVisualStyleBackColor = true;
+            LegalAll_BTN.Click += LegalAll_BTN_Click;
             // 
             // RandomPID_BTN
             // 
-            this.RandomPID_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.RandomPID_BTN.Location = new System.Drawing.Point(330, 54);
-            this.RandomPID_BTN.Name = "RandomPID_BTN";
-            this.RandomPID_BTN.Size = new System.Drawing.Size(102, 25);
-            this.RandomPID_BTN.TabIndex = 16;
-            this.RandomPID_BTN.Text = "随机PID";
-            this.RandomPID_BTN.UseVisualStyleBackColor = true;
-            this.RandomPID_BTN.Click += new System.EventHandler(this.RandomPID_BTN_Click);
+            RandomPID_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            RandomPID_BTN.Location = new System.Drawing.Point(13, 70);
+            RandomPID_BTN.Name = "RandomPID_BTN";
+            RandomPID_BTN.Size = new System.Drawing.Size(102, 25);
+            RandomPID_BTN.TabIndex = 16;
+            RandomPID_BTN.Text = "随机PID";
+            RandomPID_BTN.UseVisualStyleBackColor = true;
+            RandomPID_BTN.Click += RandomPID_BTN_Click;
             // 
             // Sort_BTN
             // 
-            this.Sort_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.Sort_BTN.Location = new System.Drawing.Point(336, 101);
-            this.Sort_BTN.Name = "Sort_BTN";
-            this.Sort_BTN.Size = new System.Drawing.Size(102, 25);
-            this.Sort_BTN.TabIndex = 17;
-            this.Sort_BTN.Text = "开始排序";
-            this.Sort_BTN.UseVisualStyleBackColor = true;
-            this.Sort_BTN.Click += new System.EventHandler(this.Sort_BTN_Click);
-            // 
-            // DeleteBox_BTN
-            // 
-            this.DeleteBox_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.DeleteBox_BTN.Location = new System.Drawing.Point(228, 133);
-            this.DeleteBox_BTN.Name = "DeleteBox_BTN";
-            this.DeleteBox_BTN.Size = new System.Drawing.Size(102, 25);
-            this.DeleteBox_BTN.TabIndex = 18;
-            this.DeleteBox_BTN.Text = "删除箱子";
-            this.DeleteBox_BTN.UseVisualStyleBackColor = true;
-            this.DeleteBox_BTN.Click += new System.EventHandler(this.DeleteBox_BTN_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.RandomEC_BTN);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.RandomPID_BTN);
-            this.groupBox1.Controls.Add(this.LGLabel);
-            this.groupBox1.Controls.Add(this.OTLabel);
-            this.groupBox1.Controls.Add(this.SID16Label);
-            this.groupBox1.Controls.Add(this.TID16Label);
-            this.groupBox1.Controls.Add(this.GenderBox);
-            this.groupBox1.Controls.Add(this.LanguageBox);
-            this.groupBox1.Controls.Add(this.OT_Name);
-            this.groupBox1.Controls.Add(this.SID16Box);
-            this.groupBox1.Controls.Add(this.TID16Box);
-            this.groupBox1.Controls.Add(this.Gen_BTN);
-            this.groupBox1.Location = new System.Drawing.Point(5, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(549, 90);
-            this.groupBox1.TabIndex = 21;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "编辑全部箱子";
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("黑体", 9F);
-            this.button1.Location = new System.Drawing.Point(439, 662);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(102, 25);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "随机PID/EC";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // Mod_Select_Box
-            // 
-            this.Mod_Select_Box.FormattingEnabled = true;
-            this.Mod_Select_Box.Location = new System.Drawing.Point(560, 29);
-            this.Mod_Select_Box.Name = "Mod_Select_Box";
-            this.Mod_Select_Box.Size = new System.Drawing.Size(121, 25);
-            this.Mod_Select_Box.TabIndex = 68;
-            // 
-            // FormAndSubDex_BTN
-            // 
-            this.FormAndSubDex_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FormAndSubDex_BTN.Location = new System.Drawing.Point(560, 60);
-            this.FormAndSubDex_BTN.Name = "FormAndSubDex_BTN";
-            this.FormAndSubDex_BTN.Size = new System.Drawing.Size(121, 25);
-            this.FormAndSubDex_BTN.TabIndex = 69;
-            this.FormAndSubDex_BTN.Text = "生成形态";
-            this.FormAndSubDex_BTN.UseVisualStyleBackColor = true;
-            this.FormAndSubDex_BTN.Click += new System.EventHandler(this.FormAndSubDex_Click);
+            Sort_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Sort_BTN.Location = new System.Drawing.Point(221, 6);
+            Sort_BTN.Name = "Sort_BTN";
+            Sort_BTN.Size = new System.Drawing.Size(102, 25);
+            Sort_BTN.TabIndex = 17;
+            Sort_BTN.Text = "开始排序";
+            Sort_BTN.UseVisualStyleBackColor = true;
+            Sort_BTN.Click += Sort_BTN_Click;
             // 
             // RandomEC_BTN
             // 
-            this.RandomEC_BTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.RandomEC_BTN.Location = new System.Drawing.Point(440, 54);
-            this.RandomEC_BTN.Name = "RandomEC_BTN";
-            this.RandomEC_BTN.Size = new System.Drawing.Size(102, 25);
-            this.RandomEC_BTN.TabIndex = 18;
-            this.RandomEC_BTN.Text = "随机EC";
-            this.RandomEC_BTN.UseVisualStyleBackColor = true;
-            this.RandomEC_BTN.Click += new System.EventHandler(this.RandomEC_BTN_Click);
+            RandomEC_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            RandomEC_BTN.Location = new System.Drawing.Point(121, 70);
+            RandomEC_BTN.Name = "RandomEC_BTN";
+            RandomEC_BTN.Size = new System.Drawing.Size(102, 25);
+            RandomEC_BTN.TabIndex = 18;
+            RandomEC_BTN.Text = "随机EC";
+            RandomEC_BTN.UseVisualStyleBackColor = true;
+            RandomEC_BTN.Click += RandomEC_BTN_Click;
+            // 
+            // Mod_Select_Box
+            // 
+            Mod_Select_Box.FormattingEnabled = true;
+            Mod_Select_Box.Location = new System.Drawing.Point(5, 37);
+            Mod_Select_Box.Name = "Mod_Select_Box";
+            Mod_Select_Box.Size = new System.Drawing.Size(121, 25);
+            Mod_Select_Box.TabIndex = 68;
+            // 
+            // FormAndSubDex_BTN
+            // 
+            FormAndSubDex_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            FormAndSubDex_BTN.Location = new System.Drawing.Point(132, 38);
+            FormAndSubDex_BTN.Name = "FormAndSubDex_BTN";
+            FormAndSubDex_BTN.Size = new System.Drawing.Size(83, 25);
+            FormAndSubDex_BTN.TabIndex = 69;
+            FormAndSubDex_BTN.Text = "生成形态";
+            FormAndSubDex_BTN.UseVisualStyleBackColor = true;
+            FormAndSubDex_BTN.Click += FormAndSubDex_Click;
+            // 
+            // DexTabControl
+            // 
+            DexTabControl.Controls.Add(IDPage);
+            DexTabControl.Controls.Add(DexBuilder);
+            DexTabControl.Location = new System.Drawing.Point(12, 12);
+            DexTabControl.Name = "DexTabControl";
+            DexTabControl.SelectedIndex = 0;
+            DexTabControl.Size = new System.Drawing.Size(347, 176);
+            DexTabControl.TabIndex = 70;
+            // 
+            // IDPage
+            // 
+            IDPage.BackColor = System.Drawing.Color.WhiteSmoke;
+            IDPage.Controls.Add(DeleteBox_BTN);
+            IDPage.Controls.Add(ClearAll_BTN);
+            IDPage.Controls.Add(Gen_BTN);
+            IDPage.Controls.Add(RandomEC_BTN);
+            IDPage.Controls.Add(TID16Box);
+            IDPage.Controls.Add(SID16Box);
+            IDPage.Controls.Add(OT_Name);
+            IDPage.Controls.Add(RandomPID_BTN);
+            IDPage.Controls.Add(LanguageBox);
+            IDPage.Controls.Add(GenderBox);
+            IDPage.Controls.Add(LGLabel);
+            IDPage.Controls.Add(TID16Label);
+            IDPage.Controls.Add(SID16Label);
+            IDPage.Controls.Add(OTLabel);
+            IDPage.Location = new System.Drawing.Point(4, 26);
+            IDPage.Name = "IDPage";
+            IDPage.Padding = new Padding(3);
+            IDPage.Size = new System.Drawing.Size(339, 146);
+            IDPage.TabIndex = 0;
+            IDPage.Text = "ID编辑器";
+            // 
+            // DeleteBox_BTN
+            // 
+            DeleteBox_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            DeleteBox_BTN.Location = new System.Drawing.Point(13, 101);
+            DeleteBox_BTN.Name = "DeleteBox_BTN";
+            DeleteBox_BTN.Size = new System.Drawing.Size(102, 25);
+            DeleteBox_BTN.TabIndex = 20;
+            DeleteBox_BTN.Text = "删除箱子";
+            DeleteBox_BTN.UseVisualStyleBackColor = true;
+            DeleteBox_BTN.Click += DeleteBox_BTN_Click;
+            // 
+            // ClearAll_BTN
+            // 
+            ClearAll_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ClearAll_BTN.Location = new System.Drawing.Point(121, 101);
+            ClearAll_BTN.Name = "ClearAll_BTN";
+            ClearAll_BTN.Size = new System.Drawing.Size(102, 25);
+            ClearAll_BTN.TabIndex = 19;
+            ClearAll_BTN.Text = "删除全部";
+            ClearAll_BTN.UseVisualStyleBackColor = true;
+            ClearAll_BTN.Click += ClearAll_BTN_Click;
+            // 
+            // DexBuilder
+            // 
+            DexBuilder.BackColor = System.Drawing.Color.WhiteSmoke;
+            DexBuilder.Controls.Add(Insertion_BTN);
+            DexBuilder.Controls.Add(Solt_Label);
+            DexBuilder.Controls.Add(Box_Label);
+            DexBuilder.Controls.Add(SoltnumericUpDown);
+            DexBuilder.Controls.Add(BoxnumericUpDown);
+            DexBuilder.Controls.Add(LegalAll_BTN);
+            DexBuilder.Controls.Add(FormAndSubDex_BTN);
+            DexBuilder.Controls.Add(Legal_BTN);
+            DexBuilder.Controls.Add(Mod_Select_Box);
+            DexBuilder.Controls.Add(SortBox);
+            DexBuilder.Controls.Add(Sort_BTN);
+            DexBuilder.Controls.Add(LivingDex_BTN);
+            DexBuilder.Controls.Add(BuildDex_BTN);
+            DexBuilder.Location = new System.Drawing.Point(4, 26);
+            DexBuilder.Name = "DexBuilder";
+            DexBuilder.Padding = new Padding(3);
+            DexBuilder.Size = new System.Drawing.Size(339, 146);
+            DexBuilder.TabIndex = 1;
+            DexBuilder.Text = "图鉴制作器";
+            // 
+            // Insertion_BTN
+            // 
+            Insertion_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Insertion_BTN.Location = new System.Drawing.Point(220, 99);
+            Insertion_BTN.Name = "Insertion_BTN";
+            Insertion_BTN.Size = new System.Drawing.Size(103, 25);
+            Insertion_BTN.TabIndex = 74;
+            Insertion_BTN.Text = "开始插空";
+            Insertion_BTN.UseVisualStyleBackColor = true;
+            Insertion_BTN.Click += Insertion_BTN_Click;
+            // 
+            // Solt_Label
+            // 
+            Solt_Label.AutoSize = true;
+            Solt_Label.Location = new System.Drawing.Point(115, 101);
+            Solt_Label.Name = "Solt_Label";
+            Solt_Label.Size = new System.Drawing.Size(36, 17);
+            Solt_Label.TabIndex = 73;
+            Solt_Label.Text = "槽位";
+            // 
+            // Box_Label
+            // 
+            Box_Label.AutoSize = true;
+            Box_Label.Location = new System.Drawing.Point(7, 101);
+            Box_Label.Name = "Box_Label";
+            Box_Label.Size = new System.Drawing.Size(36, 17);
+            Box_Label.TabIndex = 72;
+            Box_Label.Text = "箱子";
+            // 
+            // SoltnumericUpDown
+            // 
+            SoltnumericUpDown.Location = new System.Drawing.Point(157, 99);
+            SoltnumericUpDown.Name = "SoltnumericUpDown";
+            SoltnumericUpDown.Size = new System.Drawing.Size(58, 25);
+            SoltnumericUpDown.TabIndex = 71;
+            SoltnumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // BoxnumericUpDown
+            // 
+            BoxnumericUpDown.Location = new System.Drawing.Point(49, 99);
+            BoxnumericUpDown.Name = "BoxnumericUpDown";
+            BoxnumericUpDown.Size = new System.Drawing.Size(58, 25);
+            BoxnumericUpDown.TabIndex = 70;
+            BoxnumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // DexBuildForm
             // 
-            this.ClientSize = new System.Drawing.Size(687, 171);
-            this.Controls.Add(this.FormAndSubDex_BTN);
-            this.Controls.Add(this.Mod_Select_Box);
-            this.Controls.Add(this.Sort_BTN);
-            this.Controls.Add(this.LivingDex_BTN);
-            this.Controls.Add(this.BuildDex_BTN);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.ClearAll_BTN);
-            this.Controls.Add(this.DeleteBox_BTN);
-            this.Controls.Add(this.SortBox);
-            this.Controls.Add(this.LegalAll_BTN);
-            this.Controls.Add(this.Legal_BTN);
-            this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "DexBuildForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Super Wang";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.ResumeLayout(false);
-
+            ClientSize = new System.Drawing.Size(368, 199);
+            Controls.Add(DexTabControl);
+            Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            Name = "DexBuildForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Super Wang";
+            DexTabControl.ResumeLayout(false);
+            IDPage.ResumeLayout(false);
+            IDPage.PerformLayout();
+            DexBuilder.ResumeLayout(false);
+            DexBuilder.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)SoltnumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)BoxnumericUpDown).EndInit();
+            ResumeLayout(false);
         }
-        private GroupBox groupBox1;
+
         private ComboBox Mod_Select_Box;
         private Button FormAndSubDex_BTN;
         private Button BuildDex_BTN;
@@ -330,11 +404,18 @@ namespace WangPluginPkm.GUI
         private ComboBox SortBox;
         private Button Legal_BTN;
         private Button LegalAll_BTN;
-        private Button ClearAll_BTN;
         private Button RandomPID_BTN;
         private Button Sort_BTN;
-        private Button DeleteBox_BTN;
-        private Button button1;
         private Button RandomEC_BTN;
+        private TabControl DexTabControl;
+        private TabPage IDPage;
+        private Button DeleteBox_BTN;
+        private Button ClearAll_BTN;
+        private TabPage DexBuilder;
+        private Button Insertion_BTN;
+        private Label Solt_Label;
+        private Label Box_Label;
+        private NumericUpDown SoltnumericUpDown;
+        private NumericUpDown BoxnumericUpDown;
     }
 }
