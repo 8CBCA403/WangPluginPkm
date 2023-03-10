@@ -10,10 +10,7 @@ namespace WangPluginPkm.GUI
     partial class DistributionUI
     {
         private OpenFileDialog OpenFile_Dialog;
-        private TextBox BOX_TextBox;
-        private Label BOX_Label;
         private Button Clone_BTN;
-        private Button LoadEH1_BTN;
         private CheckBox ShinyBox;
         private Button Gift_BTN;
         private CheckBox SetTrainer_Box;
@@ -33,7 +30,6 @@ namespace WangPluginPkm.GUI
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
-        private GroupBox groupBox4;
         private GroupBox groupBox5;
         private CheckBox Random_Name_Box;
         private CheckBox RandEC_Box;
@@ -41,10 +37,7 @@ namespace WangPluginPkm.GUI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DistributionUI));
-            LoadEH1_BTN = new Button();
             OpenFile_Dialog = new OpenFileDialog();
-            BOX_TextBox = new TextBox();
-            BOX_Label = new Label();
             Clone_BTN = new Button();
             ShinyBox = new CheckBox();
             Gift_BTN = new Button();
@@ -74,56 +67,23 @@ namespace WangPluginPkm.GUI
             MINSize_BTN = new Button();
             MAXSize_BTN = new Button();
             RandEC_BTN = new Button();
-            groupBox4 = new GroupBox();
             groupBox5 = new GroupBox();
             DitributiontabControl = new TabControl();
             CopyPage = new TabPage();
             EditBoxPage = new TabPage();
-            EH1Page = new TabPage();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
-            groupBox4.SuspendLayout();
             groupBox5.SuspendLayout();
             DitributiontabControl.SuspendLayout();
             CopyPage.SuspendLayout();
             EditBoxPage.SuspendLayout();
-            EH1Page.SuspendLayout();
             SuspendLayout();
-            // 
-            // LoadEH1_BTN
-            // 
-            LoadEH1_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            LoadEH1_BTN.Location = new System.Drawing.Point(115, 16);
-            LoadEH1_BTN.Name = "LoadEH1_BTN";
-            LoadEH1_BTN.Size = new System.Drawing.Size(100, 25);
-            LoadEH1_BTN.TabIndex = 0;
-            LoadEH1_BTN.Text = "读取EH1";
-            LoadEH1_BTN.UseVisualStyleBackColor = true;
-            LoadEH1_BTN.Click += LoadEH1_BTN_Click;
             // 
             // OpenFile_Dialog
             // 
             OpenFile_Dialog.Filter = "PokemonHomefile (*.eh1)|*.eh1|All files (*.*)|*.*";
             OpenFile_Dialog.Multiselect = true;
-            // 
-            // BOX_TextBox
-            // 
-            BOX_TextBox.Location = new System.Drawing.Point(44, 17);
-            BOX_TextBox.Name = "BOX_TextBox";
-            BOX_TextBox.Size = new System.Drawing.Size(65, 27);
-            BOX_TextBox.TabIndex = 1;
-            BOX_TextBox.Text = "1";
-            // 
-            // BOX_Label
-            // 
-            BOX_Label.AutoSize = true;
-            BOX_Label.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            BOX_Label.Location = new System.Drawing.Point(6, 21);
-            BOX_Label.Name = "BOX_Label";
-            BOX_Label.Size = new System.Drawing.Size(39, 15);
-            BOX_Label.TabIndex = 2;
-            BOX_Label.Text = "箱子";
             // 
             // Clone_BTN
             // 
@@ -196,7 +156,7 @@ namespace WangPluginPkm.GUI
             BallBox.FormattingEnabled = true;
             BallBox.Location = new System.Drawing.Point(332, 49);
             BallBox.Name = "BallBox";
-            BallBox.Size = new System.Drawing.Size(62, 28);
+            BallBox.Size = new System.Drawing.Size(62, 23);
             BallBox.TabIndex = 48;
             // 
             // Trainer_Box
@@ -204,7 +164,7 @@ namespace WangPluginPkm.GUI
             Trainer_Box.FormattingEnabled = true;
             Trainer_Box.Location = new System.Drawing.Point(8, 17);
             Trainer_Box.Name = "Trainer_Box";
-            Trainer_Box.Size = new System.Drawing.Size(100, 28);
+            Trainer_Box.Size = new System.Drawing.Size(100, 23);
             Trainer_Box.TabIndex = 49;
             // 
             // Use_Trainer_BTN
@@ -278,7 +238,7 @@ namespace WangPluginPkm.GUI
             Edit_EVIVN_Box.FormattingEnabled = true;
             Edit_EVIVN_Box.Location = new System.Drawing.Point(8, 18);
             Edit_EVIVN_Box.Name = "Edit_EVIVN_Box";
-            Edit_EVIVN_Box.Size = new System.Drawing.Size(100, 28);
+            Edit_EVIVN_Box.Size = new System.Drawing.Size(100, 23);
             Edit_EVIVN_Box.TabIndex = 62;
             // 
             // Clone_Select_Box
@@ -286,7 +246,7 @@ namespace WangPluginPkm.GUI
             Clone_Select_Box.FormattingEnabled = true;
             Clone_Select_Box.Location = new System.Drawing.Point(5, 48);
             Clone_Select_Box.Name = "Clone_Select_Box";
-            Clone_Select_Box.Size = new System.Drawing.Size(100, 28);
+            Clone_Select_Box.Size = new System.Drawing.Size(100, 23);
             Clone_Select_Box.TabIndex = 63;
             // 
             // Trainer_Select_Box
@@ -294,7 +254,7 @@ namespace WangPluginPkm.GUI
             Trainer_Select_Box.FormattingEnabled = true;
             Trainer_Select_Box.Location = new System.Drawing.Point(224, 17);
             Trainer_Select_Box.Name = "Trainer_Select_Box";
-            Trainer_Select_Box.Size = new System.Drawing.Size(100, 28);
+            Trainer_Select_Box.Size = new System.Drawing.Size(100, 23);
             Trainer_Select_Box.TabIndex = 64;
             // 
             // Random_Trainer_Box
@@ -447,18 +407,6 @@ namespace WangPluginPkm.GUI
             RandEC_BTN.UseVisualStyleBackColor = true;
             RandEC_BTN.Click += RandEC_BTN_Click;
             // 
-            // groupBox4
-            // 
-            groupBox4.Controls.Add(BOX_TextBox);
-            groupBox4.Controls.Add(LoadEH1_BTN);
-            groupBox4.Controls.Add(BOX_Label);
-            groupBox4.Location = new System.Drawing.Point(21, 17);
-            groupBox4.Name = "groupBox4";
-            groupBox4.Size = new System.Drawing.Size(224, 50);
-            groupBox4.TabIndex = 70;
-            groupBox4.TabStop = false;
-            groupBox4.Text = "EH1查看器";
-            // 
             // groupBox5
             // 
             groupBox5.Controls.Add(Edit_EVIVN_Box);
@@ -474,7 +422,6 @@ namespace WangPluginPkm.GUI
             // 
             DitributiontabControl.Controls.Add(CopyPage);
             DitributiontabControl.Controls.Add(EditBoxPage);
-            DitributiontabControl.Controls.Add(EH1Page);
             DitributiontabControl.Location = new System.Drawing.Point(12, 12);
             DitributiontabControl.Name = "DitributiontabControl";
             DitributiontabControl.SelectedIndex = 0;
@@ -486,10 +433,10 @@ namespace WangPluginPkm.GUI
             CopyPage.Controls.Add(groupBox1);
             CopyPage.Controls.Add(groupBox5);
             CopyPage.Controls.Add(groupBox2);
-            CopyPage.Location = new System.Drawing.Point(4, 29);
+            CopyPage.Location = new System.Drawing.Point(4, 25);
             CopyPage.Name = "CopyPage";
             CopyPage.Padding = new Padding(3);
-            CopyPage.Size = new System.Drawing.Size(493, 223);
+            CopyPage.Size = new System.Drawing.Size(493, 227);
             CopyPage.TabIndex = 0;
             CopyPage.Text = "复制器";
             CopyPage.UseVisualStyleBackColor = true;
@@ -505,21 +452,11 @@ namespace WangPluginPkm.GUI
             EditBoxPage.Text = "杂项编辑";
             EditBoxPage.UseVisualStyleBackColor = true;
             // 
-            // EH1Page
-            // 
-            EH1Page.Controls.Add(groupBox4);
-            EH1Page.Location = new System.Drawing.Point(4, 29);
-            EH1Page.Name = "EH1Page";
-            EH1Page.Padding = new Padding(3);
-            EH1Page.Size = new System.Drawing.Size(493, 223);
-            EH1Page.TabIndex = 2;
-            EH1Page.Text = "EH1查看器";
-            EH1Page.UseVisualStyleBackColor = true;
-            // 
             // DistributionUI
             // 
             ClientSize = new System.Drawing.Size(529, 273);
             Controls.Add(DitributiontabControl);
+            Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -530,13 +467,10 @@ namespace WangPluginPkm.GUI
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
-            groupBox4.ResumeLayout(false);
-            groupBox4.PerformLayout();
             groupBox5.ResumeLayout(false);
             DitributiontabControl.ResumeLayout(false);
             CopyPage.ResumeLayout(false);
             EditBoxPage.ResumeLayout(false);
-            EH1Page.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -549,6 +483,5 @@ namespace WangPluginPkm.GUI
         private TabControl DitributiontabControl;
         private TabPage CopyPage;
         private TabPage EditBoxPage;
-        private TabPage EH1Page;
     }
 }

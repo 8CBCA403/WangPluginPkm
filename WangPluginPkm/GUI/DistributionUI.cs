@@ -65,10 +65,10 @@ namespace WangPluginPkm.GUI
             this.Clone_Select_Box.DataSource = Enum.GetValues(typeof(DisFormClone));
             this.Clone_Select_Box.SelectedIndexChanged += (_, __) =>
             {
-                CloneValue =Clone_Select_Box.SelectedIndex;
+                CloneValue = Clone_Select_Box.SelectedIndex;
             };
             this.Trainer_Select_Box.DataSource = Enum.GetValues(typeof(DisFormTrainer));
-             
+
             this.Trainer_Select_Box.SelectedIndexChanged += (_, __) =>
             {
                 TrainerValue = Trainer_Select_Box.SelectedIndex;
@@ -83,67 +83,8 @@ namespace WangPluginPkm.GUI
             };
 
         }
-        private void LoadEH1_BTN_Click(object sender, EventArgs e)
-        {
-            List<PKM> PK = new();
-            var i = 0;
-            DialogResult dr = this.OpenFile_Dialog.ShowDialog();
-            int BOX = Int16.Parse(BOX_TextBox.Text) - 1;
-            if (dr == DialogResult.OK)
-            {
-                foreach (String file in OpenFile_Dialog.FileNames)
-                {
-                    ConvertPKM(file, OpenFile_Dialog.FileNames.Length, ref PK);
-                    i++;
-                    if (i == OpenFile_Dialog.SafeFileNames.Length)
-                    {
-                        break;
-                    }
-                }
-                MessageBox.Show($"选取了{PK.Count}只宝可梦");
-                for (i = 0; i < PK.Count; i++)
-                {
-                    SAV.SAV.SetBoxSlotAtIndex(PK[i], BOX, i);
-                    SAV.ReloadSlots();
-                }
-            }
-        }
-        private void ConvertPKM(string file, int n, ref List<PKM> p)
-        {
-            var data = File.ReadAllBytes(file);
-            PKM pk;
+      
 
-            var pkh = DecryptEH1(data);
-            if (SAV.SAV.Version is GameVersion.SH or GameVersion.SW)
-            {
-                pk = pkh.ConvertToPK8();
-                p.Add(pk);
-
-            }
-            else if (SAV.SAV.Version is GameVersion.PLA)
-            {
-                pk = pkh.ConvertToPA8();
-                p.Add(pk);
-            }
-            else if (SAV.SAV.Version is GameVersion.BD or GameVersion.SP)
-            {
-                pk = pkh.ConvertToPB8();
-                p.Add(pk);
-            }
-            else
-                MessageBox.Show("ERROR");
-
-        }
-        private PKH DecryptEH1(byte[] ek1)
-        {
-            if (ek1 != null)
-            {
-                if (HomeCrypto.GetIsEncrypted1(ek1))
-                    return new PKH(ek1);
-            }
-            return null;
-        }
-       
         public void SetPkm()
         {
             List<PKM> PKL = new();
@@ -348,7 +289,7 @@ namespace WangPluginPkm.GUI
             }
             SAV.ReloadSlots();
         }
-       
+
         private static Trainer RandomT(IList<Trainer> T, int i)
         {
             Random ra = new(unchecked((int)Util.Rand32()) + i);

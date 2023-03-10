@@ -97,7 +97,7 @@ namespace WangPluginPkm.GUI
             LanguageBox.FormattingEnabled = true;
             LanguageBox.Location = new System.Drawing.Point(198, 38);
             LanguageBox.Name = "LanguageBox";
-            LanguageBox.Size = new System.Drawing.Size(53, 25);
+            LanguageBox.Size = new System.Drawing.Size(53, 23);
             LanguageBox.TabIndex = 5;
             // 
             // GenderBox
@@ -105,7 +105,7 @@ namespace WangPluginPkm.GUI
             GenderBox.FormattingEnabled = true;
             GenderBox.Location = new System.Drawing.Point(257, 38);
             GenderBox.Name = "GenderBox";
-            GenderBox.Size = new System.Drawing.Size(74, 25);
+            GenderBox.Size = new System.Drawing.Size(74, 23);
             GenderBox.TabIndex = 6;
             // 
             // TID16Label
@@ -165,7 +165,7 @@ namespace WangPluginPkm.GUI
             SortBox.FormattingEnabled = true;
             SortBox.Location = new System.Drawing.Point(5, 7);
             SortBox.Name = "SortBox";
-            SortBox.Size = new System.Drawing.Size(210, 25);
+            SortBox.Size = new System.Drawing.Size(210, 23);
             SortBox.TabIndex = 12;
             // 
             // Legal_BTN
@@ -228,7 +228,7 @@ namespace WangPluginPkm.GUI
             Mod_Select_Box.FormattingEnabled = true;
             Mod_Select_Box.Location = new System.Drawing.Point(5, 37);
             Mod_Select_Box.Name = "Mod_Select_Box";
-            Mod_Select_Box.Size = new System.Drawing.Size(121, 25);
+            Mod_Select_Box.Size = new System.Drawing.Size(121, 23);
             Mod_Select_Box.TabIndex = 68;
             // 
             // FormAndSubDex_BTN
@@ -269,10 +269,10 @@ namespace WangPluginPkm.GUI
             IDPage.Controls.Add(TID16Label);
             IDPage.Controls.Add(SID16Label);
             IDPage.Controls.Add(OTLabel);
-            IDPage.Location = new System.Drawing.Point(4, 26);
+            IDPage.Location = new System.Drawing.Point(4, 25);
             IDPage.Name = "IDPage";
             IDPage.Padding = new Padding(3);
-            IDPage.Size = new System.Drawing.Size(339, 146);
+            IDPage.Size = new System.Drawing.Size(339, 147);
             IDPage.TabIndex = 0;
             IDPage.Text = "ID编辑器";
             // 
@@ -314,10 +314,10 @@ namespace WangPluginPkm.GUI
             DexBuilder.Controls.Add(Sort_BTN);
             DexBuilder.Controls.Add(LivingDex_BTN);
             DexBuilder.Controls.Add(BuildDex_BTN);
-            DexBuilder.Location = new System.Drawing.Point(4, 26);
+            DexBuilder.Location = new System.Drawing.Point(4, 29);
             DexBuilder.Name = "DexBuilder";
             DexBuilder.Padding = new Padding(3);
-            DexBuilder.Size = new System.Drawing.Size(339, 146);
+            DexBuilder.Size = new System.Drawing.Size(339, 143);
             DexBuilder.TabIndex = 1;
             DexBuilder.Text = "图鉴制作器";
             // 
@@ -337,7 +337,7 @@ namespace WangPluginPkm.GUI
             Solt_Label.AutoSize = true;
             Solt_Label.Location = new System.Drawing.Point(115, 101);
             Solt_Label.Name = "Solt_Label";
-            Solt_Label.Size = new System.Drawing.Size(36, 17);
+            Solt_Label.Size = new System.Drawing.Size(39, 15);
             Solt_Label.TabIndex = 73;
             Solt_Label.Text = "槽位";
             // 
@@ -346,7 +346,7 @@ namespace WangPluginPkm.GUI
             Box_Label.AutoSize = true;
             Box_Label.Location = new System.Drawing.Point(7, 101);
             Box_Label.Name = "Box_Label";
-            Box_Label.Size = new System.Drawing.Size(36, 17);
+            Box_Label.Size = new System.Drawing.Size(39, 15);
             Box_Label.TabIndex = 72;
             Box_Label.Text = "箱子";
             // 
@@ -370,7 +370,7 @@ namespace WangPluginPkm.GUI
             // 
             ClientSize = new System.Drawing.Size(368, 199);
             Controls.Add(DexTabControl);
-            Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;

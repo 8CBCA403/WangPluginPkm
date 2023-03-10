@@ -10,7 +10,7 @@ namespace WangPluginPkm.GUI
 {
     partial class EggGeneratorUI : Form
     {
-      
+
         public enum BOX
         {
             [Description("生成面板")]
@@ -19,11 +19,11 @@ namespace WangPluginPkm.GUI
             BOX,
         }
         public BOX B = BOX.ONE;
-      
+
 
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
-        
+
         public EggGeneratorUI(ISaveFileProvider sav, IPKMView editor)
         {
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace WangPluginPkm.GUI
             Editor = editor;
             Version.Text = $"Version:{SAV.SAV.Version}";
         }
-      
+
         private void BindingData()
         {
             Number_Box.DisplayMember = "Description";
@@ -51,26 +51,26 @@ namespace WangPluginPkm.GUI
             {
                 B = (BOX)Enum.Parse(typeof(BOX), this.Number_Box.SelectedValue.ToString(), false);
             };
-           // this.Number_Box.SelectedIndex = 0;
+            // this.Number_Box.SelectedIndex = 0;
         }
         private void GEgg_Click(object sender, EventArgs e)
         {
-        if (B == BOX.ONE)
-            SetOne();
-        else if(B==BOX.BOX)
-            SetBox();
+            if (B == BOX.ONE)
+                SetOne();
+            else if (B == BOX.BOX)
+                SetBox();
         }
-        public  PKM Egg(PKM pk, ISaveFileProvider SaveFileEditor)
+        public PKM Egg(PKM pk, ISaveFileProvider SaveFileEditor)
         {
             List<IEncounterInfo> Results;
             IEncounterInfo enc;
             PKM pkm = pk.Clone();
             PKM pko = pk.Clone();
             var tree = EvolutionTree.GetEvolutionTree(pk.Context);
-            var PE = tree.GetPreEvolutions(pk.Species,pk.Form);
+            var PE = tree.GetPreEvolutions(pk.Species, pk.Form);
             if (PE.Count() != 0)
             {
-                var PreSpecies =PE.First();
+                var PreSpecies = PE.First();
                 pk.Species = PreSpecies.Species;
             }
             var setting = new SearchSettings
@@ -94,7 +94,7 @@ namespace WangPluginPkm.GUI
                 pk.OT_Gender = SaveFileEditor.SAV.Gender;
                 if (Gender_CheckBox.Checked)
                     pk.Gender = pko.Gender;
-                if(Form_CheckBox.Checked)
+                if (Form_CheckBox.Checked)
                     pk.Form = pko.Form;
                 if (RelearnMovcheckBox.Checked)
                 {
@@ -218,39 +218,39 @@ namespace WangPluginPkm.GUI
                 }
                 else if (pk.Gen8 == true)
                 {
-                if (Ability_CheckBox.Checked)
-                {
-                pk.Ability = pko.Ability;
+                    if (Ability_CheckBox.Checked)
+                    {
+                        pk.Ability = pko.Ability;
+                    }
+                    pk.OT_Name = SaveFileEditor.SAV.OT;
+                    pk.Language = pko.Language;
+                    pk.PID = pko.PID;
+                    pk.Ball = pko.Ball;
+                    if (pko.Ball is 16 or 24)
+                        pk.Ball = 4;
+                    pk.IsNicknamed = true;
+                    if (pk.Language == 10 || pk.Language == 9)
+                    {
+                        pk.Nickname = "蛋";
+                    }
+                    if (pk.Language == 2)
+                    {
+                        pk.Nickname = "Egg";
+                    }
+                    pk.Egg_Location = 60002;
+                    if (pk.Version == 49 || pk.Version == 48)
+                    {
+                        pk.Egg_Location = 60010;
+                    }
+                    pk.Met_Location = 0;
+                    if (pk.Version == 49 || pk.Version == 48)
+                    {
+                        pk.Met_Location = 65535;
+                    }
                 }
-                pk.OT_Name = SaveFileEditor.SAV.OT;
-                pk.Language = pko.Language;
-                pk.PID = pko.PID;
-                pk.Ball = pko.Ball;
-                if (pko.Ball is 16 or 24)
-                    pk.Ball = 4;
-                pk.IsNicknamed = true;
-                if (pk.Language == 10 || pk.Language == 9)
+                else if (pk.Gen9 == true)
                 {
-                    pk.Nickname = "蛋";
-                }
-                if (pk.Language == 2)
-                {
-                    pk.Nickname = "Egg";
-                }
-                pk.Egg_Location = 60002;
-                if (pk.Version == 49 || pk.Version == 48)
-                {
-                    pk.Egg_Location = 60010;
-                }
-                pk.Met_Location = 0;
-                if (pk.Version == 49 || pk.Version == 48)
-                {
-                    pk.Met_Location = 65535;
-                }
-                }
-                else if(pk.Gen9==true)
-                {
-                    pk.IsNicknamed=true;
+                    pk.IsNicknamed = true;
                     if (pk.Language == 10 || pk.Language == 9)
                     {
                         pk.Nickname = "蛋";
@@ -266,7 +266,7 @@ namespace WangPluginPkm.GUI
                 pk.OT_Friendship = 1;
                 pk.RefreshChecksum();
                 pk.SetBoxForm();
-              
+
                 return pk;
             }
             else
@@ -276,18 +276,18 @@ namespace WangPluginPkm.GUI
         }
         public void SetBox()
         {
-        int n = SAV.CurrentBox;
-        PKM[] PKL = SAV.SAV.GetBoxData(n);
-        for (int i = 0; i < PKL.Count(); i++)
-        {
-        var pk = PKL[i];
-        PKL[i] = Egg(pk, SAV); 
-        }
-        if (PKL.Count() != 0)
-        {
-           SAV.SAV.SetBoxData(PKL, n);
-        }
-           SAV.ReloadSlots();
+            int n = SAV.CurrentBox;
+            PKM[] PKL = SAV.SAV.GetBoxData(n);
+            for (int i = 0; i < PKL.Count(); i++)
+            {
+                var pk = PKL[i];
+                PKL[i] = Egg(pk, SAV);
+            }
+            if (PKL.Count() != 0)
+            {
+                SAV.SAV.SetBoxData(PKL, n);
+            }
+            SAV.ReloadSlots();
         }
         public void SetOne()
         {

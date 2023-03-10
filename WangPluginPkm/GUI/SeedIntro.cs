@@ -99,6 +99,6 @@ namespace WangPluginPkm.GUI
             Roaming8b.SubItems.Add($"28");
             SeedInstroList.Items.Add(Roaming8b);
         }
-       
+
     }
 }

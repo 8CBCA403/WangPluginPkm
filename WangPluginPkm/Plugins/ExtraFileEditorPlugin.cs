@@ -3,10 +3,10 @@ using System.Windows.Forms;
 using WangPluginPkm.GUI;
 namespace WangPluginPkm.Plugins
 {
-    internal class GP1EditorPlugin: WangPluginPkm
+    internal class ExtraFileEditorPlugin: WangPluginPkm
     {
         
-            public override string Name => "GP1编辑器/GP1 Editor";
+            public override string Name => "额外文件编辑器/ExtraFileEditor";
             public override int Priority => 8;
 
             protected override void AddPluginControl(ToolStripDropDownItem modmenu)
@@ -16,7 +16,7 @@ namespace WangPluginPkm.Plugins
                     Image =    Properties.Resources.GoPark
                 };
                 ctrl.Click += OpenForm;
-                ctrl.Name = "GP1编辑器/GP1 Editor";
+                ctrl.Name = "额外文件编辑器/ExtraFileEditor";
                 modmenu.DropDownItems.Add(ctrl);
 
             }
@@ -24,7 +24,7 @@ namespace WangPluginPkm.Plugins
             private void OpenForm(object sender, EventArgs e)
             {
 
-                var form = new GP1Editor(SaveFileEditor, PKMEditor);
+                var form = new ExtraFileEditor(SaveFileEditor, PKMEditor);
                 form.Show();
             }
         }

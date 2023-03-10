@@ -11,23 +11,23 @@ namespace WangPluginPkm.GUI
 {
     partial class BattleKingUI : Form
     {
-       
-      //  public string Page;
-        public  List<ShowdownSet> Sets = new();
+
+        //  public string Page;
+        public List<ShowdownSet> Sets = new();
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
-       
+
         public BattleKingUI(ISaveFileProvider sav, IPKMView editor)
         {
             InitializeComponent();
             SAV = sav;
             Editor = editor;
         }
-     
-     //   private static readonly EncounterOrder[] EncounterPriority =
-    //   {
-     //       EncounterOrder.Egg, EncounterOrder.Static, EncounterOrder.Trade, EncounterOrder.Slot, EncounterOrder.Mystery,
-    //    };
+
+        //   private static readonly EncounterOrder[] EncounterPriority =
+        //   {
+        //       EncounterOrder.Egg, EncounterOrder.Static, EncounterOrder.Trade, EncounterOrder.Slot, EncounterOrder.Mystery,
+        //    };
         private void IsRunning(bool running)
         {
             ImportPKM_BTN.Enabled = !running;
@@ -64,8 +64,8 @@ namespace WangPluginPkm.GUI
                         return;
                     }
                     Import(info.Sets);
-                  //  var response = $"All sets generated from the following URL: {info.URL}";
-                   // MessageBox.Show(response);
+                    //  var response = $"All sets generated from the following URL: {info.URL}";
+                    // MessageBox.Show(response);
                 }
             MessageBox.Show($"导入了{suburl.Length}个队伍");
         }
@@ -74,9 +74,9 @@ namespace WangPluginPkm.GUI
             var text = GetTextShowdownData(PSBox.Text.TrimEnd());
             if (string.IsNullOrWhiteSpace(text))
                 return;
-            if(ChineseCheckBox.Checked)
+            if (ChineseCheckBox.Checked)
             {
-               text= PSTranslator<PK9>.Chinese2Showdown(text);
+                text = PSTranslator<PK9>.Chinese2Showdown(text);
             }
             Import(text!);
         }
@@ -133,7 +133,7 @@ namespace WangPluginPkm.GUI
             else
             {
                 var replace = (Control.ModifierKeys & Keys.Alt) != 0;
-                 ImportSetsToBoxes(sets, replace);
+                ImportSetsToBoxes(sets, replace);
             }
 
         }
@@ -164,7 +164,7 @@ namespace WangPluginPkm.GUI
             Editor.PopulateFields(legal);
             var timespan = timer.Elapsed;
             Debug.WriteLine($"Time to complete {nameof(ImportSetToTabs)}: {timespan.Minutes:00} minutes {timespan.Seconds:00} seconds {timespan.Milliseconds / 10:00} milliseconds");
-        
+
         }
         private void ImportSetsToBoxes(IReadOnlyList<ShowdownSet> sets, bool replace)
         {
@@ -180,30 +180,30 @@ namespace WangPluginPkm.GUI
             timer.Stop();
             var timespan = timer.Elapsed;
             Debug.WriteLine($"Time to complete {nameof(ImportSetsToBoxes)}: {timespan.Minutes:00} minutes {timespan.Seconds:00} seconds {timespan.Milliseconds / 10:00} milliseconds");
-           
+
         }
         private string TranslatorZH(string text)
         {
             string[] zh = text.Split(';');
-            string s="";
-            string t="";
-            for(int i=0;i<zh.Count();i++)
+            string s = "";
+            string t = "";
+            for (int i = 0; i < zh.Count(); i++)
             {
                 t.Replace(";", "");
-                t=PSTranslator<PKM>.Chinese2Showdown(zh[i]);
-                s =s+ t;
+                t = PSTranslator<PKM>.Chinese2Showdown(zh[i]);
+                s = s + t;
                 s += "\n\n";
             }
             return s;
         }
-        private  string GetTextShowdownData(string text)
+        private string GetTextShowdownData(string text)
         {
-            
-            
+
+
             if (ShowdownUtil.IsTextShowdownData(text))
                 return text;
 
-           
+
             return null;
         }
         private void GenSmogonSets(PKM rough)
@@ -218,13 +218,13 @@ namespace WangPluginPkm.GUI
             if (!fi.Exists)
                 return null;
             string ext = fi.Extension;
-            byte[] input;  
-            input = File.ReadAllBytes(path); 
+            byte[] input;
+            input = File.ReadAllBytes(path);
             FileUtil.TryGetPKM(input, out var pk, ext);
             return pk;
         }
 
-       
+
         public static void ClearPKM(PKM pkm)
         {
             pkm.Species = 0;
@@ -232,7 +232,7 @@ namespace WangPluginPkm.GUI
 
         private void Test_BTN_Click(object sender, EventArgs e)
         {
- 
+
         }
     }
 }

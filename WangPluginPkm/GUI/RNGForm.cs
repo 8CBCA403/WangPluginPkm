@@ -24,7 +24,6 @@ namespace WangPluginPkm.GUI
         private CancellationTokenSource ChecktokenSource = new();
         private const string Pk9Filter = "PK9 Entity |*.pk9|All Files|*.*";
         private bool CheckFlag = true;
-        private PK9 PK = null!;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
 

@@ -10,68 +10,67 @@ namespace WangPluginPkm.GUI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SimpleEditor));
-            this.AllRibbon = new System.Windows.Forms.Button();
-            this.ClearRecord = new System.Windows.Forms.Button();
-            this.LegalizeReport = new System.Windows.Forms.Button();
-            this.Master = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            AllRibbon = new Button();
+            ClearRecord = new Button();
+            LegalizeReport = new Button();
+            Master = new Button();
+            SuspendLayout();
             // 
             // AllRibbon
             // 
-            this.AllRibbon.Location = new System.Drawing.Point(25, 26);
-            this.AllRibbon.Name = "AllRibbon";
-            this.AllRibbon.Size = new System.Drawing.Size(110, 30);
-            this.AllRibbon.TabIndex = 0;
-            this.AllRibbon.Text = "AllRibbon";
-            this.AllRibbon.UseVisualStyleBackColor = true;
-            this.AllRibbon.Click += new System.EventHandler(this.AllRibbon_Click);
+            AllRibbon.Location = new System.Drawing.Point(25, 26);
+            AllRibbon.Name = "AllRibbon";
+            AllRibbon.Size = new System.Drawing.Size(110, 30);
+            AllRibbon.TabIndex = 0;
+            AllRibbon.Text = "AllRibbon";
+            AllRibbon.UseVisualStyleBackColor = true;
+            AllRibbon.Click += AllRibbon_Click;
             // 
             // ClearRecord
             // 
-            this.ClearRecord.Location = new System.Drawing.Point(156, 26);
-            this.ClearRecord.Name = "ClearRecord";
-            this.ClearRecord.Size = new System.Drawing.Size(110, 30);
-            this.ClearRecord.TabIndex = 1;
-            this.ClearRecord.Text = "ClearRecord";
-            this.ClearRecord.UseVisualStyleBackColor = true;
-            this.ClearRecord.Click += new System.EventHandler(this.ClearRecord_Click);
+            ClearRecord.Location = new System.Drawing.Point(156, 26);
+            ClearRecord.Name = "ClearRecord";
+            ClearRecord.Size = new System.Drawing.Size(110, 30);
+            ClearRecord.TabIndex = 1;
+            ClearRecord.Text = "ClearRecord";
+            ClearRecord.UseVisualStyleBackColor = true;
+            ClearRecord.Click += ClearRecord_Click;
             // 
             // LegalizeReport
             // 
-            this.LegalizeReport.Location = new System.Drawing.Point(25, 71);
-            this.LegalizeReport.Name = "LegalizeReport";
-            this.LegalizeReport.Size = new System.Drawing.Size(110, 28);
-            this.LegalizeReport.TabIndex = 2;
-            this.LegalizeReport.Text = "Report";
-            this.LegalizeReport.UseVisualStyleBackColor = true;
-            this.LegalizeReport.Click += new System.EventHandler(this.LegalizeReport_Click);
+            LegalizeReport.Location = new System.Drawing.Point(25, 71);
+            LegalizeReport.Name = "LegalizeReport";
+            LegalizeReport.Size = new System.Drawing.Size(110, 28);
+            LegalizeReport.TabIndex = 2;
+            LegalizeReport.Text = "Report";
+            LegalizeReport.UseVisualStyleBackColor = true;
+            LegalizeReport.Click += LegalizeReport_Click;
             // 
             // Master
             // 
-            this.Master.Location = new System.Drawing.Point(157, 71);
-            this.Master.Name = "Master";
-            this.Master.Size = new System.Drawing.Size(108, 28);
-            this.Master.TabIndex = 3;
-            this.Master.Text = "Master";
-            this.Master.UseVisualStyleBackColor = true;
-            this.Master.Click += new System.EventHandler(this.Master_Click);
+            Master.Location = new System.Drawing.Point(157, 71);
+            Master.Name = "Master";
+            Master.Size = new System.Drawing.Size(108, 28);
+            Master.TabIndex = 3;
+            Master.Text = "Master";
+            Master.UseVisualStyleBackColor = true;
+            Master.Click += Master_Click;
             // 
             // SimpleEditor
             // 
-            this.ClientSize = new System.Drawing.Size(282, 113);
-            this.Controls.Add(this.Master);
-            this.Controls.Add(this.LegalizeReport);
-            this.Controls.Add(this.ClearRecord);
-            this.Controls.Add(this.AllRibbon);
-            this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "SimpleEditor";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Super Wang";
-            this.ResumeLayout(false);
-
+            ClientSize = new System.Drawing.Size(282, 113);
+            Controls.Add(Master);
+            Controls.Add(LegalizeReport);
+            Controls.Add(ClearRecord);
+            Controls.Add(AllRibbon);
+            Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            Name = "SimpleEditor";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Super Wang";
+            ResumeLayout(false);
         }
     }
 }

@@ -112,7 +112,7 @@ namespace WangPluginPkm.GUI
             UsePreSeed.AutoSize = true;
             UsePreSeed.Location = new System.Drawing.Point(6, 171);
             UsePreSeed.Name = "UsePreSeed";
-            UsePreSeed.Size = new System.Drawing.Size(114, 21);
+            UsePreSeed.Size = new System.Drawing.Size(125, 19);
             UsePreSeed.TabIndex = 22;
             UsePreSeed.Text = "使用预设种子";
             UsePreSeed.UseVisualStyleBackColor = true;
@@ -146,7 +146,7 @@ namespace WangPluginPkm.GUI
             TeamLockBox.AutoSize = true;
             TeamLockBox.Location = new System.Drawing.Point(138, 171);
             TeamLockBox.Name = "TeamLockBox";
-            TeamLockBox.Size = new System.Drawing.Size(117, 21);
+            TeamLockBox.Size = new System.Drawing.Size(117, 19);
             TeamLockBox.TabIndex = 24;
             TeamLockBox.Text = "CXD使用队锁";
             TeamLockBox.UseVisualStyleBackColor = true;
@@ -164,7 +164,7 @@ namespace WangPluginPkm.GUI
             MinIV_Box.FormattingEnabled = true;
             MinIV_Box.Location = new System.Drawing.Point(87, 37);
             MinIV_Box.Name = "MinIV_Box";
-            MinIV_Box.Size = new System.Drawing.Size(105, 25);
+            MinIV_Box.Size = new System.Drawing.Size(105, 23);
             MinIV_Box.TabIndex = 25;
             // 
             // Gender_Box
@@ -172,7 +172,7 @@ namespace WangPluginPkm.GUI
             Gender_Box.FormattingEnabled = true;
             Gender_Box.Location = new System.Drawing.Point(100, 67);
             Gender_Box.Name = "Gender_Box";
-            Gender_Box.Size = new System.Drawing.Size(92, 25);
+            Gender_Box.Size = new System.Drawing.Size(92, 23);
             Gender_Box.TabIndex = 26;
             // 
             // FlawlessIV
@@ -180,7 +180,7 @@ namespace WangPluginPkm.GUI
             FlawlessIV.AutoSize = true;
             FlawlessIV.Location = new System.Drawing.Point(52, 40);
             FlawlessIV.Name = "FlawlessIV";
-            FlawlessIV.Size = new System.Drawing.Size(34, 17);
+            FlawlessIV.Size = new System.Drawing.Size(39, 15);
             FlawlessIV.TabIndex = 27;
             FlawlessIV.Text = "锁IV";
             // 
@@ -189,7 +189,7 @@ namespace WangPluginPkm.GUI
             genderlabel.AutoSize = true;
             genderlabel.Location = new System.Drawing.Point(53, 71);
             genderlabel.Name = "genderlabel";
-            genderlabel.Size = new System.Drawing.Size(50, 17);
+            genderlabel.Size = new System.Drawing.Size(55, 15);
             genderlabel.TabIndex = 28;
             genderlabel.Text = "公母比";
             // 
@@ -198,7 +198,7 @@ namespace WangPluginPkm.GUI
             Ability_Box.FormattingEnabled = true;
             Ability_Box.Location = new System.Drawing.Point(87, 98);
             Ability_Box.Name = "Ability_Box";
-            Ability_Box.Size = new System.Drawing.Size(105, 25);
+            Ability_Box.Size = new System.Drawing.Size(105, 23);
             Ability_Box.TabIndex = 29;
             // 
             // AbilityLabel
@@ -206,7 +206,7 @@ namespace WangPluginPkm.GUI
             AbilityLabel.AutoSize = true;
             AbilityLabel.Location = new System.Drawing.Point(53, 101);
             AbilityLabel.Name = "AbilityLabel";
-            AbilityLabel.Size = new System.Drawing.Size(36, 17);
+            AbilityLabel.Size = new System.Drawing.Size(39, 15);
             AbilityLabel.TabIndex = 30;
             AbilityLabel.Text = "特性";
             // 
@@ -311,7 +311,7 @@ namespace WangPluginPkm.GUI
             IVCheck_Box.Enabled = false;
             IVCheck_Box.Location = new System.Drawing.Point(46, 111);
             IVCheck_Box.Name = "IVCheck_Box";
-            IVCheck_Box.Size = new System.Drawing.Size(98, 21);
+            IVCheck_Box.Size = new System.Drawing.Size(109, 19);
             IVCheck_Box.TabIndex = 44;
             IVCheck_Box.Text = "使用IV反推";
             IVCheck_Box.UseVisualStyleBackColor = true;
@@ -324,7 +324,7 @@ namespace WangPluginPkm.GUI
             PIDECCheck_Box.CheckState = CheckState.Checked;
             PIDECCheck_Box.Location = new System.Drawing.Point(46, 85);
             PIDECCheck_Box.Name = "PIDECCheck_Box";
-            PIDECCheck_Box.Size = new System.Drawing.Size(110, 21);
+            PIDECCheck_Box.Size = new System.Drawing.Size(117, 19);
             PIDECCheck_Box.TabIndex = 25;
             PIDECCheck_Box.Text = "使用PID反推";
             PIDECCheck_Box.UseVisualStyleBackColor = true;
@@ -335,7 +335,7 @@ namespace WangPluginPkm.GUI
             IVBox.AutoSize = true;
             IVBox.Location = new System.Drawing.Point(43, 54);
             IVBox.Name = "IVBox";
-            IVBox.Size = new System.Drawing.Size(20, 17);
+            IVBox.Size = new System.Drawing.Size(23, 15);
             IVBox.TabIndex = 43;
             IVBox.Text = "IV";
             // 
@@ -352,7 +352,7 @@ namespace WangPluginPkm.GUI
             ECLabel.AutoSize = true;
             ECLabel.Location = new System.Drawing.Point(210, 54);
             ECLabel.Name = "ECLabel";
-            ECLabel.Size = new System.Drawing.Size(29, 17);
+            ECLabel.Size = new System.Drawing.Size(23, 15);
             ECLabel.TabIndex = 41;
             ECLabel.Text = "EC";
             // 
@@ -369,7 +369,7 @@ namespace WangPluginPkm.GUI
             Seedlabel.AutoSize = true;
             Seedlabel.Location = new System.Drawing.Point(197, 85);
             Seedlabel.Name = "Seedlabel";
-            Seedlabel.Size = new System.Drawing.Size(42, 17);
+            Seedlabel.Size = new System.Drawing.Size(39, 15);
             Seedlabel.TabIndex = 39;
             Seedlabel.Text = "Seed";
             // 
@@ -378,7 +378,7 @@ namespace WangPluginPkm.GUI
             PIDlabel.AutoSize = true;
             PIDlabel.Location = new System.Drawing.Point(207, 22);
             PIDlabel.Name = "PIDlabel";
-            PIDlabel.Size = new System.Drawing.Size(32, 17);
+            PIDlabel.Size = new System.Drawing.Size(31, 15);
             PIDlabel.TabIndex = 37;
             PIDlabel.Text = "PID";
             // 
@@ -387,7 +387,7 @@ namespace WangPluginPkm.GUI
             Mlabel.AutoSize = true;
             Mlabel.Location = new System.Drawing.Point(7, 22);
             Mlabel.Name = "Mlabel";
-            Mlabel.Size = new System.Drawing.Size(64, 17);
+            Mlabel.Size = new System.Drawing.Size(71, 15);
             Mlabel.TabIndex = 37;
             Mlabel.Text = "模式选择";
             // 
@@ -396,7 +396,7 @@ namespace WangPluginPkm.GUI
             Mod_ComboBox.FormattingEnabled = true;
             Mod_ComboBox.Location = new System.Drawing.Point(68, 17);
             Mod_ComboBox.Name = "Mod_ComboBox";
-            Mod_ComboBox.Size = new System.Drawing.Size(124, 25);
+            Mod_ComboBox.Size = new System.Drawing.Size(124, 23);
             Mod_ComboBox.TabIndex = 37;
             // 
             // RNGFormTabControl
@@ -426,10 +426,10 @@ namespace WangPluginPkm.GUI
             ReverseSeedPage.Controls.Add(ECBox);
             ReverseSeedPage.Controls.Add(PIDlabel);
             ReverseSeedPage.Controls.Add(Seedlabel);
-            ReverseSeedPage.Location = new System.Drawing.Point(4, 26);
+            ReverseSeedPage.Location = new System.Drawing.Point(4, 25);
             ReverseSeedPage.Name = "ReverseSeedPage";
             ReverseSeedPage.Padding = new Padding(3);
-            ReverseSeedPage.Size = new System.Drawing.Size(373, 202);
+            ReverseSeedPage.Size = new System.Drawing.Size(373, 203);
             ReverseSeedPage.TabIndex = 0;
             ReverseSeedPage.Text = "Seed逆推";
             // 
@@ -452,10 +452,10 @@ namespace WangPluginPkm.GUI
             SWSHPage.Controls.Add(Seed_Box);
             SWSHPage.Controls.Add(Ability_Box);
             SWSHPage.Controls.Add(AbilityLabel);
-            SWSHPage.Location = new System.Drawing.Point(4, 29);
+            SWSHPage.Location = new System.Drawing.Point(4, 25);
             SWSHPage.Name = "SWSHPage";
             SWSHPage.Padding = new Padding(3);
-            SWSHPage.Size = new System.Drawing.Size(373, 199);
+            SWSHPage.Size = new System.Drawing.Size(373, 203);
             SWSHPage.TabIndex = 1;
             SWSHPage.Text = "剑盾Raid检测";
             // 
@@ -464,7 +464,7 @@ namespace WangPluginPkm.GUI
             Seed_Label.AutoSize = true;
             Seed_Label.Location = new System.Drawing.Point(6, 9);
             Seed_Label.Name = "Seed_Label";
-            Seed_Label.Size = new System.Drawing.Size(42, 17);
+            Seed_Label.Size = new System.Drawing.Size(39, 15);
             Seed_Label.TabIndex = 47;
             Seed_Label.Text = "Seed";
             // 
@@ -519,10 +519,10 @@ namespace WangPluginPkm.GUI
             TeraSeedPage.Controls.Add(TeraSeedBox);
             TeraSeedPage.Controls.Add(label);
             TeraSeedPage.Controls.Add(lblEC);
-            TeraSeedPage.Location = new System.Drawing.Point(4, 26);
+            TeraSeedPage.Location = new System.Drawing.Point(4, 25);
             TeraSeedPage.Name = "TeraSeedPage";
             TeraSeedPage.Padding = new Padding(3);
-            TeraSeedPage.Size = new System.Drawing.Size(373, 202);
+            TeraSeedPage.Size = new System.Drawing.Size(373, 203);
             TeraSeedPage.TabIndex = 2;
             TeraSeedPage.Text = "朱紫太晶坑检测";
             // 
@@ -539,7 +539,7 @@ namespace WangPluginPkm.GUI
             Gen9IvcomboBox.FormattingEnabled = true;
             Gen9IvcomboBox.Location = new System.Drawing.Point(158, 10);
             Gen9IvcomboBox.Name = "Gen9IvcomboBox";
-            Gen9IvcomboBox.Size = new System.Drawing.Size(34, 25);
+            Gen9IvcomboBox.Size = new System.Drawing.Size(34, 23);
             Gen9IvcomboBox.TabIndex = 80;
             // 
             // numHeight
@@ -571,27 +571,30 @@ namespace WangPluginPkm.GUI
             // label5
             // 
             label5.AutoSize = true;
+            label5.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             label5.Location = new System.Drawing.Point(263, 44);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(36, 17);
+            label5.Size = new System.Drawing.Size(39, 15);
             label5.TabIndex = 89;
             label5.Text = "特性";
             // 
             // label2
             // 
             label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             label2.Location = new System.Drawing.Point(123, 13);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(34, 17);
+            label2.Size = new System.Drawing.Size(39, 15);
             label2.TabIndex = 81;
             label2.Text = "锁IV";
             // 
             // lblScale
             // 
             lblScale.AutoSize = true;
+            lblScale.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             lblScale.Location = new System.Drawing.Point(169, 106);
             lblScale.Name = "lblScale";
-            lblScale.Size = new System.Drawing.Size(40, 17);
+            lblScale.Size = new System.Drawing.Size(47, 15);
             lblScale.TabIndex = 48;
             lblScale.Text = "大小:";
             // 
@@ -614,9 +617,10 @@ namespace WangPluginPkm.GUI
             // lblNature
             // 
             lblNature.AutoSize = true;
+            lblNature.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             lblNature.Location = new System.Drawing.Point(27, 137);
             lblNature.Name = "lblNature";
-            lblNature.Size = new System.Drawing.Size(40, 17);
+            lblNature.Size = new System.Drawing.Size(47, 15);
             lblNature.TabIndex = 71;
             lblNature.Text = "性格:";
             // 
@@ -633,33 +637,36 @@ namespace WangPluginPkm.GUI
             Gen9AbilitycomboBox.FormattingEnabled = true;
             Gen9AbilitycomboBox.Location = new System.Drawing.Point(49, 10);
             Gen9AbilitycomboBox.Name = "Gen9AbilitycomboBox";
-            Gen9AbilitycomboBox.Size = new System.Drawing.Size(70, 25);
+            Gen9AbilitycomboBox.Size = new System.Drawing.Size(70, 23);
             Gen9AbilitycomboBox.TabIndex = 82;
             // 
             // lblHeight
             // 
             lblHeight.AutoSize = true;
+            lblHeight.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             lblHeight.Location = new System.Drawing.Point(169, 75);
             lblHeight.Name = "lblHeight";
-            lblHeight.Size = new System.Drawing.Size(40, 17);
+            lblHeight.Size = new System.Drawing.Size(47, 15);
             lblHeight.TabIndex = 52;
             lblHeight.Text = "身高:";
             // 
             // label3
             // 
             label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             label3.Location = new System.Drawing.Point(15, 13);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(36, 17);
+            label3.Size = new System.Drawing.Size(39, 15);
             label3.TabIndex = 83;
             label3.Text = "特性";
             // 
             // lblWeight
             // 
             lblWeight.AutoSize = true;
+            lblWeight.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             lblWeight.Location = new System.Drawing.Point(263, 75);
             lblWeight.Name = "lblWeight";
-            lblWeight.Size = new System.Drawing.Size(40, 17);
+            lblWeight.Size = new System.Drawing.Size(47, 15);
             lblWeight.TabIndex = 51;
             lblWeight.Text = "体重:";
             // 
@@ -668,15 +675,16 @@ namespace WangPluginPkm.GUI
             Tera9genderComboBox.FormattingEnabled = true;
             Tera9genderComboBox.Location = new System.Drawing.Point(232, 10);
             Tera9genderComboBox.Name = "Tera9genderComboBox";
-            Tera9genderComboBox.Size = new System.Drawing.Size(70, 25);
+            Tera9genderComboBox.Size = new System.Drawing.Size(70, 23);
             Tera9genderComboBox.TabIndex = 80;
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             label1.Location = new System.Drawing.Point(195, 13);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(36, 17);
+            label1.Size = new System.Drawing.Size(39, 15);
             label1.TabIndex = 81;
             label1.Text = "公母";
             // 
@@ -685,7 +693,7 @@ namespace WangPluginPkm.GUI
             lblPID.AutoSize = true;
             lblPID.Location = new System.Drawing.Point(34, 75);
             lblPID.Name = "lblPID";
-            lblPID.Size = new System.Drawing.Size(36, 17);
+            lblPID.Size = new System.Drawing.Size(39, 15);
             lblPID.TabIndex = 49;
             lblPID.Text = "PID:";
             // 
@@ -703,7 +711,7 @@ namespace WangPluginPkm.GUI
             cmbNature.Items.AddRange(new object[] { "Hardy", "Lonely", "Brave", "Adamant", "Naughty", "Bold", "Docile", "Relaxed", "Impish", "Lax", "Timid", "Hasty", "Serious", "Jolly", "Naive", "Modest", "Mild", "Quiet", "Bashful", "Rash", "Calm", "Gentle", "Sassy", "Careful", "Quirky" });
             cmbNature.Location = new System.Drawing.Point(67, 134);
             cmbNature.Name = "cmbNature";
-            cmbNature.Size = new System.Drawing.Size(102, 25);
+            cmbNature.Size = new System.Drawing.Size(102, 23);
             cmbNature.TabIndex = 72;
             // 
             // IVstextBox
@@ -717,18 +725,20 @@ namespace WangPluginPkm.GUI
             // label4
             // 
             label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             label4.Location = new System.Drawing.Point(176, 44);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(33, 17);
+            label4.Size = new System.Drawing.Size(39, 15);
             label4.TabIndex = 87;
             label4.Text = "性别";
             // 
             // IVlabel
             // 
             IVlabel.AutoSize = true;
+            IVlabel.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             IVlabel.Location = new System.Drawing.Point(6, 168);
             IVlabel.Name = "IVlabel";
-            IVlabel.Size = new System.Drawing.Size(40, 17);
+            IVlabel.Size = new System.Drawing.Size(47, 15);
             IVlabel.TabIndex = 85;
             IVlabel.Text = "个体:";
             // 
@@ -745,7 +755,7 @@ namespace WangPluginPkm.GUI
             label.AutoSize = true;
             label.Location = new System.Drawing.Point(21, 46);
             label.Name = "label";
-            label.Size = new System.Drawing.Size(46, 17);
+            label.Size = new System.Drawing.Size(47, 15);
             label.TabIndex = 86;
             label.Text = "Seed:";
             // 
@@ -754,7 +764,7 @@ namespace WangPluginPkm.GUI
             lblEC.AutoSize = true;
             lblEC.Location = new System.Drawing.Point(34, 106);
             lblEC.Name = "lblEC";
-            lblEC.Size = new System.Drawing.Size(33, 17);
+            lblEC.Size = new System.Drawing.Size(31, 15);
             lblEC.TabIndex = 47;
             lblEC.Text = "EC:";
             // 
@@ -783,7 +793,7 @@ namespace WangPluginPkm.GUI
             Controls.Add(RNGFormTabControl);
             Controls.Add(SearchGroupBox);
             Controls.Add(RNGmenuStrip);
-            Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             ForeColor = System.Drawing.SystemColors.ControlText;
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");

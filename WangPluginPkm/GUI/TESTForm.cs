@@ -11,7 +11,7 @@ namespace WangPluginPkm.GUI
 
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
-        public  TESTForm(ISaveFileProvider sav, IPKMView editor)
+        public TESTForm(ISaveFileProvider sav, IPKMView editor)
         {
             SAV = sav;
             Editor = editor;
@@ -20,48 +20,48 @@ namespace WangPluginPkm.GUI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TESTForm));
-            this.SetAll_BTN = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            SetAll_BTN = new Button();
+            SuspendLayout();
             // 
             // SetAll_BTN
             // 
-            this.SetAll_BTN.Location = new System.Drawing.Point(80, 34);
-            this.SetAll_BTN.Name = "SetAll_BTN";
-            this.SetAll_BTN.Size = new System.Drawing.Size(96, 30);
-            this.SetAll_BTN.TabIndex = 0;
-            this.SetAll_BTN.Text = "RandomPID";
-            this.SetAll_BTN.UseVisualStyleBackColor = true;
-            this.SetAll_BTN.Click += new System.EventHandler(this.SetAll_BTN_Click);
+            SetAll_BTN.Location = new System.Drawing.Point(80, 34);
+            SetAll_BTN.Name = "SetAll_BTN";
+            SetAll_BTN.Size = new System.Drawing.Size(96, 30);
+            SetAll_BTN.TabIndex = 0;
+            SetAll_BTN.Text = "RandomPID";
+            SetAll_BTN.UseVisualStyleBackColor = true;
+            SetAll_BTN.Click += SetAll_BTN_Click;
             // 
             // TESTForm
             // 
-            this.ClientSize = new System.Drawing.Size(258, 98);
-            this.Controls.Add(this.SetAll_BTN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "TESTForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Super Wang";
-            this.ResumeLayout(false);
-
+            ClientSize = new System.Drawing.Size(258, 98);
+            Controls.Add(SetAll_BTN);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            Name = "TESTForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Super Wang";
+            ResumeLayout(false);
         }
+
         public void SetPkm(ISaveFileProvider SaveFileEditor)
         {
             var sav = SaveFileEditor.SAV;
             List<PKM> PKL = new();
-            for(int i=0;i<30;i++)
+            for (int i = 0; i < 30; i++)
             {
                 var pk = GetPkm(Editor.Data);
                 pk.Language = Editor.Data.Language;
                 pk.ClearNickname();
                 pk.OT_Name = "Homelander";
                 pk.DisplayTID = 074074;
-                pk.DisplaySID =0007;
+                pk.DisplaySID = 0007;
                 PKL.Add(pk);
             }
-            if(PKL.Count!=0)
-            sav.SetBoxData(PKL,sav.CurrentBox);
+            if (PKL.Count != 0)
+                sav.SetBoxData(PKL, sav.CurrentBox);
             SaveFileEditor.ReloadSlots();
         }
         public PKM GetPkm(PKM pk)
@@ -83,8 +83,8 @@ namespace WangPluginPkm.GUI
                 Results = results;
                 enc = Results[0];
                 var criteria = EncounterUtil.GetCriteria(enc, pk);
-                pk= enc.ConvertToPKM(SAV.SAV, criteria);
-                
+                pk = enc.ConvertToPKM(SAV.SAV, criteria);
+
             }
             return pk;
         }

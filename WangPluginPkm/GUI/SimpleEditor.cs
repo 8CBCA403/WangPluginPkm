@@ -10,7 +10,7 @@ namespace WangPluginPkm.GUI
 {
     partial class SimpleEditor : Form
     {
-      
+
         private IPKMView Editor { get; }
         private ISaveFileProvider SAV { get; }
         private PK8 gp = new();
@@ -38,7 +38,7 @@ namespace WangPluginPkm.GUI
         private void Master_Click(object sender, EventArgs e)
         {
             if (SAV.SAV.Version != GameVersion.PLA)
-                MessageBox.Show("只适用于阿尔宙斯！","SuperWang");
+                MessageBox.Show("只适用于阿尔宙斯！", "SuperWang");
             else
             {
                 Handle_MoveShop();
@@ -51,23 +51,23 @@ namespace WangPluginPkm.GUI
             PKM pkm = Editor.Data;
             var pk = (PA8)pkm;
             if (pk.Species != 0)
-            pk = GetMoveFromDataBase(pkm);
+                pk = GetMoveFromDataBase(pkm);
             IMoveShop8Mastery shop = pk;
             for (int q = 0; q < 62; q++)
             {
-              shop.SetPurchasedRecordFlag(q, true);
-              la = new LegalityAnalysis(pk);
-              if (!la.Valid)
-                  shop.SetPurchasedRecordFlag(q, false);
-             }
+                shop.SetPurchasedRecordFlag(q, true);
+                la = new LegalityAnalysis(pk);
+                if (!la.Valid)
+                    shop.SetPurchasedRecordFlag(q, false);
+            }
             for (int j = 0; j < 62; j++)
-             {
-               shop.SetMasteredRecordFlag(j, true);
-               la = new LegalityAnalysis(pk);
-               if (!la.Valid)
-                  shop.SetMasteredRecordFlag(j, false);
-             }
-            pk= Handle_OTPokemon(pk,pkm);
+            {
+                shop.SetMasteredRecordFlag(j, true);
+                la = new LegalityAnalysis(pk);
+                if (!la.Valid)
+                    shop.SetMasteredRecordFlag(j, false);
+            }
+            pk = Handle_OTPokemon(pk, pkm);
             pk.ResetHeight();
             pk.ResetWeight();
             pk.ClearNickname();
@@ -163,8 +163,8 @@ namespace WangPluginPkm.GUI
         private void SearchGift()
         {
 
-            string r="";
-            var L=  SAV.SAV.GetBoxData(SAV.CurrentBox);
+            string r = "";
+            var L = SAV.SAV.GetBoxData(SAV.CurrentBox);
             PKM pk;
             int j = 1;
             if (L.Count() != 0)
@@ -178,7 +178,7 @@ namespace WangPluginPkm.GUI
             }
             MessageBox.Show($"{r}");
         }
-       
+
         private void Check_Gift_Click(object sender, EventArgs e)
         {
             SearchGift();
@@ -186,13 +186,13 @@ namespace WangPluginPkm.GUI
 
         private void ALLMG_Click(object sender, EventArgs e)
         {
-            
-           
+
+
             IList<PKM> BoxData;
             for (ushort i = 1; i < 722; i++)
             {
                 List<PKM> L = new();
-              
+
                 BoxData = SAV.SAV.BoxData;
                 IList<PKM> arr2 = BoxData;
                 List<int> list = FindAllEmptySlots(arr2, 0);
@@ -206,8 +206,8 @@ namespace WangPluginPkm.GUI
                 }
                 SAV.ReloadSlots();
             }
-         
-            
+
+
         }
         #endregion
         private static List<int> FindAllEmptySlots(IList<PKM> data, int start)
@@ -226,8 +226,8 @@ namespace WangPluginPkm.GUI
         private void button1_Click(object sender, EventArgs e)
         {
             PK8 pk;
-            pk=gp;
-            var o= PokeCrypto.EncryptArray8(pk.Data);
+            pk = gp;
+            var o = PokeCrypto.EncryptArray8(pk.Data);
             using var sfd = new SaveFileDialog
             {
                 FileName = "A",
@@ -238,7 +238,7 @@ namespace WangPluginPkm.GUI
 
             if (sfd.ShowDialog() != DialogResult.OK)
                 return;
-            File.WriteAllBytes(sfd.FileName,o);
+            File.WriteAllBytes(sfd.FileName, o);
 
         }
 

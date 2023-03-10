@@ -2,20 +2,22 @@
 using System;
 using System.Windows.Forms;
 using System.IO;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace WangPluginPkm.GUI
 {
-    partial class GP1Editor:Form
+    partial class ExtraFileEditor : Form
     {
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
 
         private GP1M gp = new();
         private GP1 gpm = new();
-        
-        private const string GoFilter ="Go Park Entity |*.gp1|All Files|*.*";
-        private const string PK8Filter ="SWSH/PLA pokemon file |*.pb8|*.pa8|All Files|*.*";
-       
+
+        private const string GoFilter = "Go Park Entity |*.gp1|All Files|*.*";
+        private const string PK8Filter = "SWSH/PLA pokemon file |*.pb8|*.pa8|All Files|*.*";
+
         private GenderType Gtype = GenderType.None;
         enum GenderType
         {
@@ -24,14 +26,14 @@ namespace WangPluginPkm.GUI
             Female,
             None,
         }
-        public GP1Editor(ISaveFileProvider sav, IPKMView editor)
+        public ExtraFileEditor(ISaveFileProvider sav, IPKMView editor)
         {
             SAV = sav;
             Editor = editor;
             InitializeComponent();
             BindingData();
         }
-       
+
         private void BindingData()
         {
             this.GenderBox.DataSource = Enum.GetNames(typeof(GenderType));
@@ -41,7 +43,7 @@ namespace WangPluginPkm.GUI
             };
             this.GenderBox.SelectedIndex = 0;
         }
-            private void ImportGP1From(string path)
+        private void ImportGP1From(string path)
         {
             var data = File.ReadAllBytes(path);
             if (data.Length != GP1.SIZE)
@@ -49,7 +51,7 @@ namespace WangPluginPkm.GUI
                 MessageBox.Show(MessageStrings.MsgFileLoadIncompatible);
                 return;
             }
-            var gp1 = new GP1M();          
+            var gp1 = new GP1M();
             data.CopyTo(gp1.Data, 0);
             data.CopyTo(gpm.Data, 0);
             gp = gp1;
@@ -58,18 +60,18 @@ namespace WangPluginPkm.GUI
         {
             byte a = 0;
             byte b = 0;
-            pk.Species= (ushort)SpeciesName.GetSpeciesID(SpeciesBox.Text, 9);
+            pk.Species = (ushort)SpeciesName.GetSpeciesID(SpeciesBox.Text, 9);
             gp.Username1 = OT_Name.Text;
-            ushort Move1 = (ushort)Array.IndexOf(GameInfo.Strings.movelist,Move1_TextBox.Text);
-            ushort Move2 = (ushort)Array.IndexOf(GameInfo.Strings.movelist,Move2_TextBox.Text);
-          //gp.Username2 = OName.Text;
+            ushort Move1 = (ushort)Array.IndexOf(GameInfo.Strings.movelist, Move1_TextBox.Text);
+            ushort Move2 = (ushort)Array.IndexOf(GameInfo.Strings.movelist, Move2_TextBox.Text);
+            //gp.Username2 = OName.Text;
             gp.Nickname = NickNameBox.Text;
-            gp.IV_HP =Convert.ToInt16(HP_TextBox.Text);
+            gp.IV_HP = Convert.ToInt16(HP_TextBox.Text);
             gp.IV_ATK = Convert.ToInt16(Atk_TextBox.Text);
             gp.IV_DEF = Convert.ToInt16(Def_TextBox.Text);
             gp.Gender = GenderBox.SelectedIndex;
-            gp.Move1= Move1;
-            gp.Move2= Move2;
+            gp.Move1 = Move1;
+            gp.Move2 = Move2;
             gp.CP = Convert.ToInt16(CP_TextBox.Text);
             gp.Date = Convert.ToInt32(MetDate_TextBox.Text);
             if (ShinyCheck.Checked)
@@ -79,18 +81,18 @@ namespace WangPluginPkm.GUI
                 b = 1;
             gp.Form = b;
             gp = pk;
-            
+
         }
         private void ImportGP_BTN_Click(object sender, EventArgs e)
         {
-         
+
             using var sfd = new OpenFileDialog
             {
                 Filter = GoFilter,
                 FilterIndex = 0,
                 RestoreDirectory = true,
             };
-         // Export
+            // Export
             if (sfd.ShowDialog() != DialogResult.OK)
                 return;
 
@@ -102,14 +104,14 @@ namespace WangPluginPkm.GUI
             SpeciesBox.Text = Name;
             NickNameBox.Text = gp.Nickname;
             OT_Name.Text = gp.Username1;
-          //OName.Text = gp.Username2;
+            //OName.Text = gp.Username2;
             HP_TextBox.Text = gp.IV_HP.ToString();
             Atk_TextBox.Text = gp.IV_ATK.ToString();
             Def_TextBox.Text = gp.IV_DEF.ToString();
             Move1_TextBox.Text = Move1;
             Move2_TextBox.Text = Move2;
             CP_TextBox.Text = gp.CP.ToString();
-            GenderBox.SelectedIndex = gp.Gender%4;
+            GenderBox.SelectedIndex = gp.Gender % 4;
             MetDate_TextBox.Text = gp.Date.ToString();
             GeoName_TextBox.Text = gp.GeoCityName;
             if (gp.IsShiny == 1)
@@ -145,8 +147,8 @@ namespace WangPluginPkm.GUI
 
         private void CovertToPB7_Click(object sender, EventArgs e)
         {
-            PB7 pkm ;
-            pkm=gpm.ConvertToPB7(SAV.SAV);
+            PB7 pkm;
+            pkm = gpm.ConvertToPB7(SAV.SAV);
             Editor.PopulateFields(pkm, false);
             SAV.ReloadSlots();
         }
@@ -168,15 +170,15 @@ namespace WangPluginPkm.GUI
         }
         private PKM ImportPKFrom(string path)
         {
-            PKM pkm=Editor.Data;
+            PKM pkm = Editor.Data;
             var data = File.ReadAllBytes(path);
             string extension = Path.GetExtension(path);
-            if (data.Length != 344|| data.Length != 376)
+            if (data.Length != 344 || data.Length != 376)
             {
                 MessageBox.Show(MessageStrings.MsgFileLoadIncompatible);
-               
+
             }
-           switch(extension)
+            switch (extension)
             {
                 case "pk8":
                     pkm = new PK8(data);
@@ -191,6 +193,65 @@ namespace WangPluginPkm.GUI
             return pkm;
         }
 
-        
+        private void LoadEH1_BTN_Click(object sender, EventArgs e)
+        {
+            List<PKM> PK = new();
+            var i = 0;
+            DialogResult dr = this.OpenFile_Dialog.ShowDialog();
+            int BOX = Int16.Parse(BOX_TextBox.Text) - 1;
+            if (dr == DialogResult.OK)
+            {
+                foreach (String file in OpenFile_Dialog.FileNames)
+                {
+                    ConvertPKM(file, OpenFile_Dialog.FileNames.Length, ref PK);
+                    i++;
+                    if (i == OpenFile_Dialog.SafeFileNames.Length)
+                    {
+                        break;
+                    }
+                }
+                MessageBox.Show($"选取了{PK.Count}只宝可梦");
+                for (i = 0; i < PK.Count; i++)
+                {
+                    SAV.SAV.SetBoxSlotAtIndex(PK[i], BOX, i);
+                    SAV.ReloadSlots();
+                }
+            }
+        }
+        private void ConvertPKM(string file, int n, ref List<PKM> p)
+        {
+            var data = File.ReadAllBytes(file);
+            PKM pk;
+
+            var pkh = DecryptEH1(data);
+            if (SAV.SAV.Version is GameVersion.SH or GameVersion.SW)
+            {
+                pk = pkh.ConvertToPK8();
+                p.Add(pk);
+
+            }
+            else if (SAV.SAV.Version is GameVersion.PLA)
+            {
+                pk = pkh.ConvertToPA8();
+                p.Add(pk);
+            }
+            else if (SAV.SAV.Version is GameVersion.BD or GameVersion.SP)
+            {
+                pk = pkh.ConvertToPB8();
+                p.Add(pk);
+            }
+            else
+                MessageBox.Show("ERROR");
+
+        }
+        private PKH DecryptEH1(byte[] ek1)
+        {
+            if (ek1 != null)
+            {
+                if (HomeCrypto.GetIsEncrypted1(ek1))
+                    return new PKH(ek1);
+            }
+            return null;
+        }
     }
 }

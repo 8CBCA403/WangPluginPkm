@@ -33,310 +33,309 @@ namespace WangPluginPkm.GUI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MutiCalcUI));
-            this.CalcNature = new System.Windows.Forms.Button();
-            this.PIDHex = new System.Windows.Forms.TextBox();
-            this.PID = new System.Windows.Forms.Label();
-            this.Nature = new System.Windows.Forms.TextBox();
-            this.CloseBTN = new System.Windows.Forms.Button();
-            this.Hex1 = new System.Windows.Forms.TextBox();
-            this.Dec1 = new System.Windows.Forms.TextBox();
-            this.Dec2 = new System.Windows.Forms.TextBox();
-            this.Hex2 = new System.Windows.Forms.TextBox();
-            this.CalcHTD = new System.Windows.Forms.Button();
-            this.CalcDTH = new System.Windows.Forms.Button();
-            this.TID16 = new System.Windows.Forms.TextBox();
-            this.SID16 = new System.Windows.Forms.TextBox();
-            this.CalcID = new System.Windows.Forms.Button();
-            this.HTC = new System.Windows.Forms.Label();
-            this.CTH = new System.Windows.Forms.Label();
-            this.TID16Result = new System.Windows.Forms.TextBox();
-            this.SID16Result = new System.Windows.Forms.TextBox();
-            this.IDCheck = new System.Windows.Forms.CheckBox();
-            this.IDsCheck = new System.Windows.Forms.CheckBox();
-            this.TID16Label = new System.Windows.Forms.Label();
-            this.SID16Label = new System.Windows.Forms.Label();
-            this.UnownPidTextBox = new System.Windows.Forms.TextBox();
-            this.UnownFormBox = new System.Windows.Forms.TextBox();
-            this.UnownLabel = new System.Windows.Forms.Label();
-            this.FormCalc = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            CalcNature = new Button();
+            PIDHex = new TextBox();
+            PID = new Label();
+            Nature = new TextBox();
+            CloseBTN = new Button();
+            Hex1 = new TextBox();
+            Dec1 = new TextBox();
+            Dec2 = new TextBox();
+            Hex2 = new TextBox();
+            CalcHTD = new Button();
+            CalcDTH = new Button();
+            TID16 = new TextBox();
+            SID16 = new TextBox();
+            CalcID = new Button();
+            HTC = new Label();
+            CTH = new Label();
+            TID16Result = new TextBox();
+            SID16Result = new TextBox();
+            IDCheck = new CheckBox();
+            IDsCheck = new CheckBox();
+            TID16Label = new Label();
+            SID16Label = new Label();
+            UnownPidTextBox = new TextBox();
+            UnownFormBox = new TextBox();
+            UnownLabel = new Label();
+            FormCalc = new Button();
+            SuspendLayout();
             // 
             // CalcNature
             // 
-            this.CalcNature.Font = new System.Drawing.Font("黑体", 9F);
-            this.CalcNature.Location = new System.Drawing.Point(315, 23);
-            this.CalcNature.Name = "CalcNature";
-            this.CalcNature.Size = new System.Drawing.Size(100, 25);
-            this.CalcNature.TabIndex = 0;
-            this.CalcNature.Text = "计算";
-            this.CalcNature.UseVisualStyleBackColor = true;
-            this.CalcNature.Click += new System.EventHandler(this.CalcStart_Click);
+            CalcNature.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            CalcNature.Location = new System.Drawing.Point(315, 23);
+            CalcNature.Name = "CalcNature";
+            CalcNature.Size = new System.Drawing.Size(100, 25);
+            CalcNature.TabIndex = 0;
+            CalcNature.Text = "计算";
+            CalcNature.UseVisualStyleBackColor = true;
+            CalcNature.Click += CalcStart_Click;
             // 
             // PIDHex
             // 
-            this.PIDHex.Location = new System.Drawing.Point(103, 23);
-            this.PIDHex.Name = "PIDHex";
-            this.PIDHex.Size = new System.Drawing.Size(100, 25);
-            this.PIDHex.TabIndex = 2;
+            PIDHex.Location = new System.Drawing.Point(103, 23);
+            PIDHex.Name = "PIDHex";
+            PIDHex.Size = new System.Drawing.Size(100, 25);
+            PIDHex.TabIndex = 2;
             // 
             // PID
             // 
-            this.PID.AutoSize = true;
-            this.PID.Font = new System.Drawing.Font("黑体", 9F);
-            this.PID.Location = new System.Drawing.Point(12, 27);
-            this.PID.Name = "PID";
-            this.PID.Size = new System.Drawing.Size(111, 15);
-            this.PID.TabIndex = 3;
-            this.PID.Text = "通过PID算性格";
+            PID.AutoSize = true;
+            PID.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            PID.Location = new System.Drawing.Point(12, 27);
+            PID.Name = "PID";
+            PID.Size = new System.Drawing.Size(111, 15);
+            PID.TabIndex = 3;
+            PID.Text = "通过PID算性格";
             // 
             // Nature
             // 
-            this.Nature.Enabled = false;
-            this.Nature.Location = new System.Drawing.Point(209, 23);
-            this.Nature.Name = "Nature";
-            this.Nature.Size = new System.Drawing.Size(100, 25);
-            this.Nature.TabIndex = 4;
+            Nature.Enabled = false;
+            Nature.Location = new System.Drawing.Point(209, 23);
+            Nature.Name = "Nature";
+            Nature.Size = new System.Drawing.Size(100, 25);
+            Nature.TabIndex = 4;
             // 
             // CloseBTN
             // 
-            this.CloseBTN.Font = new System.Drawing.Font("黑体", 9F);
-            this.CloseBTN.Location = new System.Drawing.Point(315, 147);
-            this.CloseBTN.Name = "CloseBTN";
-            this.CloseBTN.Size = new System.Drawing.Size(100, 25);
-            this.CloseBTN.TabIndex = 5;
-            this.CloseBTN.Text = "关闭";
-            this.CloseBTN.UseVisualStyleBackColor = true;
-            this.CloseBTN.Click += new System.EventHandler(this.CloseBTN_Click);
+            CloseBTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            CloseBTN.Location = new System.Drawing.Point(315, 147);
+            CloseBTN.Name = "CloseBTN";
+            CloseBTN.Size = new System.Drawing.Size(100, 25);
+            CloseBTN.TabIndex = 5;
+            CloseBTN.Text = "关闭";
+            CloseBTN.UseVisualStyleBackColor = true;
+            CloseBTN.Click += CloseBTN_Click;
             // 
             // Hex1
             // 
-            this.Hex1.Location = new System.Drawing.Point(103, 54);
-            this.Hex1.Name = "Hex1";
-            this.Hex1.Size = new System.Drawing.Size(100, 25);
-            this.Hex1.TabIndex = 6;
+            Hex1.Location = new System.Drawing.Point(103, 54);
+            Hex1.Name = "Hex1";
+            Hex1.Size = new System.Drawing.Size(100, 25);
+            Hex1.TabIndex = 6;
             // 
             // Dec1
             // 
-            this.Dec1.Enabled = false;
-            this.Dec1.Location = new System.Drawing.Point(209, 54);
-            this.Dec1.Name = "Dec1";
-            this.Dec1.Size = new System.Drawing.Size(100, 25);
-            this.Dec1.TabIndex = 7;
+            Dec1.Enabled = false;
+            Dec1.Location = new System.Drawing.Point(209, 54);
+            Dec1.Name = "Dec1";
+            Dec1.Size = new System.Drawing.Size(100, 25);
+            Dec1.TabIndex = 7;
             // 
             // Dec2
             // 
-            this.Dec2.Location = new System.Drawing.Point(103, 85);
-            this.Dec2.Name = "Dec2";
-            this.Dec2.Size = new System.Drawing.Size(100, 25);
-            this.Dec2.TabIndex = 8;
+            Dec2.Location = new System.Drawing.Point(103, 85);
+            Dec2.Name = "Dec2";
+            Dec2.Size = new System.Drawing.Size(100, 25);
+            Dec2.TabIndex = 8;
             // 
             // Hex2
             // 
-            this.Hex2.Enabled = false;
-            this.Hex2.Location = new System.Drawing.Point(209, 85);
-            this.Hex2.Name = "Hex2";
-            this.Hex2.Size = new System.Drawing.Size(100, 25);
-            this.Hex2.TabIndex = 9;
+            Hex2.Enabled = false;
+            Hex2.Location = new System.Drawing.Point(209, 85);
+            Hex2.Name = "Hex2";
+            Hex2.Size = new System.Drawing.Size(100, 25);
+            Hex2.TabIndex = 9;
             // 
             // CalcHTD
             // 
-            this.CalcHTD.Font = new System.Drawing.Font("黑体", 9F);
-            this.CalcHTD.Location = new System.Drawing.Point(315, 53);
-            this.CalcHTD.Name = "CalcHTD";
-            this.CalcHTD.Size = new System.Drawing.Size(100, 25);
-            this.CalcHTD.TabIndex = 10;
-            this.CalcHTD.Text = "计算";
-            this.CalcHTD.UseVisualStyleBackColor = true;
-            this.CalcHTD.Click += new System.EventHandler(this.CalcHTD_Click);
+            CalcHTD.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            CalcHTD.Location = new System.Drawing.Point(315, 53);
+            CalcHTD.Name = "CalcHTD";
+            CalcHTD.Size = new System.Drawing.Size(100, 25);
+            CalcHTD.TabIndex = 10;
+            CalcHTD.Text = "计算";
+            CalcHTD.UseVisualStyleBackColor = true;
+            CalcHTD.Click += CalcHTD_Click;
             // 
             // CalcDTH
             // 
-            this.CalcDTH.Font = new System.Drawing.Font("黑体", 9F);
-            this.CalcDTH.Location = new System.Drawing.Point(315, 85);
-            this.CalcDTH.Name = "CalcDTH";
-            this.CalcDTH.Size = new System.Drawing.Size(100, 26);
-            this.CalcDTH.TabIndex = 11;
-            this.CalcDTH.Text = "计算";
-            this.CalcDTH.UseVisualStyleBackColor = true;
-            this.CalcDTH.Click += new System.EventHandler(this.CalcDTH_Click);
+            CalcDTH.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            CalcDTH.Location = new System.Drawing.Point(315, 85);
+            CalcDTH.Name = "CalcDTH";
+            CalcDTH.Size = new System.Drawing.Size(100, 26);
+            CalcDTH.TabIndex = 11;
+            CalcDTH.Text = "计算";
+            CalcDTH.UseVisualStyleBackColor = true;
+            CalcDTH.Click += CalcDTH_Click;
             // 
             // TID16
             // 
-            this.TID16.Location = new System.Drawing.Point(103, 116);
-            this.TID16.Name = "TID16";
-            this.TID16.Size = new System.Drawing.Size(100, 25);
-            this.TID16.TabIndex = 12;
+            TID16.Location = new System.Drawing.Point(103, 116);
+            TID16.Name = "TID16";
+            TID16.Size = new System.Drawing.Size(100, 25);
+            TID16.TabIndex = 12;
             // 
             // SID16
             // 
-            this.SID16.Location = new System.Drawing.Point(103, 147);
-            this.SID16.Name = "SID16";
-            this.SID16.Size = new System.Drawing.Size(100, 25);
-            this.SID16.TabIndex = 13;
+            SID16.Location = new System.Drawing.Point(103, 147);
+            SID16.Name = "SID16";
+            SID16.Size = new System.Drawing.Size(100, 25);
+            SID16.TabIndex = 13;
             // 
             // CalcID
             // 
-            this.CalcID.Font = new System.Drawing.Font("黑体", 9F);
-            this.CalcID.Location = new System.Drawing.Point(315, 116);
-            this.CalcID.Name = "CalcID";
-            this.CalcID.Size = new System.Drawing.Size(100, 26);
-            this.CalcID.TabIndex = 14;
-            this.CalcID.Text = "转换";
-            this.CalcID.UseVisualStyleBackColor = true;
-            this.CalcID.Click += new System.EventHandler(this.CalcID_Click);
+            CalcID.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            CalcID.Location = new System.Drawing.Point(315, 116);
+            CalcID.Name = "CalcID";
+            CalcID.Size = new System.Drawing.Size(100, 26);
+            CalcID.TabIndex = 14;
+            CalcID.Text = "转换";
+            CalcID.UseVisualStyleBackColor = true;
+            CalcID.Click += CalcID_Click;
             // 
             // HTC
             // 
-            this.HTC.AutoSize = true;
-            this.HTC.Font = new System.Drawing.Font("黑体", 9F);
-            this.HTC.Location = new System.Drawing.Point(6, 57);
-            this.HTC.Name = "HTC";
-            this.HTC.Size = new System.Drawing.Size(119, 15);
-            this.HTC.TabIndex = 15;
-            this.HTC.Text = "16进制转10进制";
+            HTC.AutoSize = true;
+            HTC.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            HTC.Location = new System.Drawing.Point(6, 57);
+            HTC.Name = "HTC";
+            HTC.Size = new System.Drawing.Size(119, 15);
+            HTC.TabIndex = 15;
+            HTC.Text = "16进制转10进制";
             // 
             // CTH
             // 
-            this.CTH.AutoSize = true;
-            this.CTH.Font = new System.Drawing.Font("黑体", 9F);
-            this.CTH.Location = new System.Drawing.Point(6, 88);
-            this.CTH.Name = "CTH";
-            this.CTH.Size = new System.Drawing.Size(119, 15);
-            this.CTH.TabIndex = 16;
-            this.CTH.Text = "10进制转16进制";
+            CTH.AutoSize = true;
+            CTH.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            CTH.Location = new System.Drawing.Point(6, 88);
+            CTH.Name = "CTH";
+            CTH.Size = new System.Drawing.Size(119, 15);
+            CTH.TabIndex = 16;
+            CTH.Text = "10进制转16进制";
             // 
             // TID16Result
             // 
-            this.TID16Result.Enabled = false;
-            this.TID16Result.Location = new System.Drawing.Point(209, 116);
-            this.TID16Result.Name = "TID16Result";
-            this.TID16Result.Size = new System.Drawing.Size(100, 25);
-            this.TID16Result.TabIndex = 17;
+            TID16Result.Enabled = false;
+            TID16Result.Location = new System.Drawing.Point(209, 116);
+            TID16Result.Name = "TID16Result";
+            TID16Result.Size = new System.Drawing.Size(100, 25);
+            TID16Result.TabIndex = 17;
             // 
             // SID16Result
             // 
-            this.SID16Result.Enabled = false;
-            this.SID16Result.Location = new System.Drawing.Point(209, 147);
-            this.SID16Result.Name = "SID16Result";
-            this.SID16Result.Size = new System.Drawing.Size(100, 25);
-            this.SID16Result.TabIndex = 18;
+            SID16Result.Enabled = false;
+            SID16Result.Location = new System.Drawing.Point(209, 147);
+            SID16Result.Name = "SID16Result";
+            SID16Result.Size = new System.Drawing.Size(100, 25);
+            SID16Result.TabIndex = 18;
             // 
             // IDCheck
             // 
-            this.IDCheck.AutoSize = true;
-            this.IDCheck.Font = new System.Drawing.Font("黑体", 9F);
-            this.IDCheck.Location = new System.Drawing.Point(78, 214);
-            this.IDCheck.Name = "IDCheck";
-            this.IDCheck.Size = new System.Drawing.Size(125, 19);
-            this.IDCheck.TabIndex = 19;
-            this.IDCheck.Text = "5位ID转7位ID";
-            this.IDCheck.UseVisualStyleBackColor = true;
+            IDCheck.AutoSize = true;
+            IDCheck.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            IDCheck.Location = new System.Drawing.Point(78, 214);
+            IDCheck.Name = "IDCheck";
+            IDCheck.Size = new System.Drawing.Size(125, 19);
+            IDCheck.TabIndex = 19;
+            IDCheck.Text = "5位ID转7位ID";
+            IDCheck.UseVisualStyleBackColor = true;
             // 
             // IDsCheck
             // 
-            this.IDsCheck.AutoSize = true;
-            this.IDsCheck.Font = new System.Drawing.Font("黑体", 9F);
-            this.IDsCheck.Location = new System.Drawing.Point(209, 214);
-            this.IDsCheck.Name = "IDsCheck";
-            this.IDsCheck.Size = new System.Drawing.Size(125, 19);
-            this.IDsCheck.TabIndex = 20;
-            this.IDsCheck.Text = "7位ID转5位ID";
-            this.IDsCheck.UseVisualStyleBackColor = true;
+            IDsCheck.AutoSize = true;
+            IDsCheck.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            IDsCheck.Location = new System.Drawing.Point(209, 214);
+            IDsCheck.Name = "IDsCheck";
+            IDsCheck.Size = new System.Drawing.Size(125, 19);
+            IDsCheck.TabIndex = 20;
+            IDsCheck.Text = "7位ID转5位ID";
+            IDsCheck.UseVisualStyleBackColor = true;
             // 
             // TID16Label
             // 
-            this.TID16Label.AutoSize = true;
-            this.TID16Label.Font = new System.Drawing.Font("黑体", 9F);
-            this.TID16Label.Location = new System.Drawing.Point(66, 118);
-            this.TID16Label.Name = "TID16Label";
-            this.TID16Label.Size = new System.Drawing.Size(39, 15);
-            this.TID16Label.TabIndex = 31;
-            this.TID16Label.Text = "表ID";
+            TID16Label.AutoSize = true;
+            TID16Label.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            TID16Label.Location = new System.Drawing.Point(66, 118);
+            TID16Label.Name = "TID16Label";
+            TID16Label.Size = new System.Drawing.Size(39, 15);
+            TID16Label.TabIndex = 31;
+            TID16Label.Text = "表ID";
             // 
             // SID16Label
             // 
-            this.SID16Label.AutoSize = true;
-            this.SID16Label.Font = new System.Drawing.Font("黑体", 9F);
-            this.SID16Label.Location = new System.Drawing.Point(66, 151);
-            this.SID16Label.Name = "SID16Label";
-            this.SID16Label.Size = new System.Drawing.Size(39, 15);
-            this.SID16Label.TabIndex = 32;
-            this.SID16Label.Text = "里ID";
+            SID16Label.AutoSize = true;
+            SID16Label.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            SID16Label.Location = new System.Drawing.Point(66, 151);
+            SID16Label.Name = "SID16Label";
+            SID16Label.Size = new System.Drawing.Size(39, 15);
+            SID16Label.TabIndex = 32;
+            SID16Label.Text = "里ID";
             // 
             // UnownPidTextBox
             // 
-            this.UnownPidTextBox.Location = new System.Drawing.Point(123, 178);
-            this.UnownPidTextBox.Name = "UnownPidTextBox";
-            this.UnownPidTextBox.Size = new System.Drawing.Size(129, 25);
-            this.UnownPidTextBox.TabIndex = 33;
+            UnownPidTextBox.Location = new System.Drawing.Point(123, 178);
+            UnownPidTextBox.Name = "UnownPidTextBox";
+            UnownPidTextBox.Size = new System.Drawing.Size(129, 25);
+            UnownPidTextBox.TabIndex = 33;
             // 
             // UnownFormBox
             // 
-            this.UnownFormBox.Location = new System.Drawing.Point(258, 178);
-            this.UnownFormBox.Name = "UnownFormBox";
-            this.UnownFormBox.Size = new System.Drawing.Size(51, 25);
-            this.UnownFormBox.TabIndex = 34;
+            UnownFormBox.Location = new System.Drawing.Point(258, 178);
+            UnownFormBox.Name = "UnownFormBox";
+            UnownFormBox.Size = new System.Drawing.Size(51, 25);
+            UnownFormBox.TabIndex = 34;
             // 
             // UnownLabel
             // 
-            this.UnownLabel.AutoSize = true;
-            this.UnownLabel.Font = new System.Drawing.Font("黑体", 9F);
-            this.UnownLabel.Location = new System.Drawing.Point(12, 182);
-            this.UnownLabel.Name = "UnownLabel";
-            this.UnownLabel.Size = new System.Drawing.Size(135, 15);
-            this.UnownLabel.TabIndex = 35;
-            this.UnownLabel.Text = "Gen3未知图腾形态";
+            UnownLabel.AutoSize = true;
+            UnownLabel.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            UnownLabel.Location = new System.Drawing.Point(12, 182);
+            UnownLabel.Name = "UnownLabel";
+            UnownLabel.Size = new System.Drawing.Size(135, 15);
+            UnownLabel.TabIndex = 35;
+            UnownLabel.Text = "Gen3未知图腾形态";
             // 
             // FormCalc
             // 
-            this.FormCalc.Font = new System.Drawing.Font("黑体", 9F);
-            this.FormCalc.Location = new System.Drawing.Point(315, 178);
-            this.FormCalc.Name = "FormCalc";
-            this.FormCalc.Size = new System.Drawing.Size(100, 25);
-            this.FormCalc.TabIndex = 36;
-            this.FormCalc.Text = "计算";
-            this.FormCalc.UseVisualStyleBackColor = true;
-            this.FormCalc.Click += new System.EventHandler(this.FormCalc_Click);
+            FormCalc.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            FormCalc.Location = new System.Drawing.Point(315, 178);
+            FormCalc.Name = "FormCalc";
+            FormCalc.Size = new System.Drawing.Size(100, 25);
+            FormCalc.TabIndex = 36;
+            FormCalc.Text = "计算";
+            FormCalc.UseVisualStyleBackColor = true;
+            FormCalc.Click += FormCalc_Click;
             // 
             // MutiCalcUI
             // 
-            this.ClientSize = new System.Drawing.Size(424, 245);
-            this.Controls.Add(this.FormCalc);
-            this.Controls.Add(this.UnownLabel);
-            this.Controls.Add(this.UnownFormBox);
-            this.Controls.Add(this.UnownPidTextBox);
-            this.Controls.Add(this.SID16Label);
-            this.Controls.Add(this.TID16Label);
-            this.Controls.Add(this.IDsCheck);
-            this.Controls.Add(this.IDCheck);
-            this.Controls.Add(this.SID16Result);
-            this.Controls.Add(this.TID16Result);
-            this.Controls.Add(this.CTH);
-            this.Controls.Add(this.HTC);
-            this.Controls.Add(this.CalcID);
-            this.Controls.Add(this.SID16);
-            this.Controls.Add(this.TID16);
-            this.Controls.Add(this.CalcDTH);
-            this.Controls.Add(this.CalcHTD);
-            this.Controls.Add(this.Hex2);
-            this.Controls.Add(this.Dec2);
-            this.Controls.Add(this.Dec1);
-            this.Controls.Add(this.Hex1);
-            this.Controls.Add(this.CloseBTN);
-            this.Controls.Add(this.Nature);
-            this.Controls.Add(this.PID);
-            this.Controls.Add(this.PIDHex);
-            this.Controls.Add(this.CalcNature);
-            this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "MutiCalcUI";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Super Wang";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            ClientSize = new System.Drawing.Size(424, 245);
+            Controls.Add(FormCalc);
+            Controls.Add(UnownLabel);
+            Controls.Add(UnownFormBox);
+            Controls.Add(UnownPidTextBox);
+            Controls.Add(SID16Label);
+            Controls.Add(TID16Label);
+            Controls.Add(IDsCheck);
+            Controls.Add(IDCheck);
+            Controls.Add(SID16Result);
+            Controls.Add(TID16Result);
+            Controls.Add(CTH);
+            Controls.Add(HTC);
+            Controls.Add(CalcID);
+            Controls.Add(SID16);
+            Controls.Add(TID16);
+            Controls.Add(CalcDTH);
+            Controls.Add(CalcHTD);
+            Controls.Add(Hex2);
+            Controls.Add(Dec2);
+            Controls.Add(Dec1);
+            Controls.Add(Hex1);
+            Controls.Add(CloseBTN);
+            Controls.Add(Nature);
+            Controls.Add(PID);
+            Controls.Add(PIDHex);
+            Controls.Add(CalcNature);
+            Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            Name = "MutiCalcUI";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Super Wang";
+            ResumeLayout(false);
+            PerformLayout();
         }
     }
 }

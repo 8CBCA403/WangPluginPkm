@@ -11,7 +11,7 @@ namespace WangPluginPkm.GUI
 {
     partial class ShinyMakerUI : Form
     {
-        public  static uint XorNumber;
+        public static uint XorNumber;
         public static Stopwatch sw = new();
         private ShinyRange T = ShinyRange.BOX;
         public enum ShinyRange
@@ -29,7 +29,7 @@ namespace WangPluginPkm.GUI
             RandomStar,
             Xor,
         }
-        public static Shinytype shinyflag=Shinytype.Star;
+        public static Shinytype shinyflag = Shinytype.Star;
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
         public ShinyMakerUI(ISaveFileProvider sav, IPKMView editor)
@@ -41,7 +41,7 @@ namespace WangPluginPkm.GUI
         }
         private void BindingData()
         {
-            int[] shiny8 = new int[16] {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+            int[] shiny8 = new int[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
             int[] shiny = new int[8] { 0, 1, 2, 3, 4, 5, 6, 7 };
             if (Editor.Data.Format < 8)
                 this.XorBox.DataSource = shiny;
@@ -49,7 +49,7 @@ namespace WangPluginPkm.GUI
                 this.XorBox.DataSource = shiny8;
             this.XorBox.SelectedIndexChanged += (_, __) =>
             {
-                XorNumber=Convert.ToUInt16(this.XorBox.SelectedItem.ToString());
+                XorNumber = Convert.ToUInt16(this.XorBox.SelectedItem.ToString());
             };
             this.XorBox.SelectedIndex = 0;
             this.RangeBox.DisplayMember = "Description";
@@ -76,17 +76,17 @@ namespace WangPluginPkm.GUI
             sav.ModifyBoxes(ShinyFunction);
             SaveFileEditor.ReloadSlots();
         }
-        public static void SetBoxShiny(ISaveFileProvider SaveFileEditor,int i)
+        public static void SetBoxShiny(ISaveFileProvider SaveFileEditor, int i)
         {
             var sav = SaveFileEditor.SAV;
-            sav.ModifyBoxes(ShinyFunction,i,i);
+            sav.ModifyBoxes(ShinyFunction, i, i);
             SaveFileEditor.ReloadSlots();
         }
         public static void ShinySID16(PKM pkm)
         {
-            
-                pkm.SetShinySID();
-            
+
+            pkm.SetShinySID();
+
         }
         private static uint RandomStar(PKM pk)
         {
@@ -96,9 +96,9 @@ namespace WangPluginPkm.GUI
                 r = (uint)myObject.Next(1, 16);
             return (((uint)(pk.TID16 ^ pk.SID16) ^ (pk.PID & 0xFFFF) ^ r) << 16) | (pk.PID & 0xFFFF);
         }
-        private static uint ShinyPID(PKM val,int f=0)
+        private static uint ShinyPID(PKM val, int f = 0)
         {
-            if (shinyflag == Shinytype.RandomStar&&f==0)
+            if (shinyflag == Shinytype.RandomStar && f == 0)
                 val.PID = RandomStar(val);
             else if (shinyflag == Shinytype.Star && f == 0)
                 val.PID = (((uint)(val.TID16 ^ val.SID16) ^ (val.PID & 0xFFFF) ^ 1u) << 16) | (val.PID & 0xFFFF);
@@ -106,7 +106,7 @@ namespace WangPluginPkm.GUI
                 val.PID = (((uint)(val.TID16 ^ val.SID16) ^ (val.PID & 0xFFFF) ^ 0u) << 16) | (val.PID & 0xFFFF);
             else if (shinyflag == Shinytype.Xor && f == 0)
                 val.PID = (((uint)(val.TID16 ^ val.SID16) ^ (val.PID & 0xFFFF) ^ XorNumber) << 16) | (val.PID & 0xFFFF);
-            else if(f==1)
+            else if (f == 1)
                 val.PID = (((uint)(val.TID16 ^ val.SID16) ^ (val.PID & 0xFFFF) ^ 1u) << 16) | (val.PID & 0xFFFF);
             return val.PID;
         }
@@ -125,7 +125,7 @@ namespace WangPluginPkm.GUI
         {
             if (shinyflag == Shinytype.RandomStar && f == 0)
                 val.PID = RandomStar(val);
-             return val.PID;
+            return val.PID;
         }
         public static void ShinyFunction(PKM pkm)
         {
@@ -185,14 +185,14 @@ namespace WangPluginPkm.GUI
                             int[] iv;
                             foreach (var seed in reg)
                             {
-                                iv= LCRNGReversal.SetValuesFromSeedLCRNG(val, seed);
+                                iv = LCRNGReversal.SetValuesFromSeedLCRNG(val, seed);
                                 if (val.IsShiny)
                                     val.IVs = iv;
                             }
                         }
                         else
                         {
-                            pkm.SID16 =(ushort) ShinySID16Lite(val);
+                            pkm.SID16 = (ushort)ShinySID16Lite(val);
                         }
                         pkm.PID = val.PID;
                         pkm.IVs = val.IVs;
@@ -241,7 +241,7 @@ namespace WangPluginPkm.GUI
                         }
                         else
                         {
-                            pkm.SID16 =(ushort)ShinySID16Lite(val);
+                            pkm.SID16 = (ushort)ShinySID16Lite(val);
                         }
                         pkm.PID = val.PID;
                         pkm.IVs = val.IVs;
@@ -261,7 +261,7 @@ namespace WangPluginPkm.GUI
                 if (VersionFlag.Gen8SWSHFlag(val.Version))
                 {
                     pkm.PID = Util.Rand32();
-                    if (EggFlag||pkm.Met_Location==162)
+                    if (EggFlag || pkm.Met_Location == 162)
                     {
                         pkm.PID = ShinyPID(val);
                         CommonEdits.SetRandomEC(pkm);
@@ -284,7 +284,7 @@ namespace WangPluginPkm.GUI
                             }
                             else if (shinyflag == Shinytype.Xor && Overworld8RNG.GenPkmQ(ref pkm, seed, ShinyArray(), iv, XorNumber))
                             {
-                               
+
                                 pkm.RefreshChecksum();
                                 break;
                             }
@@ -293,17 +293,17 @@ namespace WangPluginPkm.GUI
                         }
                     }
                 }
-                if(VersionFlag.Gen8PLAFlag(val.Version))
+                if (VersionFlag.Gen8PLAFlag(val.Version))
                 {
                     pkm.PID = ShinyPID(val);
                     CommonEdits.SetRandomEC(pkm);
                 }
-                if(VersionFlag.Gen8BDSPFlag(val.Version))
+                if (VersionFlag.Gen8BDSPFlag(val.Version))
                 {
                     pkm.PID = ShinyPID(val);
                     CommonEdits.SetRandomEC(pkm);
                 }
-                if(VersionFlag.Gen9Flag(val.Version))
+                if (VersionFlag.Gen9Flag(val.Version))
                 {
                     pkm.PID = ShinyPID(val);
                     CommonEdits.SetRandomEC(pkm);
@@ -322,26 +322,26 @@ namespace WangPluginPkm.GUI
                 pkm.StatNature = va.StatNature;
                 pkm.Gender = va.Gender;
                 pkm.EncryptionConstant = va.EncryptionConstant;
-                if (pkm is IScaledSize s&& va is IScaledSize p)
+                if (pkm is IScaledSize s && va is IScaledSize p)
                 {
-                 s.HeightScalar = p.HeightScalar;
-                 s.WeightScalar = p.WeightScalar;
+                    s.HeightScalar = p.HeightScalar;
+                    s.WeightScalar = p.WeightScalar;
                 }
             }
         }
-        public static ushort SetShinySID16(ushort TID16,uint PID,Shinytype shiny=Shinytype.Square)
+        public static ushort SetShinySID16(ushort TID16, uint PID, Shinytype shiny = Shinytype.Square)
         {
- 
+
             var xor = TID16 ^ (PID >> 16) ^ (PID & 0xFFFF);
             uint bits = shiny switch
             {
                 Shinytype.Square => 0,
                 Shinytype.Star => 1,
-                Shinytype.Xor=> XorNumber,
-               _=>0,
+                Shinytype.Xor => XorNumber,
+                _ => 0,
             };
             ushort SID16 = (ushort)(xor ^ bits);
-            return SID16; 
+            return SID16;
         }
         private void ShinySID16_BTN_Click(object sender, EventArgs e)
         {
@@ -350,7 +350,7 @@ namespace WangPluginPkm.GUI
             {
                 case ShinyRange.BOX:
                     int i = SAV.CurrentBox;
-                    SAV.SAV.ModifyBoxes(ShinySID16,i,i);
+                    SAV.SAV.ModifyBoxes(ShinySID16, i, i);
                     break;
                 case ShinyRange.All:
                     SAV.SAV.ModifyBoxes(ShinySID16);
@@ -358,7 +358,7 @@ namespace WangPluginPkm.GUI
             }
             SAV.ReloadSlots();
             sw.Stop();
-            MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒","SuperWang");
+            MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
         }
         private void Shiny_BTN_Click(object sender, EventArgs e)
         {
@@ -366,10 +366,10 @@ namespace WangPluginPkm.GUI
             switch (T)
             {
                 case ShinyRange.BOX:
-                  
+
                     int i = SAV.CurrentBox;
                     shinyflag = Shinytype.RandomStar;
-                    SetBoxShiny(SAV,i);
+                    SetBoxShiny(SAV, i);
                     break;
                 case ShinyRange.All:
                     shinyflag = Shinytype.RandomStar;
@@ -383,7 +383,7 @@ namespace WangPluginPkm.GUI
         private static bool[] ShinyArray()
         {
             bool[] shiny = new bool[6] { false, false, false, false, false, false };
-            
+
             if (shinyflag == Shinytype.RandomStar)
             {
                 shiny = new bool[6] { false, false, true, false, false, false };

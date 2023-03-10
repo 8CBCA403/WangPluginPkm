@@ -14,16 +14,16 @@ namespace WangPluginPkm.GUI
         {
             this.IDCheck.CheckedChanged += (_, __) =>
             {
-                IDsCheck.Enabled=!IDCheck.Checked;
+                IDsCheck.Enabled = !IDCheck.Checked;
             };
             this.IDsCheck.CheckedChanged += (_, __) =>
             {
                 IDCheck.Enabled = !IDsCheck.Checked;
             };
-         }
+        }
         private void CalcStart_Click(object sender, System.EventArgs e)
         {
-            var PID=uint.Parse(PIDHex.Text, System.Globalization.NumberStyles.HexNumber);
+            var PID = uint.Parse(PIDHex.Text, System.Globalization.NumberStyles.HexNumber);
             var NatureID = PID % 25;
             Nature.Text = ShowNature(NatureID);
         }
@@ -32,7 +32,7 @@ namespace WangPluginPkm.GUI
             string Nature = "Hardy";
             switch (ID)
             {
-                case 0: 
+                case 0:
                     Nature = "0,Hardy";
                     break;
                 case 1:
@@ -108,13 +108,13 @@ namespace WangPluginPkm.GUI
                     Nature = "24,Quirky";
                     break;
             }
-           
+
             return Nature;
         }
         private static string ShowForm(byte v)
         {
             string Form = "A";
-            switch(v)
+            switch (v)
             {
                 case 0:
                     Form = "A";
@@ -209,14 +209,14 @@ namespace WangPluginPkm.GUI
         }
         private void CalcHTD_Click(object sender, EventArgs e)
         {
-            var HEX= "0x"+Hex1.Text;
+            var HEX = "0x" + Hex1.Text;
             var DEC = Convert.ToUInt64(HEX, 16);
             Dec1.Text = DEC.ToString();
         }
         private void CalcDTH_Click(object sender, EventArgs e)
         {
             var DEC = Int64.Parse(Dec2.Text);
-            var HEX= DEC.ToString("X");
+            var HEX = DEC.ToString("X");
             Hex2.Text = HEX;
         }
         private void CalcID_Click(object sender, EventArgs e)
@@ -234,7 +234,7 @@ namespace WangPluginPkm.GUI
                 TID16Result.Text = TID167.ToString();
                 SID16Result.Text = SID167.ToString();
             }
-            else if(IDsCheck.Checked == true)
+            else if (IDsCheck.Checked == true)
             {
                 TID16SID16 = UInt32.Parse(TID16.Text) + UInt32.Parse(SID16.Text) * 1_000_000;
                 TID165 = TID16SID16 % 65536;
@@ -274,14 +274,14 @@ namespace WangPluginPkm.GUI
         private double PriceFunction(int Box)
         {
             double Price;
-                Price = (15 + (-2.69727717624839005266) * Math.Log(Box));
+            Price = (15 + (-2.69727717624839005266) * Math.Log(Box));
             return Price;
         }
         private void FormCalc_Click(object sender, EventArgs e)
         {
             var PID = uint.Parse(UnownPidTextBox.Text, System.Globalization.NumberStyles.HexNumber);
             var value = ((PID & 0x3000000) >> 18) | ((PID & 0x30000) >> 12) | ((PID & 0x300) >> 6) | (PID & 0x3);
-            var s=(byte)(value % 28);
+            var s = (byte)(value % 28);
             UnownFormBox.Text = ShowForm(s);
         }
     }

@@ -31,58 +31,58 @@ namespace WangPluginPkm.GUI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SeedIntro));
-            this.SeedInstroList = new System.Windows.Forms.ListView();
-            this.TextBox = new System.Windows.Forms.TextBox();
-            this.TeamLockTextBox = new System.Windows.Forms.TextBox();
-            this.SuspendLayout();
+            SeedInstroList = new ListView();
+            TextBox = new TextBox();
+            TeamLockTextBox = new TextBox();
+            SuspendLayout();
             // 
             // SeedInstroList
             // 
-            this.SeedInstroList.HideSelection = false;
-            this.SeedInstroList.Location = new System.Drawing.Point(10, 229);
-            this.SeedInstroList.Name = "SeedInstroList";
-            this.SeedInstroList.Size = new System.Drawing.Size(660, 249);
-            this.SeedInstroList.TabIndex = 0;
-            this.SeedInstroList.UseCompatibleStateImageBehavior = false;
+            SeedInstroList.Location = new System.Drawing.Point(10, 305);
+            SeedInstroList.Margin = new Padding(3, 4, 3, 4);
+            SeedInstroList.Name = "SeedInstroList";
+            SeedInstroList.Size = new System.Drawing.Size(660, 331);
+            SeedInstroList.TabIndex = 0;
+            SeedInstroList.UseCompatibleStateImageBehavior = false;
             // 
             // TextBox
             // 
-            this.TextBox.Location = new System.Drawing.Point(10, 19);
-            this.TextBox.Multiline = true;
-            this.TextBox.Name = "TextBox";
-            this.TextBox.Size = new System.Drawing.Size(662, 100);
-            this.TextBox.TabIndex = 1;
-            this.TextBox.Text = "RNG面板使用说明\r\n1.本工具查找功能对象为PKHeX左侧面板精灵，使用前先将需要查找的精灵拖拽至左侧面板\r\n2.请使用本世代存档进行操作（如：现需要查找Met" +
-    "hod1类型Gen3小火龙则需要打开火红/叶绿存档进行操作，而不应打开如日月存档跨世代操作，可能出现卡死）\r\n3.如需特殊IV请使用预制种子，详情见下表。\r\n4" +
-    ".XDColo队锁只限于XDColo部分精灵,详情见下表";
+            TextBox.Location = new System.Drawing.Point(10, 25);
+            TextBox.Margin = new Padding(3, 4, 3, 4);
+            TextBox.Multiline = true;
+            TextBox.Name = "TextBox";
+            TextBox.Size = new System.Drawing.Size(662, 132);
+            TextBox.TabIndex = 1;
+            TextBox.Text = "RNG面板使用说明\r\n1.本工具查找功能对象为PKHeX左侧面板精灵，使用前先将需要查找的精灵拖拽至左侧面板\r\n2.请使用本世代存档进行操作（如：现需要查找Method1类型Gen3小火龙则需要打开火红/叶绿存档进行操作，而不应打开如日月存档跨世代操作，可能出现卡死）\r\n3.如需特殊IV请使用预制种子，详情见下表。\r\n4.XDColo队锁只限于XDColo部分精灵,详情见下表";
             // 
             // TeamLockTextBox
             // 
-            this.TeamLockTextBox.Location = new System.Drawing.Point(10, 125);
-            this.TeamLockTextBox.Multiline = true;
-            this.TeamLockTextBox.Name = "TeamLockTextBox";
-            this.TeamLockTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TeamLockTextBox.Size = new System.Drawing.Size(660, 98);
-            this.TeamLockTextBox.TabIndex = 2;
-            this.TeamLockTextBox.Text = resources.GetString("TeamLockTextBox.Text");
+            TeamLockTextBox.Location = new System.Drawing.Point(10, 167);
+            TeamLockTextBox.Margin = new Padding(3, 4, 3, 4);
+            TeamLockTextBox.Multiline = true;
+            TeamLockTextBox.Name = "TeamLockTextBox";
+            TeamLockTextBox.ScrollBars = ScrollBars.Vertical;
+            TeamLockTextBox.Size = new System.Drawing.Size(660, 129);
+            TeamLockTextBox.TabIndex = 2;
+            TeamLockTextBox.Text = resources.GetString("TeamLockTextBox.Text");
             // 
             // SeedIntro
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(683, 497);
-            this.Controls.Add(this.TeamLockTextBox);
-            this.Controls.Add(this.TextBox);
-            this.Controls.Add(this.SeedInstroList);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "SeedIntro";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SeedInfo";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(683, 663);
+            Controls.Add(TeamLockTextBox);
+            Controls.Add(TextBox);
+            Controls.Add(SeedInstroList);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 4, 3, 4);
+            MaximizeBox = false;
+            Name = "SeedIntro";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "SeedInfo";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
