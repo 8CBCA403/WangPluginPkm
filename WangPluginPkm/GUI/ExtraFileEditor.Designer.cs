@@ -67,7 +67,7 @@ namespace WangPluginPkm.GUI
             GeoName_Label = new Label();
             PKM_TabControl = new TabControl();
             GP1Tab = new TabPage();
-            tabPage2 = new TabPage();
+            EH1tabPage = new TabPage();
             groupBox4 = new GroupBox();
             BOX_TextBox = new TextBox();
             LoadEH1_BTN = new Button();
@@ -75,7 +75,7 @@ namespace WangPluginPkm.GUI
             OpenFile_Dialog = new OpenFileDialog();
             PKM_TabControl.SuspendLayout();
             GP1Tab.SuspendLayout();
-            tabPage2.SuspendLayout();
+            EH1tabPage.SuspendLayout();
             groupBox4.SuspendLayout();
             SuspendLayout();
             // 
@@ -340,7 +340,7 @@ namespace WangPluginPkm.GUI
             // PKM_TabControl
             // 
             PKM_TabControl.Controls.Add(GP1Tab);
-            PKM_TabControl.Controls.Add(tabPage2);
+            PKM_TabControl.Controls.Add(EH1tabPage);
             PKM_TabControl.Location = new System.Drawing.Point(12, 12);
             PKM_TabControl.Name = "PKM_TabControl";
             PKM_TabControl.SelectedIndex = 0;
@@ -349,6 +349,7 @@ namespace WangPluginPkm.GUI
             // 
             // GP1Tab
             // 
+            GP1Tab.BackColor = System.Drawing.Color.WhiteSmoke;
             GP1Tab.Controls.Add(GenderBox);
             GP1Tab.Controls.Add(GeoName_Label);
             GP1Tab.Controls.Add(ImportGP_BTN);
@@ -384,18 +385,17 @@ namespace WangPluginPkm.GUI
             GP1Tab.Size = new System.Drawing.Size(535, 246);
             GP1Tab.TabIndex = 0;
             GP1Tab.Text = "GP1Editor";
-            GP1Tab.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // EH1tabPage
             // 
-            tabPage2.Controls.Add(groupBox4);
-            tabPage2.Location = new System.Drawing.Point(4, 26);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new System.Drawing.Size(535, 246);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "EH1Viewer";
-            tabPage2.UseVisualStyleBackColor = true;
+            EH1tabPage.BackColor = System.Drawing.Color.WhiteSmoke;
+            EH1tabPage.Controls.Add(groupBox4);
+            EH1tabPage.Location = new System.Drawing.Point(4, 26);
+            EH1tabPage.Name = "EH1tabPage";
+            EH1tabPage.Padding = new Padding(3);
+            EH1tabPage.Size = new System.Drawing.Size(535, 246);
+            EH1tabPage.TabIndex = 1;
+            EH1tabPage.Text = "EH1Viewer";
             // 
             // groupBox4
             // 
@@ -456,7 +456,7 @@ namespace WangPluginPkm.GUI
             PKM_TabControl.ResumeLayout(false);
             GP1Tab.ResumeLayout(false);
             GP1Tab.PerformLayout();
-            tabPage2.ResumeLayout(false);
+            EH1tabPage.ResumeLayout(false);
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
             ResumeLayout(false);
@@ -464,7 +464,7 @@ namespace WangPluginPkm.GUI
 
         private TabControl PKM_TabControl;
         private TabPage GP1Tab;
-        private TabPage tabPage2;
+        private TabPage EH1tabPage;
         private GroupBox groupBox4;
         private TextBox BOX_TextBox;
         private Button LoadEH1_BTN;

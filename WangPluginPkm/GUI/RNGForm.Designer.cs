@@ -265,7 +265,7 @@ namespace WangPluginPkm.GUI
             Seed_Box.Location = new System.Drawing.Point(52, 6);
             Seed_Box.Multiline = true;
             Seed_Box.Name = "Seed_Box";
-            Seed_Box.Size = new System.Drawing.Size(140, 25);
+            Seed_Box.Size = new System.Drawing.Size(140, 23);
             Seed_Box.TabIndex = 23;
             Seed_Box.Text = "没有seed";
             // 
@@ -519,10 +519,10 @@ namespace WangPluginPkm.GUI
             TeraSeedPage.Controls.Add(TeraSeedBox);
             TeraSeedPage.Controls.Add(label);
             TeraSeedPage.Controls.Add(lblEC);
-            TeraSeedPage.Location = new System.Drawing.Point(4, 25);
+            TeraSeedPage.Location = new System.Drawing.Point(4, 29);
             TeraSeedPage.Name = "TeraSeedPage";
             TeraSeedPage.Padding = new Padding(3);
-            TeraSeedPage.Size = new System.Drawing.Size(373, 203);
+            TeraSeedPage.Size = new System.Drawing.Size(373, 199);
             TeraSeedPage.TabIndex = 2;
             TeraSeedPage.Text = "朱紫太晶坑检测";
             // 

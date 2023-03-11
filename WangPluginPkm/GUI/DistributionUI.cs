@@ -83,7 +83,7 @@ namespace WangPluginPkm.GUI
             };
 
         }
-      
+
 
         public void SetPkm()
         {

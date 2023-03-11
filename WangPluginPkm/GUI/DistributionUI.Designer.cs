@@ -430,6 +430,7 @@ namespace WangPluginPkm.GUI
             // 
             // CopyPage
             // 
+            CopyPage.BackColor = System.Drawing.Color.WhiteSmoke;
             CopyPage.Controls.Add(groupBox1);
             CopyPage.Controls.Add(groupBox5);
             CopyPage.Controls.Add(groupBox2);
@@ -439,18 +440,17 @@ namespace WangPluginPkm.GUI
             CopyPage.Size = new System.Drawing.Size(493, 227);
             CopyPage.TabIndex = 0;
             CopyPage.Text = "复制器";
-            CopyPage.UseVisualStyleBackColor = true;
             // 
             // EditBoxPage
             // 
+            EditBoxPage.BackColor = System.Drawing.Color.WhiteSmoke;
             EditBoxPage.Controls.Add(groupBox3);
-            EditBoxPage.Location = new System.Drawing.Point(4, 29);
+            EditBoxPage.Location = new System.Drawing.Point(4, 25);
             EditBoxPage.Name = "EditBoxPage";
             EditBoxPage.Padding = new Padding(3);
-            EditBoxPage.Size = new System.Drawing.Size(493, 223);
+            EditBoxPage.Size = new System.Drawing.Size(493, 227);
             EditBoxPage.TabIndex = 1;
             EditBoxPage.Text = "杂项编辑";
-            EditBoxPage.UseVisualStyleBackColor = true;
             // 
             // DistributionUI
             // 

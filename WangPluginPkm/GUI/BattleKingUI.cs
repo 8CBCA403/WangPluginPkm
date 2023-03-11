@@ -72,11 +72,18 @@ namespace WangPluginPkm.GUI
         private void LoadTeamFromPSCode_BTN_Click(object sender, EventArgs e)
         {
             var text = GetTextShowdownData(PSBox.Text.TrimEnd());
+            var chs = "";
             if (string.IsNullOrWhiteSpace(text))
                 return;
             if (ChineseCheckBox.Checked)
             {
-                text = PSTranslator<PK9>.Chinese2Showdown(text);
+
+                var T = text.Split("\n\n");
+                foreach (var t in T)
+                {
+                    chs += PSTranslator<PK9>.Chinese2Showdown(t) + "\n\n";
+                }
+                text = chs;
             }
             Import(text!);
         }

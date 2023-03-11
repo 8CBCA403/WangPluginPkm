@@ -61,7 +61,12 @@ namespace WangPluginPkm
                 Name = "Mothed4/U",
                 Value = "M4",
             };
-           
+            RNGModClass Tera9 = new RNGModClass
+            {
+                Name = "Tera9",
+                Value = "Tera9",
+            };
+
             if (!isIV)
             {
                 L.Add(M124);
@@ -70,6 +75,7 @@ namespace WangPluginPkm
                 L.Add(M3U);
                 L.Add(XDColo);
                 L.Add(Overword8);
+                L.Add(Tera9);
             }
             else
             {

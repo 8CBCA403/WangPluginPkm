@@ -14,6 +14,7 @@ using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
 using Roaming8bRNG = WangPluginPkm.RNG.Methods.Roaming8bRNG;
 using WangPluginPkm.WangUtil.ModifyPKM;
 using static WangPluginPkm.CheckRules;
+using WangPluginPkm.RNG.ReverseRNG;
 
 namespace WangPluginPkm.GUI
 {
@@ -468,6 +469,11 @@ namespace WangPluginPkm.GUI
                             seed = Overworld8Reversal.GetOriginalSeed(EC, PID);
                             break;
                         }
+                    case "Tera9":
+                        {
+                            seed = Tera9RNGReverse.GetOriginalSeed(EC, PID);
+                            break;
+                        }
                 }
 
             }
@@ -525,14 +531,14 @@ namespace WangPluginPkm.GUI
         private string PrintSeed(uint[] seeds, uint seed = 0)
         {
             string result = "";
-            if (seeds.Length != 0 && MD.Value != "Overworld8")
+            if (seeds.Length != 0 && MD.Value != "Overworld8" && MD.Value != "Tera9")
             {
                 for (int i = 0; i < seeds.Length; i++)
                 {
                     result += seeds[i].ToString("X") + '\n';
                 }
             }
-            else if (seed != 0 && MD.Value == "Overworld8")
+            else if (seed != 0 && (MD.Value is "Overworld8" or "Tera9"))
             {
                 result = seed.ToString("X");
             }
@@ -572,7 +578,7 @@ namespace WangPluginPkm.GUI
             this.Mod_ComboBox.SelectedIndexChanged += (_, __) =>
             {
                 MD = (RNGModClass)this.Mod_ComboBox.SelectedItem;
-                if (MD.Value == "Overworld8")
+                if (MD.Value is "Overworld8" or "Tera9")
                 {
                     ECBox.Enabled = true;
                 }
