@@ -23,8 +23,8 @@ namespace WangPluginPkm.GUI
         };
         public DexModClass mod = new DexModClass
         {
-            Name = "一组未知图腾",
-            Value = "Unown",
+            Name = "无",
+            Value = "None",
         };
         private DexFormLanguage7 type7 = DexFormLanguage7.ENG;
         private DexFormLanguage5 type5 = DexFormLanguage5.ENG;
@@ -86,9 +86,18 @@ namespace WangPluginPkm.GUI
             Mod_Select_Box.DisplayMember = "Name";
             Mod_Select_Box.ValueMember = "Value";
             Mod_Select_Box.SelectedIndex = 0;
+            FormAndSubDex_BTN.Enabled = false;
             this.Mod_Select_Box.SelectedIndexChanged += (_, __) =>
             {
                 mod = (DexModClass)this.Mod_Select_Box.SelectedItem;
+                if(mod.Value=="None")
+                {
+                    FormAndSubDex_BTN.Enabled =false;
+                }
+                else
+                {
+                    FormAndSubDex_BTN.Enabled = true;
+                }
             };
         }
         public void Gen(ISaveFileProvider SaveFileEditor)

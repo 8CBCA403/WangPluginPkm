@@ -164,7 +164,16 @@ namespace WangPluginPkm
                 Name = "米立龙家族",
                 Value = "Tatsugiri",
             };
-            if (G>=2&& V is not GameVersion.SW && V is not GameVersion.SH && G <= 8)
+            DexModClass None = new DexModClass
+            {
+                Name = "无",
+                Value = "None",
+            };
+            if (G>=1)
+            {
+                L.Add(None);
+            }
+            if (G>=3&& V is not GameVersion.SW && V is not GameVersion.SH && G <= 8)
             {
                 L.Add(Unown);
             }
