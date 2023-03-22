@@ -4,12 +4,12 @@ using System.Windows.Forms;
 
 namespace WangPluginPkm
 {
-    public partial class PkmCondition :  UserControl
+    public partial class PkmCondition : UserControl
     {
-        public  CheckRules rules = new();
+        public CheckRules rules = new();
         private ShinyType selectedShiny = ShinyType.None;
         private MethodType RNGMethod = MethodType.None;
-        public enum  ShinyType
+        public enum ShinyType
         {
             None,
             Shiny,
@@ -17,7 +17,7 @@ namespace WangPluginPkm
             Sqaure,
             ForceStar,
         }
-       
+
         public PkmCondition()
         {
             InitializeComponent();
@@ -51,7 +51,7 @@ namespace WangPluginPkm
                 rules.Shiny = selectedShiny;
             };
             this.ShinyTypeBox1.SelectedIndex = 0;
-           
+
         }
         private void IVS_TextChanged(object sender, EventArgs e)
         {
@@ -65,6 +65,6 @@ namespace WangPluginPkm
                 txtbox.Text = "0";
             }
         }
-     
+
     }
 }

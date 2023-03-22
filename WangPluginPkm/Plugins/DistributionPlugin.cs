@@ -24,7 +24,6 @@ namespace WangPluginPkm.Plugins
         private void AddCheckerToList()
         {
             var menuVSD = (ContextMenuStrip)((dynamic)SaveFileEditor).menu.mnuVSD;
-            var menuVS = (ContextMenuStrip)((dynamic)SaveFileEditor);
             var ATKIVEV = new ToolStripMenuItem("物攻手");
             var SPAIVEV = new ToolStripMenuItem("特攻手");
             var ATK_0SPEIVEV=new ToolStripMenuItem("物攻0速");
@@ -67,6 +66,7 @@ namespace WangPluginPkm.Plugins
             };
            
         }
+#nullable enable
         private static SlotViewInfo<PictureBox> GetSenderInfo(ref object sender)
         {
             var pb = GetUnderlyingControl<PictureBox>(sender);
@@ -113,6 +113,7 @@ namespace WangPluginPkm.Plugins
                     return null;
             }
         }
+#nullable disable
         private void OpenForm(object sender, EventArgs e)
         {
 
