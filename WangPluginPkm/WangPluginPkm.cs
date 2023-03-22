@@ -14,6 +14,8 @@ namespace WangPluginPkm
         public abstract int Priority { get; }
         public ISaveFileProvider SaveFileEditor { get; private set; } = null!;
         public IPKMView PKMEditor { get; private set; } = null!;
+
+        public IEncounterGenerator EncounterGenerator { get; private set; } = null!;
         public object[] globalArgs;
 
         public  void Initialize(params object[] args)
@@ -23,6 +25,7 @@ namespace WangPluginPkm
             PKMEditor = (IPKMView)Array.Find(args, z => z is IPKMView);
             var menu = (ToolStrip)Array.Find(args, z => z is ToolStrip);
             LoadMenuStrip(menu);
+           
 
         }
         private void LoadMenuStrip(ToolStrip menuStrip)
@@ -54,8 +57,9 @@ namespace WangPluginPkm
             Name = ParentMenuName,
         };
         protected abstract void AddPluginControl(ToolStripDropDownItem modmenu);
-       
-        public  void NotifySaveLoaded()
+      
+
+        public void NotifySaveLoaded()
         {
             Console.WriteLine($"{Name} was notified that a Save File was just loaded.");
         }
