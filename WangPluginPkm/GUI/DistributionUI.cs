@@ -31,7 +31,6 @@ namespace WangPluginPkm.GUI
             InitializeComponent();
             BindingData();
         }
-
         private void BindingData()
         {
             string[] lines = Properties.Resources.Trainers.Split('\n');
@@ -83,8 +82,6 @@ namespace WangPluginPkm.GUI
             };
 
         }
-
-
         public void SetPkm()
         {
             List<PKM> PKL = new();
@@ -289,7 +286,6 @@ namespace WangPluginPkm.GUI
             }
             SAV.ReloadSlots();
         }
-
         private static Trainer RandomT(IList<Trainer> T, int i)
         {
             Random ra = new(unchecked((int)Util.Rand32()) + i);
@@ -565,7 +561,6 @@ namespace WangPluginPkm.GUI
                 pk.SetRandomEC();
             }
         }
-
         private void Random_EncBTN_Click(object sender, EventArgs e)
         {
             Counter = 0;

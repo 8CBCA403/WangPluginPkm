@@ -243,40 +243,7 @@ namespace WangPluginPkm.GUI
                 SID16Result.Text = SID165.ToString();
             }
         }
-        #region
-        /*
-        private void PriceCalc_BTN_Click(object sender, EventArgs e)
-        {
-            var Box = Int16.Parse(BoxInput_TextBox.Text);
-            var a0 = 9.39116979028421;
-            var a1 = 9.07347629645924;
-            double PricePerBox = 0;
-            if (Box < 9||Box==9)
-            {
-                PricePerBox = PriceFunction(Box);
-            }
-            else
-            {
-                for (int i = 0; i < Box - 9; i++)
-                {
-                    PricePerBox = a1 + (a1 - a0) / 10;
-                    a0 = a1;
-                    a1 = PricePerBox;
-                }
-            }
-            double Price = PricePerBox*Box; 
-            var PricePerPKM= (Price / Box/30);
-            PriceOutPut_TextBox.Text = Price.ToString();
-            PricePerBox_TextBox.Text = PricePerBox.ToString();
-            PricePerPKM_TextBox.Text = PricePerPKM.ToString();
-        }*/
-        #endregion
-        private double PriceFunction(int Box)
-        {
-            double Price;
-            Price = (15 + (-2.69727717624839005266) * Math.Log(Box));
-            return Price;
-        }
+
         private void FormCalc_Click(object sender, EventArgs e)
         {
             var PID = uint.Parse(UnownPidTextBox.Text, System.Globalization.NumberStyles.HexNumber);
@@ -284,5 +251,6 @@ namespace WangPluginPkm.GUI
             var s = (byte)(value % 28);
             UnownFormBox.Text = ShowForm(s);
         }
+
     }
 }
