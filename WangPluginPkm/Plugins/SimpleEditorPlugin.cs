@@ -16,6 +16,8 @@ using iText.IO.Font;
 using System.Globalization;
 using iText.Kernel.Pdf.Canvas;
 using iText.Kernel.Pdf.Xobject;
+using System.IO;
+using Org.BouncyCastle.Bcpg.Sig;
 
 namespace WangPluginPkm.Plugins
 {
@@ -102,8 +104,8 @@ namespace WangPluginPkm.Plugins
         }
         private static void pdf(string result,PKM p )
         {
-            
-            PdfFont f1 = PdfFontFactory.CreateFont(@"plugins\WangPluginPkm\simkai.ttf");
+           
+            PdfFont f1 = PdfFontFactory.CreateFont(Properties.Resources.simkai,PdfFontFactory.EmbeddingStrategy.FORCE_EMBEDDED);
             PdfWriter writer = new PdfWriter($"超王宝可梦合法性检测报告-{GameStringsZh.Species[p.Species]}{p.EncryptionConstant:X}.pdf");
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
@@ -144,10 +146,12 @@ namespace WangPluginPkm.Plugins
        */
             MessageBox.Show("已生成合法检测报告");
         }
+   
         public static byte[] ImageToByte(System.Drawing.Image img)
         {
             ImageConverter converter = new ImageConverter();
-            return (byte[])converter.ConvertTo(img, typeof(byte[]));
+            var result = (byte[])converter.ConvertTo(img, typeof(byte[]));
+            return result;
         }
         public static T? GetUnderlyingControl<T>(object sender) where T : class
         {
