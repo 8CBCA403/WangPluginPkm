@@ -115,23 +115,24 @@ namespace WangPluginPkm.Plugins
             Paragraph header2 = new Paragraph($"--------{p.OT_Name}的{GameStringsZh.Species[p.Species]}")
                .SetTextAlignment(TextAlignment.RIGHT)
                .SetFontSize(20).SetFont(f1);
-            Paragraph subheader = new Paragraph("SuperWang")
+            Paragraph subheader = new Paragraph($"SuperWang检测时间:北京时间" +
+                $"{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff",CultureInfo.InvariantCulture)}")
                 .SetTextAlignment(TextAlignment.CENTER)
                 .SetFontSize(15).SetFont(f1);
             LineSeparator ls = new LineSeparator(new SolidLine());
             Paragraph content = new Paragraph($"{result}")
                 .SetTextAlignment(TextAlignment.LEFT) .SetFontSize(12).SetFont(f1);
-            Paragraph time = new Paragraph($"\n\n\n\n\n\n检测时间:北京时间{ DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff",
-                                CultureInfo.InvariantCulture) }").SetTextAlignment(TextAlignment.RIGHT).SetFontSize(12).SetFont(f1);
+            //Paragraph time = new Paragraph($"\n\n\n\n\n检测时间:北京时间{ DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff",
+             //                   CultureInfo.InvariantCulture) }").SetTextAlignment(TextAlignment.RIGHT).SetFontSize(12).SetFont(f1);
             ImageData imageData = ImageDataFactory.Create(ImageToByte(Properties.Resources.SuperWang));
-            iText.Layout.Element.Image image = new iText.Layout.Element.Image(imageData).ScaleAbsolute(100, 100).SetFixedPosition(1, 35, 45);
+            iText.Layout.Element.Image image = new iText.Layout.Element.Image(imageData).ScaleAbsolute(100, 100).SetFixedPosition(1, 450, 45);
             document.Add(image);
             document.Add(header1);
             document.Add(header2);
             document.Add(subheader);
             document.Add(ls);
             document.Add(content);
-            document.Add(time);
+          //  document.Add(time);
             document.Close();
        /*   
             PdfDocument backgroundDocument = new PdfDocument(new PdfReader(@"OIP.pdf"));

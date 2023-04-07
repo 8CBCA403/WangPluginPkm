@@ -18,20 +18,20 @@ namespace WangPluginPkm.PluginUtil.Functions
                 var pk = pkms.Find(x => x.Species == item.Species);
                 pkms.Remove(pk);
             }
-            var o = a.Union(pkms);
-            o = o.OrderBySpecies();
-            var bd = sav.BoxData;
+            var o = a.Union(pkms).ToArray();
+            o = o.OrderBySpecies().ToArray();
+            Span<PKM> bd = sav.BoxData.ToArray();
             o.CopyTo(bd);
-            sav.BoxData = bd;
+            sav.BoxData = bd.ToArray();
             SaveFileEditor.ReloadSlots();
         }
         public static void LivingDex(ISaveFileProvider SaveFileEditor)
         {
             var sav = SaveFileEditor.SAV;
-            var pkms = sav.GenerateLivingDex();
-            var bd = sav.BoxData;
+            Span<PKM> pkms = sav.GenerateLivingDex().ToArray();
+            Span<PKM> bd = sav.BoxData.ToArray();
             pkms.CopyTo(bd);
-            sav.BoxData = bd;
+            sav.BoxData = bd.ToArray();
             SaveFileEditor.ReloadSlots();
         }
         public static void LegalBox(ISaveFileProvider SaveFileEditor)
