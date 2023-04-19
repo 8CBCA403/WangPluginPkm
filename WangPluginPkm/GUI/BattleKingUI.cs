@@ -7,6 +7,9 @@ using PKHeX.Core.AutoMod;
 using System.Diagnostics;
 using System.Linq;
 using System.IO;
+using System.Media;
+using WangPluginPkm.PluginUtil.ModifyPKM;
+
 namespace WangPluginPkm.GUI
 {
     partial class BattleKingUI : Form
@@ -16,6 +19,7 @@ namespace WangPluginPkm.GUI
         public List<ShowdownSet> Sets = new();
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
+        private static List<ExpandPKM> BD = new List<ExpandPKM>();
 
         public BattleKingUI(ISaveFileProvider sav, IPKMView editor)
         {
@@ -236,10 +240,124 @@ namespace WangPluginPkm.GUI
         {
             pkm.Species = 0;
         }
-
-        private void Test_BTN_Click(object sender, EventArgs e)
+        private void OpenQuick(string path)
         {
+            if (!CanFocus)
+            {
+                SystemSounds.Asterisk.Play();
+                return;
+            }
+            var fi = new FileInfo(path);
+            if (!fi.Exists)
+                return;
+            byte[] input;
+            input = File.ReadAllBytes(path);
 
+            if (LoadFile(input, path))
+                return;
         }
+#nullable enable
+        private bool LoadFile(object? input, string path)
+        {
+            if (input == null)
+            {
+                return false;
+            }
+            switch (input)
+            {
+               // case PKM pk: return OpenPKM(pk);
+                case byte[] pkms: return OpenPCBoxBin(pkms);
+            }
+            return false;
+        }
+        private bool OpenPKM(PKM pk)
+        {
+            var destType = SAV.SAV.PKMType;
+            var tmp = EntityConverter.ConvertToType(pk, destType, out var c);
+            Debug.WriteLine(c.GetDisplayString(pk, destType));
+            if (tmp == null)
+                return false;
+            SAV.SAV.AdaptPKM(tmp);
+            TeamList_BOX.Items.Add(pk, CheckState.Checked);
+            return true;
+        }
+        protected PKM GetPKM(byte[] data) => new PK9(data);
+        private bool OpenPCBoxBin(byte[] pkms)
+        {
+            var pkdata = FileTradeHelper<PK9>.Bin2List(pkms);
+            ExpandPKM ex;
+            if (pkdata != null)
+            {
+                for (int i = 0; i < pkdata.Count; i++)
+                {
+                    ex = new()
+                    {
+                        pk = pkdata[i],
+                        Name = GameInfo.GetStrings("zh").Species[pkdata[i].Species] + $"{pkdata[i].EncryptionConstant:X}"
+                    };
+                    BD.Add(ex);
+                }
+            }
+
+            if (BD.Count != 0)
+            {
+                for (int i = 0; i < BD.Count; i++)
+                {
+                    TeamList_BOX.Items.Add(BD[i], CheckState.Checked);
+                }
+
+            }
+            return true;
+        }
+
+        private void PKM_DragDrop(object sender, DragEventArgs e)
+        {
+            BD.Clear();
+            TeamList_BOX.Items.Clear();
+            if (e?.Data?.GetData(DataFormats.FileDrop) is not string[] { Length: not 0 } files)
+                return;
+            OpenQuick(files[0]);
+            e.Effect = DragDropEffects.Copy;
+        }
+        private void PKM_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e is null)
+                return;
+            if (e.AllowedEffect == (DragDropEffects.Copy | DragDropEffects.Link)) // external file
+                e.Effect = DragDropEffects.Copy;
+            else if (e.Data != null) // within
+                e.Effect = DragDropEffects.Copy;
+        }
+
+        private void TEST_BTN_Click(object sender, EventArgs e)
+        {
+            int n = 0;
+            int l = 0;
+            int m = 0;
+            for (int i = 0; i < 6; i++)
+            {
+                n = n + BD[i].pk.Move1_PPUps
+                + BD[i].pk.Move2_PPUps
+                + BD[i].pk.Move3_PPUps
+                + BD[i].pk.Move4_PPUps;
+            }
+            if (n > 15)
+                ResultBox.Text += "队伍PP Up使用超过20%，不合法\n\n";
+            for(int i=0; i < 6; i++)
+            {
+                if (BD[i].pk.EVTotal == 508)
+                    l++;
+            }
+            if(l>0)
+                ResultBox.Text += "队伍中有精灵努力值总和为508，不合法\n\n";
+            for (int i = 0; i < 6; i++)
+            {
+                if (BD[i].pk.CurrentLevel==100)
+                    m++;
+            }
+            if(m==6)
+                ResultBox.Text += "全队宝可梦都是100级，不合法";
+        }
+
     }
 }

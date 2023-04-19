@@ -181,6 +181,9 @@
   <data name="Sort" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\img\Sort.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="SuperSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SuperSound.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="SuperWang" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\img\SuperWang.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -195,6 +198,9 @@
   </data>
   <data name="Trainers" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\text\Trainers.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="VIRTUES" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\VIRTUES.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="wang" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\img\wang.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -282,6 +282,15 @@ namespace WangPluginPkm.Properties {
         }
         
         /// <summary>
+        ///   查找类似于 System.IO.MemoryStream 的 System.IO.UnmanagedMemoryStream 类型的本地化资源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream SuperSound {
+            get {
+                return ResourceManager.GetStream("SuperSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap SuperWang {
@@ -328,6 +337,15 @@ namespace WangPluginPkm.Properties {
         internal static string Trainers {
             get {
                 return ResourceManager.GetString("Trainers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 System.IO.MemoryStream 的 System.IO.UnmanagedMemoryStream 类型的本地化资源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream VIRTUES {
+            get {
+                return ResourceManager.GetStream("VIRTUES", resourceCulture);
             }
         }
         

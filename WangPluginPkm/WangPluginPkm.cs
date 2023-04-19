@@ -3,6 +3,8 @@ using System;
 using System.Threading;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Media;
+
 namespace WangPluginPkm
 {
     public abstract class WangPluginPkm : IPlugin
@@ -10,6 +12,7 @@ namespace WangPluginPkm
         private const string ParentMenuName = "SuperWang";
         private const string ParentMenuText = "超王插件PKM";
         private const string ParentMenuParent = "Menu_Tools";
+        private SoundPlayer Player = new SoundPlayer();
         public abstract string Name { get; }
         public abstract int Priority { get; }
         public ISaveFileProvider SaveFileEditor { get; private set; } = null!;
@@ -24,9 +27,9 @@ namespace WangPluginPkm
             SaveFileEditor = (ISaveFileProvider)Array.Find(args, z => z is ISaveFileProvider);
             PKMEditor = (IPKMView)Array.Find(args, z => z is IPKMView);
             var menu = (ToolStrip)Array.Find(args, z => z is ToolStrip);
+            Player.Stream = Properties.Resources.SuperSound;
+            Player.Play();
             LoadMenuStrip(menu);
-           
-
         }
         private void LoadMenuStrip(ToolStrip menuStrip)
         {

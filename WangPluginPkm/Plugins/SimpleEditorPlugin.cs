@@ -123,7 +123,7 @@ namespace WangPluginPkm.Plugins
             Paragraph content = new Paragraph($"{result}")
                 .SetTextAlignment(TextAlignment.LEFT) .SetFontSize(12).SetFont(f1);
             //Paragraph time = new Paragraph($"\n\n\n\n\n检测时间:北京时间{ DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff",
-             //                   CultureInfo.InvariantCulture) }").SetTextAlignment(TextAlignment.RIGHT).SetFontSize(12).SetFont(f1);
+            //                   CultureInfo.InvariantCulture) }").SetTextAlignment(TextAlignment.RIGHT).SetFontSize(12).SetFont(f1);
             ImageData imageData = ImageDataFactory.Create(ImageToByte(Properties.Resources.SuperWang));
             iText.Layout.Element.Image image = new iText.Layout.Element.Image(imageData).ScaleAbsolute(100, 100).SetFixedPosition(1, 450, 45);
             document.Add(image);
@@ -132,7 +132,7 @@ namespace WangPluginPkm.Plugins
             document.Add(subheader);
             document.Add(ls);
             document.Add(content);
-          //  document.Add(time);
+          //document.Add(time);
             document.Close();
        /*   
             PdfDocument backgroundDocument = new PdfDocument(new PdfReader(@"OIP.pdf"));

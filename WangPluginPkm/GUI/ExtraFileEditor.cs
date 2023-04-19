@@ -3,7 +3,9 @@ using System;
 using System.Windows.Forms;
 using System.IO;
 using System.Collections.Generic;
+using static System.Buffers.Binary.BinaryPrimitives;
 using System.ComponentModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WangPluginPkm.GUI
 {
@@ -17,6 +19,7 @@ namespace WangPluginPkm.GUI
 
         private const string GoFilter = "Go Park Entity |*.gp1|All Files|*.*";
         private const string PK8Filter = "SWSH/PLA pokemon file |*.pb8|*.pa8|All Files|*.*";
+        private const string PA8Filter = "PLA file |*.pa8|All Files|*.*";
 
         private GenderType Gtype = GenderType.None;
         enum GenderType
@@ -201,7 +204,7 @@ namespace WangPluginPkm.GUI
             int BOX = Int16.Parse(BOX_TextBox.Text) - 1;
             if (dr == DialogResult.OK)
             {
-                foreach (String file in OpenFile_Dialog.FileNames)
+                foreach (System.String file in OpenFile_Dialog.FileNames)
                 {
                     ConvertPKM(file, OpenFile_Dialog.FileNames.Length, ref PK);
                     i++;
@@ -254,6 +257,43 @@ namespace WangPluginPkm.GUI
             return null;
         }
 
+        private void LoadPA8_BTN_Click(object sender, EventArgs e)
+        {
+            using var sfd = new OpenFileDialog
+            {
+                Filter = PA8Filter,
+                FilterIndex = 0,
+                RestoreDirectory = true,
+            };
+            // Export
+            if (sfd.ShowDialog() != DialogResult.OK)
+                return;
 
+            string path = sfd.FileName;
+            var data = File.ReadAllBytes(path);
+            
+           var chs= CalculateChecksum(data);
+            WriteUInt16LittleEndian(data.AsSpan(0x06), chs);
+            var pk=PokeCrypto.EncryptArray8A(data);
+           
+            using var sfds = new SaveFileDialog
+            {
+                FileName = "test",
+                Filter = PA8Filter,
+                FilterIndex = 0,
+                RestoreDirectory = true,
+            };
+
+            if (sfd.ShowDialog() != DialogResult.OK)
+                return;
+            File.WriteAllBytes("test.pa8", pk);
+        }
+        private ushort CalculateChecksum(byte[] Data)
+        {
+            ushort chk = 0;
+            for (int i = 8; i < 360; i += 2)
+                chk += ReadUInt16LittleEndian(Data.AsSpan(i));
+            return chk;
+        }
     }
 }
