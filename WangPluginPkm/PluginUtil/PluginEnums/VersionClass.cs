@@ -18,107 +18,107 @@ namespace WangPluginPkm
             };
             VersionClass RYBG = new VersionClass
             {
-                Name = "Gen 1 关东图鉴（蓝，绿，红，黄）顺序",
+                Name = "Gen 1 关东图鉴（蓝，绿，红，黄）",
                 Version = "RYBG",
             };
             VersionClass GS = new VersionClass
             {
-                Name = "Gen 2 城都图鉴（金，银，水晶）顺序",
+                Name = "Gen 2 城都图鉴（金，银，水晶）",
                 Version = "GS",
             };
             VersionClass E = new VersionClass
             {
-                Name = "Gen 3 丰缘图鉴（红，绿，蓝宝石）顺序",
+                Name = "Gen 3 丰缘图鉴（红，绿，蓝宝石）",
                 Version = "E",
             };
             VersionClass FRGL = new VersionClass
             {
-                Name = "Gen 3 关东图鉴（火红，叶绿）顺序",
+                Name = "Gen 3 关东图鉴（火红，叶绿）",
                 Version = "FRGL",
             };
             VersionClass DP = new VersionClass
             {
-                Name = "Gen 4 神奥图鉴（钻石，珍珠）顺序",
+                Name = "Gen 4 神奥图鉴（钻石，珍珠）",
                 Version = "DP",
             };
             VersionClass Platinum = new VersionClass
             {
-                Name = "Gen 4 神奥图鉴（白金）顺序",
+                Name = "Gen 4 神奥图鉴（白金）",
                 Version = "Platinum",
             };
             VersionClass GHSS = new VersionClass
             {
-                Name = "Gen 4 城都图鉴（心金，魂银）顺序",
+                Name = "Gen 4 城都图鉴（心金，魂银）",
                 Version = "GHSS",
             };
             VersionClass BW = new VersionClass
             {
-                Name = "Gen 5 合众图鉴（黑，白）顺序",
+                Name = "Gen 5 合众图鉴（黑，白）",
                 Version = "BW",
             };
             VersionClass B2W2 = new VersionClass
             {
-                Name = "Gen 5 合众图鉴（黑2，白2）顺序",
+                Name = "Gen 5 合众图鉴（黑2，白2）",
                 Version = "B2W2",
             };
             VersionClass XY = new VersionClass
             {
-                Name = "Gen 6 卡洛斯图鉴（X，Y）顺序",
+                Name = "Gen 6 卡洛斯图鉴（X，Y）",
                 Version = "XY",
             };
             VersionClass ORAS = new VersionClass
             {
-                Name = "Gen 6 丰缘图鉴（始源红宝石，蓝宝石）顺序",
+                Name = "Gen 6 丰缘图鉴（始源红宝石，蓝宝石）",
                 Version = "ORAS",
             };
             VersionClass SM = new VersionClass
             {
-                Name = "Gen 7 阿罗拉图鉴（日，月）顺序",
+                Name = "Gen 7 阿罗拉图鉴（日，月）",
                 Version = "SM",
             };
             VersionClass USUM = new VersionClass
             {
-                Name = "Gen 7 阿罗拉图鉴（究极日，月）顺序",
+                Name = "Gen 7 阿罗拉图鉴（究极日，月）",
                 Version = "USUM",
             };
             VersionClass LPLE = new VersionClass
             {
-                Name = "Gen 7 关东图鉴（去皮，去伊）顺序",
+                Name = "Gen 7 关东图鉴（去皮，去伊）",
                 Version = "LPLE",
             };
             VersionClass SWSH = new VersionClass
             {
-                Name = "Gen 8 伽勒尔图鉴（剑，盾）顺序",
+                Name = "Gen 8 伽勒尔图鉴（剑，盾）",
                 Version = "SWSH",
             };
             VersionClass SWSH1 = new VersionClass
             {
-                Name = "Gen 8 伽勒尔铠岛图鉴（剑盾DLC1）顺序",
+                Name = "Gen 8 伽勒尔铠岛图鉴（剑盾DLC1）",
                 Version = "SWSH1",
             };
             VersionClass SWSH2 = new VersionClass
             {
-                Name = "Gen 8 伽勒尔冰冠图鉴（剑盾DLC2）顺序",
+                Name = "Gen 8 伽勒尔冰冠图鉴（剑盾DLC2）",
                 Version = "SWSH2",
             };
             VersionClass SWSH3 = new VersionClass
             {
-                Name = "Gen 8 伽勒尔完整图鉴顺序",
+                Name = "Gen 8 伽勒尔完整图鉴",
                 Version = "SWSH3",
             };
             VersionClass BDSP = new VersionClass
             {
-                Name = "Gen 8 神奥图鉴（明亮珍珠，晶灿钻石）顺序",
+                Name = "Gen 8 神奥图鉴（明亮珍珠，晶灿钻石）",
                 Version = "BDSP",
             };
             VersionClass PLA = new VersionClass
             {
-                Name = "Gen 8 洗翠图鉴（传说阿尔宙斯）顺序",
+                Name = "Gen 8 洗翠图鉴（传说阿尔宙斯）",
                 Version = "PLA",
             };
             VersionClass SV = new VersionClass
             {
-                Name = "Gen 9 帕底亚图鉴（朱紫）顺序",
+                Name = "Gen 9 帕底亚图鉴（朱紫）",
                 Version = "SV",
             };
 

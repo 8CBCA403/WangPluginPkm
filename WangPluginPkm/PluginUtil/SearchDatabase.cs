@@ -32,6 +32,7 @@ namespace WangPluginPkm
                 Results = results;
                 enc = Results[r];
                 pk = enc.ConvertToPKM(SAV.SAV);
+                pk = EntityConverter.ConvertToType(pk, SAV.SAV.PKMType, out var r1);
                 if (location != 0)
                 {
                     for (int i = 0; ; i++)
@@ -44,13 +45,14 @@ namespace WangPluginPkm
                 }
                 if (gender != 0)
                 {
-                    for (int i = 0; ; i++)
+                    for (int i = 0;i<Results.Count ; i++)
                     {
                         enc = Results[i];
                         pk = enc.ConvertToPKM(SAV.SAV);
                         if (pk.Gender == 1)
                             break;
                     }
+                    pk.Gender = 1;
                 }
 
             }
@@ -191,7 +193,57 @@ namespace WangPluginPkm
                 L = "无法匹配";
             return L;
         }
-      
+        public static PKM SearchPK(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version, EncounterCriteria En, int form = 0, bool egg = false, int location = 0, int gender = 0, int r = 0)
+        {
+            List<IEncounterInfo> Results;
+            IEncounterInfo enc;
+            var setting = new SearchSettings
+            {
+                Species = species,
+                SearchEgg = egg,
+                Version = version,
+            };
+            var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
+            var results = search.ToList();
+            IEnumerable<IEncounterInfo> res = results;
+            if (form != 0)
+            {
+                res = res.Where(pkm => pkm.Form == form);
+                if (res.Count() != 0)
+                    results = res.ToList();
+            }
+            PKM pk = Editor.Data;
+            if (results.Count != 0)
+            {
+                Results = results;
+                enc = Results[r];
+                pk = enc.ConvertToPKM(SAV.SAV,En);
+                if (location != 0)
+                {
+                    for (int i = 0; ; i++)
+                    {
+                        enc = Results[i];
+                        pk = enc.ConvertToPKM(SAV.SAV,En);
+                        if (pk.Met_Location == location)
+                            break;
+                    }
+                }
+                if (gender != 0)
+                {
+                    for (int i = 0; i < Results.Count; i++)
+                    {
+                        enc = Results[i];
+                        pk = enc.ConvertToPKM(SAV.SAV,En);
+                        if (pk.Gender == 1)
+                            break;
+                    }
+                    pk.Gender = 1;
+                }
+
+            }
+            return pk;
+        }
+
 
     }
 }

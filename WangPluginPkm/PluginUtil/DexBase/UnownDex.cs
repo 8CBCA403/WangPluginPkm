@@ -45,9 +45,9 @@ namespace WangPluginPkm.WangUtil.DexBase
                 GameVersion.W2 or GameVersion.BW or GameVersion.B2W2:
                     for (int i = 0; i < 28; i++)
                     {
-                        PK4 pk4 = (PK4)SearchDatabase.SearchPKM(SAV, Editor, 201, 7);
+                        PKM pk4 = SearchDatabase.SearchPKM(SAV, Editor, 201, 7);
                         pk4.Form = (byte)i;
-                        PKL.Add(pk4.ConvertToPK5());
+                        PKL.Add(pk4);
                     }
                     break;
                 case GameVersion.X or GameVersion.Y or GameVersion.OR or 
@@ -63,10 +63,10 @@ namespace WangPluginPkm.WangUtil.DexBase
                 or GameVersion.UM or GameVersion.SM or GameVersion.USUM:
                     for (int i = 0; i < 28; i++)
                     {
-                        PK6 pk6 = (PK6)SearchDatabase.SearchPKM(SAV, Editor, 201, 27);
+                        PKM pk6 = SearchDatabase.SearchPKM(SAV, Editor, 201, 27);
                         pk6.Form = (byte)i;
                         pk6.OT_Name = "wang";
-                        PKL.Add(pk6.ConvertToPK7());
+                        PKL.Add(pk6);
                     }
                     break;
                 case GameVersion.BD or GameVersion.SP or GameVersion.BDSP:

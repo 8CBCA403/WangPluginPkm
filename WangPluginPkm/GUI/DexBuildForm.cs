@@ -5,10 +5,12 @@ using System.Linq;
 using PKHeX.Core;
 using System.Collections.Generic;
 using WangPluginPkm.SortBase;
+using WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve;
 using WangPluginPkm.WangUtil.DexBase;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 using static WangPluginPkm.PluginUtil.Functions.DexBuildFunctions;
 using System.Text.RegularExpressions;
+using System.Drawing;
 
 namespace WangPluginPkm.GUI
 {
@@ -29,6 +31,8 @@ namespace WangPluginPkm.GUI
         private DexFormLanguage7 type7 = DexFormLanguage7.ENG;
         private DexFormLanguage5 type5 = DexFormLanguage5.ENG;
         private DexFormOTGender typeG = DexFormOTGender.Male;
+        private int mainHomeAchieve = 5;
+        private int subHomeAchieve = 0;
         public List<VersionClass> L = new();
         public List<DexModClass> ML = new();
         private ISaveFileProvider SAV { get; }
@@ -90,14 +94,52 @@ namespace WangPluginPkm.GUI
             this.Mod_Select_Box.SelectedIndexChanged += (_, __) =>
             {
                 mod = (DexModClass)this.Mod_Select_Box.SelectedItem;
-                if(mod.Value=="None")
+                if (mod.Value == "None")
                 {
-                    FormAndSubDex_BTN.Enabled =false;
+                    FormAndSubDex_BTN.Enabled = false;
                 }
                 else
                 {
                     FormAndSubDex_BTN.Enabled = true;
                 }
+            };
+            this.MaincomboBox.DataSource = Enum.GetNames(typeof(MainHomeAchieve));
+            this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
+            this.MaincomboBox.SelectedIndexChanged += (_, __) =>
+            {
+                mainHomeAchieve = this.MaincomboBox.SelectedIndex;
+                switch (mainHomeAchieve)
+                {
+                    case 0:
+                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
+                        break;
+                    case 1:
+                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
+                        break;
+                    case 2:
+                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
+                        break;
+                    case 3:
+                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
+                        break;
+                    case 4:
+                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
+                        break;
+                    case 5:
+                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve));
+                        break;
+                    case 6:
+                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
+                        break;
+                    case 7:
+                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
+                        break;
+
+                }
+            };
+            this.SubcomboBox.SelectedIndexChanged += (_, __) =>
+            {
+                subHomeAchieve = this.SubcomboBox.SelectedIndex;
             };
         }
         public void Gen(ISaveFileProvider SaveFileEditor)
@@ -577,8 +619,65 @@ namespace WangPluginPkm.GUI
             }
         }
 
-        [GeneratedRegex("[^0-9]")]
-        private static partial Regex NotNumberRegex();
+        private void Run_BTN_Click(object sender, EventArgs e)
+        {
+            var PKL = new List<PKM>();
+            switch (mainHomeAchieve)
+            {
+                case 5:
+                    {
+                        switch(subHomeAchieve)
+                        {
+                            case 0:
+                                PKL = RSE.RSESets(SAV, Editor);
+                                break;
+                            case 1:
+                                PKL = FRLG.FRLGSets(SAV, Editor);
+                                break;
+                            case 2:
+                                PKL = DPPT.DPPTSets(SAV, Editor);
+                                break;
+                            case 3:
+                                PKL = HGSS.HGSSSets(SAV, Editor);
+                                break;
+                            case 4:
+                                PKL = BW.BWSets(SAV, Editor);
+                                break;
+                            case 5:
+                                PKL = XY.XYSets(SAV, Editor);
+                                break;
+                            case 6:
+                                PKL = ORAS.ORASSets(SAV, Editor);
+                                break;
+                            case 7:
+                                PKL = SM.SMSets(SAV, Editor);
+                                break;
+                            case 8:
+                                PKL = RBY.RBYSets(SAV, Editor);
+                                break;
+                            case 9:
+                                PKL = GDSI.GDSISets(SAV, Editor);
+                                break;
+                        }
+                    }
+                    break;
+                default: break;
+            }
+            var BoxData = SAV.SAV.BoxData;
+            IList<PKM> arr2 = BoxData;
+            List<int> list = FindAllEmptySlots(arr2, 0);
+            if (PKL.Count != 0)
+            {
+                for (int i = 0; i < PKL.Count; i++)
+                {
+                    int index = list[i];
+                    SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
+                }
+            }
+            SAV.ReloadSlots();
+        }
+
+        
     }
 }
 
