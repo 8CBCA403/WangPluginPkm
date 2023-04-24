@@ -6,6 +6,7 @@ using PKHeX.Core;
 using System.Collections.Generic;
 using WangPluginPkm.SortBase;
 using WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve;
+using WangPluginPkm.PluginUtil.AchieveBase.SpecificForm;
 using WangPluginPkm.WangUtil.DexBase;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 using static WangPluginPkm.PluginUtil.Functions.DexBuildFunctions;
@@ -129,7 +130,7 @@ namespace WangPluginPkm.GUI
                         this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve));
                         break;
                     case 6:
-                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
+                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(SpecificForm));
                         break;
                     case 7:
                         this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
@@ -658,6 +659,76 @@ namespace WangPluginPkm.GUI
                             case 9:
                                 PKL = GDSI.GDSISets(SAV, Editor);
                                 break;
+                        }
+                    }
+                    break;
+                case 6:
+                    {
+                        switch (subHomeAchieve)
+                        {
+                            case 0:
+                                PKL = VivillonDex.VivillonSets(SAV, Editor);
+                                break;
+                            case 1://阿罗拉
+                                break;
+                            case 2://化石
+                                break;
+                            case 3:
+                              PKL= UnownDex.UnownSets(SAV, Editor);
+                                break;
+                            case 4:
+                                PKL = OricorioDex.OricorioSets(SAV, Editor);
+                                break;
+                            case 5:
+                                PKL = UltraBeast.UltraSets(SAV, Editor);
+                                break;
+                            case 6:
+                                PKL = RotomDex.RotomSets(SAV, Editor);
+                                break;
+                            case 7:
+                                PKL = MiniorDex.MiniorSets(SAV, Editor);
+                                break;
+                            case 8:
+                                PKL = Eevee.EeveeSets(SAV, Editor);
+                                break;
+                            case 9:
+                                PKL= Deerling.SpringSets(SAV, Editor);
+                                break;
+                            case 10:
+                                PKL = Deerling.SummerSets(SAV, Editor);
+                                break;
+                            case 11:
+                                PKL = Deerling.AutumnSets(SAV, Editor);
+                                break;
+                            case 12:
+                                PKL=Deerling.WinterSets(SAV, Editor); 
+                                break;
+                            case 13:
+                                PKL = Misc.SnorlaxSets(SAV, Editor);
+                                break;
+                            case 14:
+                                PKL = Misc.MetagrossSets(SAV, Editor);
+                                break;
+                            case 15:
+                                PKL=Misc.ShayminSets(SAV,Editor);
+                                break;
+                            case 16:
+                                PKL = Misc.MeloettaSets(SAV, Editor);
+                                break;
+                            case 17:
+                                PKL = Misc.GenesectSets(SAV, Editor);
+                                break;
+                            case 18:
+                                PKL= GuardianDeity.GSets(SAV, Editor);
+                                break;
+                            case 19:
+                                PKL = CapPikachuDex.CapPikachuSets(SAV, Editor);
+                                break;
+                            case 20://30只皮
+                                break;
+                            case 21://30只变怪
+                                break;
+
                         }
                     }
                     break;

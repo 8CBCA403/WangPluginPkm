@@ -39,6 +39,7 @@ namespace WangPluginPkm
                     {
                         enc = Results[i];
                         pk = enc.ConvertToPKM(SAV.SAV);
+                        pk = EntityConverter.ConvertToType(pk, SAV.SAV.PKMType, out var r2);
                         if (pk.Met_Location == location)
                             break;
                     }
