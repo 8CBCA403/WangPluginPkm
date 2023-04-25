@@ -105,26 +105,26 @@ namespace WangPluginPkm.GUI
                 }
             };
             this.MaincomboBox.DataSource = Enum.GetNames(typeof(MainHomeAchieve));
-            this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
+            this.SubcomboBox.DataSource = Enum.GetNames(typeof(RegionDex));
             this.MaincomboBox.SelectedIndexChanged += (_, __) =>
             {
                 mainHomeAchieve = this.MaincomboBox.SelectedIndex;
                 switch (mainHomeAchieve)
                 {
                     case 0:
-                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
+                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(RegionDex));
                         break;
                     case 1:
-                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
+                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(HomeType));
                         break;
                     case 2:
-                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
+                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(HomeBall));
                         break;
                     case 3:
-                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
+                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(HomeNature));
                         break;
                     case 4:
-                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
+                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(Firstpartner));
                         break;
                     case 5:
                         this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve));
@@ -133,7 +133,7 @@ namespace WangPluginPkm.GUI
                         this.SubcomboBox.DataSource = Enum.GetNames(typeof(SpecificForm));
                         break;
                     case 7:
-                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve2));
+                        this.SubcomboBox.DataSource = Enum.GetNames(typeof(OtherPokemonachievements));
                         break;
 
                 }
@@ -627,36 +627,43 @@ namespace WangPluginPkm.GUI
             {
                 case 5:
                     {
-                        switch(subHomeAchieve)
+                        switch (subHomeAchieve)
                         {
                             case 0:
-                                PKL = RSE.RSESets(SAV, Editor);
+                                PKL = RSE.RSESets(SAV, Editor).Concat(FRLG.FRLGSets(SAV, Editor)).Concat(DPPT.DPPTSets(SAV, Editor)).
+                                    Concat(HGSS.HGSSSets(SAV, Editor)).Concat(BW.BWSets(SAV, Editor)).
+                                    Concat(XY.XYSets(SAV, Editor)).Concat(ORAS.ORASSets(SAV, Editor)).
+                                     Concat(SM.SMSets(SAV, Editor)).Concat(RBY.RBYSets(SAV, Editor)).
+                                     Concat(GDSI.GDSISets(SAV, Editor)).ToList(); ;
                                 break;
                             case 1:
-                                PKL = FRLG.FRLGSets(SAV, Editor);
+                                PKL = RSE.RSESets(SAV, Editor);
                                 break;
                             case 2:
-                                PKL = DPPT.DPPTSets(SAV, Editor);
+                                PKL = FRLG.FRLGSets(SAV, Editor);
                                 break;
                             case 3:
-                                PKL = HGSS.HGSSSets(SAV, Editor);
+                                PKL = DPPT.DPPTSets(SAV, Editor);
                                 break;
                             case 4:
-                                PKL = BW.BWSets(SAV, Editor);
+                                PKL = HGSS.HGSSSets(SAV, Editor);
                                 break;
                             case 5:
-                                PKL = XY.XYSets(SAV, Editor);
+                                PKL = BW.BWSets(SAV, Editor);
                                 break;
                             case 6:
-                                PKL = ORAS.ORASSets(SAV, Editor);
+                                PKL = XY.XYSets(SAV, Editor);
                                 break;
                             case 7:
-                                PKL = SM.SMSets(SAV, Editor);
+                                PKL = ORAS.ORASSets(SAV, Editor);
                                 break;
                             case 8:
-                                PKL = RBY.RBYSets(SAV, Editor);
+                                PKL = SM.SMSets(SAV, Editor);
                                 break;
                             case 9:
+                                PKL = RBY.RBYSets(SAV, Editor);
+                                break;
+                            case 10:
                                 PKL = GDSI.GDSISets(SAV, Editor);
                                 break;
                         }
@@ -669,12 +676,13 @@ namespace WangPluginPkm.GUI
                             case 0:
                                 PKL = VivillonDex.VivillonSets(SAV, Editor);
                                 break;
-                            case 1://阿罗拉
+                            case 1:
+                                PKL = Alola.AlolaSets(SAV, Editor);
                                 break;
                             case 2://化石
                                 break;
                             case 3:
-                              PKL= UnownDex.UnownSets(SAV, Editor);
+                                PKL = UnownDex.UnownSets(SAV, Editor);
                                 break;
                             case 4:
                                 PKL = OricorioDex.OricorioSets(SAV, Editor);
@@ -692,7 +700,7 @@ namespace WangPluginPkm.GUI
                                 PKL = Eevee.EeveeSets(SAV, Editor);
                                 break;
                             case 9:
-                                PKL= Deerling.SpringSets(SAV, Editor);
+                                PKL = Deerling.SpringSets(SAV, Editor);
                                 break;
                             case 10:
                                 PKL = Deerling.SummerSets(SAV, Editor);
@@ -701,7 +709,7 @@ namespace WangPluginPkm.GUI
                                 PKL = Deerling.AutumnSets(SAV, Editor);
                                 break;
                             case 12:
-                                PKL=Deerling.WinterSets(SAV, Editor); 
+                                PKL = Deerling.WinterSets(SAV, Editor);
                                 break;
                             case 13:
                                 PKL = Misc.SnorlaxSets(SAV, Editor);
@@ -710,7 +718,7 @@ namespace WangPluginPkm.GUI
                                 PKL = Misc.MetagrossSets(SAV, Editor);
                                 break;
                             case 15:
-                                PKL=Misc.ShayminSets(SAV,Editor);
+                                PKL = Misc.ShayminSets(SAV, Editor);
                                 break;
                             case 16:
                                 PKL = Misc.MeloettaSets(SAV, Editor);
@@ -719,7 +727,7 @@ namespace WangPluginPkm.GUI
                                 PKL = Misc.GenesectSets(SAV, Editor);
                                 break;
                             case 18:
-                                PKL= GuardianDeity.GSets(SAV, Editor);
+                                PKL = GuardianDeity.GSets(SAV, Editor);
                                 break;
                             case 19:
                                 PKL = CapPikachuDex.CapPikachuSets(SAV, Editor);
@@ -748,7 +756,7 @@ namespace WangPluginPkm.GUI
             SAV.ReloadSlots();
         }
 
-        
+
     }
 }
 

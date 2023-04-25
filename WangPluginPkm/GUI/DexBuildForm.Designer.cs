@@ -51,7 +51,7 @@ namespace WangPluginPkm.GUI
             // BuildDex_BTN
             // 
             BuildDex_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            BuildDex_BTN.Location = new System.Drawing.Point(113, 77);
+            BuildDex_BTN.Location = new System.Drawing.Point(132, 79);
             BuildDex_BTN.Name = "BuildDex_BTN";
             BuildDex_BTN.Size = new System.Drawing.Size(102, 26);
             BuildDex_BTN.TabIndex = 0;
@@ -159,7 +159,7 @@ namespace WangPluginPkm.GUI
             LivingDex_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             LivingDex_BTN.Location = new System.Drawing.Point(5, 78);
             LivingDex_BTN.Name = "LivingDex_BTN";
-            LivingDex_BTN.Size = new System.Drawing.Size(102, 25);
+            LivingDex_BTN.Size = new System.Drawing.Size(119, 25);
             LivingDex_BTN.TabIndex = 11;
             LivingDex_BTN.Text = "生成全图鉴";
             LivingDex_BTN.UseVisualStyleBackColor = true;
@@ -170,13 +170,13 @@ namespace WangPluginPkm.GUI
             SortBox.FormattingEnabled = true;
             SortBox.Location = new System.Drawing.Point(5, 7);
             SortBox.Name = "SortBox";
-            SortBox.Size = new System.Drawing.Size(210, 26);
+            SortBox.Size = new System.Drawing.Size(229, 26);
             SortBox.TabIndex = 12;
             // 
             // Legal_BTN
             // 
             Legal_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            Legal_BTN.Location = new System.Drawing.Point(220, 78);
+            Legal_BTN.Location = new System.Drawing.Point(239, 79);
             Legal_BTN.Name = "Legal_BTN";
             Legal_BTN.Size = new System.Drawing.Size(103, 25);
             Legal_BTN.TabIndex = 13;
@@ -187,7 +187,7 @@ namespace WangPluginPkm.GUI
             // LegalAll_BTN
             // 
             LegalAll_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            LegalAll_BTN.Location = new System.Drawing.Point(221, 42);
+            LegalAll_BTN.Location = new System.Drawing.Point(240, 43);
             LegalAll_BTN.Name = "LegalAll_BTN";
             LegalAll_BTN.Size = new System.Drawing.Size(102, 25);
             LegalAll_BTN.TabIndex = 14;
@@ -209,7 +209,7 @@ namespace WangPluginPkm.GUI
             // Sort_BTN
             // 
             Sort_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            Sort_BTN.Location = new System.Drawing.Point(221, 6);
+            Sort_BTN.Location = new System.Drawing.Point(240, 7);
             Sort_BTN.Name = "Sort_BTN";
             Sort_BTN.Size = new System.Drawing.Size(102, 25);
             Sort_BTN.TabIndex = 17;
@@ -241,7 +241,7 @@ namespace WangPluginPkm.GUI
             FormAndSubDex_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             FormAndSubDex_BTN.Location = new System.Drawing.Point(132, 42);
             FormAndSubDex_BTN.Name = "FormAndSubDex_BTN";
-            FormAndSubDex_BTN.Size = new System.Drawing.Size(83, 25);
+            FormAndSubDex_BTN.Size = new System.Drawing.Size(102, 25);
             FormAndSubDex_BTN.TabIndex = 69;
             FormAndSubDex_BTN.Text = "生成形态";
             FormAndSubDex_BTN.UseVisualStyleBackColor = true;
@@ -255,7 +255,7 @@ namespace WangPluginPkm.GUI
             DexTabControl.Location = new System.Drawing.Point(12, 12);
             DexTabControl.Name = "DexTabControl";
             DexTabControl.SelectedIndex = 0;
-            DexTabControl.Size = new System.Drawing.Size(340, 184);
+            DexTabControl.Size = new System.Drawing.Size(356, 184);
             DexTabControl.TabIndex = 70;
             // 
             // IDPage
@@ -278,7 +278,7 @@ namespace WangPluginPkm.GUI
             IDPage.Location = new System.Drawing.Point(4, 28);
             IDPage.Name = "IDPage";
             IDPage.Padding = new Padding(3);
-            IDPage.Size = new System.Drawing.Size(332, 152);
+            IDPage.Size = new System.Drawing.Size(348, 152);
             IDPage.TabIndex = 0;
             IDPage.Text = "ID编辑器";
             // 
@@ -320,17 +320,17 @@ namespace WangPluginPkm.GUI
             DexBuilder.Controls.Add(Sort_BTN);
             DexBuilder.Controls.Add(LivingDex_BTN);
             DexBuilder.Controls.Add(BuildDex_BTN);
-            DexBuilder.Location = new System.Drawing.Point(4, 33);
+            DexBuilder.Location = new System.Drawing.Point(4, 28);
             DexBuilder.Name = "DexBuilder";
             DexBuilder.Padding = new Padding(3);
-            DexBuilder.Size = new System.Drawing.Size(332, 147);
+            DexBuilder.Size = new System.Drawing.Size(348, 152);
             DexBuilder.TabIndex = 1;
             DexBuilder.Text = "图鉴制作器";
             // 
             // Insertion_BTN
             // 
             Insertion_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            Insertion_BTN.Location = new System.Drawing.Point(220, 114);
+            Insertion_BTN.Location = new System.Drawing.Point(239, 115);
             Insertion_BTN.Name = "Insertion_BTN";
             Insertion_BTN.Size = new System.Drawing.Size(103, 22);
             Insertion_BTN.TabIndex = 74;
@@ -381,7 +381,7 @@ namespace WangPluginPkm.GUI
             Home_Page.Location = new System.Drawing.Point(4, 28);
             Home_Page.Name = "Home_Page";
             Home_Page.Padding = new Padding(3);
-            Home_Page.Size = new System.Drawing.Size(332, 152);
+            Home_Page.Size = new System.Drawing.Size(348, 152);
             Home_Page.TabIndex = 2;
             Home_Page.Text = "Home成就制作器";
             // 
@@ -390,7 +390,7 @@ namespace WangPluginPkm.GUI
             SubcomboBox.FormattingEnabled = true;
             SubcomboBox.Location = new System.Drawing.Point(6, 38);
             SubcomboBox.Name = "SubcomboBox";
-            SubcomboBox.Size = new System.Drawing.Size(320, 26);
+            SubcomboBox.Size = new System.Drawing.Size(336, 26);
             SubcomboBox.TabIndex = 4;
             // 
             // MaincomboBox
@@ -403,9 +403,9 @@ namespace WangPluginPkm.GUI
             // 
             // Run_BTN
             // 
-            Run_BTN.Location = new System.Drawing.Point(194, 3);
+            Run_BTN.Location = new System.Drawing.Point(194, 6);
             Run_BTN.Name = "Run_BTN";
-            Run_BTN.Size = new System.Drawing.Size(132, 32);
+            Run_BTN.Size = new System.Drawing.Size(148, 26);
             Run_BTN.TabIndex = 2;
             Run_BTN.Text = "制作";
             Run_BTN.UseVisualStyleBackColor = true;
@@ -413,7 +413,7 @@ namespace WangPluginPkm.GUI
             // 
             // DexBuildForm
             // 
-            ClientSize = new System.Drawing.Size(360, 204);
+            ClientSize = new System.Drawing.Size(373, 204);
             Controls.Add(DexTabControl);
             Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.Fixed3D;
