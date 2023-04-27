@@ -59,6 +59,39 @@ namespace WangPluginPkm
             }
             return pk;
         }
+        public static List<PKM> SearchPKMList(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version, int form = 0, bool egg = false)
+        {
+            List<IEncounterInfo> Results;
+            List<PKM> pkl=new();
+            var setting = new SearchSettings
+            {
+                Species = species,
+                SearchEgg = egg,
+                Version = version,
+            };
+            var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
+            var results = search.ToList();
+            IEnumerable<IEncounterInfo> res = results;
+            if (form != 0)
+            {
+                res = res.Where(pkm => pkm.Form == form);
+                if (res.Count() != 0)
+                    results = res.ToList();
+            }
+            PKM pk = Editor.Data;
+            if (results.Count != 0)
+            {
+                Results = results;
+                foreach (var en in Results)
+                {
+                    pk = en.ConvertToPKM(SAV.SAV);
+                    pk = EntityConverter.ConvertToType(pk, SAV.SAV.PKMType, out var r1);
+                    pkl.Add(pk);
+                }
+
+            }
+            return pkl;
+        }
         public static PKM GetGodPkm(ISaveFileProvider SAV, IPKMView Editor, ushort species)
         {
             List<IEncounterInfo> Results;

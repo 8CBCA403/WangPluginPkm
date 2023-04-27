@@ -14,11 +14,6 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
         {
             List<PKM> PKL = new();
             PKM pk;
-            CheckRules r = new CheckRules()
-            {
-                Shiny = PkmCondition.ShinyType.Shiny,
-                Method=MethodType.Method1
-            };
             if(SAV.SAV.Version is GameVersion.US or GameVersion.UM or GameVersion.USUM)
             {
                 pk =SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Groudon, (int)GameVersion.R);

@@ -183,6 +183,7 @@ namespace WangPluginPkm.PluginUtil.PluginEnums
         }
         public enum Firstpartner
         {
+            已添加全部最初的伙伴成就,
             已添加在关都地区一开始可选择的3只宝可梦,
             已添加在城都地区一开始可选择的3只宝可梦,
             已添加在丰缘地区一开始可选择的3只宝可梦,
@@ -194,7 +195,7 @@ namespace WangPluginPkm.PluginUtil.PluginEnums
         }
         public enum PostGenAchieve
         {
-            添加全部3DS历代游戏宝可梦,
+            添加全部历代游戏宝可梦成就,
             需要来自红宝石蓝宝石绿宝石的宝可梦,
             需要来自火红叶绿的宝可梦,
             需要来自钻石珍珠白金的宝可梦,
@@ -212,6 +213,7 @@ namespace WangPluginPkm.PluginUtil.PluginEnums
         }
         public enum SpecificForm
         {
+            添加全部特定形态或数量要求成就,
             已添加18种彩粉蝶的花纹,
             已添加100种栖息在阿罗拉地区的宝可梦,
             已添加20种从化石复原的宝可梦,

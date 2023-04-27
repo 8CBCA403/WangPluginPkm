@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using WangPluginPkm.SortBase;
 using WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve;
 using WangPluginPkm.PluginUtil.AchieveBase.SpecificForm;
+using WangPluginPkm.PluginUtil.AchieveBase;
 using WangPluginPkm.WangUtil.DexBase;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 using static WangPluginPkm.PluginUtil.Functions.DexBuildFunctions;
@@ -625,6 +626,41 @@ namespace WangPluginPkm.GUI
             var PKL = new List<PKM>();
             switch (mainHomeAchieve)
             {
+                case 4:
+                    {
+                        switch (subHomeAchieve)
+                        {
+                            case 0:
+                                PKL = FirstPartner.FRLGSets(SAV, Editor).Concat(FirstPartner.HGSSSets(SAV, Editor)).
+                                    Concat(FirstPartner.RSESets(SAV, Editor)).Concat(FirstPartner.DPPTSets(SAV, Editor)).
+                                    Concat(FirstPartner.BWSets(SAV, Editor)).Concat(FirstPartner.XYSets(SAV, Editor)).
+                                    Concat(FirstPartner.SMSets(SAV, Editor)).ToList();
+
+                                break;
+                            case 1:
+                                PKL = FirstPartner.FRLGSets(SAV, Editor);
+                                break;
+                            case 2:
+                                PKL = FirstPartner.HGSSSets(SAV, Editor);
+                                break;
+                            case 3:
+                                PKL = FirstPartner.RSESets(SAV, Editor);
+                                break;
+                            case 4:
+                                PKL = FirstPartner.DPPTSets(SAV, Editor);
+                                break;
+                            case 5:
+                                PKL = FirstPartner.BWSets(SAV,Editor);
+                                break;
+                            case 6:
+                                PKL = FirstPartner.XYSets(SAV, Editor);
+                                break;
+                            case 7:
+                                PKL = FirstPartner.SMSets(SAV, Editor);
+                                break;
+                        }
+                    }
+                    break;
                 case 5:
                     {
                         switch (subHomeAchieve)
@@ -674,67 +710,85 @@ namespace WangPluginPkm.GUI
                         switch (subHomeAchieve)
                         {
                             case 0:
-                                PKL = VivillonDex.VivillonSets(SAV, Editor);
+                                PKL = VivillonDex.VivillonSets(SAV, Editor).Concat(Alola.AlolaSets(SAV, Editor)).
+                                    Concat(AlolaformDex.AlolaSets(SAV, Editor)).Concat(Fossil.FossilSets(SAV, Editor)).
+                                    Concat(UnownDex.UnownSets(SAV, Editor)).Concat(OricorioDex.OricorioSets(SAV, Editor)).
+                                    Concat(UltraBeast.UltraSets(SAV, Editor)).Concat(RotomDex.RotomSets(SAV, Editor)).
+                                    Concat(MiniorDex.MiniorSets(SAV, Editor)).Concat(Eevee.EeveeSets(SAV, Editor)).
+                                    Concat(Deerling.SpringSets(SAV, Editor)).Concat(Deerling.SummerSets(SAV, Editor)).
+                                    Concat(Deerling.AutumnSets(SAV, Editor)).Concat(Deerling.WinterSets(SAV, Editor)).
+                                    Concat(Misc.SnorlaxSets(SAV, Editor)).Concat(Misc.MetagrossSets(SAV, Editor)).
+                                    Concat(Misc.ShayminSets(SAV, Editor)).Concat(Misc.MeloettaSets(SAV, Editor)).
+                                    Concat(Misc.GenesectSets(SAV, Editor)).Concat(GuardianDeity.GSets(SAV, Editor)).
+                                    Concat(CapPikachuDex.CapPikachuSets(SAV, Editor)).Concat(Pika.PikaSets(SAV, Editor)).Concat(Ditto.DittoSets(SAV, Editor)).
+                                    ToList();
+
                                 break;
                             case 1:
-                                PKL = Alola.AlolaSets(SAV, Editor);
+                                PKL = VivillonDex.VivillonSets(SAV, Editor);
                                 break;
-                            case 2://化石
+                            case 2:
+                                PKL = Alola.AlolaSets(SAV, Editor).Concat(AlolaformDex.AlolaSets(SAV, Editor)).ToList();
                                 break;
                             case 3:
-                                PKL = UnownDex.UnownSets(SAV, Editor);
+                                PKL = Fossil.FossilSets(SAV, Editor);
                                 break;
                             case 4:
-                                PKL = OricorioDex.OricorioSets(SAV, Editor);
+                                PKL = UnownDex.UnownSets(SAV, Editor);
                                 break;
                             case 5:
-                                PKL = UltraBeast.UltraSets(SAV, Editor);
+                                PKL = OricorioDex.OricorioSets(SAV, Editor);
                                 break;
                             case 6:
-                                PKL = RotomDex.RotomSets(SAV, Editor);
+                                PKL = UltraBeast.UltraSets(SAV, Editor);
                                 break;
                             case 7:
-                                PKL = MiniorDex.MiniorSets(SAV, Editor);
+                                PKL = RotomDex.RotomSets(SAV, Editor);
                                 break;
                             case 8:
-                                PKL = Eevee.EeveeSets(SAV, Editor);
+                                PKL = MiniorDex.MiniorSets(SAV, Editor);
                                 break;
                             case 9:
-                                PKL = Deerling.SpringSets(SAV, Editor);
+                                PKL = Eevee.EeveeSets(SAV, Editor);
                                 break;
                             case 10:
-                                PKL = Deerling.SummerSets(SAV, Editor);
+                                PKL = Deerling.SpringSets(SAV, Editor);
                                 break;
                             case 11:
-                                PKL = Deerling.AutumnSets(SAV, Editor);
+                                PKL = Deerling.SummerSets(SAV, Editor);
                                 break;
                             case 12:
-                                PKL = Deerling.WinterSets(SAV, Editor);
+                                PKL = Deerling.AutumnSets(SAV, Editor);
                                 break;
                             case 13:
-                                PKL = Misc.SnorlaxSets(SAV, Editor);
+                                PKL = Deerling.WinterSets(SAV, Editor);
                                 break;
                             case 14:
-                                PKL = Misc.MetagrossSets(SAV, Editor);
+                                PKL = Misc.SnorlaxSets(SAV, Editor);
                                 break;
                             case 15:
-                                PKL = Misc.ShayminSets(SAV, Editor);
+                                PKL = Misc.MetagrossSets(SAV, Editor);
                                 break;
                             case 16:
-                                PKL = Misc.MeloettaSets(SAV, Editor);
+                                PKL = Misc.ShayminSets(SAV, Editor);
                                 break;
                             case 17:
-                                PKL = Misc.GenesectSets(SAV, Editor);
+                                PKL = Misc.MeloettaSets(SAV, Editor);
                                 break;
                             case 18:
-                                PKL = GuardianDeity.GSets(SAV, Editor);
+                                PKL = Misc.GenesectSets(SAV, Editor);
                                 break;
                             case 19:
+                                PKL = GuardianDeity.GSets(SAV, Editor);
+                                break;
+                            case 20:
                                 PKL = CapPikachuDex.CapPikachuSets(SAV, Editor);
                                 break;
-                            case 20://30只皮
+                            case 21:
+                                PKL = Pika.PikaSets(SAV, Editor);
                                 break;
-                            case 21://30只变怪
+                            case 22:
+                                PKL = Ditto.DittoSets(SAV, Editor);
                                 break;
 
                         }

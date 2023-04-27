@@ -33,7 +33,6 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Cosmog, (int)GameVersion.UM);
                 pk = AchieveFunc.fun(pk);
-                
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Cosmog, (int)GameVersion.UM);
                 pk.CurrentLevel = 50;
