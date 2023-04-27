@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace WangPluginPkm.WangUtil.DexBase
+namespace WangPluginPkm.PluginUtil.DexBase
 {
     internal class DeoxysDex
     {

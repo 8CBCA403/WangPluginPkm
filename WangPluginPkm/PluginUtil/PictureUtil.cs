@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Drawing;
 
-namespace WangPluginPkm.WangUtil
+namespace WangPluginPkm.PluginUtil
 {
     class Picture
     {

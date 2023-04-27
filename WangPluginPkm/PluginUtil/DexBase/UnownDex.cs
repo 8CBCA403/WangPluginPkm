@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using PKHeX.Core;
 using PKHeX.Core.AutoMod;
 
-namespace WangPluginPkm.WangUtil.DexBase
+namespace WangPluginPkm.PluginUtil.DexBase
 {
     internal class UnownDex
     {

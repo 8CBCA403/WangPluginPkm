@@ -12,7 +12,7 @@ using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 using static WangPluginPkm.PluginUtil.PluginEnums.TeraEnum;
 using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
 using Roaming8bRNG = WangPluginPkm.RNG.Methods.Roaming8bRNG;
-using WangPluginPkm.WangUtil.ModifyPKM;
+using WangPluginPkm.PluginUtil.ModifyPKM;
 using static WangPluginPkm.CheckRules;
 using WangPluginPkm.RNG.ReverseRNG;
 

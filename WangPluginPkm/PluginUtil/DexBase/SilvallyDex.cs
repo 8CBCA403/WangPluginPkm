@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WangPluginPkm;
 
-namespace WangPluginPkm.WangUtil.DexBase
+namespace WangPluginPkm.PluginUtil.DexBase
 {
     internal class SilvallyDex
     {

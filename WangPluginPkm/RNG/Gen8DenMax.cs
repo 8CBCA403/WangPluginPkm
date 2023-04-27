@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using WangPluginPkm.GUI;
 using PKHeX.Core;
-using WangPluginPkm.WangUtil.PluginEnums;
+using WangPluginPkm.PluginUtil.PluginEnums;
 namespace WangPluginPkm
 {
     internal class Gen8DenMax

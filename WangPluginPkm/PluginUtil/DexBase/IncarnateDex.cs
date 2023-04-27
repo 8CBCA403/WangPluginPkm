@@ -1,6 +1,6 @@
 ﻿using PKHeX.Core;
 using System.Collections.Generic;
-namespace WangPluginPkm.WangUtil.DexBase
+namespace WangPluginPkm.PluginUtil.DexBase
 {
     internal class IncarnateDex
     {

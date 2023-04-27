@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WangPluginPkm.WangUtil.PluginEnums;
+using WangPluginPkm.PluginUtil.PluginEnums;
 using static WangPluginPkm.PluginUtil.PluginEnums.TeraEnum;
 #nullable enable
-namespace WangPluginPkm.WangUtil.ModifyPKM
+namespace WangPluginPkm.PluginUtil.ModifyPKM
 {
     public class TeraDetails
     {

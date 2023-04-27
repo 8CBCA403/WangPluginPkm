@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WangPluginPkm.WangUtil.ModifyPKM
+namespace WangPluginPkm.PluginUtil.ModifyPKM
 {
     public class EncounterRaid9 : ITeraRaid9
     {

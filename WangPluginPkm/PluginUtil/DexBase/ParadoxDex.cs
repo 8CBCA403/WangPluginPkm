@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace WangPluginPkm.WangUtil.DexBase
+namespace WangPluginPkm.PluginUtil.DexBase
 {
     internal class ParadoxDex
     {

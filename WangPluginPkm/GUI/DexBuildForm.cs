@@ -8,7 +8,7 @@ using WangPluginPkm.SortBase;
 using WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve;
 using WangPluginPkm.PluginUtil.AchieveBase.SpecificForm;
 using WangPluginPkm.PluginUtil.AchieveBase;
-using WangPluginPkm.WangUtil.DexBase;
+using WangPluginPkm.PluginUtil.DexBase;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 using static WangPluginPkm.PluginUtil.Functions.DexBuildFunctions;
 using System.Text.RegularExpressions;
