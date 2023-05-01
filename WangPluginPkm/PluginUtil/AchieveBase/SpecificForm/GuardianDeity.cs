@@ -18,16 +18,16 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                 case GameVersion.US or GameVersion.UM or GameVersion.USUM:
                     {
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 785, 32);
-                        pk = AchieveFunc.fun(pk);
+                        pk = AchieveFunc.fun(pk,SAV);
                         PKL.Add(pk);
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 786, 32);
-                        pk = AchieveFunc.fun(pk);
+                        pk = AchieveFunc.fun(pk,SAV);
                         PKL.Add(pk);
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 787, 32);
-                        pk = AchieveFunc.fun(pk);
+                        pk = AchieveFunc.fun(pk,SAV);
                         PKL.Add(pk);
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 788, 32);
-                        pk = AchieveFunc.fun(pk);
+                        pk = AchieveFunc.fun(pk,SAV);
                         PKL.Add(pk);
                     }
                     break;

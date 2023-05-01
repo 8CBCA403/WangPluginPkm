@@ -9,10 +9,12 @@ using WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve;
 using WangPluginPkm.PluginUtil.AchieveBase.SpecificForm;
 using WangPluginPkm.PluginUtil.AchieveBase;
 using WangPluginPkm.PluginUtil.DexBase;
+using WangPluginPkm.PluginUtil.MeerkatBase;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 using static WangPluginPkm.PluginUtil.Functions.DexBuildFunctions;
 using System.Text.RegularExpressions;
 using System.Drawing;
+using PKHeX.Core.AutoMod;
 
 namespace WangPluginPkm.GUI
 {
@@ -35,6 +37,7 @@ namespace WangPluginPkm.GUI
         private DexFormOTGender typeG = DexFormOTGender.Male;
         private int mainHomeAchieve = 5;
         private int subHomeAchieve = 0;
+        private int Markeet = 0;
         public List<VersionClass> L = new();
         public List<DexModClass> ML = new();
         private ISaveFileProvider SAV { get; }
@@ -107,6 +110,7 @@ namespace WangPluginPkm.GUI
             };
             this.MaincomboBox.DataSource = Enum.GetNames(typeof(MainHomeAchieve));
             this.SubcomboBox.DataSource = Enum.GetNames(typeof(RegionDex));
+        //  this.Markeetbox.DataSource = Enum.GetNames(typeof(TaoBaoCombo));
             this.MaincomboBox.SelectedIndexChanged += (_, __) =>
             {
                 mainHomeAchieve = this.MaincomboBox.SelectedIndex;
@@ -143,6 +147,10 @@ namespace WangPluginPkm.GUI
             {
                 subHomeAchieve = this.SubcomboBox.SelectedIndex;
             };
+        //  this.Markeetbox.SelectedIndexChanged += (_, __) =>
+        //  {
+        //    Markeet = this.Markeetbox.SelectedIndex;
+        //  };
         }
         public void Gen(ISaveFileProvider SaveFileEditor)
         {
@@ -564,7 +572,6 @@ namespace WangPluginPkm.GUI
         }*/
         #endregion
 
-
         //https://github.com/foohyfooh/PKHeXInsertionPlugin
         private void Insertion_BTN_Click(object sender, EventArgs e)
         {
@@ -650,7 +657,7 @@ namespace WangPluginPkm.GUI
                                 PKL = FirstPartner.DPPTSets(SAV, Editor);
                                 break;
                             case 5:
-                                PKL = FirstPartner.BWSets(SAV,Editor);
+                                PKL = FirstPartner.BWSets(SAV, Editor);
                                 break;
                             case 6:
                                 PKL = FirstPartner.XYSets(SAV, Editor);
@@ -810,7 +817,103 @@ namespace WangPluginPkm.GUI
             SAV.ReloadSlots();
         }
 
+        private void RunMarkeet_BTN_Click(object sender, EventArgs e)
+        {
+            var PKL = new List<PKM>();
+            var PKLB = new List<PKM>();
+            switch (Markeet)
+            {
+                case 0:
+                    PKL = SAV.SAV.GenerateLivingDex(true, ShinycheckBox.Checked, false, false).ToList();
+                    PKL.RemoveAt(22);
+                    PKL.RemoveAt(130);
+                    PKL.RemoveAt(883);
+                    PKL.RemoveAt(886);
+                    PKL.RemoveAt(894);
+                    PKL.RemoveAt(905);
+                    PKL.RemoveAt(907);
+                    PKL.RemoveAt(911);
+                    PKL.RemoveAt(953);
+                    PKL.RemoveAt(954);
+                    MessageBox.Show($"{PKL.Count}");
+                    break;
+                case 1:
+                    sw.Start();
+                    PKL = SAV.SAV.GenerateLivingDex(true, ShinycheckBox.Checked, false, false).ToList();
+                    PKL.RemoveAt(22);
+                    PKL.RemoveAt(130);
+                    PKL.RemoveAt(883);
+                    PKL.RemoveAt(886);
+                    PKL.RemoveAt(894);
+                    PKL.RemoveAt(905);
+                    PKL.RemoveAt(907);
+                    PKL.RemoveAt(911);
+                    PKL.RemoveAt(953);
+                    PKL.RemoveAt(954);
+                    PKL.RemoveAt(960);
+                    for (int i = 0; i < 23; i++)
+                    {
+                        PKLB.Add(PKL[960 + i]);
+                    }
+                    PKLB = PKLB.Concat(TaoBaoCombo1One.Sets(SAV, Editor)).ToList();
+                    sw.Stop();
+                    MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+                    sw.Reset();
+                    break;
+            }
 
+            var BoxData = SAV.SAV.BoxData;
+            IList<PKM> arr2 = BoxData;
+            List<int> list = FindAllEmptySlots(arr2, 0);
+            if (PKL.Count != 0)
+            {
+                if (Markeet == 0)
+                {
+                    for (int i = 0; i < 960; i++)
+                    {
+                        int index = list[i];
+                        SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
+                    }
+                    MessageBox.Show($"注意这个存档满了换下一个");
+                }
+                else if (Markeet == 1)
+                {
+                    for (int i = 0; i < PKLB.Count; i++)
+                    {
+                        int index = list[i];
+                        SAV.SAV.SetBoxSlotAtIndex(PKLB[i], index);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < PKL.Count; i++)
+                    {
+                        int index = list[i];
+                        SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
+                    }
+                }
+            }
+            SAV.ReloadSlots();
+
+        }
+
+        private void GenDex_BTN_Click(object sender, EventArgs e)
+        {
+            sw.Start();
+            var PKL = MutiGenDex.SetAll(SAV, Editor, ShinycheckBox.Checked);
+            var BoxData = SAV.SAV.BoxData;
+            IList<PKM> arr2 = BoxData;
+            List<int> list = FindAllEmptySlots(arr2, 0);
+            for (int i = 0; i < PKL.Count; i++)
+            {
+                int index = list[i];
+                SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
+            }
+            SAV.ReloadSlots();
+            sw.Stop();
+            MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+            sw.Reset();
+        }
     }
 }
 

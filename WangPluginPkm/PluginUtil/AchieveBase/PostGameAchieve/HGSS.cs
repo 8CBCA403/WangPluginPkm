@@ -18,13 +18,13 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
             {
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.HoOh, (int)GameVersion.HG);
            
-                pk=AchieveFunc.fun(pk);
+                pk=AchieveFunc.fun(pk,SAV);
                 pk.Version = 7;
                 PKL.Add(pk);
 
                 pk =SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Lugia, (int)GameVersion.SS);
            
-                pk = AchieveFunc.fun(pk);
+                pk = AchieveFunc.fun(pk,SAV);
                 pk.Version = 8;
                 PKL.Add(pk);
               

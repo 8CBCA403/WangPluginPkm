@@ -256,6 +256,11 @@ namespace WangPluginPkm.PluginUtil.PluginEnums
             添加持有闪亮之星奖章的宝可梦,
             添加霜奶仙的样子吧
         }
+        public enum TaoBaoCombo
+        {
+            猫鼬套餐11,
+            猫鼬套餐12,
+        }
         public static int GetLanguageBox7(DexFormLanguage7 type7)
         {
             var T = 1;

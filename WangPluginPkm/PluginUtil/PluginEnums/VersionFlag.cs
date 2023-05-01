@@ -33,7 +33,7 @@ namespace WangPluginPkm
         }
         public static bool Gen7Flag(int Version)
         {
-            if (Version is 30 or 31 or 32 or 33)
+            if (Version is 30 or 31 or 32 or 33 or 42 or 43)
                 return true;
             else
                 return false;

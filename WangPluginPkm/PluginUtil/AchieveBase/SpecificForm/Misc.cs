@@ -24,7 +24,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                         pk.Nature = 12;
                         pk.AbilityNumber = 1;
                         pk.Ability = 17;
-                        pk = AchieveFunc.fun(pk);
+                        pk = AchieveFunc.fun(pk,SAV);
                         PKL.Add(pk);
                     }
                     break;
@@ -42,7 +42,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 376, 32);
                         pk.CurrentLevel = 60;
                         pk.Species = 376;
-                        pk = AchieveFunc.fun(pk);
+                        pk = AchieveFunc.fun(pk,SAV);
                         pk.SetShiny();
                         PKL.Add(pk);
                     }
@@ -61,7 +61,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                        
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 492, 32);
 
-                        //   pk = AchieveFunc.fun(pk);
+                        //   pk = AchieveFunc.fun(pk,SAV);
                         PKL.Add(pk);
                        
                     }
@@ -80,7 +80,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                       
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 648, 32);
 
-                        // pk = AchieveFunc.fun(pk);
+                        // pk = AchieveFunc.fun(pk,SAV);
                         PKL.Add(pk);
                        
                     }
@@ -98,8 +98,9 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                     {
                        
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 649, 23,0,false,40007);
-
-                        // pk = AchieveFunc.fun(pk);
+                        pk.Language = 2;
+                        pk.ClearNickname();
+                        // pk = AchieveFunc.fun(pk,SAV);
                         PKL.Add(pk);
                     }
                     break;

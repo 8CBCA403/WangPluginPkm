@@ -17,29 +17,43 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
          
             if(SAV.SAV.Version is GameVersion.US or GameVersion.UM or GameVersion.USUM)
             {
+                var sa = (SAV7)SAV.SAV;
+                int l = 0;
+                if (sa.Region == 0)
+                    l = 1;
+                else if (sa.Region == 7)
+                    l = 2;
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Venusaur, (int)GameVersion.RBY);
+                pk.Language = l;
                 pk.CurrentLevel = 50;
                 pk.Species = 3;
-                pk = AchieveFunc.fun(pk);
+                pk = AchieveFunc.fun(pk,SAV);
                 pk.SID16 = 0;
+                
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Charizard, (int)GameVersion.RBY);
+                pk.Language = l;
                 pk.CurrentLevel = 50;
                 pk.Species = 6;
-                pk = AchieveFunc.fun(pk);
+                pk = AchieveFunc.fun(pk,SAV);
                 pk.SID16 = 0;
+                
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Blastoise, (int)GameVersion.RBY);
                 pk.CurrentLevel = 50;
                 pk.Species = 9;
-                pk = AchieveFunc.fun(pk);
+                pk.Language = l;
+                pk = AchieveFunc.fun(pk,SAV);
                 pk.SID16 = 0;
                 pk.Version = 36;
+                
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Pikachu, (int)GameVersion.RBY);
-                pk = AchieveFunc.fun(pk);
+                pk.Language = l;
+                pk = AchieveFunc.fun(pk,SAV);
                 pk.SID16 = 0;
                 pk.Version = 38;
+               
                 PKL.Add(pk);
             }
             return PKL;

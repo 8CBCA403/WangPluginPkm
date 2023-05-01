@@ -64,7 +64,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                             }
                             pk.ClearNickname();
                             if(pk.Species != 802 && pk.Species != 807 && pk.Species != 761)
-                            pk = AchieveFunc.fun(pk);
+                            pk = AchieveFunc.fun(pk,SAV);
                             PKL.Add(pk);
                         }
                     }

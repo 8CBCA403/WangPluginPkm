@@ -7,7 +7,7 @@ namespace WangPluginPkm
     internal class SearchDatabase
     {
         public static GameStrings GameStrings = GameInfo.GetStrings("zh");
-        public static PKM SearchPKM(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version, int form = 0, bool egg = false, int location = 0, int gender = 0, int r = 0)
+        public static PKM SearchPKM(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version, int form = 0, bool egg = false, int location = 0, int gender = 0, int r = 0,int level=0)
         {
             List<IEncounterInfo> Results;
             IEncounterInfo enc;
@@ -32,14 +32,13 @@ namespace WangPluginPkm
                 Results = results;
                 enc = Results[r];
                 pk = enc.ConvertToPKM(SAV.SAV);
-                pk = EntityConverter.ConvertToType(pk, SAV.SAV.PKMType, out var r1);
                 if (location != 0)
                 {
                     for (int i = 0; ; i++)
                     {
                         enc = Results[i];
                         pk = enc.ConvertToPKM(SAV.SAV);
-                        pk = EntityConverter.ConvertToType(pk, SAV.SAV.PKMType, out var r2);
+                       
                         if (pk.Met_Location == location)
                             break;
                     }
@@ -55,6 +54,18 @@ namespace WangPluginPkm
                     }
                     pk.Gender = 1;
                 }
+                if (level!= 0)
+                {
+                    for (int i = 0; i < Results.Count; i++)
+                    {
+                        enc = Results[i];
+                        pk = enc.ConvertToPKM(SAV.SAV);
+                        if (pk.Met_Level == level)
+                            break;
+                    }
+              
+                }
+                pk = EntityConverter.ConvertToType(pk, SAV.SAV.PKMType, out var r2);
 
             }
             return pk;
@@ -78,6 +89,7 @@ namespace WangPluginPkm
                 if (res.Count() != 0)
                     results = res.ToList();
             }
+         
             PKM pk = Editor.Data;
             if (results.Count != 0)
             {
@@ -135,7 +147,7 @@ namespace WangPluginPkm
                 {
 
                     pkc = gift.ConvertToPKM(SAV.SAV);
-                    // EntityConverter.TryMakePKMCompatible(pkc, pk, out var c, out pkc);
+                 //   pkc = EntityConverter.ConvertToType(pkc, SAV.SAV.PKMType, out var r1);
                     p.Add(pkc);
                 }
 

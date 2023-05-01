@@ -37,6 +37,8 @@ namespace WangPluginPkm.GUI
             SoltnumericUpDown = new NumericUpDown();
             BoxnumericUpDown = new NumericUpDown();
             Home_Page = new TabPage();
+            GenDex_BTN = new Button();
+            ShinycheckBox = new CheckBox();
             SubcomboBox = new ComboBox();
             MaincomboBox = new ComboBox();
             Run_BTN = new Button();
@@ -320,10 +322,10 @@ namespace WangPluginPkm.GUI
             DexBuilder.Controls.Add(Sort_BTN);
             DexBuilder.Controls.Add(LivingDex_BTN);
             DexBuilder.Controls.Add(BuildDex_BTN);
-            DexBuilder.Location = new System.Drawing.Point(4, 28);
+            DexBuilder.Location = new System.Drawing.Point(4, 33);
             DexBuilder.Name = "DexBuilder";
             DexBuilder.Padding = new Padding(3);
-            DexBuilder.Size = new System.Drawing.Size(348, 152);
+            DexBuilder.Size = new System.Drawing.Size(348, 147);
             DexBuilder.TabIndex = 1;
             DexBuilder.Text = "图鉴制作器";
             // 
@@ -375,6 +377,8 @@ namespace WangPluginPkm.GUI
             // Home_Page
             // 
             Home_Page.BackColor = System.Drawing.Color.WhiteSmoke;
+            Home_Page.Controls.Add(GenDex_BTN);
+            Home_Page.Controls.Add(ShinycheckBox);
             Home_Page.Controls.Add(SubcomboBox);
             Home_Page.Controls.Add(MaincomboBox);
             Home_Page.Controls.Add(Run_BTN);
@@ -384,6 +388,26 @@ namespace WangPluginPkm.GUI
             Home_Page.Size = new System.Drawing.Size(348, 152);
             Home_Page.TabIndex = 2;
             Home_Page.Text = "Home成就制作器";
+            // 
+            // GenDex_BTN
+            // 
+            GenDex_BTN.Location = new System.Drawing.Point(6, 70);
+            GenDex_BTN.Name = "GenDex_BTN";
+            GenDex_BTN.Size = new System.Drawing.Size(159, 26);
+            GenDex_BTN.TabIndex = 8;
+            GenDex_BTN.Text = "生成跨世代图鉴";
+            GenDex_BTN.UseVisualStyleBackColor = true;
+            GenDex_BTN.Click += GenDex_BTN_Click;
+            // 
+            // ShinycheckBox
+            // 
+            ShinycheckBox.AutoSize = true;
+            ShinycheckBox.Location = new System.Drawing.Point(194, 74);
+            ShinycheckBox.Name = "ShinycheckBox";
+            ShinycheckBox.Size = new System.Drawing.Size(70, 22);
+            ShinycheckBox.TabIndex = 7;
+            ShinycheckBox.Text = "闪光";
+            ShinycheckBox.UseVisualStyleBackColor = true;
             // 
             // SubcomboBox
             // 
@@ -403,7 +427,7 @@ namespace WangPluginPkm.GUI
             // 
             // Run_BTN
             // 
-            Run_BTN.Location = new System.Drawing.Point(194, 6);
+            Run_BTN.Location = new System.Drawing.Point(194, 5);
             Run_BTN.Name = "Run_BTN";
             Run_BTN.Size = new System.Drawing.Size(148, 26);
             Run_BTN.TabIndex = 2;
@@ -430,6 +454,7 @@ namespace WangPluginPkm.GUI
             ((System.ComponentModel.ISupportInitialize)SoltnumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)BoxnumericUpDown).EndInit();
             Home_Page.ResumeLayout(false);
+            Home_Page.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -467,5 +492,7 @@ namespace WangPluginPkm.GUI
         private Button Run_BTN;
         private ComboBox SubcomboBox;
         private ComboBox MaincomboBox;
+        private CheckBox ShinycheckBox;
+        private Button GenDex_BTN;
     }
 }

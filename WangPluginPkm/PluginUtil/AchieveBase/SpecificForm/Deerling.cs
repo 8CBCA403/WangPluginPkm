@@ -24,7 +24,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                             }
                             pk.Form = (byte)0;
                             pk.ClearNickname();
-                            pk = AchieveFunc.fun(pk);
+                            pk = AchieveFunc.fun(pk,SAV);
                             PKL.Add(pk);
                         }
                     }
@@ -51,7 +51,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                             }
                             pk.Form = (byte)1;
                             pk.ClearNickname();
-                            pk = AchieveFunc.fun(pk);
+                            pk = AchieveFunc.fun(pk,SAV);
                             PKL.Add(pk);
                         }
                     }
@@ -78,7 +78,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                             }
                             pk.Form = (byte)2;
                             pk.ClearNickname();
-                            pk = AchieveFunc.fun(pk);
+                            pk = AchieveFunc.fun(pk,SAV);
                             PKL.Add(pk);
                         }
                     }
@@ -105,7 +105,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                             }
                             pk.Form = (byte)3;
                             pk.ClearNickname();
-                            pk = AchieveFunc.fun(pk);
+                            pk = AchieveFunc.fun(pk,SAV);
                             PKL.Add(pk);
                         }
                     }
