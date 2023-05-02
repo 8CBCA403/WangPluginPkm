@@ -31,7 +31,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
                 pk.TID16 = 61482;
                 pk.SID16 = 5;
             }
-            if (pk.Version is 35 or 40 or 41 or 38 or 37 or 36)
+            if (pk.Version is 35 or 40 or 41 or 38 or 37 or 36 or 39)
                 pk.SID16 = 0;
             pk.SetSuggestedMoves();
             pk.HealPP();
