@@ -31,7 +31,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
                 pk.TID16 = 61482;
                 pk.SID16 = 5;
             }
-            if (pk.Version == 35|| pk.Version == 40|| pk.Version == 41)
+            if (pk.Version is 35 or 40 or 41 or 38 or 37 or 36)
                 pk.SID16 = 0;
             pk.SetSuggestedMoves();
             pk.HealPP();
@@ -53,6 +53,42 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
             pk.SetSuggestedMoves();
             pk.HealPP();
             pk.RefreshAbility(0);
+            return pk;
+        }
+        public static PKM evo1H(PKM pk)
+        {
+            pk.Species++;
+            pk.CurrentLevel += 25;
+           
+            pk.RefreshAbility(2);
+            pk.Language = 2;
+            pk.ClearNickname();
+            pk.SetSuggestedMoves(true);
+            pk.HealPP();
+            return pk;
+        }
+        public static PKM evo2H(PKM pk)
+        {
+            pk.Species += 2;
+            pk.CurrentLevel += 40;
+          
+            pk.RefreshAbility(2);
+            pk.Language = 2;
+            pk.ClearNickname();
+            pk.SetSuggestedMoves(true);
+            pk.HealPP();
+            return pk;
+        }
+        public static PKM evo3H(PKM pk)
+        {
+            pk.Species += 3;
+            pk.CurrentLevel += 40;
+
+            pk.RefreshAbility(2);
+            pk.Language = 2;
+            pk.ClearNickname();
+            pk.SetSuggestedMoves(true);
+            pk.HealPP();
             return pk;
         }
         public static PKM evo3(PKM pk)

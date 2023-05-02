@@ -6,6 +6,7 @@ using System.Linq;
 using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
 using System.ComponentModel;
 using static WangPluginPkm.GUI.DistributionUI;
+using System.Media;
 
 namespace WangPluginPkm.GUI
 {
@@ -14,6 +15,7 @@ namespace WangPluginPkm.GUI
         public static uint XorNumber;
         public static Stopwatch sw = new();
         private ShinyRange T = ShinyRange.BOX;
+        private SoundPlayer Player = new SoundPlayer();
         public enum ShinyRange
         {
             [Description("闪一箱")]
@@ -379,6 +381,9 @@ namespace WangPluginPkm.GUI
             sw.Stop();
             MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
             sw.Reset();
+            Player.Stream = Properties.Resources.shinys;
+            Player.Play();
+
         }
         private static bool[] ShinyArray()
         {

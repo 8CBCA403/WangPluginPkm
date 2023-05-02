@@ -15,6 +15,7 @@ using static WangPluginPkm.PluginUtil.Functions.DexBuildFunctions;
 using System.Text.RegularExpressions;
 using System.Drawing;
 using PKHeX.Core.AutoMod;
+using System.Media;
 
 namespace WangPluginPkm.GUI
 {
@@ -22,6 +23,7 @@ namespace WangPluginPkm.GUI
     {
         private static Random rand = new Random();
         public static Stopwatch sw = new();
+        private SoundPlayer Player = new SoundPlayer();
         public VersionClass version = new VersionClass
         {
             Name = "按照全国图鉴顺序",
@@ -899,6 +901,11 @@ namespace WangPluginPkm.GUI
 
         private void GenDex_BTN_Click(object sender, EventArgs e)
         {
+            if (SAV.SAV.Version != GameVersion.US && SAV.SAV.Version != GameVersion.UM)
+            {
+                MessageBox.Show("本功能只适用于究极日月！");
+                return;
+            }
             sw.Start();
             var PKL = MutiGenDex.SetAll(SAV, Editor, ShinycheckBox.Checked);
             var BoxData = SAV.SAV.BoxData;
@@ -913,6 +920,8 @@ namespace WangPluginPkm.GUI
             sw.Stop();
             MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
             sw.Reset();
+            Player.Stream = Properties.Resources.dex;
+            Player.Play();
         }
     }
 }
