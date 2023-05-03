@@ -1171,6 +1171,9 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                 {
                     switch (i)
                     {
+                        case 0:
+                            PKL[i].Language = 2;
+                            break;
                         case 2:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
@@ -1474,10 +1477,25 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                         case 150:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 644, (int)GameVersion.W,0,false,39);
                             break;
+                        case 153:
+                            PKL[i].Language = 2;
+                            break;
+                        case 154:
+                            PKL[i].Language = 2;
+                            break;
+                        case 155:
+                            PKL[i].Language = 2;
+                            break;
 
                     }
                     PKL[i] = EntityConverter.ConvertToType(PKL[i], SAV.SAV.PKMType, out var r2);
                     PKL[i] = AchieveFunc.fun(PKL[i],SAV);
+                    var TID16bit = (PKL[i].TID16 ^ PKL[i].SID16) & 1;
+                    var bitxor = PKL[i].PID >> 31 ^ PKL[i].PID & 1;
+                    if (bitxor != TID16bit)
+                        PKL[i].PID ^= 1;
+                    PKL[i].EncryptionConstant = PKL[i].PID;
+                    PKL[i].Gender= PKL[i].GetSaneGender();
                     if (shiny)
                     {
                         PKL[i] = ShinyMakerUI.ShinyFunctionPlus(PKL[i]);
@@ -1640,6 +1658,8 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             break;
                         case 28:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            PKL[i].Gender = 0;
+                            PKL[i].Form = 0;
                             break;
                         case 30:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
@@ -1711,6 +1731,15 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             break;
                         case 67:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 717, (int)GameVersion.Y);
+                            break;
+                        case 69:
+                            PKL[i].Language = 2;
+                            break;
+                        case 70:
+                            PKL[i].Language = 2;
+                            break;
+                        case 71:
+                            PKL[i].Language = 2;
                             break;
                     }
 
