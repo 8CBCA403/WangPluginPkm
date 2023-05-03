@@ -1155,6 +1155,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             };
             PKM pk;
             var PKL = new List<PKM>();
+          
             PKL.Add(SearchDatabase.SearchPKM(SAV, Editor, 494, (int)GameVersion.W2));
             for (int i = 495; i < 637; i++)
             {
@@ -1169,12 +1170,19 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             {
                 for (int i = 0; i < PKL.Count; i++)
                 {
+                    var context = PKL[i].Context;
+
+                    var et = EvolutionTree.GetEvolutionTree(context);
+                    var chain = et.GetValidPreEvolutions(PKL[i], levelMax: 100, skipChecks: true);
+                    EncounterGenerator5 g5 = new();
+                    
                     switch (i)
                     {
                         case 0:
                             PKL[i].Language = 2;
                             break;
                         case 2:
+                            PKL[i]= g5.GetPossible(PKL[i], chain, GameVersion.W, EncounterTypeGroup.Static).ToList()[0].ConvertToPKM(SAV.SAV);
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 3:

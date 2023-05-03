@@ -13,6 +13,7 @@ namespace WangPluginPkm
             IEncounterInfo enc;
             var setting = new SearchSettings
             {
+                SearchShiny=false,
                 Species = species,
                 SearchEgg = egg,
                 Version = version,
