@@ -289,6 +289,43 @@ namespace WangPluginPkm
             }
             return pk;
         }
+        public static PKM SearchPKMBW(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version,int loc=0, int r = 0)
+        {
+            List<IEncounterInfo> Results;
+            IEncounterInfo enc;
+            var setting = new SearchSettings
+            {
+                Species = species,
+                SearchEgg=false,
+                Version = version,
+            };
+            var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
+            var results = search.ToList();
+            IEnumerable<IEncounterInfo> res = results;
+          
+            PKM pk = Editor.Data;
+            if (results.Count != 0)
+            {
+                Results = results;
+                enc = Results[r];
+                pk = enc.ConvertToPKM(SAV.SAV);
+                if (loc != 0)
+                {
+                    for (int i = 0; ; i++)
+                    {
+                        enc = Results[i];
+                        pk = enc.ConvertToPKM(SAV.SAV);
+
+                        if (pk.Met_Location != loc)
+                            break;
+                    }
+                }
+                
+                pk = EntityConverter.ConvertToType(pk, SAV.SAV.PKMType, out var r2);
+
+            }
+            return pk;
+        }
 
 
     }

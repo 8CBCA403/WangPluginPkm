@@ -1158,8 +1158,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             PKL.Add(SearchDatabase.SearchPKM(SAV, Editor, 494, (int)GameVersion.W2));
             for (int i = 495; i < 637; i++)
             {
-                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)i, (int)GameVersion.W, 0, true);
-                pk.CurrentLevel = 5;
+                pk = SearchDatabase.SearchPKMBW(SAV, Editor, (ushort)i, (int)GameVersion.W);
                 PKL.Add(pk);
             }
             for (int i = 637; i < 650; i++)
@@ -1190,33 +1189,44 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                         case 9:
                             PKL[i] = AchieveFunc.evo2(PKL[i]);
                             break;
-                        case 11:
-                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                        case 10:
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 504, (int)GameVersion.W,32);
                             break;
-                        case 13:
+                        case 11:
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 504, (int)GameVersion.W, 32);
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 14:
-                            PKL[i] = AchieveFunc.evo2(PKL[i]);
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 15:
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 509, (int)GameVersion.W, 32);
+                        
                             break;
                         case 16:
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 509, (int)GameVersion.W, 32);
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 17:
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 511, (int)GameVersion.W, 32);
                             break;
                         case 18:
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 511, (int)GameVersion.W, 32);
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
-                          
+                            break;
+                        case 19:
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 513, (int)GameVersion.W, 32);
                             break;
                         case 20:
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 513, (int)GameVersion.W, 32);
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
-                      
+                            break;
+                        case 21:
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 515, (int)GameVersion.W, 32);
                             break;
                         case 22:
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 515, (int)GameVersion.W, 32);
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
-                            
-                            break;
-                        case 24:
-                            PKL[i] = AchieveFunc.evo1(PKL[i]);
-                         
                             break;
                         case 26:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
@@ -1230,11 +1240,8 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                         case 29:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
-                        case 31:
-                            PKL[i] = AchieveFunc.evo1(PKL[i]);
-                            break;
                         case 32:
-                            PKL[i] = AchieveFunc.evo2(PKL[i]);
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 34:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
@@ -1250,11 +1257,8 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                         case 40:
                             PKL[i] = AchieveFunc.evo2(PKL[i]);
                             break;
-                        case 42:
-                            PKL[i] = AchieveFunc.evo1(PKL[i]);
-                            break;
                         case 43:
-                            PKL[i] = AchieveFunc.evo2(PKL[i]);
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 47:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
@@ -1270,13 +1274,16 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo2(PKL[i]);
 
                             break;
-                        case 53:
+                        case 52://问题
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 546, (int)GameVersion.B, 0,1);
+                            break;
+                        case 53://问题
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 546, (int)GameVersion.B, 0, 1);
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
-                            PKL[i].RefreshAbility(2);
+                            PKL[i].RefreshAbility(0);
                             break;
                         case 55:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
-                            PKL[i].RefreshAbility(2);
                             break;
                         case 58:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
@@ -1286,8 +1293,8 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo2(PKL[i]);
                             break;
                         case 61:
-                            PKL[i] = AchieveFunc.evo1(PKL[i]);
-                            PKL[i].CurrentLevel = 40;
+                          //  PKL[i] = AchieveFunc.evo1(PKL[i]);
+                          //  PKL[i].CurrentLevel = 40;
                             break;
                         case 64:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
@@ -1324,11 +1331,13 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 574, (int)GameVersion.B,0,true);
                             break;
                         case 81:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 574, (int)GameVersion.B, 0, true);
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             PKL[i].CurrentLevel = 50;
                             PKL[i].RefreshAbility(0);
                             break;
                         case 82:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 574, (int)GameVersion.B, 0, true);
                             PKL[i] = AchieveFunc.evo2(PKL[i]);
                             PKL[i].CurrentLevel = 70;
                             PKL[i].RefreshAbility(0);
@@ -1356,6 +1365,9 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                         case 92:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             PKL[i].CurrentLevel = 40;
+                            break;
+                        case 93:
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 587, (int)GameVersion.B, 0, 1);
                             break;
                         case 95:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
@@ -1406,11 +1418,10 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i].CurrentLevel = 60;
                             break;
                         case 117:
-                            PKL[i] = AchieveFunc.evo1(PKL[i]);
-                            PKL[i].CurrentLevel = 40;
+                           //龙
                             break;
                         case 118:
-                            PKL[i] = AchieveFunc.evo2(PKL[i]);
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
                             PKL[i].CurrentLevel = 60;
                             break;
                         case 120:
@@ -1437,7 +1448,12 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             PKL[i].CurrentLevel = 60;
                             break;
+                        case 135:
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 629, (int)GameVersion.B);
+                           // PKL[i].CurrentLevel = 60;
+                            break;
                         case 136:
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 629, (int)GameVersion.B);
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             PKL[i].CurrentLevel = 60;
                             break;
@@ -1448,6 +1464,15 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                         case 141:
                             PKL[i] = AchieveFunc.evo2(PKL[i]);
                             PKL[i].CurrentLevel = 70;
+                            break;
+                        case 142:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 636, (int)GameVersion.B2, 0, true);
+                            break;
+                        case 149:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 643, (int)GameVersion.B, 0, false, 39);
+                            break;
+                        case 150:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 644, (int)GameVersion.W,0,false,39);
                             break;
 
                     }
