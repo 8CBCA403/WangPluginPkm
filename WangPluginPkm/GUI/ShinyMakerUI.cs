@@ -3,10 +3,9 @@ using System.Windows.Forms;
 using PKHeX.Core;
 using System.Diagnostics;
 using System.Linq;
-using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
 using System.ComponentModel;
-using static WangPluginPkm.GUI.DistributionUI;
 using System.Media;
+using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
 
 namespace WangPluginPkm.GUI
 {

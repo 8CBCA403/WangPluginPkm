@@ -17,7 +17,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         {
                             for (int j = 0; j < 3; j++)
                             {
-                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(412), 10,0,false,0,1);
+                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(412), 10,0,false,0,2);
                                 pk.Form = (byte)j;
                                 if (i == 1)
                                 {
@@ -36,7 +36,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         {
                             for (int j = 0; j < 3; j++)
                             {
-                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(412), 20,0,false,0,1);
+                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(412), 20,0,false,0,2);
                                 pk.Form = (byte)j;
                                 if (i == 1)
                                 {
@@ -55,7 +55,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         {
                             for (int j = 0; j < 3; j++)
                             {
-                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(412 + i), 24, 0, true, 0, 1);
+                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(412 + i), 24, 0, true, 0, 2);
                                 pk.Form = (byte)j;
                                 if (i == 1)
                                 {
@@ -74,7 +74,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         {
                             for (int j = 0; j < 3; j++)
                             {
-                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(412), 30, 0, true, 0, 1);
+                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(412), 30, 0, true, 0, 2);
                                 pk.Form = (byte)j;
                                 if (i == 1)
                                 {
@@ -92,7 +92,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         {
                             for (int j = 0; j < 3; j++)
                             {
-                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(412 + i), 48, 0, false, 0, 1);
+                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(412 + i), 48, 0, false, 0, 2);
                                 pk.Form = (byte)j;
                                 if (i == 1)
                                 {
@@ -110,7 +110,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         {
                             for (int j = 0; j < 3; j++)
                             {
-                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(412 + i), 47, 0, false, 0, 1);
+                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(412 + i), 47, 0, false, 0, 2);
                                 pk.Form = (byte)j;
                                 if (i == 1)
                                 {

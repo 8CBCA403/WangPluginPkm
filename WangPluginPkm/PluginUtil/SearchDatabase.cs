@@ -49,10 +49,10 @@ namespace WangPluginPkm
                     {
                         enc = Results[i];
                         pk = enc.ConvertToPKM(SAV.SAV);
-                        if (pk.Gender == 1)
+                        if (pk.Gender == gender-1)
                             break;
                     }
-                    pk.Gender = 1;
+                   
                 }
                 if (level!= 0)
                 {

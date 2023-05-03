@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PKHeX.Core;
+﻿using PKHeX.Core;
 using PKHeX.Core.AutoMod;
 
 namespace WangPluginPkm.PluginUtil.AchieveBase
@@ -55,45 +50,9 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
             pk.RefreshAbility(0);
             return pk;
         }
-        public static PKM evo1H(PKM pk)
-        {
-            pk.Species++;
-            pk.CurrentLevel += 25;
-           
-            pk.RefreshAbility(2);
-            pk.Language = 2;
-            pk.ClearNickname();
-            pk.SetSuggestedMoves(true);
-            pk.HealPP();
-            return pk;
-        }
-        public static PKM evo2H(PKM pk)
-        {
-            pk.Species += 2;
-            pk.CurrentLevel += 40;
-          
-            pk.RefreshAbility(2);
-            pk.Language = 2;
-            pk.ClearNickname();
-            pk.SetSuggestedMoves(true);
-            pk.HealPP();
-            return pk;
-        }
-        public static PKM evo3H(PKM pk)
-        {
-            pk.Species += 3;
-            pk.CurrentLevel += 40;
-
-            pk.RefreshAbility(2);
-            pk.Language = 2;
-            pk.ClearNickname();
-            pk.SetSuggestedMoves(true);
-            pk.HealPP();
-            return pk;
-        }
         public static PKM evo3(PKM pk)
         {
-            pk.Species+=3;
+            pk.Species += 3;
             pk.CurrentLevel += 20;
             pk.SetSuggestedMoves();
             pk.HealPP();
@@ -109,5 +68,39 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
             pk.RefreshAbility(0);
             return pk;
         }
+        public static PKM evo1H(PKM pk)
+        {
+            pk.Species++;
+            pk.CurrentLevel += 25;
+            pk.RefreshAbility(2);
+            pk.Language = 2;
+            pk.ClearNickname();
+            pk.SetSuggestedMoves(true);
+            pk.HealPP();
+            return pk;
+        }
+        public static PKM evo2H(PKM pk)
+        {
+            pk.Species += 2;
+            pk.CurrentLevel += 40;
+            pk.RefreshAbility(2);
+            pk.Language = 2;
+            pk.ClearNickname();
+            pk.SetSuggestedMoves(true);
+            pk.HealPP();
+            return pk;
+        }
+        public static PKM evo3H(PKM pk)
+        {
+            pk.Species += 3;
+            pk.CurrentLevel += 40;
+            pk.RefreshAbility(2);
+            pk.Language = 2;
+            pk.ClearNickname();
+            pk.SetSuggestedMoves(true);
+            pk.HealPP();
+            return pk;
+        }
+       
     }
 }

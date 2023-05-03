@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PKHeX.Core;
 using PKHeX.Core.AutoMod;
 using WangPluginPkm.PluginUtil.AchieveBase;
 using WangPluginPkm.GUI;
 using WangPluginPkm.RNG.Methods;
-using System.Windows.Forms;
 
 namespace WangPluginPkm.PluginUtil.MeerkatBase
 {
@@ -337,7 +334,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             SAV.ReloadSlots();
             return PKL;
         }
-        public static List<PKM> SetGen2(ISaveFileProvider SAV, IPKMView Editor, bool shiny)
+        public static List<PKM> SetGen2(ISaveFileProvider SAV, IPKMView Editor,bool shiny)
         {
             if (SAV.SAV is SAV7 s)
             {
@@ -585,14 +582,13 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             SAV.ReloadSlots();
             return PKL;
         }
-        public static List<PKM> SetGen3(ISaveFileProvider SAV,  IPKMView Editor,bool shiny)
+        public static List<PKM> SetGen3(ISaveFileProvider SAV, IPKMView Editor,bool shiny)
         {
            if(SAV.SAV is SAV7 s)
             {
                 s.ConsoleRegion = 1;
                 s.Country = 49;
             }
-           
             var PKL= new List<PKM>();
             for (int i = 252; i < 387; i++)
             {
@@ -877,32 +873,271 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                 s.ConsoleRegion = 1;
                 s.Country = 49;
             }
-            _ = new List<PKM>();
-            SAV4Pt sa = new();
-            List<PKM> PKL = sa.GenerateLivingDex(false, false, false, false).ToList();
-            for (int i = 0; i < 386; i++)
+            var PKL = new List<PKM>();
+            for (int i = 387; i < 494; i++)
             {
-                PKL.RemoveAt(0);
+                PKL.Add(SearchDatabase.SearchPKM(SAV, Editor, (ushort)i, (int)GameVersion.Pt));
             }
             if (PKL.Count != 0)
             {
                 for (int i = 0; i < PKL.Count; i++)
                 {
                     PKL[i] = EntityConverter.ConvertToType(PKL[i], SAV.SAV.PKMType, out var r2);
+                    switch (i)
+                    {
+                        case 1:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 2:
+                            PKL[i] = AchieveFunc.evo2(PKL[i]);
+                            break;
+                        case 3:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)390, (int)GameVersion.Pt, 0, false, 0, 0,0,5);
+                            break;
+                        case 4:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)390, (int)GameVersion.Pt, 0, false, 0, 0, 0, 5);
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 5:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)390, (int)GameVersion.Pt, 0, false, 0, 0, 0, 5);
+                            PKL[i] = AchieveFunc.evo2(PKL[i]);
+                            break;
+                        case 7:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 8:
+                            PKL[i] = AchieveFunc.evo2(PKL[i]);
+                            break;
+                        case 11:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 13:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 15:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 17:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 18:
+                            PKL[i] = AchieveFunc.evo2(PKL[i]);
+                            break;
+                        case 20:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 22:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 24:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 26:
+                            PKL[i] =SearchDatabase.SearchPKM(SAV, Editor, (ushort)412, (int)GameVersion.Pt,0,false,0,2); ;
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 27:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)412, (int)GameVersion.Pt, 0, false, 0, 1);
+                            PKL[i] = AchieveFunc.evo2(PKL[i]);
+                           break;
+                        case 28:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)415, (int)GameVersion.Pt,0,false,0,0,0,5);
+                            break;
+                        case 29:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)415, (int)GameVersion.Pt, 0, true);
+                            PKL[i].SetGender(1);
+                            PKL[i].SetPIDGender(1);
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 30:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)417, (int)GameVersion.Pt, 0, false, 0, 0, 0, 11);
+                            break;
+                        case 32:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 34:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 36:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 37:
+                            PKL[i].Species = 424;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 39:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 41:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 42:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)429, (int)GameVersion.P);
+                            PKL[i].Species = 429;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 43:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)430, (int)GameVersion.D);
+                            PKL[i].Species = 430;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 44:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)431, (int)GameVersion.P);
+                            break;
+                        case 45:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)431, (int)GameVersion.P);
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 47:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)434, (int)GameVersion.D);
+                            break;
+                        case 48:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)434, (int)GameVersion.D);
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 50:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 54:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)441, (int)GameVersion.Pt,0,false,0,0,0,25);
+                            break;
+                        case 58:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 60:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)447, (int)GameVersion.Pt, 0, true,0,0,1);
+                          //  PKL[i].Egg_Location = 2010;
+                            break;
+                        case 61:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)447, (int)GameVersion.Pt, 0, true, 0, 0, 1);
+                          //  PKL[i].Egg_Location = 2010;
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 65:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 67:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 70:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 73:
+                            PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            break;
+                        case 74:
+                            PKL[i].Species = 461;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 75:
+                            PKL[i].Species = 462;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 76:
+                            PKL[i].Species = 463;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 77:
+                            PKL[i].Species = 464;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 78:
+                            PKL[i].Species = 465;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 79:
+                            PKL[i].Species = 466;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 80:
+                            PKL[i].Species = 467;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 81:
+                            PKL[i].Species = 468;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 82:
+                            PKL[i].Species = 469;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 83:
+                            PKL[i].Species = 470;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 84:
+                            PKL[i].Species = 471;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 85:
+                            PKL[i].Species = 472;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 86:
+                            PKL[i].Species = 473;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 87:
+                            PKL[i].Species = 474;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 88:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)280, (int)GameVersion.Pt, 0, false, 0, 1);
+                            PKL[i].Species = 475;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 89:
+                            PKL[i].Species = 476;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 90:
+                            PKL[i].Species = 477;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                        case 91:
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)361, (int)GameVersion.Pt, 0, false, 0, 2);
+                            PKL[i].Species = 478;
+                            PKL[i].CurrentLevel = 50;
+                            PKL[i].RefreshAbility(0);
+                            break;
+                    }
+
                     PKL[i].ClearNickname();
-                    PKL[i] = AchieveFunc.fun(PKL[i],SAV);
-                    if (PKL[i].Species==490)
+                    PKL[i] = AchieveFunc.fun(PKL[i], SAV);
+                    if (PKL[i].Species == 490)
                     {
                         PKL[i].Language = 1;
                         PKL[i].ClearNickname();
                     }
+                    PKL[i].SetSuggestedMoves(true);
+                    PKL[i].HealPP();
                     if (shiny)
                     {
                         PKL[i] = ShinyMakerUI.ShinyFunctionPlus(PKL[i]);
                     }
-
                 }
             }
+            
             
             SAV.ReloadSlots();
             return PKL;
