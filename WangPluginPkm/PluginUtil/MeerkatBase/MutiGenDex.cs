@@ -1186,6 +1186,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 3:
+                            PKL[i] = g5.GetPossible(PKL[i], chain, GameVersion.W, EncounterTypeGroup.Static).ToList()[0].ConvertToPKM(SAV.SAV);
                             PKL[i] = AchieveFunc.evo2(PKL[i]);
                             break;
                         case 5:

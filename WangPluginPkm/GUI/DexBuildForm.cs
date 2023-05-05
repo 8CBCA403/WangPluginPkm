@@ -631,6 +631,14 @@ namespace WangPluginPkm.GUI
             var PKL = new List<PKM>();
             switch (mainHomeAchieve)
             {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
                 case 4:
                     {
                         switch (subHomeAchieve)
@@ -798,6 +806,8 @@ namespace WangPluginPkm.GUI
 
                         }
                     }
+                    break;
+                case 7:
                     break;
                 default: break;
             }
