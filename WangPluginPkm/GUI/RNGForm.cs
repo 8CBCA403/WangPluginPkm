@@ -525,7 +525,10 @@ namespace WangPluginPkm.GUI
             }
             if (Seeds.Length != 0)
             {
-                SeedBox.Text = PrintSeed(S, seed);
+                SeedBox.Clear();
+                var r = PrintSeed(S, seed).Split('\n');
+                for (int i = 0; i < r.Length; i++)
+                    SeedBox.AppendText($"{r[i]}" + Environment.NewLine);
             }
         }
         private string PrintSeed(uint[] seeds, uint seed = 0)

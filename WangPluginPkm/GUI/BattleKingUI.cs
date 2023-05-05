@@ -265,7 +265,7 @@ namespace WangPluginPkm.GUI
             }
             switch (input)
             {
-               // case PKM pk: return OpenPKM(pk);
+                // case PKM pk: return OpenPKM(pk);
                 case byte[] pkms: return OpenPCBoxBin(pkms);
             }
             return false;
@@ -331,6 +331,7 @@ namespace WangPluginPkm.GUI
 
         private void TEST_BTN_Click(object sender, EventArgs e)
         {
+            ResultBox.Clear();
             int n = 0;
             int l = 0;
             int m = 0;
@@ -342,21 +343,27 @@ namespace WangPluginPkm.GUI
                 + BD[i].pk.Move4_PPUps;
             }
             if (n > 15)
-                ResultBox.Text += "队伍PP Up使用超过20%，不合法\n\n";
-            for(int i=0; i < 6; i++)
+                ResultBox.AppendText("队伍PP Up使用超过20%，不合法!" + Environment.NewLine);
+            else
+                ResultBox.AppendText("队伍PP Up使用合法!" + Environment.NewLine);
+            for (int i = 0; i < 6; i++)
             {
                 if (BD[i].pk.EVTotal == 508)
                     l++;
             }
-            if(l>0)
-                ResultBox.Text += "队伍中有精灵努力值总和为508，不合法\n\n";
+            if (l > 0)
+                ResultBox.AppendText("队伍中存在精灵努力值总和为508，不合法!" + Environment.NewLine);
+            else
+                ResultBox.AppendText("队伍中努力值配置合法!" + Environment.NewLine);
             for (int i = 0; i < 6; i++)
             {
-                if (BD[i].pk.CurrentLevel==100)
+                if (BD[i].pk.CurrentLevel == 100)
                     m++;
             }
-            if(m==6)
-                ResultBox.Text += "全队宝可梦都是100级，不合法";
+            if (m == 6)
+                ResultBox.AppendText("全队宝可梦都是100级，不合法!" + Environment.NewLine);
+            else
+                ResultBox.AppendText("队伍中宝可梦等级合法!" + Environment.NewLine);
         }
 
     }
