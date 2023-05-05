@@ -6,18 +6,11 @@ using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
-using iText.Layout.Borders;
 using iText.Kernel.Pdf.Canvas.Draw;
-using PKHeX.Core.AutoMod;
 using iText.IO.Image;
 using System.Drawing;
 using iText.Kernel.Font;
-using iText.IO.Font;
 using System.Globalization;
-using iText.Kernel.Pdf.Canvas;
-using iText.Kernel.Pdf.Xobject;
-using System.IO;
-using Org.BouncyCastle.Bcpg.Sig;
 
 namespace WangPluginPkm.Plugins
 {
@@ -104,9 +97,8 @@ namespace WangPluginPkm.Plugins
         }
         private static void pdf(string result,PKM p )
         {
-           
-            PdfFont f1 = PdfFontFactory.CreateFont(Properties.Resources.simkai,PdfFontFactory.EmbeddingStrategy.FORCE_EMBEDDED);
-            PdfWriter writer = new PdfWriter($"超王宝可梦合法性检测报告-{GameStringsZh.Species[p.Species]}{p.EncryptionConstant:X}.pdf");
+            PdfFont f1 = PdfFontFactory.CreateFont(@"Plugins\WangPluginPkm\simkai.ttf");
+            PdfWriter writer = new PdfWriter(@"Plugins\WangPluginPkm\Reports\"+$"超王宝可梦合法性检测报告-{GameStringsZh.Species[p.Species]}{p.EncryptionConstant:X}.pdf");
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
             Paragraph header1 = new Paragraph($"超王宝可梦合法性检测报告")
@@ -122,8 +114,6 @@ namespace WangPluginPkm.Plugins
             LineSeparator ls = new LineSeparator(new SolidLine());
             Paragraph content = new Paragraph($"{result}")
                 .SetTextAlignment(TextAlignment.LEFT) .SetFontSize(12).SetFont(f1);
-            //Paragraph time = new Paragraph($"\n\n\n\n\n检测时间:北京时间{ DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff",
-            //                   CultureInfo.InvariantCulture) }").SetTextAlignment(TextAlignment.RIGHT).SetFontSize(12).SetFont(f1);
             ImageData imageData = ImageDataFactory.Create(ImageToByte(Properties.Resources.SuperWang));
             iText.Layout.Element.Image image = new iText.Layout.Element.Image(imageData).ScaleAbsolute(100, 100).SetFixedPosition(1, 450, 45);
             document.Add(image);
@@ -132,26 +122,14 @@ namespace WangPluginPkm.Plugins
             document.Add(subheader);
             document.Add(ls);
             document.Add(content);
-          //document.Add(time);
             document.Close();
-       /*   
-            PdfDocument backgroundDocument = new PdfDocument(new PdfReader(@"OIP.pdf"));
-            PdfDocument pdfDocument = new PdfDocument(new PdfReader($"temp.pdf"),
-            new PdfWriter($"超王宝可梦合法性检测报告-{GameStringsZh.Species[p.Species]}.pdf"));
-            PdfFormXObject backgroundXObject = backgroundDocument.GetPage(1).CopyAsFormXObject(pdfDocument);
-            PdfPage page = pdfDocument.GetPage(1);
-            PdfStream stream = page.NewContentStreamBefore();
-            new PdfCanvas(stream, page.GetResources(), pdfDocument).AddXObjectAt(backgroundXObject, 0, 0);
-            pdfDocument.Close();
-            backgroundDocument.Close();
-       */
             MessageBox.Show("已生成合法检测报告");
         }
    
-        public static byte[] ImageToByte(System.Drawing.Image img)
+        public static byte[] ?ImageToByte(System.Drawing.Image img)
         {
             ImageConverter converter = new ImageConverter();
-            var result = (byte[])converter.ConvertTo(img, typeof(byte[]));
+            var result = converter.ConvertTo(img, typeof(byte[])) as byte[];
             return result;
         }
         public static T? GetUnderlyingControl<T>(object sender) where T : class

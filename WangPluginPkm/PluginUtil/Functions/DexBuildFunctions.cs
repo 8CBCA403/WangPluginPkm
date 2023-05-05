@@ -34,6 +34,15 @@ namespace WangPluginPkm.PluginUtil.Functions
             sav.BoxData = bd.ToArray();
             SaveFileEditor.ReloadSlots();
         }
+        public static void LivingDexHome(ISaveFileProvider SaveFileEditor)
+        {
+            var sav = SaveFileEditor.SAV;
+            Span<PKM> pkms = sav.GenerateLivingDex(false,false,false,false).ToArray();
+            Span<PKM> bd = sav.BoxData.ToArray();
+            pkms.CopyTo(bd);
+            sav.BoxData = bd.ToArray();
+            SaveFileEditor.ReloadSlots();
+        }
         public static void LegalBox(ISaveFileProvider SaveFileEditor)
         {
             var sav = SaveFileEditor.SAV;

@@ -18,6 +18,7 @@ namespace WangPluginPkm.GUI
 {
     partial class DexBuildForm : Form
     {
+        public static GameStrings GameStringsZh = GameInfo.GetStrings("zh");
         private static Random rand = new Random();
         public static Stopwatch sw = new();
         private SoundPlayer Player = new SoundPlayer();
@@ -34,7 +35,7 @@ namespace WangPluginPkm.GUI
         private DexFormLanguage7 type7 = DexFormLanguage7.ENG;
         private DexFormLanguage5 type5 = DexFormLanguage5.ENG;
         private DexFormOTGender typeG = DexFormOTGender.Male;
-        private int mainHomeAchieve = 5;
+        private int mainHomeAchieve = 0;
         private int subHomeAchieve = 0;
         public List<VersionClass> L = new();
         public List<DexModClass> ML = new();
@@ -106,9 +107,10 @@ namespace WangPluginPkm.GUI
                     FormAndSubDex_BTN.Enabled = true;
                 }
             };
+            this.AchieveGen_BTN.Enabled = true;
+            this.AchieveCheck_BTN.Enabled = false;
             this.MaincomboBox.DataSource = Enum.GetNames(typeof(MainHomeAchieve));
             this.SubcomboBox.DataSource = Enum.GetNames(typeof(RegionDex));
-            //  this.Markeetbox.DataSource = Enum.GetNames(typeof(TaoBaoCombo));
             this.MaincomboBox.SelectedIndexChanged += (_, __) =>
             {
                 mainHomeAchieve = this.MaincomboBox.SelectedIndex;
@@ -116,27 +118,43 @@ namespace WangPluginPkm.GUI
                 {
                     case 0:
                         this.SubcomboBox.DataSource = Enum.GetNames(typeof(RegionDex));
+                        this.AchieveGen_BTN.Enabled = true;
+                        this.AchieveCheck_BTN.Enabled = false;
                         break;
                     case 1:
                         this.SubcomboBox.DataSource = Enum.GetNames(typeof(HomeType));
+                        this.AchieveGen_BTN.Enabled = false;
+                        this.AchieveCheck_BTN.Enabled = true;
                         break;
                     case 2:
                         this.SubcomboBox.DataSource = Enum.GetNames(typeof(HomeBall));
+                        this.AchieveGen_BTN.Enabled = false;
+                        this.AchieveCheck_BTN.Enabled = true;
                         break;
                     case 3:
                         this.SubcomboBox.DataSource = Enum.GetNames(typeof(HomeNature));
+                        this.AchieveGen_BTN.Enabled = false;
+                        this.AchieveCheck_BTN.Enabled = true;
                         break;
                     case 4:
                         this.SubcomboBox.DataSource = Enum.GetNames(typeof(Firstpartner));
+                        this.AchieveGen_BTN.Enabled = true;
+                        this.AchieveCheck_BTN.Enabled = false;
                         break;
                     case 5:
                         this.SubcomboBox.DataSource = Enum.GetNames(typeof(PostGenAchieve));
+                        this.AchieveGen_BTN.Enabled = true;
+                        this.AchieveCheck_BTN.Enabled = false;
                         break;
                     case 6:
                         this.SubcomboBox.DataSource = Enum.GetNames(typeof(SpecificForm));
+                        this.AchieveGen_BTN.Enabled = true;
+                        this.AchieveCheck_BTN.Enabled = false;
                         break;
                     case 7:
                         this.SubcomboBox.DataSource = Enum.GetNames(typeof(OtherPokemonachievements));
+                        this.AchieveGen_BTN.Enabled = false;
+                        this.AchieveCheck_BTN.Enabled = false;
                         break;
 
                 }
@@ -145,10 +163,7 @@ namespace WangPluginPkm.GUI
             {
                 subHomeAchieve = this.SubcomboBox.SelectedIndex;
             };
-            //  this.Markeetbox.SelectedIndexChanged += (_, __) =>
-            //  {
-            //    Markeet = this.Markeetbox.SelectedIndex;
-            //  };
+         
         }
         public void Gen(ISaveFileProvider SaveFileEditor)
         {
@@ -632,6 +647,147 @@ namespace WangPluginPkm.GUI
             switch (mainHomeAchieve)
             {
                 case 0:
+                    switch(subHomeAchieve)
+                    {
+                        case 0:
+                            if(SAV.SAV.Version==GameVersion.GE|| SAV.SAV.Version == GameVersion.GP)
+                            {
+                                sw.Start();
+                                LivingDexHome(SAV);
+                                sw.Stop();
+                                MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+                                sw.Reset();
+                            }
+                            else
+                            {
+                                MessageBox.Show("版本不对！");
+                            }
+                            break;
+                        case 1:
+                            if (SAV.SAV.Version == GameVersion.SW || SAV.SAV.Version == GameVersion.SH)
+                            {
+                                sw.Start();
+                                LivingDexHome(SAV);
+                                IEnumerable<PKM> sortMethod(IEnumerable<PKM> pkms, int i) => pkms.OrderByCustom(Gen8_Galar.GetGalarDexSortFunctions());   
+                                SAV.SAV.SortBoxes(0, -1, sortMethod);
+                                List<PKM> L = (List<PKM>)SAV.SAV.GetAllPKM();
+                                var n = L.Count;
+                                SAV.SAV.ModifyBoxes(ClearPKM);
+                                for (int i = 400; i < n; i++)
+                                {
+                                    L.RemoveAt(400);
+                                }
+                                if (L.Count != 0)
+                                {
+                                    for (int i = 0; i < L.Count; i++)
+                                    {
+                                       
+                                        SAV.SAV.SetBoxSlotAtIndex(L[i], i);
+                                    }
+                                }
+                                SAV.ReloadSlots();
+                                sw.Stop();
+                                MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+                                sw.Reset();
+                            }
+                            else
+                            {
+                                MessageBox.Show("版本不对！");
+                            }
+                            break;
+                        case 2:
+                            if (SAV.SAV.Version == GameVersion.SW || SAV.SAV.Version == GameVersion.SH)
+                            {
+                                sw.Start();
+                                LivingDexHome(SAV);
+                                IEnumerable<PKM> sortMethod(IEnumerable<PKM> pkms, int i) => pkms.OrderByCustom(Gen8_Galar.GetIoADexSortFunctions());
+                                SAV.SAV.SortBoxes(0, -1, sortMethod);
+                                List<PKM> L = (List<PKM>)SAV.SAV.GetAllPKM();
+                                var n = L.Count;
+                                SAV.SAV.ModifyBoxes(ClearPKM);
+                                for (int i = 211; i < n; i++)
+                                {
+                                    L.RemoveAt(211);
+                                }
+                                if (L.Count != 0)
+                                {
+                                    for (int i = 0; i < L.Count; i++)
+                                    {
+
+                                        SAV.SAV.SetBoxSlotAtIndex(L[i], i);
+                                    }
+                                }
+                                SAV.ReloadSlots();
+                                sw.Stop();
+                                MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+                                sw.Reset();
+                            }
+                            else
+                            {
+                                MessageBox.Show("版本不对！");
+                            }
+                            break;
+                        case 3:
+                            if (SAV.SAV.Version == GameVersion.SW || SAV.SAV.Version == GameVersion.SH)
+                            {
+                                sw.Start();
+                                LivingDexHome(SAV);
+                                IEnumerable<PKM> sortMethod(IEnumerable<PKM> pkms, int i) => pkms.OrderByCustom(Gen8_Galar.GetCTDexSortFunction());
+                                SAV.SAV.SortBoxes(0, -1, sortMethod);
+                                List<PKM> L = (List<PKM>)SAV.SAV.GetAllPKM();
+                                var n = L.Count;
+                                SAV.SAV.ModifyBoxes(ClearPKM);
+                                for (int i = 210; i < n; i++)
+                                {
+                                    L.RemoveAt(210);
+                                }
+                                if (L.Count != 0)
+                                {
+                                    for (int i = 0; i < L.Count; i++)
+                                    {
+
+                                        SAV.SAV.SetBoxSlotAtIndex(L[i], i);
+                                    }
+                                }
+                                SAV.ReloadSlots();
+                                sw.Stop();
+                                MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+                                sw.Reset();
+                            }
+                            else
+                            {
+                                MessageBox.Show("版本不对！");
+                            }
+                            break;
+                        case 4:
+                            if (SAV.SAV.Version == GameVersion.BD || SAV.SAV.Version == GameVersion.SP)
+                            {
+                                sw.Start();
+                                LivingDexHome(SAV);
+                                sw.Stop();
+                                MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+                                sw.Reset();
+                            }
+                            else
+                            {
+                                MessageBox.Show("版本不对！");
+                            }
+                            break;
+                        case 5:
+                            if (SAV.SAV.Version == GameVersion.PLA)
+                            {
+                                sw.Start();
+                                LivingDexHome(SAV);
+                                sw.Stop();
+                                MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+                                sw.Reset();
+                            }
+                            else
+                            {
+                                MessageBox.Show("版本不对！");
+                            }
+                            break;
+                    }
                     break;
                 case 1:
                     break;
@@ -932,6 +1088,54 @@ namespace WangPluginPkm.GUI
         }
         */
         #endregion
+
+        private void AchieveCheck_BTN_Click(object sender, EventArgs e)
+        {
+            var PL = SAV.SAV.GetAllPKM();
+            int i = 0;
+            switch(mainHomeAchieve)
+            {
+                case 1:
+                    {
+                        foreach (var pk in PL)
+                        {
+                            if (TypeAchieve.pokemonIsType(pk, TypeAchieve.T(subHomeAchieve)))
+                            {
+                                i++;
+                            }
+                        }
+                        Result.Text = $"当前存档中有{i}只属性为{GameStringsZh.Types[(int)TypeAchieve.T(subHomeAchieve)]}属性的宝可梦";
+                    }
+                    break;
+                case 2:
+                    {
+                        foreach (var pk in PL)
+                        {
+                            if (TypeAchieve.pokemonIsBall(pk, TypeAchieve.B(subHomeAchieve)))
+                            {
+                                i++;
+                            }
+                        }
+                        Result.Text = $"当前存档中有{i}只球种为{TypeAchieve.B(subHomeAchieve)}的宝可梦";
+                    }
+                    break;
+                case 3:
+                    {
+                        foreach (var pk in PL)
+                        {
+                            if (TypeAchieve.pokemonIsNature(pk, TypeAchieve.N(subHomeAchieve)))
+                            {
+                                i++;
+                            }
+                        }
+                        Result.Text = $"当前存档中有{i}只性格为{GameStringsZh.Natures[(int)TypeAchieve.N(subHomeAchieve)]}的宝可梦";
+                    }
+                    break;
+            }
+          
+        }
+
+
     }
 }
 
