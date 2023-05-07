@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WangPluginPkm.PluginUtil.AchieveBase
 {
-    internal class TypeAchieve
+    internal class CheckAchieve
     {
         public static bool pokemonIsType(PKM pkm, MoveType type)
         {
@@ -30,6 +30,96 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
         public static bool pokemonIsNature(PKM pkm,Nature nature)
         {
             if (pkm.Nature == (int)nature)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public static bool Ispokemon(PKM pkm)
+        {
+            if (pkm.Species!=0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public static bool Isshiny(PKM pkm)
+        {
+            if (pkm.IsShiny)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public static bool IsAlpha(PA8 pkm)
+        {
+            if (pkm.IsAlpha)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public static bool IsGMax(PA8 pkm)
+        {
+            if (pkm.IsGanbaruValuesMax(pkm))
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public static bool IsSheen(PB8 pkm)
+        {
+            if (pkm.CNT_Sheen==255)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public static bool IsCool(PB8 pkm)
+        {
+            if (pkm.CNT_Cool == 255)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public static bool IsBeauty(PB8 pkm)
+        {
+            if (pkm.CNT_Beauty == 255)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public static bool IsCute(PB8 pkm)
+        {
+            if (pkm.CNT_Cute == 255)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public static bool IsSmart(PB8 pkm)
+        {
+            if (pkm.CNT_Smart == 255)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public static bool IsTough(PB8 pkm)
+        {
+            if (pkm.CNT_Tough == 255)
             {
                 return true;
             }
@@ -160,7 +250,6 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
             }
             return ty;
         }
-
         public static Nature N(int i)
         {
             var ty = Nature.Naive;

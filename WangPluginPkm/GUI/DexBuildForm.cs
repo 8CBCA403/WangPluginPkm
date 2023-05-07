@@ -154,7 +154,7 @@ namespace WangPluginPkm.GUI
                     case 7:
                         this.SubcomboBox.DataSource = Enum.GetNames(typeof(OtherPokemonachievements));
                         this.AchieveGen_BTN.Enabled = false;
-                        this.AchieveCheck_BTN.Enabled = false;
+                        this.AchieveCheck_BTN.Enabled = true;
                         break;
 
                 }
@@ -162,6 +162,20 @@ namespace WangPluginPkm.GUI
             this.SubcomboBox.SelectedIndexChanged += (_, __) =>
             {
                 subHomeAchieve = this.SubcomboBox.SelectedIndex;
+                if(this.MaincomboBox.SelectedIndex==7)
+                {
+                    switch(subHomeAchieve)
+                    {
+                        case 15:
+                            this.AchieveGen_BTN.Enabled = true;
+                            this.AchieveCheck_BTN.Enabled = false;
+                            break;
+                        default:
+                            this.AchieveGen_BTN.Enabled = false;
+                            this.AchieveCheck_BTN.Enabled = true;
+                            break;
+                    }
+                }
             };
          
         }
@@ -964,7 +978,15 @@ namespace WangPluginPkm.GUI
                     }
                     break;
                 case 7:
-                    break;
+                    {
+                        switch (subHomeAchieve)
+                        {
+                            case 15:
+                                PKL = AlcremieDex.AlcremieSets(SAV, Editor);
+                                break;
+                        }
+                        break;
+                    }
                 default: break;
             }
             var BoxData = SAV.SAV.BoxData;
@@ -1093,49 +1115,271 @@ namespace WangPluginPkm.GUI
         {
             var PL = SAV.SAV.GetAllPKM();
             int i = 0;
+            List<int> aL = new List<int>();
             switch(mainHomeAchieve)
             {
                 case 1:
                     {
                         foreach (var pk in PL)
                         {
-                            if (TypeAchieve.pokemonIsType(pk, TypeAchieve.T(subHomeAchieve)))
+                            if (CheckAchieve.pokemonIsType(pk, CheckAchieve.T(subHomeAchieve)))
                             {
                                 i++;
                             }
                         }
-                        Result.Text = $"当前存档中有{i}只属性为{GameStringsZh.Types[(int)TypeAchieve.T(subHomeAchieve)]}属性的宝可梦";
+                        Result.Text = $"当前存档中有{i}只属性为{GameStringsZh.Types[(int)CheckAchieve.T(subHomeAchieve)]}属性的宝可梦";
                     }
                     break;
                 case 2:
                     {
                         foreach (var pk in PL)
                         {
-                            if (TypeAchieve.pokemonIsBall(pk, TypeAchieve.B(subHomeAchieve)))
+                            if (CheckAchieve.pokemonIsBall(pk, CheckAchieve.B(subHomeAchieve)))
                             {
                                 i++;
                             }
                         }
-                        Result.Text = $"当前存档中有{i}只球种为{TypeAchieve.B(subHomeAchieve)}的宝可梦";
+                        Result.Text = $"当前存档中有{i}只球种为{CheckAchieve.B(subHomeAchieve)}的宝可梦";
                     }
                     break;
                 case 3:
                     {
                         foreach (var pk in PL)
                         {
-                            if (TypeAchieve.pokemonIsNature(pk, TypeAchieve.N(subHomeAchieve)))
+                            if (CheckAchieve.pokemonIsNature(pk, CheckAchieve.N(subHomeAchieve)))
                             {
                                 i++;
                             }
                         }
-                        Result.Text = $"当前存档中有{i}只性格为{GameStringsZh.Natures[(int)TypeAchieve.N(subHomeAchieve)]}的宝可梦";
+                        Result.Text = $"当前存档中有{i}只性格为{GameStringsZh.Natures[(int)CheckAchieve.N(subHomeAchieve)]}的宝可梦";
+                    }
+                    break;
+                case 7:
+                    {
+                    switch (subHomeAchieve)
+                    {
+                            case 0:
+                                foreach (var pk in PL)
+                                {
+                                    if (CheckAchieve.Ispokemon(pk))
+                                    {
+                                        i++;
+                                    }
+                                }
+                                Result.Text = $"当前存档中有{i}只宝可梦";
+                                break;
+                            case 1:
+                                foreach (var pk in PL)
+                                {
+                                    if (CheckAchieve.Isshiny(pk))
+                                    {
+                                        i++;
+                                    }
+                                }
+                                Result.Text = $"当前存档中有{i}只异色宝可梦";
+                                break;
+                            case 2:
+                                foreach (var pk in PL)
+                                {
+                                    aL.Add(pk.Ability);
+                                }
+                                var dis = aL.DistinctBy(i => i);
+                                Result.Text = $"当前存档中有{dis.Count()}种特性";
+                                break;
+                            case 3:
+                                foreach (var pk in PL)
+                                {
+                                    aL.Add(pk.Move1);
+                                    aL.Add(pk.Move2);
+                                    aL.Add(pk.Move3);
+                                    aL.Add(pk.Move4);
+                                }
+                                var Pdis = aL.DistinctBy(i => i);
+                                Result.Text = $"当前存档中有{Pdis.Count() - 1}种技能";
+                                break;
+                            case 4:
+                                foreach (var pk in PL)
+                                {
+                                    aL.Add(pk.Move1);
+                                    aL.Add(pk.Move2);
+                                    aL.Add(pk.Move3);
+                                    aL.Add(pk.Move4);
+                                }
+                                var Sdis = aL.DistinctBy(i => i);
+                                Result.Text = $"当前存档中有{Sdis.Count() - 1}种技能";
+                                break;
+                            case 5:
+                                foreach (var pk in PL)
+                                {
+                                    aL.Add(pk.Move1);
+                                    aL.Add(pk.Move2);
+                                    aL.Add(pk.Move3);
+                                    aL.Add(pk.Move4);
+                                }
+                                var Cdis = aL.DistinctBy(i => i);
+                                Result.Text = $"当前存档中有{Cdis.Count() - 1}种技能";
+                                break;
+                            case 6:
+                                if (SAV.SAV.Version == GameVersion.PLA)
+                                {
+                                    foreach (var pk in PL)
+                                    {
+                                        if (CheckAchieve.IsGMax((PA8)pk))
+                                        {
+                                            i++;
+                                        }
+                                    }
+                                    Result.Text = $"当前存档中有{i}只奋斗等级最高宝可梦";
+                                }
+                                else
+                                {
+                                    MessageBox.Show("版本不对！");
+                                }
+                                break;
+                            case 7:
+                                if (SAV.SAV.Version == GameVersion.PLA)
+                                {
+                                    foreach (var pk in PL)
+                                    {
+                                        if (CheckAchieve.IsAlpha((PA8)pk))
+                                        {
+                                            i++;
+                                        }
+                                    }
+                                    Result.Text = $"当前存档中有{i}只头目宝可梦";
+                                }
+                                else
+                                {
+                                    MessageBox.Show("版本不对！");
+                                }
+                                break;
+                            case 8:
+                                if (SAV.SAV.Version is GameVersion.BD or GameVersion.SP)
+                                {
+                                    foreach (var pk in PL)
+                                    {
+                                        if (CheckAchieve.IsSheen((PB8)pk))
+                                        {
+                                            i++;
+                                        }
+                                    }
+
+                                    Result.Text = $"当前存档中有{i}只光泽达到最棒的宝可梦";
+                                }
+                                else
+                                {
+                                    MessageBox.Show("版本不对！");
+                                }
+                                break;
+                            case 9:
+                                if (SAV.SAV.Version is GameVersion.BD or GameVersion.SP)
+                                {
+                                    foreach (var pk in PL)
+                                    {
+                                        if (CheckAchieve.IsCool((PB8)pk))
+                                        {
+                                            i++;
+                                        }
+                                    }
+                                    Result.Text = $"当前存档中有{i}只帅气达到最棒的宝可梦";
+                                }
+                                else
+                                {
+                                    MessageBox.Show("版本不对！");
+                                }
+                                break;
+                            case 10:
+                                if (SAV.SAV.Version is GameVersion.BD or GameVersion.SP)
+                                {
+                                    foreach (var pk in PL)
+                                    {
+                                        if (CheckAchieve.IsBeauty((PB8)pk))
+                                        {
+                                            i++;
+                                        }
+                                    }
+                                    Result.Text = $"当前存档中有{i}只美丽达到最棒的宝可梦";
+                                }
+                                else
+                                {
+                                    MessageBox.Show("版本不对！");
+                                }
+                                break;
+                            case 11:
+                                if (SAV.SAV.Version is GameVersion.BD or GameVersion.SP)
+                                {
+                                    foreach (var pk in PL)
+                                    {
+                                        if (CheckAchieve.IsCute((PB8)pk))
+                                        {
+                                            i++;
+                                        }
+                                    }
+                                    Result.Text = $"当前存档中有{i}只可爱达到最棒的宝可梦";
+                                }
+                                else
+                                {
+                                    MessageBox.Show("版本不对！");
+                                }
+                                break;
+                            case 12:
+                                if (SAV.SAV.Version is GameVersion.BD or GameVersion.SP)
+                                {
+                                    foreach (var pk in PL)
+                                    {
+                                        if (CheckAchieve.IsSmart((PB8)pk))
+                                        {
+                                            i++;
+                                        }
+                                    }
+                                    Result.Text = $"当前存档中有{i}只聪明达到最棒的宝可梦";
+                                }
+                                else
+                                {
+                                    MessageBox.Show("版本不对！请使用晶灿钻石或明亮珍珠版本");
+                                }
+                                break;
+                            case 13:
+                                if (SAV.SAV.Version is GameVersion.BD or GameVersion.SP)
+                                {
+                                    foreach (var pk in PL)
+                                    {
+                                        if (CheckAchieve.IsTough((PB8)pk))
+                                        {
+                                            i++;
+                                        }
+                                    }
+                                    Result.Text = $"当前存档中有{i}只强壮达到最棒的宝可梦";
+                                }
+                                else
+                                {
+                                    MessageBox.Show("版本不对！请使用晶灿钻石或明亮珍珠版本");
+                                }
+                                break;
+                            case 14:
+                                if (SAV.SAV.Version is GameVersion.BD or GameVersion.SP)
+                                {
+                                    foreach (var pk in PL)
+                                    {
+                                        IRibbonIndex M = (PB8)pk;
+                                        if ( M.GetRibbonIndex(RibbonIndex.TwinklingStar))
+                                        {
+                                           i++;
+                                        }
+                                    }
+                                    Result.Text = $"当前存档中有{i}只携带闪亮之星奖章的宝可梦";
+                                }
+                                else
+                                {
+                                    MessageBox.Show("版本不对！请使用晶灿钻石或明亮珍珠版本");
+                                }
+                                break;
+                        }
                     }
                     break;
             }
           
         }
-
-
     }
 }
 
