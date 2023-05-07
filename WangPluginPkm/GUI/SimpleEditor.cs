@@ -269,5 +269,6 @@ namespace WangPluginPkm.GUI
             data.CopyTo(gp1.Data, 0);
             gp = gp1;
         }
+       
     }
 }

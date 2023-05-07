@@ -18,13 +18,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
             {
                 case GameVersion.US or GameVersion.UM or GameVersion.USUM:
                     {
-                        pk = SearchDatabase.SearchPKM(SAV, Editor, 143, 32);
-                        pk.Species = 143;
-                        pk.CurrentLevel = 50;
-                        pk.Nature = 12;
-                        pk.AbilityNumber = 1;
-                        pk.Ability = 17;
-                        pk = AchieveFunc.fun(pk,SAV);
+                        pk  = SearchDatabase.MytheryPK(SAV, 143, 7);
                         PKL.Add(pk);
                     }
                     break;

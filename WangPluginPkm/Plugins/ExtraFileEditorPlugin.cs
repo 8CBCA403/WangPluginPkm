@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using WangPluginPkm.GUI;
 namespace WangPluginPkm.Plugins
 {
-    internal class ExtraFileEditorPlugin: WangPluginPkm
+    public class ExtraFileEditorPlugin: WangPluginPkm
     {
         
             public override string Name => "额外文件编辑器/ExtraFileEditor";

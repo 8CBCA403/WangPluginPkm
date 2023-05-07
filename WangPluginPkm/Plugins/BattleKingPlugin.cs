@@ -4,7 +4,7 @@ using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.Plugins
 {
-    internal class BattleKingPlugin:WangPluginPkm
+    public class BattleKingPlugin:WangPluginPkm
     {
         public override string Name => "对战王/BattleKing";
         public override int Priority => 6;

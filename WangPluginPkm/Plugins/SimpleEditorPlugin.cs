@@ -11,10 +11,11 @@ using iText.IO.Image;
 using System.Drawing;
 using iText.Kernel.Font;
 using System.Globalization;
+using System.Reflection;
 
 namespace WangPluginPkm.Plugins
 {
-    internal class SimpleEditorPlugin: WangPluginPkm
+    public class SimpleEditorPlugin : WangPluginPkm
     {
         public override string Name => "常用功能/Simple Editor";
         public override int Priority => 11;
@@ -44,14 +45,14 @@ namespace WangPluginPkm.Plugins
                 var info = GetSenderInfo(ref s!);
                 var pk = info.Slot.Read(SaveFileEditor.SAV);
                 var la = new LegalityAnalysis(pk);
-                var result = la.Results;
+               // var result = la.Results;
                 var IVEVN = new ToolStripMenuItem("快捷三维编辑器");
                 var SavePDF = new ToolStripMenuItem("打印检测报告PDF");
                 IVEVN.Image = Properties.Resources.Atom;
                 SavePDF.Image = Properties.Resources.Report;
                 menuVSD.Items.Insert(menuVSD.Items.Count, IVEVN);
                 menuVSD.Items.Insert(menuVSD.Items.Count, SavePDF);
-                SavePDF.Click += (s, e) => { pdf(la.Report(true),pk); };
+                SavePDF.Click += (s, e) => { pdf(la.Report(true), pk); };
                 IVEVN.DropDownItems.Add(ATKIVEV);
                 IVEVN.DropDownItems.Add(SPAIVEV);
                 IVEVN.DropDownItems.Add(ATK_0SPEIVEV);
@@ -82,6 +83,7 @@ namespace WangPluginPkm.Plugins
             };
 
         }
+      
 #nullable enable
         private static SlotViewInfo<PictureBox> GetSenderInfo(ref object sender)
         {
@@ -95,10 +97,10 @@ namespace WangPluginPkm.Plugins
             sender = pb;
             return new SlotViewInfo<PictureBox>(loc, view);
         }
-        private static void pdf(string result,PKM p )
+        private static void pdf(string result, PKM p)
         {
             PdfFont f1 = PdfFontFactory.CreateFont(@"Plugins\WangPluginPkm\simkai.ttf");
-            PdfWriter writer = new PdfWriter(@"Plugins\WangPluginPkm\Reports\"+$"超王宝可梦合法性检测报告-{GameStringsZh.Species[p.Species]}{p.EncryptionConstant:X}.pdf");
+            PdfWriter writer = new PdfWriter(@"Plugins\WangPluginPkm\Reports\" + $"超王宝可梦合法性检测报告-{GameStringsZh.Species[p.Species]}{p.EncryptionConstant:X}.pdf");
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
             Paragraph header1 = new Paragraph($"超王宝可梦合法性检测报告")
@@ -108,12 +110,12 @@ namespace WangPluginPkm.Plugins
                .SetTextAlignment(TextAlignment.RIGHT)
                .SetFontSize(20).SetFont(f1);
             Paragraph subheader = new Paragraph($"SuperWang检测时间:北京时间" +
-                $"{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff",CultureInfo.InvariantCulture)}")
+                $"{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff", CultureInfo.InvariantCulture)}")
                 .SetTextAlignment(TextAlignment.CENTER)
                 .SetFontSize(15).SetFont(f1);
             LineSeparator ls = new LineSeparator(new SolidLine());
             Paragraph content = new Paragraph($"{result}")
-                .SetTextAlignment(TextAlignment.LEFT) .SetFontSize(12).SetFont(f1);
+                .SetTextAlignment(TextAlignment.LEFT).SetFontSize(12).SetFont(f1);
             ImageData imageData = ImageDataFactory.Create(ImageToByte(Properties.Resources.SuperWang));
             iText.Layout.Element.Image image = new iText.Layout.Element.Image(imageData).ScaleAbsolute(100, 100).SetFixedPosition(1, 450, 45);
             document.Add(image);
@@ -125,8 +127,8 @@ namespace WangPluginPkm.Plugins
             document.Close();
             MessageBox.Show("已生成合法检测报告");
         }
-   
-        public static byte[] ?ImageToByte(System.Drawing.Image img)
+
+        public static byte[]? ImageToByte(System.Drawing.Image img)
         {
             ImageConverter converter = new ImageConverter();
             var result = converter.ConvertTo(img, typeof(byte[])) as byte[];
@@ -166,12 +168,39 @@ namespace WangPluginPkm.Plugins
             }
         }
 #nullable disable
-       
+
         private void OpenForm(object sender, EventArgs e)
         {
 
-            var form = new SimpleEditor(SaveFileEditor,PKMEditor);
+            var form = new SimpleEditor(SaveFileEditor, PKMEditor);
             form.Show();
         }
+        private void InsertSlot(int boxNum, int slotNum)
+        {
+            int startIndex = boxNum * SaveFileEditor.SAV.BoxSlotCount + slotNum;
+            int boxIndex = startIndex + 1;
+            PKM currMon, nextMon;
+            while (boxIndex < SaveFileEditor.SAV.SlotCount)
+            {
+                currMon = SaveFileEditor.SAV.GetBoxSlotAtIndex(boxIndex);
+                if (currMon.Species == (int)Species.None) break;
+                boxIndex++;
+            }
+            if (boxIndex == SaveFileEditor.SAV.SlotCount)
+            {
+              //  MessageBox.Show(string.Format(Language.NoEmptySlotsError, boxNum + 1, slotNum + 1), Language.FormTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            currMon = SaveFileEditor.SAV.GetBoxSlotAtIndex(startIndex);
+            SaveFileEditor.SAV.SetBoxSlotAtIndex(SaveFileEditor.SAV.BlankPKM, startIndex);
+            for (int index = startIndex + 1; index <= boxIndex; index++)
+            {
+                nextMon = SaveFileEditor.SAV.GetBoxSlotAtIndex(index);
+                SaveFileEditor.SAV.SetBoxSlotAtIndex(currMon, index, PKMImportSetting.UseDefault, PKMImportSetting.Skip);
+                currMon = nextMon;
+            }
+            SaveFileEditor.ReloadSlots();
+        }
+
     }
 }
