@@ -40,12 +40,19 @@ namespace WangPluginPkm.Plugins
             var ATK_0SPEIVEV = new ToolStripMenuItem("物攻0速");
             var SPA_0SPEIVEV = new ToolStripMenuItem("特攻0速");
             var TANKIVEV = new ToolStripMenuItem("坦克");
-            menuVSD.Opening += (s, e) =>
+           
+                menuVSD.Opening += (s, e) =>
             {
                 var info = GetSenderInfo(ref s!);
+                if (info.Slot.Origin == SlotOrigin.Box && info.ReadCurrent().Species != (int)Species.None)
+                {
+                    ToolStripMenuItem insertSlotButton = new ToolStripMenuItem("在此处插空");
+                    insertSlotButton.Click += (s, e) => InsertSlot(SaveFileEditor.CurrentBox, info.Slot.Slot);
+                    menuVSD.Items.Add(insertSlotButton);
+                    menuVSD.Closing += (s, e) => menuVSD.Items.Remove(insertSlotButton);
+                }
                 var pk = info.Slot.Read(SaveFileEditor.SAV);
                 var la = new LegalityAnalysis(pk);
-               // var result = la.Results;
                 var IVEVN = new ToolStripMenuItem("快捷三维编辑器");
                 var SavePDF = new ToolStripMenuItem("打印检测报告PDF");
                 IVEVN.Image = Properties.Resources.Atom;
