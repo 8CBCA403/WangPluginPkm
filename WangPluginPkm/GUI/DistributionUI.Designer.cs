@@ -87,8 +87,8 @@ namespace WangPluginPkm.GUI
             // 
             // Clone_BTN
             // 
-            Clone_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            Clone_BTN.Location = new System.Drawing.Point(115, 49);
+            Clone_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Clone_BTN.Location = new System.Drawing.Point(116, 42);
             Clone_BTN.Name = "Clone_BTN";
             Clone_BTN.Size = new System.Drawing.Size(100, 25);
             Clone_BTN.TabIndex = 20;
@@ -99,18 +99,18 @@ namespace WangPluginPkm.GUI
             // ShinyBox
             // 
             ShinyBox.AutoSize = true;
-            ShinyBox.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            ShinyBox.Location = new System.Drawing.Point(8, 24);
+            ShinyBox.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ShinyBox.Location = new System.Drawing.Point(7, 20);
             ShinyBox.Name = "ShinyBox";
-            ShinyBox.Size = new System.Drawing.Size(61, 19);
+            ShinyBox.Size = new System.Drawing.Size(48, 16);
             ShinyBox.TabIndex = 28;
             ShinyBox.Text = "闪光";
             ShinyBox.UseVisualStyleBackColor = true;
             // 
             // Gift_BTN
             // 
-            Gift_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            Gift_BTN.Location = new System.Drawing.Point(221, 49);
+            Gift_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Gift_BTN.Location = new System.Drawing.Point(222, 42);
             Gift_BTN.Name = "Gift_BTN";
             Gift_BTN.Size = new System.Drawing.Size(100, 25);
             Gift_BTN.TabIndex = 35;
@@ -121,17 +121,17 @@ namespace WangPluginPkm.GUI
             // SetTrainer_Box
             // 
             SetTrainer_Box.AutoSize = true;
-            SetTrainer_Box.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            SetTrainer_Box.Location = new System.Drawing.Point(59, 24);
+            SetTrainer_Box.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            SetTrainer_Box.Location = new System.Drawing.Point(58, 20);
             SetTrainer_Box.Name = "SetTrainer_Box";
-            SetTrainer_Box.Size = new System.Drawing.Size(109, 19);
+            SetTrainer_Box.Size = new System.Drawing.Size(84, 16);
             SetTrainer_Box.TabIndex = 36;
             SetTrainer_Box.Text = "指定训练家";
             SetTrainer_Box.UseVisualStyleBackColor = true;
             // 
             // AllRibbon_BTN
             // 
-            AllRibbon_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            AllRibbon_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             AllRibbon_BTN.Location = new System.Drawing.Point(122, 26);
             AllRibbon_BTN.Name = "AllRibbon_BTN";
             AllRibbon_BTN.Size = new System.Drawing.Size(100, 25);
@@ -142,8 +142,8 @@ namespace WangPluginPkm.GUI
             // 
             // LoadTrainer_BTN
             // 
-            LoadTrainer_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            LoadTrainer_BTN.Location = new System.Drawing.Point(118, 18);
+            LoadTrainer_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LoadTrainer_BTN.Location = new System.Drawing.Point(118, 20);
             LoadTrainer_BTN.Name = "LoadTrainer_BTN";
             LoadTrainer_BTN.Size = new System.Drawing.Size(100, 25);
             LoadTrainer_BTN.TabIndex = 39;
@@ -154,23 +154,23 @@ namespace WangPluginPkm.GUI
             // BallBox
             // 
             BallBox.FormattingEnabled = true;
-            BallBox.Location = new System.Drawing.Point(332, 49);
+            BallBox.Location = new System.Drawing.Point(333, 44);
             BallBox.Name = "BallBox";
-            BallBox.Size = new System.Drawing.Size(62, 23);
+            BallBox.Size = new System.Drawing.Size(62, 20);
             BallBox.TabIndex = 48;
             // 
             // Trainer_Box
             // 
             Trainer_Box.FormattingEnabled = true;
-            Trainer_Box.Location = new System.Drawing.Point(8, 17);
+            Trainer_Box.Location = new System.Drawing.Point(8, 22);
             Trainer_Box.Name = "Trainer_Box";
-            Trainer_Box.Size = new System.Drawing.Size(100, 23);
+            Trainer_Box.Size = new System.Drawing.Size(100, 20);
             Trainer_Box.TabIndex = 49;
             // 
             // Use_Trainer_BTN
             // 
-            Use_Trainer_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            Use_Trainer_BTN.Location = new System.Drawing.Point(330, 17);
+            Use_Trainer_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Use_Trainer_BTN.Location = new System.Drawing.Point(330, 20);
             Use_Trainer_BTN.Name = "Use_Trainer_BTN";
             Use_Trainer_BTN.Size = new System.Drawing.Size(100, 25);
             Use_Trainer_BTN.TabIndex = 50;
@@ -181,18 +181,18 @@ namespace WangPluginPkm.GUI
             // RandPID_Box
             // 
             RandPID_Box.AutoSize = true;
-            RandPID_Box.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            RandPID_Box.Location = new System.Drawing.Point(298, 24);
+            RandPID_Box.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            RandPID_Box.Location = new System.Drawing.Point(297, 20);
             RandPID_Box.Name = "RandPID_Box";
-            RandPID_Box.Size = new System.Drawing.Size(85, 19);
+            RandPID_Box.Size = new System.Drawing.Size(66, 16);
             RandPID_Box.TabIndex = 52;
             RandPID_Box.Text = "随机PID";
             RandPID_Box.UseVisualStyleBackColor = true;
             // 
             // IVEVN_BTN
             // 
-            IVEVN_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            IVEVN_BTN.Location = new System.Drawing.Point(118, 19);
+            IVEVN_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            IVEVN_BTN.Location = new System.Drawing.Point(118, 16);
             IVEVN_BTN.Name = "IVEVN_BTN";
             IVEVN_BTN.Size = new System.Drawing.Size(100, 25);
             IVEVN_BTN.TabIndex = 53;
@@ -202,7 +202,7 @@ namespace WangPluginPkm.GUI
             // 
             // Move_Shop
             // 
-            Move_Shop.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Move_Shop.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             Move_Shop.Location = new System.Drawing.Point(15, 26);
             Move_Shop.Name = "Move_Shop";
             Move_Shop.Size = new System.Drawing.Size(100, 25);
@@ -213,7 +213,7 @@ namespace WangPluginPkm.GUI
             // 
             // LevelMax_BTN
             // 
-            LevelMax_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LevelMax_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             LevelMax_BTN.Location = new System.Drawing.Point(15, 57);
             LevelMax_BTN.Name = "LevelMax_BTN";
             LevelMax_BTN.Size = new System.Drawing.Size(100, 25);
@@ -225,10 +225,10 @@ namespace WangPluginPkm.GUI
             // Ball_Box
             // 
             Ball_Box.AutoSize = true;
-            Ball_Box.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            Ball_Box.Location = new System.Drawing.Point(400, 51);
+            Ball_Box.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Ball_Box.Location = new System.Drawing.Point(401, 46);
             Ball_Box.Name = "Ball_Box";
-            Ball_Box.Size = new System.Drawing.Size(61, 19);
+            Ball_Box.Size = new System.Drawing.Size(48, 16);
             Ball_Box.TabIndex = 61;
             Ball_Box.Text = "球种";
             Ball_Box.UseVisualStyleBackColor = true;
@@ -238,32 +238,32 @@ namespace WangPluginPkm.GUI
             Edit_EVIVN_Box.FormattingEnabled = true;
             Edit_EVIVN_Box.Location = new System.Drawing.Point(8, 18);
             Edit_EVIVN_Box.Name = "Edit_EVIVN_Box";
-            Edit_EVIVN_Box.Size = new System.Drawing.Size(100, 23);
+            Edit_EVIVN_Box.Size = new System.Drawing.Size(100, 20);
             Edit_EVIVN_Box.TabIndex = 62;
             // 
             // Clone_Select_Box
             // 
             Clone_Select_Box.FormattingEnabled = true;
-            Clone_Select_Box.Location = new System.Drawing.Point(5, 48);
+            Clone_Select_Box.Location = new System.Drawing.Point(6, 44);
             Clone_Select_Box.Name = "Clone_Select_Box";
-            Clone_Select_Box.Size = new System.Drawing.Size(100, 23);
+            Clone_Select_Box.Size = new System.Drawing.Size(100, 20);
             Clone_Select_Box.TabIndex = 63;
             // 
             // Trainer_Select_Box
             // 
             Trainer_Select_Box.FormattingEnabled = true;
-            Trainer_Select_Box.Location = new System.Drawing.Point(224, 17);
+            Trainer_Select_Box.Location = new System.Drawing.Point(224, 22);
             Trainer_Select_Box.Name = "Trainer_Select_Box";
-            Trainer_Select_Box.Size = new System.Drawing.Size(100, 23);
+            Trainer_Select_Box.Size = new System.Drawing.Size(100, 20);
             Trainer_Select_Box.TabIndex = 64;
             // 
             // Random_Trainer_Box
             // 
             Random_Trainer_Box.AutoSize = true;
-            Random_Trainer_Box.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            Random_Trainer_Box.Location = new System.Drawing.Point(142, 24);
+            Random_Trainer_Box.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Random_Trainer_Box.Location = new System.Drawing.Point(141, 20);
             Random_Trainer_Box.Name = "Random_Trainer_Box";
-            Random_Trainer_Box.Size = new System.Drawing.Size(109, 19);
+            Random_Trainer_Box.Size = new System.Drawing.Size(84, 16);
             Random_Trainer_Box.TabIndex = 65;
             Random_Trainer_Box.Text = "随机训练家";
             Random_Trainer_Box.UseVisualStyleBackColor = true;
@@ -291,10 +291,10 @@ namespace WangPluginPkm.GUI
             // RandEC_Box
             // 
             RandEC_Box.AutoSize = true;
-            RandEC_Box.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            RandEC_Box.Location = new System.Drawing.Point(369, 24);
+            RandEC_Box.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            RandEC_Box.Location = new System.Drawing.Point(368, 20);
             RandEC_Box.Name = "RandEC_Box";
-            RandEC_Box.Size = new System.Drawing.Size(77, 19);
+            RandEC_Box.Size = new System.Drawing.Size(60, 16);
             RandEC_Box.TabIndex = 69;
             RandEC_Box.Text = "随机EC";
             RandEC_Box.UseVisualStyleBackColor = true;
@@ -302,10 +302,10 @@ namespace WangPluginPkm.GUI
             // Random_Name_Box
             // 
             Random_Name_Box.AutoSize = true;
-            Random_Name_Box.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            Random_Name_Box.Location = new System.Drawing.Point(226, 24);
+            Random_Name_Box.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Random_Name_Box.Location = new System.Drawing.Point(225, 20);
             Random_Name_Box.Name = "Random_Name_Box";
-            Random_Name_Box.Size = new System.Drawing.Size(93, 19);
+            Random_Name_Box.Size = new System.Drawing.Size(72, 16);
             Random_Name_Box.TabIndex = 68;
             Random_Name_Box.Text = "随机名字";
             Random_Name_Box.UseVisualStyleBackColor = true;
@@ -343,7 +343,7 @@ namespace WangPluginPkm.GUI
             // 
             // Random_EggBTN
             // 
-            Random_EggBTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Random_EggBTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             Random_EggBTN.Location = new System.Drawing.Point(334, 57);
             Random_EggBTN.Name = "Random_EggBTN";
             Random_EggBTN.Size = new System.Drawing.Size(100, 25);
@@ -354,7 +354,7 @@ namespace WangPluginPkm.GUI
             // 
             // Random_EncBTN
             // 
-            Random_EncBTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Random_EncBTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             Random_EncBTN.Location = new System.Drawing.Point(228, 57);
             Random_EncBTN.Name = "Random_EncBTN";
             Random_EncBTN.Size = new System.Drawing.Size(100, 25);
@@ -365,7 +365,7 @@ namespace WangPluginPkm.GUI
             // 
             // ThreeFinder_BTN
             // 
-            ThreeFinder_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ThreeFinder_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             ThreeFinder_BTN.Location = new System.Drawing.Point(15, 88);
             ThreeFinder_BTN.Name = "ThreeFinder_BTN";
             ThreeFinder_BTN.Size = new System.Drawing.Size(100, 25);
@@ -376,7 +376,7 @@ namespace WangPluginPkm.GUI
             // 
             // MINSize_BTN
             // 
-            MINSize_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            MINSize_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             MINSize_BTN.Location = new System.Drawing.Point(334, 26);
             MINSize_BTN.Name = "MINSize_BTN";
             MINSize_BTN.Size = new System.Drawing.Size(100, 25);
@@ -387,7 +387,7 @@ namespace WangPluginPkm.GUI
             // 
             // MAXSize_BTN
             // 
-            MAXSize_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            MAXSize_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             MAXSize_BTN.Location = new System.Drawing.Point(228, 26);
             MAXSize_BTN.Name = "MAXSize_BTN";
             MAXSize_BTN.Size = new System.Drawing.Size(100, 25);
@@ -398,7 +398,7 @@ namespace WangPluginPkm.GUI
             // 
             // RandEC_BTN
             // 
-            RandEC_BTN.Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            RandEC_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             RandEC_BTN.Location = new System.Drawing.Point(122, 57);
             RandEC_BTN.Name = "RandEC_BTN";
             RandEC_BTN.Size = new System.Drawing.Size(100, 25);
@@ -434,21 +434,21 @@ namespace WangPluginPkm.GUI
             CopyPage.Controls.Add(groupBox1);
             CopyPage.Controls.Add(groupBox5);
             CopyPage.Controls.Add(groupBox2);
-            CopyPage.Location = new System.Drawing.Point(4, 25);
+            CopyPage.Location = new System.Drawing.Point(4, 22);
             CopyPage.Name = "CopyPage";
             CopyPage.Padding = new Padding(3);
-            CopyPage.Size = new System.Drawing.Size(493, 227);
+            CopyPage.Size = new System.Drawing.Size(493, 230);
             CopyPage.TabIndex = 0;
-            CopyPage.Text = "复制器";
+            CopyPage.Text = "派送器";
             // 
             // EditBoxPage
             // 
             EditBoxPage.BackColor = System.Drawing.Color.WhiteSmoke;
             EditBoxPage.Controls.Add(groupBox3);
-            EditBoxPage.Location = new System.Drawing.Point(4, 25);
+            EditBoxPage.Location = new System.Drawing.Point(4, 22);
             EditBoxPage.Name = "EditBoxPage";
             EditBoxPage.Padding = new Padding(3);
-            EditBoxPage.Size = new System.Drawing.Size(493, 227);
+            EditBoxPage.Size = new System.Drawing.Size(493, 230);
             EditBoxPage.TabIndex = 1;
             EditBoxPage.Text = "杂项编辑";
             // 
@@ -456,7 +456,7 @@ namespace WangPluginPkm.GUI
             // 
             ClientSize = new System.Drawing.Size(529, 273);
             Controls.Add(DitributiontabControl);
-            Font = new System.Drawing.Font("SimHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;

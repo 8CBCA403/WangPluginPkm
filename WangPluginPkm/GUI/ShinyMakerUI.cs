@@ -466,186 +466,186 @@ namespace WangPluginPkm.GUI
             MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
             sw.Reset();
         }
-        public static PKM  ShinyFunctionPlus(PKM pkm)
+        public static PKM ShinyFunctionPlus(PKM pkm)
         {
             PKM val = pkm.Clone();
             PKM va = pkm.Clone();
-                bool EggFlag = val.IsEgg || val.WasEgg || val.IsTradedEgg || val.WasTradedEgg || val.Met_Level <= 1;
-                if (VersionFlag.Gen1VCFlag(val.Version) || VersionFlag.Gen2VCFlag(val.Version))
+            bool EggFlag = val.IsEgg || val.WasEgg || val.IsTradedEgg || val.WasTradedEgg || val.Met_Level <= 1;
+            if (VersionFlag.Gen1VCFlag(val.Version) || VersionFlag.Gen2VCFlag(val.Version))
+            {
+                pkm.PID = ShinyPID(val);
+            }
+            if (VersionFlag.Gen3Flag(val.Version) ||
+                VersionFlag.Gen4Flag(val.Version) ||
+                VersionFlag.Gen5Flag(val.Version) ||
+                VersionFlag.CXDFlag(val.Version))
+            {
+                if (EggFlag)
                 {
+
                     pkm.PID = ShinyPID(val);
-                }
-                if (VersionFlag.Gen3Flag(val.Version) ||
-                    VersionFlag.Gen4Flag(val.Version) ||
-                    VersionFlag.Gen5Flag(val.Version) ||
-                    VersionFlag.CXDFlag(val.Version))
-                {
-                    if (EggFlag)
+                    if (pkm.Format != 3)
                     {
-
-                        pkm.PID = ShinyPID(val);
-                        if (pkm.Format != 3)
-                        {
-                            pkm.Ball = 4;
-                        }
-                        pkm.RefreshAbility((int)(pkm.PID & 1));
-                        Span<int> abilityarray = stackalloc int[10]; ;
-                        pkm.PersonalInfo.GetAbilities(abilityarray);
-                        if (abilityarray[0] == abilityarray[1])
-                        {
-                            pkm.AbilityNumber = 1;
-                        }
-                        pkm.Nature = (int)(pkm.PID % 25);
-                        pkm.Gender = EntityGender.GetFromPID(pkm.Species, pkm.PID);
-                        pkm.StatNature = pkm.Nature;
-                        pkm.EncryptionConstant = pkm.PID;
-                        pkm.RefreshChecksum();
-
+                        pkm.Ball = 4;
                     }
-                    if ((!EggFlag) && (!VersionFlag.CXDFlag(val.Version)))
+                    pkm.RefreshAbility((int)(pkm.PID & 1));
+                    Span<int> abilityarray = stackalloc int[10]; ;
+                    pkm.PersonalInfo.GetAbilities(abilityarray);
+                    if (abilityarray[0] == abilityarray[1])
                     {
-                        const int maxResults = LCRNG.MaxCountSeedsIV;
-                        Span<uint> seeds = stackalloc uint[maxResults];
-                        int count = 0;
-                        if (shinyflag == Shinytype.RandomStar)
+                        pkm.AbilityNumber = 1;
+                    }
+                    pkm.Nature = (int)(pkm.PID % 25);
+                    pkm.Gender = EntityGender.GetFromPID(pkm.Species, pkm.PID);
+                    pkm.StatNature = pkm.Nature;
+                    pkm.EncryptionConstant = pkm.PID;
+                    pkm.RefreshChecksum();
+
+                }
+                if ((!EggFlag) && (!VersionFlag.CXDFlag(val.Version)))
+                {
+                    const int maxResults = LCRNG.MaxCountSeedsIV;
+                    Span<uint> seeds = stackalloc uint[maxResults];
+                    int count = 0;
+                    if (shinyflag == Shinytype.RandomStar)
+                    {
+                        for (int i = 0; ; i++)
                         {
-                            for (int i = 0; ; i++)
-                            {
-                                val.PID = ShinyPIDLite(val);
-                                count = LCRNGReversal.GetSeeds(seeds, val.PID);
-                                if (count == 0)
-                                    val.PID = Util.Rand32();
-                                else
-                                    break;
-                            }
+                            val.PID = ShinyPIDLite(val);
+                            count = LCRNGReversal.GetSeeds(seeds, val.PID);
+                            if (count == 0)
+                                val.PID = Util.Rand32();
+                            else
+                                break;
+                        }
+                        var reg = seeds[..count];
+                        int[] iv;
+                        foreach (var seed in reg)
+                        {
+                            iv = LCRNGReversal.SetValuesFromSeedLCRNG(val, seed);
+                            if (val.IsShiny)
+                                val.IVs = iv;
+                        }
+                    }
+                    else
+                    {
+                        pkm.SID16 = (ushort)ShinySID16Lite(val);
+                    }
+                    pkm.PID = val.PID;
+                    pkm.IVs = val.IVs;
+                    pkm.Gender = EntityGender.GetFromPID(pkm.Species, pkm.PID);
+                    pkm.Nature = (int)(pkm.PID % 25);
+                    pkm.StatNature = pkm.Nature;
+                    pkm.EncryptionConstant = pkm.PID;
+                    pkm.RefreshAbility((int)(pkm.PID & 1));
+                    Span<int> abilityarray = stackalloc int[10]; ;
+                    pkm.PersonalInfo.GetAbilities(abilityarray);
+                    if (abilityarray[0] == abilityarray[1])
+                    {
+                        pkm.AbilityNumber = 1;
+                    }
+                    pkm.RefreshChecksum();
+                }
+                if (VersionFlag.CXDFlag(val.Version) && !GiftAndStarter.XDCGFFlag(val.Species))
+                {
+
+                    const int maxResults = XDRNG.MaxCountSeedsIV;
+                    Span<uint> seeds = stackalloc uint[maxResults];
+                    int count = 0;
+                    if (shinyflag == Shinytype.RandomStar)
+                    {
+                        for (int i = 0; ; i++)
+                        {
+                            val.PID = ShinyPIDLite(val);
+                            count = XDRNGReversal.GetSeeds(seeds, val.PID);
+                            if (count == 0)
+                                val.PID = Util.Rand32();
                             var reg = seeds[..count];
                             int[] iv;
                             foreach (var seed in reg)
                             {
-                                iv = LCRNGReversal.SetValuesFromSeedLCRNG(val, seed);
+                                iv = XDRNGReversal.SetValuesFromSeedXDRNG(val, seed);
                                 if (val.IsShiny)
                                     val.IVs = iv;
                             }
-                        }
-                        else
-                        {
-                            pkm.SID16 = (ushort)ShinySID16Lite(val);
-                        }
-                        pkm.PID = val.PID;
-                        pkm.IVs = val.IVs;
-                        pkm.Gender = EntityGender.GetFromPID(pkm.Species, pkm.PID);
-                        pkm.Nature = (int)(pkm.PID % 25);
-                        pkm.StatNature = pkm.Nature;
-                        pkm.EncryptionConstant = pkm.PID;
-                        pkm.RefreshAbility((int)(pkm.PID & 1));
-                        Span<int> abilityarray = stackalloc int[10]; ;
-                        pkm.PersonalInfo.GetAbilities(abilityarray);
-                        if (abilityarray[0] == abilityarray[1])
-                        {
-                            pkm.AbilityNumber = 1;
-                        }
-                        pkm.RefreshChecksum();
-                    }
-                    if (VersionFlag.CXDFlag(val.Version) && !GiftAndStarter.XDCGFFlag(val.Species))
-                    {
-
-                        const int maxResults = XDRNG.MaxCountSeedsIV;
-                        Span<uint> seeds = stackalloc uint[maxResults];
-                        int count = 0;
-                        if (shinyflag == Shinytype.RandomStar)
-                        {
-                            for (int i = 0; ; i++)
+                            if (!val.IsShiny)
                             {
-                                val.PID = ShinyPIDLite(val);
-                                count = XDRNGReversal.GetSeeds(seeds, val.PID);
-                                if (count == 0)
-                                    val.PID = Util.Rand32();
-                                var reg = seeds[..count];
-                                int[] iv;
-                                foreach (var seed in reg)
-                                {
-                                    iv = XDRNGReversal.SetValuesFromSeedXDRNG(val, seed);
-                                    if (val.IsShiny)
-                                        val.IVs = iv;
-                                }
-                                if (!val.IsShiny)
-                                {
-                                    continue;
-                                }
-                                else
-                                    break;
+                                continue;
                             }
+                            else
+                                break;
                         }
-                        else
-                        {
-                            pkm.SID16 = (ushort)ShinySID16Lite(val);
-                        }
-                        pkm.PID = val.PID;
-                        pkm.IVs = val.IVs;
-                        pkm.Gender = EntityGender.GetFromPID(pkm.Species, pkm.PID);
-                        pkm.Nature = (int)(pkm.PID % 25);
-                        pkm.EncryptionConstant = pkm.PID;
-                        pkm.RefreshChecksum();
-                    }
-
-                }
-                if (VersionFlag.Gen6Flag(val.Version) ||
-                    VersionFlag.Gen7Flag(val.Version))
-                {
-                    pkm.PID = ShinyPID(val);
-                    CommonEdits.SetRandomEC(pkm);
-                }
-                if (VersionFlag.Gen8SWSHFlag(val.Version))
-                {
-                    pkm.PID = Util.Rand32();
-                    if (EggFlag || pkm.Met_Location == 162)
-                    {
-                        pkm.PID = ShinyPID(val);
-                        CommonEdits.SetRandomEC(pkm);
-                    }
-                    else if (Gen8MaxLairGodPool.MaxLairGodFlag(pkm.Species))
-                    {
-                        pkm.PID = ShinyPID(val, 1);
-                        CommonEdits.SetRandomEC(pkm);
                     }
                     else
                     {
-                        bool[] iv = new bool[] { false, false, false };
-                        for (; ; )
-                        {
-                            uint seed = Util.Rand32();
-                            if (shinyflag != Shinytype.Xor && Overworld8RNG.GenPkmQ(ref pkm, seed, ShinyArray(), iv))
-                            {
-                                pkm.RefreshChecksum();
-                                break;
-                            }
-                            else if (shinyflag == Shinytype.Xor && Overworld8RNG.GenPkmQ(ref pkm, seed, ShinyArray(), iv, XorNumber))
-                            {
+                        pkm.SID16 = (ushort)ShinySID16Lite(val);
+                    }
+                    pkm.PID = val.PID;
+                    pkm.IVs = val.IVs;
+                    pkm.Gender = EntityGender.GetFromPID(pkm.Species, pkm.PID);
+                    pkm.Nature = (int)(pkm.PID % 25);
+                    pkm.EncryptionConstant = pkm.PID;
+                    pkm.RefreshChecksum();
+                }
 
-                                pkm.RefreshChecksum();
-                                break;
-                            }
-                            else
-                                Overworld8RNG.Next(seed);
+            }
+            if (VersionFlag.Gen6Flag(val.Version) ||
+                VersionFlag.Gen7Flag(val.Version))
+            {
+                pkm.PID = ShinyPID(val);
+                CommonEdits.SetRandomEC(pkm);
+            }
+            if (VersionFlag.Gen8SWSHFlag(val.Version))
+            {
+                pkm.PID = Util.Rand32();
+                if (EggFlag || pkm.Met_Location == 162)
+                {
+                    pkm.PID = ShinyPID(val);
+                    CommonEdits.SetRandomEC(pkm);
+                }
+                else if (Gen8MaxLairGodPool.MaxLairGodFlag(pkm.Species))
+                {
+                    pkm.PID = ShinyPID(val, 1);
+                    CommonEdits.SetRandomEC(pkm);
+                }
+                else
+                {
+                    bool[] iv = new bool[] { false, false, false };
+                    for (; ; )
+                    {
+                        uint seed = Util.Rand32();
+                        if (shinyflag != Shinytype.Xor && Overworld8RNG.GenPkmQ(ref pkm, seed, ShinyArray(), iv))
+                        {
+                            pkm.RefreshChecksum();
+                            break;
                         }
+                        else if (shinyflag == Shinytype.Xor && Overworld8RNG.GenPkmQ(ref pkm, seed, ShinyArray(), iv, XorNumber))
+                        {
+
+                            pkm.RefreshChecksum();
+                            break;
+                        }
+                        else
+                            Overworld8RNG.Next(seed);
                     }
                 }
-                if (VersionFlag.Gen8PLAFlag(val.Version))
-                {
-                    pkm.PID = ShinyPID(val);
-                    CommonEdits.SetRandomEC(pkm);
-                }
-                if (VersionFlag.Gen8BDSPFlag(val.Version))
-                {
-                    pkm.PID = ShinyPID(val);
-                    CommonEdits.SetRandomEC(pkm);
-                }
-                if (VersionFlag.Gen9Flag(val.Version))
-                {
-                    pkm.PID = ShinyPID(val);
-                    CommonEdits.SetRandomEC(pkm);
-                }
-            
+            }
+            if (VersionFlag.Gen8PLAFlag(val.Version))
+            {
+                pkm.PID = ShinyPID(val);
+                CommonEdits.SetRandomEC(pkm);
+            }
+            if (VersionFlag.Gen8BDSPFlag(val.Version))
+            {
+                pkm.PID = ShinyPID(val);
+                CommonEdits.SetRandomEC(pkm);
+            }
+            if (VersionFlag.Gen9Flag(val.Version))
+            {
+                pkm.PID = ShinyPID(val);
+                CommonEdits.SetRandomEC(pkm);
+            }
+
             var la = new LegalityAnalysis(pkm);
             if (!la.Valid)
             {

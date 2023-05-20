@@ -18,7 +18,7 @@ namespace WangPluginPkm.GUI
             // 
             // AllRibbon
             // 
-            AllRibbon.Location = new System.Drawing.Point(25, 26);
+            AllRibbon.Location = new System.Drawing.Point(24, 12);
             AllRibbon.Name = "AllRibbon";
             AllRibbon.Size = new System.Drawing.Size(110, 30);
             AllRibbon.TabIndex = 0;
@@ -28,7 +28,7 @@ namespace WangPluginPkm.GUI
             // 
             // ClearRecord
             // 
-            ClearRecord.Location = new System.Drawing.Point(156, 26);
+            ClearRecord.Location = new System.Drawing.Point(155, 12);
             ClearRecord.Name = "ClearRecord";
             ClearRecord.Size = new System.Drawing.Size(110, 30);
             ClearRecord.TabIndex = 1;
@@ -38,7 +38,7 @@ namespace WangPluginPkm.GUI
             // 
             // LegalizeReport
             // 
-            LegalizeReport.Location = new System.Drawing.Point(25, 71);
+            LegalizeReport.Location = new System.Drawing.Point(23, 48);
             LegalizeReport.Name = "LegalizeReport";
             LegalizeReport.Size = new System.Drawing.Size(110, 28);
             LegalizeReport.TabIndex = 2;
@@ -48,7 +48,7 @@ namespace WangPluginPkm.GUI
             // 
             // Master
             // 
-            Master.Location = new System.Drawing.Point(157, 71);
+            Master.Location = new System.Drawing.Point(155, 48);
             Master.Name = "Master";
             Master.Size = new System.Drawing.Size(108, 28);
             Master.TabIndex = 3;
@@ -58,7 +58,7 @@ namespace WangPluginPkm.GUI
             // 
             // SimpleEditor
             // 
-            ClientSize = new System.Drawing.Size(282, 113);
+            ClientSize = new System.Drawing.Size(282, 87);
             Controls.Add(Master);
             Controls.Add(LegalizeReport);
             Controls.Add(ClearRecord);

@@ -7,7 +7,6 @@ namespace WangPluginPkm.GUI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MutiCalcUI));
-            tabPage2 = new TabPage();
             tabPage1 = new TabPage();
             PIDHex = new TextBox();
             UnownFormBox = new TextBox();
@@ -39,16 +38,6 @@ namespace WangPluginPkm.GUI
             tabPage1.SuspendLayout();
             tabControl.SuspendLayout();
             SuspendLayout();
-            // 
-            // tabPage2
-            // 
-            tabPage2.BackColor = System.Drawing.Color.WhiteSmoke;
-            tabPage2.Location = new System.Drawing.Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new System.Drawing.Size(616, 341);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
             // 
             // tabPage1
             // 
@@ -110,7 +99,7 @@ namespace WangPluginPkm.GUI
             // 
             // UnownPidTextBox
             // 
-            UnownPidTextBox.Location = new System.Drawing.Point(135, 279);
+            UnownPidTextBox.Location = new System.Drawing.Point(135, 278);
             UnownPidTextBox.Name = "UnownPidTextBox";
             UnownPidTextBox.Size = new System.Drawing.Size(130, 21);
             UnownPidTextBox.TabIndex = 33;
@@ -326,7 +315,6 @@ namespace WangPluginPkm.GUI
             // tabControl
             // 
             tabControl.Controls.Add(tabPage1);
-            tabControl.Controls.Add(tabPage2);
             tabControl.Location = new System.Drawing.Point(12, 12);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
@@ -350,7 +338,6 @@ namespace WangPluginPkm.GUI
             ResumeLayout(false);
         }
 
-        private TabPage tabPage2;
         private TabPage tabPage1;
         private TextBox PIDHex;
         private TextBox UnownFormBox;

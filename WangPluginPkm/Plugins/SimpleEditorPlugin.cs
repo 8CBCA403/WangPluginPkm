@@ -11,7 +11,6 @@ using iText.IO.Image;
 using System.Drawing;
 using iText.Kernel.Font;
 using System.Globalization;
-using System.Reflection;
 
 namespace WangPluginPkm.Plugins
 {
@@ -47,6 +46,7 @@ namespace WangPluginPkm.Plugins
                 if (info.Slot.Origin == SlotOrigin.Box && info.ReadCurrent().Species != (int)Species.None)
                 {
                     ToolStripMenuItem insertSlotButton = new ToolStripMenuItem("在此处插空");
+                    insertSlotButton.Image = Properties.Resources.Down;
                     insertSlotButton.Click += (s, e) => InsertSlot(SaveFileEditor.CurrentBox, info.Slot.Slot);
                     menuVSD.Items.Add(insertSlotButton);
                     menuVSD.Closing += (s, e) => menuVSD.Items.Remove(insertSlotButton);
@@ -90,7 +90,6 @@ namespace WangPluginPkm.Plugins
             };
 
         }
-      
 #nullable enable
         private static SlotViewInfo<PictureBox> GetSenderInfo(ref object sender)
         {
@@ -134,7 +133,6 @@ namespace WangPluginPkm.Plugins
             document.Close();
             MessageBox.Show("已生成合法检测报告");
         }
-
         public static byte[]? ImageToByte(System.Drawing.Image img)
         {
             ImageConverter converter = new ImageConverter();
@@ -160,7 +158,6 @@ namespace WangPluginPkm.Plugins
                 }
             }
         }
-
         public static T? FindFirstControlOfType<T>(Control aParent) where T : class
         {
             while (true)
