@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 
 
-namespace WangPluginPkm
+namespace WangPluginPkm.PluginUtil.DisBase
 {
     internal class SWSHGod
     {
         public ushort Species { get; set; }
         public int[] IVs { get; set; }
-        public int[] EVs{ get; set; }
+        public int[] EVs { get; set; }
         public int Nature { get; set; }
         public static List<int> a = new List<int>
-               { 144 , 145 , 146 ,150 , 243  ,244 , 245 
+               { 144 , 145 , 146 ,150 , 243  ,244 , 245
                  ,249,  250  ,380,  381 , 382 , 383  ,384 ,
                  480  ,481,  482 , 483,  484 , 485 , 487 ,
                  488 , 641 , 642,  643 , 644 , 645 , 646 ,
                  716,  717,  718,  785 , 786,  787 , 788 ,
                  791  ,792 , 793,  794 , 795  ,796 , 797 ,
-                 798 , 799 , 800 , 805 ,806 
+                 798 , 799 , 800 , 805 ,806
                 };
         public static List<SWSHGod> CreateList()
         {
@@ -26,14 +26,14 @@ namespace WangPluginPkm
             int[] Spaiv = { 31, 0, 31, 31, 31, 31 };
             int[] Spaev = { 6, 0, 0, 252, 252, 0 };
             int[] Tankiv = { 31, 0, 31, 31, 31, 31 };
-            int[] Tankev = { 252, 0, 252, 0, 0, 6};
+            int[] Tankev = { 252, 0, 252, 0, 0, 6 };
             List<SWSHGod> a = new();
             SWSHGod Articuno = new SWSHGod
             {
                 Species = 144,
                 IVs = Spaiv,
-                EVs= Spaev,
-                Nature=10,
+                EVs = Spaev,
+                Nature = 10,
             };
             SWSHGod Zapdos = new SWSHGod
             {

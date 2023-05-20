@@ -10,11 +10,11 @@
                  488 or 641 or 642 or 643 or 644 or 645 or 646 or
                  716 or 717 or 718 or 785 or 786 or 787 or 788 or
                  791 or 792 or 793 or 794 or 795 or 796 or 797 or
-                 798 or 799 or 800 or 805 or 806 )
+                 798 or 799 or 800 or 805 or 806)
                 return true;
             else
                 return false;
         }
-         
-}
+
+    }
 }

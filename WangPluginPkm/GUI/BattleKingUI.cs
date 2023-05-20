@@ -331,6 +331,11 @@ namespace WangPluginPkm.GUI
 
         private void TEST_BTN_Click(object sender, EventArgs e)
         {
+            if (SAV.SAV.Version != GameVersion.VL && SAV.SAV.Version != GameVersion.SL && SAV.SAV.Version != GameVersion.SV)
+            {
+                MessageBox.Show("目前VGC版本为朱紫！");
+                return;
+            }
             ResultBox.Clear();
             int n = 0;
             int l = 0;

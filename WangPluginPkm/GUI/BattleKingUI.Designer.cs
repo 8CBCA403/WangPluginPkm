@@ -28,6 +28,7 @@ namespace WangPluginPkm.GUI
             ResultBox = new TextBox();
             TEST_BTN = new Button();
             TeamList_BOX = new CheckedListBox();
+            textBox1 = new TextBox();
             BattleKingtabControl.SuspendLayout();
             PStabPage.SuspendLayout();
             WebtabPage.SuspendLayout();
@@ -89,7 +90,7 @@ namespace WangPluginPkm.GUI
             // 
             ConditionBox.Location = new System.Drawing.Point(161, 107);
             ConditionBox.Name = "ConditionBox";
-            ConditionBox.Size = new System.Drawing.Size(206, 25);
+            ConditionBox.Size = new System.Drawing.Size(206, 21);
             ConditionBox.TabIndex = 6;
             ConditionBox.Text = "Nothing to check";
             // 
@@ -109,7 +110,7 @@ namespace WangPluginPkm.GUI
             ChineseCheckBox.AutoSize = true;
             ChineseCheckBox.Location = new System.Drawing.Point(105, 305);
             ChineseCheckBox.Name = "ChineseCheckBox";
-            ChineseCheckBox.Size = new System.Drawing.Size(93, 19);
+            ChineseCheckBox.Size = new System.Drawing.Size(72, 16);
             ChineseCheckBox.TabIndex = 8;
             ChineseCheckBox.Text = "中文指令";
             ChineseCheckBox.UseVisualStyleBackColor = true;
@@ -132,10 +133,10 @@ namespace WangPluginPkm.GUI
             PStabPage.Controls.Add(PSBox);
             PStabPage.Controls.Add(ChineseCheckBox);
             PStabPage.Controls.Add(LoadTeamFromPSCode_BTN);
-            PStabPage.Location = new System.Drawing.Point(4, 25);
+            PStabPage.Location = new System.Drawing.Point(4, 22);
             PStabPage.Name = "PStabPage";
             PStabPage.Padding = new Padding(3);
-            PStabPage.Size = new System.Drawing.Size(528, 348);
+            PStabPage.Size = new System.Drawing.Size(528, 351);
             PStabPage.TabIndex = 0;
             PStabPage.Text = "PS指令模式";
             // 
@@ -144,10 +145,10 @@ namespace WangPluginPkm.GUI
             WebtabPage.BackColor = System.Drawing.Color.WhiteSmoke;
             WebtabPage.Controls.Add(UrlBox);
             WebtabPage.Controls.Add(LoadBattleTeam_BTN);
-            WebtabPage.Location = new System.Drawing.Point(4, 29);
+            WebtabPage.Location = new System.Drawing.Point(4, 26);
             WebtabPage.Name = "WebtabPage";
             WebtabPage.Padding = new Padding(3);
-            WebtabPage.Size = new System.Drawing.Size(528, 344);
+            WebtabPage.Size = new System.Drawing.Size(528, 347);
             WebtabPage.TabIndex = 1;
             WebtabPage.Text = "网址模式";
             // 
@@ -157,23 +158,24 @@ namespace WangPluginPkm.GUI
             SmogontabPage.Controls.Add(ConditionBox);
             SmogontabPage.Controls.Add(ClearAllBox_BTN);
             SmogontabPage.Controls.Add(ImportPKM_BTN);
-            SmogontabPage.Location = new System.Drawing.Point(4, 29);
+            SmogontabPage.Location = new System.Drawing.Point(4, 26);
             SmogontabPage.Name = "SmogontabPage";
             SmogontabPage.Padding = new Padding(3);
-            SmogontabPage.Size = new System.Drawing.Size(528, 344);
+            SmogontabPage.Size = new System.Drawing.Size(528, 347);
             SmogontabPage.TabIndex = 2;
             SmogontabPage.Text = "Smogon策略模式";
             // 
             // VGC_Check
             // 
             VGC_Check.BackColor = System.Drawing.Color.WhiteSmoke;
+            VGC_Check.Controls.Add(textBox1);
             VGC_Check.Controls.Add(ResultBox);
             VGC_Check.Controls.Add(TEST_BTN);
             VGC_Check.Controls.Add(TeamList_BOX);
-            VGC_Check.Location = new System.Drawing.Point(4, 25);
+            VGC_Check.Location = new System.Drawing.Point(4, 22);
             VGC_Check.Name = "VGC_Check";
             VGC_Check.Padding = new Padding(3);
-            VGC_Check.Size = new System.Drawing.Size(528, 348);
+            VGC_Check.Size = new System.Drawing.Size(528, 351);
             VGC_Check.TabIndex = 3;
             VGC_Check.Text = "VGC队伍检测";
             // 
@@ -187,9 +189,9 @@ namespace WangPluginPkm.GUI
             // 
             // TEST_BTN
             // 
-            TEST_BTN.Location = new System.Drawing.Point(50, 308);
+            TEST_BTN.Location = new System.Drawing.Point(6, 311);
             TEST_BTN.Name = "TEST_BTN";
-            TEST_BTN.Size = new System.Drawing.Size(112, 34);
+            TEST_BTN.Size = new System.Drawing.Size(192, 34);
             TEST_BTN.TabIndex = 1;
             TEST_BTN.Text = "检测";
             TEST_BTN.UseVisualStyleBackColor = true;
@@ -200,12 +202,21 @@ namespace WangPluginPkm.GUI
             TeamList_BOX.AllowDrop = true;
             TeamList_BOX.BackColor = System.Drawing.SystemColors.Window;
             TeamList_BOX.FormattingEnabled = true;
-            TeamList_BOX.Location = new System.Drawing.Point(6, 6);
+            TeamList_BOX.Location = new System.Drawing.Point(6, 33);
             TeamList_BOX.Name = "TeamList_BOX";
-            TeamList_BOX.Size = new System.Drawing.Size(192, 284);
+            TeamList_BOX.Size = new System.Drawing.Size(192, 276);
             TeamList_BOX.TabIndex = 0;
             TeamList_BOX.DragDrop += PKM_DragDrop;
             TeamList_BOX.DragEnter += PKM_DragEnter;
+            // 
+            // textBox1
+            // 
+            textBox1.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            textBox1.Location = new System.Drawing.Point(6, 6);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new System.Drawing.Size(192, 21);
+            textBox1.TabIndex = 3;
+            textBox1.Text = "请将有6只精灵的bin文件拖入下方";
             // 
             // BattleKingUI
             // 
@@ -244,5 +255,6 @@ namespace WangPluginPkm.GUI
         private CheckedListBox TeamList_BOX;
         private Button TEST_BTN;
         private TextBox ResultBox;
+        private TextBox textBox1;
     }
 }

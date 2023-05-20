@@ -261,6 +261,10 @@ namespace WangPluginPkm.PluginUtil.PluginEnums
             猫鼬套餐11,
             猫鼬套餐12,
         }
+        public enum DisCombo
+        {
+           一套百变怪
+        }
         public static int GetLanguageBox7(DexFormLanguage7 type7)
         {
             var T = 1;

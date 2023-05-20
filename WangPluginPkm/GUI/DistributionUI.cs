@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 using static WangPluginPkm.PluginUtil.Functions.DistributionFunctions;
+using WangPluginPkm.PluginUtil.DisBase;
+
 namespace WangPluginPkm.GUI
 {
     partial class DistributionUI : Form
@@ -16,6 +18,7 @@ namespace WangPluginPkm.GUI
         private int IVEVValue = 0;
         private int CloneValue = 0;
         private int TrainerValue = 0;
+        private int Dis = 0;
         public Nature type = Nature.Hardy;
         public Ball ball = Ball.Poke;
         public Trainer Trainer;
@@ -57,18 +60,18 @@ namespace WangPluginPkm.GUI
             };
 
             Edit_EVIVN_Box.DataSource = Enum.GetValues(typeof(DisFormIVEV));
-            this.Edit_EVIVN_Box.SelectedIndexChanged += (_, __) =>
+            Edit_EVIVN_Box.SelectedIndexChanged += (_, __) =>
             {
                 IVEVValue = Edit_EVIVN_Box.SelectedIndex;
             };
-            this.Clone_Select_Box.DataSource = Enum.GetValues(typeof(DisFormClone));
-            this.Clone_Select_Box.SelectedIndexChanged += (_, __) =>
+            Clone_Select_Box.DataSource = Enum.GetValues(typeof(DisFormClone));
+            Clone_Select_Box.SelectedIndexChanged += (_, __) =>
             {
                 CloneValue = Clone_Select_Box.SelectedIndex;
             };
-            this.Trainer_Select_Box.DataSource = Enum.GetValues(typeof(DisFormTrainer));
+            Trainer_Select_Box.DataSource = Enum.GetValues(typeof(DisFormTrainer));
 
-            this.Trainer_Select_Box.SelectedIndexChanged += (_, __) =>
+            Trainer_Select_Box.SelectedIndexChanged += (_, __) =>
             {
                 TrainerValue = Trainer_Select_Box.SelectedIndex;
             };
@@ -79,6 +82,11 @@ namespace WangPluginPkm.GUI
             Random_Trainer_Box.CheckedChanged += (_, __) =>
             {
                 SetTrainer_Box.Enabled = !Random_Trainer_Box.Checked;
+            };
+            DiscomboBox.DataSource = Enum.GetValues(typeof(DisCombo));
+            DiscomboBox.SelectedIndexChanged += (_, __) =>
+            {
+                Dis = DiscomboBox.SelectedIndex;
             };
 
         }
@@ -855,5 +863,27 @@ namespace WangPluginPkm.GUI
         #endregion
 
 
+        private void GenDIs_BTN_Click(object sender, EventArgs e)
+        {
+            var PKL = new List<PKM>();
+            switch (Dis)
+            {
+                case 0:
+                    PKL = PerfectDitto.SearchDitto(SAV, Editor);
+                    break;
+            }
+            var BoxData = SAV.SAV.BoxData;
+            IList<PKM> arr2 = BoxData;
+            List<int> list = FindAllEmptySlots(arr2, 0);
+            if (PKL.Count != 0)
+            {
+                for (int i = 0; i < PKL.Count; i++)
+                {
+                    int index = list[i];
+                    SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
+                }
+            }
+            SAV.ReloadSlots();
+        }
     }
 }

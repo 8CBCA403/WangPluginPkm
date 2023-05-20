@@ -70,6 +70,9 @@ namespace WangPluginPkm.GUI
             groupBox5 = new GroupBox();
             DitributiontabControl = new TabControl();
             CopyPage = new TabPage();
+            DisGroupBox = new GroupBox();
+            DiscomboBox = new ComboBox();
+            GenDIs_BTN = new Button();
             EditBoxPage = new TabPage();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -77,6 +80,7 @@ namespace WangPluginPkm.GUI
             groupBox5.SuspendLayout();
             DitributiontabControl.SuspendLayout();
             CopyPage.SuspendLayout();
+            DisGroupBox.SuspendLayout();
             EditBoxPage.SuspendLayout();
             SuspendLayout();
             // 
@@ -431,6 +435,7 @@ namespace WangPluginPkm.GUI
             // CopyPage
             // 
             CopyPage.BackColor = System.Drawing.Color.WhiteSmoke;
+            CopyPage.Controls.Add(DisGroupBox);
             CopyPage.Controls.Add(groupBox1);
             CopyPage.Controls.Add(groupBox5);
             CopyPage.Controls.Add(groupBox2);
@@ -441,14 +446,44 @@ namespace WangPluginPkm.GUI
             CopyPage.TabIndex = 0;
             CopyPage.Text = "派送器";
             // 
+            // DisGroupBox
+            // 
+            DisGroupBox.Controls.Add(DiscomboBox);
+            DisGroupBox.Controls.Add(GenDIs_BTN);
+            DisGroupBox.Location = new System.Drawing.Point(250, 163);
+            DisGroupBox.Name = "DisGroupBox";
+            DisGroupBox.Size = new System.Drawing.Size(228, 53);
+            DisGroupBox.TabIndex = 72;
+            DisGroupBox.TabStop = false;
+            DisGroupBox.Text = "常用派送";
+            // 
+            // DiscomboBox
+            // 
+            DiscomboBox.FormattingEnabled = true;
+            DiscomboBox.Location = new System.Drawing.Point(8, 18);
+            DiscomboBox.Name = "DiscomboBox";
+            DiscomboBox.Size = new System.Drawing.Size(100, 20);
+            DiscomboBox.TabIndex = 62;
+            // 
+            // GenDIs_BTN
+            // 
+            GenDIs_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            GenDIs_BTN.Location = new System.Drawing.Point(118, 16);
+            GenDIs_BTN.Name = "GenDIs_BTN";
+            GenDIs_BTN.Size = new System.Drawing.Size(100, 25);
+            GenDIs_BTN.TabIndex = 53;
+            GenDIs_BTN.Text = "生成";
+            GenDIs_BTN.UseVisualStyleBackColor = true;
+            GenDIs_BTN.Click += GenDIs_BTN_Click;
+            // 
             // EditBoxPage
             // 
             EditBoxPage.BackColor = System.Drawing.Color.WhiteSmoke;
             EditBoxPage.Controls.Add(groupBox3);
-            EditBoxPage.Location = new System.Drawing.Point(4, 22);
+            EditBoxPage.Location = new System.Drawing.Point(4, 26);
             EditBoxPage.Name = "EditBoxPage";
             EditBoxPage.Padding = new Padding(3);
-            EditBoxPage.Size = new System.Drawing.Size(493, 230);
+            EditBoxPage.Size = new System.Drawing.Size(493, 226);
             EditBoxPage.TabIndex = 1;
             EditBoxPage.Text = "杂项编辑";
             // 
@@ -470,6 +505,7 @@ namespace WangPluginPkm.GUI
             groupBox5.ResumeLayout(false);
             DitributiontabControl.ResumeLayout(false);
             CopyPage.ResumeLayout(false);
+            DisGroupBox.ResumeLayout(false);
             EditBoxPage.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -483,5 +519,8 @@ namespace WangPluginPkm.GUI
         private TabControl DitributiontabControl;
         private TabPage CopyPage;
         private TabPage EditBoxPage;
+        private GroupBox DisGroupBox;
+        private ComboBox DiscomboBox;
+        private Button GenDIs_BTN;
     }
 }

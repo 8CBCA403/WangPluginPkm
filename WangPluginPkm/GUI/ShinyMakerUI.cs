@@ -6,6 +6,7 @@ using System.Linq;
 using System.ComponentModel;
 using System.Media;
 using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
+using WangPluginPkm.PluginUtil.PluginEnums;
 
 namespace WangPluginPkm.GUI
 {
