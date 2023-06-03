@@ -162,9 +162,9 @@ namespace WangPluginPkm.GUI
             this.SubcomboBox.SelectedIndexChanged += (_, __) =>
             {
                 subHomeAchieve = this.SubcomboBox.SelectedIndex;
-                if(this.MaincomboBox.SelectedIndex==7)
+                if (this.MaincomboBox.SelectedIndex == 7)
                 {
-                    switch(subHomeAchieve)
+                    switch (subHomeAchieve)
                     {
                         case 15:
                             this.AchieveGen_BTN.Enabled = true;
@@ -177,7 +177,7 @@ namespace WangPluginPkm.GUI
                     }
                 }
             };
-         
+
         }
         public void Gen(ISaveFileProvider SaveFileEditor)
         {
@@ -661,10 +661,10 @@ namespace WangPluginPkm.GUI
             switch (mainHomeAchieve)
             {
                 case 0:
-                    switch(subHomeAchieve)
+                    switch (subHomeAchieve)
                     {
                         case 0:
-                            if(SAV.SAV.Version==GameVersion.GE|| SAV.SAV.Version == GameVersion.GP)
+                            if (SAV.SAV.Version == GameVersion.GE || SAV.SAV.Version == GameVersion.GP)
                             {
                                 sw.Start();
                                 LivingDexHome(SAV);
@@ -682,7 +682,7 @@ namespace WangPluginPkm.GUI
                             {
                                 sw.Start();
                                 LivingDexHome(SAV);
-                                IEnumerable<PKM> sortMethod(IEnumerable<PKM> pkms, int i) => pkms.OrderByCustom(Gen8_Galar.GetGalarDexSortFunctions());   
+                                IEnumerable<PKM> sortMethod(IEnumerable<PKM> pkms, int i) => pkms.OrderByCustom(Gen8_Galar.GetGalarDexSortFunctions());
                                 SAV.SAV.SortBoxes(0, -1, sortMethod);
                                 List<PKM> L = (List<PKM>)SAV.SAV.GetAllPKM();
                                 var n = L.Count;
@@ -695,7 +695,7 @@ namespace WangPluginPkm.GUI
                                 {
                                     for (int i = 0; i < L.Count; i++)
                                     {
-                                       
+
                                         SAV.SAV.SetBoxSlotAtIndex(L[i], i);
                                     }
                                 }
@@ -1116,7 +1116,7 @@ namespace WangPluginPkm.GUI
             var PL = SAV.SAV.GetAllPKM();
             int i = 0;
             List<int> aL = new List<int>();
-            switch(mainHomeAchieve)
+            switch (mainHomeAchieve)
             {
                 case 1:
                     {
@@ -1156,8 +1156,8 @@ namespace WangPluginPkm.GUI
                     break;
                 case 7:
                     {
-                    switch (subHomeAchieve)
-                    {
+                        switch (subHomeAchieve)
+                        {
                             case 0:
                                 foreach (var pk in PL)
                                 {
@@ -1362,9 +1362,9 @@ namespace WangPluginPkm.GUI
                                     foreach (var pk in PL)
                                     {
                                         IRibbonIndex M = (PB8)pk;
-                                        if ( M.GetRibbonIndex(RibbonIndex.TwinklingStar))
+                                        if (M.GetRibbonIndex(RibbonIndex.TwinklingStar))
                                         {
-                                           i++;
+                                            i++;
                                         }
                                     }
                                     Result.Text = $"当前存档中有{i}只携带闪亮之星奖章的宝可梦";
@@ -1378,7 +1378,33 @@ namespace WangPluginPkm.GUI
                     }
                     break;
             }
-          
+
+        }
+
+        private void Check_BTN_Click(object sender, EventArgs e)
+        {
+            SAV.ReloadSlots();
+            int TID = (TIDCheck_BOX.Text != string.Empty ? int.Parse(TIDCheck_BOX.Text) : 0);
+            int SID = (SIDCheck_Box.Text != string.Empty ? int.Parse(SIDCheck_Box.Text) : 0);
+            Int32 TS = TID * 1000 + SID;
+            var p = SAV.SAV.GetAllPKM();
+            int i = 0;
+            int n = 0;
+            foreach (var pk in p)
+            {
+                int TS1 = (int)pk.TrainerTID7 * 1000 + (int)pk.TrainerSID7;
+                i++;
+                if (TS != TS1&&pk.Species!=0 && pk.PID != 0)
+                {
+                    R_BOX.AppendText($"第{i / 30 + 1}箱第{i % 30+1}只ID不同\n" + Environment.NewLine);
+                    n++;
+                }
+
+            }
+            if (n == 0)
+            {
+                MessageBox.Show("太棒啦全对！");
+            }
         }
     }
 }

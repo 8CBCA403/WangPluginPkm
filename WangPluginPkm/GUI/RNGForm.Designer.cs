@@ -76,6 +76,7 @@ namespace WangPluginPkm.GUI
             lblEC = new Label();
             RNGmenuStrip = new MenuStrip();
             ToolStripMenuItem = new ToolStripMenuItem();
+            Check_Frame = new CheckBox();
             SearchGroupBox.SuspendLayout();
             RNGFormTabControl.SuspendLayout();
             ReverseSeedPage.SuspendLayout();
@@ -129,6 +130,7 @@ namespace WangPluginPkm.GUI
             // 
             // SearchGroupBox
             // 
+            SearchGroupBox.Controls.Add(Check_Frame);
             SearchGroupBox.Controls.Add(Cancel);
             SearchGroupBox.Controls.Add(TeamLockBox);
             SearchGroupBox.Controls.Add(Search);
@@ -144,7 +146,7 @@ namespace WangPluginPkm.GUI
             // TeamLockBox
             // 
             TeamLockBox.AutoSize = true;
-            TeamLockBox.Location = new System.Drawing.Point(109, 192);
+            TeamLockBox.Location = new System.Drawing.Point(223, 192);
             TeamLockBox.Name = "TeamLockBox";
             TeamLockBox.Size = new System.Drawing.Size(90, 16);
             TeamLockBox.TabIndex = 24;
@@ -452,10 +454,10 @@ namespace WangPluginPkm.GUI
             SWSHPage.Controls.Add(Seed_Box);
             SWSHPage.Controls.Add(Ability_Box);
             SWSHPage.Controls.Add(AbilityLabel);
-            SWSHPage.Location = new System.Drawing.Point(4, 22);
+            SWSHPage.Location = new System.Drawing.Point(4, 26);
             SWSHPage.Name = "SWSHPage";
             SWSHPage.Padding = new Padding(3);
-            SWSHPage.Size = new System.Drawing.Size(373, 224);
+            SWSHPage.Size = new System.Drawing.Size(373, 220);
             SWSHPage.TabIndex = 1;
             SWSHPage.Text = "剑盾Raid检测";
             // 
@@ -519,10 +521,10 @@ namespace WangPluginPkm.GUI
             TeraSeedPage.Controls.Add(TeraSeedBox);
             TeraSeedPage.Controls.Add(label);
             TeraSeedPage.Controls.Add(lblEC);
-            TeraSeedPage.Location = new System.Drawing.Point(4, 22);
+            TeraSeedPage.Location = new System.Drawing.Point(4, 26);
             TeraSeedPage.Name = "TeraSeedPage";
             TeraSeedPage.Padding = new Padding(3);
-            TeraSeedPage.Size = new System.Drawing.Size(373, 224);
+            TeraSeedPage.Size = new System.Drawing.Size(373, 220);
             TeraSeedPage.TabIndex = 2;
             TeraSeedPage.Text = "朱紫太晶坑检测";
             // 
@@ -785,6 +787,16 @@ namespace WangPluginPkm.GUI
             ToolStripMenuItem.Text = "使用说明";
             ToolStripMenuItem.Click += ToolStripMenuItem_Click;
             // 
+            // Check_Frame
+            // 
+            Check_Frame.AutoSize = true;
+            Check_Frame.Location = new System.Drawing.Point(109, 192);
+            Check_Frame.Name = "Check_Frame";
+            Check_Frame.Size = new System.Drawing.Size(108, 16);
+            Check_Frame.TabIndex = 25;
+            Check_Frame.Text = "严格帧合法检测";
+            Check_Frame.UseVisualStyleBackColor = true;
+            // 
             // RNGForm
             // 
             AutoValidate = AutoValidate.EnablePreventFocusChange;
@@ -889,5 +901,6 @@ namespace WangPluginPkm.GUI
         private Label label5;
         private TextBox GendertextBox;
         private Label label4;
+        private CheckBox Check_Frame;
     }
 }

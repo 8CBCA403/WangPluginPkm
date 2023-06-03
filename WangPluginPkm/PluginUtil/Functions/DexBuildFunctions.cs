@@ -56,6 +56,7 @@ namespace WangPluginPkm.PluginUtil.Functions
         public static void ClearPKM(PKM pkm)
         {
             pkm.Species = 0;
+            pkm.PID = 0;
         }
         public static void RandomPKMPID(PKM pkm)
         {

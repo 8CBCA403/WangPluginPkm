@@ -179,6 +179,7 @@ namespace WangPluginPkm.GUI
             ConditionForm.ConditionBox.Text = "searching...";
             uint seed = 0;
             int i = 0;
+            int j = 0;
             List<uint> SeedList = new List<uint>();
             if (UsePreSeed.Checked == true)
             {
@@ -210,7 +211,6 @@ namespace WangPluginPkm.GUI
                         {
                             seed = SeedList[i];
                             i++;
-
                         }
                         if (TeamLockBox.Checked == true)
                         {
@@ -221,9 +221,29 @@ namespace WangPluginPkm.GUI
                                 continue;
                             }
                         }
+                        
                         if (GenPkm(ref pk, seed, p.Form))
                         {
-                            // MessageBox.Show($"Success！");
+                            if(Check_Frame.Checked)
+                            {
+                                var la = new LegalityAnalysis(pk);
+                                if (la.Info.FrameMatches == false)
+                                {
+                                    if(SeedList.Count==0)
+                                    seed = Util.Rand32();
+                                    if (SeedList.Count != 0 && j < SeedList.Count)
+                                    {
+                                        seed = SeedList[j];
+                                        j++;
+                                    }
+                                    if(j>=SeedList.Count)
+                                    {
+                                        MessageBox.Show("没有匹配！");
+                                        break;
+                                    }
+                                    continue;
+                                }
+                            }
                             this.Invoke(() =>
                                 {
                                     MessageBox.Show($"Success！");
