@@ -67,7 +67,7 @@ namespace WangPluginPkm.GUI
             gp.Username1 = OT_Name.Text;
             ushort Move1 = (ushort)Array.IndexOf(GameInfo.Strings.movelist, Move1_TextBox.Text);
             ushort Move2 = (ushort)Array.IndexOf(GameInfo.Strings.movelist, Move2_TextBox.Text);
-            //gp.Username2 = OName.Text;
+          //gp.Username2 = OName.Text;
             gp.Nickname = NickNameBox.Text;
             gp.IV_HP = Convert.ToInt16(HP_TextBox.Text);
             gp.IV_ATK = Convert.ToInt16(Atk_TextBox.Text);
@@ -251,7 +251,7 @@ namespace WangPluginPkm.GUI
         {
             if (ek1 != null)
             {
-                if (HomeCrypto.GetIsEncrypted1(ek1))
+                if (HomeCrypto.GetIsEncrypted(ek1,1))
                     return new PKH(ek1);
             }
             return null;

@@ -187,6 +187,9 @@ namespace WangPluginPkm.GUI
         }
         public void SetID(PKM pkm)
         {
+            var T = pkm.TID16;
+            var S = pkm.SID16;
+            var N = pkm.OT_Name;
             var TID16 = uint.Parse(TID16Box.Text);
             var SID16 = uint.Parse(SID16Box.Text);
             var Name = OT_Name.Text;
@@ -206,8 +209,18 @@ namespace WangPluginPkm.GUI
                 pkm.SID16 = (ushort)SID16;
 
             }
-            pkm.OT_Gender = GetGender(typeG);
-            pkm.ClearNickname();
+            var la = new LegalityAnalysis(pkm);
+            if (la.Valid)
+            {
+                pkm.OT_Gender = GetGender(typeG);
+                pkm.ClearNickname();
+            }
+            else
+            {
+                pkm.TID16=T;
+               pkm.SID16=S;
+               pkm.OT_Name=N;
+            }
         }
         private void SortByRegionalDex(Func<PKM, IComparable>[] sortFunctions)
         {

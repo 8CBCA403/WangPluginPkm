@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using PKHeX.Core.AutoMod;
-
+using WangPluginPkm.Properties;
+using WangPluginPkm.PluginUtil.LegalLogic;
 namespace WangPluginPkm.PluginUtil.Functions
 {
     public static class DexBuildFunctions
@@ -46,11 +47,13 @@ namespace WangPluginPkm.PluginUtil.Functions
         public static void LegalBox(ISaveFileProvider SaveFileEditor)
         {
             var sav = SaveFileEditor.SAV;
-            sav.LegalizeBox(sav.CurrentBox);
+            Legalize.LegalizeBox(sav, sav.CurrentBox);
+
         }
         public static void LegalAll(ISaveFileProvider SaveFileEditor)
         {
             var sav = SaveFileEditor.SAV;
+           
             sav.LegalizeBoxes();
         }
         public static void ClearPKM(PKM pkm)

@@ -226,6 +226,7 @@ namespace WangPluginPkm.GUI
                         {
                             if(Check_Frame.Checked)
                             {
+                              
                                 var la = new LegalityAnalysis(pk);
                                 if (la.Info.FrameMatches == false)
                                 {
@@ -236,11 +237,12 @@ namespace WangPluginPkm.GUI
                                         seed = SeedList[j];
                                         j++;
                                     }
-                                    if(j>=SeedList.Count)
+                                    if(j>=SeedList.Count&&SeedList.Count!=0)
                                     {
                                         MessageBox.Show("没有匹配！");
                                         break;
                                     }
+                                   
                                     continue;
                                 }
                             }

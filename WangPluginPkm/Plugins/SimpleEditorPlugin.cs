@@ -55,16 +55,20 @@ namespace WangPluginPkm.Plugins
                 var la = new LegalityAnalysis(pk);
                 var IVEVN = new ToolStripMenuItem("快捷三维编辑器");
                 var SavePDF = new ToolStripMenuItem("打印检测报告PDF");
+                var clearnick = new ToolStripMenuItem("清除昵称垃圾字节");
                 IVEVN.Image = Properties.Resources.Atom;
                 SavePDF.Image = Properties.Resources.Report;
                 menuVSD.Items.Insert(menuVSD.Items.Count, IVEVN);
                 menuVSD.Items.Insert(menuVSD.Items.Count, SavePDF);
+                menuVSD.Items.Insert(menuVSD.Items.Count, clearnick);
                 SavePDF.Click += (s, e) => { pdf(la.Report(true), pk); };
+                clearnick.Click += (s, e) => { info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.Clearnike(pk)); };
                 IVEVN.DropDownItems.Add(ATKIVEV);
                 IVEVN.DropDownItems.Add(SPAIVEV);
                 IVEVN.DropDownItems.Add(ATK_0SPEIVEV);
                 IVEVN.DropDownItems.Add(SPA_0SPEIVEV);
                 IVEVN.DropDownItems.Add(TANKIVEV);
+
                 ATKIVEV.Click += (s, e) =>
                 {
                     info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.ATKIVEV(pk));
@@ -87,6 +91,7 @@ namespace WangPluginPkm.Plugins
                 };
                 menuVSD.Closing += (s, e) => menuVSD.Items.Remove(IVEVN);
                 menuVSD.Closing += (s, e) => menuVSD.Items.Remove(SavePDF);
+                menuVSD.Closing += (s, e) => menuVSD.Items.Remove(clearnick);
             };
 
         }

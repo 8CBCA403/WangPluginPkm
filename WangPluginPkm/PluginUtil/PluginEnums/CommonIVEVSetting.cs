@@ -54,6 +54,12 @@ namespace WangPluginPkm
             pk.StatNature = pk.Nature;
             return pk;
         }
+        public static PKM Clearnike(PKM pk)
+        {
+            pk.Nickname_Trash.Clear();
+            pk.ClearNickname();
+            return pk;
+        }
 
     }
 }
