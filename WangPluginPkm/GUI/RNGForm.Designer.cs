@@ -12,6 +12,7 @@ namespace WangPluginPkm.GUI
             UsePreSeed = new CheckBox();
             FastCheck_BTN = new Button();
             SearchGroupBox = new GroupBox();
+            Check_Frame = new CheckBox();
             TeamLockBox = new CheckBox();
             ConditionForm = new WangPluginPkm.PkmCondition();
             MinIV_Box = new ComboBox();
@@ -42,6 +43,11 @@ namespace WangPluginPkm.GUI
             Mod_ComboBox = new ComboBox();
             RNGFormTabControl = new TabControl();
             ReverseSeedPage = new TabPage();
+            CalcBTN = new Button();
+            label7 = new Label();
+            label6 = new Label();
+            IVCheckBox = new TextBox();
+            SeedCheckBox = new TextBox();
             SWSHPage = new TabPage();
             Seed_Label = new Label();
             SlowCheck = new Button();
@@ -76,7 +82,6 @@ namespace WangPluginPkm.GUI
             lblEC = new Label();
             RNGmenuStrip = new MenuStrip();
             ToolStripMenuItem = new ToolStripMenuItem();
-            Check_Frame = new CheckBox();
             SearchGroupBox.SuspendLayout();
             RNGFormTabControl.SuspendLayout();
             ReverseSeedPage.SuspendLayout();
@@ -90,7 +95,7 @@ namespace WangPluginPkm.GUI
             // 
             // Search
             // 
-            Search.Location = new System.Drawing.Point(32, 214);
+            Search.Location = new System.Drawing.Point(51, 220);
             Search.Name = "Search";
             Search.Size = new System.Drawing.Size(92, 25);
             Search.TabIndex = 9;
@@ -100,7 +105,7 @@ namespace WangPluginPkm.GUI
             // 
             // Cancel
             // 
-            Cancel.Location = new System.Drawing.Point(180, 214);
+            Cancel.Location = new System.Drawing.Point(192, 220);
             Cancel.Name = "Cancel";
             Cancel.Size = new System.Drawing.Size(92, 25);
             Cancel.TabIndex = 11;
@@ -111,7 +116,7 @@ namespace WangPluginPkm.GUI
             // UsePreSeed
             // 
             UsePreSeed.AutoSize = true;
-            UsePreSeed.Location = new System.Drawing.Point(7, 192);
+            UsePreSeed.Location = new System.Drawing.Point(4, 198);
             UsePreSeed.Name = "UsePreSeed";
             UsePreSeed.Size = new System.Drawing.Size(96, 16);
             UsePreSeed.TabIndex = 22;
@@ -120,9 +125,9 @@ namespace WangPluginPkm.GUI
             // 
             // FastCheck_BTN
             // 
-            FastCheck_BTN.Location = new System.Drawing.Point(41, 182);
+            FastCheck_BTN.Location = new System.Drawing.Point(58, 229);
             FastCheck_BTN.Name = "FastCheck_BTN";
-            FastCheck_BTN.Size = new System.Drawing.Size(124, 25);
+            FastCheck_BTN.Size = new System.Drawing.Size(124, 30);
             FastCheck_BTN.TabIndex = 23;
             FastCheck_BTN.Text = "快速检测(依赖Z3)";
             FastCheck_BTN.UseVisualStyleBackColor = true;
@@ -130,23 +135,38 @@ namespace WangPluginPkm.GUI
             // 
             // SearchGroupBox
             // 
+            SearchGroupBox.Controls.Add(CalcBTN);
             SearchGroupBox.Controls.Add(Check_Frame);
+            SearchGroupBox.Controls.Add(label7);
             SearchGroupBox.Controls.Add(Cancel);
+            SearchGroupBox.Controls.Add(label6);
             SearchGroupBox.Controls.Add(TeamLockBox);
+            SearchGroupBox.Controls.Add(IVCheckBox);
+            SearchGroupBox.Controls.Add(SeedCheckBox);
             SearchGroupBox.Controls.Add(Search);
             SearchGroupBox.Controls.Add(UsePreSeed);
             SearchGroupBox.Controls.Add(ConditionForm);
             SearchGroupBox.Location = new System.Drawing.Point(12, 31);
             SearchGroupBox.Name = "SearchGroupBox";
-            SearchGroupBox.Size = new System.Drawing.Size(326, 250);
+            SearchGroupBox.Size = new System.Drawing.Size(339, 319);
             SearchGroupBox.TabIndex = 24;
             SearchGroupBox.TabStop = false;
             SearchGroupBox.Text = "查找";
             // 
+            // Check_Frame
+            // 
+            Check_Frame.AutoSize = true;
+            Check_Frame.Location = new System.Drawing.Point(106, 198);
+            Check_Frame.Name = "Check_Frame";
+            Check_Frame.Size = new System.Drawing.Size(108, 16);
+            Check_Frame.TabIndex = 25;
+            Check_Frame.Text = "严格帧合法检测";
+            Check_Frame.UseVisualStyleBackColor = true;
+            // 
             // TeamLockBox
             // 
             TeamLockBox.AutoSize = true;
-            TeamLockBox.Location = new System.Drawing.Point(223, 192);
+            TeamLockBox.Location = new System.Drawing.Point(220, 198);
             TeamLockBox.Name = "TeamLockBox";
             TeamLockBox.Size = new System.Drawing.Size(90, 16);
             TeamLockBox.TabIndex = 24;
@@ -158,13 +178,13 @@ namespace WangPluginPkm.GUI
             ConditionForm.Location = new System.Drawing.Point(7, 14);
             ConditionForm.Margin = new Padding(2);
             ConditionForm.Name = "ConditionForm";
-            ConditionForm.Size = new System.Drawing.Size(314, 173);
+            ConditionForm.Size = new System.Drawing.Size(326, 169);
             ConditionForm.TabIndex = 23;
             // 
             // MinIV_Box
             // 
             MinIV_Box.FormattingEnabled = true;
-            MinIV_Box.Location = new System.Drawing.Point(41, 40);
+            MinIV_Box.Location = new System.Drawing.Point(47, 79);
             MinIV_Box.Name = "MinIV_Box";
             MinIV_Box.Size = new System.Drawing.Size(151, 20);
             MinIV_Box.TabIndex = 25;
@@ -172,7 +192,7 @@ namespace WangPluginPkm.GUI
             // Gender_Box
             // 
             Gender_Box.FormattingEnabled = true;
-            Gender_Box.Location = new System.Drawing.Point(54, 71);
+            Gender_Box.Location = new System.Drawing.Point(60, 114);
             Gender_Box.Name = "Gender_Box";
             Gender_Box.Size = new System.Drawing.Size(138, 20);
             Gender_Box.TabIndex = 26;
@@ -180,7 +200,7 @@ namespace WangPluginPkm.GUI
             // FlawlessIV
             // 
             FlawlessIV.AutoSize = true;
-            FlawlessIV.Location = new System.Drawing.Point(6, 44);
+            FlawlessIV.Location = new System.Drawing.Point(13, 82);
             FlawlessIV.Name = "FlawlessIV";
             FlawlessIV.Size = new System.Drawing.Size(29, 12);
             FlawlessIV.TabIndex = 27;
@@ -189,7 +209,7 @@ namespace WangPluginPkm.GUI
             // genderlabel
             // 
             genderlabel.AutoSize = true;
-            genderlabel.Location = new System.Drawing.Point(7, 76);
+            genderlabel.Location = new System.Drawing.Point(13, 117);
             genderlabel.Name = "genderlabel";
             genderlabel.Size = new System.Drawing.Size(41, 12);
             genderlabel.TabIndex = 28;
@@ -198,7 +218,7 @@ namespace WangPluginPkm.GUI
             // Ability_Box
             // 
             Ability_Box.FormattingEnabled = true;
-            Ability_Box.Location = new System.Drawing.Point(41, 102);
+            Ability_Box.Location = new System.Drawing.Point(47, 149);
             Ability_Box.Name = "Ability_Box";
             Ability_Box.Size = new System.Drawing.Size(151, 20);
             Ability_Box.TabIndex = 29;
@@ -206,7 +226,7 @@ namespace WangPluginPkm.GUI
             // AbilityLabel
             // 
             AbilityLabel.AutoSize = true;
-            AbilityLabel.Location = new System.Drawing.Point(7, 106);
+            AbilityLabel.Location = new System.Drawing.Point(12, 154);
             AbilityLabel.Name = "AbilityLabel";
             AbilityLabel.Size = new System.Drawing.Size(29, 12);
             AbilityLabel.TabIndex = 30;
@@ -214,7 +234,7 @@ namespace WangPluginPkm.GUI
             // 
             // FixPidForTera_BTN
             // 
-            FixPidForTera_BTN.Location = new System.Drawing.Point(210, 179);
+            FixPidForTera_BTN.Location = new System.Drawing.Point(212, 210);
             FixPidForTera_BTN.Name = "FixPidForTera_BTN";
             FixPidForTera_BTN.Size = new System.Drawing.Size(111, 25);
             FixPidForTera_BTN.TabIndex = 36;
@@ -225,7 +245,7 @@ namespace WangPluginPkm.GUI
             // Legal_Check_BOX4
             // 
             Legal_Check_BOX4.Cursor = Cursors.No;
-            Legal_Check_BOX4.Location = new System.Drawing.Point(219, 114);
+            Legal_Check_BOX4.Location = new System.Drawing.Point(225, 151);
             Legal_Check_BOX4.Multiline = true;
             Legal_Check_BOX4.Name = "Legal_Check_BOX4";
             Legal_Check_BOX4.Size = new System.Drawing.Size(125, 25);
@@ -235,7 +255,7 @@ namespace WangPluginPkm.GUI
             // Legal_Check_BOX3
             // 
             Legal_Check_BOX3.Cursor = Cursors.No;
-            Legal_Check_BOX3.Location = new System.Drawing.Point(220, 78);
+            Legal_Check_BOX3.Location = new System.Drawing.Point(226, 112);
             Legal_Check_BOX3.Multiline = true;
             Legal_Check_BOX3.Name = "Legal_Check_BOX3";
             Legal_Check_BOX3.Size = new System.Drawing.Size(125, 25);
@@ -245,7 +265,7 @@ namespace WangPluginPkm.GUI
             // Legal_Check_BOX2
             // 
             Legal_Check_BOX2.Cursor = Cursors.No;
-            Legal_Check_BOX2.Location = new System.Drawing.Point(220, 42);
+            Legal_Check_BOX2.Location = new System.Drawing.Point(226, 73);
             Legal_Check_BOX2.Multiline = true;
             Legal_Check_BOX2.Name = "Legal_Check_BOX2";
             Legal_Check_BOX2.Size = new System.Drawing.Size(125, 25);
@@ -255,7 +275,7 @@ namespace WangPluginPkm.GUI
             // Legal_Check_BOX1
             // 
             Legal_Check_BOX1.Cursor = Cursors.No;
-            Legal_Check_BOX1.Location = new System.Drawing.Point(219, 6);
+            Legal_Check_BOX1.Location = new System.Drawing.Point(225, 34);
             Legal_Check_BOX1.Multiline = true;
             Legal_Check_BOX1.Name = "Legal_Check_BOX1";
             Legal_Check_BOX1.Size = new System.Drawing.Size(125, 25);
@@ -264,17 +284,17 @@ namespace WangPluginPkm.GUI
             // 
             // Seed_Box
             // 
-            Seed_Box.Location = new System.Drawing.Point(52, 6);
+            Seed_Box.Location = new System.Drawing.Point(58, 34);
             Seed_Box.Multiline = true;
             Seed_Box.Name = "Seed_Box";
-            Seed_Box.Size = new System.Drawing.Size(140, 23);
+            Seed_Box.Size = new System.Drawing.Size(140, 25);
             Seed_Box.TabIndex = 23;
             Seed_Box.Text = "没有seed";
             // 
             // Legal_Check_BOX5
             // 
             Legal_Check_BOX5.Cursor = Cursors.No;
-            Legal_Check_BOX5.Location = new System.Drawing.Point(220, 150);
+            Legal_Check_BOX5.Location = new System.Drawing.Point(226, 190);
             Legal_Check_BOX5.Multiline = true;
             Legal_Check_BOX5.Name = "Legal_Check_BOX5";
             Legal_Check_BOX5.Size = new System.Drawing.Size(125, 25);
@@ -283,23 +303,23 @@ namespace WangPluginPkm.GUI
             // 
             // SeedBox
             // 
-            SeedBox.Location = new System.Drawing.Point(236, 82);
+            SeedBox.Location = new System.Drawing.Point(232, 135);
             SeedBox.Multiline = true;
             SeedBox.Name = "SeedBox";
             SeedBox.ScrollBars = ScrollBars.Vertical;
-            SeedBox.Size = new System.Drawing.Size(124, 83);
+            SeedBox.Size = new System.Drawing.Size(124, 79);
             SeedBox.TabIndex = 38;
             // 
             // PIDBox
             // 
-            PIDBox.Location = new System.Drawing.Point(236, 17);
+            PIDBox.Location = new System.Drawing.Point(232, 70);
             PIDBox.Name = "PIDBox";
             PIDBox.Size = new System.Drawing.Size(124, 21);
             PIDBox.TabIndex = 37;
             // 
             // ReverseCheck_BTN
             // 
-            ReverseCheck_BTN.Location = new System.Drawing.Point(46, 139);
+            ReverseCheck_BTN.Location = new System.Drawing.Point(64, 189);
             ReverseCheck_BTN.Name = "ReverseCheck_BTN";
             ReverseCheck_BTN.Size = new System.Drawing.Size(124, 25);
             ReverseCheck_BTN.TabIndex = 25;
@@ -311,7 +331,7 @@ namespace WangPluginPkm.GUI
             // 
             IVCheck_Box.AutoSize = true;
             IVCheck_Box.Enabled = false;
-            IVCheck_Box.Location = new System.Drawing.Point(46, 111);
+            IVCheck_Box.Location = new System.Drawing.Point(42, 164);
             IVCheck_Box.Name = "IVCheck_Box";
             IVCheck_Box.Size = new System.Drawing.Size(84, 16);
             IVCheck_Box.TabIndex = 44;
@@ -324,7 +344,7 @@ namespace WangPluginPkm.GUI
             PIDECCheck_Box.AutoSize = true;
             PIDECCheck_Box.Checked = true;
             PIDECCheck_Box.CheckState = CheckState.Checked;
-            PIDECCheck_Box.Location = new System.Drawing.Point(46, 85);
+            PIDECCheck_Box.Location = new System.Drawing.Point(42, 138);
             PIDECCheck_Box.Name = "PIDECCheck_Box";
             PIDECCheck_Box.Size = new System.Drawing.Size(90, 16);
             PIDECCheck_Box.TabIndex = 25;
@@ -335,7 +355,7 @@ namespace WangPluginPkm.GUI
             // IVBox
             // 
             IVBox.AutoSize = true;
-            IVBox.Location = new System.Drawing.Point(43, 54);
+            IVBox.Location = new System.Drawing.Point(39, 107);
             IVBox.Name = "IVBox";
             IVBox.Size = new System.Drawing.Size(17, 12);
             IVBox.TabIndex = 43;
@@ -344,7 +364,7 @@ namespace WangPluginPkm.GUI
             // IVTextBox
             // 
             IVTextBox.Enabled = false;
-            IVTextBox.Location = new System.Drawing.Point(69, 51);
+            IVTextBox.Location = new System.Drawing.Point(65, 104);
             IVTextBox.Name = "IVTextBox";
             IVTextBox.Size = new System.Drawing.Size(124, 21);
             IVTextBox.TabIndex = 42;
@@ -352,7 +372,7 @@ namespace WangPluginPkm.GUI
             // ECLabel
             // 
             ECLabel.AutoSize = true;
-            ECLabel.Location = new System.Drawing.Point(210, 54);
+            ECLabel.Location = new System.Drawing.Point(206, 107);
             ECLabel.Name = "ECLabel";
             ECLabel.Size = new System.Drawing.Size(17, 12);
             ECLabel.TabIndex = 41;
@@ -361,7 +381,7 @@ namespace WangPluginPkm.GUI
             // ECBox
             // 
             ECBox.Enabled = false;
-            ECBox.Location = new System.Drawing.Point(236, 51);
+            ECBox.Location = new System.Drawing.Point(232, 104);
             ECBox.Name = "ECBox";
             ECBox.Size = new System.Drawing.Size(124, 21);
             ECBox.TabIndex = 40;
@@ -369,7 +389,7 @@ namespace WangPluginPkm.GUI
             // Seedlabel
             // 
             Seedlabel.AutoSize = true;
-            Seedlabel.Location = new System.Drawing.Point(197, 85);
+            Seedlabel.Location = new System.Drawing.Point(193, 138);
             Seedlabel.Name = "Seedlabel";
             Seedlabel.Size = new System.Drawing.Size(29, 12);
             Seedlabel.TabIndex = 39;
@@ -378,7 +398,7 @@ namespace WangPluginPkm.GUI
             // PIDlabel
             // 
             PIDlabel.AutoSize = true;
-            PIDlabel.Location = new System.Drawing.Point(207, 22);
+            PIDlabel.Location = new System.Drawing.Point(203, 75);
             PIDlabel.Name = "PIDlabel";
             PIDlabel.Size = new System.Drawing.Size(23, 12);
             PIDlabel.TabIndex = 37;
@@ -387,7 +407,7 @@ namespace WangPluginPkm.GUI
             // Mlabel
             // 
             Mlabel.AutoSize = true;
-            Mlabel.Location = new System.Drawing.Point(7, 22);
+            Mlabel.Location = new System.Drawing.Point(3, 75);
             Mlabel.Name = "Mlabel";
             Mlabel.Size = new System.Drawing.Size(53, 12);
             Mlabel.TabIndex = 37;
@@ -396,7 +416,7 @@ namespace WangPluginPkm.GUI
             // Mod_ComboBox
             // 
             Mod_ComboBox.FormattingEnabled = true;
-            Mod_ComboBox.Location = new System.Drawing.Point(68, 17);
+            Mod_ComboBox.Location = new System.Drawing.Point(64, 70);
             Mod_ComboBox.Name = "Mod_ComboBox";
             Mod_ComboBox.Size = new System.Drawing.Size(124, 20);
             Mod_ComboBox.TabIndex = 37;
@@ -406,10 +426,10 @@ namespace WangPluginPkm.GUI
             RNGFormTabControl.Controls.Add(ReverseSeedPage);
             RNGFormTabControl.Controls.Add(SWSHPage);
             RNGFormTabControl.Controls.Add(TeraSeedPage);
-            RNGFormTabControl.Location = new System.Drawing.Point(344, 31);
+            RNGFormTabControl.Location = new System.Drawing.Point(357, 31);
             RNGFormTabControl.Name = "RNGFormTabControl";
             RNGFormTabControl.SelectedIndex = 0;
-            RNGFormTabControl.Size = new System.Drawing.Size(381, 250);
+            RNGFormTabControl.Size = new System.Drawing.Size(381, 319);
             RNGFormTabControl.TabIndex = 45;
             // 
             // ReverseSeedPage
@@ -431,9 +451,51 @@ namespace WangPluginPkm.GUI
             ReverseSeedPage.Location = new System.Drawing.Point(4, 22);
             ReverseSeedPage.Name = "ReverseSeedPage";
             ReverseSeedPage.Padding = new Padding(3);
-            ReverseSeedPage.Size = new System.Drawing.Size(373, 224);
+            ReverseSeedPage.Size = new System.Drawing.Size(373, 293);
             ReverseSeedPage.TabIndex = 0;
             ReverseSeedPage.Text = "Seed逆推";
+            // 
+            // CalcBTN
+            // 
+            CalcBTN.Location = new System.Drawing.Point(40, 279);
+            CalcBTN.Name = "CalcBTN";
+            CalcBTN.Size = new System.Drawing.Size(114, 25);
+            CalcBTN.TabIndex = 49;
+            CalcBTN.Text = "计算";
+            CalcBTN.UseVisualStyleBackColor = true;
+            CalcBTN.Click += CalcBTN_Click;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(160, 255);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(17, 12);
+            label7.TabIndex = 48;
+            label7.Text = "IV";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(5, 255);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(29, 12);
+            label6.TabIndex = 47;
+            label6.Text = "Seed";
+            // 
+            // IVCheckBox
+            // 
+            IVCheckBox.Location = new System.Drawing.Point(186, 252);
+            IVCheckBox.Name = "IVCheckBox";
+            IVCheckBox.Size = new System.Drawing.Size(124, 21);
+            IVCheckBox.TabIndex = 46;
+            // 
+            // SeedCheckBox
+            // 
+            SeedCheckBox.Location = new System.Drawing.Point(40, 252);
+            SeedCheckBox.Name = "SeedCheckBox";
+            SeedCheckBox.Size = new System.Drawing.Size(114, 21);
+            SeedCheckBox.TabIndex = 45;
             // 
             // SWSHPage
             // 
@@ -454,17 +516,17 @@ namespace WangPluginPkm.GUI
             SWSHPage.Controls.Add(Seed_Box);
             SWSHPage.Controls.Add(Ability_Box);
             SWSHPage.Controls.Add(AbilityLabel);
-            SWSHPage.Location = new System.Drawing.Point(4, 26);
+            SWSHPage.Location = new System.Drawing.Point(4, 22);
             SWSHPage.Name = "SWSHPage";
             SWSHPage.Padding = new Padding(3);
-            SWSHPage.Size = new System.Drawing.Size(373, 220);
+            SWSHPage.Size = new System.Drawing.Size(373, 293);
             SWSHPage.TabIndex = 1;
             SWSHPage.Text = "剑盾Raid检测";
             // 
             // Seed_Label
             // 
             Seed_Label.AutoSize = true;
-            Seed_Label.Location = new System.Drawing.Point(7, 9);
+            Seed_Label.Location = new System.Drawing.Point(12, 37);
             Seed_Label.Name = "Seed_Label";
             Seed_Label.Size = new System.Drawing.Size(29, 12);
             Seed_Label.TabIndex = 47;
@@ -472,9 +534,9 @@ namespace WangPluginPkm.GUI
             // 
             // SlowCheck
             // 
-            SlowCheck.Location = new System.Drawing.Point(220, 181);
+            SlowCheck.Location = new System.Drawing.Point(227, 229);
             SlowCheck.Name = "SlowCheck";
-            SlowCheck.Size = new System.Drawing.Size(124, 25);
+            SlowCheck.Size = new System.Drawing.Size(124, 30);
             SlowCheck.TabIndex = 48;
             SlowCheck.Text = "慢速检测";
             SlowCheck.UseVisualStyleBackColor = true;
@@ -482,9 +544,9 @@ namespace WangPluginPkm.GUI
             // 
             // FixLairSeed
             // 
-            FixLairSeed.Location = new System.Drawing.Point(41, 140);
+            FixLairSeed.Location = new System.Drawing.Point(58, 184);
             FixLairSeed.Name = "FixLairSeed";
-            FixLairSeed.Size = new System.Drawing.Size(124, 25);
+            FixLairSeed.Size = new System.Drawing.Size(124, 30);
             FixLairSeed.TabIndex = 47;
             FixLairSeed.Text = "修正大冒险seed";
             FixLairSeed.UseVisualStyleBackColor = true;
@@ -521,16 +583,16 @@ namespace WangPluginPkm.GUI
             TeraSeedPage.Controls.Add(TeraSeedBox);
             TeraSeedPage.Controls.Add(label);
             TeraSeedPage.Controls.Add(lblEC);
-            TeraSeedPage.Location = new System.Drawing.Point(4, 26);
+            TeraSeedPage.Location = new System.Drawing.Point(4, 22);
             TeraSeedPage.Name = "TeraSeedPage";
             TeraSeedPage.Padding = new Padding(3);
-            TeraSeedPage.Size = new System.Drawing.Size(373, 220);
+            TeraSeedPage.Size = new System.Drawing.Size(373, 293);
             TeraSeedPage.TabIndex = 2;
             TeraSeedPage.Text = "朱紫太晶坑检测";
             // 
             // AbilitytextBox
             // 
-            AbilitytextBox.Location = new System.Drawing.Point(292, 38);
+            AbilitytextBox.Location = new System.Drawing.Point(294, 65);
             AbilitytextBox.MaxLength = 8;
             AbilitytextBox.Name = "AbilitytextBox";
             AbilitytextBox.Size = new System.Drawing.Size(63, 21);
@@ -539,14 +601,14 @@ namespace WangPluginPkm.GUI
             // Gen9IvcomboBox
             // 
             Gen9IvcomboBox.FormattingEnabled = true;
-            Gen9IvcomboBox.Location = new System.Drawing.Point(158, 10);
+            Gen9IvcomboBox.Location = new System.Drawing.Point(160, 37);
             Gen9IvcomboBox.Name = "Gen9IvcomboBox";
             Gen9IvcomboBox.Size = new System.Drawing.Size(34, 20);
             Gen9IvcomboBox.TabIndex = 80;
             // 
             // numHeight
             // 
-            numHeight.Location = new System.Drawing.Point(210, 72);
+            numHeight.Location = new System.Drawing.Point(212, 99);
             numHeight.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             numHeight.Name = "numHeight";
             numHeight.Size = new System.Drawing.Size(47, 21);
@@ -554,7 +616,7 @@ namespace WangPluginPkm.GUI
             // 
             // CheckTeraSeed_BTN
             // 
-            CheckTeraSeed_BTN.Location = new System.Drawing.Point(210, 140);
+            CheckTeraSeed_BTN.Location = new System.Drawing.Point(212, 163);
             CheckTeraSeed_BTN.Name = "CheckTeraSeed_BTN";
             CheckTeraSeed_BTN.Size = new System.Drawing.Size(111, 25);
             CheckTeraSeed_BTN.TabIndex = 78;
@@ -564,7 +626,7 @@ namespace WangPluginPkm.GUI
             // 
             // numScale
             // 
-            numScale.Location = new System.Drawing.Point(210, 103);
+            numScale.Location = new System.Drawing.Point(212, 130);
             numScale.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             numScale.Name = "numScale";
             numScale.Size = new System.Drawing.Size(47, 21);
@@ -574,7 +636,7 @@ namespace WangPluginPkm.GUI
             // 
             label5.AutoSize = true;
             label5.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label5.Location = new System.Drawing.Point(263, 44);
+            label5.Location = new System.Drawing.Point(265, 71);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(29, 12);
             label5.TabIndex = 89;
@@ -584,7 +646,7 @@ namespace WangPluginPkm.GUI
             // 
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label2.Location = new System.Drawing.Point(123, 13);
+            label2.Location = new System.Drawing.Point(125, 40);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(29, 12);
             label2.TabIndex = 81;
@@ -594,7 +656,7 @@ namespace WangPluginPkm.GUI
             // 
             lblScale.AutoSize = true;
             lblScale.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            lblScale.Location = new System.Drawing.Point(169, 106);
+            lblScale.Location = new System.Drawing.Point(171, 133);
             lblScale.Name = "lblScale";
             lblScale.Size = new System.Drawing.Size(35, 12);
             lblScale.TabIndex = 48;
@@ -602,7 +664,7 @@ namespace WangPluginPkm.GUI
             // 
             // txtPID
             // 
-            txtPID.Location = new System.Drawing.Point(67, 71);
+            txtPID.Location = new System.Drawing.Point(69, 114);
             txtPID.MaxLength = 8;
             txtPID.Name = "txtPID";
             txtPID.Size = new System.Drawing.Size(100, 21);
@@ -610,7 +672,7 @@ namespace WangPluginPkm.GUI
             // 
             // GendertextBox
             // 
-            GendertextBox.Location = new System.Drawing.Point(210, 38);
+            GendertextBox.Location = new System.Drawing.Point(212, 65);
             GendertextBox.MaxLength = 8;
             GendertextBox.Name = "GendertextBox";
             GendertextBox.Size = new System.Drawing.Size(47, 21);
@@ -620,7 +682,7 @@ namespace WangPluginPkm.GUI
             // 
             lblNature.AutoSize = true;
             lblNature.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            lblNature.Location = new System.Drawing.Point(27, 137);
+            lblNature.Location = new System.Drawing.Point(28, 195);
             lblNature.Name = "lblNature";
             lblNature.Size = new System.Drawing.Size(35, 12);
             lblNature.TabIndex = 71;
@@ -628,7 +690,7 @@ namespace WangPluginPkm.GUI
             // 
             // numWeight
             // 
-            numWeight.Location = new System.Drawing.Point(308, 72);
+            numWeight.Location = new System.Drawing.Point(310, 99);
             numWeight.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             numWeight.Name = "numWeight";
             numWeight.Size = new System.Drawing.Size(47, 21);
@@ -637,7 +699,7 @@ namespace WangPluginPkm.GUI
             // Gen9AbilitycomboBox
             // 
             Gen9AbilitycomboBox.FormattingEnabled = true;
-            Gen9AbilitycomboBox.Location = new System.Drawing.Point(49, 10);
+            Gen9AbilitycomboBox.Location = new System.Drawing.Point(51, 37);
             Gen9AbilitycomboBox.Name = "Gen9AbilitycomboBox";
             Gen9AbilitycomboBox.Size = new System.Drawing.Size(70, 20);
             Gen9AbilitycomboBox.TabIndex = 82;
@@ -646,7 +708,7 @@ namespace WangPluginPkm.GUI
             // 
             lblHeight.AutoSize = true;
             lblHeight.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            lblHeight.Location = new System.Drawing.Point(169, 75);
+            lblHeight.Location = new System.Drawing.Point(171, 102);
             lblHeight.Name = "lblHeight";
             lblHeight.Size = new System.Drawing.Size(35, 12);
             lblHeight.TabIndex = 52;
@@ -656,7 +718,7 @@ namespace WangPluginPkm.GUI
             // 
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label3.Location = new System.Drawing.Point(15, 13);
+            label3.Location = new System.Drawing.Point(17, 40);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(29, 12);
             label3.TabIndex = 83;
@@ -666,7 +728,7 @@ namespace WangPluginPkm.GUI
             // 
             lblWeight.AutoSize = true;
             lblWeight.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            lblWeight.Location = new System.Drawing.Point(263, 75);
+            lblWeight.Location = new System.Drawing.Point(265, 102);
             lblWeight.Name = "lblWeight";
             lblWeight.Size = new System.Drawing.Size(35, 12);
             lblWeight.TabIndex = 51;
@@ -675,7 +737,7 @@ namespace WangPluginPkm.GUI
             // Tera9genderComboBox
             // 
             Tera9genderComboBox.FormattingEnabled = true;
-            Tera9genderComboBox.Location = new System.Drawing.Point(232, 10);
+            Tera9genderComboBox.Location = new System.Drawing.Point(234, 37);
             Tera9genderComboBox.Name = "Tera9genderComboBox";
             Tera9genderComboBox.Size = new System.Drawing.Size(70, 20);
             Tera9genderComboBox.TabIndex = 80;
@@ -684,7 +746,7 @@ namespace WangPluginPkm.GUI
             // 
             label1.AutoSize = true;
             label1.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label1.Location = new System.Drawing.Point(195, 13);
+            label1.Location = new System.Drawing.Point(197, 40);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(29, 12);
             label1.TabIndex = 81;
@@ -693,7 +755,7 @@ namespace WangPluginPkm.GUI
             // lblPID
             // 
             lblPID.AutoSize = true;
-            lblPID.Location = new System.Drawing.Point(34, 75);
+            lblPID.Location = new System.Drawing.Point(34, 117);
             lblPID.Name = "lblPID";
             lblPID.Size = new System.Drawing.Size(29, 12);
             lblPID.TabIndex = 49;
@@ -701,7 +763,7 @@ namespace WangPluginPkm.GUI
             // 
             // txtEC
             // 
-            txtEC.Location = new System.Drawing.Point(67, 102);
+            txtEC.Location = new System.Drawing.Point(69, 153);
             txtEC.MaxLength = 8;
             txtEC.Name = "txtEC";
             txtEC.Size = new System.Drawing.Size(100, 21);
@@ -711,14 +773,14 @@ namespace WangPluginPkm.GUI
             // 
             cmbNature.FormattingEnabled = true;
             cmbNature.Items.AddRange(new object[] { "Hardy", "Lonely", "Brave", "Adamant", "Naughty", "Bold", "Docile", "Relaxed", "Impish", "Lax", "Timid", "Hasty", "Serious", "Jolly", "Naive", "Modest", "Mild", "Quiet", "Bashful", "Rash", "Calm", "Gentle", "Sassy", "Careful", "Quirky" });
-            cmbNature.Location = new System.Drawing.Point(67, 133);
+            cmbNature.Location = new System.Drawing.Point(69, 192);
             cmbNature.Name = "cmbNature";
             cmbNature.Size = new System.Drawing.Size(102, 20);
             cmbNature.TabIndex = 72;
             // 
             // IVstextBox
             // 
-            IVstextBox.Location = new System.Drawing.Point(49, 163);
+            IVstextBox.Location = new System.Drawing.Point(49, 230);
             IVstextBox.MaxLength = 8;
             IVstextBox.Name = "IVstextBox";
             IVstextBox.Size = new System.Drawing.Size(120, 21);
@@ -728,7 +790,7 @@ namespace WangPluginPkm.GUI
             // 
             label4.AutoSize = true;
             label4.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label4.Location = new System.Drawing.Point(176, 44);
+            label4.Location = new System.Drawing.Point(178, 71);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(29, 12);
             label4.TabIndex = 87;
@@ -738,7 +800,7 @@ namespace WangPluginPkm.GUI
             // 
             IVlabel.AutoSize = true;
             IVlabel.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            IVlabel.Location = new System.Drawing.Point(6, 168);
+            IVlabel.Location = new System.Drawing.Point(6, 237);
             IVlabel.Name = "IVlabel";
             IVlabel.Size = new System.Drawing.Size(35, 12);
             IVlabel.TabIndex = 85;
@@ -746,7 +808,7 @@ namespace WangPluginPkm.GUI
             // 
             // TeraSeedBox
             // 
-            TeraSeedBox.Location = new System.Drawing.Point(67, 40);
+            TeraSeedBox.Location = new System.Drawing.Point(69, 75);
             TeraSeedBox.MaxLength = 8;
             TeraSeedBox.Name = "TeraSeedBox";
             TeraSeedBox.Size = new System.Drawing.Size(100, 21);
@@ -755,7 +817,7 @@ namespace WangPluginPkm.GUI
             // label
             // 
             label.AutoSize = true;
-            label.Location = new System.Drawing.Point(21, 46);
+            label.Location = new System.Drawing.Point(24, 78);
             label.Name = "label";
             label.Size = new System.Drawing.Size(35, 12);
             label.TabIndex = 86;
@@ -764,7 +826,7 @@ namespace WangPluginPkm.GUI
             // lblEC
             // 
             lblEC.AutoSize = true;
-            lblEC.Location = new System.Drawing.Point(34, 106);
+            lblEC.Location = new System.Drawing.Point(36, 160);
             lblEC.Name = "lblEC";
             lblEC.Size = new System.Drawing.Size(23, 12);
             lblEC.TabIndex = 47;
@@ -776,7 +838,7 @@ namespace WangPluginPkm.GUI
             RNGmenuStrip.Items.AddRange(new ToolStripItem[] { ToolStripMenuItem });
             RNGmenuStrip.Location = new System.Drawing.Point(0, 0);
             RNGmenuStrip.Name = "RNGmenuStrip";
-            RNGmenuStrip.Size = new System.Drawing.Size(737, 25);
+            RNGmenuStrip.Size = new System.Drawing.Size(761, 25);
             RNGmenuStrip.TabIndex = 46;
             RNGmenuStrip.Text = "menuStrip1";
             // 
@@ -787,21 +849,11 @@ namespace WangPluginPkm.GUI
             ToolStripMenuItem.Text = "使用说明";
             ToolStripMenuItem.Click += ToolStripMenuItem_Click;
             // 
-            // Check_Frame
-            // 
-            Check_Frame.AutoSize = true;
-            Check_Frame.Location = new System.Drawing.Point(109, 192);
-            Check_Frame.Name = "Check_Frame";
-            Check_Frame.Size = new System.Drawing.Size(108, 16);
-            Check_Frame.TabIndex = 25;
-            Check_Frame.Text = "严格帧合法检测";
-            Check_Frame.UseVisualStyleBackColor = true;
-            // 
             // RNGForm
             // 
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             BackColor = System.Drawing.SystemColors.Control;
-            ClientSize = new System.Drawing.Size(737, 288);
+            ClientSize = new System.Drawing.Size(761, 364);
             Controls.Add(RNGFormTabControl);
             Controls.Add(SearchGroupBox);
             Controls.Add(RNGmenuStrip);
@@ -902,5 +954,10 @@ namespace WangPluginPkm.GUI
         private TextBox GendertextBox;
         private Label label4;
         private CheckBox Check_Frame;
+        private Label label6;
+        private TextBox IVCheckBox;
+        private TextBox SeedCheckBox;
+        private Label label7;
+        private Button CalcBTN;
     }
 }

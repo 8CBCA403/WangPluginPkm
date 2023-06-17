@@ -221,28 +221,28 @@ namespace WangPluginPkm.GUI
                                 continue;
                             }
                         }
-                        
+
                         if (GenPkm(ref pk, seed, p.Form))
                         {
-                            if(Check_Frame.Checked)
+                            if (Check_Frame.Checked)
                             {
-                              
+
                                 var la = new LegalityAnalysis(pk);
                                 if (la.Info.FrameMatches == false)
                                 {
-                                    if(SeedList.Count==0)
-                                    seed = Util.Rand32();
+                                    if (SeedList.Count == 0)
+                                        seed = Util.Rand32();
                                     if (SeedList.Count != 0 && j < SeedList.Count)
                                     {
                                         seed = SeedList[j];
                                         j++;
                                     }
-                                    if(j>=SeedList.Count&&SeedList.Count!=0)
+                                    if (j >= SeedList.Count && SeedList.Count != 0)
                                     {
                                         MessageBox.Show("没有匹配！");
                                         break;
                                     }
-                                   
+
                                     continue;
                                 }
                             }
@@ -746,5 +746,15 @@ namespace WangPluginPkm.GUI
             form.Show();
         }
 
+        private void CalcBTN_Click(object sender, EventArgs e)
+        {
+            if (SeedCheckBox.Text == "")
+                return;
+            string vIn = SeedCheckBox.Text;
+            uint vOut = Convert.ToUInt32(vIn, 16);
+            var pkm = Editor.Data;
+            GenPkm(ref pkm, vOut);
+            IVCheckBox.Text = $"{pkm.IV_HP}/{pkm.IV_ATK}/{pkm.IV_DEF}/{pkm.IV_SPA}/{pkm.IV_SPD}/{pkm.IV_SPE}";
+        }
     }
 }
