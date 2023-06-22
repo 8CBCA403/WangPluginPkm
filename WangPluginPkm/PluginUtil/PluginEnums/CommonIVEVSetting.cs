@@ -1,4 +1,5 @@
 ﻿using PKHeX.Core;
+using PKHeX.Core.AutoMod;
 
 namespace WangPluginPkm
 {
@@ -56,6 +57,25 @@ namespace WangPluginPkm
         }
         public static PKM Clearnike(PKM pk)
         {
+            pk.Nickname_Trash.Clear();
+            pk.ClearNickname();
+            return pk;
+        }
+        public static PK9 cid(PK9 pk, ISaveFileProvider sav)
+        {
+            pk.Language=sav.SAV.Language;
+            pk.TrainerTID7 = sav.SAV.TrainerTID7;
+            pk.TrainerSID7 = sav.SAV.TrainerSID7;
+            pk.OT_Gender = sav.SAV.Gender;
+            pk.OT_Name = sav.SAV.OT;
+            pk.Obedience_Level = 1;
+            RibbonApplicator.RemoveAllValidRibbons(pk);
+            pk.HT_Language = 0;
+            pk.HT_Gender = 0;
+            pk.HT_Name = "";
+            pk.MarkValue = 0;
+            pk.HT_Friendship = 0;
+            pk.HT_Trash.Clear();
             pk.Nickname_Trash.Clear();
             pk.ClearNickname();
             return pk;
