@@ -6,6 +6,7 @@ using PKHeX.Core.AutoMod;
 using WangPluginPkm.PluginUtil.AchieveBase;
 using WangPluginPkm.GUI;
 using WangPluginPkm.RNG.Methods;
+using Microsoft.Z3;
 
 namespace WangPluginPkm.PluginUtil.MeerkatBase
 {
@@ -1169,10 +1170,10 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             {
                 for (int i = 0; i < PKL.Count; i++)
                 {
-                    var context = PKL[i].Context;
-
-                    var et = EvolutionTree.GetEvolutionTree(context);
-                    var chain = et.GetValidPreEvolutions(PKL[i], levelMax: 100, skipChecks: true);
+                   // var context = PKL[i].Context;
+                    var origin = new EvolutionOrigin(PKL[i].Species, (byte)GameVersion.W, 5, 1, 100);
+                    var chain = EvolutionChain.GetOriginChain(PKL[i], origin);
+                  
                     EncounterGenerator5 g5 = new();
                     
                     switch (i)

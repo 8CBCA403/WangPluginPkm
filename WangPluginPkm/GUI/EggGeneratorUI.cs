@@ -67,7 +67,7 @@ namespace WangPluginPkm.GUI
             PKM pkm = pk.Clone();
             PKM pko = pk.Clone();
             var tree = EvolutionTree.GetEvolutionTree(pk.Context);
-            var PE = tree.GetPreEvolutions(pk.Species, pk.Form);
+            var PE = tree.GetEvolutionsAndPreEvolutions(pk.Species, pk.Form);
             if (PE.Count() != 0)
             {
                 var PreSpecies = PE.First();
