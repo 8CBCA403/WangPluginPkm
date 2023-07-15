@@ -29,83 +29,93 @@ namespace WangPluginPkm.Plugins
             ctrl.Name = "常用功能/Simple Editor";
             modmenu.DropDownItems.Add(ctrl);
             AddCheckerToList();
-
         }
         private void AddCheckerToList()
         {
             var menuVSD = (ContextMenuStrip)((dynamic)SaveFileEditor).menu.mnuVSD;
-            var ATKIVEV = new ToolStripMenuItem("物攻手");
-            var SPAIVEV = new ToolStripMenuItem("特攻手");
-            var ATK_0SPEIVEV = new ToolStripMenuItem("物攻0速");
-            var SPA_0SPEIVEV = new ToolStripMenuItem("特攻0速");
-            var TANKIVEV = new ToolStripMenuItem("坦克");
-           
-                menuVSD.Opening += (s, e) =>
+            menuVSD.Opening += (s, e) =>
             {
                 var info = GetSenderInfo(ref s!);
+               
                 if (info.Slot.Origin == SlotOrigin.Box && info.ReadCurrent().Species != (int)Species.None)
                 {
                     ToolStripMenuItem insertSlotButton = new ToolStripMenuItem("在此处插空");
                     insertSlotButton.Image = Properties.Resources.Down;
-                    insertSlotButton.Click += (s, e) => InsertSlot(SaveFileEditor.CurrentBox, info.Slot.Slot);
                     menuVSD.Items.Add(insertSlotButton);
+                    insertSlotButton.Click += (s, e) =>
+                           InsertSlot(SaveFileEditor.CurrentBox, info.Slot.Slot);
                     menuVSD.Closing += (s, e) => menuVSD.Items.Remove(insertSlotButton);
-                }
-                var pk = info.Slot.Read(SaveFileEditor.SAV);
-                var la = new LegalityAnalysis(pk);
-                var IVEVN = new ToolStripMenuItem("快捷三维编辑器");
-                var SavePDF = new ToolStripMenuItem("打印检测报告PDF");
-                var clearnick = new ToolStripMenuItem("清除昵称垃圾字节");
-                var changeid = new ToolStripMenuItem("把id由PKHeX改成存档id(仅适用于SV)");
-                IVEVN.Image = Properties.Resources.Atom;
-                SavePDF.Image = Properties.Resources.Report;
-                clearnick.Image = Properties.Resources.TrashCan;
-                changeid.Image = Properties.Resources.Transfer;
-                menuVSD.Items.Insert(menuVSD.Items.Count, IVEVN);
-                menuVSD.Items.Insert(menuVSD.Items.Count, SavePDF);
-                menuVSD.Items.Insert(menuVSD.Items.Count, clearnick);
-                menuVSD.Items.Insert(menuVSD.Items.Count, changeid);
-                SavePDF.Click += (s, e) => { pdf(la.Report(true), pk); };
-                clearnick.Click += (s, e) => { info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.Clearnike(pk)); };
-                changeid.Click += (s, e) => {
+                 
+                        var pk = info.Slot.Read(SaveFileEditor.SAV);
+                        PKM p=PKMEditor.Data;
+                        var la = new LegalityAnalysis(pk);
+                        var ATKIVEV = new ToolStripMenuItem("物攻手");
+                        var SPAIVEV = new ToolStripMenuItem("特攻手");
+                        var ATK_0SPEIVEV = new ToolStripMenuItem("物攻0速");
+                        var SPA_0SPEIVEV = new ToolStripMenuItem("特攻0速");
+                        var TANKIVEV = new ToolStripMenuItem("坦克");
+                        var IVEVN = new ToolStripMenuItem("快捷三维编辑器");
+                        var SavePDF = new ToolStripMenuItem("打印检测报告PDF");
+                        var clearnick = new ToolStripMenuItem("清除昵称垃圾字节");
+          
+                        var changeid = new ToolStripMenuItem("把id由PKHeX改成存档id(仅适用于SV)");
+                        IVEVN.Image = Properties.Resources.Atom;
+                        SavePDF.Image = Properties.Resources.Report;
+                        clearnick.Image = Properties.Resources.TrashCan;
                     if (SaveFileEditor.SAV.Version is GameVersion.SL or GameVersion.VL)
-                        info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.cid((PK9)pk, SaveFileEditor));
-                    else
-                        MessageBox.Show("目前只适用于SV");
-                };
-                IVEVN.DropDownItems.Add(ATKIVEV);
-                IVEVN.DropDownItems.Add(SPAIVEV);
-                IVEVN.DropDownItems.Add(ATK_0SPEIVEV);
-                IVEVN.DropDownItems.Add(SPA_0SPEIVEV);
-                IVEVN.DropDownItems.Add(TANKIVEV);
-
-                ATKIVEV.Click += (s, e) =>
-                {
-                    info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.ATKIVEV(pk));
-                };
-                SPAIVEV.Click += (s, e) =>
-                {
-                    info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.SPAIVEV(pk));
-                };
-                ATK_0SPEIVEV.Click += (s, e) =>
-                {
-                    info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.ATK_0SPEIVEV(pk));
-                };
-                SPA_0SPEIVEV.Click += (s, e) =>
-                {
-                    info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.SPA_0SPEIVEV(pk));
-                };
-                TANKIVEV.Click += (s, e) =>
-                {
-                    info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.TANKIVEV(pk));
-                };
-                menuVSD.Closing += (s, e) => menuVSD.Items.Remove(IVEVN);
-                menuVSD.Closing += (s, e) => menuVSD.Items.Remove(SavePDF);
-                menuVSD.Closing += (s, e) => menuVSD.Items.Remove(clearnick);
-                menuVSD.Closing += (s, e) => menuVSD.Items.Remove(changeid);
+                        changeid.Image = Properties.Resources.Transfer;
+                        menuVSD.Items.Insert(menuVSD.Items.Count, IVEVN);
+                        menuVSD.Items.Insert(menuVSD.Items.Count, SavePDF);
+                        menuVSD.Items.Insert(menuVSD.Items.Count, clearnick);
+                    if (SaveFileEditor.SAV.Version is GameVersion.SL or GameVersion.VL)
+                        menuVSD.Items.Insert(menuVSD.Items.Count, changeid);
+                        IVEVN.DropDownItems.Add(ATKIVEV);
+                        IVEVN.DropDownItems.Add(SPAIVEV);
+                        IVEVN.DropDownItems.Add(ATK_0SPEIVEV);
+                        IVEVN.DropDownItems.Add(SPA_0SPEIVEV);
+                        IVEVN.DropDownItems.Add(TANKIVEV);
+                        SavePDF.Click += (s, e) =>
+                        {
+                            pdf(la.Report(), pk);
+                        };
+                        clearnick.Click += (s, e) =>
+                        {
+                            info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.Clearnike(pk));
+                        };
+                    if(SaveFileEditor.SAV.Version is GameVersion.SL or GameVersion.VL)
+                        changeid.Click += (s, e) =>
+                        {
+                            info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.cid((PK9)pk, SaveFileEditor));
+                        };
+                        ATKIVEV.Click += (s, e) =>
+                        {
+                            info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.ATKIVEV(pk));
+                        };
+                        SPAIVEV.Click += (s, e) =>
+                        {
+                            info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.SPAIVEV(pk));
+                        };
+                        ATK_0SPEIVEV.Click += (s, e) =>
+                        {
+                            info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.ATK_0SPEIVEV(pk));
+                        };
+                        SPA_0SPEIVEV.Click += (s, e) =>
+                        {
+                            info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.SPA_0SPEIVEV(pk));
+                        };
+                        TANKIVEV.Click += (s, e) =>
+                        {
+                            info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.TANKIVEV(pk));
+                        };
+                        menuVSD.Closing += (s, e) => menuVSD.Items.Remove(IVEVN);
+                        menuVSD.Closing += (s, e) => menuVSD.Items.Remove(SavePDF);
+                        menuVSD.Closing += (s, e) => menuVSD.Items.Remove(clearnick);
+                        menuVSD.Closing += (s, e) => menuVSD.Items.Remove(changeid);
+                    }
+                
             };
-
         }
+       
 #nullable enable
         private static SlotViewInfo<PictureBox> GetSenderInfo(ref object sender)
         {

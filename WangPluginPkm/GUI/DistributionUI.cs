@@ -438,19 +438,19 @@ namespace WangPluginPkm.GUI
             switch (IVEVValue)
             {
                 case 0:
-                    Editor.PopulateFields(CommonIVEVSetting.ATKIVEV(Editor.Data));
+                    Editor.PopulateFields(CommonIVEVSetting.ATKIVEV((PK9)Editor.Data));
                     break;
                 case 1:
-                    Editor.PopulateFields(CommonIVEVSetting.SPAIVEV(Editor.Data));
+                    Editor.PopulateFields(CommonIVEVSetting.SPAIVEV((PK9)Editor.Data));
                     break;
                 case 2:
-                    Editor.PopulateFields(CommonIVEVSetting.ATK_0SPEIVEV(Editor.Data));
+                    Editor.PopulateFields(CommonIVEVSetting.ATK_0SPEIVEV((PK9)Editor.Data));
                     break;
                 case 3:
-                    Editor.PopulateFields(CommonIVEVSetting.SPA_0SPEIVEV(Editor.Data));
+                    Editor.PopulateFields(CommonIVEVSetting.SPA_0SPEIVEV((PK9)Editor.Data));
                     break;
                 case 4:
-                    Editor.PopulateFields(CommonIVEVSetting.TANKIVEV(Editor.Data));
+                    Editor.PopulateFields(CommonIVEVSetting.TANKIVEV((PK9)Editor.Data));
                     break;
             }
         }

@@ -371,6 +371,7 @@ namespace WangPluginPkm.GUI
             else
                 ResultBox.AppendText("队伍中宝可梦等级合法!" + Environment.NewLine);
         }
+      
 
     }
 }

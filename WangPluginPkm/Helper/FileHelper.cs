@@ -50,7 +50,7 @@ namespace WangPluginPkm
         public static bool ValidBinFileSize(long size) => (size > 0) && (size <= MaxCountInBin * pkmSizeInBin[typeof(T)]) && (size % pkmSizeInBin[typeof(T)] == 0);
         public static int MaxCountInBin => maxCountInBin[typeof(T)];
 #nullable enable
-        static PKM? GetPKM(byte[] ba) => typeof(T) switch
+       public static PKM? GetPKM(byte[] ba) => typeof(T) switch
         {
             Type t when t == typeof(PK8) => new PK8(ba),
             Type t when t == typeof(PB8) => new PB8(ba),
