@@ -9,6 +9,7 @@ using System.Linq;
 using System.IO;
 using System.Media;
 using WangPluginPkm.PluginUtil.ModifyPKM;
+using static WangPluginPkm.GUI.EggGeneratorUI;
 
 namespace WangPluginPkm.GUI
 {
@@ -77,19 +78,19 @@ namespace WangPluginPkm.GUI
         {
             var text = GetTextShowdownData(PSBox.Text.TrimEnd());
             var chs = "";
-            if (string.IsNullOrWhiteSpace(text))
+            if (string.IsNullOrWhiteSpace(text)&& !ChineseCheckBox.Checked)
                 return;
             if (ChineseCheckBox.Checked)
             {
-
-                var T = text.Split("\n\n");
+                var T = PSBox.Text.Split("\n\n");
                 foreach (var t in T)
                 {
-                    chs += PSTranslator<PK9>.Chinese2Showdown(t) + "\n\n";
+                    chs += ShowdownTranslator<PK9>.Chinese2Showdown(t) + "\n\n";
                 }
                 text = chs;
             }
-            Import(text!);
+            
+            Import(text);
         }
         private void ClearAllBox_BTN_Click(object sender, EventArgs e)
         {
@@ -201,7 +202,7 @@ namespace WangPluginPkm.GUI
             for (int i = 0; i < zh.Count(); i++)
             {
                 t.Replace(";", "");
-                t = PSTranslator<PKM>.Chinese2Showdown(zh[i]);
+                t = ShowdownTranslator<PKM>.Chinese2Showdown(zh[i]);
                 s = s + t;
                 s += "\n\n";
             }
