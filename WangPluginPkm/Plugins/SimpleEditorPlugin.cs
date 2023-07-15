@@ -11,6 +11,12 @@ using iText.IO.Image;
 using System.Drawing;
 using iText.Kernel.Font;
 using System.Globalization;
+using System.Net.Http;
+using Org.BouncyCastle.Utilities.Zlib;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
+
 
 namespace WangPluginPkm.Plugins
 {
@@ -19,6 +25,7 @@ namespace WangPluginPkm.Plugins
         public override string Name => "常用功能/Simple Editor";
         public override int Priority => 11;
         public static GameStrings GameStringsZh = GameInfo.GetStrings("zh");
+
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {
             var ctrl = new ToolStripMenuItem(Name)
@@ -76,7 +83,7 @@ namespace WangPluginPkm.Plugins
                         IVEVN.DropDownItems.Add(TANKIVEV);
                         SavePDF.Click += (s, e) =>
                         {
-                            pdf(la.Report(), pk);
+                            pdf(la.Report(true), pk);
                         };
                         clearnick.Click += (s, e) =>
                         {
@@ -129,8 +136,12 @@ namespace WangPluginPkm.Plugins
             sender = pb;
             return new SlotViewInfo<PictureBox>(loc, view);
         }
-        private static void pdf(string result, PKM p)
+        private static async void pdf(string result, PKM p)
         {
+            string sp = p.Species.ToString().PadLeft(4, '0');
+            string baseuri = "https://raw.githubusercontent.com/8CBCA403/pokepic/main/Normal/poke_capture_"+$"{sp}"+"_000_00000000_f_n.png";
+            MessageBox.Show($"{baseuri}");
+            Uri siteUri = new Uri(baseuri);
             PdfFont f1 = PdfFontFactory.CreateFont(@"Plugins\WangPluginPkm\simkai.ttf");
             PdfWriter writer = new PdfWriter(@"Plugins\WangPluginPkm\Reports\" + $"超王宝可梦合法性检测报告-{GameStringsZh.Species[p.Species]}{p.EncryptionConstant:X}.pdf");
             PdfDocument pdf = new PdfDocument(writer);
@@ -148,8 +159,11 @@ namespace WangPluginPkm.Plugins
             LineSeparator ls = new LineSeparator(new SolidLine());
             Paragraph content = new Paragraph($"{result}")
                 .SetTextAlignment(TextAlignment.LEFT).SetFontSize(12).SetFont(f1);
-            ImageData imageData = ImageDataFactory.Create(ImageToByte(Properties.Resources.SuperWang));
+            ImageData imageData = ImageDataFactory.Create(ImageToByte(Properties.Resources.SuperWang)); 
             iText.Layout.Element.Image image = new iText.Layout.Element.Image(imageData).ScaleAbsolute(100, 100).SetFixedPosition(1, 450, 45);
+            ImageData imageData1 = ImageDataFactory.Create(ImageToByte(await LoadImage(siteUri)));
+            iText.Layout.Element.Image image1 = new iText.Layout.Element.Image(imageData1).ScaleAbsolute(100, 100).SetFixedPosition(1,450, 585);
+            document.Add(image1);
             document.Add(image);
             document.Add(header1);
             document.Add(header2);
@@ -164,6 +178,27 @@ namespace WangPluginPkm.Plugins
             ImageConverter converter = new ImageConverter();
             var result = converter.ConvertTo(img, typeof(byte[])) as byte[];
             return result;
+        }
+        public async static Task<Bitmap> LoadImage(Uri uri)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    using (var response = await client.GetAsync(uri))
+                    {
+                        response.EnsureSuccessStatusCode();
+                        System.IO.Stream responseStream = response.Content.ReadAsStream();
+                        Bitmap bitmapImage = new Bitmap(responseStream);
+                        return bitmapImage;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Failed to load the image: {0}", ex.Message);
+            }
+            return null;
         }
         public static T? GetUnderlyingControl<T>(object sender) where T : class
         {
