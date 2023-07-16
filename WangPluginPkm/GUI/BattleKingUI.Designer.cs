@@ -25,10 +25,10 @@ namespace WangPluginPkm.GUI
             WebtabPage = new TabPage();
             SmogontabPage = new TabPage();
             VGC_Check = new TabPage();
+            textBox1 = new TextBox();
             ResultBox = new TextBox();
             TEST_BTN = new Button();
             TeamList_BOX = new CheckedListBox();
-            textBox1 = new TextBox();
             BattleKingtabControl.SuspendLayout();
             PStabPage.SuspendLayout();
             WebtabPage.SuspendLayout();
@@ -66,7 +66,7 @@ namespace WangPluginPkm.GUI
             // LoadTeamFromPSCode_BTN
             // 
             LoadTeamFromPSCode_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            LoadTeamFromPSCode_BTN.Location = new System.Drawing.Point(215, 299);
+            LoadTeamFromPSCode_BTN.Location = new System.Drawing.Point(172, 299);
             LoadTeamFromPSCode_BTN.Name = "LoadTeamFromPSCode_BTN";
             LoadTeamFromPSCode_BTN.Size = new System.Drawing.Size(197, 32);
             LoadTeamFromPSCode_BTN.TabIndex = 4;
@@ -108,7 +108,7 @@ namespace WangPluginPkm.GUI
             // ChineseCheckBox
             // 
             ChineseCheckBox.AutoSize = true;
-            ChineseCheckBox.Location = new System.Drawing.Point(105, 305);
+            ChineseCheckBox.Location = new System.Drawing.Point(71, 308);
             ChineseCheckBox.Name = "ChineseCheckBox";
             ChineseCheckBox.Size = new System.Drawing.Size(72, 16);
             ChineseCheckBox.TabIndex = 8;
@@ -172,12 +172,21 @@ namespace WangPluginPkm.GUI
             VGC_Check.Controls.Add(ResultBox);
             VGC_Check.Controls.Add(TEST_BTN);
             VGC_Check.Controls.Add(TeamList_BOX);
-            VGC_Check.Location = new System.Drawing.Point(4, 22);
+            VGC_Check.Location = new System.Drawing.Point(4, 26);
             VGC_Check.Name = "VGC_Check";
             VGC_Check.Padding = new Padding(3);
-            VGC_Check.Size = new System.Drawing.Size(528, 351);
+            VGC_Check.Size = new System.Drawing.Size(528, 347);
             VGC_Check.TabIndex = 3;
             VGC_Check.Text = "VGC队伍检测";
+            // 
+            // textBox1
+            // 
+            textBox1.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            textBox1.Location = new System.Drawing.Point(6, 6);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new System.Drawing.Size(192, 21);
+            textBox1.TabIndex = 3;
+            textBox1.Text = "请将有6只精灵的bin文件拖入下方";
             // 
             // ResultBox
             // 
@@ -208,15 +217,6 @@ namespace WangPluginPkm.GUI
             TeamList_BOX.TabIndex = 0;
             TeamList_BOX.DragDrop += PKM_DragDrop;
             TeamList_BOX.DragEnter += PKM_DragEnter;
-            // 
-            // textBox1
-            // 
-            textBox1.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            textBox1.Location = new System.Drawing.Point(6, 6);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(192, 21);
-            textBox1.TabIndex = 3;
-            textBox1.Text = "请将有6只精灵的bin文件拖入下方";
             // 
             // BattleKingUI
             // 

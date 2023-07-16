@@ -78,7 +78,7 @@ namespace WangPluginPkm.GUI
         {
             var text = GetTextShowdownData(PSBox.Text.TrimEnd());
             var chs = "";
-            if (string.IsNullOrWhiteSpace(text)&& !ChineseCheckBox.Checked)
+            if (string.IsNullOrWhiteSpace(text) && !ChineseCheckBox.Checked)
                 return;
             if (ChineseCheckBox.Checked)
             {
@@ -89,7 +89,7 @@ namespace WangPluginPkm.GUI
                 }
                 text = chs;
             }
-            
+
             Import(text);
         }
         private void ClearAllBox_BTN_Click(object sender, EventArgs e)
@@ -371,7 +371,7 @@ namespace WangPluginPkm.GUI
             else
                 ResultBox.AppendText("队伍中宝可梦等级合法!" + Environment.NewLine);
         }
-      
+
 
     }
 }
