@@ -28,7 +28,7 @@ namespace WangPluginPkm.PluginUtil.ModifyPKM
         public int RelearnMove4 { get; set; }
         public int[] IVS { get; set; } = new int[6];
         public int[] EVS { get; set; } = new int[6];
-
+        public int CurrentLevel { get; set; }
         public static string lptoSt(litePK pk)
         {
             string r = "";
@@ -43,7 +43,7 @@ namespace WangPluginPkm.PluginUtil.ModifyPKM
                 evst += $"{pk.EVS[i]}" + "/";
             }
             r = $"{pk.Name},{pk.Species},{pk.Nature},{pk.Ability},{pk.HeldItem},{pk.Ball},{pk.Language}," +
-                $"{pk.Form},{pk.AbilityNumber}:{ivst}:{evst}:{pk.Move1},{pk.Move2},{pk.Move3},{pk.Move4}:" +
+                $"{pk.Form},{pk.AbilityNumber},{pk.CurrentLevel}:{ivst}:{evst}:{pk.Move1},{pk.Move2},{pk.Move3},{pk.Move4}:" +
                 $"{pk.RelearnMove1},{pk.RelearnMove2},{pk.RelearnMove3},{pk.RelearnMove4}#";
             return r;
         }

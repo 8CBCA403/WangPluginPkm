@@ -81,11 +81,14 @@
             Filter_CB = new System.Windows.Forms.ComboBox();
             Filter_LB = new System.Windows.Forms.Label();
             PKBox = new System.Windows.Forms.PictureBox();
+            Current_Level_LB = new System.Windows.Forms.Label();
+            Level_NUM = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)FO_NU).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ABN_NU).BeginInit();
             ((System.ComponentModel.ISupportInitialize)StartBox_NUM).BeginInit();
             ((System.ComponentModel.ISupportInitialize)EndBox_NUM).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PKBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Level_NUM).BeginInit();
             SuspendLayout();
             // 
             // SPL
@@ -568,11 +571,31 @@
             PKBox.TabIndex = 53;
             PKBox.TabStop = false;
             // 
+            // Current_Level_LB
+            // 
+            Current_Level_LB.AutoSize = true;
+            Current_Level_LB.Location = new System.Drawing.Point(172, 238);
+            Current_Level_LB.Name = "Current_Level_LB";
+            Current_Level_LB.Size = new System.Drawing.Size(56, 17);
+            Current_Level_LB.TabIndex = 54;
+            Current_Level_LB.Text = "当前等级";
+            // 
+            // Level_NUM
+            // 
+            Level_NUM.Location = new System.Drawing.Point(237, 236);
+            Level_NUM.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            Level_NUM.Name = "Level_NUM";
+            Level_NUM.Size = new System.Drawing.Size(56, 23);
+            Level_NUM.TabIndex = 55;
+            Level_NUM.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
             // SuperDataBase
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(559, 602);
+            Controls.Add(Level_NUM);
+            Controls.Add(Current_Level_LB);
             Controls.Add(PKBox);
             Controls.Add(Filter_LB);
             Controls.Add(Filter_CB);
@@ -634,6 +657,7 @@
             ((System.ComponentModel.ISupportInitialize)StartBox_NUM).EndInit();
             ((System.ComponentModel.ISupportInitialize)EndBox_NUM).EndInit();
             ((System.ComponentModel.ISupportInitialize)PKBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Level_NUM).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -692,5 +716,7 @@
         private System.Windows.Forms.ComboBox Filter_CB;
         private System.Windows.Forms.Label Filter_LB;
         private System.Windows.Forms.PictureBox PKBox;
+        private System.Windows.Forms.Label Current_Level_LB;
+        private System.Windows.Forms.NumericUpDown Level_NUM;
     }
 }

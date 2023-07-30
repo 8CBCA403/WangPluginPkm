@@ -98,6 +98,7 @@ namespace WangPluginPkm.GUI
             IV_TB.Text = $"{Editor.Data.IV_HP}/{Editor.Data.IV_ATK}/{Editor.Data.IV_DEF}/{Editor.Data.IV_SPA}/{Editor.Data.IV_SPD}/{Editor.Data.IV_SPE}";
             EV_TB.Text = $"{Editor.Data.EV_HP}/{Editor.Data.EV_ATK}/{Editor.Data.EV_DEF}/{Editor.Data.EV_SPA}/{Editor.Data.EV_SPD}/{Editor.Data.EV_SPE}";
             this.Lp_LIST.DisplayMember = "Name";
+            Level_NUM.Value = Editor.Data.CurrentLevel;
             MessageBox.Show("导入了面板！");
         }
         private AutoCompleteStringCollection auto(string[] array)
@@ -224,6 +225,7 @@ namespace WangPluginPkm.GUI
                 RelearnMove4 = REM4_CB.SelectedIndex,
                 IVS = ivs,
                 EVS = evs,
+                CurrentLevel=(int)Level_NUM.Value
             };
 
             return lp;
@@ -255,6 +257,12 @@ namespace WangPluginPkm.GUI
                 lp.Language = Int32.Parse(baselps[6]);
                 lp.Form = Int32.Parse(baselps[7]);
                 lp.AbilityNumber = Int32.Parse(baselps[8]);
+                if (baselps.Length<10)
+                    lp.CurrentLevel = 1;
+                else
+                {
+                    lp.CurrentLevel = Int32.Parse(baselps[9]);
+                }
                 var ivlps = ivlpsarray.Split("/");
                 for (int i = 0; i < 6; i++)
                 {
@@ -318,6 +326,7 @@ namespace WangPluginPkm.GUI
                 REM4_CB.SelectedIndex = ((litePK)lp).RelearnMove4;
                 IV_TB.Text = $"{((litePK)lp).IVS[0]}/{((litePK)lp).IVS[1]}/{((litePK)lp).IVS[2]}/{((litePK)lp).IVS[3]}/{((litePK)lp).IVS[4]}/{((litePK)lp).IVS[5]}";
                 EV_TB.Text = $"{((litePK)lp).EVS[0]}/{((litePK)lp).EVS[1]}/{((litePK)lp).EVS[2]}/{((litePK)lp).EVS[3]}/{((litePK)lp).EVS[4]}/{((litePK)lp).EVS[5]}";
+                Level_NUM.Value = ((litePK)lp).CurrentLevel;
                 string baseuri = "https://raw.githubusercontent.com/8CBCA403/pokepic/main/Normal/poke_capture_" + $"{((litePK)lp).Species.ToString().PadLeft(4, '0')}" + "_000_00000000_f_n.png";
                 try
                 {
@@ -406,6 +415,7 @@ namespace WangPluginPkm.GUI
                     pk.RelearnMove2 = (ushort)litePKs[i].RelearnMove2;
                     pk.RelearnMove3 = (ushort)litePKs[i].RelearnMove3;
                     pk.RelearnMove4 = (ushort)litePKs[i].RelearnMove4;
+                    pk.CurrentLevel = litePKs[i].CurrentLevel;
                 }
 
             }
@@ -489,6 +499,7 @@ namespace WangPluginPkm.GUI
             pk.RelearnMove4 = REM4_CB.SelectedIndex;
             pk.IVS = ivs;
             pk.EVS = evs;
+            pk.CurrentLevel = (int)Level_NUM.Value;
             Lp_LIST.SetItemChecked(index, true);
         }
         private void FilterItemsByProperty(string name, object value)
