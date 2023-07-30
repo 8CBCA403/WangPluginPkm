@@ -28,7 +28,7 @@ namespace WangPluginPkm.GUI
         private void ClearRecord_Click(object sender, EventArgs e)
         {
             ITechRecord techRecord = Editor.Data as ITechRecord;
-            TechnicalRecordApplicator.SetRecordFlags(techRecord, false, 112);
+           // TechnicalRecordApplicator.SetRecordFlags(techRecord, false, 112);
         }
         private void LegalizeReport_Click(object sender, EventArgs e)
         {

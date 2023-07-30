@@ -328,7 +328,7 @@ namespace WangPluginPkm.GUI
             {
                 if (pk is ITechRecord t)
                 {
-                    t.SetRecordFlags();
+                    t.SetRecordFlagsAll();
                 }
             }
             SAV.ReloadSlots();
