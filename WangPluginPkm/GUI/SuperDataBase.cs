@@ -1,5 +1,4 @@
-﻿using iText.Forms.Xfdf;
-using PKHeX.Core;
+﻿using PKHeX.Core;
 using System;
 using System.Linq;
 using System.IO;
@@ -7,14 +6,10 @@ using System.Windows.Forms;
 using WangPluginPkm.PluginUtil.ModifyPKM;
 using System.Text;
 using System.Collections.Generic;
-using System.Xml;
-using static WangPluginPkm.CheckRules;
-using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
-using System.Net;
 using System.Net.Http;
-using iText.IO.Image;
 using System.Drawing;
-using static WangPluginPkm.GUI.EggGeneratorUI;
+using PKHeX.Core.Enhancements;
+using PKHeX.Core.AutoMod;
 
 namespace WangPluginPkm.GUI
 {
@@ -28,8 +23,6 @@ namespace WangPluginPkm.GUI
 
         private List<string> EditType = new List<string>();
 
-
-
         public SuperDataBase(ISaveFileProvider sav, IPKMView editor)
         {
 
@@ -37,7 +30,6 @@ namespace WangPluginPkm.GUI
             SAV = sav;
             Editor = editor;
             BindingData();
-
         }
         public enum Filter
         {
@@ -131,8 +123,6 @@ namespace WangPluginPkm.GUI
             {
                 RunFilter_CLB.SetItemChecked(i, true);
             }
-
-
         }
 
         private void import_editor_BTN_Click(object sender, EventArgs e)
@@ -790,6 +780,135 @@ namespace WangPluginPkm.GUI
                     break;
             }
             return boxbuffer;
+        }
+
+        private void Load_PS_BTN_Click(object sender, EventArgs e)
+        {
+            Import(PS_Box.Text);
+
+        }
+        public void Import(string source)
+        {
+            if (ShowdownUtil.IsTeamBackup(source))
+            {
+                var teams = ShowdownTeamSet.GetTeams(source);
+                var names = teams.Select(z => z.Summary);
+                Import(teams.SelectMany(z => z.Team).ToList());
+                return;
+            }
+            var sets = ShowdownUtil.ShowdownSets(source);
+            Import(sets);
+        }
+        public void Import(IEnumerable<string> sets)
+        {
+            var entries = sets.Select(z => new ShowdownSet(z)).ToList();
+            Import(entries);
+        }
+        public void Import(IReadOnlyList<ShowdownSet> sets, bool skipDialog = false)
+        {
+            int i = 0;
+            if (sets.Count == 1)
+            {
+                var lp = ImportSetToTabs(sets[0], skipDialog);
+                lp.Name = GameStringsZh.Species[lp.Species];
+                Lp_LIST.Items.Add(lp, true);
+                Lp_LIST.DisplayMember = "Name";
+                Lp_LIST.Refresh();
+            }
+            else
+            {
+                Lp_LIST.Items.Clear();
+                var lpo = ImportToExisting(SAV.SAV, sets);
+                foreach (var lp in lpo)
+                {
+                    i++;
+                    lp.Name = GameStringsZh.Species[lp.Species] + $"{i}";
+                    Lp_LIST.Items.Add(lp, true);
+                    Lp_LIST.DisplayMember = "Name";
+                }
+                Lp_LIST.Refresh();
+            }
+
+        }
+        private litePK ImportSetToTabs(ShowdownSet set, bool skipDialog = false)
+        {
+            var regen = new RegenTemplate(set, SAV.SAV.Generation);
+            var sav = SAV.SAV;
+            var legal = sav.GetLegalFromSet(regen, out var msg);
+            return convertpktolpk(legal);
+
+        }
+
+        public List<litePK> ImportToExisting(SaveFile tr, IReadOnlyList<ShowdownSet> sets)
+        {
+            int num = 0;
+            List<litePK> lp = new();
+            for (int i = 0; i < sets.Count; i++)
+            {
+                ShowdownSet showdownSet = sets[i];
+                RegenTemplate regenTemplate = new RegenTemplate(showdownSet, tr.Generation);
+                LegalizationResult msg;
+                PKM legalFromSet = tr.GetLegalFromSet(regenTemplate, out msg);
+                legalFromSet.ResetPartyStats();
+                legalFromSet.SetBoxForm();
+                num++;
+                lp.Add(convertpktolpk(legalFromSet));
+            }
+            return lp;
+        }
+        public litePK convertpktolpk(PKM pk)
+        {
+            int[] iv = new int[6];
+            iv[0] = pk.IV_HP;
+            iv[1] = pk.IV_ATK;
+            iv[2] = pk.IV_DEF;
+            iv[3] = pk.IV_SPA;
+            iv[4] = pk.IV_SPD;
+            iv[5] = pk.IV_SPE;
+            int[] ev = new int[6];
+            ev[0] = pk.EV_HP;
+            ev[1] = pk.EV_ATK;
+            ev[2] = pk.EV_DEF;
+            ev[3] = pk.EV_SPA;
+            ev[4] = pk.EV_SPD;
+            ev[5] = pk.EV_SPE;
+            litePK lp = new()
+            {
+                Name = File_TB.Text,
+                Species = pk.Species,
+                Nature = pk.Nature,
+                Ability = pk.Ability,
+                AbilityNumber = pk.AbilityNumber,
+                HeldItem = pk.HeldItem,
+                Ball = pk.Ball,
+                Language = pk.Language,
+                Form = pk.Form,
+                Move1 = pk.Move1,
+                Move2 = pk.Move2,
+                Move3 = pk.Move3,
+                Move4 = pk.Move4,
+                RelearnMove1 = pk.RelearnMove1,
+                RelearnMove2 = pk.RelearnMove2,
+                RelearnMove3 = pk.RelearnMove3,
+                RelearnMove4 = pk.RelearnMove4,
+                IVS = iv,
+                EVS = ev,
+                CurrentLevel = pk.CurrentLevel
+
+            };
+            switch (SAV.SAV.Generation)
+            {
+                case 8:
+                    lp.StatNature = ((PK8)pk).StatNature;
+                    break;
+                case 9:
+                    lp.StatNature = ((PK9)pk).StatNature;
+                    lp.TeraType = (int)((PK9)pk).TeraType;
+                    break;
+                default:
+                    break;
+            }
+            return lp;
         }
     }
 }

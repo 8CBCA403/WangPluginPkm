@@ -93,6 +93,9 @@
             SNL = new System.Windows.Forms.Label();
             Tera_CB = new System.Windows.Forms.ComboBox();
             Tera_LAB = new System.Windows.Forms.Label();
+            PS_Box = new System.Windows.Forms.TextBox();
+            Load_PS_BTN = new System.Windows.Forms.Button();
+            PS_LB = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)FO_NU).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ABN_NU).BeginInit();
             ((System.ComponentModel.ISupportInitialize)StartBox_NUM).BeginInit();
@@ -415,7 +418,7 @@
             Sav_BTN.Name = "Sav_BTN";
             Sav_BTN.Size = new System.Drawing.Size(91, 26);
             Sav_BTN.TabIndex = 34;
-            Sav_BTN.Text = "保存模板";
+            Sav_BTN.Text = "保存模板->";
             Sav_BTN.UseVisualStyleBackColor = true;
             Sav_BTN.Click += Sav_BTN_Click;
             // 
@@ -465,7 +468,7 @@
             // 
             // RUN_BTN
             // 
-            RUN_BTN.Location = new System.Drawing.Point(602, 324);
+            RUN_BTN.Location = new System.Drawing.Point(602, 558);
             RUN_BTN.Name = "RUN_BTN";
             RUN_BTN.Size = new System.Drawing.Size(91, 26);
             RUN_BTN.TabIndex = 40;
@@ -486,7 +489,7 @@
             // StartBox_LB
             // 
             StartBox_LB.AutoSize = true;
-            StartBox_LB.Location = new System.Drawing.Point(540, 22);
+            StartBox_LB.Location = new System.Drawing.Point(559, 502);
             StartBox_LB.Name = "StartBox_LB";
             StartBox_LB.Size = new System.Drawing.Size(56, 17);
             StartBox_LB.TabIndex = 42;
@@ -495,7 +498,7 @@
             // EndBox
             // 
             EndBox.AutoSize = true;
-            EndBox.Location = new System.Drawing.Point(540, 50);
+            EndBox.Location = new System.Drawing.Point(559, 533);
             EndBox.Name = "EndBox";
             EndBox.Size = new System.Drawing.Size(56, 17);
             EndBox.TabIndex = 44;
@@ -503,7 +506,7 @@
             // 
             // StartBox_NUM
             // 
-            StartBox_NUM.Location = new System.Drawing.Point(596, 17);
+            StartBox_NUM.Location = new System.Drawing.Point(615, 497);
             StartBox_NUM.Maximum = new decimal(new int[] { 32, 0, 0, 0 });
             StartBox_NUM.Name = "StartBox_NUM";
             StartBox_NUM.Size = new System.Drawing.Size(35, 23);
@@ -512,7 +515,7 @@
             // 
             // EndBox_NUM
             // 
-            EndBox_NUM.Location = new System.Drawing.Point(596, 48);
+            EndBox_NUM.Location = new System.Drawing.Point(615, 528);
             EndBox_NUM.Maximum = new decimal(new int[] { 32, 0, 0, 0 });
             EndBox_NUM.Name = "EndBox_NUM";
             EndBox_NUM.Size = new System.Drawing.Size(35, 23);
@@ -607,7 +610,7 @@
             // 
             RunFilter_CLB.FormattingEnabled = true;
             RunFilter_CLB.HorizontalScrollbar = true;
-            RunFilter_CLB.Location = new System.Drawing.Point(540, 112);
+            RunFilter_CLB.Location = new System.Drawing.Point(546, 289);
             RunFilter_CLB.Name = "RunFilter_CLB";
             RunFilter_CLB.Size = new System.Drawing.Size(212, 202);
             RunFilter_CLB.TabIndex = 56;
@@ -615,7 +618,7 @@
             // Start_LB
             // 
             Start_LB.AutoSize = true;
-            Start_LB.Location = new System.Drawing.Point(637, 22);
+            Start_LB.Location = new System.Drawing.Point(656, 500);
             Start_LB.Name = "Start_LB";
             Start_LB.Size = new System.Drawing.Size(56, 17);
             Start_LB.TabIndex = 57;
@@ -624,7 +627,7 @@
             // End_LB
             // 
             End_LB.AutoSize = true;
-            End_LB.Location = new System.Drawing.Point(637, 50);
+            End_LB.Location = new System.Drawing.Point(656, 530);
             End_LB.Name = "End_LB";
             End_LB.Size = new System.Drawing.Size(56, 17);
             End_LB.TabIndex = 58;
@@ -632,7 +635,7 @@
             // 
             // Start_NUM
             // 
-            Start_NUM.Location = new System.Drawing.Point(699, 17);
+            Start_NUM.Location = new System.Drawing.Point(718, 497);
             Start_NUM.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
             Start_NUM.Name = "Start_NUM";
             Start_NUM.Size = new System.Drawing.Size(35, 23);
@@ -641,7 +644,7 @@
             // 
             // End_NUM
             // 
-            End_NUM.Location = new System.Drawing.Point(699, 48);
+            End_NUM.Location = new System.Drawing.Point(718, 528);
             End_NUM.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
             End_NUM.Name = "End_NUM";
             End_NUM.Size = new System.Drawing.Size(35, 23);
@@ -651,7 +654,7 @@
             // Run_LB
             // 
             Run_LB.AutoSize = true;
-            Run_LB.Location = new System.Drawing.Point(540, 84);
+            Run_LB.Location = new System.Drawing.Point(546, 266);
             Run_LB.Name = "Run_LB";
             Run_LB.Size = new System.Drawing.Size(56, 17);
             Run_LB.TabIndex = 61;
@@ -695,11 +698,42 @@
             Tera_LAB.TabIndex = 64;
             Tera_LAB.Text = "钛晶属性";
             // 
+            // PS_Box
+            // 
+            PS_Box.Location = new System.Drawing.Point(546, 35);
+            PS_Box.Multiline = true;
+            PS_Box.Name = "PS_Box";
+            PS_Box.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            PS_Box.Size = new System.Drawing.Size(212, 196);
+            PS_Box.TabIndex = 66;
+            // 
+            // Load_PS_BTN
+            // 
+            Load_PS_BTN.Location = new System.Drawing.Point(578, 237);
+            Load_PS_BTN.Name = "Load_PS_BTN";
+            Load_PS_BTN.Size = new System.Drawing.Size(144, 26);
+            Load_PS_BTN.TabIndex = 67;
+            Load_PS_BTN.Text = "<-从PS导入模板";
+            Load_PS_BTN.UseVisualStyleBackColor = true;
+            Load_PS_BTN.Click += Load_PS_BTN_Click;
+            // 
+            // PS_LB
+            // 
+            PS_LB.AutoSize = true;
+            PS_LB.Location = new System.Drawing.Point(546, 15);
+            PS_LB.Name = "PS_LB";
+            PS_LB.Size = new System.Drawing.Size(53, 17);
+            PS_LB.TabIndex = 68;
+            PS_LB.Text = "PSCode";
+            // 
             // SuperDataBase
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(770, 601);
+            Controls.Add(PS_LB);
+            Controls.Add(Load_PS_BTN);
+            Controls.Add(PS_Box);
             Controls.Add(Tera_CB);
             Controls.Add(Tera_LAB);
             Controls.Add(SNA_CB);
@@ -848,5 +882,8 @@
         private System.Windows.Forms.Label SNL;
         private System.Windows.Forms.ComboBox Tera_CB;
         private System.Windows.Forms.Label Tera_LAB;
+        private System.Windows.Forms.TextBox PS_Box;
+        private System.Windows.Forms.Button Load_PS_BTN;
+        private System.Windows.Forms.Label PS_LB;
     }
 }
