@@ -14,6 +14,7 @@ using System.Net;
 using System.Net.Http;
 using iText.IO.Image;
 using System.Drawing;
+using static WangPluginPkm.GUI.EggGeneratorUI;
 
 namespace WangPluginPkm.GUI
 {
@@ -25,18 +26,25 @@ namespace WangPluginPkm.GUI
 
         private static List<litePK> lp = new List<litePK>();
 
+        private List<string> EditType = new List<string>();
+
+
+
         public SuperDataBase(ISaveFileProvider sav, IPKMView editor)
         {
+
             InitializeComponent();
-            BindingData();
             SAV = sav;
             Editor = editor;
+            BindingData();
+
         }
         public enum Filter
         {
             种类,
             文件名
         }
+
         private void BindingData()
         {
             var MOV1 = GameStringsZh.Move.ToArray();
@@ -51,6 +59,26 @@ namespace WangPluginPkm.GUI
             SP_CB.AutoCompleteCustomSource = auto(GameStringsZh.Species.ToArray());
             NA_CB.DataSource = GameStringsZh.Natures;
             NA_CB.AutoCompleteCustomSource = auto(GameStringsZh.Natures.ToArray());
+            if (SAV.SAV.Generation >= 8)
+            {
+                SNA_CB.Enabled = true;
+                SNA_CB.DataSource = GameStringsZh.Natures.ToArray();
+            }
+            else
+            {
+                SNA_CB.Enabled = false;
+                SNA_CB.DataSource = GameStringsZh.Natures.ToArray();
+            }
+            if (SAV.SAV.Generation == 9)
+            {
+                Tera_CB.Enabled = true;
+                Tera_CB.DataSource = GameStringsZh.Types.ToArray();
+            }
+            else
+            {
+                Tera_CB.Enabled = false;
+                Tera_CB.DataSource = GameStringsZh.Types.ToArray();
+            }
             MOV1_CB.DataSource = MOV1;
             MOV1_CB.AutoCompleteCustomSource = auto(MOV1);
             MOV2_CB.DataSource = MOV2;
@@ -75,6 +103,36 @@ namespace WangPluginPkm.GUI
             BA_CB.AutoCompleteCustomSource = auto(GameStringsZh.balllist.ToArray());
             LA_CB.DataSource = Enum.GetNames(typeof(LanguageID));
             Filter_CB.DataSource = Enum.GetValues(typeof(Filter));
+            EditType.Add("性格");
+            EditType.Add("特性");
+            EditType.Add("持有物");
+            EditType.Add("球种");
+            EditType.Add("语言");
+            EditType.Add("形态");
+            EditType.Add("个体值");
+            EditType.Add("努力值");
+            EditType.Add("技能");
+            EditType.Add("遗传技能");
+            EditType.Add("等级");
+            switch (SAV.SAV.Generation)
+            {
+                case 8:
+                    EditType.Add("薄荷性格");
+                    break;
+                case 9:
+                    EditType.Add("薄荷性格"); ;
+                    EditType.Add("太晶属性"); ;
+                    break;
+                default:
+                    break;
+            }
+            RunFilter_CLB.DataSource = EditType;
+            for (int i = 0; i < RunFilter_CLB.Items.Count; i++)
+            {
+                RunFilter_CLB.SetItemChecked(i, true);
+            }
+
+
         }
 
         private void import_editor_BTN_Click(object sender, EventArgs e)
@@ -97,6 +155,18 @@ namespace WangPluginPkm.GUI
             REM4_CB.SelectedIndex = Editor.Data.RelearnMove4;
             IV_TB.Text = $"{Editor.Data.IV_HP}/{Editor.Data.IV_ATK}/{Editor.Data.IV_DEF}/{Editor.Data.IV_SPA}/{Editor.Data.IV_SPD}/{Editor.Data.IV_SPE}";
             EV_TB.Text = $"{Editor.Data.EV_HP}/{Editor.Data.EV_ATK}/{Editor.Data.EV_DEF}/{Editor.Data.EV_SPA}/{Editor.Data.EV_SPD}/{Editor.Data.EV_SPE}";
+            switch (SAV.SAV.Generation)
+            {
+                case 8:
+                    SNA_CB.SelectedIndex = ((PK8)Editor.Data).StatNature;
+                    break;
+                case 9:
+                    SNA_CB.SelectedIndex = ((PK9)Editor.Data).StatNature;
+                    Tera_CB.SelectedIndex = (int)((PK9)Editor.Data).TeraType;
+                    break;
+                default:
+                    break;
+            }
             this.Lp_LIST.DisplayMember = "Name";
             Level_NUM.Value = Editor.Data.CurrentLevel;
             MessageBox.Show("导入了面板！");
@@ -225,8 +295,21 @@ namespace WangPluginPkm.GUI
                 RelearnMove4 = REM4_CB.SelectedIndex,
                 IVS = ivs,
                 EVS = evs,
-                CurrentLevel=(int)Level_NUM.Value
+                CurrentLevel = (int)Level_NUM.Value
+
             };
+            switch (SAV.SAV.Generation)
+            {
+                case 8:
+                    lp.StatNature = SNA_CB.SelectedIndex;
+                    break;
+                case 9:
+                    lp.StatNature = SNA_CB.SelectedIndex;
+                    lp.TeraType = Tera_CB.SelectedIndex;
+                    break;
+                default:
+                    break;
+            }
 
             return lp;
         }
@@ -235,7 +318,7 @@ namespace WangPluginPkm.GUI
             List<litePK> lt = new();
             int[] mov = new int[4];
             int[] remov = new int[4];
-
+            var STarray = "";
             var ss = s.Split("#");
             for (int j = 0; j < ss.Length - 1; j++)
             {
@@ -257,7 +340,24 @@ namespace WangPluginPkm.GUI
                 lp.Language = Int32.Parse(baselps[6]);
                 lp.Form = Int32.Parse(baselps[7]);
                 lp.AbilityNumber = Int32.Parse(baselps[8]);
-                if (baselps.Length<10)
+                if (lpsarray.Length > 5)
+                {
+                    STarray = lpsarray[5];
+                    var st = STarray.Split(',');
+                    switch (SAV.SAV.Generation)
+                    {
+                        case 8:
+                            lp.StatNature = Int32.Parse(st[0]);
+                            break;
+                        case 9:
+                            lp.StatNature = Int32.Parse(st[0]);
+                            lp.TeraType = Int32.Parse(st[1]);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                if (baselps.Length < 10)
                     lp.CurrentLevel = 1;
                 else
                 {
@@ -327,6 +427,18 @@ namespace WangPluginPkm.GUI
                 IV_TB.Text = $"{((litePK)lp).IVS[0]}/{((litePK)lp).IVS[1]}/{((litePK)lp).IVS[2]}/{((litePK)lp).IVS[3]}/{((litePK)lp).IVS[4]}/{((litePK)lp).IVS[5]}";
                 EV_TB.Text = $"{((litePK)lp).EVS[0]}/{((litePK)lp).EVS[1]}/{((litePK)lp).EVS[2]}/{((litePK)lp).EVS[3]}/{((litePK)lp).EVS[4]}/{((litePK)lp).EVS[5]}";
                 Level_NUM.Value = ((litePK)lp).CurrentLevel;
+                switch (SAV.SAV.Generation)
+                {
+                    case 8:
+                        SNA_CB.SelectedIndex = ((litePK)lp).StatNature;
+                        break;
+                    case 9:
+                        SNA_CB.SelectedIndex = ((litePK)lp).StatNature;
+                        Tera_CB.SelectedIndex = ((litePK)lp).TeraType;
+                        break;
+                    default:
+                        break;
+                }
                 string baseuri = "https://raw.githubusercontent.com/8CBCA403/pokepic/main/Normal/poke_capture_" + $"{((litePK)lp).Species.ToString().PadLeft(4, '0')}" + "_000_00000000_f_n.png";
                 try
                 {
@@ -371,12 +483,13 @@ namespace WangPluginPkm.GUI
 
         private void RUN_BTN_Click(object sender, EventArgs e)
         {
-            SAV.SAV.ModifyBoxes(mod, (int)StartBox_NUM.Value, (int)EndBox_NUM.Value);
+            ModifyBoxes(mod, SAV.SAV.Generation, (int)StartBox_NUM.Value - 1, (int)Start_NUM.Value - 1, (int)EndBox_NUM.Value - 1, (int)End_NUM.Value - 1);
             SAV.ReloadSlots();
             MessageBox.Show("覆写完成！");
         }
         private void mod(PKM pk)
         {
+
             List<litePK> litePKs = new List<litePK>();
             foreach (var pl in Lp_LIST.CheckedItems)
             {
@@ -387,35 +500,102 @@ namespace WangPluginPkm.GUI
             {
                 if (pk.Species == litePKs[i].Species)
                 {
-                    pk.Nature = litePKs[i].Nature;
-                    pk.Ability = litePKs[i].Ability;
-                    pk.AbilityNumber = (int)litePKs[i].AbilityNumber;
-                    pk.HeldItem = litePKs[i].HeldItem;
-                    pk.Ball = litePKs[i].Ball;
-                    pk.Language = litePKs[i].Language;
-                    pk.Form = (byte)litePKs[i].Form;
-                    pk.IV_HP = litePKs[i].IVS[0];
-                    pk.IV_ATK = litePKs[i].IVS[1];
-                    pk.IV_DEF = litePKs[i].IVS[2];
-                    pk.IV_SPA = litePKs[i].IVS[3];
-                    pk.IV_SPD = litePKs[i].IVS[4];
-                    pk.IV_SPE = litePKs[i].IVS[5];
-                    pk.EV_HP = litePKs[i].EVS[0];
-                    pk.EV_ATK = litePKs[i].EVS[1];
-                    pk.EV_DEF = litePKs[i].EVS[2];
-                    pk.EV_SPA = litePKs[i].EVS[3];
-                    pk.EV_SPD = litePKs[i].EVS[4];
-                    pk.EV_SPE = litePKs[i].EVS[5];
-                    pk.Move1 = (ushort)litePKs[i].Move1;
-                    pk.Move2 = (ushort)litePKs[i].Move2;
-                    pk.Move3 = (ushort)litePKs[i].Move3;
-                    pk.Move4 = (ushort)litePKs[i].Move4;
-                    pk.HealPP();
-                    pk.RelearnMove1 = (ushort)litePKs[i].RelearnMove1;
-                    pk.RelearnMove2 = (ushort)litePKs[i].RelearnMove2;
-                    pk.RelearnMove3 = (ushort)litePKs[i].RelearnMove3;
-                    pk.RelearnMove4 = (ushort)litePKs[i].RelearnMove4;
-                    pk.CurrentLevel = litePKs[i].CurrentLevel;
+                    for (int j = 0; j < RunFilter_CLB.Items.Count; j++)
+                    {
+                        if (RunFilter_CLB.GetItemChecked(j))
+                            switch (j)
+                            {
+                                case 0:
+                                    {
+                                        pk.Nature = litePKs[i].Nature;
+                                    }
+                                    break;
+                                case 1:
+                                    {
+                                        pk.Ability = litePKs[i].Ability;
+                                        pk.AbilityNumber = (int)litePKs[i].AbilityNumber;
+                                    }
+                                    break;
+                                case 2:
+                                    {
+                                        pk.HeldItem = litePKs[i].HeldItem;
+                                    }
+                                    break;
+                                case 3:
+                                    {
+                                        pk.Ball = litePKs[i].Ball;
+                                    }
+                                    break;
+                                case 4:
+                                    {
+                                        pk.Language = litePKs[i].Language;
+                                        pk.ClearNickname();
+                                    }
+                                    break;
+                                case 5:
+                                    {
+                                        pk.Form = (byte)litePKs[i].Form;
+                                    }
+                                    break;
+                                case 6:
+                                    {
+                                        pk.IV_HP = litePKs[i].IVS[0];
+                                        pk.IV_ATK = litePKs[i].IVS[1];
+                                        pk.IV_DEF = litePKs[i].IVS[2];
+                                        pk.IV_SPA = litePKs[i].IVS[3];
+                                        pk.IV_SPD = litePKs[i].IVS[4];
+                                        pk.IV_SPE = litePKs[i].IVS[5];
+                                    }
+                                    break;
+                                case 7:
+                                    {
+                                        pk.EV_HP = litePKs[i].EVS[0];
+                                        pk.EV_ATK = litePKs[i].EVS[1];
+                                        pk.EV_DEF = litePKs[i].EVS[2];
+                                        pk.EV_SPA = litePKs[i].EVS[3];
+                                        pk.EV_SPD = litePKs[i].EVS[4];
+                                        pk.EV_SPE = litePKs[i].EVS[5];
+                                    }
+                                    break;
+                                case 8:
+                                    {
+                                        pk.Move1 = (ushort)litePKs[i].Move1;
+                                        pk.Move2 = (ushort)litePKs[i].Move2;
+                                        pk.Move3 = (ushort)litePKs[i].Move3;
+                                        pk.Move4 = (ushort)litePKs[i].Move4;
+                                        pk.HealPP();
+                                    }
+                                    break;
+                                case 9:
+                                    {
+                                        pk.RelearnMove1 = (ushort)litePKs[i].RelearnMove1;
+                                        pk.RelearnMove2 = (ushort)litePKs[i].RelearnMove2;
+                                        pk.RelearnMove3 = (ushort)litePKs[i].RelearnMove3;
+                                        pk.RelearnMove4 = (ushort)litePKs[i].RelearnMove4;
+                                    }
+                                    break;
+                                case 10:
+                                    {
+                                        pk.CurrentLevel = litePKs[i].CurrentLevel;
+
+                                    }
+                                    break;
+                                case 11:
+                                    {
+
+                                        pk.StatNature = litePKs[i].StatNature;
+                                    }
+                                    break;
+                                case 12:
+                                    {
+                                        ((PK9)pk).TeraTypeOverride = (MoveType)litePKs[i].TeraType;
+                                    }
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                    }
                 }
 
             }
@@ -500,7 +680,20 @@ namespace WangPluginPkm.GUI
             pk.IVS = ivs;
             pk.EVS = evs;
             pk.CurrentLevel = (int)Level_NUM.Value;
+            switch (SAV.SAV.Generation)
+            {
+                case 8:
+                    pk.StatNature = SNA_CB.SelectedIndex;
+                    break;
+                case 9:
+                    pk.StatNature = SNA_CB.SelectedIndex;
+                    pk.TeraType = Tera_CB.SelectedIndex;
+                    break;
+                default:
+                    break;
+            }
             Lp_LIST.SetItemChecked(index, true);
+            MessageBox.Show("修改完成！");
         }
         private void FilterItemsByProperty(string name, object value)
         {
@@ -542,6 +735,61 @@ namespace WangPluginPkm.GUI
                 Lp_LIST.Items.Add(lp[i], true);
             }
             Lp_LIST.Refresh();
+        }
+        public int ModifyBoxes(Action<PKM> action, int gen, int BoxStart = 0, int slotStart = 0, int BoxEnd = -1, int slotEnd = -1)
+        {
+            if ((uint)BoxEnd >= SAV.SAV.BoxCount)
+            {
+                BoxEnd = SAV.SAV.BoxCount - 1;
+            }
+
+            Span<byte> boxBuffer = GetInfo(gen);
+            int num = 0;
+            for (int i = BoxStart; i <= BoxEnd; i++)
+            {
+                for (int j = slotStart; j < slotEnd; j++)
+                {
+                    if (!SAV.SAV.IsSlotOverwriteProtected(i, j))
+                    {
+                        int boxSlotOffset = SAV.SAV.GetBoxSlotOffset(i, j);
+                        int num2 = boxSlotOffset;
+                        Span<byte> span = boxBuffer.Slice(num2, boxBuffer.Length - num2);
+                        if (SAV.SAV.IsPKMPresent(span))
+                        {
+                            PKM boxSlotAtIndex = SAV.SAV.GetBoxSlotAtIndex(i, j);
+                            action(boxSlotAtIndex);
+                            num++;
+                            SAV.SAV.SetBoxSlot(boxSlotAtIndex, span, PKMImportSetting.Skip, PKMImportSetting.Skip);
+                        }
+                    }
+                }
+            }
+
+            return num;
+        }
+        public Span<byte> GetInfo(int gen)
+        {
+            Span<byte> boxbuffer = SAV.SAV.Data;
+            switch (gen)
+            {
+                case 3:
+                    boxbuffer = ((SAV3)SAV.SAV).Storage;
+                    break;
+                case 4:
+                    boxbuffer = ((SAV4)SAV.SAV).Storage;
+                    break;
+                case 8:
+                    boxbuffer = ((SAV8SWSH)SAV.SAV).BoxInfo.Data;
+                    if (SAV.SAV.Version == GameVersion.PLA)
+                        boxbuffer = ((SAV8LA)SAV.SAV).BoxInfo.Data;
+                    break;
+                case 9:
+                    boxbuffer = ((SAV9SV)SAV.SAV).BoxInfo.Data;
+                    break;
+                default:
+                    break;
+            }
+            return boxbuffer;
         }
     }
 }
