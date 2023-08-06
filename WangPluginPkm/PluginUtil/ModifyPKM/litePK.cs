@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace WangPluginPkm.PluginUtil.ModifyPKM
 {
     [Serializable]
-    public   class litePK
+    public class litePK
     {
         public  string Name { get; set; }
         public int Species { get; set; }

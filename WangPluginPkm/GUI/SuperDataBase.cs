@@ -286,7 +286,6 @@ namespace WangPluginPkm.GUI
                 IVS = ivs,
                 EVS = evs,
                 CurrentLevel = (int)Level_NUM.Value
-
             };
             switch (SAV.SAV.Generation)
             {
@@ -488,7 +487,7 @@ namespace WangPluginPkm.GUI
             }
             for (int i = 0; i < litePKs.Count; i++)
             {
-                if (pk.Species == litePKs[i].Species)
+                if (pk.Species == litePKs[i].Species && pk.Form == litePKs[i].Form)
                 {
                     for (int j = 0; j < RunFilter_CLB.Items.Count; j++)
                     {
@@ -817,7 +816,6 @@ namespace WangPluginPkm.GUI
             }
             else
             {
-                Lp_LIST.Items.Clear();
                 var lpo = ImportToExisting(SAV.SAV, sets);
                 foreach (var lp in lpo)
                 {
