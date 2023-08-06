@@ -736,7 +736,7 @@ namespace WangPluginPkm.GUI
             int num = 0;
             for (int i = BoxStart; i <= BoxEnd; i++)
             {
-                for (int j = slotStart; j < slotEnd; j++)
+                for (int j = slotStart; j <= slotEnd; j++)
                 {
                     if (!SAV.SAV.IsSlotOverwriteProtected(i, j))
                     {
