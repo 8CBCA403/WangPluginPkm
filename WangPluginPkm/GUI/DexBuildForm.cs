@@ -195,18 +195,22 @@ namespace WangPluginPkm.GUI
             var Name = OT_Name.Text;
             if (VersionFlag.ID7Flag(SAV.SAV.Version))
                 pkm.Language = GetLanguageBox7(type7);
+            
             else
                 pkm.Language = GetLanguageBox5(type5);
             pkm.OT_Name = Name;
+            pkm.ClearNickname();
             if (VersionFlag.ID7Flag(SAV.SAV.Version))
             {
                 pkm.TrainerTID7 = TID16;
                 pkm.TrainerSID7 = SID16;
+                pkm.ClearNickname();
             }
             else
             {
                 pkm.TID16 = (ushort)TID16;
                 pkm.SID16 = (ushort)SID16;
+                pkm.ClearNickname();
 
             }
             var la = new LegalityAnalysis(pkm);
@@ -217,9 +221,10 @@ namespace WangPluginPkm.GUI
             }
             else
             {
-                pkm.TID16=T;
+               pkm.TID16=T;
                pkm.SID16=S;
                pkm.OT_Name=N;
+               pkm.ClearNickname();
             }
         }
         private void SortByRegionalDex(Func<PKM, IComparable>[] sortFunctions)

@@ -8,31 +8,37 @@ using System.Diagnostics;
 using System.Linq;
 using System.IO;
 using System.Media;
+using System.Net.Http;
+using System.Threading.Tasks;
 using WangPluginPkm.PluginUtil.ModifyPKM;
-using static WangPluginPkm.GUI.EggGeneratorUI;
+using HtmlAgilityPack;
+using System.Data;
+using Newtonsoft.Json;
+using WangPluginPkm.PluginUtil.BattleKingBase;
+
 
 namespace WangPluginPkm.GUI
 {
     partial class BattleKingUI : Form
     {
-
-        //  public string Page;
         public List<ShowdownSet> Sets = new();
         private ISaveFileProvider SAV { get; }
+
         private IPKMView Editor { get; }
         private static List<ExpandPKM> BD = new List<ExpandPKM>();
+        private enum Falinks
+        {
+            VGC,
+            Tournaments
 
+        }
         public BattleKingUI(ISaveFileProvider sav, IPKMView editor)
         {
             InitializeComponent();
+            Web_CB.DataSource = Enum.GetValues(typeof(Falinks));
             SAV = sav;
             Editor = editor;
         }
-
-        //   private static readonly EncounterOrder[] EncounterPriority =
-        //   {
-        //       EncounterOrder.Egg, EncounterOrder.Static, EncounterOrder.Trade, EncounterOrder.Slot, EncounterOrder.Mystery,
-        //    };
         private void IsRunning(bool running)
         {
             ImportPKM_BTN.Enabled = !running;
@@ -69,8 +75,6 @@ namespace WangPluginPkm.GUI
                         return;
                     }
                     Import(info.Sets);
-                    //  var response = $"All sets generated from the following URL: {info.URL}";
-                    // MessageBox.Show(response);
                 }
             MessageBox.Show($"导入了{suburl.Length}个队伍");
         }
@@ -144,7 +148,7 @@ namespace WangPluginPkm.GUI
             }
             else
             {
-                var replace = (Control.ModifierKeys & Keys.Alt) != 0;
+                var replace = (Control.ModifierKeys & System.Windows.Forms.Keys.Alt) != 0;
                 ImportSetsToBoxes(sets, replace);
             }
 
@@ -188,7 +192,6 @@ namespace WangPluginPkm.GUI
             var result = sav.ImportToExisting(sets, BoxData, out var invalid, out var timeout, start, replace);
             Debug.WriteLine("Multi Set Genning Complete. Setting data to the save file and reloading view.");
             SAV.ReloadSlots();
-            // Debug Statements
             timer.Stop();
             var timespan = timer.Elapsed;
             Debug.WriteLine($"Time to complete {nameof(ImportSetsToBoxes)}: {timespan.Minutes:00} minutes {timespan.Seconds:00} seconds {timespan.Milliseconds / 10:00} milliseconds");
@@ -210,12 +213,8 @@ namespace WangPluginPkm.GUI
         }
         private string GetTextShowdownData(string text)
         {
-
-
             if (ShowdownUtil.IsTextShowdownData(text))
                 return text;
-
-
             return null;
         }
         private void GenSmogonSets(PKM rough)
@@ -231,7 +230,7 @@ namespace WangPluginPkm.GUI
                 return null;
             string ext = fi.Extension;
             byte[] input;
-            input = File.ReadAllBytes(path);
+            input = System.IO.File.ReadAllBytes(path);
             FileUtil.TryGetPKM(input, out var pk, ext);
             return pk;
         }
@@ -252,7 +251,7 @@ namespace WangPluginPkm.GUI
             if (!fi.Exists)
                 return;
             byte[] input;
-            input = File.ReadAllBytes(path);
+            input = System.IO.File.ReadAllBytes(path);
 
             if (LoadFile(input, path))
                 return;
@@ -372,6 +371,230 @@ namespace WangPluginPkm.GUI
                 ResultBox.AppendText("队伍中宝可梦等级合法!" + Environment.NewLine);
         }
 
+        private async void MT_BTN_Click(object sender, EventArgs e)
+        {
+            switch (Web_CB.SelectedIndex)
+            {
+                case 0:
+                    {
+                        await NewVGCGet();
+                    }
+                    break;
+                case 1:
+                    {
+                        await NewTournamentsGet();
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
+        public async Task NewVGCGet()
+        {
+            TeamForm fr = new(Web_CB.SelectedIndex);
+            HttpClient client = new HttpClient();
+            string jsonContent;
+            MT_BTN.Enabled = false;
+            fr.Import_BTN.Enabled = false;
+            HttpResponseMessage response = await client.GetAsync(ImportURL_text.Text);
+            string responseBody = await response.Content.ReadAsStringAsync();
+            var r = (BFuction.GetString(responseBody, "_buildManifest.js", "_ssgManifest.js"));
+            var jsUrl = ImportURL_text.Text + "/_next/data/" + r + "/en/pastes/vgc/" + CB.SelectedValue + ".json";
+            response = await client.GetAsync(jsUrl);
+            jsonContent = await response.Content.ReadAsStringAsync();
+            var data = JsonConvert.DeserializeObject<RootObject>(jsonContent);
+            Stopwatch st = new Stopwatch();
+            st.Start();
+            try
+            {
+                if (data != null)
+                {
+                    int n = data.PageProps.Pastes.Count;
+                    for (int i = 0; i < n; i++)
+                    {
+                        var item = data.PageProps.Pastes[i];
+                        var link = ImportURL_text.Text + "/pastes/" + item.Id;
+                        response = await client.GetAsync(link);
+                        var content = await response.Content.ReadAsStringAsync();
+                        HtmlAgilityPack.HtmlDocument docl = new HtmlAgilityPack.HtmlDocument();
+                        docl.LoadHtml(content);
+                        HtmlNode targetNode = docl.DocumentNode.SelectSingleNode("//pre[contains(@class, 'ml-5') and contains(@class, 'w-4/5') and contains(@class, 'whitespace-pre-wrap')]");
+                        if (targetNode != null)
+                        {
+                            string textContent = targetNode.InnerText;
+                            data.PageProps.Pastes[i].PS = textContent;
+                        }
+                        fr.TeamListBox.Items.Add(data.PageProps.Pastes[i]);
+                        fr.TeamListBox.DisplayMember = "Title";
+                        fr.TeamListBox.Refresh();
+                        fr.Show();
+                    }
+                }
+                MT_BTN.Enabled = true;
+                fr.Import_BTN.Enabled = true;
+                st.Stop();
+                MessageBox.Show($"经过时间{st.ElapsedMilliseconds / 1000}秒");
+            }
+
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+
+            }
+            finally
+            {
+                client.Dispose();
+
+            }
+
+        }
+        public async Task NewTournamentsGet()
+        {
+            TeamForm fr = new(Web_CB.SelectedIndex);
+
+            HttpClient client = new HttpClient();
+            MT_BTN.Enabled = false;
+            fr.Import_BTN.Enabled = false;
+            HttpResponseMessage response = await client.GetAsync(ImportURL_text.Text);
+            string responseBody = await response.Content.ReadAsStringAsync();
+            var r = (BFuction.GetString(responseBody, "_buildManifest.js", "_ssgManifest.js"));
+            Stopwatch st = new Stopwatch();
+            st.Start();
+            try
+            {
+                await SubTournamentsGet(r, fr);
+                MT_BTN.Enabled = true;
+                fr.Import_BTN.Enabled = true;
+                st.Stop();
+                MessageBox.Show($"经过时间{st.ElapsedMilliseconds / 1000}秒");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                client.Dispose();
+            }
+
+        }
+        public async Task SubTournamentsGet(string r, TeamForm fr)
+        {
+            int n;
+            string jsonContent;
+            HttpResponseMessage response;
+            HttpClient client = new HttpClient();
+            var jsUrl = ImportURL_text.Text + "/_next/data/" + r + "/en/tournaments/" + CB.SelectedValue + ".json";
+            response = await client.GetAsync(jsUrl);
+            jsonContent = await response.Content.ReadAsStringAsync();
+            var re = BFuction.DeleStringEnd(jsonContent, ",\"_nextI18Next\"");
+            var res = BFuction.DeleStringStart(re, "Teams\":");
+            var data = JsonConvert.DeserializeObject<List<TournamentSub>>(res);
+            if (data != null)
+            {
+                n = data.Count;
+                for (int i = 0; i < n; i++)
+                {
+                    fr.TeamListBox.Items.Add(data[i]);
+                    fr.TeamListBox.DisplayMember = "Author";
+                    fr.TeamListBox.Refresh();
+                    fr.Show();
+                }
+            }
+        }
+        public async Task Selectc()
+        {
+            switch (Web_CB.SelectedIndex)
+            {
+                case 0:
+                    {
+                        List<string> st = new();
+                        string targetClass = "select-bordered select select-sm w-64 overflow-ellipsis";
+                        HttpClient httpClient = new HttpClient();
+                        try
+                        {
+                            string htmlContent = await httpClient.GetStringAsync(ImportURL_text.Text + "/zh-Hans/pastes/vgc/" + CB.SelectedValue);
+                            HtmlAgilityPack.HtmlDocument htmlDocument = new HtmlAgilityPack.HtmlDocument();
+                            htmlDocument.LoadHtml(htmlContent);
+                            HtmlNodeCollection selectElements = htmlDocument.DocumentNode.SelectNodes($"//select[contains(@class, '{targetClass}')]");
+                            if (selectElements != null)
+                            {
+                                foreach (HtmlNode selectElement in selectElements)
+                                {
+                                    HtmlNodeCollection optionElements = selectElement.SelectNodes("option");
+                                    foreach (HtmlNode option in optionElements)
+                                    {
+                                        string optionValue = option.GetAttributeValue("value", "");
+                                        st.Add(optionValue);
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("出错了！可能是输入了错误的网址，获得正确网址请联系老吴" + Environment.NewLine + ex.Message);
+                        }
+                        finally
+                        {
+                            httpClient.Dispose();
+                        }
+                        CB.DataSource = st;
+                    }
+                    break;
+                case 1:
+                    {
+                        List<Tournament> st = new();
+                        HttpClient client = new HttpClient();
+                        List<Tournament> data;
+                        string jsonContent;
+                        HttpResponseMessage response = await client.GetAsync(ImportURL_text.Text);
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        var r = (BFuction.GetString(responseBody, "_buildManifest.js", "_ssgManifest.js"));
+                        var jsUrl = ImportURL_text.Text + "/_next/data/" + r + "/en/tournaments" + ".json";
+                        response = await client.GetAsync(jsUrl);
+                        jsonContent = await response.Content.ReadAsStringAsync();
+                        var re = BFuction.DeleStringEnd(jsonContent, ",\"_nextI18Next\"");
+                        re = re.Replace("{\"pageProps\":{\"tournaments\":", "");
+#pragma warning disable CS8600 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                        data = JsonConvert.DeserializeObject<List<Tournament>>(re);
+#pragma warning restore CS8600 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                        try
+                        {
+                            if (data != null)
+                            {
+                                int n = data.Count;
+                                for (int i = 0; i < n; i++)
+                                {
+                                    st.Add(data[i]);
+                                }
+                            }
+                            CB.DataSource = st;
+                            CB.ValueMember = "Id";
+                            CB.DisplayMember = "Name";
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: " + ex.Message);
+                        }
+                        finally
+                        {
+                            client.Dispose();
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        private async void C_BTN_Click(object sender, EventArgs e)
+        {
+            await Selectc();
+            MessageBox.Show("导入了网页！");
+        }
 
     }
 }
+
