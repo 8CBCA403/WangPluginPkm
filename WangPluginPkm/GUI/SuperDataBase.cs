@@ -472,7 +472,7 @@ namespace WangPluginPkm.GUI
 
         private void RUN_BTN_Click(object sender, EventArgs e)
         {
-            ModifyBoxes(mod, SAV.SAV.Generation, (int)StartBox_NUM.Value - 1, (int)Start_NUM.Value - 1, (int)EndBox_NUM.Value - 1, (int)End_NUM.Value - 1);
+            ModifyBoxes(mod, SAV.SAV.Generation, (int)StartBox_NUM.Value - 1, (int)Start_NUM.Value - 1, (int)EndBox_NUM.Value - 1, (int)End_NUM.Value-1 );
             SAV.ReloadSlots();
             MessageBox.Show("覆写完成！");
         }
@@ -736,7 +736,7 @@ namespace WangPluginPkm.GUI
             int num = 0;
             for (int i = BoxStart; i <= BoxEnd; i++)
             {
-                for (int j = slotStart; j < slotEnd; j++)
+                for (int j = slotStart; j <= slotEnd; j++)
                 {
                     if (!SAV.SAV.IsSlotOverwriteProtected(i, j))
                     {

@@ -23,16 +23,26 @@ namespace WangPluginPkm.GUI
             BattleKingtabControl = new TabControl();
             PStabPage = new TabPage();
             WebtabPage = new TabPage();
-            SmogontabPage = new TabPage();
+            STtabPage = new TabPage();
+            Test_TB = new TextBox();
+            MT_Box = new GroupBox();
+            Web_CB = new ComboBox();
+            ImportURL_text = new TextBox();
+            C_BTN = new Button();
+            MT_BTN = new Button();
+            CB = new ComboBox();
+            SmogonGroup = new GroupBox();
             VGC_Check = new TabPage();
-            textBox1 = new TextBox();
+            Helper_TB = new TextBox();
             ResultBox = new TextBox();
             TEST_BTN = new Button();
             TeamList_BOX = new CheckedListBox();
             BattleKingtabControl.SuspendLayout();
             PStabPage.SuspendLayout();
             WebtabPage.SuspendLayout();
-            SmogontabPage.SuspendLayout();
+            STtabPage.SuspendLayout();
+            MT_Box.SuspendLayout();
+            SmogonGroup.SuspendLayout();
             VGC_Check.SuspendLayout();
             SuspendLayout();
             // 
@@ -77,9 +87,9 @@ namespace WangPluginPkm.GUI
             // ImportPKM_BTN
             // 
             ImportPKM_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            ImportPKM_BTN.Location = new System.Drawing.Point(161, 150);
+            ImportPKM_BTN.Location = new System.Drawing.Point(6, 53);
             ImportPKM_BTN.Name = "ImportPKM_BTN";
-            ImportPKM_BTN.Size = new System.Drawing.Size(206, 30);
+            ImportPKM_BTN.Size = new System.Drawing.Size(170, 24);
             ImportPKM_BTN.TabIndex = 5;
             ImportPKM_BTN.TabStop = false;
             ImportPKM_BTN.Text = "从文件导入smogon策略";
@@ -88,18 +98,18 @@ namespace WangPluginPkm.GUI
             // 
             // ConditionBox
             // 
-            ConditionBox.Location = new System.Drawing.Point(161, 107);
+            ConditionBox.Location = new System.Drawing.Point(6, 20);
             ConditionBox.Name = "ConditionBox";
-            ConditionBox.Size = new System.Drawing.Size(206, 21);
+            ConditionBox.Size = new System.Drawing.Size(171, 21);
             ConditionBox.TabIndex = 6;
             ConditionBox.Text = "Nothing to check";
             // 
             // ClearAllBox_BTN
             // 
             ClearAllBox_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            ClearAllBox_BTN.Location = new System.Drawing.Point(161, 196);
+            ClearAllBox_BTN.Location = new System.Drawing.Point(6, 87);
             ClearAllBox_BTN.Name = "ClearAllBox_BTN";
-            ClearAllBox_BTN.Size = new System.Drawing.Size(206, 29);
+            ClearAllBox_BTN.Size = new System.Drawing.Size(170, 24);
             ClearAllBox_BTN.TabIndex = 7;
             ClearAllBox_BTN.Text = "清除全部盒子";
             ClearAllBox_BTN.UseVisualStyleBackColor = true;
@@ -119,7 +129,7 @@ namespace WangPluginPkm.GUI
             // 
             BattleKingtabControl.Controls.Add(PStabPage);
             BattleKingtabControl.Controls.Add(WebtabPage);
-            BattleKingtabControl.Controls.Add(SmogontabPage);
+            BattleKingtabControl.Controls.Add(STtabPage);
             BattleKingtabControl.Controls.Add(VGC_Check);
             BattleKingtabControl.Location = new System.Drawing.Point(12, 12);
             BattleKingtabControl.Name = "BattleKingtabControl";
@@ -152,23 +162,103 @@ namespace WangPluginPkm.GUI
             WebtabPage.TabIndex = 1;
             WebtabPage.Text = "网址模式";
             // 
-            // SmogontabPage
+            // STtabPage
             // 
-            SmogontabPage.BackColor = System.Drawing.Color.WhiteSmoke;
-            SmogontabPage.Controls.Add(ConditionBox);
-            SmogontabPage.Controls.Add(ClearAllBox_BTN);
-            SmogontabPage.Controls.Add(ImportPKM_BTN);
-            SmogontabPage.Location = new System.Drawing.Point(4, 26);
-            SmogontabPage.Name = "SmogontabPage";
-            SmogontabPage.Padding = new Padding(3);
-            SmogontabPage.Size = new System.Drawing.Size(528, 347);
-            SmogontabPage.TabIndex = 2;
-            SmogontabPage.Text = "Smogon策略模式";
+            STtabPage.BackColor = System.Drawing.Color.WhiteSmoke;
+            STtabPage.Controls.Add(Test_TB);
+            STtabPage.Controls.Add(MT_Box);
+            STtabPage.Controls.Add(SmogonGroup);
+            STtabPage.Location = new System.Drawing.Point(4, 22);
+            STtabPage.Name = "STtabPage";
+            STtabPage.Padding = new Padding(3);
+            STtabPage.Size = new System.Drawing.Size(528, 351);
+            STtabPage.TabIndex = 2;
+            STtabPage.Text = "策略爬取";
+            // 
+            // Test_TB
+            // 
+            Test_TB.Location = new System.Drawing.Point(199, 137);
+            Test_TB.Multiline = true;
+            Test_TB.Name = "Test_TB";
+            Test_TB.ScrollBars = ScrollBars.Vertical;
+            Test_TB.Size = new System.Drawing.Size(323, 208);
+            Test_TB.TabIndex = 15;
+            // 
+            // MT_Box
+            // 
+            MT_Box.Controls.Add(Web_CB);
+            MT_Box.Controls.Add(ImportURL_text);
+            MT_Box.Controls.Add(C_BTN);
+            MT_Box.Controls.Add(MT_BTN);
+            MT_Box.Controls.Add(CB);
+            MT_Box.Location = new System.Drawing.Point(199, 6);
+            MT_Box.Name = "MT_Box";
+            MT_Box.Size = new System.Drawing.Size(323, 125);
+            MT_Box.TabIndex = 9;
+            MT_Box.TabStop = false;
+            MT_Box.Text = "神偷";
+            // 
+            // Web_CB
+            // 
+            Web_CB.FormattingEnabled = true;
+            Web_CB.Location = new System.Drawing.Point(6, 20);
+            Web_CB.Name = "Web_CB";
+            Web_CB.Size = new System.Drawing.Size(85, 20);
+            Web_CB.TabIndex = 14;
+            // 
+            // ImportURL_text
+            // 
+            ImportURL_text.Location = new System.Drawing.Point(97, 20);
+            ImportURL_text.Name = "ImportURL_text";
+            ImportURL_text.Size = new System.Drawing.Size(220, 21);
+            ImportURL_text.TabIndex = 13;
+            // 
+            // C_BTN
+            // 
+            C_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            C_BTN.Location = new System.Drawing.Point(29, 87);
+            C_BTN.Name = "C_BTN";
+            C_BTN.Size = new System.Drawing.Size(134, 24);
+            C_BTN.TabIndex = 11;
+            C_BTN.Text = "同步网页信息";
+            C_BTN.UseVisualStyleBackColor = true;
+            C_BTN.Click += C_BTN_Click;
+            // 
+            // MT_BTN
+            // 
+            MT_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            MT_BTN.Location = new System.Drawing.Point(169, 87);
+            MT_BTN.Name = "MT_BTN";
+            MT_BTN.Size = new System.Drawing.Size(134, 24);
+            MT_BTN.TabIndex = 8;
+            MT_BTN.Text = "开偷！";
+            MT_BTN.UseVisualStyleBackColor = true;
+            MT_BTN.Click += MT_BTN_Click;
+            // 
+            // CB
+            // 
+            CB.FormattingEnabled = true;
+            CB.Location = new System.Drawing.Point(6, 53);
+            CB.Name = "CB";
+            CB.Size = new System.Drawing.Size(311, 20);
+            CB.TabIndex = 12;
+            // 
+            // SmogonGroup
+            // 
+            SmogonGroup.Controls.Add(ConditionBox);
+            SmogonGroup.Controls.Add(ImportPKM_BTN);
+            SmogonGroup.Controls.Add(ClearAllBox_BTN);
+            SmogonGroup.Location = new System.Drawing.Point(6, 6);
+            SmogonGroup.Name = "SmogonGroup";
+            SmogonGroup.Size = new System.Drawing.Size(187, 125);
+            SmogonGroup.TabIndex = 8;
+            SmogonGroup.TabStop = false;
+            SmogonGroup.Text = "Smogon";
             // 
             // VGC_Check
             // 
             VGC_Check.BackColor = System.Drawing.Color.WhiteSmoke;
-            VGC_Check.Controls.Add(textBox1);
+            VGC_Check.Controls.Add(Helper_TB);
             VGC_Check.Controls.Add(ResultBox);
             VGC_Check.Controls.Add(TEST_BTN);
             VGC_Check.Controls.Add(TeamList_BOX);
@@ -179,14 +269,14 @@ namespace WangPluginPkm.GUI
             VGC_Check.TabIndex = 3;
             VGC_Check.Text = "VGC队伍检测";
             // 
-            // textBox1
+            // Helper_TB
             // 
-            textBox1.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            textBox1.Location = new System.Drawing.Point(6, 6);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(192, 21);
-            textBox1.TabIndex = 3;
-            textBox1.Text = "请将有6只精灵的bin文件拖入下方";
+            Helper_TB.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Helper_TB.Location = new System.Drawing.Point(6, 6);
+            Helper_TB.Name = "Helper_TB";
+            Helper_TB.Size = new System.Drawing.Size(192, 21);
+            Helper_TB.TabIndex = 3;
+            Helper_TB.Text = "请将有6只精灵的bin文件拖入下方";
             // 
             // ResultBox
             // 
@@ -223,6 +313,7 @@ namespace WangPluginPkm.GUI
             ClientSize = new System.Drawing.Size(559, 402);
             Controls.Add(BattleKingtabControl);
             Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "BattleKingUI";
@@ -232,8 +323,12 @@ namespace WangPluginPkm.GUI
             PStabPage.ResumeLayout(false);
             PStabPage.PerformLayout();
             WebtabPage.ResumeLayout(false);
-            SmogontabPage.ResumeLayout(false);
-            SmogontabPage.PerformLayout();
+            STtabPage.ResumeLayout(false);
+            STtabPage.PerformLayout();
+            MT_Box.ResumeLayout(false);
+            MT_Box.PerformLayout();
+            SmogonGroup.ResumeLayout(false);
+            SmogonGroup.PerformLayout();
             VGC_Check.ResumeLayout(false);
             VGC_Check.PerformLayout();
             ResumeLayout(false);
@@ -250,11 +345,19 @@ namespace WangPluginPkm.GUI
         private TabControl BattleKingtabControl;
         private TabPage PStabPage;
         private TabPage WebtabPage;
-        private TabPage SmogontabPage;
+        private TabPage STtabPage;
         private TabPage VGC_Check;
         private CheckedListBox TeamList_BOX;
         private Button TEST_BTN;
         private TextBox ResultBox;
-        private TextBox textBox1;
+        private TextBox Helper_TB;
+        private GroupBox MT_Box;
+        private Button MT_BTN;
+        private GroupBox SmogonGroup;
+        private Button C_BTN;
+        private ComboBox CB;
+        private TextBox ImportURL_text;
+        private ComboBox Web_CB;
+        private TextBox Test_TB;
     }
 }
