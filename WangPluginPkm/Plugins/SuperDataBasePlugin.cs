@@ -10,7 +10,7 @@ namespace WangPluginPkm.Plugins
 {
     public class SuperDataBasePlugin : WangPluginPkm
     {
-        public override string Name => "超级数据库";
+        public override string Name => "超级数据库/Super DataBase";
         public override int Priority => 10;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
@@ -20,7 +20,7 @@ namespace WangPluginPkm.Plugins
                 Image = Properties.Resources.dataBase
             };
             ctrl.Click += OpenForm;
-            ctrl.Name = "超级数据库";
+            ctrl.Name = "超级数据库/Super DataBase";
             modmenu.DropDownItems.Add(ctrl);
 
         }

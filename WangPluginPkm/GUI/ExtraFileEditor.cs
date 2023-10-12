@@ -63,11 +63,12 @@ namespace WangPluginPkm.GUI
         {
             byte a = 0;
             byte b = 0;
-            pk.Species = (ushort)SpeciesName.GetSpeciesID(SpeciesBox.Text, 9);
+            SpeciesName.TryGetSpecies(SpeciesBox.Text, 9, out ushort s);
+            pk.Species = s;
             gp.Username1 = OT_Name.Text;
             ushort Move1 = (ushort)Array.IndexOf(GameInfo.Strings.movelist, Move1_TextBox.Text);
             ushort Move2 = (ushort)Array.IndexOf(GameInfo.Strings.movelist, Move2_TextBox.Text);
-          //gp.Username2 = OName.Text;
+            //gp.Username2 = OName.Text;
             gp.Nickname = NickNameBox.Text;
             gp.IV_HP = Convert.ToInt16(HP_TextBox.Text);
             gp.IV_ATK = Convert.ToInt16(Atk_TextBox.Text);
@@ -151,7 +152,7 @@ namespace WangPluginPkm.GUI
         private void CovertToPB7_Click(object sender, EventArgs e)
         {
             PB7 pkm;
-            pkm = gpm.ConvertToPB7(SAV.SAV);
+            pkm = gpm.ConvertToPKM(SAV.SAV);
             Editor.PopulateFields(pkm, false);
             SAV.ReloadSlots();
         }
@@ -251,7 +252,7 @@ namespace WangPluginPkm.GUI
         {
             if (ek1 != null)
             {
-                if (HomeCrypto.GetIsEncrypted(ek1,1))
+                if (HomeCrypto.GetIsEncrypted(ek1, 1))
                     return new PKH(ek1);
             }
             return null;
@@ -271,11 +272,11 @@ namespace WangPluginPkm.GUI
 
             string path = sfd.FileName;
             var data = File.ReadAllBytes(path);
-            
-           var chs= CalculateChecksum(data);
+
+            var chs = CalculateChecksum(data);
             WriteUInt16LittleEndian(data.AsSpan(0x06), chs);
-            var pk=PokeCrypto.EncryptArray8A(data);
-           
+            var pk = PokeCrypto.EncryptArray8A(data);
+
             using var sfds = new SaveFileDialog
             {
                 FileName = "test",

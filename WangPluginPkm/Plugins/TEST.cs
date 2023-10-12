@@ -1,11 +1,11 @@
 ﻿#region
-/*using System;
+using System;
 using System.Windows.Forms;
 using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.Plugins
 {
-    internal class TEST: WangPluginPkm
+    public class TEST: WangPluginPkm
     {
         public override string Name => "Test";
         public override int Priority => 10;
@@ -29,5 +29,5 @@ namespace WangPluginPkm.Plugins
             form.Show();
         }
     }
-}*/
+}
 #endregion

@@ -89,6 +89,7 @@ namespace WangPluginPkm.GUI
                 pkm = enc.ConvertToPKM(SaveFileEditor.SAV, criteria);
                 pk = pkm;
                 pk.IsEgg = true;
+                pk.OT_Name = SaveFileEditor.SAV.OT;
                 pk.DisplayTID = SaveFileEditor.SAV.DisplayTID;
                 pk.DisplaySID = SaveFileEditor.SAV.DisplaySID;
                 pk.OT_Gender = SaveFileEditor.SAV.Gender;
@@ -105,11 +106,21 @@ namespace WangPluginPkm.GUI
                 pk.CurrentHandler = 0;
                 pk.Nature = pko.Nature;
                 pk.IVs = pko.IVs;
-                if (pk.Gen2 == true)
+                if (pk.Generation == 2)
                 {
+                    ((PK2)pk).OT_Name = "1";
+                    pk.Met_Level = 1;
+                    ((PK2)pk).Met_TimeOfDay = 1;
+                    
                     if (pko.IsShiny == true)
                         pk.SetShiny();
-                    pk.Nickname = "EGG";
+                    pk.IsNicknamed = true;
+                    if(pk.Language==1)
+                    {
+                       
+
+                    }
+                    pk.Nickname = SpeciesName.GetEggName(pk.Language, pk.Format); 
                     pk.Met_Location = 0;
                 }
                 else if (pk.Gen3 == true)
@@ -174,6 +185,7 @@ namespace WangPluginPkm.GUI
                 }
                 else if (pk.Gen6 == true)
                 {
+
                     pk.Ability = pko.Ability;
                     pk.OT_Name = SaveFileEditor.SAV.OT;
                     pk.Language = pko.Language;
@@ -188,6 +200,12 @@ namespace WangPluginPkm.GUI
                     {
                         pk.Nickname = "Egg";
                     }
+                    if (pk.Language == 1)
+                    {
+                        pk.Nickname = "タマゴ";
+                    }
+                     ((PK6)pk).FixMemories();
+                    ((PK6)pk).RefreshAbility(pk.AbilityNumber);
                     pk.Egg_Location = 60002;
                     pk.Met_Location = 0;
                 }
@@ -211,6 +229,10 @@ namespace WangPluginPkm.GUI
                     if (pk.Language == 2)
                     {
                         pk.Nickname = "Egg";
+                    }
+                    if (pk.Language == 1)
+                    {
+                        pk.Nickname = "タマゴ";
                     }
                     pk.Egg_Location = 60002;
                     pk.Met_Location = 0;
@@ -237,6 +259,10 @@ namespace WangPluginPkm.GUI
                     {
                         pk.Nickname = "Egg";
                     }
+                    if (pk.Language == 1)
+                    {
+                        pk.Nickname = "タマゴ";
+                    }
                     pk.Egg_Location = 60002;
                     if (pk.Version == 49 || pk.Version == 48)
                     {
@@ -258,6 +284,10 @@ namespace WangPluginPkm.GUI
                     if (pk.Language == 2)
                     {
                         pk.Nickname = "Egg";
+                    }
+                    if (pk.Language == 1)
+                    {
+                        pk.Nickname = "タマゴ";
                     }
                     pk.Version = 0;
                     pk.Met_Location = 0;

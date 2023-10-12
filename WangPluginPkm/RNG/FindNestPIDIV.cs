@@ -11,7 +11,7 @@ namespace WangPluginPkm
             if (enc is EncounterStatic8N or EncounterStatic8NC or EncounterStatic8ND or EncounterStatic8U)
             {
 
-                var e = (EncounterStatic)enc;
+                var e = enc;
                 var isShiny = pk.IsShiny;
                 if (pk.AbilityNumber == 4 && e.Ability is AbilityPermission.Any12 or AbilityPermission.OnlyFirst or AbilityPermission.OnlySecond)
                     return;
@@ -35,10 +35,10 @@ namespace WangPluginPkm
            
             if (shiny && enc is not EncounterStatic8U)
                 return;
-
-            if (pk.Species == (int)Species.Toxtricity && pk.Form != EvolutionMethod.GetAmpLowKeyResult(pk.Nature))
+            // pk.Form != EvolutionMethod.GetAmpLowKeyResult(pk.Nature)
+            if (pk.Species == (int)Species.Toxtricity )
             {
-                enc.ApplyDetailsTo(pk, GetRandomULong());
+              //  enc.ConvertToPKM(enc.Context);
                 pk.RefreshAbility(iterPKM.AbilityNumber >> 1);
                 pk.StatNature = iterPKM.StatNature;
                 return;
@@ -48,7 +48,7 @@ namespace WangPluginPkm
             do
             {
                 ulong seed = GetRandomULong();
-                enc.ApplyDetailsTo(pk, seed);
+              //  enc.ApplyDetailsTo(pk, seed);
                 if (IsMatchCriteria<T>(pk, iterPKM))
                     break;
             } while (++count < 10_000);

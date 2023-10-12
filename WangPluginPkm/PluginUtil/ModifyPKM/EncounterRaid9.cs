@@ -233,15 +233,11 @@ namespace WangPluginPkm.PluginUtil.ModifyPKM
                 return Nature.Random;
             else if (Encounter is EncounterMight9 might)
                 return might.Nature;
-            else if (Encounter is EncounterDist9 dist)
-                return dist.Nature;
+            
             else if (Encounter is EncounterRaid9 raid)
                 return raid.Nature;
-            else if (Encounter is PKHeX.Core.EncounterTera9 h_tera)
-                return h_tera.Nature;
-            else if (Encounter is PKHeX.Core.EncounterDist9 h_dist)
-                return h_dist.Nature;
-            else if (Encounter is PKHeX.Core.EncounterMight9 h_might)
+           
+            else if (Encounter is EncounterMight9 h_might)
                 return h_might.Nature;
             else throw new ArgumentOutOfRangeException();
         }
@@ -287,19 +283,19 @@ namespace WangPluginPkm.PluginUtil.ModifyPKM
         private sbyte GetGender()
         {
             if (Encounter is EncounterTera9 tera)
-                return tera.Gender;
+                return (sbyte)tera.Gender;
             else if (Encounter is EncounterMight9 might)
-                return might.Gender;
+                return (sbyte)might.Gender;
             else if (Encounter is EncounterDist9 dist)
-                return dist.Gender;
+                return (sbyte)dist.Gender;
             else if (Encounter is EncounterRaid9 raid)
                 return raid.Gender;
             else if (Encounter is PKHeX.Core.EncounterTera9 h_tera)
-                return h_tera.Gender;
+                return (sbyte)h_tera.Gender;
             else if (Encounter is PKHeX.Core.EncounterDist9 h_dist)
-                return h_dist.Gender;
+                return (sbyte)h_dist.Gender;
             else if (Encounter is PKHeX.Core.EncounterMight9 h_might)
-                return h_might.Gender;
+                return (sbyte)h_might.Gender;
             else throw new ArgumentOutOfRangeException();
         }
 
