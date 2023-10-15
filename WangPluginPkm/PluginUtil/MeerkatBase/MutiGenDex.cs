@@ -650,7 +650,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             {
                                 PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)265, (int)GameVersion.E);
                                 var val = WurmpleUtil.GetWurmpleEvoVal(PKL[i].EncryptionConstant);
-                                if (val == 1)
+                                if (val == WurmpleEvolution.Cascoon)
                                     break;
                             }
                             PKL[i] = AchieveFunc.evo3(PKL[i]);
@@ -660,7 +660,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             {
                                 PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)265, (int)GameVersion.E);
                                 var val=WurmpleUtil.GetWurmpleEvoVal(PKL[i].EncryptionConstant);
-                                if (val==1)
+                                if (val== WurmpleEvolution.Cascoon)
                                     break;
                             }
                             PKL[i] = AchieveFunc.evo4(PKL[i]);

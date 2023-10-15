@@ -54,7 +54,7 @@ namespace WangPluginPkm.RNG.Methods
                     ivs[i] = xors.NextInt(0, MAX + 1);
             }
 
-            if (!criteria.IsIVsCompatible(ivs, 8))
+            if (!criteria.IsCompatibleIVs(ivs))
                 return false;
 
             pk.IV_HP = ivs[0];

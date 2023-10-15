@@ -12,8 +12,13 @@ namespace WangPluginPkm.GUI
             UsePreSeed = new CheckBox();
             FastCheck_BTN = new Button();
             SearchGroupBox = new GroupBox();
+            CalcBTN = new Button();
             Check_Frame = new CheckBox();
+            label7 = new Label();
+            label6 = new Label();
             TeamLockBox = new CheckBox();
+            IVCheckBox = new TextBox();
+            SeedCheckBox = new TextBox();
             ConditionForm = new WangPluginPkm.PkmCondition();
             MinIV_Box = new ComboBox();
             Gender_Box = new ComboBox();
@@ -43,11 +48,6 @@ namespace WangPluginPkm.GUI
             Mod_ComboBox = new ComboBox();
             RNGFormTabControl = new TabControl();
             ReverseSeedPage = new TabPage();
-            CalcBTN = new Button();
-            label7 = new Label();
-            label6 = new Label();
-            IVCheckBox = new TextBox();
-            SeedCheckBox = new TextBox();
             SWSHPage = new TabPage();
             Seed_Label = new Label();
             SlowCheck = new Button();
@@ -82,6 +82,39 @@ namespace WangPluginPkm.GUI
             lblEC = new Label();
             RNGmenuStrip = new MenuStrip();
             ToolStripMenuItem = new ToolStripMenuItem();
+            Check_Tab = new TabControl();
+            R_TabPage = new TabPage();
+            Gen8_R_TabPage = new TabPage();
+            label8 = new Label();
+            MinIV_raid_Box = new ComboBox();
+            Gender_Raid_Box = new ComboBox();
+            label9 = new Label();
+            label10 = new Label();
+            Raid_Seed_TextBox = new TextBox();
+            Ability_Raid_Box = new ComboBox();
+            label11 = new Label();
+            SpeMax = new TextBox();
+            SpeMin = new TextBox();
+            SpdMax = new TextBox();
+            SpdMin = new TextBox();
+            SpaMax = new TextBox();
+            SpaMin = new TextBox();
+            DefMin = new TextBox();
+            DefMax = new TextBox();
+            AtkMax = new TextBox();
+            AtkMin = new TextBox();
+            Max_Label = new Label();
+            HpMax = new TextBox();
+            Min_Label = new Label();
+            HpMin = new TextBox();
+            Spe_Label = new Label();
+            Spd_Label = new Label();
+            Spa_Label = new Label();
+            Def_Label = new Label();
+            Atk_Label = new Label();
+            HP_Label = new Label();
+            Start_RUN_BTN = new Button();
+            Stop_RUN_BTN = new Button();
             SearchGroupBox.SuspendLayout();
             RNGFormTabControl.SuspendLayout();
             ReverseSeedPage.SuspendLayout();
@@ -91,11 +124,14 @@ namespace WangPluginPkm.GUI
             ((System.ComponentModel.ISupportInitialize)numScale).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numWeight).BeginInit();
             RNGmenuStrip.SuspendLayout();
+            Check_Tab.SuspendLayout();
+            R_TabPage.SuspendLayout();
+            Gen8_R_TabPage.SuspendLayout();
             SuspendLayout();
             // 
             // Search
             // 
-            Search.Location = new System.Drawing.Point(51, 220);
+            Search.Location = new System.Drawing.Point(52, 208);
             Search.Name = "Search";
             Search.Size = new System.Drawing.Size(92, 25);
             Search.TabIndex = 9;
@@ -105,7 +141,7 @@ namespace WangPluginPkm.GUI
             // 
             // Cancel
             // 
-            Cancel.Location = new System.Drawing.Point(192, 220);
+            Cancel.Location = new System.Drawing.Point(167, 208);
             Cancel.Name = "Cancel";
             Cancel.Size = new System.Drawing.Size(92, 25);
             Cancel.TabIndex = 11;
@@ -116,7 +152,7 @@ namespace WangPluginPkm.GUI
             // UsePreSeed
             // 
             UsePreSeed.AutoSize = true;
-            UsePreSeed.Location = new System.Drawing.Point(4, 198);
+            UsePreSeed.Location = new System.Drawing.Point(14, 186);
             UsePreSeed.Name = "UsePreSeed";
             UsePreSeed.Size = new System.Drawing.Size(96, 16);
             UsePreSeed.TabIndex = 22;
@@ -135,47 +171,79 @@ namespace WangPluginPkm.GUI
             // 
             // SearchGroupBox
             // 
-            SearchGroupBox.Controls.Add(CalcBTN);
-            SearchGroupBox.Controls.Add(Check_Frame);
-            SearchGroupBox.Controls.Add(label7);
-            SearchGroupBox.Controls.Add(Cancel);
-            SearchGroupBox.Controls.Add(label6);
-            SearchGroupBox.Controls.Add(TeamLockBox);
-            SearchGroupBox.Controls.Add(IVCheckBox);
-            SearchGroupBox.Controls.Add(SeedCheckBox);
-            SearchGroupBox.Controls.Add(Search);
-            SearchGroupBox.Controls.Add(UsePreSeed);
-            SearchGroupBox.Controls.Add(ConditionForm);
+            SearchGroupBox.Controls.Add(Check_Tab);
             SearchGroupBox.Location = new System.Drawing.Point(12, 31);
             SearchGroupBox.Name = "SearchGroupBox";
-            SearchGroupBox.Size = new System.Drawing.Size(339, 319);
+            SearchGroupBox.Size = new System.Drawing.Size(367, 319);
             SearchGroupBox.TabIndex = 24;
             SearchGroupBox.TabStop = false;
             SearchGroupBox.Text = "查找";
             // 
+            // CalcBTN
+            // 
+            CalcBTN.Location = new System.Drawing.Point(64, 252);
+            CalcBTN.Name = "CalcBTN";
+            CalcBTN.Size = new System.Drawing.Size(114, 25);
+            CalcBTN.TabIndex = 49;
+            CalcBTN.Text = "计算";
+            CalcBTN.UseVisualStyleBackColor = true;
+            CalcBTN.Click += CalcBTN_Click;
+            // 
             // Check_Frame
             // 
             Check_Frame.AutoSize = true;
-            Check_Frame.Location = new System.Drawing.Point(106, 198);
+            Check_Frame.Location = new System.Drawing.Point(112, 186);
             Check_Frame.Name = "Check_Frame";
             Check_Frame.Size = new System.Drawing.Size(108, 16);
             Check_Frame.TabIndex = 25;
             Check_Frame.Text = "严格帧合法检测";
             Check_Frame.UseVisualStyleBackColor = true;
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(184, 228);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(17, 12);
+            label7.TabIndex = 48;
+            label7.Text = "IV";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(122, 623);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(29, 12);
+            label6.TabIndex = 47;
+            label6.Text = "Seed";
+            // 
             // TeamLockBox
             // 
             TeamLockBox.AutoSize = true;
-            TeamLockBox.Location = new System.Drawing.Point(220, 198);
+            TeamLockBox.Location = new System.Drawing.Point(226, 186);
             TeamLockBox.Name = "TeamLockBox";
             TeamLockBox.Size = new System.Drawing.Size(90, 16);
             TeamLockBox.TabIndex = 24;
             TeamLockBox.Text = "CXD使用队锁";
             TeamLockBox.UseVisualStyleBackColor = true;
             // 
+            // IVCheckBox
+            // 
+            IVCheckBox.Location = new System.Drawing.Point(210, 225);
+            IVCheckBox.Name = "IVCheckBox";
+            IVCheckBox.Size = new System.Drawing.Size(124, 21);
+            IVCheckBox.TabIndex = 46;
+            // 
+            // SeedCheckBox
+            // 
+            SeedCheckBox.Location = new System.Drawing.Point(64, 225);
+            SeedCheckBox.Name = "SeedCheckBox";
+            SeedCheckBox.Size = new System.Drawing.Size(114, 21);
+            SeedCheckBox.TabIndex = 45;
+            // 
             // ConditionForm
             // 
-            ConditionForm.Location = new System.Drawing.Point(7, 14);
+            ConditionForm.Location = new System.Drawing.Point(5, 5);
             ConditionForm.Margin = new Padding(2);
             ConditionForm.Name = "ConditionForm";
             ConditionForm.Size = new System.Drawing.Size(326, 169);
@@ -184,7 +252,7 @@ namespace WangPluginPkm.GUI
             // MinIV_Box
             // 
             MinIV_Box.FormattingEnabled = true;
-            MinIV_Box.Location = new System.Drawing.Point(47, 79);
+            MinIV_Box.Location = new System.Drawing.Point(47, 73);
             MinIV_Box.Name = "MinIV_Box";
             MinIV_Box.Size = new System.Drawing.Size(151, 20);
             MinIV_Box.TabIndex = 25;
@@ -192,7 +260,7 @@ namespace WangPluginPkm.GUI
             // Gender_Box
             // 
             Gender_Box.FormattingEnabled = true;
-            Gender_Box.Location = new System.Drawing.Point(60, 114);
+            Gender_Box.Location = new System.Drawing.Point(60, 108);
             Gender_Box.Name = "Gender_Box";
             Gender_Box.Size = new System.Drawing.Size(138, 20);
             Gender_Box.TabIndex = 26;
@@ -200,7 +268,7 @@ namespace WangPluginPkm.GUI
             // FlawlessIV
             // 
             FlawlessIV.AutoSize = true;
-            FlawlessIV.Location = new System.Drawing.Point(13, 82);
+            FlawlessIV.Location = new System.Drawing.Point(13, 76);
             FlawlessIV.Name = "FlawlessIV";
             FlawlessIV.Size = new System.Drawing.Size(29, 12);
             FlawlessIV.TabIndex = 27;
@@ -209,7 +277,7 @@ namespace WangPluginPkm.GUI
             // genderlabel
             // 
             genderlabel.AutoSize = true;
-            genderlabel.Location = new System.Drawing.Point(13, 117);
+            genderlabel.Location = new System.Drawing.Point(13, 111);
             genderlabel.Name = "genderlabel";
             genderlabel.Size = new System.Drawing.Size(41, 12);
             genderlabel.TabIndex = 28;
@@ -218,7 +286,7 @@ namespace WangPluginPkm.GUI
             // Ability_Box
             // 
             Ability_Box.FormattingEnabled = true;
-            Ability_Box.Location = new System.Drawing.Point(47, 149);
+            Ability_Box.Location = new System.Drawing.Point(47, 143);
             Ability_Box.Name = "Ability_Box";
             Ability_Box.Size = new System.Drawing.Size(151, 20);
             Ability_Box.TabIndex = 29;
@@ -226,7 +294,7 @@ namespace WangPluginPkm.GUI
             // AbilityLabel
             // 
             AbilityLabel.AutoSize = true;
-            AbilityLabel.Location = new System.Drawing.Point(12, 154);
+            AbilityLabel.Location = new System.Drawing.Point(12, 148);
             AbilityLabel.Name = "AbilityLabel";
             AbilityLabel.Size = new System.Drawing.Size(29, 12);
             AbilityLabel.TabIndex = 30;
@@ -287,7 +355,7 @@ namespace WangPluginPkm.GUI
             Seed_Box.Location = new System.Drawing.Point(58, 34);
             Seed_Box.Multiline = true;
             Seed_Box.Name = "Seed_Box";
-            Seed_Box.Size = new System.Drawing.Size(140, 25);
+            Seed_Box.Size = new System.Drawing.Size(140, 22);
             Seed_Box.TabIndex = 23;
             Seed_Box.Text = "没有seed";
             // 
@@ -426,7 +494,7 @@ namespace WangPluginPkm.GUI
             RNGFormTabControl.Controls.Add(ReverseSeedPage);
             RNGFormTabControl.Controls.Add(SWSHPage);
             RNGFormTabControl.Controls.Add(TeraSeedPage);
-            RNGFormTabControl.Location = new System.Drawing.Point(357, 31);
+            RNGFormTabControl.Location = new System.Drawing.Point(385, 31);
             RNGFormTabControl.Name = "RNGFormTabControl";
             RNGFormTabControl.SelectedIndex = 0;
             RNGFormTabControl.Size = new System.Drawing.Size(381, 319);
@@ -435,13 +503,17 @@ namespace WangPluginPkm.GUI
             // ReverseSeedPage
             // 
             ReverseSeedPage.BackColor = System.Drawing.Color.WhiteSmoke;
+            ReverseSeedPage.Controls.Add(CalcBTN);
             ReverseSeedPage.Controls.Add(IVCheck_Box);
             ReverseSeedPage.Controls.Add(SeedBox);
+            ReverseSeedPage.Controls.Add(label7);
             ReverseSeedPage.Controls.Add(PIDECCheck_Box);
             ReverseSeedPage.Controls.Add(PIDBox);
             ReverseSeedPage.Controls.Add(IVBox);
             ReverseSeedPage.Controls.Add(ReverseCheck_BTN);
+            ReverseSeedPage.Controls.Add(IVCheckBox);
             ReverseSeedPage.Controls.Add(IVTextBox);
+            ReverseSeedPage.Controls.Add(SeedCheckBox);
             ReverseSeedPage.Controls.Add(Mod_ComboBox);
             ReverseSeedPage.Controls.Add(ECLabel);
             ReverseSeedPage.Controls.Add(Mlabel);
@@ -454,48 +526,6 @@ namespace WangPluginPkm.GUI
             ReverseSeedPage.Size = new System.Drawing.Size(373, 293);
             ReverseSeedPage.TabIndex = 0;
             ReverseSeedPage.Text = "Seed逆推";
-            // 
-            // CalcBTN
-            // 
-            CalcBTN.Location = new System.Drawing.Point(40, 279);
-            CalcBTN.Name = "CalcBTN";
-            CalcBTN.Size = new System.Drawing.Size(114, 25);
-            CalcBTN.TabIndex = 49;
-            CalcBTN.Text = "计算";
-            CalcBTN.UseVisualStyleBackColor = true;
-            CalcBTN.Click += CalcBTN_Click;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(160, 255);
-            label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(17, 12);
-            label7.TabIndex = 48;
-            label7.Text = "IV";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(5, 255);
-            label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(29, 12);
-            label6.TabIndex = 47;
-            label6.Text = "Seed";
-            // 
-            // IVCheckBox
-            // 
-            IVCheckBox.Location = new System.Drawing.Point(186, 252);
-            IVCheckBox.Name = "IVCheckBox";
-            IVCheckBox.Size = new System.Drawing.Size(124, 21);
-            IVCheckBox.TabIndex = 46;
-            // 
-            // SeedCheckBox
-            // 
-            SeedCheckBox.Location = new System.Drawing.Point(40, 252);
-            SeedCheckBox.Name = "SeedCheckBox";
-            SeedCheckBox.Size = new System.Drawing.Size(114, 21);
-            SeedCheckBox.TabIndex = 45;
             // 
             // SWSHPage
             // 
@@ -583,10 +613,10 @@ namespace WangPluginPkm.GUI
             TeraSeedPage.Controls.Add(TeraSeedBox);
             TeraSeedPage.Controls.Add(label);
             TeraSeedPage.Controls.Add(lblEC);
-            TeraSeedPage.Location = new System.Drawing.Point(4, 22);
+            TeraSeedPage.Location = new System.Drawing.Point(4, 26);
             TeraSeedPage.Name = "TeraSeedPage";
             TeraSeedPage.Padding = new Padding(3);
-            TeraSeedPage.Size = new System.Drawing.Size(373, 293);
+            TeraSeedPage.Size = new System.Drawing.Size(373, 289);
             TeraSeedPage.TabIndex = 2;
             TeraSeedPage.Text = "朱紫太晶坑检测";
             // 
@@ -838,7 +868,7 @@ namespace WangPluginPkm.GUI
             RNGmenuStrip.Items.AddRange(new ToolStripItem[] { ToolStripMenuItem });
             RNGmenuStrip.Location = new System.Drawing.Point(0, 0);
             RNGmenuStrip.Name = "RNGmenuStrip";
-            RNGmenuStrip.Size = new System.Drawing.Size(761, 25);
+            RNGmenuStrip.Size = new System.Drawing.Size(780, 25);
             RNGmenuStrip.TabIndex = 46;
             RNGmenuStrip.Text = "menuStrip1";
             // 
@@ -849,14 +879,336 @@ namespace WangPluginPkm.GUI
             ToolStripMenuItem.Text = "使用说明";
             ToolStripMenuItem.Click += ToolStripMenuItem_Click;
             // 
+            // Check_Tab
+            // 
+            Check_Tab.Controls.Add(R_TabPage);
+            Check_Tab.Controls.Add(Gen8_R_TabPage);
+            Check_Tab.Location = new System.Drawing.Point(6, 20);
+            Check_Tab.Name = "Check_Tab";
+            Check_Tab.SelectedIndex = 0;
+            Check_Tab.Size = new System.Drawing.Size(353, 293);
+            Check_Tab.TabIndex = 45;
+            // 
+            // R_TabPage
+            // 
+            R_TabPage.Controls.Add(ConditionForm);
+            R_TabPage.Controls.Add(Check_Frame);
+            R_TabPage.Controls.Add(Search);
+            R_TabPage.Controls.Add(UsePreSeed);
+            R_TabPage.Controls.Add(TeamLockBox);
+            R_TabPage.Controls.Add(Cancel);
+            R_TabPage.Location = new System.Drawing.Point(4, 22);
+            R_TabPage.Name = "R_TabPage";
+            R_TabPage.Padding = new Padding(3);
+            R_TabPage.Size = new System.Drawing.Size(345, 267);
+            R_TabPage.TabIndex = 0;
+            R_TabPage.Text = "常规查找";
+            R_TabPage.UseVisualStyleBackColor = true;
+            // 
+            // Gen8_R_TabPage
+            // 
+            Gen8_R_TabPage.Controls.Add(Start_RUN_BTN);
+            Gen8_R_TabPage.Controls.Add(Stop_RUN_BTN);
+            Gen8_R_TabPage.Controls.Add(SpeMax);
+            Gen8_R_TabPage.Controls.Add(SpeMin);
+            Gen8_R_TabPage.Controls.Add(SpdMax);
+            Gen8_R_TabPage.Controls.Add(SpdMin);
+            Gen8_R_TabPage.Controls.Add(SpaMax);
+            Gen8_R_TabPage.Controls.Add(SpaMin);
+            Gen8_R_TabPage.Controls.Add(DefMin);
+            Gen8_R_TabPage.Controls.Add(DefMax);
+            Gen8_R_TabPage.Controls.Add(AtkMax);
+            Gen8_R_TabPage.Controls.Add(AtkMin);
+            Gen8_R_TabPage.Controls.Add(Max_Label);
+            Gen8_R_TabPage.Controls.Add(HpMax);
+            Gen8_R_TabPage.Controls.Add(Min_Label);
+            Gen8_R_TabPage.Controls.Add(HpMin);
+            Gen8_R_TabPage.Controls.Add(Spe_Label);
+            Gen8_R_TabPage.Controls.Add(Spd_Label);
+            Gen8_R_TabPage.Controls.Add(Spa_Label);
+            Gen8_R_TabPage.Controls.Add(Def_Label);
+            Gen8_R_TabPage.Controls.Add(Atk_Label);
+            Gen8_R_TabPage.Controls.Add(HP_Label);
+            Gen8_R_TabPage.Controls.Add(label8);
+            Gen8_R_TabPage.Controls.Add(MinIV_raid_Box);
+            Gen8_R_TabPage.Controls.Add(Gender_Raid_Box);
+            Gen8_R_TabPage.Controls.Add(label9);
+            Gen8_R_TabPage.Controls.Add(label10);
+            Gen8_R_TabPage.Controls.Add(Raid_Seed_TextBox);
+            Gen8_R_TabPage.Controls.Add(Ability_Raid_Box);
+            Gen8_R_TabPage.Controls.Add(label11);
+            Gen8_R_TabPage.Location = new System.Drawing.Point(4, 22);
+            Gen8_R_TabPage.Name = "Gen8_R_TabPage";
+            Gen8_R_TabPage.Padding = new Padding(3);
+            Gen8_R_TabPage.Size = new System.Drawing.Size(345, 267);
+            Gen8_R_TabPage.TabIndex = 1;
+            Gen8_R_TabPage.Text = "剑盾Raid查找";
+            Gen8_R_TabPage.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(59, 14);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(29, 12);
+            label8.TabIndex = 55;
+            label8.Text = "Seed";
+            // 
+            // MinIV_raid_Box
+            // 
+            MinIV_raid_Box.FormattingEnabled = true;
+            MinIV_raid_Box.Location = new System.Drawing.Point(94, 42);
+            MinIV_raid_Box.Name = "MinIV_raid_Box";
+            MinIV_raid_Box.Size = new System.Drawing.Size(151, 20);
+            MinIV_raid_Box.TabIndex = 49;
+            // 
+            // Gender_Raid_Box
+            // 
+            Gender_Raid_Box.FormattingEnabled = true;
+            Gender_Raid_Box.Location = new System.Drawing.Point(107, 71);
+            Gender_Raid_Box.Name = "Gender_Raid_Box";
+            Gender_Raid_Box.Size = new System.Drawing.Size(138, 20);
+            Gender_Raid_Box.TabIndex = 50;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(60, 45);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(29, 12);
+            label9.TabIndex = 51;
+            label9.Text = "锁IV";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new System.Drawing.Point(60, 74);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(41, 12);
+            label10.TabIndex = 52;
+            label10.Text = "公母比";
+            // 
+            // Raid_Seed_TextBox
+            // 
+            Raid_Seed_TextBox.Location = new System.Drawing.Point(94, 14);
+            Raid_Seed_TextBox.Multiline = true;
+            Raid_Seed_TextBox.Name = "Raid_Seed_TextBox";
+            Raid_Seed_TextBox.Size = new System.Drawing.Size(151, 22);
+            Raid_Seed_TextBox.TabIndex = 48;
+            Raid_Seed_TextBox.Text = "没有seed";
+            // 
+            // Ability_Raid_Box
+            // 
+            Ability_Raid_Box.FormattingEnabled = true;
+            Ability_Raid_Box.Location = new System.Drawing.Point(94, 97);
+            Ability_Raid_Box.Name = "Ability_Raid_Box";
+            Ability_Raid_Box.Size = new System.Drawing.Size(151, 20);
+            Ability_Raid_Box.TabIndex = 53;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new System.Drawing.Point(59, 102);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(29, 12);
+            label11.TabIndex = 54;
+            label11.Text = "特性";
+            // 
+            // SpeMax
+            // 
+            SpeMax.Location = new System.Drawing.Point(260, 192);
+            SpeMax.Name = "SpeMax";
+            SpeMax.Size = new System.Drawing.Size(30, 21);
+            SpeMax.TabIndex = 75;
+            SpeMax.Text = "31";
+            // 
+            // SpeMin
+            // 
+            SpeMin.Location = new System.Drawing.Point(260, 155);
+            SpeMin.Name = "SpeMin";
+            SpeMin.Size = new System.Drawing.Size(30, 21);
+            SpeMin.TabIndex = 74;
+            SpeMin.Text = "0";
+            // 
+            // SpdMax
+            // 
+            SpdMax.Location = new System.Drawing.Point(222, 192);
+            SpdMax.Name = "SpdMax";
+            SpdMax.Size = new System.Drawing.Size(30, 21);
+            SpdMax.TabIndex = 73;
+            SpdMax.Text = "31";
+            // 
+            // SpdMin
+            // 
+            SpdMin.Location = new System.Drawing.Point(222, 155);
+            SpdMin.Name = "SpdMin";
+            SpdMin.Size = new System.Drawing.Size(30, 21);
+            SpdMin.TabIndex = 72;
+            SpdMin.Text = "0";
+            // 
+            // SpaMax
+            // 
+            SpaMax.Location = new System.Drawing.Point(184, 192);
+            SpaMax.Name = "SpaMax";
+            SpaMax.Size = new System.Drawing.Size(30, 21);
+            SpaMax.TabIndex = 71;
+            SpaMax.Text = "31";
+            // 
+            // SpaMin
+            // 
+            SpaMin.Location = new System.Drawing.Point(184, 155);
+            SpaMin.Name = "SpaMin";
+            SpaMin.Size = new System.Drawing.Size(30, 21);
+            SpaMin.TabIndex = 70;
+            SpaMin.Text = "0";
+            // 
+            // DefMin
+            // 
+            DefMin.Location = new System.Drawing.Point(147, 155);
+            DefMin.Name = "DefMin";
+            DefMin.Size = new System.Drawing.Size(30, 21);
+            DefMin.TabIndex = 69;
+            DefMin.Text = "0";
+            // 
+            // DefMax
+            // 
+            DefMax.Location = new System.Drawing.Point(147, 192);
+            DefMax.Name = "DefMax";
+            DefMax.Size = new System.Drawing.Size(30, 21);
+            DefMax.TabIndex = 68;
+            DefMax.Text = "31";
+            // 
+            // AtkMax
+            // 
+            AtkMax.Location = new System.Drawing.Point(109, 192);
+            AtkMax.Name = "AtkMax";
+            AtkMax.Size = new System.Drawing.Size(30, 21);
+            AtkMax.TabIndex = 67;
+            AtkMax.Text = "31";
+            // 
+            // AtkMin
+            // 
+            AtkMin.Location = new System.Drawing.Point(109, 155);
+            AtkMin.Name = "AtkMin";
+            AtkMin.Size = new System.Drawing.Size(30, 21);
+            AtkMin.TabIndex = 66;
+            AtkMin.Text = "0";
+            // 
+            // Max_Label
+            // 
+            Max_Label.AutoSize = true;
+            Max_Label.Location = new System.Drawing.Point(15, 195);
+            Max_Label.Name = "Max_Label";
+            Max_Label.Size = new System.Drawing.Size(41, 12);
+            Max_Label.TabIndex = 65;
+            Max_Label.Text = "最大值";
+            // 
+            // HpMax
+            // 
+            HpMax.Location = new System.Drawing.Point(71, 192);
+            HpMax.Name = "HpMax";
+            HpMax.Size = new System.Drawing.Size(30, 21);
+            HpMax.TabIndex = 64;
+            HpMax.Text = "31";
+            // 
+            // Min_Label
+            // 
+            Min_Label.AutoSize = true;
+            Min_Label.Location = new System.Drawing.Point(15, 158);
+            Min_Label.Name = "Min_Label";
+            Min_Label.Size = new System.Drawing.Size(41, 12);
+            Min_Label.TabIndex = 63;
+            Min_Label.Text = "最小值";
+            // 
+            // HpMin
+            // 
+            HpMin.Location = new System.Drawing.Point(71, 155);
+            HpMin.Name = "HpMin";
+            HpMin.Size = new System.Drawing.Size(30, 21);
+            HpMin.TabIndex = 62;
+            HpMin.Text = "0";
+            // 
+            // Spe_Label
+            // 
+            Spe_Label.AutoSize = true;
+            Spe_Label.Location = new System.Drawing.Point(257, 124);
+            Spe_Label.Name = "Spe_Label";
+            Spe_Label.Size = new System.Drawing.Size(29, 12);
+            Spe_Label.TabIndex = 61;
+            Spe_Label.Text = "速度";
+            // 
+            // Spd_Label
+            // 
+            Spd_Label.AutoSize = true;
+            Spd_Label.Location = new System.Drawing.Point(219, 124);
+            Spd_Label.Name = "Spd_Label";
+            Spd_Label.Size = new System.Drawing.Size(29, 12);
+            Spd_Label.TabIndex = 60;
+            Spd_Label.Text = "特防";
+            // 
+            // Spa_Label
+            // 
+            Spa_Label.AutoSize = true;
+            Spa_Label.Location = new System.Drawing.Point(182, 124);
+            Spa_Label.Name = "Spa_Label";
+            Spa_Label.Size = new System.Drawing.Size(29, 12);
+            Spa_Label.TabIndex = 59;
+            Spa_Label.Text = "特攻";
+            // 
+            // Def_Label
+            // 
+            Def_Label.AutoSize = true;
+            Def_Label.Location = new System.Drawing.Point(144, 124);
+            Def_Label.Name = "Def_Label";
+            Def_Label.Size = new System.Drawing.Size(29, 12);
+            Def_Label.TabIndex = 58;
+            Def_Label.Text = "物防";
+            // 
+            // Atk_Label
+            // 
+            Atk_Label.AutoSize = true;
+            Atk_Label.Location = new System.Drawing.Point(107, 124);
+            Atk_Label.Name = "Atk_Label";
+            Atk_Label.Size = new System.Drawing.Size(29, 12);
+            Atk_Label.TabIndex = 57;
+            Atk_Label.Text = "物攻";
+            // 
+            // HP_Label
+            // 
+            HP_Label.AutoSize = true;
+            HP_Label.Location = new System.Drawing.Point(69, 124);
+            HP_Label.Name = "HP_Label";
+            HP_Label.Size = new System.Drawing.Size(29, 12);
+            HP_Label.TabIndex = 56;
+            HP_Label.Text = "血量";
+            // 
+            // Start_RUN_BTN
+            // 
+            Start_RUN_BTN.Location = new System.Drawing.Point(67, 219);
+            Start_RUN_BTN.Name = "Start_RUN_BTN";
+            Start_RUN_BTN.Size = new System.Drawing.Size(92, 25);
+            Start_RUN_BTN.TabIndex = 76;
+            Start_RUN_BTN.Text = "开始查找";
+            Start_RUN_BTN.UseVisualStyleBackColor = true;
+            // 
+            // Stop_RUN_BTN
+            // 
+            Stop_RUN_BTN.Location = new System.Drawing.Point(182, 219);
+            Stop_RUN_BTN.Name = "Stop_RUN_BTN";
+            Stop_RUN_BTN.Size = new System.Drawing.Size(92, 25);
+            Stop_RUN_BTN.TabIndex = 77;
+            Stop_RUN_BTN.Text = "停止查找";
+            Stop_RUN_BTN.UseVisualStyleBackColor = true;
+            // 
             // RNGForm
             // 
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             BackColor = System.Drawing.SystemColors.Control;
-            ClientSize = new System.Drawing.Size(761, 364);
+            ClientSize = new System.Drawing.Size(780, 362);
             Controls.Add(RNGFormTabControl);
             Controls.Add(SearchGroupBox);
             Controls.Add(RNGmenuStrip);
+            Controls.Add(label6);
             Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             ForeColor = System.Drawing.SystemColors.ControlText;
             FormBorderStyle = FormBorderStyle.Fixed3D;
@@ -867,7 +1219,6 @@ namespace WangPluginPkm.GUI
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Super Wang";
             SearchGroupBox.ResumeLayout(false);
-            SearchGroupBox.PerformLayout();
             RNGFormTabControl.ResumeLayout(false);
             ReverseSeedPage.ResumeLayout(false);
             ReverseSeedPage.PerformLayout();
@@ -880,6 +1231,11 @@ namespace WangPluginPkm.GUI
             ((System.ComponentModel.ISupportInitialize)numWeight).EndInit();
             RNGmenuStrip.ResumeLayout(false);
             RNGmenuStrip.PerformLayout();
+            Check_Tab.ResumeLayout(false);
+            R_TabPage.ResumeLayout(false);
+            R_TabPage.PerformLayout();
+            Gen8_R_TabPage.ResumeLayout(false);
+            Gen8_R_TabPage.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -959,5 +1315,38 @@ namespace WangPluginPkm.GUI
         private TextBox SeedCheckBox;
         private Label label7;
         private Button CalcBTN;
+        private TabControl Check_Tab;
+        private TabPage R_TabPage;
+        private TabPage Gen8_R_TabPage;
+        private Label label8;
+        private ComboBox MinIV_raid_Box;
+        private ComboBox Gender_Raid_Box;
+        private Label label9;
+        private Label label10;
+        private TextBox Raid_Seed_TextBox;
+        private ComboBox Ability_Raid_Box;
+        private Label label11;
+        private TextBox SpeMax;
+        private TextBox SpeMin;
+        private TextBox SpdMax;
+        private TextBox SpdMin;
+        private TextBox SpaMax;
+        private TextBox SpaMin;
+        private TextBox DefMin;
+        private TextBox DefMax;
+        private TextBox AtkMax;
+        private TextBox AtkMin;
+        private Label Max_Label;
+        private TextBox HpMax;
+        private Label Min_Label;
+        private TextBox HpMin;
+        private Label Spe_Label;
+        private Label Spd_Label;
+        private Label Spa_Label;
+        private Label Def_Label;
+        private Label Atk_Label;
+        private Label HP_Label;
+        private Button Start_RUN_BTN;
+        private Button Stop_RUN_BTN;
     }
 }

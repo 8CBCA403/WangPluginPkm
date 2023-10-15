@@ -103,6 +103,7 @@ namespace WangPluginPkm.GUI
             Controls.Add(Version);
             Controls.Add(GEgg);
             Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "EggGeneratorUI";

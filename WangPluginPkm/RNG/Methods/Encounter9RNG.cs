@@ -75,7 +75,7 @@ namespace WangPluginPkm.RNG.Methods
                 }
             }
 
-            if (!ignoreIVs && !criteria.IsIVsCompatible(ivs, 9))
+            if (!ignoreIVs && !criteria.IsCompatibleIVs(ivs))
                 return false;
             for (int i = 0; i < 6; i++)
             {

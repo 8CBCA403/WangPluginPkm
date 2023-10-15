@@ -3,6 +3,13 @@ using PKHeX.Core;
 using System.Collections.Generic;
 using PKHeX.Core.Searching;
 using System.Linq;
+using System;
+using Python.Included;
+using Python.Runtime;
+using System.IO;
+
+
+
 namespace WangPluginPkm.GUI
 {
     internal class TESTForm : Form
@@ -21,6 +28,7 @@ namespace WangPluginPkm.GUI
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TESTForm));
             SetAll_BTN = new Button();
+            textBox1 = new TextBox();
             SuspendLayout();
             // 
             // SetAll_BTN
@@ -33,9 +41,18 @@ namespace WangPluginPkm.GUI
             SetAll_BTN.UseVisualStyleBackColor = true;
             SetAll_BTN.Click += SetAll_BTN_Click;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new System.Drawing.Point(12, 77);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new System.Drawing.Size(234, 174);
+            textBox1.TabIndex = 1;
+            // 
             // TESTForm
             // 
-            ClientSize = new System.Drawing.Size(258, 98);
+            ClientSize = new System.Drawing.Size(258, 263);
+            Controls.Add(textBox1);
             Controls.Add(SetAll_BTN);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
@@ -44,53 +61,44 @@ namespace WangPluginPkm.GUI
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Super Wang";
             ResumeLayout(false);
+            PerformLayout();
         }
 
-        public void SetPkm(ISaveFileProvider SaveFileEditor)
+        private void Wang()
         {
-            var sav = SaveFileEditor.SAV;
-            List<PKM> PKL = new();
-            for (int i = 0; i < 30; i++)
+            PythonEngine.Initialize();
+
+            dynamic pickle = Py.Import("pickle");
+
+            using (Py.GIL())
             {
-                var pk = GetPkm(Editor.Data);
-                pk.Language = Editor.Data.Language;
-                pk.ClearNickname();
-                pk.OT_Name = "Homelander";
-                pk.DisplayTID = 074074;
-                pk.DisplaySID = 0007;
-                PKL.Add(pk);
+                // 读取pickle文件
+                byte[] pickleData = File.ReadAllBytes(@"D:\Desk\encounter_might_paldea.pkl");
+
+                // 反序列化pickle数据
+                dynamic unpickledObject = pickle.loads(pickleData);
+
+                // 将动态对象转换为字典
+                dynamic dictionary = unpickledObject.ToDictionary();
+
+                // 输出字典内容
+                foreach (dynamic kvp in dictionary)
+                {
+                    textBox1.Text+=($"{kvp.Key}: {kvp.Value}");
+                }
             }
-            if (PKL.Count != 0)
-                sav.SetBoxData(PKL, sav.CurrentBox);
-            SaveFileEditor.ReloadSlots();
-        }
-        public PKM GetPkm(PKM pk)
-        {
-            // pk = Editor.Data;
-            List<IEncounterInfo> Results;
-            IEncounterInfo enc;
-            var setting = new SearchSettings
-            {
-                Species = pk.Species,
-                SearchEgg = false,
-                Version = (int)SAV.SAV.Version,
 
-            };
-            var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
-            var results = search.ToList();
-            if (results.Count != 0)
-            {
-                Results = results;
-                enc = Results[0];
-                var criteria = EncounterUtil.GetCriteria(enc, pk);
-                pk = enc.ConvertToPKM(SAV.SAV, criteria);
+            PythonEngine.Shutdown();
+        }
 
-            }
-            return pk;
-        }
-        private void SetAll_BTN_Click(object sender, System.EventArgs e)
+        private void SetAll_BTN_Click(object sender, EventArgs e)
         {
-            SetPkm(SAV);
+            Wang();
         }
+
+        private TextBox textBox1;
     }
+
+
 }
+
