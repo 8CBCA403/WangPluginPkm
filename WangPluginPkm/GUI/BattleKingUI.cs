@@ -15,6 +15,8 @@ using HtmlAgilityPack;
 using System.Data;
 using Newtonsoft.Json;
 using WangPluginPkm.PluginUtil.BattleKingBase;
+using WangPluginPkm.PluginUtil;
+using WangPluginPkm.Plugins;
 
 
 namespace WangPluginPkm.GUI
@@ -22,9 +24,9 @@ namespace WangPluginPkm.GUI
     partial class BattleKingUI : Form
     {
         public List<ShowdownSet> Sets = new();
-        private ISaveFileProvider SAV { get; }
+        public static ISaveFileProvider SAV { private get; set; } = null!;
 
-        private IPKMView Editor { get; }
+        public static  IPKMView Editor { private get; set; } = null!;
         private static List<ExpandPKM> BD = new List<ExpandPKM>();
         private enum Falinks
         {
@@ -153,15 +155,41 @@ namespace WangPluginPkm.GUI
             }
 
         }
-        private void ImportSetToTabs(ShowdownSet set, bool skipDialog = false)
+        private static AutoModErrorCode ImportSetToTabs(ShowdownSet set, bool skipDialog = false)
         {
             var regen = new RegenTemplate(set, SAV.SAV.Generation);
+            if (
+                !skipDialog
+                && DialogResult.Yes
+                    != WinFormsUtil.Prompt(MessageBoxButtons.YesNo, "Import this set?", regen.Text)
+            )
+            {
+                return AutoModErrorCode.NoSingleImport;
+            }
+
+            if (set.InvalidLines.Count > 0)
+            {
+                return AutoModErrorCode.InvalidLines;
+            }
+
             Debug.WriteLine($"Commencing Import of {GameInfo.Strings.Species[set.Species]}");
             var timer = Stopwatch.StartNew();
 
             var sav = SAV.SAV;
-            var legal = sav.GetLegalFromSet(regen, out var msg);
+            var almres = sav.GetLegalFromSet(regen);
+            var legal = almres.Created;
+            var msg = almres.Status;
             timer.Stop();
+
+            if (msg is LegalizationResult.VersionMismatch)
+            {
+                var errorstr =
+                    "The PKHeX-Plugins version does not match the PKHeX version.\n\n"
+                    + "Refer to the Wiki to fix this error.\n\n"
+                    + $"The current ALM Version is {ALMVersion.Versions.AlmVersionCurrent}\n"
+                    + $"The current PKHeX Version is {ALMVersion.Versions.CoreVersionCurrent}";
+                return AutoModErrorCode.VersionMismatch;
+            }
 
             if (msg is LegalizationResult.Timeout or LegalizationResult.Failed)
             {
@@ -169,18 +197,30 @@ namespace WangPluginPkm.GUI
 
                 string analysis = null;
                 if (msg is LegalizationResult.Failed)
-                    analysis = regen.SetAnalysis(sav, sav.BlankPKM);
+                {
+                    analysis = regen.SetAnalysis(sav, legal);
+                }
 
-                var errorstr = msg == LegalizationResult.Failed ? "failed to generate" : "timed out";
-                var invalid_set_error = (analysis == null ? $"Set {errorstr}." : $"Set Invalid: {analysis}") +
-                    "\n\nIf you are sure this set is valid, please create an issue on GitHub and upload the error_log.txt file in the issue." +
-                    "\n\nAlternatively, join the support Discord and post the same file in the #autolegality-livehex-help channel.";
+                var errorstr =
+                    msg == LegalizationResult.Failed ? "failed to generate" : "timed out";
+                var invalid_set_error =
+                    (analysis == null ? $"Set {errorstr}." : $"Set Invalid: {analysis}")
+                    + "\n\nRefer to the wiki for more help on generating sets correctly."
+                    + "\n\nIf you are sure this set is valid, please create an issue on GitHub and upload the error_log.txt file in the issue.";
+             
+             
+
+             
             }
+
             Debug.WriteLine("Single Set Genning Complete. Loading final data to tabs.");
             Editor.PopulateFields(legal);
-            var timespan = timer.Elapsed;
-            Debug.WriteLine($"Time to complete {nameof(ImportSetToTabs)}: {timespan.Minutes:00} minutes {timespan.Seconds:00} seconds {timespan.Milliseconds / 10:00} milliseconds");
 
+            var timespan = timer.Elapsed;
+            Debug.WriteLine(
+                $"Time to complete {nameof(ImportSetToTabs)}: {timespan.Minutes:00} minutes {timespan.Seconds:00} seconds {timespan.Milliseconds / 10:00} milliseconds"
+            );
+            return AutoModErrorCode.None;
         }
         private void ImportSetsToBoxes(IReadOnlyList<ShowdownSet> sets, bool replace)
         {

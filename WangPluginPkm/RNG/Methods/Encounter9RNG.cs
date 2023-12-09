@@ -106,7 +106,7 @@ namespace WangPluginPkm.RNG.Methods
                 PersonalInfo.RatioMagicMale => 0,
                 _ => GetGender(gender_ratio, rand.NextInt(100)),
             };
-            if (criteria.Gender != -1 && gender != criteria.Gender)
+            if (criteria.Gender != FixedGenderUtil.GenderRandom && gender != criteria.Gender)
                 return false;
             pk.Gender = gender;
 

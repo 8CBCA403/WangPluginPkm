@@ -832,7 +832,7 @@ namespace WangPluginPkm.GUI
         {
             var regen = new RegenTemplate(set, SAV.SAV.Generation);
             var sav = SAV.SAV;
-            var legal = sav.GetLegalFromSet(regen, out var msg);
+            var legal = sav.GetLegalFromSet(regen).Created;
             return convertpktolpk(legal);
 
         }
@@ -845,8 +845,7 @@ namespace WangPluginPkm.GUI
             {
                 ShowdownSet showdownSet = sets[i];
                 RegenTemplate regenTemplate = new RegenTemplate(showdownSet, tr.Generation);
-                LegalizationResult msg;
-                PKM legalFromSet = tr.GetLegalFromSet(regenTemplate, out msg);
+                PKM legalFromSet = tr.GetLegalFromSet(regenTemplate).Created;
                 legalFromSet.ResetPartyStats();
                 legalFromSet.SetBoxForm();
                 num++;

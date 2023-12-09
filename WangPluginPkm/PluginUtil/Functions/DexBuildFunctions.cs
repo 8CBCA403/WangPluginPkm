@@ -38,7 +38,7 @@ namespace WangPluginPkm.PluginUtil.Functions
         public static void LivingDexHome(ISaveFileProvider SaveFileEditor)
         {
             var sav = SaveFileEditor.SAV;
-            Span<PKM> pkms = sav.GenerateLivingDex(false,false,false,false).ToArray();
+            Span<PKM> pkms = sav.GenerateLivingDex().ToArray();
             Span<PKM> bd = sav.BoxData.ToArray();
             pkms.CopyTo(bd);
             sav.BoxData = bd.ToArray();

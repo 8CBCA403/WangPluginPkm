@@ -63,16 +63,25 @@ namespace WangPluginPkm
             Blank20.CopyTo(data, 0x20);
             return data;
         }
+        private static ReadOnlySpan<byte> GetLength(ReadOnlySpan<byte> buffer)
+        {
+            var length = buffer.IndexOf((byte)0);
+            if (length == -1)
+                return buffer;
+            return buffer[..length];
+        }
+
+        private static string GetString(ReadOnlySpan<byte> buffer) => Encoding.ASCII.GetString(GetLength(buffer));
 
         public string Username1
         {
-            get => Util.TrimFromZero(Encoding.ASCII.GetString(Data, 0x00, 0x10));
+            get => GetString(Data.AsSpan(0x00, 0x10));
             set => WriteByte(User_name1, Encoding.ASCII.GetBytes(value));
 
         }
         public string Username2
         {
-            get => Util.TrimFromZero(Encoding.ASCII.GetString(Data, 0x10, 0x20));
+            get => GetString(Data.AsSpan(0x10, 0x20));
             set => WriteByte(User_name2, Encoding.ASCII.GetBytes(value));
         }
 
@@ -172,12 +181,12 @@ namespace WangPluginPkm
 
         public string GeoCityName 
         {
-            get=>Util.TrimFromZero(Encoding.ASCII.GetString(Data, 0x7C, 0x60)); // dunno length
+            get=>GetString(Data.AsSpan(0x7C, 0x60)); // dunno length
             set => WriteByte(GeoCity_Name, Encoding.ASCII.GetBytes(value));
         }
         public string Nickname
         {
-            get=>Util.TrimFromZero(Encoding.ASCII.GetString(Data, 0x12D, 0x20));
+            get=>GetString(Data.AsSpan(0x12D, 0x20));
             set=> WriteByte(Nick_Name, Encoding.ASCII.GetBytes(value));
 
 
