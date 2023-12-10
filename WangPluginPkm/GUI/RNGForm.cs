@@ -9,12 +9,10 @@ using System.ComponentModel;
 using System.Drawing;
 using WangPluginPkm.RNG.Methods;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
-using static WangPluginPkm.PluginUtil.PluginEnums.TeraEnum;
 using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
 using Roaming8bRNG = WangPluginPkm.RNG.Methods.Roaming8bRNG;
-using WangPluginPkm.PluginUtil.ModifyPKM;
-using static WangPluginPkm.CheckRules;
 using WangPluginPkm.RNG.ReverseRNG;
+using iText.Layout.Properties;
 
 namespace WangPluginPkm.GUI
 {
@@ -176,7 +174,7 @@ namespace WangPluginPkm.GUI
         private void Search_Click(object sender, EventArgs e)
         {
             GeneratorIsRunning(true);
-            ConditionForm.ConditionBox.Text = "searching...";
+
             uint seed = 0;
             int i = 0;
             int j = 0;
@@ -194,13 +192,19 @@ namespace WangPluginPkm.GUI
             Task.Factory.StartNew(
                 () =>
                 {
-                    seed = Util.Rand32();
+                    if (ZeroSeed_Check.Checked)
+                        seed = Convert.ToUInt32(ZeroSeed_TB.Text, 16);
+                    else
+                        seed = Util.Rand32();
                     var cloneseed = seed;
                     var pk = Editor.Data;
                     var p = Editor.Data.Clone();
 
                     while (true)
                     {
+                        string hexString = seed.ToString("X");
+                        ConditionForm.ConditionBox.Text = "正在查找...";
+                        ConditionForm.SeedBox.Text = hexString;
                         if (SearchtokenSource.IsCancellationRequested)
                         {
                             ConditionForm.ConditionBox.Text = "Stop";
@@ -231,7 +235,12 @@ namespace WangPluginPkm.GUI
                                 if (la.Info.FrameMatches == false)
                                 {
                                     if (SeedList.Count == 0)
-                                        seed = Util.Rand32();
+                                    {
+                                        if (ZeroSeed_Check.Checked)
+                                            seed++;
+                                        else
+                                            seed = Util.Rand32();
+                                    }
                                     if (SeedList.Count != 0 && j < SeedList.Count)
                                     {
                                         seed = SeedList[j];
@@ -251,11 +260,14 @@ namespace WangPluginPkm.GUI
                                     MessageBox.Show($"Success！");
                                     Editor.PopulateFields(pk, false);
                                     SAV.ReloadSlots();
-                                    ConditionForm.SeedBox.Text = $"{Convert.ToString(seed, 16)}";
+                                    ConditionForm.SeedBox.Text = $"{seed.ToString("X")}";
                                 });
                             break;
                         }
-                        seed = NextSeed(seed);
+                        if (ZeroSeed_Check.Checked)
+                            seed++;
+                        else
+                            seed = NextSeed(seed);
                     }
                     this.Invoke(() =>
                     {
@@ -332,7 +344,7 @@ namespace WangPluginPkm.GUI
                     //https://github.com/Z3Prover/z3
                     //https://stackoverflow.com/questions/11136324/an-error-appears-when-running-z3-in-c-sharp
                     else
-                        seeds = BruteForceSearch.FindSeeds(ec, pid, Editor.Data.TID16, Editor.Data.SID16);//慢速逆推暂时弃用了
+                        seeds = BruteForceSearch.FindSeeds(ec, pid, Editor.Data.TID16, Editor.Data.SID16);
 
                     if (la.Valid == true)
                     {
@@ -756,5 +768,7 @@ namespace WangPluginPkm.GUI
             GenPkm(ref pkm, vOut);
             IVCheckBox.Text = $"{pkm.IV_HP}/{pkm.IV_ATK}/{pkm.IV_DEF}/{pkm.IV_SPA}/{pkm.IV_SPD}/{pkm.IV_SPE}";
         }
+
+   
     }
 }

@@ -72,6 +72,9 @@ namespace WangPluginPkm.GUI
             BOX_TextBox = new TextBox();
             LoadEH1_BTN = new Button();
             BOX_Label = new Label();
+            PKLEditor = new TabPage();
+            PKL_CLB = new CheckedListBox();
+            import_BTN = new Button();
             tabPage1 = new TabPage();
             LoadPA8_BTN = new Button();
             OpenFile_Dialog = new OpenFileDialog();
@@ -79,12 +82,13 @@ namespace WangPluginPkm.GUI
             GP1Tab.SuspendLayout();
             EH1tabPage.SuspendLayout();
             groupBox4.SuspendLayout();
+            PKLEditor.SuspendLayout();
             tabPage1.SuspendLayout();
             SuspendLayout();
             // 
             // ImportGP_BTN
             // 
-            ImportGP_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ImportGP_BTN.Font = new System.Drawing.Font("黑体", 9F);
             ImportGP_BTN.Location = new System.Drawing.Point(273, 178);
             ImportGP_BTN.Name = "ImportGP_BTN";
             ImportGP_BTN.Size = new System.Drawing.Size(96, 33);
@@ -95,7 +99,7 @@ namespace WangPluginPkm.GUI
             // 
             // ExportGP_BTN
             // 
-            ExportGP_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ExportGP_BTN.Font = new System.Drawing.Font("黑体", 9F);
             ExportGP_BTN.Location = new System.Drawing.Point(391, 178);
             ExportGP_BTN.Name = "ExportGP_BTN";
             ExportGP_BTN.Size = new System.Drawing.Size(96, 33);
@@ -106,7 +110,7 @@ namespace WangPluginPkm.GUI
             // 
             // Edit_GP
             // 
-            Edit_GP.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Edit_GP.Font = new System.Drawing.Font("黑体", 9F);
             Edit_GP.Location = new System.Drawing.Point(158, 181);
             Edit_GP.Name = "Edit_GP";
             Edit_GP.Size = new System.Drawing.Size(96, 30);
@@ -146,7 +150,7 @@ namespace WangPluginPkm.GUI
             // SpeciesLabel
             // 
             SpeciesLabel.AutoSize = true;
-            SpeciesLabel.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            SpeciesLabel.Font = new System.Drawing.Font("黑体", 9F);
             SpeciesLabel.Location = new System.Drawing.Point(56, 22);
             SpeciesLabel.Name = "SpeciesLabel";
             SpeciesLabel.Size = new System.Drawing.Size(29, 12);
@@ -156,7 +160,7 @@ namespace WangPluginPkm.GUI
             // NickNameLabel
             // 
             NickNameLabel.AutoSize = true;
-            NickNameLabel.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            NickNameLabel.Font = new System.Drawing.Font("黑体", 9F);
             NickNameLabel.Location = new System.Drawing.Point(56, 52);
             NickNameLabel.Name = "NickNameLabel";
             NickNameLabel.RightToLeft = RightToLeft.No;
@@ -167,7 +171,7 @@ namespace WangPluginPkm.GUI
             // OT_Name_Label
             // 
             OT_Name_Label.AutoSize = true;
-            OT_Name_Label.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            OT_Name_Label.Font = new System.Drawing.Font("黑体", 9F);
             OT_Name_Label.Location = new System.Drawing.Point(20, 84);
             OT_Name_Label.Name = "OT_Name_Label";
             OT_Name_Label.Size = new System.Drawing.Size(65, 12);
@@ -232,7 +236,7 @@ namespace WangPluginPkm.GUI
             // Move1_label
             // 
             Move1_label.AutoSize = true;
-            Move1_label.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Move1_label.Font = new System.Drawing.Font("黑体", 9F);
             Move1_label.Location = new System.Drawing.Point(337, 52);
             Move1_label.Name = "Move1_label";
             Move1_label.Size = new System.Drawing.Size(35, 12);
@@ -242,7 +246,7 @@ namespace WangPluginPkm.GUI
             // Move2_label
             // 
             Move2_label.AutoSize = true;
-            Move2_label.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Move2_label.Font = new System.Drawing.Font("黑体", 9F);
             Move2_label.Location = new System.Drawing.Point(337, 81);
             Move2_label.Name = "Move2_label";
             Move2_label.Size = new System.Drawing.Size(35, 12);
@@ -259,7 +263,7 @@ namespace WangPluginPkm.GUI
             // 
             // CovertToPB7
             // 
-            CovertToPB7.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            CovertToPB7.Font = new System.Drawing.Font("黑体", 9F);
             CovertToPB7.Location = new System.Drawing.Point(37, 181);
             CovertToPB7.Name = "CovertToPB7";
             CovertToPB7.Size = new System.Drawing.Size(105, 30);
@@ -294,7 +298,7 @@ namespace WangPluginPkm.GUI
             // Time_Label
             // 
             Time_Label.AutoSize = true;
-            Time_Label.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Time_Label.Font = new System.Drawing.Font("黑体", 9F);
             Time_Label.Location = new System.Drawing.Point(32, 114);
             Time_Label.Name = "Time_Label";
             Time_Label.Size = new System.Drawing.Size(53, 12);
@@ -304,7 +308,7 @@ namespace WangPluginPkm.GUI
             // AlolaForm_Check
             // 
             AlolaForm_Check.AutoSize = true;
-            AlolaForm_Check.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            AlolaForm_Check.Font = new System.Drawing.Font("黑体", 9F);
             AlolaForm_Check.Location = new System.Drawing.Point(215, 111);
             AlolaForm_Check.Name = "AlolaForm_Check";
             AlolaForm_Check.Size = new System.Drawing.Size(84, 16);
@@ -315,7 +319,7 @@ namespace WangPluginPkm.GUI
             // ShinyCheck
             // 
             ShinyCheck.AutoSize = true;
-            ShinyCheck.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ShinyCheck.Font = new System.Drawing.Font("黑体", 9F);
             ShinyCheck.Location = new System.Drawing.Point(215, 80);
             ShinyCheck.Name = "ShinyCheck";
             ShinyCheck.Size = new System.Drawing.Size(48, 16);
@@ -333,7 +337,7 @@ namespace WangPluginPkm.GUI
             // GeoName_Label
             // 
             GeoName_Label.AutoSize = true;
-            GeoName_Label.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            GeoName_Label.Font = new System.Drawing.Font("黑体", 9F);
             GeoName_Label.Location = new System.Drawing.Point(32, 145);
             GeoName_Label.Name = "GeoName_Label";
             GeoName_Label.Size = new System.Drawing.Size(53, 12);
@@ -344,6 +348,7 @@ namespace WangPluginPkm.GUI
             // 
             PKM_TabControl.Controls.Add(GP1Tab);
             PKM_TabControl.Controls.Add(EH1tabPage);
+            PKM_TabControl.Controls.Add(PKLEditor);
             PKM_TabControl.Controls.Add(tabPage1);
             PKM_TabControl.Location = new System.Drawing.Point(12, 12);
             PKM_TabControl.Name = "PKM_TabControl";
@@ -394,10 +399,10 @@ namespace WangPluginPkm.GUI
             // 
             EH1tabPage.BackColor = System.Drawing.Color.WhiteSmoke;
             EH1tabPage.Controls.Add(groupBox4);
-            EH1tabPage.Location = new System.Drawing.Point(4, 24);
+            EH1tabPage.Location = new System.Drawing.Point(4, 26);
             EH1tabPage.Name = "EH1tabPage";
             EH1tabPage.Padding = new Padding(3);
-            EH1tabPage.Size = new System.Drawing.Size(535, 248);
+            EH1tabPage.Size = new System.Drawing.Size(535, 246);
             EH1tabPage.TabIndex = 1;
             EH1tabPage.Text = "EH1Viewer";
             // 
@@ -423,7 +428,7 @@ namespace WangPluginPkm.GUI
             // 
             // LoadEH1_BTN
             // 
-            LoadEH1_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LoadEH1_BTN.Font = new System.Drawing.Font("黑体", 9F);
             LoadEH1_BTN.Location = new System.Drawing.Point(115, 16);
             LoadEH1_BTN.Name = "LoadEH1_BTN";
             LoadEH1_BTN.Size = new System.Drawing.Size(100, 25);
@@ -435,20 +440,51 @@ namespace WangPluginPkm.GUI
             // BOX_Label
             // 
             BOX_Label.AutoSize = true;
-            BOX_Label.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            BOX_Label.Font = new System.Drawing.Font("黑体", 9F);
             BOX_Label.Location = new System.Drawing.Point(6, 21);
             BOX_Label.Name = "BOX_Label";
             BOX_Label.Size = new System.Drawing.Size(29, 12);
             BOX_Label.TabIndex = 2;
             BOX_Label.Text = "箱子";
             // 
+            // PKLEditor
+            // 
+            PKLEditor.Controls.Add(PKL_CLB);
+            PKLEditor.Controls.Add(import_BTN);
+            PKLEditor.Location = new System.Drawing.Point(4, 24);
+            PKLEditor.Name = "PKLEditor";
+            PKLEditor.Padding = new Padding(3);
+            PKLEditor.Size = new System.Drawing.Size(535, 248);
+            PKLEditor.TabIndex = 3;
+            PKLEditor.Text = "PKLEditor(WC9)";
+            PKLEditor.UseVisualStyleBackColor = true;
+            // 
+            // PKL_CLB
+            // 
+            PKL_CLB.FormattingEnabled = true;
+            PKL_CLB.Location = new System.Drawing.Point(6, 6);
+            PKL_CLB.Name = "PKL_CLB";
+            PKL_CLB.Size = new System.Drawing.Size(199, 212);
+            PKL_CLB.TabIndex = 1;
+            PKL_CLB.SelectedIndexChanged += PKL_CLB_SelectedIndexChanged;
+            // 
+            // import_BTN
+            // 
+            import_BTN.Location = new System.Drawing.Point(63, 219);
+            import_BTN.Name = "import_BTN";
+            import_BTN.Size = new System.Drawing.Size(75, 23);
+            import_BTN.TabIndex = 0;
+            import_BTN.Text = "导入";
+            import_BTN.UseVisualStyleBackColor = true;
+            import_BTN.Click += import_BTN_Click;
+            // 
             // tabPage1
             // 
             tabPage1.Controls.Add(LoadPA8_BTN);
-            tabPage1.Location = new System.Drawing.Point(4, 24);
+            tabPage1.Location = new System.Drawing.Point(4, 26);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new System.Drawing.Size(535, 248);
+            tabPage1.Size = new System.Drawing.Size(535, 246);
             tabPage1.TabIndex = 2;
             tabPage1.Text = "Test";
             tabPage1.UseVisualStyleBackColor = true;
@@ -472,7 +508,7 @@ namespace WangPluginPkm.GUI
             // 
             ClientSize = new System.Drawing.Size(565, 294);
             Controls.Add(PKM_TabControl);
-            Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Font = new System.Drawing.Font("Arial", 9F);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -485,6 +521,7 @@ namespace WangPluginPkm.GUI
             EH1tabPage.ResumeLayout(false);
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
+            PKLEditor.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -499,5 +536,8 @@ namespace WangPluginPkm.GUI
         private OpenFileDialog OpenFile_Dialog;
         private TabPage tabPage1;
         private Button LoadPA8_BTN;
+        private TabPage PKLEditor;
+        private Button import_BTN;
+        private CheckedListBox PKL_CLB;
     }
 }

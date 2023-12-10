@@ -54,12 +54,14 @@
             MethodBox = new System.Windows.Forms.ComboBox();
             ConditionBox = new System.Windows.Forms.TextBox();
             RNGLabel = new System.Windows.Forms.Label();
+            Condition_Lb = new System.Windows.Forms.Label();
+            SeedLB = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
             // HP_Label
             // 
             HP_Label.AutoSize = true;
-            HP_Label.Location = new System.Drawing.Point(64, 77);
+            HP_Label.Location = new System.Drawing.Point(73, 80);
             HP_Label.Name = "HP_Label";
             HP_Label.Size = new System.Drawing.Size(32, 17);
             HP_Label.TabIndex = 6;
@@ -68,7 +70,7 @@
             // Atk_Label
             // 
             Atk_Label.AutoSize = true;
-            Atk_Label.Location = new System.Drawing.Point(102, 77);
+            Atk_Label.Location = new System.Drawing.Point(111, 80);
             Atk_Label.Name = "Atk_Label";
             Atk_Label.Size = new System.Drawing.Size(32, 17);
             Atk_Label.TabIndex = 7;
@@ -77,7 +79,7 @@
             // Def_Label
             // 
             Def_Label.AutoSize = true;
-            Def_Label.Location = new System.Drawing.Point(139, 77);
+            Def_Label.Location = new System.Drawing.Point(148, 80);
             Def_Label.Name = "Def_Label";
             Def_Label.Size = new System.Drawing.Size(32, 17);
             Def_Label.TabIndex = 8;
@@ -86,7 +88,7 @@
             // Spa_Label
             // 
             Spa_Label.AutoSize = true;
-            Spa_Label.Location = new System.Drawing.Point(177, 77);
+            Spa_Label.Location = new System.Drawing.Point(186, 80);
             Spa_Label.Name = "Spa_Label";
             Spa_Label.Size = new System.Drawing.Size(32, 17);
             Spa_Label.TabIndex = 9;
@@ -95,7 +97,7 @@
             // Spd_Label
             // 
             Spd_Label.AutoSize = true;
-            Spd_Label.Location = new System.Drawing.Point(214, 77);
+            Spd_Label.Location = new System.Drawing.Point(223, 80);
             Spd_Label.Name = "Spd_Label";
             Spd_Label.Size = new System.Drawing.Size(32, 17);
             Spd_Label.TabIndex = 10;
@@ -104,7 +106,7 @@
             // Spe_Label
             // 
             Spe_Label.AutoSize = true;
-            Spe_Label.Location = new System.Drawing.Point(252, 77);
+            Spe_Label.Location = new System.Drawing.Point(261, 80);
             Spe_Label.Name = "Spe_Label";
             Spe_Label.Size = new System.Drawing.Size(32, 17);
             Spe_Label.TabIndex = 11;
@@ -112,7 +114,7 @@
             // 
             // HpMin
             // 
-            HpMin.Location = new System.Drawing.Point(66, 108);
+            HpMin.Location = new System.Drawing.Point(75, 111);
             HpMin.Name = "HpMin";
             HpMin.Size = new System.Drawing.Size(30, 23);
             HpMin.TabIndex = 12;
@@ -122,7 +124,7 @@
             // Min_Label
             // 
             Min_Label.AutoSize = true;
-            Min_Label.Location = new System.Drawing.Point(10, 111);
+            Min_Label.Location = new System.Drawing.Point(19, 114);
             Min_Label.Name = "Min_Label";
             Min_Label.Size = new System.Drawing.Size(44, 17);
             Min_Label.TabIndex = 13;
@@ -130,7 +132,7 @@
             // 
             // HpMax
             // 
-            HpMax.Location = new System.Drawing.Point(66, 145);
+            HpMax.Location = new System.Drawing.Point(75, 148);
             HpMax.Name = "HpMax";
             HpMax.Size = new System.Drawing.Size(30, 23);
             HpMax.TabIndex = 14;
@@ -140,7 +142,7 @@
             // Max_Label
             // 
             Max_Label.AutoSize = true;
-            Max_Label.Location = new System.Drawing.Point(10, 148);
+            Max_Label.Location = new System.Drawing.Point(19, 151);
             Max_Label.Name = "Max_Label";
             Max_Label.Size = new System.Drawing.Size(44, 17);
             Max_Label.TabIndex = 15;
@@ -148,7 +150,7 @@
             // 
             // AtkMin
             // 
-            AtkMin.Location = new System.Drawing.Point(104, 108);
+            AtkMin.Location = new System.Drawing.Point(113, 111);
             AtkMin.Name = "AtkMin";
             AtkMin.Size = new System.Drawing.Size(30, 23);
             AtkMin.TabIndex = 16;
@@ -157,7 +159,7 @@
             // 
             // AtkMax
             // 
-            AtkMax.Location = new System.Drawing.Point(104, 145);
+            AtkMax.Location = new System.Drawing.Point(113, 148);
             AtkMax.Name = "AtkMax";
             AtkMax.Size = new System.Drawing.Size(30, 23);
             AtkMax.TabIndex = 17;
@@ -166,7 +168,7 @@
             // 
             // DefMax
             // 
-            DefMax.Location = new System.Drawing.Point(142, 145);
+            DefMax.Location = new System.Drawing.Point(151, 148);
             DefMax.Name = "DefMax";
             DefMax.Size = new System.Drawing.Size(30, 23);
             DefMax.TabIndex = 18;
@@ -175,7 +177,7 @@
             // 
             // DefMin
             // 
-            DefMin.Location = new System.Drawing.Point(142, 108);
+            DefMin.Location = new System.Drawing.Point(151, 111);
             DefMin.Name = "DefMin";
             DefMin.Size = new System.Drawing.Size(30, 23);
             DefMin.TabIndex = 19;
@@ -184,7 +186,7 @@
             // 
             // SpaMin
             // 
-            SpaMin.Location = new System.Drawing.Point(179, 108);
+            SpaMin.Location = new System.Drawing.Point(188, 111);
             SpaMin.Name = "SpaMin";
             SpaMin.Size = new System.Drawing.Size(30, 23);
             SpaMin.TabIndex = 20;
@@ -193,7 +195,7 @@
             // 
             // SpaMax
             // 
-            SpaMax.Location = new System.Drawing.Point(179, 145);
+            SpaMax.Location = new System.Drawing.Point(188, 148);
             SpaMax.Name = "SpaMax";
             SpaMax.Size = new System.Drawing.Size(30, 23);
             SpaMax.TabIndex = 21;
@@ -202,7 +204,7 @@
             // 
             // SpdMin
             // 
-            SpdMin.Location = new System.Drawing.Point(217, 108);
+            SpdMin.Location = new System.Drawing.Point(226, 111);
             SpdMin.Name = "SpdMin";
             SpdMin.Size = new System.Drawing.Size(30, 23);
             SpdMin.TabIndex = 22;
@@ -211,7 +213,7 @@
             // 
             // SpdMax
             // 
-            SpdMax.Location = new System.Drawing.Point(217, 145);
+            SpdMax.Location = new System.Drawing.Point(226, 148);
             SpdMax.Name = "SpdMax";
             SpdMax.Size = new System.Drawing.Size(30, 23);
             SpdMax.TabIndex = 23;
@@ -220,7 +222,7 @@
             // 
             // SpeMin
             // 
-            SpeMin.Location = new System.Drawing.Point(255, 108);
+            SpeMin.Location = new System.Drawing.Point(264, 111);
             SpeMin.Name = "SpeMin";
             SpeMin.Size = new System.Drawing.Size(30, 23);
             SpeMin.TabIndex = 24;
@@ -229,7 +231,7 @@
             // 
             // SpeMax
             // 
-            SpeMax.Location = new System.Drawing.Point(255, 145);
+            SpeMax.Location = new System.Drawing.Point(264, 148);
             SpeMax.Name = "SpeMax";
             SpeMax.Size = new System.Drawing.Size(30, 23);
             SpeMax.TabIndex = 25;
@@ -250,12 +252,12 @@
             ShinyTypeBox1.FormattingEnabled = true;
             ShinyTypeBox1.Location = new System.Drawing.Point(66, 44);
             ShinyTypeBox1.Name = "ShinyTypeBox1";
-            ShinyTypeBox1.Size = new System.Drawing.Size(120, 25);
+            ShinyTypeBox1.Size = new System.Drawing.Size(106, 25);
             ShinyTypeBox1.TabIndex = 27;
             // 
             // SeedBox
             // 
-            SeedBox.Location = new System.Drawing.Point(191, 44);
+            SeedBox.Location = new System.Drawing.Point(214, 45);
             SeedBox.Name = "SeedBox";
             SeedBox.Size = new System.Drawing.Size(94, 23);
             SeedBox.TabIndex = 28;
@@ -266,12 +268,12 @@
             MethodBox.FormattingEnabled = true;
             MethodBox.Location = new System.Drawing.Point(66, 11);
             MethodBox.Name = "MethodBox";
-            MethodBox.Size = new System.Drawing.Size(120, 25);
+            MethodBox.Size = new System.Drawing.Size(105, 25);
             MethodBox.TabIndex = 29;
             // 
             // ConditionBox
             // 
-            ConditionBox.Location = new System.Drawing.Point(191, 11);
+            ConditionBox.Location = new System.Drawing.Point(214, 12);
             ConditionBox.Name = "ConditionBox";
             ConditionBox.Size = new System.Drawing.Size(94, 23);
             ConditionBox.TabIndex = 30;
@@ -286,10 +288,30 @@
             RNGLabel.TabIndex = 31;
             RNGLabel.Text = "RNG类型";
             // 
+            // Condition_Lb
+            // 
+            Condition_Lb.AutoSize = true;
+            Condition_Lb.Location = new System.Drawing.Point(177, 15);
+            Condition_Lb.Name = "Condition_Lb";
+            Condition_Lb.Size = new System.Drawing.Size(32, 17);
+            Condition_Lb.TabIndex = 32;
+            Condition_Lb.Text = "状态";
+            // 
+            // SeedLB
+            // 
+            SeedLB.AutoSize = true;
+            SeedLB.Location = new System.Drawing.Point(176, 48);
+            SeedLB.Name = "SeedLB";
+            SeedLB.Size = new System.Drawing.Size(37, 17);
+            SeedLB.TabIndex = 33;
+            SeedLB.Text = "Seed";
+            // 
             // PkmCondition
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(SeedLB);
+            Controls.Add(Condition_Lb);
             Controls.Add(RNGLabel);
             Controls.Add(ConditionBox);
             Controls.Add(MethodBox);
@@ -317,7 +339,7 @@
             Controls.Add(Atk_Label);
             Controls.Add(HP_Label);
             Name = "PkmCondition";
-            Size = new System.Drawing.Size(304, 184);
+            Size = new System.Drawing.Size(329, 184);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -349,5 +371,7 @@
         private System.Windows.Forms.ComboBox MethodBox;
         public System.Windows.Forms.TextBox ConditionBox;
         private System.Windows.Forms.Label RNGLabel;
+        private System.Windows.Forms.Label Condition_Lb;
+        private System.Windows.Forms.Label SeedLB;
     }
 }
