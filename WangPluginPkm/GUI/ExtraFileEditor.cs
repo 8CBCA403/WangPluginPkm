@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using static System.Buffers.Binary.BinaryPrimitives;
 using System.ComponentModel;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Diagnostics;
 
 namespace WangPluginPkm.GUI
 {
@@ -20,7 +21,22 @@ namespace WangPluginPkm.GUI
         private const string GoFilter = "Go Park Entity |*.gp1|All Files|*.*";
         private const string PK8Filter = "SWSH/PLA pokemon file |*.pb8|*.pa8|All Files|*.*";
         private const string PA8Filter = "PLA file |*.pa8|All Files|*.*";
-
+        private WC9[] MGDB_G9;
+        private static WC9[] GetWC9DB(ReadOnlySpan<byte> bin) => Get(bin, WC9.Size, static d => new WC9(d));
+        private static T[] Get<T>(ReadOnlySpan<byte> bin, int size, Func<byte[], T> ctor)
+        {
+            // bin is a multiple of size
+            // bin.Length % size == 0
+            var result = new T[bin.Length / size];
+            Debug.Assert(result.Length * size == bin.Length);
+            for (int i = 0; i < result.Length; i++)
+            {
+                var offset = i * size;
+                var slice = bin.Slice(offset, size).ToArray();
+                result[i] = ctor(slice);
+            }
+            return result;
+        }
         private GenderType Gtype = GenderType.None;
         enum GenderType
         {
@@ -295,6 +311,50 @@ namespace WangPluginPkm.GUI
             for (int i = 8; i < 360; i += 2)
                 chk += ReadUInt16LittleEndian(Data.AsSpan(i));
             return chk;
+        }
+        public static byte[] GetBinary(FileStream resource)
+        {
+
+            if (resource is null)
+                return [];
+
+            var buffer = new byte[resource.Length];
+            resource.ReadExactly(buffer);
+            return buffer;
+        }
+        private void import_BTN_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "选择文件";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            openFileDialog.Filter = "pkl文件|*.pkl|所有文件|*.*";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFileName = openFileDialog.FileName;
+                using (FileStream resource = File.OpenRead(selectedFileName))
+                {
+                    var rawDB = GetBinary(resource);
+                    if (rawDB != null)
+                    {
+                        MGDB_G9 = GetWC9DB(rawDB);
+                        PKL_CLB.DataSource = MGDB_G9;
+                        PKL_CLB.DisplayMember = "CardID";
+                        PKL_CLB.ValueMember = "CardID";
+                    }
+                    else
+                        MessageBox.Show("所选文件为空！");
+                }
+            }
+            else
+            {
+                MessageBox.Show("用户取消了文件选择。");
+            }
+
+        }
+
+        private void PKL_CLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
