@@ -1,6 +1,5 @@
 ﻿using PKHeX.Core;
 using System;
-using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.RNG.Methods
 {

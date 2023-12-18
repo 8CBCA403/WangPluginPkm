@@ -13,7 +13,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
             PKM pk;
             switch (SAV.SAV.Version)
             {
-                case  GameVersion.SS or GameVersion.HG or GameVersion.HGSS  or GameVersion.Pt :
+                case GameVersion.SS or GameVersion.HG or GameVersion.HGSS or GameVersion.Pt:
                     {
                         for (int i = 0; i < 6; i++)
                         {

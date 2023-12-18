@@ -1,18 +1,18 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using PKHeX.Core;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using PKHeX.Core;
-using System.Collections.Generic;
-using WangPluginPkm.SortBase;
+using System.Media;
+using System.Windows.Forms;
+using WangPluginPkm.PluginUtil.AchieveBase;
 using WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve;
 using WangPluginPkm.PluginUtil.AchieveBase.SpecificForm;
-using WangPluginPkm.PluginUtil.AchieveBase;
 using WangPluginPkm.PluginUtil.DexBase;
 using WangPluginPkm.PluginUtil.MeerkatBase;
-using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
+using WangPluginPkm.SortBase;
 using static WangPluginPkm.PluginUtil.Functions.DexBuildFunctions;
-using System.Media;
+using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 
 namespace WangPluginPkm.GUI
 {
@@ -195,7 +195,7 @@ namespace WangPluginPkm.GUI
             var Name = OT_Name.Text;
             if (VersionFlag.ID7Flag(SAV.SAV.Version))
                 pkm.Language = GetLanguageBox7(type7);
-            
+
             else
                 pkm.Language = GetLanguageBox5(type5);
             pkm.OT_Name = Name;
@@ -221,10 +221,10 @@ namespace WangPluginPkm.GUI
             }
             else
             {
-               pkm.TID16=T;
-               pkm.SID16=S;
-               pkm.OT_Name=N;
-               pkm.ClearNickname();
+                pkm.TID16 = T;
+                pkm.SID16 = S;
+                pkm.OT_Name = N;
+                pkm.ClearNickname();
             }
         }
         private void SortByRegionalDex(Func<PKM, IComparable>[] sortFunctions)
@@ -1412,9 +1412,9 @@ namespace WangPluginPkm.GUI
             {
                 int TS1 = (int)pk.TrainerTID7 * 1000 + (int)pk.TrainerSID7;
                 i++;
-                if (TS != TS1&&pk.Species!=0 && pk.PID != 0)
+                if (TS != TS1 && pk.Species != 0 && pk.PID != 0)
                 {
-                    R_BOX.AppendText($"第{i / 30 + 1}箱第{i % 30+1}只ID不同\n" + Environment.NewLine);
+                    R_BOX.AppendText($"第{i / 30 + 1}箱第{i % 30 + 1}只ID不同\n" + Environment.NewLine);
                     n++;
                 }
 

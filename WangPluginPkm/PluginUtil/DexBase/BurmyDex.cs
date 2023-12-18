@@ -17,11 +17,11 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         {
                             for (int j = 0; j < 3; j++)
                             {
-                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(412), 10,0,false,0,2);
+                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(412), 10, 0, false, 0, 2);
                                 pk.Form = (byte)j;
                                 if (i == 1)
                                 {
-                                   pk= Edit(pk);
+                                    pk = Edit(pk);
                                 }
                                 pk.ClearNickname();
                                 PKL.Add(pk);
@@ -36,7 +36,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         {
                             for (int j = 0; j < 3; j++)
                             {
-                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(412), 20,0,false,0,2);
+                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(412), 20, 0, false, 0, 2);
                                 pk.Form = (byte)j;
                                 if (i == 1)
                                 {

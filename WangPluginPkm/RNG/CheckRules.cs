@@ -1,6 +1,5 @@
 ﻿using PKHeX.Core;
 using System.Collections.Generic;
-using WangPluginPkm.GUI;
 namespace WangPluginPkm
 {
     public partial class CheckRules
@@ -33,7 +32,7 @@ namespace WangPluginPkm
             A0S0SPA0
         }
 
-        public PkmCondition.ShinyType Shiny  { get; set; }
+        public PkmCondition.ShinyType Shiny { get; set; }
         public MethodType Method { get; set; }
         public bool CheckIV(CheckRules r, PKM pk)
         {
@@ -54,7 +53,7 @@ namespace WangPluginPkm
         public bool CheckShiny(CheckRules r, PKM pk)
         {
             var s = (uint)(pk.TID16 ^ pk.SID16) ^ ((pk.PID >> 16) ^ (pk.PID & 0xFFFF));
-            if (r.Shiny== PkmCondition.ShinyType.None)
+            if (r.Shiny == PkmCondition.ShinyType.None)
                 return true;
             else if (r.Shiny == PkmCondition.ShinyType.Shiny && s < 8)
                 return true;
@@ -372,16 +371,16 @@ namespace WangPluginPkm
                     }
             }
             return Getqeueu;
-            
+
         }
-        public static bool CheckIV(CheckRules r,IV iv)
+        public static bool CheckIV(CheckRules r, IV iv)
         {
-            switch(iv)
+            switch (iv)
             {
                 case IV.V0:
-                    if (r.minHP  == 0 &&r.minAtk == 0 &&
-                        r.minDef == 0 &&r.minSpA == 0 &&
-                        r.minSpD == 0 &&r.minSpe == 0 )
+                    if (r.minHP == 0 && r.minAtk == 0 &&
+                        r.minDef == 0 && r.minSpA == 0 &&
+                        r.minSpD == 0 && r.minSpe == 0)
                         return true;
                     break;
                 case IV.V6:
@@ -391,19 +390,19 @@ namespace WangPluginPkm
                         return true;
                     break;
                 case IV.A0:
-                    if (r.maxAtk == 0 &&r.maxSpe != 0)
+                    if (r.maxAtk == 0 && r.maxSpe != 0)
                         return true;
                     break;
                 case IV.S0:
-                    if (r.maxAtk != 0 &&r.maxSpe == 0)
+                    if (r.maxAtk != 0 && r.maxSpe == 0)
                         return true;
                     break;
                 case IV.A0S0:
-                    if (r.maxAtk == 0 &&r.maxSpe == 0)
+                    if (r.maxAtk == 0 && r.maxSpe == 0)
                         return true;
                     break;
                 case IV.SPA0:
-                    if (r.maxAtk != 0 &&r.maxSpe != 0 &&r.minAtk == 31&& r.minSpA == 0)
+                    if (r.maxAtk != 0 && r.maxSpe != 0 && r.minAtk == 31 && r.minSpA == 0)
                         return true;
                     break;
                 case IV.A0S0SPA0:

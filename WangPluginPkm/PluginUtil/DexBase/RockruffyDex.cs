@@ -1,9 +1,5 @@
 ﻿using PKHeX.Core;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WangPluginPkm.PluginUtil.DexBase
 {
@@ -20,18 +16,18 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 744, 30, 0, false);
                         pk.ClearNickname();
                         PKL.Add(pk);
-                        for(int i=0;i<2;i++)
+                        for (int i = 0; i < 2; i++)
                         {
-                            pk = SearchDatabase.SearchPKM(SAV, Editor, 744, 30+i, i, false);
+                            pk = SearchDatabase.SearchPKM(SAV, Editor, 744, 30 + i, i, false);
                             pk.CurrentLevel = 50;
                             pk.Species = 745;
-                            pk.Form =(byte) i;
-                            if(i==0)
+                            pk.Form = (byte)i;
+                            if (i == 0)
                             {
                                 pk.Ability = 146;
                                 pk.AbilityNumber = 2;
                             }
-                            else if(i==1)
+                            else if (i == 1)
                             {
                                 pk.Ability = 72;
                                 pk.AbilityNumber = 2;
@@ -39,7 +35,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                             pk.ClearNickname();
                             PKL.Add(pk);
                         }
- 
+
                     }
                     break;
                 case GameVersion.US or GameVersion.UM or GameVersion.USUM:
@@ -116,7 +112,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                             pk.ClearNickname();
                             PKL.Add(pk);
                         }
-                       
+
                     }
                     break;
             }

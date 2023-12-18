@@ -1,10 +1,10 @@
 ﻿using System;
-using WangPluginPkm.GUI;
 using System.Windows.Forms;
+using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.Plugins
 {
-    public class EggGeneratorPlugin: WangPluginPkm
+    public class EggGeneratorPlugin : WangPluginPkm
     {
         public override string Name => "变蛋器/Egg Generator";
         public override int Priority => 2;

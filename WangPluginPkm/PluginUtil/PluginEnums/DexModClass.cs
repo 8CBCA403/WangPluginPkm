@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using PKHeX.Core;
+﻿using PKHeX.Core;
+using System.Collections.Generic;
 namespace WangPluginPkm
 {
     internal class DexModClass
@@ -169,50 +168,50 @@ namespace WangPluginPkm
                 Name = "无",
                 Value = "None",
             };
-            if (G>=1)
+            if (G >= 1)
             {
                 L.Add(None);
             }
-            if (G>=3&& V is not GameVersion.SW && V is not GameVersion.SH && G <= 8)
+            if (G >= 3 && V is not GameVersion.SW && V is not GameVersion.SH && G <= 8)
             {
                 L.Add(Unown);
             }
-            if (G >= 3 && G< 8)
+            if (G >= 3 && G < 8)
             {
                 L.Add(Deoxys);
             }
             if (G >= 4 && G <= 8)
             {
-                if(V is not GameVersion.SW &&V is not GameVersion.SH)
-                L.Add(Burmy);
+                if (V is not GameVersion.SW && V is not GameVersion.SH)
+                    L.Add(Burmy);
                 L.Add(Gastrodon);
                 L.Add(Rotom);
-                if(V is not GameVersion.SW && V is not GameVersion.SH && V is not GameVersion.BD&& V is not GameVersion.SP)
-                L.Add(Arceus);
+                if (V is not GameVersion.SW && V is not GameVersion.SH && V is not GameVersion.BD && V is not GameVersion.SP)
+                    L.Add(Arceus);
             }
-            if(G==5)
+            if (G == 5)
             {
                 L.Add(DreamRadar);
             }
-            if (G >= 5&& V is not GameVersion.BD && V is not GameVersion.SP && G <= 8)
+            if (G >= 5 && V is not GameVersion.BD && V is not GameVersion.SP && G <= 8)
             {
                 if (G != 8 && V is not GameVersion.PLA)
                 {
                     L.Add(Deerling);
-                   
+
                 }
                 if (V is not GameVersion.PLA)
                 {
                     L.Add(Genesect);
                 }
-                if (V is GameVersion.PLA&&V is not GameVersion.SW & V is not GameVersion.SH&& V is not GameVersion.SWSH)
+                if (V is GameVersion.PLA && V is not GameVersion.SW & V is not GameVersion.SH && V is not GameVersion.SWSH)
                 {
                     L.Add(Incarnate);
                 }
             }
             if (G >= 6 && G <= 8)
             {
-                if(V==GameVersion.AS||V==GameVersion.OR)
+                if (V == GameVersion.AS || V == GameVersion.OR)
                     L.Add(CosplayPikachu);
                 if (G != 8)
                 {
@@ -222,11 +221,11 @@ namespace WangPluginPkm
                     L.Add(Furfrou);
                     L.Add(Zygarde);
                 }
-                if(V!=GameVersion.PLA && V is not GameVersion.BD && V is not GameVersion.SP)
+                if (V != GameVersion.PLA && V is not GameVersion.BD && V is not GameVersion.SP)
                     L.Add(Pumpkaboo);
-                
+
             }
-            if (G >= 7&&G<=8)
+            if (G >= 7 && G <= 8)
             {
                 if (G != 8)
                 {
@@ -250,9 +249,9 @@ namespace WangPluginPkm
                     L.Add(Gigamax);
                 }
                 else if (V is GameVersion.PLA)
-                L.Add(Hisui);
+                    L.Add(Hisui);
             }
-            if(G==9)
+            if (G == 9)
             {
                 L.Add(Rotom);
                 L.Add(Flabébé);

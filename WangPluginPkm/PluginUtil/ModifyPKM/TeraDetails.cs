@@ -1,10 +1,4 @@
 ﻿using PKHeX.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WangPluginPkm.PluginUtil.PluginEnums;
 using static WangPluginPkm.PluginUtil.PluginEnums.TeraEnum;
 #nullable enable
 namespace WangPluginPkm.PluginUtil.ModifyPKM

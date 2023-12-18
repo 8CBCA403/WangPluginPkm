@@ -1,5 +1,5 @@
-﻿using System;
-using PKHeX.Core;
+﻿using PKHeX.Core;
+using System;
 namespace WangPluginPkm
 {
     internal class LCRNGReversal
@@ -24,14 +24,14 @@ namespace WangPluginPkm
                 f[val] = true; b[val] = (byte)i;
             }
         }
-        public static int GetSeeds(Span<uint> result, uint pid,bool IsUnown=false)
+        public static int GetSeeds(Span<uint> result, uint pid, bool IsUnown = false)
         {
             uint first = pid << 16;
             uint second = pid & 0xFFFF_0000;
-            if(IsUnown)
+            if (IsUnown)
             {
-                first= pid & 0xFFFF_0000;
-                second= pid << 16;
+                first = pid & 0xFFFF_0000;
+                second = pid << 16;
             }
             return GetSeeds(result, first, second);
         }
@@ -98,7 +98,7 @@ namespace WangPluginPkm
             }
             return ctr;
         }
-        public static int[] SetValuesFromSeedLCRNG(PKM pk,  uint seed)
+        public static int[] SetValuesFromSeedLCRNG(PKM pk, uint seed)
         {
             var A = LCRNG.Next(seed);
             var B = LCRNG.Next(A);
@@ -108,7 +108,7 @@ namespace WangPluginPkm
             Span<int> IVs = stackalloc int[6];
             GetIVsInt32(IVs, C >> 16, D >> 16);
             pk.SetIVs(IVs);
-            var r=IVs.ToArray();
+            var r = IVs.ToArray();
             return r;
         }
         internal static void GetIVsInt32(Span<int> result, uint r1, uint r2)

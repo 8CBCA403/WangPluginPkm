@@ -6,7 +6,7 @@ namespace WangPluginPkm
     {
         public static bool XDCGFFlag(int Species)
         {
-            if (Species is 311 or 196 or 197 )
+            if (Species is 311 or 196 or 197)
                 return true;
             else
                 return false;

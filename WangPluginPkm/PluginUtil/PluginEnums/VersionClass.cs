@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using PKHeX.Core;
+﻿using PKHeX.Core;
+using System.Collections.Generic;
 
 namespace WangPluginPkm
 {
     internal class VersionClass
     {
-       public string Name { get; set; }
-       public string Version { get; set; }
-       
+        public string Name { get; set; }
+        public string Version { get; set; }
+
         public static List<VersionClass> VersionList(ISaveFileProvider sav)
         {
             var L = new List<VersionClass>();
@@ -187,7 +187,7 @@ namespace WangPluginPkm
                         L.Add(PLA);
                     }
                 }
-                if(gen >= 9) { L.Add(SV); }
+                if (gen >= 9) { L.Add(SV); }
 
             }
             return L;

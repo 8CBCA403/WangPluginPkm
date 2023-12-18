@@ -1,18 +1,17 @@
-﻿using System;
+﻿using PKHeX.Core;
+using PKHeX.Core.AutoMod;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using PKHeX.Core;
-using PKHeX.Core.AutoMod;
-using WangPluginPkm.PluginUtil.AchieveBase;
 using WangPluginPkm.GUI;
+using WangPluginPkm.PluginUtil.AchieveBase;
 using WangPluginPkm.RNG.Methods;
-using Microsoft.Z3;
 
 namespace WangPluginPkm.PluginUtil.MeerkatBase
 {
     internal class MutiGenDex
     {
-        public static List<PKM> SetGen1(ISaveFileProvider SAV, IPKMView Editor,bool shiny)
+        public static List<PKM> SetGen1(ISaveFileProvider SAV, IPKMView Editor, bool shiny)
         {
             if (SAV.SAV is SAV7 s)
             {
@@ -111,25 +110,25 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             break;
                         case 30:
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
-                      
+
                             break;
                         case 33:
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 35:
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
-               
+
                             break;
                         case 37:
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
-                          
+
                             break;
                         case 41:
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 43:
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
-     
+
                             break;
                         case 44:
                             PKL[i] = AchieveFunc.evo2H(PKL[i]);
@@ -164,7 +163,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 59:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Poliwag, (int)GameVersion.RD,0,false,0,0,0,15);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Poliwag, (int)GameVersion.RD, 0, false, 0, 0, 0, 15);
                             break;
                         case 60:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Poliwag, (int)GameVersion.RD, 0, false, 0, 0, 0, 15);
@@ -300,23 +299,23 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             break;
                     }
                     PKL[i].Language = 2;
-                    if(i!=82)
-                    PKL[i].ClearNickname();
-                   if (i == 150 && shiny)
+                    if (i != 82)
+                        PKL[i].ClearNickname();
+                    if (i == 150 && shiny)
                     {
                         PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Mew, (int)GameVersion.E);
-                        PKL[i] = AchieveFunc.fun(PKL[i],SAV);
+                        PKL[i] = AchieveFunc.fun(PKL[i], SAV);
                         PKL[i].OT_Name = "Meerk";
                         PKL[i].AbilityNumber = 1;
                     }
-                    else if(i!=150&&i!=82)
+                    else if (i != 150 && i != 82)
                     {
-                        PKL[i] = AchieveFunc.fun(PKL[i],SAV);
+                        PKL[i] = AchieveFunc.fun(PKL[i], SAV);
                     }
                     PKL[i].SetSuggestedMoves(true);
                     PKL[i].HealPP();
-                    
-                    if(i==131)
+
+                    if (i == 131)
                     {
                         PKL[i].Move1 = 144;
                         PKL[i].Move2 = 0;
@@ -328,13 +327,13 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                     {
                         PKL[i] = ShinyMakerUI.ShinyFunctionPlus(PKL[i]);
                     }
-                   
+
                 }
             }
             SAV.ReloadSlots();
             return PKL;
         }
-        public static List<PKM> SetGen2(ISaveFileProvider SAV, IPKMView Editor,bool shiny)
+        public static List<PKM> SetGen2(ISaveFileProvider SAV, IPKMView Editor, bool shiny)
         {
             if (SAV.SAV is SAV7 s)
             {
@@ -351,12 +350,12 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                 for (int i = 0; i < PKL.Count; i++)
                 {
                     PKL[i] = EntityConverter.ConvertToType(PKL[i], SAV.SAV.PKMType, out var r2);
-                    if(i!=99)
+                    if (i != 99)
                     {
                         Random random = new Random();
                         int rand = random.Next(0, 5);
                         uint ran = (uint)random.Next(2, 8);
-                        PKL[i].EXP= PKL[i].EXP+ran;
+                        PKL[i].EXP = PKL[i].EXP + ran;
                         PKL[i].Nature = Experience.GetNatureVC(PKL[i].EXP);
                         switch (rand)
                         {
@@ -414,7 +413,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 17:
-                            PKL[i].Species=169;
+                            PKL[i].Species = 169;
                             PKL[i].CurrentLevel = 50;
                             PKL[i].RefreshAbility(2);
                             break;
@@ -422,7 +421,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 20:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 172, (int)GameVersion.SI,0,true);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 172, (int)GameVersion.SI, 0, true);
                             break;
                         case 21:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 173, (int)GameVersion.SI, 0, true);
@@ -504,7 +503,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 73:
-                            PKL[i]  = SearchDatabase.SearchPKM(SAV, Editor, 224, (int)GameVersion.SI);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 224, (int)GameVersion.SI);
                             break;
                         case 75:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 227, (int)GameVersion.SI);
@@ -528,7 +527,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 86:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 238, (int)GameVersion.SI,0,true);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 238, (int)GameVersion.SI, 0, true);
                             break;
                         case 87:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 239, (int)GameVersion.SI, 0, true);
@@ -553,10 +552,10 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             break;
                     }
                     PKL[i].ClearNickname();
-                    PKL[i] = AchieveFunc.fun(PKL[i],SAV);
+                    PKL[i] = AchieveFunc.fun(PKL[i], SAV);
                     PKL[i].SetSuggestedMoves(true);
                     PKL[i].HealPP();
-                    if(i==83)
+                    if (i == 83)
                     {
                         PKL[i].Move1 = 166;
                         PKL[i].Move2 = 0;
@@ -582,24 +581,24 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             SAV.ReloadSlots();
             return PKL;
         }
-        public static List<PKM> SetGen3(ISaveFileProvider SAV, IPKMView Editor,bool shiny)
+        public static List<PKM> SetGen3(ISaveFileProvider SAV, IPKMView Editor, bool shiny)
         {
-           if(SAV.SAV is SAV7 s)
+            if (SAV.SAV is SAV7 s)
             {
                 s.ConsoleRegion = 1;
                 s.Country = 49;
             }
-            var PKL= new List<PKM>();
+            var PKL = new List<PKM>();
             for (int i = 252; i < 387; i++)
             {
-               PKL.Add( SearchDatabase.SearchPKM(SAV,Editor,(ushort)i,(int)GameVersion.E));
+                PKL.Add(SearchDatabase.SearchPKM(SAV, Editor, (ushort)i, (int)GameVersion.E));
             }
             if (PKL.Count != 0)
             {
                 for (int i = 0; i < PKL.Count; i++)
                 {
                     PKL[i] = EntityConverter.ConvertToType(PKL[i], SAV.SAV.PKMType, out _);
-                    switch(i)
+                    switch (i)
                     {
                         case 1:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
@@ -659,8 +658,8 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             while (true)
                             {
                                 PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)265, (int)GameVersion.E);
-                                var val=WurmpleUtil.GetWurmpleEvoVal(PKL[i].EncryptionConstant);
-                                if (val== WurmpleEvolution.Cascoon)
+                                var val = WurmpleUtil.GetWurmpleEvoVal(PKL[i].EncryptionConstant);
+                                if (val == WurmpleEvolution.Cascoon)
                                     break;
                             }
                             PKL[i] = AchieveFunc.evo4(PKL[i]);
@@ -672,7 +671,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo2(PKL[i]);
                             break;
                         case 21:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)273, (int)GameVersion.E,0,false,0,0,0,3);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)273, (int)GameVersion.E, 0, false, 0, 0, 0, 3);
                             break;
                         case 22:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)273, (int)GameVersion.E, 0, false, 0, 0, 0, 3);
@@ -723,7 +722,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 46:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)298, (int)GameVersion.E,0,true);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)298, (int)GameVersion.E, 0, true);
                             break;
                         case 49:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
@@ -838,7 +837,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             break;
                         case 133:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)385, (int)GameVersion.R);
-                            if(shiny)
+                            if (shiny)
                             {
                                 PKL[i].PID = 1177749629;
                                 PKL[i].EncryptionConstant = 1177749629;
@@ -853,10 +852,10 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             }
                             break;
                     }
-                    
-                  
+
+
                     PKL[i].ClearNickname();
-                    PKL[i] = AchieveFunc.fun(PKL[i],SAV);
+                    PKL[i] = AchieveFunc.fun(PKL[i], SAV);
                     if (shiny)
                     {
                         PKL[i] = ShinyMakerUI.ShinyFunctionPlus(PKL[i]);
@@ -866,7 +865,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             SAV.ReloadSlots();
             return PKL;
         }
-        public static List<PKM> SetGen4(ISaveFileProvider SAV, IPKMView Editor,bool shiny)
+        public static List<PKM> SetGen4(ISaveFileProvider SAV, IPKMView Editor, bool shiny)
         {
             if (SAV.SAV is SAV7 s)
             {
@@ -892,7 +891,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo2(PKL[i]);
                             break;
                         case 3:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)390, (int)GameVersion.Pt, 0, false, 0, 0,0,5);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)390, (int)GameVersion.Pt, 0, false, 0, 0, 0, 5);
                             break;
                         case 4:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)390, (int)GameVersion.Pt, 0, false, 0, 0, 0, 5);
@@ -933,15 +932,15 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 26:
-                            PKL[i] =SearchDatabase.SearchPKM(SAV, Editor, (ushort)412, (int)GameVersion.Pt,0,false,0,2); ;
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)412, (int)GameVersion.Pt, 0, false, 0, 2); ;
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 27:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)412, (int)GameVersion.Pt, 0, false, 0, 1);
                             PKL[i] = AchieveFunc.evo2(PKL[i]);
-                           break;
+                            break;
                         case 28:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)415, (int)GameVersion.Pt,0,false,0,0,0,5);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)415, (int)GameVersion.Pt, 0, false, 0, 0, 0, 5);
                             break;
                         case 29:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)415, (int)GameVersion.Pt, 0, true);
@@ -1002,18 +1001,18 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 54:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)441, (int)GameVersion.Pt,0,false,0,0,0,25);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)441, (int)GameVersion.Pt, 0, false, 0, 0, 0, 25);
                             break;
                         case 58:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 60:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)447, (int)GameVersion.Pt, 0, true,0,0,1);
-                          //  PKL[i].Egg_Location = 2010;
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)447, (int)GameVersion.Pt, 0, true, 0, 0, 1);
+                            //  PKL[i].Egg_Location = 2010;
                             break;
                         case 61:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)447, (int)GameVersion.Pt, 0, true, 0, 0, 1);
-                          //  PKL[i].Egg_Location = 2010;
+                            //  PKL[i].Egg_Location = 2010;
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 65:
@@ -1137,12 +1136,12 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                     }
                 }
             }
-            
-            
+
+
             SAV.ReloadSlots();
             return PKL;
         }
-        public static List<PKM> SetGen5(ISaveFileProvider SAV, IPKMView Editor,bool shiny)
+        public static List<PKM> SetGen5(ISaveFileProvider SAV, IPKMView Editor, bool shiny)
         {
             if (SAV.SAV is SAV7 s)
             {
@@ -1155,7 +1154,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             };
             PKM pk;
             var PKL = new List<PKM>();
-          
+
             PKL.Add(SearchDatabase.SearchPKM(SAV, Editor, 494, (int)GameVersion.W2));
             for (int i = 495; i < 637; i++)
             {
@@ -1170,19 +1169,19 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             {
                 for (int i = 0; i < PKL.Count; i++)
                 {
-                   // var context = PKL[i].Context;
+                    // var context = PKL[i].Context;
                     var origin = new EvolutionOrigin(PKL[i].Species, (byte)GameVersion.W, 5, 1, 100);
                     var chain = EvolutionChain.GetOriginChain(PKL[i], origin);
-                  
+
                     EncounterGenerator5 g5 = new();
-                    
+
                     switch (i)
                     {
                         case 0:
                             PKL[i].Language = 2;
                             break;
                         case 2:
-                            PKL[i]= g5.GetPossible(PKL[i], chain, GameVersion.W, EncounterTypeGroup.Static).ToList()[0].ConvertToPKM(SAV.SAV);
+                            PKL[i] = g5.GetPossible(PKL[i], chain, GameVersion.W, EncounterTypeGroup.Static).ToList()[0].ConvertToPKM(SAV.SAV);
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 3:
@@ -1202,7 +1201,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo2(PKL[i]);
                             break;
                         case 10:
-                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 504, (int)GameVersion.W,32);
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 504, (int)GameVersion.W, 32);
                             break;
                         case 11:
                             PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 504, (int)GameVersion.W, 32);
@@ -1213,7 +1212,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             break;
                         case 15:
                             PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 509, (int)GameVersion.W, 32);
-                        
+
                             break;
                         case 16:
                             PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 509, (int)GameVersion.W, 32);
@@ -1287,7 +1286,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
 
                             break;
                         case 52://问题
-                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 546, (int)GameVersion.B, 0,1);
+                            PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 546, (int)GameVersion.B, 0, 1);
                             break;
                         case 53://问题
                             PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 546, (int)GameVersion.B, 0, 1);
@@ -1305,8 +1304,8 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo2(PKL[i]);
                             break;
                         case 61:
-                          //  PKL[i] = AchieveFunc.evo1(PKL[i]);
-                          //  PKL[i].CurrentLevel = 40;
+                            //  PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            //  PKL[i].CurrentLevel = 40;
                             break;
                         case 64:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
@@ -1340,7 +1339,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 80:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 574, (int)GameVersion.B,0,true);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 574, (int)GameVersion.B, 0, true);
                             break;
                         case 81:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 574, (int)GameVersion.B, 0, true);
@@ -1430,7 +1429,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i].CurrentLevel = 60;
                             break;
                         case 117:
-                           //龙
+                            //龙
                             break;
                         case 118:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
@@ -1462,7 +1461,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             break;
                         case 135:
                             PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 629, (int)GameVersion.B);
-                           // PKL[i].CurrentLevel = 60;
+                            // PKL[i].CurrentLevel = 60;
                             break;
                         case 136:
                             PKL[i] = SearchDatabase.SearchPKMBW(SAV, Editor, 629, (int)GameVersion.B);
@@ -1484,7 +1483,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 643, (int)GameVersion.B, 0, false, 39);
                             break;
                         case 150:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 644, (int)GameVersion.W,0,false,39);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 644, (int)GameVersion.W, 0, false, 39);
                             break;
                         case 153:
                             PKL[i].Language = 2;
@@ -1498,17 +1497,17 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
 
                     }
                     PKL[i] = EntityConverter.ConvertToType(PKL[i], SAV.SAV.PKMType, out var r2);
-                    PKL[i] = AchieveFunc.fun(PKL[i],SAV);
+                    PKL[i] = AchieveFunc.fun(PKL[i], SAV);
                     var TID16bit = (PKL[i].TID16 ^ PKL[i].SID16) & 1;
                     var bitxor = PKL[i].PID >> 31 ^ PKL[i].PID & 1;
                     if (bitxor != TID16bit)
                         PKL[i].PID ^= 1;
                     PKL[i].EncryptionConstant = PKL[i].PID;
-                    PKL[i].Gender= PKL[i].GetSaneGender();
+                    PKL[i].Gender = PKL[i].GetSaneGender();
                     if (shiny)
                     {
                         PKL[i] = ShinyMakerUI.ShinyFunctionPlus(PKL[i]);
-                        switch(i)
+                        switch (i)
                         {
                             case 143:
                                 {
@@ -1597,7 +1596,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             SAV.ReloadSlots();
             return PKL;
         }
-        public static List<PKM> SetGen6(ISaveFileProvider SAV, IPKMView Editor,bool shiny)
+        public static List<PKM> SetGen6(ISaveFileProvider SAV, IPKMView Editor, bool shiny)
         {
             if (SAV.SAV is SAV7 s)
             {
@@ -1704,15 +1703,15 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                         case 47:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
-                       case 49:
+                        case 49:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 50:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 133, (int)GameVersion.Y,0,true);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 133, (int)GameVersion.Y, 0, true);
                             PKL[i].CurrentLevel = 50;
                             PKL[i].Species = 700;
                             PKL[i].RefreshAbility(0);
-                       
+
                             break;
                         case 55:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
@@ -1754,19 +1753,19 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
 
 
                     PKL[i].ClearNickname();
-                    PKL[i] = AchieveFunc.fun(PKL[i],SAV);
+                    PKL[i] = AchieveFunc.fun(PKL[i], SAV);
 
                     if (shiny)
                     {
                         PKL[i] = ShinyMakerUI.ShinyFunctionPlus(PKL[i]);
                     }
                 }
-               
+
             }
             SAV.ReloadSlots();
             return PKL;
         }
-        public static List<PKM> SetGen7(ISaveFileProvider SAV, IPKMView Editor,bool shiny)
+        public static List<PKM> SetGen7(ISaveFileProvider SAV, IPKMView Editor, bool shiny)
         {
             if (SAV.SAV is SAV7 s)
             {
@@ -1848,7 +1847,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i].Gender = 1;
                             break;
                         case 39:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 761, (int)GameVersion.SN,0,true);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 761, (int)GameVersion.SN, 0, true);
                             break;
                         case 41:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
@@ -1908,7 +1907,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
 
                     }
                     PKL[i].ClearNickname();
-                    PKL[i] = AchieveFunc.fun(PKL[i],SAV);
+                    PKL[i] = AchieveFunc.fun(PKL[i], SAV);
                     if (shiny)
                     {
                         PKL[i] = ShinyMakerUI.ShinyFunctionPlus(PKL[i]);
@@ -1920,7 +1919,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
         }
         public static List<PKM> SetAll(ISaveFileProvider SAV, IPKMView Editor, bool shiny)
         {
-            List<PKM> PKL = SetGen1(SAV, Editor, shiny).Concat(SetGen2(SAV,  Editor, shiny)).
+            List<PKM> PKL = SetGen1(SAV, Editor, shiny).Concat(SetGen2(SAV, Editor, shiny)).
                                   Concat(SetGen3(SAV, Editor, shiny)).Concat(SetGen4(SAV, Editor, shiny)).
                                   Concat(SetGen5(SAV, Editor, shiny)).Concat(SetGen6(SAV, Editor, shiny)).
                                   Concat(SetGen7(SAV, Editor, shiny)).ToList();

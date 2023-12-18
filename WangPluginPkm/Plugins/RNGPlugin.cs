@@ -1,10 +1,10 @@
 ﻿using System;
-using WangPluginPkm.GUI;
 using System.Windows.Forms;
+using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.Plugins
 {
-     public class RNGPlugin:WangPluginPkm
+    public class RNGPlugin : WangPluginPkm
     {
         public override string Name => "RNG面板/RNG Form";
         public override int Priority => 0;
@@ -19,9 +19,9 @@ namespace WangPluginPkm.Plugins
             ctrl.Name = "RNG面板/RNG Form";
             modmenu.DropDownItems.Add(ctrl);
         }
-        private  void OpenForm(object sender, EventArgs e)
+        private void OpenForm(object sender, EventArgs e)
         {
-           
+
             var form = new RNGForm(SaveFileEditor, PKMEditor);
             form.Show();
         }

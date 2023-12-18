@@ -7,7 +7,7 @@ namespace WangPluginPkm.SortBase
     internal class Gen1_Kanto : SortingBase
     {
 
-      protected static readonly Dictionary<Species, int> dex = new Dictionary<Species, int>() {
+        protected static readonly Dictionary<Species, int> dex = new Dictionary<Species, int>() {
       {Species.Bulbasaur, 1},
       {Species.Ivysaur, 2},
       {Species.Venusaur, 3},

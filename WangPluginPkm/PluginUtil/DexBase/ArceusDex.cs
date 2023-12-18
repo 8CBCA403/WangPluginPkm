@@ -92,10 +92,10 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         for (int i = 0; i < 18; i++)
                         {
                             pk = SearchDatabase.MytheryPK(SAV, 493, 7);
-                            pk.Form =(byte) i;
-                            if(i>0)
+                            pk.Form = (byte)i;
+                            if (i > 0)
                             {
-                                pk.HeldItem = Plate[i-1];
+                                pk.HeldItem = Plate[i - 1];
                             }
                             pk.ClearNickname();
                             PKL.Add(pk);
@@ -107,7 +107,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         for (int i = 0; i < 19; i++)
                         {
                             pk = SearchDatabase.SearchPKM(SAV, Editor, 493, 47);
-                            pk.Form = (byte)i;                          
+                            pk.Form = (byte)i;
                             pk.ClearNickname();
                             PKL.Add(pk);
                         }

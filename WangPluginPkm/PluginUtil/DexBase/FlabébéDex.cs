@@ -1,9 +1,5 @@
 ﻿using PKHeX.Core;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WangPluginPkm.PluginUtil.DexBase
 {
@@ -28,7 +24,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                                 {
                                     pk = Edit1(pk);
                                 }
-                                else if(i==2)
+                                else if (i == 2)
                                 {
                                     pk = Edit2(pk);
                                 }

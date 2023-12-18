@@ -1,9 +1,8 @@
 ﻿using PKHeX.Core;
+using PKHeX.Core.AutoMod;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using PKHeX.Core.AutoMod;
-using WangPluginPkm.Properties;
 using WangPluginPkm.PluginUtil.LegalLogic;
 namespace WangPluginPkm.PluginUtil.Functions
 {
@@ -53,7 +52,7 @@ namespace WangPluginPkm.PluginUtil.Functions
         public static void LegalAll(ISaveFileProvider SaveFileEditor)
         {
             var sav = SaveFileEditor.SAV;
-           
+
             sav.LegalizeBoxes();
         }
         public static void ClearPKM(PKM pkm)

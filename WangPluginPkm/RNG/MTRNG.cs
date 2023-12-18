@@ -73,7 +73,6 @@
 */
 
 
-using PKHeX.Core;
 using System;
 
 namespace RNGReporter.Objects
@@ -89,7 +88,7 @@ namespace RNGReporter.Objects
     ///     for details
     ///     on the algorithm.
     /// </remarks>
-    public class MersenneTwister 
+    public class MersenneTwister
     {
         /* Period parameters */
         private const Int32 N = 624;
@@ -250,7 +249,7 @@ namespace RNGReporter.Objects
         }
     }
 
-    public class MersenneTwisterFast 
+    public class MersenneTwisterFast
     {
         /* Period parameters */
         private const Int32 N = 624;
@@ -417,7 +416,7 @@ namespace RNGReporter.Objects
         }
     }
 
-    public class MersenneTwisterUntempered 
+    public class MersenneTwisterUntempered
     {
         /* Period parameters */
         private const Int32 N = 624;

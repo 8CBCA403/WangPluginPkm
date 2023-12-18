@@ -14,20 +14,20 @@ namespace WangPluginPkm.PluginUtil.DexBase
         public static List<PKM> GigamaxSets(ISaveFileProvider SAV, IPKMView Editor)
         {
             List<PKM> PKL = new();
-            PK8 pk ;
+            PK8 pk;
             switch (SAV.SAV.Version)
             {
                 case GameVersion.SW or GameVersion.SH or GameVersion.SWSH:
                     for (int i = 0; i < a.Count; i++)
                     {
-                        pk =(PK8) SearchDatabase.SearchPKM(SAV, Editor, a[i], 45,0,true);
-                        if (a[i]==892)
+                        pk = (PK8)SearchDatabase.SearchPKM(SAV, Editor, a[i], 45, 0, true);
+                        if (a[i] == 892)
                             pk = (PK8)SearchDatabase.SearchPKM(SAV, Editor, a[i], 45);
-                        else if (a[i]==809)
+                        else if (a[i] == 809)
                             pk = (PK8)SearchDatabase.SearchPKM(SAV, Editor, a[i], 45);
                         pk.CurrentLevel = 100;
                         pk.Species = a[i];
-                        ModifyAbilityAndOT(ref pk,i);
+                        ModifyAbilityAndOT(ref pk, i);
                         pk.CanGigantamax = true;
                         pk.ClearNickname();
                         PKL.Add(pk);
@@ -36,18 +36,18 @@ namespace WangPluginPkm.PluginUtil.DexBase
             }
             return PKL;
         }
-        public static void ModifyAbilityAndOT(ref PK8 pk,int i)
+        public static void ModifyAbilityAndOT(ref PK8 pk, int i)
         {
-            if(pk.Species==12)
+            if (pk.Species == 12)
             {
                 pk.Ability = 14;
                 pk.AbilityNumber = 1;
             }
-            else if(pk.Species==68)
+            else if (pk.Species == 68)
             {
                 pk.OT_Name = "wang";
             }
-            else if (i==24)
+            else if (i == 24)
             {
                 pk.Nature = 15;
                 pk.StatNature = pk.Nature;
@@ -55,7 +55,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                 pk.Ability = 58;
                 pk.AbilityNumber = 2;
             }
-            else if (i==25)
+            else if (i == 25)
             {
                 pk.Nature = 13;
                 pk.StatNature = pk.Nature;
@@ -63,12 +63,12 @@ namespace WangPluginPkm.PluginUtil.DexBase
                 pk.Ability = 244;
                 pk.AbilityNumber = 1;
             }
-            else if (i==32)
+            else if (i == 32)
             {
                 pk.Ability = 260;
                 pk.AbilityNumber = 1;
             }
-            else if (i==33)
+            else if (i == 33)
             {
                 pk.Ability = 260;
                 pk.AbilityNumber = 1;

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WangPluginPkm.PluginUtil.PluginEnums
+﻿namespace WangPluginPkm.PluginUtil.PluginEnums
 {
     internal class GUIEnums
     {
@@ -25,7 +18,7 @@ namespace WangPluginPkm.PluginUtil.PluginEnums
             有梦特,
             无梦特,
             只能特性一,
-         
+
         }
         public enum DexFormLanguage5
         {
@@ -53,7 +46,7 @@ namespace WangPluginPkm.PluginUtil.PluginEnums
             Male,
             Female,
         }
-       
+
         public enum DisFormIVEV
         {
             物攻,
@@ -84,10 +77,10 @@ namespace WangPluginPkm.PluginUtil.PluginEnums
             特定形态或数量要求,
             其他宝可梦成就
         }
-       
+
         public enum RegionDex
         {
-            填满LetsGo皮卡丘LetsGo伊布的关都图鉴,  
+            填满LetsGo皮卡丘LetsGo伊布的关都图鉴,
             填满劍盾的伽勒尔图鉴,
             填满劍盾的铠岛图鉴,
             填满劍盾的王冠雪原图鉴,
@@ -263,7 +256,7 @@ namespace WangPluginPkm.PluginUtil.PluginEnums
         }
         public enum DisCombo
         {
-           一套百变怪
+            一套百变怪
         }
         public static int GetLanguageBox7(DexFormLanguage7 type7)
         {

@@ -45,7 +45,7 @@ namespace WangPluginPkm
             Method4_Unown_6V,
             Method4_Unown_0a,
             Method4_Unown_0s,
-            Method4_Unown_0a0s, 
+            Method4_Unown_0a0s,
             XDColo_0V,
             XDColo_6V,
             XDColo_0a,
@@ -113,7 +113,7 @@ namespace WangPluginPkm
         public static List<uint> Method1_Unown_0a0s = new List<uint>()
         {0x486e015e,0xc86e015e};
         public static List<uint> Method2_Unown_0V = new List<uint>()
-        {0x32cc6ef3,0x43d778ff,0x7cd1f85c,0xb2cc6ef3,0xc3d778ff	,
+        {0x32cc6ef3,0x43d778ff,0x7cd1f85c,0xb2cc6ef3,0xc3d778ff ,
          0xfcd1f85c};
         public static List<uint> Method2_Unown_6V = new List<uint>()
         {0x24c16dad,0x35cc77b9,0x6ec6f716,0xa4c16dad,0xb5cc77b9,0xeec6f716};
@@ -128,14 +128,14 @@ namespace WangPluginPkm
         public static List<uint> Method3_Unown_6V = new List<uint>()
         {0x24c16dad,0x35cc77b9,0x6ec6f716,0xa4c16dad,0xb5cc77b9,0xeec6f716};
         public static List<uint> Method3_Unown_0a = new List<uint>()
-        {0x55dbf88,0x4c63402b,0x855dbf88,0xcc63402b	};
+        {0x55dbf88,0x4c63402b,0x855dbf88,0xcc63402b };
         public static List<uint> Method3_Unown_0s = new List<uint>()
         {0x63346d45,0xe3346d45};
         public static List<uint> Method3_Unown_0a0s = new List<uint>()
         {0x79cb35b7,0xf9cb35b7};
         public static List<uint> Method4_Unown_0V = new List<uint>()
         {0x11966f24,0x1a07301f,0x91966f24,0x9a07301f};
-        public static List<uint> Method4_Unown_6V = new List<uint>() 
+        public static List<uint> Method4_Unown_6V = new List<uint>()
         {0x2ae8b215,0x33597310,0xaae8b215,0xb3597310};
         public static List<uint> Method4_Unown_0a = new List<uint>()
         {0x443de23d,0xc43de23d};
@@ -170,7 +170,7 @@ namespace WangPluginPkm
         public static List<uint> OverWorld8_0a0spa0s = new List<uint>()
         {0x2C0ABDFE,0x392CE753,0x3BC35690,0x92070197,0xDF81E3CB,
         };
-        public static List<uint> Roaming8_6V = new List<uint>()   
+        public static List<uint> Roaming8_6V = new List<uint>()
         {0x60d489e, 0xf962809, 0x1707a1bc, 0x256512ac,0x2b2e0bc5, 0x3e9e0489, 0x429f7bdd, 0x4fcd2b6c,
         0x5ce9aa13, 0x65aded09, 0x6707f338, 0x6b72fe4d,0x7171a30b, 0x733dd448, 0x7a928de5, 0x7ef34d82,
         0x874a8cd4, 0x90383581, 0x9bd65fdb, 0x9f2f499e,0xa01f78d8, 0xafecaffc, 0xb2b8db34, 0xc057809e,
@@ -190,385 +190,440 @@ namespace WangPluginPkm
             List<uint> SeedQueue = new List<uint>();
             switch (T)
             {
-                case SeedType.Method1_0V: {
+                case SeedType.Method1_0V:
+                    {
                         for (int i = 0; i < 6; i++)
                         {
                             SeedQueue.Add(Method1_0V[i]);
                         }
                         break;
                     }
-                case SeedType.Method1_6V: {
+                case SeedType.Method1_6V:
+                    {
                         for (int i = 0; i < 6; i++)
                         {
                             SeedQueue.Add(Method1_6V[i]);
                         }
                         break;
                     }
-                case SeedType.Method1_0a: {
+                case SeedType.Method1_0a:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(Method1_0a[i]);
                         }
                         break;
                     }
-                case SeedType.Method1_0s: {
+                case SeedType.Method1_0s:
+                    {
                         for (int i = 0; i < 2; i++)
                         {
                             SeedQueue.Add(Method1_0s[i]);
                         }
                         break;
                     }
-                case SeedType.Method1_0a0s: {
+                case SeedType.Method1_0a0s:
+                    {
                         for (int i = 0; i < 2; i++)
                         {
                             SeedQueue.Add(Method1_0a0s[i]);
                         }
                         break;
                     }
-                case SeedType.Method2_0V: {
+                case SeedType.Method2_0V:
+                    {
                         for (int i = 0; i < 6; i++)
                         {
                             SeedQueue.Add(Method2_0V[i]);
                         }
                         break;
                     }
-                case SeedType.Method2_6V: {
+                case SeedType.Method2_6V:
+                    {
                         for (int i = 0; i < 6; i++)
                         {
                             SeedQueue.Add(Method2_6V[i]);
                         }
                         break;
                     }
-                case SeedType.Method2_0a: {
+                case SeedType.Method2_0a:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(Method2_0a[i]);
                         }
                         break;
                     }
-                case SeedType.Method2_0s: {
+                case SeedType.Method2_0s:
+                    {
                         for (int i = 0; i < 2; i++)
                         {
                             SeedQueue.Add(Method2_0s[i]);
                         }
                         break;
                     }
-                case SeedType.Method2_0a0s: {
+                case SeedType.Method2_0a0s:
+                    {
                         for (int i = 0; i < 2; i++)
                         {
                             SeedQueue.Add(Method2_0a0s[i]);
                         }
                         break;
                     }
-                case SeedType.Method3_0V: {
+                case SeedType.Method3_0V:
+                    {
                         for (int i = 0; i < 6; i++)
                         {
                             SeedQueue.Add(Method3_0V[i]);
                         }
                         break;
                     }
-                case SeedType.Method3_6V: {
+                case SeedType.Method3_6V:
+                    {
                         for (int i = 0; i < 6; i++)
                         {
                             SeedQueue.Add(Method3_6V[i]);
                         }
                         break;
                     }
-                case SeedType.Method3_0a: {
+                case SeedType.Method3_0a:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(Method2_0a[i]);
                         }
                         break;
                     }
-                case SeedType.Method3_0s: {
+                case SeedType.Method3_0s:
+                    {
                         for (int i = 0; i < 2; i++)
                         {
                             SeedQueue.Add(Method2_0s[i]);
                         }
                         break;
                     }
-                case SeedType.Method3_0a0s: {
+                case SeedType.Method3_0a0s:
+                    {
                         for (int i = 0; i < 2; i++)
                         {
                             SeedQueue.Add(Method2_0a0s[i]);
                         }
                         break;
                     }
-                case SeedType.Method4_0V: {
+                case SeedType.Method4_0V:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(Method4_0V[i]);
                         }
                         break;
                     }
-                case SeedType.Method4_6V: {
+                case SeedType.Method4_6V:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(Method4_6V[i]);
                         }
                         break;
                     }
-                case SeedType.Method4_0a: {
+                case SeedType.Method4_0a:
+                    {
                         for (int i = 0; i < 2; i++)
                         {
                             SeedQueue.Add(Method4_0a[i]);
                         }
                         break;
                     }
-                case SeedType.Method4_0s:{
+                case SeedType.Method4_0s:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(Method4_0s[i]);
                         }
                         break;
                     }
-                case SeedType.Method4_0a0s:{
+                case SeedType.Method4_0a0s:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(Method4_0a0s[i]);
                         }
                         break;
                     }
-                case SeedType.Method1_Unown_0V:{ 
-                    for (int i = 0; i < 6; i++)
+                case SeedType.Method1_Unown_0V:
                     {
-                        SeedQueue.Add(Method1_Unown_0V[i]);
+                        for (int i = 0; i < 6; i++)
+                        {
+                            SeedQueue.Add(Method1_Unown_0V[i]);
+                        }
+                        break;
                     }
-                    break;
-            }
-                case SeedType.Method1_Unown_6V:{
+                case SeedType.Method1_Unown_6V:
+                    {
                         for (int i = 0; i < 6; i++)
                         {
                             SeedQueue.Add(Method1_Unown_6V[i]);
                         }
                         break;
                     }
-                case SeedType.Method1_Unown_0a:{
+                case SeedType.Method1_Unown_0a:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(Method1_Unown_0a[i]);
                         }
                         break;
                     }
-                case SeedType.Method1_Unown_0s:{
+                case SeedType.Method1_Unown_0s:
+                    {
                         for (int i = 0; i < 2; i++)
                         {
                             SeedQueue.Add(Method1_Unown_0s[i]);
                         }
                         break;
                     }
-                case SeedType.Method1_Unown_0a0s:{
+                case SeedType.Method1_Unown_0a0s:
+                    {
                         for (int i = 0; i < 2; i++)
                         {
                             SeedQueue.Add(Method1_Unown_0a0s[i]);
                         }
                         break;
                     }
-                case SeedType.Method2_Unown_0V:{
+                case SeedType.Method2_Unown_0V:
+                    {
                         for (int i = 0; i < 6; i++)
                         {
                             SeedQueue.Add(Method2_Unown_0V[i]);
                         }
                         break;
                     }
-                case SeedType.Method2_Unown_6V:{
+                case SeedType.Method2_Unown_6V:
+                    {
                         for (int i = 0; i < 6; i++)
                         {
                             SeedQueue.Add(Method2_Unown_6V[i]);
                         }
                         break;
                     }
-                case SeedType.Method2_Unown_0a:{
+                case SeedType.Method2_Unown_0a:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(Method2_Unown_0a[i]);
                         }
                         break;
                     }
-                case SeedType.Method2_Unown_0s:{
+                case SeedType.Method2_Unown_0s:
+                    {
                         for (int i = 0; i < 2; i++)
                         {
                             SeedQueue.Add(Method2_Unown_0s[i]);
                         }
                         break;
                     }
-                case SeedType.Method2_Unown_0a0s:{
+                case SeedType.Method2_Unown_0a0s:
+                    {
                         for (int i = 0; i < 2; i++)
                         {
                             SeedQueue.Add(Method2_Unown_0a0s[i]);
                         }
                         break;
                     }
-                case SeedType.Method3_Unown_0V:{
+                case SeedType.Method3_Unown_0V:
+                    {
                         for (int i = 0; i < 6; i++)
                         {
                             SeedQueue.Add(Method3_Unown_0V[i]);
                         }
                         break;
                     }
-                case SeedType.Method3_Unown_6V:{
+                case SeedType.Method3_Unown_6V:
+                    {
                         for (int i = 0; i < 6; i++)
                         {
                             SeedQueue.Add(Method3_Unown_6V[i]);
                         }
                         break;
                     }
-                case SeedType.Method3_Unown_0a:{
+                case SeedType.Method3_Unown_0a:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(Method3_Unown_0a[i]);
                         }
                         break;
                     }
-                case SeedType.Method3_Unown_0s:{
+                case SeedType.Method3_Unown_0s:
+                    {
                         for (int i = 0; i < 2; i++)
                         {
                             SeedQueue.Add(Method3_Unown_0s[i]);
                         }
                         break;
                     }
-                case SeedType.Method3_Unown_0a0s:{
+                case SeedType.Method3_Unown_0a0s:
+                    {
                         for (int i = 0; i < 2; i++)
                         {
                             SeedQueue.Add(Method3_Unown_0a0s[i]);
                         }
                         break;
                     }
-                case SeedType.Method4_Unown_0V:{
+                case SeedType.Method4_Unown_0V:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(Method4_Unown_0V[i]);
                         }
                         break;
                     }
-                case SeedType.Method4_Unown_6V:{
+                case SeedType.Method4_Unown_6V:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(Method4_Unown_6V[i]);
                         }
                         break;
                     }
-                case SeedType.Method4_Unown_0a:{
+                case SeedType.Method4_Unown_0a:
+                    {
                         for (int i = 0; i < 2; i++)
                         {
                             SeedQueue.Add(Method4_Unown_0a[i]);
                         }
                         break;
                     }
-                case SeedType.Method4_Unown_0s:{
+                case SeedType.Method4_Unown_0s:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(Method4_Unown_0s[i]);
                         }
                         break;
                     }
-                case SeedType.Method4_Unown_0a0s:{
+                case SeedType.Method4_Unown_0a0s:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(Method4_Unown_0a0s[i]);
                         }
                         break;
                     }
-                case SeedType.XDColo_0V:{
+                case SeedType.XDColo_0V:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(XDColo_0V[i]);
                         }
                         break;
                     }
-                case SeedType.XDColo_6V:{
+                case SeedType.XDColo_6V:
+                    {
                         for (int i = 0; i < 6; i++)
                         {
                             SeedQueue.Add(XDColo_6V[i]);
                         }
                         break;
                     }
-                case SeedType.XDColo_0a:{
+                case SeedType.XDColo_0a:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(XDColo_0a[i]);
                         }
                         break;
                     }
-                case SeedType.XDColo_0s:{
+                case SeedType.XDColo_0s:
+                    {
                         for (int i = 0; i < 2; i++)
                         {
                             SeedQueue.Add(XDColo_0s[i]);
                         }
                         break;
                     }
-                case SeedType.XDColo_0a0s:{
+                case SeedType.XDColo_0a0s:
+                    {
                         for (int i = 0; i < 4; i++)
                         {
                             SeedQueue.Add(XDColo_0a0s[i]);
                         }
                         break;
                     }
-                case SeedType.OverWorld8_0V:{
+                case SeedType.OverWorld8_0V:
+                    {
                         for (int i = 0; i < 8; i++)
                         {
                             SeedQueue.Add(OverWorld8_0V[i]);
                         }
                         break;
                     }
-                case SeedType.OverWorld8_0a:{
+                case SeedType.OverWorld8_0a:
+                    {
                         for (int i = 0; i < 6; i++)
                         {
                             SeedQueue.Add(OverWorld8_0a[i]);
                         }
                         break;
                     }
-                case SeedType.OverWorld8_0s:{
+                case SeedType.OverWorld8_0s:
+                    {
                         for (int i = 0; i < 1; i++)
                         {
                             SeedQueue.Add(OverWorld8_0s[i]);
                         }
                         break;
                     }
-                case SeedType.OverWorld8_0a0s:{
+                case SeedType.OverWorld8_0a0s:
+                    {
                         for (int i = 0; i < 5; i++)
                         {
                             SeedQueue.Add(OverWorld8_0a0s[i]);
                         }
                         break;
                     }
-                case SeedType.OverWorld8_0spa:{
+                case SeedType.OverWorld8_0spa:
+                    {
                         for (int i = 0; i < 35; i++)
                         {
                             SeedQueue.Add(OverWorld8_0spa[i]);
                         }
                         break;
                     }
-                case SeedType.OverWorld8_0a0spa0s:{
+                case SeedType.OverWorld8_0a0spa0s:
+                    {
                         for (int i = 0; i < 5; i++)
                         {
                             SeedQueue.Add(OverWorld8_0a0spa0s[i]);
                         }
                         break;
                     }
-                case SeedType.Roaming8_6V:{
+                case SeedType.Roaming8_6V:
+                    {
                         for (int i = 0; i < 28; i++)
                         {
                             SeedQueue.Add(Roaming8_6V[i]);
                         }
                         break;
                     }
-                case SeedType.Roaming8_0a:{
+                case SeedType.Roaming8_0a:
+                    {
                         for (int i = 0; i < 20; i++)
                         {
                             SeedQueue.Add(Roaming8_0a[i]);
                         }
                         break;
                     }
-                case SeedType.Roaming8_0s:{
+                case SeedType.Roaming8_0s:
+                    {
                         for (int i = 0; i < 18; i++)
                         {
                             SeedQueue.Add(Roaming8_0s[i]);
                         }
                         break;
                     }
-                case SeedType.Roaming8_0a0s:{
+                case SeedType.Roaming8_0a0s:
+                    {
                         for (int i = 0; i < 8; i++)
                         {
                             SeedQueue.Add(Roaming8_0a0s[i]);

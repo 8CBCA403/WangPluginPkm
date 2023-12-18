@@ -1,6 +1,6 @@
 ﻿using System;
-using WangPluginPkm.PluginUtil.BattleKingBase;
 using System.Windows.Forms;
+using WangPluginPkm.PluginUtil.BattleKingBase;
 
 namespace WangPluginPkm.GUI
 {
@@ -27,7 +27,7 @@ namespace WangPluginPkm.GUI
                 case 1:
                     foreach (var item in TeamListBox.CheckedItems)
                     {
-                        a += (((TournamentSub)item).Paste)+Environment.NewLine;
+                        a += (((TournamentSub)item).Paste) + Environment.NewLine;
                     }
                     break;
             }

@@ -1,5 +1,4 @@
 ﻿using PKHeX.Core;
-using PKHeX.Core.AutoMod;
 
 namespace WangPluginPkm
 {
@@ -63,7 +62,7 @@ namespace WangPluginPkm
         }
         public static PK9 cid(PK9 pk, ISaveFileProvider sav)
         {
-            pk.Language=sav.SAV.Language;
+            pk.Language = sav.SAV.Language;
             pk.TrainerTID7 = sav.SAV.TrainerTID7;
             pk.TrainerSID7 = sav.SAV.TrainerSID7;
             pk.OT_Gender = sav.SAV.Gender;

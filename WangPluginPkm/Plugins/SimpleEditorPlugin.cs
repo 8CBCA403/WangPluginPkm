@@ -1,19 +1,19 @@
-﻿using System;
-using System.Windows.Forms;
-using WangPluginPkm.GUI;
-using PKHeX.Core;
+﻿using iText.IO.Image;
+using iText.Kernel.Font;
 using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Canvas.Draw;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
-using iText.Kernel.Pdf.Canvas.Draw;
-using iText.IO.Image;
+using PKHeX.Core;
+using System;
+using System.Diagnostics;
 using System.Drawing;
-using iText.Kernel.Font;
 using System.Globalization;
 using System.Net.Http;
-using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.Plugins
 {
@@ -24,14 +24,14 @@ namespace WangPluginPkm.Plugins
         public static GameStrings GameStringsZh = GameInfo.GetStrings("zh");
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {
-          /*  var ctrl = new ToolStripMenuItem(Name)
-            {
-                Image = Properties.Resources.pokeball
-            };
-            ctrl.Click += OpenForm;
-            ctrl.Name = "常用功能/Simple Editor";
-            modmenu.DropDownItems.Add(ctrl);
-          */
+            /*  var ctrl = new ToolStripMenuItem(Name)
+              {
+                  Image = Properties.Resources.pokeball
+              };
+              ctrl.Click += OpenForm;
+              ctrl.Name = "常用功能/Simple Editor";
+              modmenu.DropDownItems.Add(ctrl);
+            */
             AddCheckerToList();
         }
         private void OpenForm(object sender, EventArgs e)
@@ -54,7 +54,7 @@ namespace WangPluginPkm.Plugins
                     insertSlotButton.Click += (s, e) =>
                          InsertSlot(SaveFileEditor.CurrentBox, info.Slot.Slot);
                     var pk = info.Slot.Read(SaveFileEditor.SAV);
-                    PKM p=PKMEditor.Data;
+                    PKM p = PKMEditor.Data;
                     var la = new LegalityAnalysis(pk);
                     var ATKIVEV = new ToolStripMenuItem("物攻手");
                     var SPAIVEV = new ToolStripMenuItem("特攻手");
@@ -88,11 +88,11 @@ namespace WangPluginPkm.Plugins
                     {
                         info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.Clearnike(pk));
                     };
-                    if(SaveFileEditor.SAV.Version is GameVersion.SL or GameVersion.VL)
-                    changeid.Click += (s, e) =>
-                    {
-                        info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.cid((PK9)pk, SaveFileEditor));
-                    };
+                    if (SaveFileEditor.SAV.Version is GameVersion.SL or GameVersion.VL)
+                        changeid.Click += (s, e) =>
+                        {
+                            info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.cid((PK9)pk, SaveFileEditor));
+                        };
                     ATKIVEV.Click += (s, e) =>
                     {
                         info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.ATKIVEV(pk));
@@ -118,10 +118,10 @@ namespace WangPluginPkm.Plugins
                     menuVSD.Closing += (s, e) => menuVSD.Items.Remove(SavePDF);
                     menuVSD.Closing += (s, e) => menuVSD.Items.Remove(clearnick);
                     menuVSD.Closing += (s, e) => menuVSD.Items.Remove(changeid);
-                    }
+                }
             };
         }
-       
+
 #nullable enable
         private static SlotViewInfo<PictureBox> GetSenderInfo(ref object sender)
         {
@@ -194,7 +194,7 @@ namespace WangPluginPkm.Plugins
         private static async void CreatePDF(string result, PKM p)
         {
             string sp = p.Species.ToString().PadLeft(4, '0');
-            string baseuri = "https://raw.githubusercontent.com/8CBCA403/pokepic/main/Normal/poke_capture_"+$"{sp}"+"_000_00000000_f_n.png";
+            string baseuri = "https://raw.githubusercontent.com/8CBCA403/pokepic/main/Normal/poke_capture_" + $"{sp}" + "_000_00000000_f_n.png";
             MessageBox.Show($"{baseuri}");
             Uri siteUri = new Uri(baseuri);
             PdfFont f1 = PdfFontFactory.CreateFont(@"Plugins\WangPluginPkm\simkai.ttf");
@@ -214,10 +214,10 @@ namespace WangPluginPkm.Plugins
             LineSeparator ls = new LineSeparator(new SolidLine());
             Paragraph content = new Paragraph($"{result}")
                 .SetTextAlignment(TextAlignment.LEFT).SetFontSize(12).SetFont(f1);
-            ImageData imageData = ImageDataFactory.Create(ImageToByte(Properties.Resources.SuperWang)); 
+            ImageData imageData = ImageDataFactory.Create(ImageToByte(Properties.Resources.SuperWang));
             iText.Layout.Element.Image image = new iText.Layout.Element.Image(imageData).ScaleAbsolute(100, 100).SetFixedPosition(1, 450, 45);
             ImageData imageData1 = ImageDataFactory.Create(ImageToByte(await LoadImage(siteUri)));
-            iText.Layout.Element.Image image1 = new iText.Layout.Element.Image(imageData1).ScaleAbsolute(100, 100).SetFixedPosition(1,450, 585);
+            iText.Layout.Element.Image image1 = new iText.Layout.Element.Image(imageData1).ScaleAbsolute(100, 100).SetFixedPosition(1, 450, 585);
             document.Add(image1);
             document.Add(image);
             document.Add(header1);
@@ -236,7 +236,7 @@ namespace WangPluginPkm.Plugins
         }
         public async static Task<Bitmap> LoadImage(Uri uri)
         {
-            Bitmap bitmapImage=new(Properties.Resources.SuperWang);
+            Bitmap bitmapImage = new(Properties.Resources.SuperWang);
             try
             {
                 using (HttpClient client = new HttpClient())
@@ -256,10 +256,10 @@ namespace WangPluginPkm.Plugins
             }
             return bitmapImage;
         }
-      
+
 #nullable disable
 
-     
-        
+
+
     }
 }

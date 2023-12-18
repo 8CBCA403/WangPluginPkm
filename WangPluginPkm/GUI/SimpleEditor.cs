@@ -1,10 +1,10 @@
-﻿using System;
-using PKHeX.Core;
-using System.Windows.Forms;
-using System.Collections.Generic;
+﻿using PKHeX.Core;
 using PKHeX.Core.Searching;
-using System.Linq;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace WangPluginPkm.GUI
 {
@@ -28,7 +28,7 @@ namespace WangPluginPkm.GUI
         private void ClearRecord_Click(object sender, EventArgs e)
         {
             ITechRecord techRecord = Editor.Data as ITechRecord;
-           // TechnicalRecordApplicator.SetRecordFlags(techRecord, false, 112);
+            // TechnicalRecordApplicator.SetRecordFlags(techRecord, false, 112);
         }
         private void LegalizeReport_Click(object sender, EventArgs e)
         {

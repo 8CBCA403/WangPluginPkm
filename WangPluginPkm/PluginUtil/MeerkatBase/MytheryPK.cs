@@ -1,9 +1,5 @@
 ﻿using PKHeX.Core;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WangPluginPkm.PluginUtil.AchieveBase;
 
 namespace WangPluginPkm.PluginUtil.MeerkatBase
@@ -17,7 +13,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             if (SAV.SAV.Version is GameVersion.US or GameVersion.UM or GameVersion.USUM)
             {
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Mew, (int)GameVersion.E);
-                pk = AchieveFunc.fun(pk,SAV);
+                pk = AchieveFunc.fun(pk, SAV);
                 pk.OT_Name = "Meerk";
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Deoxys, (int)GameVersion.E);
@@ -32,7 +28,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             PKM pk;
             if (SAV.SAV.Version is GameVersion.US or GameVersion.UM or GameVersion.USUM)
             {
-                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Meloetta, (int)GameVersion.W2,0,false,40001);
+                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Meloetta, (int)GameVersion.W2, 0, false, 40001);
                 pk.Language = 2;
                 pk.ClearNickname();
                 PKL.Add(pk);
@@ -62,7 +58,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                 pk.Language = 2;
                 pk.ClearNickname();
                 PKL.Add(pk);
-                pk = SearchDatabase.SearchPKM(SAV, Editor,719, 27, 0);
+                pk = SearchDatabase.SearchPKM(SAV, Editor, 719, 27, 0);
                 pk.Language = 2;
                 pk.ClearNickname();
                 PKL.Add(pk);
@@ -77,7 +73,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             {
                 pk = SearchDatabase.SearchPKM(SAV, Editor, 446, (int)GameVersion.SN, 0, false, 40051);
                 PKL.Add(pk);
-                pk = SearchDatabase.SearchPKM(SAV, Editor, 658, (int)GameVersion.SN, 0,false,30010);
+                pk = SearchDatabase.SearchPKM(SAV, Editor, 658, (int)GameVersion.SN, 0, false, 30010);
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, 801, (int)GameVersion.SN, 0, false, 40001);
                 PKL.Add(pk);

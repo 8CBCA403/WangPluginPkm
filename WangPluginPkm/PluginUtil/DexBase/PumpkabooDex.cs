@@ -1,10 +1,6 @@
 ﻿using PKHeX.Core;
 using PKHeX.Core.AutoMod;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WangPluginPkm.PluginUtil.DexBase
 {
@@ -25,7 +21,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                             {
                                 pk = SearchDatabase.SearchPKM(SAV, Editor, 710, 24, 0, true);
                                 pk.Form = (byte)j;
-                                if(i==1)
+                                if (i == 1)
                                 {
                                     pk = Edit(pk);
                                 }

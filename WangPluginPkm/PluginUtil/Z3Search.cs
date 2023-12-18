@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Microsoft.Z3;
+﻿using Microsoft.Z3;
 using PKHeX.Core;
-using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 namespace WangPluginPkm
 {
     public static class Z3Search
     {
         public static IEnumerable<ulong> GetSeeds(uint ec, uint pid)
         {
-            
+
             foreach (var seed in FindPotentialSeeds(ec, pid, false))
                 yield return seed;
             foreach (var seed in FindPotentialSeeds(ec, pid ^ 0x10000000, false))
@@ -22,7 +21,7 @@ namespace WangPluginPkm
         {
             using var ctx = new Context(new Dictionary<string, string> { { "model", "true" } });
             var exp = CreateModel(ctx, ec, pid, shiny, out var s0);
-            
+
             Model m;
             while ((m = Check(ctx, exp)) != null)
             {
@@ -37,7 +36,7 @@ namespace WangPluginPkm
 
         private static BoolExpr CreateModel(Context ctx, uint ec, uint pid, bool shiny, out BitVecExpr s0)
         {
-            
+
             s0 = ctx.MkBVConst("s0", 64);
             BitVecExpr s1 = ctx.MkBV(Xoroshiro128Plus.XOROSHIRO_CONST, 64);
 

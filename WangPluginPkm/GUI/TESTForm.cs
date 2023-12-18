@@ -1,12 +1,8 @@
-﻿using System.Windows.Forms;
-using PKHeX.Core;
-using System.Collections.Generic;
-using PKHeX.Core.Searching;
-using System.Linq;
-using System;
-using Python.Included;
+﻿using PKHeX.Core;
 using Python.Runtime;
+using System;
 using System.IO;
+using System.Windows.Forms;
 
 
 
@@ -84,7 +80,7 @@ namespace WangPluginPkm.GUI
                 // 输出字典内容
                 foreach (dynamic kvp in dictionary)
                 {
-                    textBox1.Text+=($"{kvp.Key}: {kvp.Value}");
+                    textBox1.Text += ($"{kvp.Key}: {kvp.Value}");
                 }
             }
 

@@ -1,10 +1,5 @@
 ﻿using PKHeX.Core;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WangPluginPkm.RNG.Methods;
 
 namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
 {
@@ -14,7 +9,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
         {
             List<PKM> PKL = new();
             PKM pk;
-            if(SAV.SAV.Version is GameVersion.US or GameVersion.UM or GameVersion.USUM)
+            if (SAV.SAV.Version is GameVersion.US or GameVersion.UM or GameVersion.USUM)
             {
                 var sa = (SAV7)SAV.SAV;
                 int l = 0;
@@ -24,24 +19,24 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
                     l = 2;
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.HoOh, (int)GameVersion.C);
                 pk.Language = l;
-                pk =AchieveFunc.fun(pk,SAV);
+                pk = AchieveFunc.fun(pk, SAV);
                 pk.Version = 41;
                 pk.SID16 = 0;
                 PKL.Add(pk);
 
-                pk =SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Lugia, (int)GameVersion.C);
+                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Lugia, (int)GameVersion.C);
                 pk.Language = l;
-                pk = AchieveFunc.fun(pk,SAV);
+                pk = AchieveFunc.fun(pk, SAV);
                 pk.Version = 41;
                 pk.SID16 = 0;
-                
+
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Suicune, (int)GameVersion.C);
                 pk.Language = l;
-                pk = AchieveFunc.fun(pk,SAV);
+                pk = AchieveFunc.fun(pk, SAV);
                 pk.Version = 41;
                 pk.SID16 = 0;
-               
+
                 PKL.Add(pk);
 
 

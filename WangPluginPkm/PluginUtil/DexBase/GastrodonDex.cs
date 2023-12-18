@@ -1,9 +1,5 @@
 ﻿using PKHeX.Core;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WangPluginPkm.PluginUtil.DexBase
 {
@@ -22,7 +18,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         {
                             for (int j = 0; j < 2; j++)
                             {
-                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(422 + i), 10,0,true);
+                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(422 + i), 10, 0, true);
                                 pk.Form = (byte)j;
                                 if (i == 1)
                                 {
@@ -62,7 +58,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         {
                             for (int j = 1; j < 2; j++)
                             {
-                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(422 + i), 26,j);
+                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(422 + i), 26, j);
                                 pk.Form = (byte)j;
                                 if (i == 1)
                                 {
@@ -131,7 +127,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         {
                             for (int j = 0; j < 2; j++)
                             {
-                                pk = SearchDatabase.SearchPKM(SAV, Editor, 422, 48,i,true);
+                                pk = SearchDatabase.SearchPKM(SAV, Editor, 422, 48, i, true);
                                 pk.Form = (byte)j;
                                 if (i == 1)
                                 {
@@ -149,7 +145,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         {
                             for (int j = 0; j < 2; j++)
                             {
-                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(422 + i), 47,j);
+                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)(422 + i), 47, j);
                                 pk.Form = (byte)j;
                                 if (i == 1)
                                 {

@@ -1,13 +1,13 @@
-﻿using System;
+﻿using PKHeX.Core;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using PKHeX.Core;
-using System.Windows.Forms;
 using System.ComponentModel;
-using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
-using static WangPluginPkm.PluginUtil.Functions.DistributionFunctions;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 using WangPluginPkm.PluginUtil.DisBase;
+using static WangPluginPkm.PluginUtil.Functions.DistributionFunctions;
+using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 
 namespace WangPluginPkm.GUI
 {

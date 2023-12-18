@@ -10,14 +10,14 @@ namespace WangPluginPkm
             else
                 return false;
         }
-        public static bool Gen4Flag (int Version)
+        public static bool Gen4Flag(int Version)
         {
             if (Version is 10 or 11 or 12 or 7 or 8)
                 return true;
             else
                 return false;
         }
-        public static bool Gen5Flag (int Version)
+        public static bool Gen5Flag(int Version)
         {
             if (Version is 20 or 21 or 22 or 23)
                 return true;
@@ -68,7 +68,7 @@ namespace WangPluginPkm
         }
         public static bool Gen2VCFlag(int Version)
         {
-            if (Version is 39 or 40 or 41 )
+            if (Version is 39 or 40 or 41)
                 return true;
             else
                 return false;
@@ -89,8 +89,8 @@ namespace WangPluginPkm
         }
         public static bool ID7Flag(GameVersion version)
         {
-            if (version  is GameVersion.SN or GameVersion.MN or GameVersion.US or GameVersion.UM or
-                 GameVersion.GP or GameVersion.GE or GameVersion.SW or GameVersion.SH or GameVersion.PLA or 
+            if (version is GameVersion.SN or GameVersion.MN or GameVersion.US or GameVersion.UM or
+                 GameVersion.GP or GameVersion.GE or GameVersion.SW or GameVersion.SH or GameVersion.PLA or
                  GameVersion.BD or GameVersion.SP or GameVersion.VL or GameVersion.SL or GameVersion.SV)
                 return true;
             else

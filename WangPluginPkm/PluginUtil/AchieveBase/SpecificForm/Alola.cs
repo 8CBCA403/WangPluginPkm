@@ -1,9 +1,5 @@
 ﻿using PKHeX.Core;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
 {
@@ -20,10 +16,10 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                         for (int i = 722; i < 808; i++)
                         {
                             pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)i, 32);
-                            if(i is 805 or 797 or 795 or 780)
+                            if (i is 805 or 797 or 795 or 780)
                                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)i, 33);
                             if (i is 761)
-                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)i, 33,0,true);
+                                pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)i, 33, 0, true);
                             pk.CurrentLevel = 100;
                             pk.Species = (ushort)i;
                             if (pk.Species == 737)
@@ -63,8 +59,8 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                                 pk.Ability = 5;
                             }
                             pk.ClearNickname();
-                            if(pk.Species != 802 && pk.Species != 807 && pk.Species != 761)
-                            pk = AchieveFunc.fun(pk,SAV);
+                            if (pk.Species != 802 && pk.Species != 807 && pk.Species != 761)
+                                pk = AchieveFunc.fun(pk, SAV);
                             PKL.Add(pk);
                         }
                     }

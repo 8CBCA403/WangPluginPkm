@@ -1,9 +1,7 @@
-﻿using System;
+﻿using PKHeX.Core;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-using WangPluginPkm.GUI;
-using PKHeX.Core;
-using WangPluginPkm.PluginUtil.PluginEnums;
 
 namespace WangPluginPkm
 {
@@ -22,7 +20,7 @@ namespace WangPluginPkm
             }
             return "没找到Seed";
         }
-        public static string Raidfinder(string s, PKM pk,int MinIV, int A, int G)
+        public static string Raidfinder(string s, PKM pk, int MinIV, int A, int G)
         {
             string T1;
             string T2;
@@ -111,8 +109,8 @@ namespace WangPluginPkm
             var num7 = (int)xoroshiro128Plus.NextInt(129uL) + (int)xoroshiro128Plus.NextInt(128uL);
             var num8 = (int)xoroshiro128Plus.NextInt(129uL) + (int)xoroshiro128Plus.NextInt(128uL);
             var IV = array[0] + "/" + array[1] + "/" + array[2] + "/" + array[3] + "/" + array[4] + "/" + array[5];
-            if (EC == pk.EncryptionConstant && 
-                PID == pk.PID && 
+            if (EC == pk.EncryptionConstant &&
+                PID == pk.PID &&
                 pk.IV_HP == array[0] &&
                 pk.IV_ATK == array[1] &&
                 pk.IV_DEF == array[2] &&
@@ -165,22 +163,22 @@ namespace WangPluginPkm
                 ability = 3;
             if (num6 == pk.Gender && ability == pk.AbilityNumber - 1)
             {
-                C2="Green";
+                C2 = "Green";
             }
             else
             {
-                C2="Orange";
+                C2 = "Orange";
             }
             var scale = (IScaledSize)pk;
             if (scale.HeightScalar == num7 && scale.WeightScalar == num8)
             {
-               C3="Green";
+                C3 = "Green";
             }
             else
             {
-                C3="Orange";
+                C3 = "Orange";
             }
-            T=T1+"\n"+C1+"\n"+T2+"\n"+C2+"\n"+T3+"\n"+C3;
+            T = T1 + "\n" + C1 + "\n" + T2 + "\n" + C2 + "\n" + T3 + "\n" + C3;
             return T;
             #region 
             /*   ulong initialseedvalue = ulong.Parse(Seed_Box.Text, NumberStyles.HexNumber) & 0xFFFFFFFFFFFFFFFFuL;

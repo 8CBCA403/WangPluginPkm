@@ -1,15 +1,15 @@
 ﻿using PKHeX.Core;
+using PKHeX.Core.AutoMod;
+using PKHeX.Core.Enhancements;
 using System;
-using System.Linq;
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Windows.Forms;
 using WangPluginPkm.PluginUtil.ModifyPKM;
-using System.Text;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Drawing;
-using PKHeX.Core.Enhancements;
-using PKHeX.Core.AutoMod;
 
 namespace WangPluginPkm.GUI
 {
@@ -472,7 +472,7 @@ namespace WangPluginPkm.GUI
 
         private void RUN_BTN_Click(object sender, EventArgs e)
         {
-            ModifyBoxes(mod, SAV.SAV.Generation, (int)StartBox_NUM.Value - 1, (int)Start_NUM.Value - 1, (int)EndBox_NUM.Value - 1, (int)End_NUM.Value-1 );
+            ModifyBoxes(mod, SAV.SAV.Generation, (int)StartBox_NUM.Value - 1, (int)Start_NUM.Value - 1, (int)EndBox_NUM.Value - 1, (int)End_NUM.Value - 1);
             SAV.ReloadSlots();
             MessageBox.Show("覆写完成！");
         }

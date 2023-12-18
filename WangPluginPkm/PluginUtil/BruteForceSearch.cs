@@ -1,6 +1,5 @@
-﻿using System;
+﻿using PKHeX.Core;
 using System.Collections.Generic;
-using PKHeX.Core;
 
 namespace WangPluginPkm
 {
@@ -61,6 +60,6 @@ namespace WangPluginPkm
             const uint tmp = unchecked((uint)Xoroshiro128Plus.XOROSHIRO_CONST) & 0xFFFFFFFF;
             return tmp < ec ? ec - tmp : 0xFFFFFFFF - (tmp - ec) + 1;
         }
-    
-}
+
+    }
 }

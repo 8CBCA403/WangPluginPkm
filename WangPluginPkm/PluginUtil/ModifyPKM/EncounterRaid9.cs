@@ -1,9 +1,6 @@
 ﻿using PKHeX.Core;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WangPluginPkm.PluginUtil.ModifyPKM
 {
@@ -30,7 +27,7 @@ namespace WangPluginPkm.PluginUtil.ModifyPKM
         public byte Scale { get => GetScale(); }
         public IndividualValueSet IVs { get => GetIVs(); }
         public sbyte Gender { get => GetGender(); }
-     
+
         public ushort RandRateMinScarlet { get => GetRandRateMinScarlet(); }
         public ushort RandRateMinViolet { get => GetRandRateMinViolet(); }
 
@@ -233,10 +230,10 @@ namespace WangPluginPkm.PluginUtil.ModifyPKM
                 return Nature.Random;
             else if (Encounter is EncounterMight9 might)
                 return might.Nature;
-            
+
             else if (Encounter is EncounterRaid9 raid)
                 return raid.Nature;
-           
+
             else if (Encounter is EncounterMight9 h_might)
                 return h_might.Nature;
             else throw new ArgumentOutOfRangeException();
@@ -299,6 +296,6 @@ namespace WangPluginPkm.PluginUtil.ModifyPKM
             else throw new ArgumentOutOfRangeException();
         }
 
-      
+
     }
 }

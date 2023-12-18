@@ -1,9 +1,5 @@
 ﻿using PKHeX.Core;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WangPluginPkm.PluginUtil.DexBase
 {
@@ -22,7 +18,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         {
                             pk = SearchDatabase.SearchPKM(SAV, Editor, 718, 30);
                             pk.Form = (byte)i;
-                            if(i is 2 or 3)
+                            if (i is 2 or 3)
                             {
                                 pk.Ability = 211;
                             }

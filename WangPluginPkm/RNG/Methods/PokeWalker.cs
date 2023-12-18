@@ -21,7 +21,7 @@ namespace WangPluginPkm.RNG.Methods
             if (nature >= 24)
                 nature = 0;
             uint pid = (uint)((TID16 ^ SID16) >> 8 ^ 0xFF) << 24; // the most significant byte of the PID is chosen so the Pokémon can never be shiny.
-                                                                // Ensure nature is set to required nature without affecting shininess
+                                                                  // Ensure nature is set to required nature without affecting shininess
             pid += (uint)nature - pid % 25;
 
             if (gr is 0 or >= 0xFE) // non-dual gender
