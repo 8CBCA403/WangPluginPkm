@@ -86,8 +86,8 @@ namespace WangPluginPkm.PluginUtil.DexBase
                             }
                             else if (USUM[i] is 719)
                             {
-                                PK6 pk6 = (PK6)SearchDatabase.SearchPKM(SAV, Editor, USUM[i], 25, 0, false);
-                                pk = pk6.ConvertToPK7();
+                                var pk6 = SearchDatabase.SearchPKM(SAV, Editor, USUM[i], 25, 0, false);
+                                pk = pk6;
                                 pk.Language = 2;
                             }
                             pk.CurrentLevel = 100;

@@ -32,7 +32,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
                 pk.OT_Gender = 0;
             }
 
-            pk.SetSuggestedMoves();
+            //pk.SetSuggestedMoves();
             pk.HealPP();
             return pk;
         }

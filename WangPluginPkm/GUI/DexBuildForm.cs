@@ -11,6 +11,8 @@ using WangPluginPkm.PluginUtil.AchieveBase.SpecificForm;
 using WangPluginPkm.PluginUtil.DexBase;
 using WangPluginPkm.PluginUtil.MeerkatBase;
 using WangPluginPkm.SortBase;
+using static iText.Svg.SvgConstants;
+using static WangPluginPkm.CheckRules;
 using static WangPluginPkm.PluginUtil.Functions.DexBuildFunctions;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 
@@ -1423,6 +1425,21 @@ namespace WangPluginPkm.GUI
             {
                 MessageBox.Show("太棒啦全对！");
             }
+        }
+
+        private void Quick_EV_BTN_Click(object sender, EventArgs e)
+        {
+            SAV.SAV.ModifyBoxes(EditEV);
+            SAV.ReloadSlots();
+            MessageBox.Show("速配完成！");
+           
+        }
+
+        private void EditEV(PKM pk)
+        {
+            Span<int> values = stackalloc int[6];
+            EffortValues.SetMax(values, pk);
+            pk.SetEVs(values);
         }
     }
 }

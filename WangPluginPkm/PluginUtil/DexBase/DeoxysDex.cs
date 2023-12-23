@@ -46,10 +46,10 @@ namespace WangPluginPkm.PluginUtil.DexBase
                 or GameVersion.UM or GameVersion.SM or GameVersion.USUM:
                     for (int i = 0; i < 4; i++)
                     {
-                        PK6 pk6 = (PK6)SearchDatabase.SearchPKM(SAV, Editor, 386, 27, 0, false, 316);
+                        var pk6 = SearchDatabase.SearchPKM(SAV, Editor, 386, 27, 0, false, 316);
                         pk6.Form = (byte)i;
                         pk6.OT_Name = "wang";
-                        PKL.Add(pk6.ConvertToPK7());
+                        PKL.Add(pk6);
                     }
                     break;
                 default:
