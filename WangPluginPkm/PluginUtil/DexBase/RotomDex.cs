@@ -17,7 +17,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                     {
                         for (int i = 0; i < 6; i++)
                         {
-                            pk = SearchDatabase.SearchPKM(SAV, Editor, 479, 12);
+                            pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Rotom, 12);
                             pk.Form = (byte)i;
                             PKL.Add(pk);
                         }
@@ -28,7 +28,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                     {
                         for (int i = 0; i < 6; i++)
                         {
-                            pk = SearchDatabase.SearchPKM(SAV, Editor, 479, 20, 0, true);
+                            pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Rotom, 20, 0, true);
                             pk.CurrentLevel = 50;
                             pk.Form = (byte)i;
                             pk.SetSuggestedMoves();
@@ -41,7 +41,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                 GameVersion.AS or GameVersion.XY or GameVersion.ORAS:
                     for (int i = 0; i < 6; i++)
                     {
-                        pk = SearchDatabase.SearchPKM(SAV, Editor, 479, 24);
+                        pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Rotom, 24);
                         pk.Form = (byte)i;
                         PKL.Add(pk);
                     }
@@ -51,7 +51,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                     {
                         for (int i = 0; i < 6; i++)
                         {
-                            pk = SearchDatabase.SearchPKM(SAV, Editor, 479, 30, 0, true);
+                            pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Rotom, 30, 0, true);
                             pk.CurrentLevel = 50;
                             pk.Form = (byte)i;
                             pk.SetSuggestedMoves();
@@ -64,7 +64,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                     {
                         for (int i = 0; i < 6; i++)
                         {
-                            pk = SearchDatabase.SearchPKM(SAV, Editor, 479, 44, 0, true);
+                            pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Rotom, 44, 0, true);
                             pk.Form = (byte)i;
                             pk.CurrentLevel = 50;
                             pk.SetSuggestedMoves();
@@ -77,7 +77,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                     {
                         for (int i = 0; i < 6; i++)
                         {
-                            pk = SearchDatabase.SearchPKM(SAV, Editor, 479, 48);
+                            pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Rotom, 48);
                             pk.Form = (byte)i;
                             PKL.Add(pk);
                         }
@@ -87,7 +87,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                     {
                         for (int i = 0; i < 6; i++)
                         {
-                            pk = SearchDatabase.SearchPKM(SAV, Editor, 479, 47);
+                            pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Rotom, 47);
                             pk.Form = (byte)i;
                             var pa8 = (PA8)pk;
                             pa8.ResetHeight();
@@ -101,8 +101,12 @@ namespace WangPluginPkm.PluginUtil.DexBase
                     {
                         for (int i = 0; i < 6; i++)
                         {
-                            pk = SearchDatabase.SearchPKM(SAV, Editor, 479, 50);
+                            pk = SearchDatabase.SearchPKM(SAV, Editor,(ushort)Species.Rotom, 50);
                             pk.Form = (byte)i;
+                            if(pk.Form!=0)
+                            {
+                               ((PK9)pk).TeraTypeOriginal=MoveType.Electric;
+                            }
                             PKL.Add(pk);
                         }
                     }

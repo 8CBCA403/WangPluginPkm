@@ -352,7 +352,8 @@ namespace WangPluginPkm.GUI
 
         private void PKL_CLB_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
+            PKL_TEXT.Text += MGDB_G9[PKL_CLB.SelectedIndex].CardTitleIndex.ToString() + "\r\n";
         }
     }
 }
