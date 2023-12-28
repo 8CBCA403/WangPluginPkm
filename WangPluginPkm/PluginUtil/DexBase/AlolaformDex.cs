@@ -1,9 +1,5 @@
 ﻿using PKHeX.Core;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WangPluginPkm.PluginUtil.DexBase
 {
@@ -14,7 +10,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                  52,53,74,75,76,88,89,103,105
                 };
         public static List<ushort> SWSH = new List<ushort>
-               { 
+               {
                  26,27,28,37,38,50,51,52,53,103,105
                 };
         public static List<PKM> AlolaSets(ISaveFileProvider SAV, IPKMView Editor)
@@ -27,7 +23,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                 case GameVersion.SN or GameVersion.MN or GameVersion.US or GameVersion.UM:
                     for (int i = 0; i < Alola.Count; i++)
                     {
-                        pk = SearchDatabase.SearchPKM(SAV, Editor, Alola[i], 30,1,true);
+                        pk = SearchDatabase.SearchPKM(SAV, Editor, Alola[i], 30, 1, true);
                         pk.CurrentLevel = 100;
                         pk.Species = Alola[i];
                         pk.Form = 1;
@@ -74,11 +70,11 @@ namespace WangPluginPkm.PluginUtil.DexBase
                 pk.AbilityNumber = 1;
                 pk.Ability = 130;
             }
-            if(pk.Species==76)
+            if (pk.Species == 76)
             {
                 pk.OT_Name = "wang";
             }
-          
+
         }
     }
 }

@@ -21,7 +21,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                                 pk.Ability = 144;
                             pk.ClearNickname();
                             PKL.Add(pk);
-                         }
+                        }
                         for (int i = 0; i < 2; i++)
                         {
                             pk = SearchDatabase.SearchPKM(SAV, Editor, 642, 20);
@@ -113,7 +113,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                     {
                         for (int i = 0; i < 2; i++)
                         {
-                            PA8 pa8 =(PA8) SearchDatabase.SearchPKM(SAV, Editor, 641, 47);
+                            PA8 pa8 = (PA8)SearchDatabase.SearchPKM(SAV, Editor, 641, 47);
                             pa8.Form = (byte)i;
                             if (i == 1)
                                 pa8.Ability = 144;
@@ -135,7 +135,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         }
                         for (int i = 0; i < 2; i++)
                         {
-                            PA8 pa8 =(PA8) SearchDatabase.SearchPKM(SAV, Editor, 645, 47);
+                            PA8 pa8 = (PA8)SearchDatabase.SearchPKM(SAV, Editor, 645, 47);
                             pa8.Form = (byte)i;
                             if (i == 1)
                                 pa8.Ability = 22;

@@ -1,15 +1,11 @@
-﻿using System;
+﻿using PKHeX.Core;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PKHeX.Core;
 
 namespace WangPluginPkm.PluginUtil.DisBase
 {
     internal class PerfectDitto
     {
-     
+
         public static List<PKM> SearchDitto(ISaveFileProvider SAV, IPKMView Editor)
         {
             List<PKM> PKL = new();
@@ -20,8 +16,8 @@ namespace WangPluginPkm.PluginUtil.DisBase
                     {
                         for (int i = 0; i < 30; i++)
                         {
-                            pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Ditto, 50,0,false,28);
-                            pk=EditPKM(pk, i);
+                            pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Ditto, 50, 0, false, 28);
+                            pk = EditPKM(pk, i);
                             pk.ClearNickname();
                             PKL.Add(pk);
                         }
@@ -30,7 +26,7 @@ namespace WangPluginPkm.PluginUtil.DisBase
             }
             return PKL;
         }
-        public static PKM EditPKM(PKM pk,int n)
+        public static PKM EditPKM(PKM pk, int n)
         {
             int[] Atkiv = { 31, 31, 31, 31, 31, 31 };
             int[] Spaiv = { 31, 0, 31, 31, 31, 31 };
@@ -158,7 +154,7 @@ namespace WangPluginPkm.PluginUtil.DisBase
                     pk.Nature = (int)Nature.Timid;
                     pk.IVs = Atkiv;
                     break;
-               
+
 
             }
             pk.StatNature = pk.Nature;

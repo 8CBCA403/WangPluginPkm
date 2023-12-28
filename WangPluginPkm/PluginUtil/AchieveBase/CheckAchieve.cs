@@ -1,9 +1,4 @@
 ﻿using PKHeX.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WangPluginPkm.PluginUtil.AchieveBase
 {
@@ -15,19 +10,19 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
             {
                 return true;
             }
-            
+
             return false;
         }
         public static bool pokemonIsBall(PKM pkm, Ball ball)
         {
-            if (pkm.Ball==(int)ball)
+            if (pkm.Ball == (int)ball)
             {
                 return true;
             }
 
             return false;
         }
-        public static bool pokemonIsNature(PKM pkm,Nature nature)
+        public static bool pokemonIsNature(PKM pkm, Nature nature)
         {
             if (pkm.Nature == (int)nature)
             {
@@ -38,7 +33,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
         }
         public static bool Ispokemon(PKM pkm)
         {
-            if (pkm.Species!=0)
+            if (pkm.Species != 0)
             {
                 return true;
             }
@@ -74,7 +69,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
         }
         public static bool IsSheen(PB8 pkm)
         {
-            if (pkm.CNT_Sheen==255)
+            if (pkm.CNT_Sheen == 255)
             {
                 return true;
             }
@@ -258,7 +253,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
                 case 0:
                     ty = Nature.Naive; break;
                 case 1:
-                    ty =Nature.Sassy; break;
+                    ty = Nature.Sassy; break;
                 case 2:
                     ty = Nature.Gentle; break;
                 case 3:
@@ -278,7 +273,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
                 case 10:
                     ty = Nature.Serious; break;
                 case 11:
-                    ty =Nature.Hasty; break;
+                    ty = Nature.Hasty; break;
                 case 12:
                     ty = Nature.Timid; break;
                 case 13:
@@ -288,7 +283,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
                 case 15:
                     ty = Nature.Relaxed; break;
                 case 16:
-                    ty =Nature.Docile; break;
+                    ty = Nature.Docile; break;
                 case 17:
                     ty = Nature.Bold; break;
                 case 18:
@@ -305,7 +300,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
                     ty = Nature.Hardy; break;
                 case 24:
                     ty = Nature.Lonely; break;
-                
+
 
             }
             return ty;

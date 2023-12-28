@@ -1,5 +1,5 @@
-﻿using PKHeX.Core.AutoMod;
-using PKHeX.Core;
+﻿using PKHeX.Core;
+using PKHeX.Core.AutoMod;
 
 namespace WangPluginPkm
 {
@@ -7,7 +7,7 @@ namespace WangPluginPkm
     {
         public static void PreSetPIDIV(this PKM pk, IEncounterable enc)
         {
-          
+
             if (enc is EncounterStatic8N or EncounterStatic8NC or EncounterStatic8ND or EncounterStatic8U)
             {
 
@@ -15,7 +15,7 @@ namespace WangPluginPkm
                 var isShiny = pk.IsShiny;
                 if (pk.AbilityNumber == 4 && e.Ability is AbilityPermission.Any12 or AbilityPermission.OnlyFirst or AbilityPermission.OnlySecond)
                     return;
-                
+
 
                 var pk8 = (PK8)pk;
                 switch (e)
@@ -27,18 +27,18 @@ namespace WangPluginPkm
                 }
             }
         }
-        public static void FindNestPID<T>( PK8 pk, T enc, bool shiny) where T : EncounterStatic8Nest<T>
+        public static void FindNestPID<T>(PK8 pk, T enc, bool shiny) where T : EncounterStatic8Nest<T>
         {
             // Preserve Nature, Form (all abilities should be possible in gen 8, so no need to early return on a mismatch for enc HA bool vs set HA bool)
             // Nest encounter RNG generation
             var iterPKM = pk.Clone();
-           
+
             if (shiny && enc is not EncounterStatic8U)
                 return;
             // pk.Form != EvolutionMethod.GetAmpLowKeyResult(pk.Nature)
-            if (pk.Species == (int)Species.Toxtricity )
+            if (pk.Species == (int)Species.Toxtricity)
             {
-              //  enc.ConvertToPKM(enc.Context);
+                //  enc.ConvertToPKM(enc.Context);
                 pk.RefreshAbility(iterPKM.AbilityNumber >> 1);
                 pk.StatNature = iterPKM.StatNature;
                 return;
@@ -48,7 +48,7 @@ namespace WangPluginPkm
             do
             {
                 ulong seed = GetRandomULong();
-              //  enc.ApplyDetailsTo(pk, seed);
+                //  enc.ApplyDetailsTo(pk, seed);
                 if (IsMatchCriteria<T>(pk, iterPKM))
                     break;
             } while (++count < 10_000);
@@ -61,7 +61,7 @@ namespace WangPluginPkm
 
             pk.Species = iterPKM.Species; // possible evolution
             // can be ability capsuled
-            if (FormInfo.IsFormChangeable(pk.Species, pk.Form, iterPKM.Form,(EntityContext)pk.Format, (EntityContext)iterPKM.Format))
+            if (FormInfo.IsFormChangeable(pk.Species, pk.Form, iterPKM.Form, (EntityContext)pk.Format, (EntityContext)iterPKM.Format))
                 pk.Form = iterPKM.Form; // set alt form if it can be freely changed!
             pk.RefreshAbility(iterPKM.AbilityNumber >> 1);
             pk.StatNature = iterPKM.StatNature;
@@ -76,7 +76,7 @@ namespace WangPluginPkm
                 return false;
             if (template.Gender != pk.Gender) // match gender
                 return false;
-            if (template.Form != pk.Form && !FormInfo.IsFormChangeable(pk.Species, pk.Form, template.Form, (EntityContext)pk.Format,(EntityContext)template.Format)) // match form -- Toxtricity etc
+            if (template.Form != pk.Form && !FormInfo.IsFormChangeable(pk.Species, pk.Form, template.Form, (EntityContext)pk.Format, (EntityContext)template.Format)) // match form -- Toxtricity etc
                 return false;
             return true;
         }

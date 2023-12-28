@@ -1,6 +1,6 @@
-﻿using System;
+﻿using PKHeX.Core;
+using System;
 using System.Runtime.CompilerServices;
-using PKHeX.Core;
 namespace WangPluginPkm.RNG.Methods
 {
     public static class Encounter9RNG
@@ -309,7 +309,7 @@ namespace WangPluginPkm.RNG.Methods
             TeraClass Tera = new();
             // same as above method
             var rand = new Xoroshiro128Plus(seed);
-            Tera.EC=(uint)rand.NextInt(uint.MaxValue);
+            Tera.EC = (uint)rand.NextInt(uint.MaxValue);
             var pid = GetAdaptedPID(ref rand, pk, enc);
             Tera.PID = pid;
 
@@ -368,7 +368,7 @@ namespace WangPluginPkm.RNG.Methods
             if (enc.Weight == 0)
             {
                 var value = (int)rand.NextInt(0x81) + (int)rand.NextInt(0x80);
-                Tera.Weight= value;
+                Tera.Weight = value;
             }
             // Scale
             {

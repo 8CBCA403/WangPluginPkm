@@ -32,8 +32,8 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         }
                     }
                     break;
-                    case GameVersion.X or GameVersion.Y or GameVersion.OR or
-                GameVersion.AS or GameVersion.XY or GameVersion.ORAS:
+                case GameVersion.X or GameVersion.Y or GameVersion.OR or
+            GameVersion.AS or GameVersion.XY or GameVersion.ORAS:
                     {
                         for (int i = 0; i < 2; i++)
                         {
@@ -96,7 +96,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                     break;
             }
             return PKL;
-         }
+        }
         public static PKM Edit(PKM pk)
         {
             pk.CurrentLevel = 50;

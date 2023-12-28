@@ -1,9 +1,9 @@
-﻿using System;
+﻿using PKHeX.Core;
+using PKHeX.Core.Searching;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using PKHeX.Core.Searching;
-using PKHeX.Core;
 
 namespace WangPluginPkm
 {

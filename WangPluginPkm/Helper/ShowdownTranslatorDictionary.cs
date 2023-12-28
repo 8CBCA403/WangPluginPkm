@@ -39,7 +39,7 @@ namespace WangPluginPkm
             { "速度", "Spe" }
         };
 
-        public static Dictionary <string, string> ribbonMarks = new()
+        public static Dictionary<string, string> ribbonMarks = new()
         {
             { "最强之证", "\n.RibbonMarkMightiest=True" },
             { "未知之证", "\n.RibbonMarkRare=True" },

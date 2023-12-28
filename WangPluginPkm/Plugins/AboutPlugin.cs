@@ -4,7 +4,7 @@ using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.Plugins
 {
-    public class AboutPlugin: WangPluginPkm
+    public class AboutPlugin : WangPluginPkm
     {
         public override string Name => "关于/About";
         public override int Priority => 12;

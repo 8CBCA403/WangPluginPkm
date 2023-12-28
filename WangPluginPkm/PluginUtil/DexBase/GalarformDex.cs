@@ -17,11 +17,11 @@ namespace WangPluginPkm.PluginUtil.DexBase
             switch (SAV.SAV.Version)
             {
 
-                case GameVersion.SW or GameVersion.SH :
+                case GameVersion.SW or GameVersion.SH:
                     for (int i = 0; i < a.Count; i++)
                     {
                         pk = SearchDatabase.SearchPKM(SAV, Editor, a[i], 44, 1, true);
-                        if (a[i]==52)
+                        if (a[i] == 52)
                         {
                             pk = SearchDatabase.SearchPKM(SAV, Editor, a[i], 44, 2, true);
                         }
@@ -29,7 +29,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         {
                             pk = SearchDatabase.SearchPKM(SAV, Editor, a[i], 44, 1, false);
                         }
-                        else if (a[i]==555)
+                        else if (a[i] == 555)
                         {
                             pk = SearchDatabase.SearchPKM(SAV, Editor, a[i], 45, 2, false);
                         }

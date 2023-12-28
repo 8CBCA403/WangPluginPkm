@@ -1,12 +1,11 @@
-﻿using System;
-using System.Windows.Forms;
-using PKHeX.Core;
+﻿using PKHeX.Core;
+using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.ComponentModel;
 using System.Media;
+using System.Windows.Forms;
 using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
-using WangPluginPkm.PluginUtil.PluginEnums;
 
 namespace WangPluginPkm.GUI
 {

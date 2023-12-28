@@ -1,9 +1,5 @@
 ﻿using PKHeX.Core;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WangPluginPkm.PluginUtil.DexBase
 {
@@ -19,7 +15,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                     {
                         for (int j = 0; j < 3; j++)
                         {
-                            pk = SearchDatabase.SearchPKM(SAV, Editor,(int)Species.Tatsugiri, 50, j, false);
+                            pk = SearchDatabase.SearchPKM(SAV, Editor, (int)Species.Tatsugiri, 50, j, false);
                             pk.ClearNickname();
                             PKL.Add(pk);
                         }

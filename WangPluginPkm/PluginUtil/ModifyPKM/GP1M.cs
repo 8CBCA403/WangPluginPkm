@@ -1,7 +1,7 @@
-﻿using System;
+﻿using PKHeX.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using PKHeX.Core;
 using static System.Buffers.Binary.BinaryPrimitives;
 
 namespace WangPluginPkm
@@ -179,22 +179,22 @@ namespace WangPluginPkm
             set => WriteInt32LittleEndian(Data.AsSpan(0x78), value);
         }
 
-        public string GeoCityName 
+        public string GeoCityName
         {
-            get=>GetString(Data.AsSpan(0x7C, 0x60)); // dunno length
+            get => GetString(Data.AsSpan(0x7C, 0x60)); // dunno length
             set => WriteByte(GeoCity_Name, Encoding.ASCII.GetBytes(value));
         }
         public string Nickname
         {
-            get=>GetString(Data.AsSpan(0x12D, 0x20));
-            set=> WriteByte(Nick_Name, Encoding.ASCII.GetBytes(value));
+            get => GetString(Data.AsSpan(0x12D, 0x20));
+            set => WriteByte(Nick_Name, Encoding.ASCII.GetBytes(value));
 
 
         }// dunno length
 
         public static readonly IReadOnlyList<string> Genders = GameInfo.GenderSymbolASCII;
         public string GenderString => (uint)Gender >= Genders.Count ? string.Empty : Genders[Gender];
-        public string ShinyString => IsShiny==1 ? "★ " : string.Empty;
+        public string ShinyString => IsShiny == 1 ? "★ " : string.Empty;
         public string FormString => Form != 0 ? $"-{Form}" : string.Empty;
         private string NickStr => string.IsNullOrWhiteSpace(Nickname) ? SpeciesName.GetSpeciesNameGeneration(Species, (int)LanguageID.English, 7) : Nickname;
         public string FileName => $"{FileNameWithoutExtension}.gp1";
@@ -204,7 +204,7 @@ namespace WangPluginPkm
             get
             {
                 string form = Form > 0 ? $"-{Form:00}" : string.Empty;
-                string star = IsShiny==1 ? " ★" : string.Empty;
+                string star = IsShiny == 1 ? " ★" : string.Empty;
                 return $"{Species:000}{form}{star} - {NickStr} - Lv. {Level:00} - {IV_HP:00}.{IV_ATK:00}.{IV_DEF:00} - CP {CP:0000} (Moves {Move1:000}, {Move2:000})";
             }
         }
@@ -213,7 +213,7 @@ namespace WangPluginPkm
         public string StatMove => $"{IV_HP:00}/{IV_ATK:00}/{IV_DEF:00}, CP {CP:0000} (Moves {Move1:000}, {Move2:000})";
         public string Dump(IReadOnlyList<string> speciesNames, int index) => $"{index:000} {Nickname} ({speciesNames[Species]}{FormString} {ShinyString}[{GenderString}]) @ Lv. {Level:00} - {StatMove}, {GeoTime}.";
 
-       
-        
+
+
     }
 }

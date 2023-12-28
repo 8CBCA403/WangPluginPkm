@@ -16,7 +16,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         {
                             for (int j = 0; j < 7; j++)
                             {
-                                pk =(PK8) SearchDatabase.SearchPKM(SAV, Editor, 868, 45, 0, true);
+                                pk = (PK8)SearchDatabase.SearchPKM(SAV, Editor, 868, 45, 0, true);
                                 pk.CurrentLevel = 50;
                                 pk.Species = 869;
                                 pk.Form = (byte)i;

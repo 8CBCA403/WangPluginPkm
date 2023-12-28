@@ -1,10 +1,5 @@
 ﻿using PKHeX.Core;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WangPluginPkm.RNG.Methods;
 
 namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
 {
@@ -14,8 +9,8 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
         {
             List<PKM> PKL = new();
             PKM pk;
-         
-            if(SAV.SAV.Version is GameVersion.US or GameVersion.UM or GameVersion.USUM)
+
+            if (SAV.SAV.Version is GameVersion.US or GameVersion.UM or GameVersion.USUM)
             {
                 var sa = (SAV7)SAV.SAV;
                 int l = 0;
@@ -27,33 +22,33 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
                 pk.Language = l;
                 pk.CurrentLevel = 50;
                 pk.Species = 3;
-                pk = AchieveFunc.fun(pk,SAV);
+                pk = AchieveFunc.fun(pk, SAV);
                 pk.SID16 = 0;
-                
+
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Charizard, (int)GameVersion.RBY);
                 pk.Language = l;
                 pk.CurrentLevel = 50;
                 pk.Species = 6;
-                pk = AchieveFunc.fun(pk,SAV);
+                pk = AchieveFunc.fun(pk, SAV);
                 pk.SID16 = 0;
-                
+
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Blastoise, (int)GameVersion.RBY);
                 pk.CurrentLevel = 50;
                 pk.Species = 9;
                 pk.Language = l;
-                pk = AchieveFunc.fun(pk,SAV);
+                pk = AchieveFunc.fun(pk, SAV);
                 pk.SID16 = 0;
                 pk.Version = 36;
-                
+
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Pikachu, (int)GameVersion.RBY);
                 pk.Language = l;
-                pk = AchieveFunc.fun(pk,SAV);
+                pk = AchieveFunc.fun(pk, SAV);
                 pk.SID16 = 0;
                 pk.Version = 38;
-               
+
                 PKL.Add(pk);
             }
             return PKL;

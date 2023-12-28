@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
-    { 
+{
     internal class Deerling
     {
         public static List<PKM> SpringSets(ISaveFileProvider SAV, IPKMView Editor)
@@ -24,21 +24,21 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                             }
                             pk.Form = (byte)0;
                             pk.ClearNickname();
-                            pk = AchieveFunc.fun(pk,SAV);
+                            pk = AchieveFunc.fun(pk, SAV);
                             PKL.Add(pk);
                         }
                     }
                     break;
             }
             return PKL;
-         }
+        }
         public static List<PKM> SummerSets(ISaveFileProvider SAV, IPKMView Editor)
         {
             List<PKM> PKL = new();
             PKM pk;
             switch (SAV.SAV.Version)
             {
-                case  GameVersion.US or GameVersion.UM or  GameVersion.USUM:
+                case GameVersion.US or GameVersion.UM or GameVersion.USUM:
                     {
                         for (int i = 0; i < 2; i++)
                         {
@@ -51,7 +51,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                             }
                             pk.Form = (byte)1;
                             pk.ClearNickname();
-                            pk = AchieveFunc.fun(pk,SAV);
+                            pk = AchieveFunc.fun(pk, SAV);
                             PKL.Add(pk);
                         }
                     }
@@ -78,7 +78,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                             }
                             pk.Form = (byte)2;
                             pk.ClearNickname();
-                            pk = AchieveFunc.fun(pk,SAV);
+                            pk = AchieveFunc.fun(pk, SAV);
                             PKL.Add(pk);
                         }
                     }
@@ -105,7 +105,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.SpecificForm
                             }
                             pk.Form = (byte)3;
                             pk.ClearNickname();
-                            pk = AchieveFunc.fun(pk,SAV);
+                            pk = AchieveFunc.fun(pk, SAV);
                             PKL.Add(pk);
                         }
                     }

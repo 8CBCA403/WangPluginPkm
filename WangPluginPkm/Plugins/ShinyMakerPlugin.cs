@@ -1,10 +1,10 @@
 ﻿using System;
-using WangPluginPkm.GUI;
 using System.Windows.Forms;
+using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.Plugins
 {
-     public class ShinyMakerPlugin: WangPluginPkm
+    public class ShinyMakerPlugin : WangPluginPkm
     {
         public override string Name => "闪光器/Shiny Maker";
         public override int Priority => 1;

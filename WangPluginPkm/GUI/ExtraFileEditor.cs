@@ -1,12 +1,10 @@
 ﻿using PKHeX.Core;
 using System;
-using System.Windows.Forms;
-using System.IO;
 using System.Collections.Generic;
-using static System.Buffers.Binary.BinaryPrimitives;
-using System.ComponentModel;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Diagnostics;
+using System.IO;
+using System.Windows.Forms;
+using static System.Buffers.Binary.BinaryPrimitives;
 
 namespace WangPluginPkm.GUI
 {
@@ -354,7 +352,8 @@ namespace WangPluginPkm.GUI
 
         private void PKL_CLB_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
+            PKL_TEXT.Text += MGDB_G9[PKL_CLB.SelectedIndex].CardTitleIndex.ToString() + "\r\n";
         }
     }
 }

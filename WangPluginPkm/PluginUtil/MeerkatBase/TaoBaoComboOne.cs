@@ -1,10 +1,6 @@
 ﻿using PKHeX.Core;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WangPluginPkm.PluginUtil.AchieveBase;
 using WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve;
 using WangPluginPkm.PluginUtil.AchieveBase.SpecificForm;
 using WangPluginPkm.PluginUtil.DexBase;
@@ -38,7 +34,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                               Concat(CapPikachuDex.CapPikachuSets(SAV, Editor)).Concat(Pika.PikaSets(SAV, Editor)).Concat(Ditto.DittoSets(SAV, Editor)).
                               ToList();
                 PKLB = PKLB.Concat(PKL).ToList();
-                PKL=MytheryPK.ESets(SAV,Editor).ToList();
+                PKL = MytheryPK.ESets(SAV, Editor).ToList();
                 PKLB = PKLB.Concat(PKL).ToList();
                 PKL = MytheryPK.BWSets(SAV, Editor).ToList();
                 PKLB = PKLB.Concat(PKL).ToList();

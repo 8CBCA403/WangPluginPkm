@@ -1,18 +1,16 @@
 ﻿using PKHeX.Core;
 using System;
-using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
-using System.ComponentModel;
-using System.Drawing;
+using System.Windows.Forms;
 using WangPluginPkm.RNG.Methods;
+using WangPluginPkm.RNG.ReverseRNG;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
 using Roaming8bRNG = WangPluginPkm.RNG.Methods.Roaming8bRNG;
-using WangPluginPkm.RNG.ReverseRNG;
-using iText.Layout.Properties;
 
 namespace WangPluginPkm.GUI
 {
@@ -769,6 +767,6 @@ namespace WangPluginPkm.GUI
             IVCheckBox.Text = $"{pkm.IV_HP}/{pkm.IV_ATK}/{pkm.IV_DEF}/{pkm.IV_SPA}/{pkm.IV_SPD}/{pkm.IV_SPE}";
         }
 
-   
+
     }
 }

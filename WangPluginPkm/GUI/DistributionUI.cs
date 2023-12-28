@@ -1,13 +1,13 @@
-﻿using System;
+﻿using PKHeX.Core;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using PKHeX.Core;
-using System.Windows.Forms;
 using System.ComponentModel;
-using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
-using static WangPluginPkm.PluginUtil.Functions.DistributionFunctions;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 using WangPluginPkm.PluginUtil.DisBase;
+using static WangPluginPkm.PluginUtil.Functions.DistributionFunctions;
+using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 
 namespace WangPluginPkm.GUI
 {
@@ -257,11 +257,15 @@ namespace WangPluginPkm.GUI
                     pk.Language = 9;
                     pk.ClearNickname();
                 }
-
-                pk.IVs = c[j].IVs;
+                if (ShinyBox.Checked)
+                {
+                     pk.IVs = c[j].IVs;
+                     pk.Nature = c[j].Nature;
+                     pk.StatNature = pk.Nature;
+                }
+                pk.StatNature = c[j].Nature;
                 pk.SetEVs(c[j].EVs);
-                pk.Nature = c[j].Nature;
-                pk.StatNature = pk.Nature;
+            
                 pk.Move1_PPUps = 3;
                 pk.Move2_PPUps = 3;
                 pk.Move3_PPUps = 3;
@@ -271,7 +275,7 @@ namespace WangPluginPkm.GUI
                 {
                     pk.Ball = (int)ball;
                 }
-                if (RandPID_Box.Checked)
+                if (RandPID_Box.Checked&& ShinyBox.Checked)
                 {
                     pk.PID = rand.Rand32();
                     pk.SetRandomEC();

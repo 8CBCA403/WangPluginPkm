@@ -5,7 +5,7 @@ using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.Plugins
 {
-    public class TEST: WangPluginPkm
+    public class TEST : WangPluginPkm
     {
         public override string Name => "Test";
         public override int Priority => 10;

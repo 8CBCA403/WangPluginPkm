@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-using System.IO;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace WangPluginPkm.GUI
 {

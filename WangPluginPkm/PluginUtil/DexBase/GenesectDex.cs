@@ -53,15 +53,15 @@ namespace WangPluginPkm.PluginUtil.DexBase
                     {
                         for (int i = 0; i < 5; i++)
                         {
-                            PK6 pk6 = (PK6)SearchDatabase.SearchPKM(SAV, Editor, 649, 24);
+                            var pk6 = SearchDatabase.SearchPKM(SAV, Editor, 649, 24);
                             pk6.Form = (byte)i;
-                            PK7 pk7 = pk6.ConvertToPK7();
+                          
                             if (i > 0)
                             {
-                                pk7.HeldItem = Drive[i - 1];
+                                pk6.HeldItem = Drive[i - 1];
                             }
-                            pk7.ClearNickname();
-                            PKL.Add(pk7);
+                            pk6.ClearNickname();
+                            PKL.Add(pk6);
                         }
 
                     }
@@ -85,5 +85,5 @@ namespace WangPluginPkm.PluginUtil.DexBase
             }
             return PKL;
         }
-        }
+    }
 }

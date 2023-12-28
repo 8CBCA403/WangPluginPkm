@@ -29,7 +29,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                 case GameVersion.SW or GameVersion.SH or GameVersion.SWSH:
                     for (int i = 0; i < 8; i++)
                     {
-                        pk = SearchDatabase.MytheryPK(SAV, 25,8, i);
+                        pk = SearchDatabase.MytheryPK(SAV, 25, 8, i);
                         PKL.Add(pk);
                     }
                     pk = SearchDatabase.MytheryPK(SAV, 25, 8, 9);

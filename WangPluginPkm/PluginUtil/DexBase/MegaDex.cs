@@ -24,7 +24,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
         public static List<int> items = new()
         {
         534,535,656,657,658,659,660,678,661,662,663,664,665,666,667,668,669,670,671,672,673,
-        674,675,676,677,679, 680,681,682,683,684,685,752,753,754,755,756, 
+        674,675,676,677,679, 680,681,682,683,684,685,752,753,754,755,756,
         757,758,759,760,761,762,763,764,767,768,769,770,
         };
         public static List<int> itemsXY = new()
@@ -86,8 +86,8 @@ namespace WangPluginPkm.PluginUtil.DexBase
                             }
                             else if (USUM[i] is 719)
                             {
-                                PK6 pk6 = (PK6)SearchDatabase.SearchPKM(SAV, Editor, USUM[i], 25, 0, false);
-                                pk = pk6.ConvertToPK7();
+                                var pk6 = SearchDatabase.SearchPKM(SAV, Editor, USUM[i], 25, 0, false);
+                                pk = pk6;
                                 pk.Language = 2;
                             }
                             pk.CurrentLevel = 100;
@@ -111,7 +111,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         for (int i = 0; i < XY.Count; i++)
                         {
                             pk = SearchDatabase.SearchPKM(SAV, Editor, XY[i], 24, 0, true);
-                            if (XY[i] is 150 )
+                            if (XY[i] is 150)
                             {
                                 pk = SearchDatabase.SearchPKM(SAV, Editor, XY[i], 24, 0, false);
                             }
@@ -138,7 +138,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         for (int i = 0; i < USUM.Count; i++)
                         {
                             pk = SearchDatabase.SearchPKM(SAV, Editor, USUM[i], 27, 0, true);
-                            if (USUM[i] is   381 or 383 or 384 or 719)
+                            if (USUM[i] is 381 or 383 or 384 or 719)
                             {
                                 pk = SearchDatabase.SearchPKM(SAV, Editor, USUM[i], 26, 0, false);
                             }

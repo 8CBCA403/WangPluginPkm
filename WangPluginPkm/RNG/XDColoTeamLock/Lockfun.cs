@@ -1,10 +1,4 @@
 ﻿using PKHeX.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using WangPluginPkm.RNG.Methods;
 
 namespace WangPluginPkm
@@ -59,15 +53,15 @@ namespace WangPluginPkm
                         if (TeamLockXD.GenPkm(seed, T3))
                         {
                             seed = XDRNG.Next7(seed);
-                            
-                                if (TeamLockXD.GenPkm(seed, T4))
-                                {
-                                    seed = XDRNG.Next7(seed);
-                                    return true;
-                                }
-                                else
-                                    return false;
-                           
+
+                            if (TeamLockXD.GenPkm(seed, T4))
+                            {
+                                seed = XDRNG.Next7(seed);
+                                return true;
+                            }
+                            else
+                                return false;
+
                         }
                         else
                             return false;
@@ -85,7 +79,7 @@ namespace WangPluginPkm
             {
                 seed = XDRNG.Next7(seed);
                 {
-                    if (TeamLockXD.GenPkm(seed,T2))
+                    if (TeamLockXD.GenPkm(seed, T2))
                     {
                         seed = XDRNG.Next7(seed);
                         if (TeamLockXD.GenPkm(seed, T3))
@@ -267,7 +261,7 @@ namespace WangPluginPkm
             else
                 return false;
         }
-           public static bool Pineco(ref uint seed)
+        public static bool Pineco(ref uint seed)
         {
             if (OneNpcTeam(ref seed, XPineco[0]))
                 return true;
@@ -438,7 +432,7 @@ namespace WangPluginPkm
             else
                 return false;
         }
-        
+
         public static bool Hitmonchan(ref uint seed)
         {
             if (ThreeNpcTeam(ref seed, XHitmonchan[0], XHitmonchan[1], XHitmonchan[2]))
@@ -525,7 +519,7 @@ namespace WangPluginPkm
                 return false;
         }
 
-       
+
 
 
         public static bool Togepi(ref uint seed)
@@ -558,7 +552,7 @@ namespace WangPluginPkm
         }
         public static bool SphealPhenacCityandPost(ref uint seed)
         {
-            if (ThreeNpcTeam(ref seed, XSphealPhenacCityandPost[0], XSphealPhenacCityandPost[1],XSphealPhenacCityandPost[2]))
+            if (ThreeNpcTeam(ref seed, XSphealPhenacCityandPost[0], XSphealPhenacCityandPost[1], XSphealPhenacCityandPost[2]))
                 return true;
             else
                 return false;
@@ -681,7 +675,7 @@ namespace WangPluginPkm
         #region
 
         //Colo
-        public static readonly NPCClass[] CMakuhita = 
+        public static readonly NPCClass[] CMakuhita =
        {
             new NPCClass(355, 24, 0, 127), // Duskull (M) (Quirky)
             new NPCClass(167, 00, 1, 127), // Spinarak (F) (Hardy)
@@ -807,7 +801,7 @@ namespace WangPluginPkm
             new NPCClass(271, 18, 0, 127), // Lombre (M) (Bashful)
             new NPCClass(271, 12, 1, 127), // Lombre (F) (Serious)
             };
-        public static readonly NPCClass[] XParas = 
+        public static readonly NPCClass[] XParas =
 {
             new NPCClass(336, 24, 0, 127), // Seviper (M) (Quirky)
             new NPCClass(198, 06, 1, 127), // Murkrow (F) (Docile)
@@ -978,7 +972,7 @@ namespace WangPluginPkm
             new NPCClass(271, 00, 0, 127), // Lombre (M) (Hardy)
             new NPCClass(205, 12, 0, 127), // Forretress (M) (Serious)
             };
-#endregion
+        #endregion
 
         //歧义
         public static readonly NPCClass[] XButterfree =  {
@@ -987,14 +981,14 @@ namespace WangPluginPkm
             new NPCClass(184, 00, 1, 127), // Azumarill (F) (Hardy)
             new NPCClass(114,0,0,0), // Shadow Tangela
         };
-        public static readonly NPCClass[] XGrowlithe = 
+        public static readonly NPCClass[] XGrowlithe =
        {
             new NPCClass(336, 24, 0, 127), // Seviper (M) (Quirky)
             new NPCClass(198, 06, 1, 127), // Murkrow (F) (Docile)
             new NPCClass(046, 0, 0, 0), // Murkrow (F) (Docile)
 
        };
-        public static readonly NPCClass[] XMrMime = 
+        public static readonly NPCClass[] XMrMime =
          {
             new NPCClass(199, 18, 0, 127), // Slowking (M) (Bashful)
             new NPCClass(217, 18, 0, 127), // Ursaring (M) (Bashful)
@@ -1077,6 +1071,6 @@ namespace WangPluginPkm
             new NPCClass(208, 03, 0, 127), // Steelix (M) (Adamant)
           
             };
-       
+
     }
 }

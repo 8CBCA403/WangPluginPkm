@@ -1,11 +1,10 @@
-﻿using PKHeX.Core;
-using System;
+﻿using System;
 using System.Windows.Forms;
 using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.Plugins
 {
-    public class DistributionPlugin: WangPluginPkm
+    public class DistributionPlugin : WangPluginPkm
     {
         public override string Name => "派送器/Distribution Tools";
         public override int Priority => 3;
@@ -20,7 +19,7 @@ namespace WangPluginPkm.Plugins
             ctrl.Name = "派送器/Distribution Tools";
             modmenu.DropDownItems.Add(ctrl);
         }
-       
+
         private void OpenForm(object sender, EventArgs e)
         {
 

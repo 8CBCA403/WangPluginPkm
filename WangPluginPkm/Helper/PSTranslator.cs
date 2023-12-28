@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PKHeX.Core;
 using System.Linq;
 using System.Text;
-using PKHeX.Core;
 using System.Text.RegularExpressions;
 
 namespace WangPluginPkm
@@ -281,9 +279,9 @@ namespace WangPluginPkm
         public static bool IsPS(string str) => GameStringsEn.Species.Skip(1).Any(str.Contains);
 
     }
-   
-    }
+
+}
 
 
-    
+
 

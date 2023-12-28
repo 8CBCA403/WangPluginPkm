@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Windows.Forms;
-using PKHeX.Core;
+﻿using PKHeX.Core;
 using PKHeX.Core.AutoMod;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace WangPluginPkm.PluginUtil.DexBase
 {
@@ -13,7 +13,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
             PKM pk;
             switch (SAV.SAV.Version)
             {
-                case GameVersion.GD or GameVersion.SI or GameVersion.C or 
+                case GameVersion.GD or GameVersion.SI or GameVersion.C or
                 GameVersion.GS or GameVersion.GSC:
                     for (int i = 0; i < 26; i++)
                     {
@@ -22,7 +22,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         PKL.Add(pk);
                     }
                     break;
-                case GameVersion.S or GameVersion.E or GameVersion.R or 
+                case GameVersion.S or GameVersion.E or GameVersion.R or
                 GameVersion.FR or GameVersion.LG or GameVersion.RSE or GameVersion.RS:
                     for (int i = 0; i < 28; i++)
                     {
@@ -50,7 +50,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         PKL.Add(pk4);
                     }
                     break;
-                case GameVersion.X or GameVersion.Y or GameVersion.OR or 
+                case GameVersion.X or GameVersion.Y or GameVersion.OR or
                 GameVersion.AS or GameVersion.XY or GameVersion.ORAS:
                     for (int i = 0; i < 28; i++)
                     {
@@ -59,7 +59,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         PKL.Add(pk);
                     }
                     break;
-                case GameVersion.SN or GameVersion.MN or GameVersion.US 
+                case GameVersion.SN or GameVersion.MN or GameVersion.US
                 or GameVersion.UM or GameVersion.SM or GameVersion.USUM:
                     for (int i = 0; i < 28; i++)
                     {
@@ -72,7 +72,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                 case GameVersion.BD or GameVersion.SP or GameVersion.BDSP:
                     for (int i = 0; i < 28; i++)
                     {
-                        pk = SearchDatabase.SearchPKM(SAV, Editor, 201, 48,i);
+                        pk = SearchDatabase.SearchPKM(SAV, Editor, 201, 48, i);
                         pk.Form = (byte)i;
                         PKL.Add(pk);
                     }
@@ -80,7 +80,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                 case GameVersion.PLA:
                     for (int i = 0; i < 28; i++)
                     {
-                        pk = SearchDatabase.SearchPKM(SAV, Editor, 201, 47,i);
+                        pk = SearchDatabase.SearchPKM(SAV, Editor, 201, 47, i);
                         pk.Form = (byte)i;
                         PKL.Add(pk);
                     }
@@ -88,7 +88,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                 default:
                     MessageBox.Show("本作无法获得！");
                     break;
-                    
+
             }
             return PKL;
         }

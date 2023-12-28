@@ -1,9 +1,8 @@
 ﻿using PKHeX.Core;
 using System;
-using System.Threading;
-using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Media;
+using System.Windows.Forms;
 
 namespace WangPluginPkm
 {
@@ -21,7 +20,7 @@ namespace WangPluginPkm
         public IEncounterGenerator EncounterGenerator { get; private set; } = null!;
         public object[] globalArgs;
 
-        public  void Initialize(params object[] args)
+        public void Initialize(params object[] args)
         {
             globalArgs = args;
             SaveFileEditor = (ISaveFileProvider)Array.Find(args, z => z is ISaveFileProvider);
@@ -60,7 +59,7 @@ namespace WangPluginPkm
             Name = ParentMenuName,
         };
         protected abstract void AddPluginControl(ToolStripDropDownItem modmenu);
-      
+
 
         public void NotifySaveLoaded()
         {

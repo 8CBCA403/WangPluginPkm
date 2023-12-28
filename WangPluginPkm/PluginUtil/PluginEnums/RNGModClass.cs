@@ -1,9 +1,4 @@
-﻿using PKHeX.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace WangPluginPkm
 {
@@ -11,7 +6,7 @@ namespace WangPluginPkm
     {
         public string Name { get; set; }
         public string Value { get; set; }
-       
+
 
         public static List<RNGModClass> RNGModList(bool isIV)
         {

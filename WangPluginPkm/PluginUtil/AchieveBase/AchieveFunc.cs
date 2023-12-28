@@ -5,7 +5,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
 {
     internal class AchieveFunc
     {
-        public static PKM fun(PKM pk,ISaveFileProvider SAV)
+        public static PKM fun(PKM pk, ISaveFileProvider SAV)
         {
             pk.ClearNickname();
             if (pk.OT_Name == "PKHeX")
@@ -20,7 +20,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
                 pk.TID16 = 48390;
                 pk.SID16 = 05266;
             }
-            else if (pk.TID16 == SAV.SAV.TID16&& pk.SID16 == SAV.SAV.SID16)
+            else if (pk.TID16 == SAV.SAV.TID16 && pk.SID16 == SAV.SAV.SID16)
             {
                 pk.OT_Name = "Wang";
                 pk.TID16 = 48390;
@@ -32,7 +32,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
                 pk.OT_Gender = 0;
             }
 
-            pk.SetSuggestedMoves();
+            //pk.SetSuggestedMoves();
             pk.HealPP();
             return pk;
         }
@@ -47,7 +47,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
         }
         public static PKM evo2(PKM pk)
         {
-            pk.Species+= 2;
+            pk.Species += 2;
             pk.CurrentLevel += 40;
             pk.SetSuggestedMoves();
             pk.HealPP();
@@ -105,6 +105,6 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
             pk.HealPP();
             return pk;
         }
-       
+
     }
 }

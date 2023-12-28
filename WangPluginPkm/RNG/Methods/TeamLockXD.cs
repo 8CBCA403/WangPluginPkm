@@ -1,7 +1,4 @@
 using PKHeX.Core;
-using System;
-using System.Security.Cryptography;
-using System.Windows.Forms;
 
 namespace WangPluginPkm.RNG.Methods
 {

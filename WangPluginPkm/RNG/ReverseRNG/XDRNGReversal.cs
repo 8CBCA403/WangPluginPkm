@@ -1,5 +1,5 @@
-﻿using System;
-using PKHeX.Core;
+﻿using PKHeX.Core;
+using System;
 using System.Runtime.CompilerServices;
 namespace WangPluginPkm
 {
@@ -12,7 +12,7 @@ namespace WangPluginPkm
         private const uint Sub = Add - 0xFFFF;
         private const ulong Base = (Mult + 1ul) * 0xFFFF;
         [MethodImpl(MethodImplOptions.AggressiveInlining)] public static uint Prev(uint seed) => (seed * rMult) + rAdd;
-       
+
 
         public static int GetSeeds(Span<uint> result, uint pid)
         {

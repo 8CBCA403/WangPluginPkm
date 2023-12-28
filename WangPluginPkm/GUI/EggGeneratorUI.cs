@@ -1,10 +1,10 @@
-﻿using System;
-using PKHeX.Core.Searching;
-using PKHeX.Core;
+﻿using PKHeX.Core;
 using PKHeX.Core.AutoMod;
+using PKHeX.Core.Searching;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 namespace WangPluginPkm.GUI
 {
@@ -111,16 +111,16 @@ namespace WangPluginPkm.GUI
                     ((PK2)pk).OT_Name = "1";
                     pk.Met_Level = 1;
                     ((PK2)pk).Met_TimeOfDay = 1;
-                    
+
                     if (pko.IsShiny == true)
                         pk.SetShiny();
                     pk.IsNicknamed = true;
-                    if(pk.Language==1)
+                    if (pk.Language == 1)
                     {
-                       
+
 
                     }
-                    pk.Nickname = SpeciesName.GetEggName(pk.Language, pk.Format); 
+                    pk.Nickname = SpeciesName.GetEggName(pk.Language, pk.Format);
                     pk.Met_Location = 0;
                 }
                 else if (pk.Gen3 == true)

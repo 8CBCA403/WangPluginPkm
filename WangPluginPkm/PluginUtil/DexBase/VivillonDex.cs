@@ -1,15 +1,12 @@
 ﻿using PKHeX.Core;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WangPluginPkm.PluginUtil.DexBase
 {
     internal class VivillonDex
     {
-        public static byte CountryToRegionCountry(byte country) 
+        public static byte CountryToRegionCountry(byte country)
         {
             if (country is 1)
                 return 0;
@@ -49,7 +46,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
         /*16 Ocean       */ new byte[] {049,077},
         /*17 Jungle      */ new byte[] {016,021,022,025,027,031,040,042,046,052,077,153,156,169},
     };
-       
+
         public static List<PKM> VivillonSets(ISaveFileProvider SAV, IPKMView Editor)
         {
             List<PKM> PKL = new();
@@ -404,7 +401,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                     }
                     break;
                 case GameVersion.SL or GameVersion.VL or GameVersion.SV:
-                     for (int i = 0; i < 19; i++)
+                    for (int i = 0; i < 19; i++)
                     {
                         pk = SearchDatabase.SearchPKM(SAV, Editor, 666, (int)SAV.SAV.Version, 0, false);
                         pk.CurrentLevel = 50;

@@ -10,7 +10,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
             PKM pk;
             switch (SAV.SAV.Version)
             {
-                case  GameVersion.OR or GameVersion.AS or GameVersion.ORAS:
+                case GameVersion.OR or GameVersion.AS or GameVersion.ORAS:
                     {
                         for (int i = 0; i < 7; i++)
                         {

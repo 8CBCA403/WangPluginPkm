@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WangPluginPkm.PluginUtil.ModifyPKM
 {
     [Serializable]
     public class litePK
     {
-        public  string Name { get; set; }
+        public string Name { get; set; }
         public int Species { get; set; }
         public int Nature { get; set; }
         public int Ability { get; set; }
@@ -30,17 +26,17 @@ namespace WangPluginPkm.PluginUtil.ModifyPKM
         public int[] EVS { get; set; } = new int[6];
         public int CurrentLevel { get; set; }
 
-        public int StatNature { get; set; }=0 ;
+        public int StatNature { get; set; } = 0;
 
-        public int TeraType { get; set; }=0 ;
+        public int TeraType { get; set; } = 0;
         public static string lptoSt(litePK pk)
         {
             string r = "";
             string ivst = "";
             string evst = "";
-            for (int i=0;i<6;i++)
+            for (int i = 0; i < 6; i++)
             {
-                ivst += $"{pk.IVS[i]}"+"/";
+                ivst += $"{pk.IVS[i]}" + "/";
             }
             for (int i = 0; i < 6; i++)
             {

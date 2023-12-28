@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WangPluginPkm.PluginUtil.BattleKingBase
+﻿namespace WangPluginPkm.PluginUtil.BattleKingBase
 {
     public class BFuction
     {
@@ -33,13 +27,13 @@ namespace WangPluginPkm.PluginUtil.BattleKingBase
             else return "";
         }
 
-        public static string DeleStringEnd(string originalString,string substring)
+        public static string DeleStringEnd(string originalString, string substring)
         {
             int index = originalString.IndexOf(substring);
 
             if (index >= 0)
             {
-                string result = originalString.Replace(originalString.Substring(index),"");
+                string result = originalString.Replace(originalString.Substring(index), "");
 
                 return result;
             }
@@ -47,12 +41,12 @@ namespace WangPluginPkm.PluginUtil.BattleKingBase
             {
                 return "";
             }
-            
+
         }
-        public static string DeleStringStart(string originalString,string substring)
+        public static string DeleStringStart(string originalString, string substring)
         {
-            int startIndex = originalString.IndexOf(substring) ;
-            string result = originalString.Substring(startIndex+substring.Length);
+            int startIndex = originalString.IndexOf(substring);
+            string result = originalString.Substring(startIndex + substring.Length);
             return result;
         }
     }

@@ -1,12 +1,7 @@
-﻿using System.Windows.Forms;
-using PKHeX.Core;
-using System.Collections.Generic;
-using PKHeX.Core.Searching;
-using System.Linq;
+﻿using PKHeX.Core;
 using System;
-using Python.Included;
-using Python.Runtime;
 using System.IO;
+using System.Windows.Forms;
 
 
 
@@ -64,36 +59,11 @@ namespace WangPluginPkm.GUI
             PerformLayout();
         }
 
-        private void Wang()
-        {
-            PythonEngine.Initialize();
-
-            dynamic pickle = Py.Import("pickle");
-
-            using (Py.GIL())
-            {
-                // 读取pickle文件
-                byte[] pickleData = File.ReadAllBytes(@"D:\Desk\encounter_might_paldea.pkl");
-
-                // 反序列化pickle数据
-                dynamic unpickledObject = pickle.loads(pickleData);
-
-                // 将动态对象转换为字典
-                dynamic dictionary = unpickledObject.ToDictionary();
-
-                // 输出字典内容
-                foreach (dynamic kvp in dictionary)
-                {
-                    textBox1.Text+=($"{kvp.Key}: {kvp.Value}");
-                }
-            }
-
-            PythonEngine.Shutdown();
-        }
+       
 
         private void SetAll_BTN_Click(object sender, EventArgs e)
         {
-            Wang();
+        
         }
 
         private TextBox textBox1;

@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using PKHeX.Core;
+﻿using PKHeX.Core;
+using System;
 
 namespace WangPluginPkm
 {

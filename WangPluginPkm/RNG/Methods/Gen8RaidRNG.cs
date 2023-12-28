@@ -1,18 +1,14 @@
 ﻿using PKHeX.Core;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using static WangPluginPkm.CheckRules;
 
 namespace WangPluginPkm.RNG.Methods
 {
     internal class Gen8RaidRNG
     {
-            public static bool GenPkm(ref PKM pk, ulong seed, ushort species, byte iv_count, byte ability_param, byte gender_ratio, sbyte nature_param = -1, bool forceNoShiny = false)
-            {
+        public static bool GenPkm(ref PKM pk, ulong seed, ushort species, byte iv_count, byte ability_param, byte gender_ratio, sbyte nature_param = -1, bool forceNoShiny = false)
+        {
 
             // Encryption Constant
             var rng = new Xoroshiro128Plus(seed);
@@ -64,7 +60,7 @@ namespace WangPluginPkm.RNG.Methods
             pk.IV_SPD = ivs[4];
 
             pk.IV_SPE = ivs[5];
-       
+
 
             int abil = ability_param switch
             {
@@ -73,21 +69,21 @@ namespace WangPluginPkm.RNG.Methods
                 _ => ability_param,
             };
             abil <<= 1; // 1/2/4
-            pk.AbilityNumber= abil;
+            pk.AbilityNumber = abil;
             pk.RefreshAbility(abil);
             var current = pk.AbilityNumber;
-            
+
             // else, for things that were made Hidden Ability, defer to Ability Checks (Ability Patch)
-           
+
             switch (gender_ratio)
             {
                 case PersonalInfo.RatioMagicGenderless:
                     pk.Gender = 2;
-                        
+
                     break;
                 case PersonalInfo.RatioMagicFemale:
                     pk.Gender = 1;
-                       
+
                     break;
                 case PersonalInfo.RatioMagicMale:
                     pk.Gender = 0;
@@ -96,7 +92,7 @@ namespace WangPluginPkm.RNG.Methods
                 default:
                     var gender = (int)rng.NextInt(253) + 1 < gender_ratio ? 1 : 0;
                     pk.Gender = gender;
- 
+
                     break;
             }
 
@@ -105,7 +101,7 @@ namespace WangPluginPkm.RNG.Methods
                     ? ToxtricityUtil.GetRandomNature(ref rng, pk.Form)
                     : (byte)rng.NextInt(25);
             pk.Nature = nature;
-           
+
 
             if (pk is IScaledSize s)
             {
@@ -118,8 +114,8 @@ namespace WangPluginPkm.RNG.Methods
                     if (pk.Context is not (EntityContext.Gen8 or EntityContext.Gen8a or EntityContext.Gen8b))
                         return false;
                 }
-                    s.HeightScalar = (byte)height;
-                    s.WeightScalar = (byte)weight;
+                s.HeightScalar = (byte)height;
+                s.WeightScalar = (byte)weight;
             }
 
             return true;
@@ -252,5 +248,5 @@ namespace WangPluginPkm.RNG.Methods
         }
     }
 
-    }
+}
 

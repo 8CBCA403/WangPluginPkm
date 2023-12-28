@@ -1,22 +1,21 @@
-﻿using System.Windows.Forms;
+﻿using HtmlAgilityPack;
+using Newtonsoft.Json;
 using PKHeX.Core;
+using PKHeX.Core.AutoMod;
+using PKHeX.Core.Enhancements;
 using System;
 using System.Collections.Generic;
-using PKHeX.Core.Enhancements;
-using PKHeX.Core.AutoMod;
+using System.Data;
 using System.Diagnostics;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Media;
 using System.Net.Http;
 using System.Threading.Tasks;
-using WangPluginPkm.PluginUtil.ModifyPKM;
-using HtmlAgilityPack;
-using System.Data;
-using Newtonsoft.Json;
-using WangPluginPkm.PluginUtil.BattleKingBase;
+using System.Windows.Forms;
 using WangPluginPkm.PluginUtil;
-using WangPluginPkm.Plugins;
+using WangPluginPkm.PluginUtil.BattleKingBase;
+using WangPluginPkm.PluginUtil.ModifyPKM;
 
 
 namespace WangPluginPkm.GUI
@@ -26,7 +25,7 @@ namespace WangPluginPkm.GUI
         public List<ShowdownSet> Sets = new();
         public static ISaveFileProvider SAV { private get; set; } = null!;
 
-        public static  IPKMView Editor { private get; set; } = null!;
+        public static IPKMView Editor { private get; set; } = null!;
         private static List<ExpandPKM> BD = new List<ExpandPKM>();
         private enum Falinks
         {
@@ -207,10 +206,10 @@ namespace WangPluginPkm.GUI
                     (analysis == null ? $"Set {errorstr}." : $"Set Invalid: {analysis}")
                     + "\n\nRefer to the wiki for more help on generating sets correctly."
                     + "\n\nIf you are sure this set is valid, please create an issue on GitHub and upload the error_log.txt file in the issue.";
-             
-             
 
-             
+
+
+
             }
 
             Debug.WriteLine("Single Set Genning Complete. Loading final data to tabs.");
