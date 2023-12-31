@@ -96,6 +96,7 @@
             PS_Box = new System.Windows.Forms.TextBox();
             Load_PS_BTN = new System.Windows.Forms.Button();
             PS_LB = new System.Windows.Forms.Label();
+            Pktopl_BTN = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)FO_NU).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ABN_NU).BeginInit();
             ((System.ComponentModel.ISupportInitialize)StartBox_NUM).BeginInit();
@@ -214,6 +215,7 @@
             SP_CB.Name = "SP_CB";
             SP_CB.Size = new System.Drawing.Size(91, 25);
             SP_CB.TabIndex = 11;
+            SP_CB.SelectedIndexChanged += SP_CB_SelectedIndexChanged;
             // 
             // NA_CB
             // 
@@ -468,9 +470,9 @@
             // 
             // RUN_BTN
             // 
-            RUN_BTN.Location = new System.Drawing.Point(602, 558);
+            RUN_BTN.Location = new System.Drawing.Point(656, 558);
             RUN_BTN.Name = "RUN_BTN";
-            RUN_BTN.Size = new System.Drawing.Size(91, 26);
+            RUN_BTN.Size = new System.Drawing.Size(102, 26);
             RUN_BTN.TabIndex = 40;
             RUN_BTN.Text = "开始覆写";
             RUN_BTN.UseVisualStyleBackColor = true;
@@ -726,11 +728,22 @@
             PS_LB.TabIndex = 68;
             PS_LB.Text = "PSCode";
             // 
+            // Pktopl_BTN
+            // 
+            Pktopl_BTN.Location = new System.Drawing.Point(546, 558);
+            Pktopl_BTN.Name = "Pktopl_BTN";
+            Pktopl_BTN.Size = new System.Drawing.Size(104, 26);
+            Pktopl_BTN.TabIndex = 69;
+            Pktopl_BTN.Text = "开始转换";
+            Pktopl_BTN.UseVisualStyleBackColor = true;
+            Pktopl_BTN.Click += Pktopl_BTN_Click;
+            // 
             // SuperDataBase
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(770, 601);
+            Controls.Add(Pktopl_BTN);
             Controls.Add(PS_LB);
             Controls.Add(Load_PS_BTN);
             Controls.Add(PS_Box);
@@ -885,5 +898,6 @@
         private System.Windows.Forms.TextBox PS_Box;
         private System.Windows.Forms.Button Load_PS_BTN;
         private System.Windows.Forms.Label PS_LB;
+        private System.Windows.Forms.Button Pktopl_BTN;
     }
 }

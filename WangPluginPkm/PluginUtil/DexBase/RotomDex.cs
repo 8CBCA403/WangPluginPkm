@@ -101,11 +101,11 @@ namespace WangPluginPkm.PluginUtil.DexBase
                     {
                         for (int i = 0; i < 6; i++)
                         {
-                            pk = SearchDatabase.SearchPKM(SAV, Editor,(ushort)Species.Rotom, 50);
+                            pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Rotom, 50);
                             pk.Form = (byte)i;
-                            if(pk.Form!=0)
+                            if (pk.Form != 0)
                             {
-                               ((PK9)pk).TeraTypeOriginal=MoveType.Electric;
+                                ((PK9)pk).TeraTypeOriginal = MoveType.Electric;
                             }
                             PKL.Add(pk);
                         }

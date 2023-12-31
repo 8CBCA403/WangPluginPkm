@@ -10,6 +10,8 @@ using System.Net.Http;
 using System.Text;
 using System.Windows.Forms;
 using WangPluginPkm.PluginUtil.ModifyPKM;
+using static WangPluginPkm.CheckRules;
+using static WangPluginPkm.GUI.EggGeneratorUI;
 
 namespace WangPluginPkm.GUI
 {
@@ -123,6 +125,7 @@ namespace WangPluginPkm.GUI
             {
                 RunFilter_CLB.SetItemChecked(i, true);
             }
+            // PopulateFilteredDataSources(SAV.SAV);
         }
 
         private void import_editor_BTN_Click(object sender, EventArgs e)
@@ -152,7 +155,10 @@ namespace WangPluginPkm.GUI
                     break;
                 case 9:
                     SNA_CB.SelectedIndex = ((PK9)Editor.Data).StatNature;
-                    Tera_CB.SelectedIndex = (int)((PK9)Editor.Data).TeraType;
+                    if ((int)((PK9)Editor.Data).TeraType == 99)
+                        Tera_CB.SelectedIndex = 18;
+                    else
+                        Tera_CB.SelectedIndex = (int)((PK9)Editor.Data).TeraType;
                     break;
                 default:
                     break;
@@ -250,6 +256,7 @@ namespace WangPluginPkm.GUI
             }
             return r;
         }
+      
         private litePK savlp()
         {
             string[] iv = IV_TB.Text.Split('/');
@@ -294,7 +301,10 @@ namespace WangPluginPkm.GUI
                     break;
                 case 9:
                     lp.StatNature = SNA_CB.SelectedIndex;
-                    lp.TeraType = Tera_CB.SelectedIndex;
+                    if (Tera_CB.SelectedIndex == 18)
+                        lp.TeraType = 99;
+                    else
+                        lp.TeraType = Tera_CB.SelectedIndex;
                     break;
                 default:
                     break;
@@ -423,7 +433,10 @@ namespace WangPluginPkm.GUI
                         break;
                     case 9:
                         SNA_CB.SelectedIndex = ((litePK)lp).StatNature;
-                        Tera_CB.SelectedIndex = ((litePK)lp).TeraType;
+                        if (((litePK)lp).TeraType == 99)
+                            Tera_CB.SelectedIndex = 18;
+                        else
+                            Tera_CB.SelectedIndex = ((litePK)lp).TeraType;
                         break;
                     default:
                         break;
@@ -557,10 +570,13 @@ namespace WangPluginPkm.GUI
                                     break;
                                 case 9:
                                     {
-                                        pk.RelearnMove1 = (ushort)litePKs[i].RelearnMove1;
-                                        pk.RelearnMove2 = (ushort)litePKs[i].RelearnMove2;
-                                        pk.RelearnMove3 = (ushort)litePKs[i].RelearnMove3;
-                                        pk.RelearnMove4 = (ushort)litePKs[i].RelearnMove4;
+                                        if (pk.WasEgg)
+                                        {
+                                            pk.RelearnMove1 = (ushort)litePKs[i].RelearnMove1;
+                                            pk.RelearnMove2 = (ushort)litePKs[i].RelearnMove2;
+                                            pk.RelearnMove3 = (ushort)litePKs[i].RelearnMove3;
+                                            pk.RelearnMove4 = (ushort)litePKs[i].RelearnMove4;
+                                        }
                                     }
                                     break;
                                 case 10:
@@ -676,7 +692,10 @@ namespace WangPluginPkm.GUI
                     break;
                 case 9:
                     pk.StatNature = SNA_CB.SelectedIndex;
-                    pk.TeraType = Tera_CB.SelectedIndex;
+                    if (Tera_CB.SelectedIndex == 18)
+                        pk.TeraType = 99;
+                    else
+                        pk.TeraType = Tera_CB.SelectedIndex;
                     break;
                 default:
                     break;
@@ -755,6 +774,21 @@ namespace WangPluginPkm.GUI
             }
 
             return num;
+        }
+       private  void Muticonvert(int startBox, int startSlot, int endBox, int endSlot)
+        {
+            for (int box = startBox; box <= endBox; box++)
+            {
+                int start = (box == startBox) ? startSlot : 0;
+                int end = (box == endBox) ? endSlot : 29;
+
+                for (int slot = start; slot <= end; slot++)
+                {
+                    Lp_LIST.Items.Add(convertpktolpk(SAV.SAV.GetBoxSlotAtIndex(box,slot)), true);
+                    this.Lp_LIST.DisplayMember = "Name";
+                }
+            }
+            Lp_LIST.Refresh();
         }
         public Span<byte> GetInfo(int gen)
         {
@@ -871,7 +905,7 @@ namespace WangPluginPkm.GUI
             ev[5] = pk.EV_SPE;
             litePK lp = new()
             {
-                Name = File_TB.Text,
+                Name = GameStringsZh.Species.ToArray()[pk.Species],
                 Species = pk.Species,
                 Nature = pk.Nature,
                 Ability = pk.Ability,
@@ -906,6 +940,57 @@ namespace WangPluginPkm.GUI
                     break;
             }
             return lp;
+        }
+
+        private void PopulateFilteredDataSources(ITrainerInfo sav, bool force = false)
+        {
+            var source = GameInfo.FilteredSources;
+            SetIfDifferentCount(source.Languages, LA_CB, force);
+
+            if (sav.Generation >= 2)
+            {
+                var game = (GameVersion)sav.Game;
+                SetIfDifferentCount(source.Items, IT_CB, force);
+            }
+
+            if (sav.Generation >= 3)
+            {
+                SetIfDifferentCount(source.Balls, BA_CB, force);
+            }
+
+            if (sav.Generation >= 4)
+                SetIfDifferentCount(source.Abilities, AB_CB, force);
+
+
+            SetIfDifferentCount(source.Species, SP_CB, force);
+
+            // Set the Move ComboBoxes too.
+            /*  LegalMoveSource.ChangeMoveSource(source.Moves);
+              foreach (var cb in Relearn)
+                  SetIfDifferentCount(source.Relearn, cb, force);
+              foreach (var cb in Moves)
+                  SetIfDifferentCount(source.Moves, cb.CB_Move, force);*/
+
+        }
+        private static void SetIfDifferentCount(IReadOnlyCollection<ComboItem> update, ComboBox exist, bool force = false)
+        {
+            if (!force && exist.DataSource is BindingSource b && b.Count == update.Count)
+                return;
+            exist.DataSource = new BindingSource(update, null);
+            exist.DisplayMember = "Text";
+        }
+
+        private void SP_CB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            File_TB.Text = GameStringsZh.Species[SP_CB.SelectedIndex];
+        }
+
+        private void Pktopl_BTN_Click(object sender, EventArgs e)
+        {
+
+            Muticonvert((int)StartBox_NUM.Value - 1, (int)Start_NUM.Value - 1, (int)EndBox_NUM.Value - 1, (int)End_NUM.Value - 1);
+            Lp_LIST.Refresh();
+            MessageBox.Show($"{Lp_LIST.Items.Count}转换完成！");
         }
     }
 }

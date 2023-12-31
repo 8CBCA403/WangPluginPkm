@@ -343,8 +343,8 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             var PKL = new List<PKM>();
             for (int i = 152; i < 252; i++)
             {
-                if(i!=251)
-                PKL.Add(SearchDatabase.SearchPKM(SAV, Editor, (ushort)i, (int)GameVersion.GD));
+                if (i != 251)
+                    PKL.Add(SearchDatabase.SearchPKM(SAV, Editor, (ushort)i, (int)GameVersion.GD));
                 else
                     PKL.Add(SearchDatabase.SearchPKM(SAV, Editor, (ushort)i, (int)GameVersion.C));
             }
@@ -859,11 +859,11 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             break;
                     }
 
-                    PKL[i].Nature= (int)(PKL[i].PID%25);
-                        PKL[i].ClearNickname();
-                        PKL[i] = AchieveFunc.fun(PKL[i], SAV);
-                    
-                    
+                    PKL[i].Nature = (int)(PKL[i].PID % 25);
+                    PKL[i].ClearNickname();
+                    PKL[i] = AchieveFunc.fun(PKL[i], SAV);
+
+
                     if (shiny)
                     {
                         PKL[i] = ShinyMakerUI.ShinyFunctionPlus(PKL[i]);
@@ -883,11 +883,11 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             var PKL = new List<PKM>();
             for (int i = 387; i < 494; i++)
             {
-                if(i!= 489&&i!=490&&i!=493)
+                if (i != 489 && i != 490 && i != 493)
                     PKL.Add(SearchDatabase.SearchPKM(SAV, Editor, (ushort)i, (int)GameVersion.Pt));
-                else if(i is 489 or 490)
-                    PKL.Add(SearchDatabase.SearchPKM(SAV, Editor, (ushort)i, (int)GameVersion.Pt,0,true));
-                else if(i==493)
+                else if (i is 489 or 490)
+                    PKL.Add(SearchDatabase.SearchPKM(SAV, Editor, (ushort)i, (int)GameVersion.Pt, 0, true));
+                else if (i == 493)
                 {
                     PKL.Add(SearchDatabase.SearchPKM(SAV, Editor, (ushort)i, (int)GameVersion.B));
                 }
@@ -1827,13 +1827,13 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 16:
-                         //   PKL[i] = AchieveFunc.evo2(PKL[i]);
+                            //   PKL[i] = AchieveFunc.evo2(PKL[i]);
                             break;
                         case 18:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 21:
-                           // PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            // PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 23:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
@@ -1849,7 +1849,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 32:
-                          //  PKL[i] = AchieveFunc.evo1(PKL[i]);
+                            //  PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 34:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);

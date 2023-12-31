@@ -24,7 +24,15 @@ namespace WangPluginPkm.GUI
             PStabPage = new TabPage();
             WebtabPage = new TabPage();
             STtabPage = new TabPage();
-            Test_TB = new TextBox();
+            VGCPaste_GB = new GroupBox();
+            CVGC_BTN = new Button();
+            VGCExcel_CB = new ComboBox();
+            ApplicationName_LB = new Label();
+            GoogleApiKeyLB = new Label();
+            GoogleApiKey_TB = new TextBox();
+            VGCPaste_TB = new TextBox();
+            ApplicationName_TB = new TextBox();
+            VGCPastes_BTN = new Button();
             MT_Box = new GroupBox();
             Web_CB = new ComboBox();
             ImportURL_text = new TextBox();
@@ -41,6 +49,7 @@ namespace WangPluginPkm.GUI
             PStabPage.SuspendLayout();
             WebtabPage.SuspendLayout();
             STtabPage.SuspendLayout();
+            VGCPaste_GB.SuspendLayout();
             MT_Box.SuspendLayout();
             SmogonGroup.SuspendLayout();
             VGC_Check.SuspendLayout();
@@ -48,7 +57,7 @@ namespace WangPluginPkm.GUI
             // 
             // LoadBattleTeam_BTN
             // 
-            LoadBattleTeam_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LoadBattleTeam_BTN.Font = new System.Drawing.Font("黑体", 9F);
             LoadBattleTeam_BTN.Location = new System.Drawing.Point(180, 308);
             LoadBattleTeam_BTN.Name = "LoadBattleTeam_BTN";
             LoadBattleTeam_BTN.Size = new System.Drawing.Size(149, 32);
@@ -75,7 +84,7 @@ namespace WangPluginPkm.GUI
             // 
             // LoadTeamFromPSCode_BTN
             // 
-            LoadTeamFromPSCode_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LoadTeamFromPSCode_BTN.Font = new System.Drawing.Font("黑体", 9F);
             LoadTeamFromPSCode_BTN.Location = new System.Drawing.Point(172, 299);
             LoadTeamFromPSCode_BTN.Name = "LoadTeamFromPSCode_BTN";
             LoadTeamFromPSCode_BTN.Size = new System.Drawing.Size(197, 32);
@@ -86,7 +95,7 @@ namespace WangPluginPkm.GUI
             // 
             // ImportPKM_BTN
             // 
-            ImportPKM_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ImportPKM_BTN.Font = new System.Drawing.Font("黑体", 9F);
             ImportPKM_BTN.Location = new System.Drawing.Point(6, 53);
             ImportPKM_BTN.Name = "ImportPKM_BTN";
             ImportPKM_BTN.Size = new System.Drawing.Size(170, 24);
@@ -106,7 +115,7 @@ namespace WangPluginPkm.GUI
             // 
             // ClearAllBox_BTN
             // 
-            ClearAllBox_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ClearAllBox_BTN.Font = new System.Drawing.Font("黑体", 9F);
             ClearAllBox_BTN.Location = new System.Drawing.Point(6, 87);
             ClearAllBox_BTN.Name = "ClearAllBox_BTN";
             ClearAllBox_BTN.Size = new System.Drawing.Size(170, 24);
@@ -165,7 +174,7 @@ namespace WangPluginPkm.GUI
             // STtabPage
             // 
             STtabPage.BackColor = System.Drawing.Color.WhiteSmoke;
-            STtabPage.Controls.Add(Test_TB);
+            STtabPage.Controls.Add(VGCPaste_GB);
             STtabPage.Controls.Add(MT_Box);
             STtabPage.Controls.Add(SmogonGroup);
             STtabPage.Location = new System.Drawing.Point(4, 22);
@@ -175,14 +184,93 @@ namespace WangPluginPkm.GUI
             STtabPage.TabIndex = 2;
             STtabPage.Text = "策略爬取";
             // 
-            // Test_TB
+            // VGCPaste_GB
             // 
-            Test_TB.Location = new System.Drawing.Point(199, 137);
-            Test_TB.Multiline = true;
-            Test_TB.Name = "Test_TB";
-            Test_TB.ScrollBars = ScrollBars.Vertical;
-            Test_TB.Size = new System.Drawing.Size(323, 208);
-            Test_TB.TabIndex = 15;
+            VGCPaste_GB.Controls.Add(CVGC_BTN);
+            VGCPaste_GB.Controls.Add(VGCExcel_CB);
+            VGCPaste_GB.Controls.Add(ApplicationName_LB);
+            VGCPaste_GB.Controls.Add(GoogleApiKeyLB);
+            VGCPaste_GB.Controls.Add(GoogleApiKey_TB);
+            VGCPaste_GB.Controls.Add(VGCPaste_TB);
+            VGCPaste_GB.Controls.Add(ApplicationName_TB);
+            VGCPaste_GB.Controls.Add(VGCPastes_BTN);
+            VGCPaste_GB.Location = new System.Drawing.Point(6, 137);
+            VGCPaste_GB.Name = "VGCPaste_GB";
+            VGCPaste_GB.Size = new System.Drawing.Size(516, 208);
+            VGCPaste_GB.TabIndex = 19;
+            VGCPaste_GB.TabStop = false;
+            VGCPaste_GB.Text = "神偷-VGCPaste";
+            // 
+            // CVGC_BTN
+            // 
+            CVGC_BTN.Location = new System.Drawing.Point(6, 104);
+            CVGC_BTN.Name = "CVGC_BTN";
+            CVGC_BTN.Size = new System.Drawing.Size(95, 23);
+            CVGC_BTN.TabIndex = 21;
+            CVGC_BTN.Text = "同步表格信息";
+            CVGC_BTN.UseVisualStyleBackColor = true;
+            CVGC_BTN.Click += CVGC_BTN_Click;
+            // 
+            // VGCExcel_CB
+            // 
+            VGCExcel_CB.FormattingEnabled = true;
+            VGCExcel_CB.Location = new System.Drawing.Point(6, 78);
+            VGCExcel_CB.Name = "VGCExcel_CB";
+            VGCExcel_CB.Size = new System.Drawing.Size(194, 20);
+            VGCExcel_CB.TabIndex = 15;
+            // 
+            // ApplicationName_LB
+            // 
+            ApplicationName_LB.AutoSize = true;
+            ApplicationName_LB.Location = new System.Drawing.Point(6, 50);
+            ApplicationName_LB.Name = "ApplicationName_LB";
+            ApplicationName_LB.Size = new System.Drawing.Size(95, 12);
+            ApplicationName_LB.TabIndex = 20;
+            ApplicationName_LB.Text = "ApplicationName";
+            // 
+            // GoogleApiKeyLB
+            // 
+            GoogleApiKeyLB.AutoSize = true;
+            GoogleApiKeyLB.Location = new System.Drawing.Point(6, 23);
+            GoogleApiKeyLB.Name = "GoogleApiKeyLB";
+            GoogleApiKeyLB.Size = new System.Drawing.Size(77, 12);
+            GoogleApiKeyLB.TabIndex = 19;
+            GoogleApiKeyLB.Text = "GoogleApiKey";
+            // 
+            // GoogleApiKey_TB
+            // 
+            GoogleApiKey_TB.Location = new System.Drawing.Point(89, 20);
+            GoogleApiKey_TB.Name = "GoogleApiKey_TB";
+            GoogleApiKey_TB.Size = new System.Drawing.Size(111, 21);
+            GoogleApiKey_TB.TabIndex = 17;
+            GoogleApiKey_TB.Text = "AIzaSyBMFP7HlaUt9ZMr7NhapA0X1NBYy4vqcJY";
+            // 
+            // VGCPaste_TB
+            // 
+            VGCPaste_TB.Location = new System.Drawing.Point(206, 20);
+            VGCPaste_TB.Multiline = true;
+            VGCPaste_TB.Name = "VGCPaste_TB";
+            VGCPaste_TB.ScrollBars = ScrollBars.Vertical;
+            VGCPaste_TB.Size = new System.Drawing.Size(304, 182);
+            VGCPaste_TB.TabIndex = 15;
+            // 
+            // ApplicationName_TB
+            // 
+            ApplicationName_TB.Location = new System.Drawing.Point(107, 47);
+            ApplicationName_TB.Name = "ApplicationName_TB";
+            ApplicationName_TB.Size = new System.Drawing.Size(93, 21);
+            ApplicationName_TB.TabIndex = 18;
+            ApplicationName_TB.Text = "silicon-park-409723";
+            // 
+            // VGCPastes_BTN
+            // 
+            VGCPastes_BTN.Location = new System.Drawing.Point(107, 104);
+            VGCPastes_BTN.Name = "VGCPastes_BTN";
+            VGCPastes_BTN.Size = new System.Drawing.Size(93, 23);
+            VGCPastes_BTN.TabIndex = 16;
+            VGCPastes_BTN.Text = "启动VGCPastes";
+            VGCPastes_BTN.UseVisualStyleBackColor = true;
+            VGCPastes_BTN.Click += VGCPastes_Click;
             // 
             // MT_Box
             // 
@@ -196,7 +284,7 @@ namespace WangPluginPkm.GUI
             MT_Box.Size = new System.Drawing.Size(323, 125);
             MT_Box.TabIndex = 9;
             MT_Box.TabStop = false;
-            MT_Box.Text = "神偷";
+            MT_Box.Text = "神偷-阵列兵";
             // 
             // Web_CB
             // 
@@ -212,10 +300,11 @@ namespace WangPluginPkm.GUI
             ImportURL_text.Name = "ImportURL_text";
             ImportURL_text.Size = new System.Drawing.Size(220, 21);
             ImportURL_text.TabIndex = 13;
+            ImportURL_text.Text = "https://www.falinks-teambuilder.com/";
             // 
             // C_BTN
             // 
-            C_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            C_BTN.Font = new System.Drawing.Font("黑体", 9F);
             C_BTN.Location = new System.Drawing.Point(29, 87);
             C_BTN.Name = "C_BTN";
             C_BTN.Size = new System.Drawing.Size(134, 24);
@@ -226,14 +315,14 @@ namespace WangPluginPkm.GUI
             // 
             // MT_BTN
             // 
-            MT_BTN.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            MT_BTN.Font = new System.Drawing.Font("黑体", 9F);
             MT_BTN.Location = new System.Drawing.Point(169, 87);
             MT_BTN.Name = "MT_BTN";
             MT_BTN.Size = new System.Drawing.Size(134, 24);
             MT_BTN.TabIndex = 8;
             MT_BTN.Text = "开偷！";
             MT_BTN.UseVisualStyleBackColor = true;
-            MT_BTN.Click += MT_BTN_Click;
+            MT_BTN.Click += MT_BTN_ClickAsync;
             // 
             // CB
             // 
@@ -271,7 +360,7 @@ namespace WangPluginPkm.GUI
             // 
             // Helper_TB
             // 
-            Helper_TB.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Helper_TB.Font = new System.Drawing.Font("黑体", 9F);
             Helper_TB.Location = new System.Drawing.Point(6, 6);
             Helper_TB.Name = "Helper_TB";
             Helper_TB.Size = new System.Drawing.Size(192, 21);
@@ -312,7 +401,7 @@ namespace WangPluginPkm.GUI
             // 
             ClientSize = new System.Drawing.Size(559, 402);
             Controls.Add(BattleKingtabControl);
-            Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Font = new System.Drawing.Font("黑体", 9F);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -324,7 +413,8 @@ namespace WangPluginPkm.GUI
             PStabPage.PerformLayout();
             WebtabPage.ResumeLayout(false);
             STtabPage.ResumeLayout(false);
-            STtabPage.PerformLayout();
+            VGCPaste_GB.ResumeLayout(false);
+            VGCPaste_GB.PerformLayout();
             MT_Box.ResumeLayout(false);
             MT_Box.PerformLayout();
             SmogonGroup.ResumeLayout(false);
@@ -358,6 +448,14 @@ namespace WangPluginPkm.GUI
         private ComboBox CB;
         private TextBox ImportURL_text;
         private ComboBox Web_CB;
-        private TextBox Test_TB;
+        private TextBox VGCPaste_TB;
+        private Button VGCPastes_BTN;
+        private GroupBox VGCPaste_GB;
+        private TextBox GoogleApiKey_TB;
+        private TextBox ApplicationName_TB;
+        private Label GoogleApiKeyLB;
+        private Label ApplicationName_LB;
+        private ComboBox VGCExcel_CB;
+        private Button CVGC_BTN;
     }
 }

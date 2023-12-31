@@ -22,12 +22,16 @@ namespace WangPluginPkm
 
         public void Initialize(params object[] args)
         {
+            var config = PluginConfig.LoadConfig();
             globalArgs = args;
             SaveFileEditor = (ISaveFileProvider)Array.Find(args, z => z is ISaveFileProvider);
             PKMEditor = (IPKMView)Array.Find(args, z => z is IPKMView);
             var menu = (ToolStrip)Array.Find(args, z => z is ToolStrip);
-            Player.Stream = Properties.Resources.SuperSound;
-            Player.Play();
+            if (config.OpenSound)
+            {
+                Player.Stream = Properties.Resources.SuperSound;
+                Player.Play();
+            }
             LoadMenuStrip(menu);
         }
         private void LoadMenuStrip(ToolStrip menuStrip)
