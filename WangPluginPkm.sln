@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WangPluginPkm", "WangPluginPkm\WangPluginPkm.csproj", "{4F266DD0-F490-4807-99B6-6712B2BB10A5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApp1", "WPFDemo\WpfApp1.csproj", "{2D0E1E5B-F98E-4CEB-8FE5-20AC789A1517}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApp", "WPFDemo\WpfApp.csproj", "{2D0E1E5B-F98E-4CEB-8FE5-20AC789A1517}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

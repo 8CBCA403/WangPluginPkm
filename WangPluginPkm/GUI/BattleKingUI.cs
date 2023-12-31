@@ -1,4 +1,7 @@
-﻿using HtmlAgilityPack;
+﻿using Google.Apis.Services;
+using Google.Apis.Sheets.v4;
+using Google.Apis.Sheets.v4.Data;
+using HtmlAgilityPack;
 using Newtonsoft.Json;
 using PKHeX.Core;
 using PKHeX.Core.AutoMod;
@@ -11,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Media;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WangPluginPkm.PluginUtil;
@@ -24,7 +28,10 @@ namespace WangPluginPkm.GUI
     {
         public List<ShowdownSet> Sets = new();
         public static ISaveFileProvider SAV { private get; set; } = null!;
-
+        private CancellationTokenSource PastetokenSource = new();
+        private CancellationTokenSource FalinkVGCstokenSource = new();
+        private CancellationTokenSource FalinkTournamentstokenSource = new();
+        private CancellationTokenSource VGCPastestokenSource = new();
         public static IPKMView Editor { private get; set; } = null!;
         private static List<ExpandPKM> BD = new List<ExpandPKM>();
         private enum Falinks
@@ -53,30 +60,34 @@ namespace WangPluginPkm.GUI
             var url = UrlBox.Text.Trim();
             var suburl = url.Split('\n');
             if (suburl.Length > 0)
-                for (int i = 0; i < suburl.Length; i++)
+                Task.Factory.StartNew(
+                () =>
                 {
-                    TeamPasteInfo info;
-                    try
+                    for (int i = 0; i < suburl.Length; i++)
                     {
-                        info = new TeamPasteInfo(suburl[i]);
+                        TeamPasteInfo info;
+                        try
+                        {
+                            info = new TeamPasteInfo(suburl[i]);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("An error occurred while trying to obtain the contents of the URL.");
+                            return;
+                        }
+                        if (!info.Valid)
+                        {
+                            MessageBox.Show("The data inSID16e the URL are not valid Showdown Sets");
+                            return;
+                        }
+                        if (info.Source == TeamPasteInfo.PasteSource.None)
+                        {
+                            MessageBox.Show("The URL provided is not from a supported website.");
+                            return;
+                        }
+                        Import(info.Sets);
                     }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("An error occurred while trying to obtain the contents of the URL.");
-                        return;
-                    }
-                    if (!info.Valid)
-                    {
-                        MessageBox.Show("The data inSID16e the URL are not valid Showdown Sets");
-                        return;
-                    }
-                    if (info.Source == TeamPasteInfo.PasteSource.None)
-                    {
-                        MessageBox.Show("The URL provided is not from a supported website.");
-                        return;
-                    }
-                    Import(info.Sets);
-                }
+                }, PastetokenSource.Token);
             MessageBox.Show($"导入了{suburl.Length}个队伍");
         }
         private void LoadTeamFromPSCode_BTN_Click(object sender, EventArgs e)
@@ -206,10 +217,6 @@ namespace WangPluginPkm.GUI
                     (analysis == null ? $"Set {errorstr}." : $"Set Invalid: {analysis}")
                     + "\n\nRefer to the wiki for more help on generating sets correctly."
                     + "\n\nIf you are sure this set is valid, please create an issue on GitHub and upload the error_log.txt file in the issue.";
-
-
-
-
             }
 
             Debug.WriteLine("Single Set Genning Complete. Loading final data to tabs.");
@@ -273,8 +280,6 @@ namespace WangPluginPkm.GUI
             FileUtil.TryGetPKM(input, out var pk, ext);
             return pk;
         }
-
-
         public static void ClearPKM(PKM pkm)
         {
             pkm.Species = 0;
@@ -410,85 +415,104 @@ namespace WangPluginPkm.GUI
                 ResultBox.AppendText("队伍中宝可梦等级合法!" + Environment.NewLine);
         }
 
-        private async void MT_BTN_Click(object sender, EventArgs e)
+        private async void MT_BTN_ClickAsync(object sender, EventArgs e)
         {
             switch (Web_CB.SelectedIndex)
             {
                 case 0:
-                    {
-                        await NewVGCGet();
-                    }
+                    await NewVGCGet();
                     break;
                 case 1:
-                    {
-                        await NewTournamentsGet();
-                    }
+                    await NewTournamentsGet();
                     break;
                 default:
                     break;
             }
-
-
         }
         public async Task NewVGCGet()
         {
-            TeamForm fr = new(Web_CB.SelectedIndex);
-            HttpClient client = new HttpClient();
-            string jsonContent;
-            MT_BTN.Enabled = false;
-            fr.Import_BTN.Enabled = false;
-            HttpResponseMessage response = await client.GetAsync(ImportURL_text.Text);
-            string responseBody = await response.Content.ReadAsStringAsync();
-            var r = (BFuction.GetString(responseBody, "_buildManifest.js", "_ssgManifest.js"));
-            var jsUrl = ImportURL_text.Text + "/_next/data/" + r + "/en/pastes/vgc/" + CB.SelectedValue + ".json";
-            response = await client.GetAsync(jsUrl);
-            jsonContent = await response.Content.ReadAsStringAsync();
-            var data = JsonConvert.DeserializeObject<RootObject>(jsonContent);
-            Stopwatch st = new Stopwatch();
-            st.Start();
-            try
             {
-                if (data != null)
-                {
-                    int n = data.PageProps.Pastes.Count;
-                    for (int i = 0; i < n; i++)
-                    {
-                        var item = data.PageProps.Pastes[i];
-                        var link = ImportURL_text.Text + "/pastes/" + item.Id;
-                        response = await client.GetAsync(link);
-                        var content = await response.Content.ReadAsStringAsync();
-                        HtmlAgilityPack.HtmlDocument docl = new HtmlAgilityPack.HtmlDocument();
-                        docl.LoadHtml(content);
-                        HtmlNode targetNode = docl.DocumentNode.SelectSingleNode("//pre[contains(@class, 'ml-5') and contains(@class, 'w-4/5') and contains(@class, 'whitespace-pre-wrap')]");
-                        if (targetNode != null)
-                        {
-                            string textContent = targetNode.InnerText;
-                            data.PageProps.Pastes[i].PS = textContent;
-                        }
-                        fr.TeamListBox.Items.Add(data.PageProps.Pastes[i]);
-                        fr.TeamListBox.DisplayMember = "Title";
-                        fr.TeamListBox.Refresh();
-                        fr.Show();
-                    }
-                }
-                MT_BTN.Enabled = true;
+                TeamForm fr = new(Web_CB.SelectedIndex);
+                HttpClient client = new HttpClient();
+                string jsonContent;
+                MT_BTN.Enabled = false;
                 fr.Import_BTN.Enabled = true;
-                st.Stop();
-                MessageBox.Show($"经过时间{st.ElapsedMilliseconds / 1000}秒");
+                HttpResponseMessage response = await client.GetAsync(ImportURL_text.Text);
+                string responseBody = await response.Content.ReadAsStringAsync();
+                var r = (BFuction.GetString(responseBody, "_buildManifest.js", "_ssgManifest.js"));
+                var jsUrl = ImportURL_text.Text + "/_next/data/" + r + "/en/pastes/vgc/" + CB.SelectedValue + ".json";
+                response = await client.GetAsync(jsUrl);
+                jsonContent = await response.Content.ReadAsStringAsync();
+                var data = JsonConvert.DeserializeObject<RootObject>(jsonContent);
+                Stopwatch st = new Stopwatch();
+                st.Start();
+                try
+                {
+                    if (data != null)
+                    {
+                        int n = data.PageProps.Pastes.Count;
+                        // Your existing code...
+                        fr.Show();
+                        await Task.Run(async () =>
+                        {
+                            for (int i = 0; i < n; i++)
+                            {
+                                var item = data.PageProps.Pastes[i];
+                                var link = ImportURL_text.Text + "/pastes/" + item.Id;
+
+                                using (var client = new HttpClient())
+                                {
+                                    var response = await client.GetAsync(link);
+                                    var content = await response.Content.ReadAsStringAsync();
+
+                                    HtmlAgilityPack.HtmlDocument docl = new HtmlAgilityPack.HtmlDocument();
+                                    docl.LoadHtml(content);
+
+                                    HtmlNode targetNode = docl.DocumentNode.SelectSingleNode("//pre[contains(@class, 'ml-5') and contains(@class, 'w-4/5') and contains(@class, 'whitespace-pre-wrap')]");
+                                    if (targetNode != null)
+                                    {
+                                        string textContent = targetNode.InnerText;
+                                        data.PageProps.Pastes[i].PS = textContent;
+
+                                        // Ensure UI updates are done on the main thread
+                                        if (fr.IsHandleCreated)
+                                        {
+                                            fr.Invoke((MethodInvoker)delegate
+                                            {
+                                                fr.TeamListBox.Items.Add(data.PageProps.Pastes[i]);
+                                                fr.TeamListBox.DisplayMember = "Title";
+                                                fr.TeamListBox.Refresh();
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+
+
+                    }
+
+
+
+                    MT_BTN.Enabled = true;
+                    fr.Import_BTN.Enabled = true;
+                    st.Stop();
+                    MessageBox.Show($"经过时间{st.ElapsedMilliseconds / 1000}秒");
+                }
+
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+
+                }
+                finally
+                {
+                    client.Dispose();
+
+                }
             }
-
-
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-
-            }
-            finally
-            {
-                client.Dispose();
-
-            }
-
         }
         public async Task NewTournamentsGet()
         {
@@ -496,7 +520,7 @@ namespace WangPluginPkm.GUI
 
             HttpClient client = new HttpClient();
             MT_BTN.Enabled = false;
-            fr.Import_BTN.Enabled = false;
+            fr.Import_BTN.Enabled = true;
             HttpResponseMessage response = await client.GetAsync(ImportURL_text.Text);
             string responseBody = await response.Content.ReadAsStringAsync();
             var r = (BFuction.GetString(responseBody, "_buildManifest.js", "_ssgManifest.js"));
@@ -633,7 +657,124 @@ namespace WangPluginPkm.GUI
             await Selectc();
             MessageBox.Show("导入了网页！");
         }
+        private void GoogleSheet()
+        {
+            string apiKey = GoogleApiKey_TB.Text;
+            // AIzaSyBMFP7HlaUt9ZMr7NhapA0X1NBYy4vqcJY
+            // 创建Google Sheets服务
+            var sheetsService = new SheetsService(new BaseClientService.Initializer()
+            {
+                ApiKey = apiKey,
+                ApplicationName = ApplicationName_TB.Text
+                //silicon-park-409723
+            });
+            // 读取数据的示例
+            string spreadsheetId = "1axlwmzPA49rYkqXh7zHvAtSP-TKbM0ijGYBPRflLSWw";
+            if (VGCExcel_CB.SelectedValue != null)
+                PrintCellsContainingKeywordInSheet(sheetsService, spreadsheetId, (string)VGCExcel_CB.SelectedValue, "pokepast.es");
+        }
+        private static Sheet GetSheetSize(SheetsService service, string spreadsheetId, string sheetName)
+        {
+            SpreadsheetsResource.ValuesResource.GetRequest request = service.Spreadsheets.Values.Get(spreadsheetId, sheetName);
+            ValueRange response = request.Execute();
+            return (Sheet)response.Values;
+        }
+        private static List<string> GetSheetTitles(SheetsService service, string spreadsheetId)
+        {
+            var spreadsheet = service.Spreadsheets.Get(spreadsheetId).Execute();
+            var sheetTitles = new List<string>();
 
+            foreach (var sheet in spreadsheet.Sheets)
+            {
+                sheetTitles.Add(sheet.Properties.Title);
+            }
+
+            return sheetTitles;
+        }
+        private static IList<IList<object>> ReadData(SheetsService service, string spreadsheetId, string range)
+        {
+            SpreadsheetsResource.ValuesResource.GetRequest request = service.Spreadsheets.Values.Get(spreadsheetId, range);
+            ValueRange response = request.Execute();
+            return response.Values;
+        }
+        private void PrintValues(IList<IList<object>> values)
+        {
+            if (values != null && values.Count > 0)
+            {
+                // textBox1.Text+=("Read data:");
+                foreach (var row in values)
+                {
+                    foreach (var col in row)
+                    {
+                        VGCPaste_TB.Text += ($"{col} ");
+                    }
+                    VGCPaste_TB.Text += Environment.NewLine;
+                }
+            }
+            else
+            {
+                VGCPaste_TB.Text += ("No data found.");
+            }
+        }
+        private void PrintCellsContainingKeywordInSheet(SheetsService service, string spreadsheetId, string sheetName, string keyword)
+        {
+            var sheetData = service.Spreadsheets.Values.Get(spreadsheetId, $"{sheetName}!A:FZ").Execute();
+            int n = 0;
+            if (sheetData.Values != null && sheetData.Values.Count > 0)
+            {
+                VGCPaste_TB.Text += ($"{sheetName}中的队伍如下:") + Environment.NewLine;
+                for (int rowIndex = 0; rowIndex < sheetData.Values.Count; rowIndex++)
+                {
+                    var row = sheetData.Values[rowIndex];
+                    for (int colIndex = 0; colIndex < row.Count; colIndex++)
+                    {
+                        var cellValue = row[colIndex].ToString();
+                        if (cellValue != null)
+                        {
+                            if (cellValue.Contains(keyword))
+                            {
+                                n++;
+                                VGCPaste_TB.Text += ($"队伍{n}:{cellValue}") + Environment.NewLine;
+                            }
+                        }
+                    }
+                }
+                if (n == 0)
+                {
+                    VGCPaste_TB.Text += ($"此表格没有队伍");
+                }
+            }
+            else
+            {
+                VGCPaste_TB.Text += ($"此表格没有队伍");
+            }
+        }
+        private void VGCPastes_Click(object sender, EventArgs e)
+        {
+            VGCPaste_TB.Clear();
+            Task.Factory.StartNew(
+              () =>
+              {
+                  GoogleSheet();
+              }, VGCPastestokenSource.Token);
+        }
+        private void CVGC_BTN_Click(object sender, EventArgs e)
+        {
+            List<string> st;
+            string apiKey = GoogleApiKey_TB.Text;
+            //AIzaSyBMFP7HlaUt9ZMr7NhapA0X1NBYy4vqcJY
+            var sheetsService = new SheetsService(new BaseClientService.Initializer()
+            {
+                ApiKey = apiKey,
+                ApplicationName = ApplicationName_TB.Text
+                //silicon-park-409723
+            });
+            string spreadsheetId = "1axlwmzPA49rYkqXh7zHvAtSP-TKbM0ijGYBPRflLSWw";
+            st = GetSheetTitles(sheetsService, spreadsheetId);
+            VGCExcel_CB.DataSource = st;
+        }
     }
 }
+
+
 

@@ -259,13 +259,13 @@ namespace WangPluginPkm.GUI
                 }
                 if (ShinyBox.Checked)
                 {
-                     pk.IVs = c[j].IVs;
-                     pk.Nature = c[j].Nature;
-                     pk.StatNature = pk.Nature;
+                    pk.IVs = c[j].IVs;
+                    pk.Nature = c[j].Nature;
+                    pk.StatNature = pk.Nature;
                 }
                 pk.StatNature = c[j].Nature;
                 pk.SetEVs(c[j].EVs);
-            
+
                 pk.Move1_PPUps = 3;
                 pk.Move2_PPUps = 3;
                 pk.Move3_PPUps = 3;
@@ -275,7 +275,7 @@ namespace WangPluginPkm.GUI
                 {
                     pk.Ball = (int)ball;
                 }
-                if (RandPID_Box.Checked&& ShinyBox.Checked)
+                if (RandPID_Box.Checked && ShinyBox.Checked)
                 {
                     pk.PID = rand.Rand32();
                     pk.SetRandomEC();

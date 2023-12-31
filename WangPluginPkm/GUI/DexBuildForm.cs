@@ -11,8 +11,6 @@ using WangPluginPkm.PluginUtil.AchieveBase.SpecificForm;
 using WangPluginPkm.PluginUtil.DexBase;
 using WangPluginPkm.PluginUtil.MeerkatBase;
 using WangPluginPkm.SortBase;
-using static iText.Svg.SvgConstants;
-using static WangPluginPkm.CheckRules;
 using static WangPluginPkm.PluginUtil.Functions.DexBuildFunctions;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 
@@ -1432,7 +1430,7 @@ namespace WangPluginPkm.GUI
             SAV.SAV.ModifyBoxes(EditEV);
             SAV.ReloadSlots();
             MessageBox.Show("速配完成！");
-           
+
         }
 
         private void EditEV(PKM pk)

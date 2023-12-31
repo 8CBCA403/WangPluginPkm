@@ -55,7 +55,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                         {
                             var pk6 = SearchDatabase.SearchPKM(SAV, Editor, 649, 24);
                             pk6.Form = (byte)i;
-                          
+
                             if (i > 0)
                             {
                                 pk6.HeldItem = Drive[i - 1];

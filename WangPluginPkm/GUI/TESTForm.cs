@@ -1,6 +1,5 @@
 ﻿using PKHeX.Core;
 using System;
-using System.IO;
 using System.Windows.Forms;
 
 
@@ -59,11 +58,11 @@ namespace WangPluginPkm.GUI
             PerformLayout();
         }
 
-       
+
 
         private void SetAll_BTN_Click(object sender, EventArgs e)
         {
-        
+
         }
 
         private TextBox textBox1;
