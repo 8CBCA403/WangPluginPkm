@@ -6,7 +6,8 @@ namespace WangPluginPkm
     public class PluginConfig
     {
         public bool OpenSound { get; set; } = false;
-        public int Setting1 { get; set; } = 0;
+        public string GoogleapiKey { get; set; } = "";
+        public string GoogleApplicationName { get; set; } = "";
         // 添加其他配置项
         public void SaveConfig(PluginConfig config)
         {

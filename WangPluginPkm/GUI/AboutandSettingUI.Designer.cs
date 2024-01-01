@@ -2,16 +2,20 @@
 
 namespace WangPluginPkm.GUI
 {
-    partial class AboutUI
+    partial class AboutandSettingUI
     {
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutUI));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutandSettingUI));
             AboutTextBox = new RichTextBox();
             PictureBox = new PictureBox();
             PluginSetting = new GroupBox();
-            SoundCheck = new CheckBox();
             Sav_Config_BTN = new Button();
+            SoundCheck = new CheckBox();
+            API_TB = new TextBox();
+            APP_TB = new TextBox();
+            ApiKeyLB = new Label();
+            ApplicationNameLB = new Label();
             ((System.ComponentModel.ISupportInitialize)PictureBox).BeginInit();
             PluginSetting.SuspendLayout();
             SuspendLayout();
@@ -37,6 +41,10 @@ namespace WangPluginPkm.GUI
             // 
             // PluginSetting
             // 
+            PluginSetting.Controls.Add(ApplicationNameLB);
+            PluginSetting.Controls.Add(ApiKeyLB);
+            PluginSetting.Controls.Add(APP_TB);
+            PluginSetting.Controls.Add(API_TB);
             PluginSetting.Controls.Add(Sav_Config_BTN);
             PluginSetting.Controls.Add(SoundCheck);
             PluginSetting.Location = new System.Drawing.Point(3, 12);
@@ -45,6 +53,16 @@ namespace WangPluginPkm.GUI
             PluginSetting.TabIndex = 2;
             PluginSetting.TabStop = false;
             PluginSetting.Text = "插键设置";
+            // 
+            // Sav_Config_BTN
+            // 
+            Sav_Config_BTN.Location = new System.Drawing.Point(662, 75);
+            Sav_Config_BTN.Name = "Sav_Config_BTN";
+            Sav_Config_BTN.Size = new System.Drawing.Size(75, 23);
+            Sav_Config_BTN.TabIndex = 1;
+            Sav_Config_BTN.Text = "保存设置";
+            Sav_Config_BTN.UseVisualStyleBackColor = true;
+            Sav_Config_BTN.Click += Sav_Config_BTN_Click;
             // 
             // SoundCheck
             // 
@@ -58,15 +76,37 @@ namespace WangPluginPkm.GUI
             SoundCheck.Text = "是否播放启动声音";
             SoundCheck.UseVisualStyleBackColor = true;
             // 
-            // Sav_Config_BTN
+            // API_TB
             // 
-            Sav_Config_BTN.Location = new System.Drawing.Point(662, 75);
-            Sav_Config_BTN.Name = "Sav_Config_BTN";
-            Sav_Config_BTN.Size = new System.Drawing.Size(75, 23);
-            Sav_Config_BTN.TabIndex = 1;
-            Sav_Config_BTN.Text = "保存设置";
-            Sav_Config_BTN.UseVisualStyleBackColor = true;
-            Sav_Config_BTN.Click += Sav_Config_BTN_Click;
+            API_TB.Location = new System.Drawing.Point(192, 20);
+            API_TB.Name = "API_TB";
+            API_TB.Size = new System.Drawing.Size(227, 23);
+            API_TB.TabIndex = 2;
+            // 
+            // APP_TB
+            // 
+            APP_TB.Location = new System.Drawing.Point(510, 20);
+            APP_TB.Name = "APP_TB";
+            APP_TB.Size = new System.Drawing.Size(227, 23);
+            APP_TB.TabIndex = 3;
+            // 
+            // ApiKeyLB
+            // 
+            ApiKeyLB.AutoSize = true;
+            ApiKeyLB.Location = new System.Drawing.Point(138, 23);
+            ApiKeyLB.Name = "ApiKeyLB";
+            ApiKeyLB.Size = new System.Drawing.Size(48, 17);
+            ApiKeyLB.TabIndex = 4;
+            ApiKeyLB.Text = "ApiKey";
+            // 
+            // ApplicationNameLB
+            // 
+            ApplicationNameLB.AutoSize = true;
+            ApplicationNameLB.Location = new System.Drawing.Point(437, 23);
+            ApplicationNameLB.Name = "ApplicationNameLB";
+            ApplicationNameLB.Size = new System.Drawing.Size(67, 17);
+            ApplicationNameLB.TabIndex = 5;
+            ApplicationNameLB.Text = "AppName";
             // 
             // AboutUI
             // 
@@ -91,5 +131,9 @@ namespace WangPluginPkm.GUI
         private GroupBox PluginSetting;
         private CheckBox SoundCheck;
         private Button Sav_Config_BTN;
+        private TextBox APP_TB;
+        private TextBox API_TB;
+        private Label ApiKeyLB;
+        private Label ApplicationNameLB;
     }
 }

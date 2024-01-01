@@ -25,13 +25,10 @@ namespace WangPluginPkm.GUI
             WebtabPage = new TabPage();
             STtabPage = new TabPage();
             VGCPaste_GB = new GroupBox();
+            TB = new TextBox();
             CVGC_BTN = new Button();
             VGCExcel_CB = new ComboBox();
-            ApplicationName_LB = new Label();
-            GoogleApiKeyLB = new Label();
-            GoogleApiKey_TB = new TextBox();
             VGCPaste_TB = new TextBox();
-            ApplicationName_TB = new TextBox();
             VGCPastes_BTN = new Button();
             MT_Box = new GroupBox();
             Web_CB = new ComboBox();
@@ -186,13 +183,10 @@ namespace WangPluginPkm.GUI
             // 
             // VGCPaste_GB
             // 
+            VGCPaste_GB.Controls.Add(TB);
             VGCPaste_GB.Controls.Add(CVGC_BTN);
             VGCPaste_GB.Controls.Add(VGCExcel_CB);
-            VGCPaste_GB.Controls.Add(ApplicationName_LB);
-            VGCPaste_GB.Controls.Add(GoogleApiKeyLB);
-            VGCPaste_GB.Controls.Add(GoogleApiKey_TB);
             VGCPaste_GB.Controls.Add(VGCPaste_TB);
-            VGCPaste_GB.Controls.Add(ApplicationName_TB);
             VGCPaste_GB.Controls.Add(VGCPastes_BTN);
             VGCPaste_GB.Location = new System.Drawing.Point(6, 137);
             VGCPaste_GB.Name = "VGCPaste_GB";
@@ -200,6 +194,15 @@ namespace WangPluginPkm.GUI
             VGCPaste_GB.TabIndex = 19;
             VGCPaste_GB.TabStop = false;
             VGCPaste_GB.Text = "神偷-VGCPaste";
+            // 
+            // TB
+            // 
+            TB.Location = new System.Drawing.Point(6, 20);
+            TB.Multiline = true;
+            TB.Name = "TB";
+            TB.ScrollBars = ScrollBars.Vertical;
+            TB.Size = new System.Drawing.Size(201, 52);
+            TB.TabIndex = 22;
             // 
             // CVGC_BTN
             // 
@@ -216,55 +219,21 @@ namespace WangPluginPkm.GUI
             VGCExcel_CB.FormattingEnabled = true;
             VGCExcel_CB.Location = new System.Drawing.Point(6, 78);
             VGCExcel_CB.Name = "VGCExcel_CB";
-            VGCExcel_CB.Size = new System.Drawing.Size(194, 20);
+            VGCExcel_CB.Size = new System.Drawing.Size(201, 20);
             VGCExcel_CB.TabIndex = 15;
-            // 
-            // ApplicationName_LB
-            // 
-            ApplicationName_LB.AutoSize = true;
-            ApplicationName_LB.Location = new System.Drawing.Point(6, 50);
-            ApplicationName_LB.Name = "ApplicationName_LB";
-            ApplicationName_LB.Size = new System.Drawing.Size(95, 12);
-            ApplicationName_LB.TabIndex = 20;
-            ApplicationName_LB.Text = "ApplicationName";
-            // 
-            // GoogleApiKeyLB
-            // 
-            GoogleApiKeyLB.AutoSize = true;
-            GoogleApiKeyLB.Location = new System.Drawing.Point(6, 23);
-            GoogleApiKeyLB.Name = "GoogleApiKeyLB";
-            GoogleApiKeyLB.Size = new System.Drawing.Size(77, 12);
-            GoogleApiKeyLB.TabIndex = 19;
-            GoogleApiKeyLB.Text = "GoogleApiKey";
-            // 
-            // GoogleApiKey_TB
-            // 
-            GoogleApiKey_TB.Location = new System.Drawing.Point(89, 20);
-            GoogleApiKey_TB.Name = "GoogleApiKey_TB";
-            GoogleApiKey_TB.Size = new System.Drawing.Size(111, 21);
-            GoogleApiKey_TB.TabIndex = 17;
-            GoogleApiKey_TB.Text = "AIzaSyBMFP7HlaUt9ZMr7NhapA0X1NBYy4vqcJY";
             // 
             // VGCPaste_TB
             // 
-            VGCPaste_TB.Location = new System.Drawing.Point(206, 20);
+            VGCPaste_TB.Location = new System.Drawing.Point(213, 20);
             VGCPaste_TB.Multiline = true;
             VGCPaste_TB.Name = "VGCPaste_TB";
             VGCPaste_TB.ScrollBars = ScrollBars.Vertical;
-            VGCPaste_TB.Size = new System.Drawing.Size(304, 182);
+            VGCPaste_TB.Size = new System.Drawing.Size(297, 182);
             VGCPaste_TB.TabIndex = 15;
-            // 
-            // ApplicationName_TB
-            // 
-            ApplicationName_TB.Location = new System.Drawing.Point(107, 47);
-            ApplicationName_TB.Name = "ApplicationName_TB";
-            ApplicationName_TB.Size = new System.Drawing.Size(93, 21);
-            ApplicationName_TB.TabIndex = 18;
-            ApplicationName_TB.Text = "silicon-park-409723";
             // 
             // VGCPastes_BTN
             // 
-            VGCPastes_BTN.Location = new System.Drawing.Point(107, 104);
+            VGCPastes_BTN.Location = new System.Drawing.Point(114, 104);
             VGCPastes_BTN.Name = "VGCPastes_BTN";
             VGCPastes_BTN.Size = new System.Drawing.Size(93, 23);
             VGCPastes_BTN.TabIndex = 16;
@@ -451,11 +420,8 @@ namespace WangPluginPkm.GUI
         private TextBox VGCPaste_TB;
         private Button VGCPastes_BTN;
         private GroupBox VGCPaste_GB;
-        private TextBox GoogleApiKey_TB;
-        private TextBox ApplicationName_TB;
-        private Label GoogleApiKeyLB;
-        private Label ApplicationName_LB;
         private ComboBox VGCExcel_CB;
         private Button CVGC_BTN;
+        private TextBox TB;
     }
 }
