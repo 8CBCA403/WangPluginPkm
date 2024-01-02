@@ -4,7 +4,7 @@ using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.Plugins
 {
-    public class AboutPlugin : WangPluginPkm
+    public class AboutandSettingPlugin : WangPluginPkm
     {
         public override string Name => "关于和设置/About and Setting";
         public override int Priority => 12;
@@ -24,7 +24,7 @@ namespace WangPluginPkm.Plugins
         private void OpenForm(object sender, EventArgs e)
         {
 
-            var form = new AboutUI();
+            var form = new AboutandSettingUI();
             form.Show();
         }
     }

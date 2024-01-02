@@ -20,6 +20,7 @@ using System.Windows.Forms;
 using WangPluginPkm.PluginUtil;
 using WangPluginPkm.PluginUtil.BattleKingBase;
 using WangPluginPkm.PluginUtil.ModifyPKM;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 
 namespace WangPluginPkm.GUI
@@ -44,6 +45,7 @@ namespace WangPluginPkm.GUI
         {
             InitializeComponent();
             Web_CB.DataSource = Enum.GetValues(typeof(Falinks));
+            TB.Text = "注意，神偷-VGCPaste功能需要Google api key以及App Name"+Environment.NewLine+ "在此处申请 https://console.cloud.google.com/apis";
             SAV = sav;
             Editor = editor;
         }
@@ -659,13 +661,14 @@ namespace WangPluginPkm.GUI
         }
         private void GoogleSheet()
         {
-            string apiKey = GoogleApiKey_TB.Text;
+           
+            var config = PluginConfig.LoadConfig();
             // AIzaSyBMFP7HlaUt9ZMr7NhapA0X1NBYy4vqcJY
             // 创建Google Sheets服务
             var sheetsService = new SheetsService(new BaseClientService.Initializer()
             {
-                ApiKey = apiKey,
-                ApplicationName = ApplicationName_TB.Text
+                ApiKey = config.GoogleapiKey,
+                ApplicationName = config.GoogleapiKey
                 //silicon-park-409723
             });
             // 读取数据的示例
@@ -761,12 +764,12 @@ namespace WangPluginPkm.GUI
         private void CVGC_BTN_Click(object sender, EventArgs e)
         {
             List<string> st;
-            string apiKey = GoogleApiKey_TB.Text;
+            var config = PluginConfig.LoadConfig();
             //AIzaSyBMFP7HlaUt9ZMr7NhapA0X1NBYy4vqcJY
             var sheetsService = new SheetsService(new BaseClientService.Initializer()
             {
-                ApiKey = apiKey,
-                ApplicationName = ApplicationName_TB.Text
+                ApiKey = config.GoogleapiKey,
+                ApplicationName = config.GoogleapiKey
                 //silicon-park-409723
             });
             string spreadsheetId = "1axlwmzPA49rYkqXh7zHvAtSP-TKbM0ijGYBPRflLSWw";
