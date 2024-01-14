@@ -8,19 +8,22 @@ using PKHeX.Core.AutoMod;
 using PKHeX.Core.Enhancements;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Net;
 using System.Net.Http;
+using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WangPluginPkm.PluginUtil;
 using WangPluginPkm.PluginUtil.BattleKingBase;
 using WangPluginPkm.PluginUtil.ModifyPKM;
-using static Org.BouncyCastle.Math.EC.ECCurve;
+
 
 
 namespace WangPluginPkm.GUI
@@ -28,6 +31,9 @@ namespace WangPluginPkm.GUI
     partial class BattleKingUI : Form
     {
         public List<ShowdownSet> Sets = new();
+        public List<HomeRankClass> L = new();
+
+        
         public static ISaveFileProvider SAV { private get; set; } = null!;
         private CancellationTokenSource PastetokenSource = new();
         private CancellationTokenSource FalinkVGCstokenSource = new();
@@ -45,7 +51,7 @@ namespace WangPluginPkm.GUI
         {
             InitializeComponent();
             Web_CB.DataSource = Enum.GetValues(typeof(Falinks));
-            TB.Text = "注意，神偷-VGCPaste功能需要Google api key以及App Name"+Environment.NewLine+ "在此处申请 https://console.cloud.google.com/apis";
+            TB.Text = "注意，神偷-VGCPaste功能需要Google api key以及App Name" + Environment.NewLine + "在此处申请 https://console.cloud.google.com/apis";
             SAV = sav;
             Editor = editor;
         }
@@ -661,7 +667,7 @@ namespace WangPluginPkm.GUI
         }
         private void GoogleSheet()
         {
-           
+
             var config = PluginConfig.LoadConfig();
             // AIzaSyBMFP7HlaUt9ZMr7NhapA0X1NBYy4vqcJY
             // 创建Google Sheets服务
@@ -776,8 +782,97 @@ namespace WangPluginPkm.GUI
             st = GetSheetTitles(sheetsService, spreadsheetId);
             VGCExcel_CB.DataSource = st;
         }
+
+        private async void Get_Rank_BTN_Click(object sender, EventArgs e)
+        {
+            string url = "https://resource.pokemon-home.com/battledata/ranking/scvi/qox62uoxgkjlt4f4g4pm/2/1688176797/traner-1";
+            var html = await HomeRankClass.DownloadPageAsync(url);
+            if(html!=null)
+            foreach (var h in html)
+            {
+                HomeRankClass r = new(h);
+                L.Add(r);
+            }
+            var departmentBindingList = new BindingList<HomeRankClass>(L);
+            var departmentSource = new BindingSource(departmentBindingList, null);
+            Rank_List_Box.DataSource = departmentSource;
+            Rank_List_Box.DisplayMember = "DisplayName";
+            Rank_List_Box.ValueMember = "Description";
+            Rank_List_Box.Refresh();
+        }
+
+        private async void Rank_List_Box_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string imageUrl = "";
+            var u = L[Rank_List_Box.SelectedIndex];
+            if (u.Description != null)
+            {
+                RankBox.Text = $"{u.Description.Rank}";
+                NameBox.Text = u.Description.Name;
+                RankValueBox.Text = $"{u.Description.rating_value}";
+                if (u.Description.Lng != null)
+                {       
+                    LangBox.Text = $"{Lng(Int16.Parse(u.Description.Lng))}";
+                 }
+                imageUrl = "https://resource.pokemon-home.com/battledata/img/icons/trainer/" + u.Description.Icon;
+            }
+            if (!string.IsNullOrEmpty(imageUrl))
+            {
+                try
+                {
+                    var httpClient = new HttpClient();
+                    HttpResponseMessage response = await httpClient.GetAsync(imageUrl);
+                    byte[] imageData = await response.Content.ReadAsByteArrayAsync();
+                    using (MemoryStream ms = new MemoryStream(imageData))
+                    {
+                        Image downloadedImage = Image.FromStream(ms);
+                        PlayerPic.Image = downloadedImage;
+                    }
+                }
+                catch (WebException ex)
+                {
+                    if (ex.Response is HttpWebResponse response && response.StatusCode == HttpStatusCode.Forbidden)
+                    {
+                        PlayerPic.Image = Properties.Resources._403; 
+                    }
+                    else
+                    {
+                        PlayerPic.Image = Properties.Resources._403; 
+                    }
+                }
+                catch 
+                {
+                    PlayerPic.Image = Properties.Resources._403;
+                }
+            }
+            else
+            {
+                MessageBox.Show("请输入图像的URL", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        private string Lng(int l)
+        {
+            switch (l)
+            {
+                case 1:
+                    return "日语";
+                case 2:
+                    return "英语";
+                case 8:
+                    return "韩语";
+                case 9:
+                    return "繁体中文";
+                case 10:
+                    return "简体中文";
+                default:
+                    return $"语言代码{l}";
+            }
+                
+        }
+       
     }
-}
+    }
+
 
 
 
