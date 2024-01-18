@@ -61,6 +61,16 @@ namespace WangPluginPkm.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap _403 {
+            get {
+                object obj = ResourceManager.GetObject("_403", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Credits (in no particular order)
         ///- Bill Young, Mike Suleski, and Andrew Ringer for [RNGReporter]
         ///(https://github.com/Slashmolder/RNGReporter)

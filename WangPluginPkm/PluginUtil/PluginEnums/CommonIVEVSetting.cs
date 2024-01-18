@@ -72,7 +72,13 @@ namespace WangPluginPkm
             pk.HT_Language = 0;
             pk.HT_Gender = 0;
             pk.HT_Name = "";
-            pk.MarkValue = 0;
+            pk.SetMarking(0, MarkingColor.None);
+            pk.SetMarking(1, MarkingColor.None);
+            pk.SetMarking(2, MarkingColor.None);
+            pk.SetMarking(3, MarkingColor.None);
+            pk.SetMarking(4, MarkingColor.None);
+            pk.SetMarking(5, MarkingColor.None);
+
             pk.HT_Friendship = 0;
             pk.HT_Trash.Clear();
             pk.Nickname_Trash.Clear();
