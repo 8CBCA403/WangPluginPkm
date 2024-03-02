@@ -1,4 +1,5 @@
 ﻿using PKHeX.Core;
+using System;
 namespace WangPluginPkm
 {
     internal class VersionFlag
@@ -96,5 +97,7 @@ namespace WangPluginPkm
             else
                 return false;
         }
+
+       
     }
 }

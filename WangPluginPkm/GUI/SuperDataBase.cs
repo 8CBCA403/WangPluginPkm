@@ -131,7 +131,7 @@ namespace WangPluginPkm.GUI
         private void import_editor_BTN_Click(object sender, EventArgs e)
         {
             SP_CB.SelectedIndex = Editor.Data.Species;
-            NA_CB.SelectedIndex = Editor.Data.Nature;
+            NA_CB.SelectedIndex = (int)Editor.Data.Nature;
             AB_CB.SelectedIndex = Editor.Data.Ability;
             IT_CB.SelectedIndex = Editor.Data.HeldItem;
             BA_CB.SelectedIndex = Editor.Data.Ball;
@@ -151,10 +151,10 @@ namespace WangPluginPkm.GUI
             switch (SAV.SAV.Generation)
             {
                 case 8:
-                    SNA_CB.SelectedIndex = ((PK8)Editor.Data).StatNature;
+                    SNA_CB.SelectedIndex = (int)((PK8)Editor.Data).StatNature;
                     break;
                 case 9:
-                    SNA_CB.SelectedIndex = ((PK9)Editor.Data).StatNature;
+                    SNA_CB.SelectedIndex = (int)((PK9)Editor.Data).StatNature;
                     if ((int)((PK9)Editor.Data).TeraType == 99)
                         Tera_CB.SelectedIndex = 18;
                     else
@@ -509,7 +509,7 @@ namespace WangPluginPkm.GUI
                             {
                                 case 0:
                                     {
-                                        pk.Nature = litePKs[i].Nature;
+                                        pk.Nature = (Nature)litePKs[i].Nature;
                                     }
                                     break;
                                 case 1:
@@ -525,7 +525,7 @@ namespace WangPluginPkm.GUI
                                     break;
                                 case 3:
                                     {
-                                        pk.Ball = litePKs[i].Ball;
+                                        pk.Ball = (byte)litePKs[i].Ball;
                                     }
                                     break;
                                 case 4:
@@ -581,14 +581,14 @@ namespace WangPluginPkm.GUI
                                     break;
                                 case 10:
                                     {
-                                        pk.CurrentLevel = litePKs[i].CurrentLevel;
+                                        pk.CurrentLevel = (byte)litePKs[i].CurrentLevel;
 
                                     }
                                     break;
                                 case 11:
                                     {
 
-                                        pk.StatNature = litePKs[i].StatNature;
+                                        pk.StatNature = (Nature)litePKs[i].StatNature;
                                     }
                                     break;
                                 case 12:
@@ -907,7 +907,7 @@ namespace WangPluginPkm.GUI
             {
                 Name = GameStringsZh.Species.ToArray()[pk.Species],
                 Species = pk.Species,
-                Nature = pk.Nature,
+                Nature = (int)pk.Nature,
                 Ability = pk.Ability,
                 AbilityNumber = pk.AbilityNumber,
                 HeldItem = pk.HeldItem,
@@ -930,10 +930,10 @@ namespace WangPluginPkm.GUI
             switch (SAV.SAV.Generation)
             {
                 case 8:
-                    lp.StatNature = ((PK8)pk).StatNature;
+                    lp.StatNature = (int)((PK8)pk).StatNature;
                     break;
                 case 9:
-                    lp.StatNature = ((PK9)pk).StatNature;
+                    lp.StatNature = (int)((PK9)pk).StatNature;
                     lp.TeraType = (int)((PK9)pk).TeraType;
                     break;
                 default:
@@ -949,7 +949,7 @@ namespace WangPluginPkm.GUI
 
             if (sav.Generation >= 2)
             {
-                var game = (GameVersion)sav.Game;
+                var game = (GameVersion)sav.Version;
                 SetIfDifferentCount(source.Items, IT_CB, force);
             }
 

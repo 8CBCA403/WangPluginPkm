@@ -16,7 +16,7 @@ namespace WangPluginPkm.PluginUtil.LegalLogic
                 {
                     TrainerSettings.DefaultTID16 = pKM.TID16;
                     TrainerSettings.DefaultSID16 = pKM.SID16;
-                    TrainerSettings.DefaultOT = pKM.OT_Name;
+                    TrainerSettings.DefaultOT = pKM.OriginalTrainerName;
                     PKM pKM2 = sav.Legalize(pKM);
                     pKM2.Heal();
                     if (new LegalityAnalysis(pKM2).Valid)

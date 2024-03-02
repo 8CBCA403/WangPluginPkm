@@ -108,17 +108,17 @@ namespace WangPluginPkm.RNG.Methods
             };
             if (criteria.Gender != FixedGenderUtil.GenderRandom && gender != criteria.Gender)
                 return false;
-            pk.Gender = gender;
+            pk.Gender = (byte)gender;
 
             byte nature = enc.Nature != Nature.Random ? (byte)enc.Nature : enc.Species == (int)Species.Toxtricity
-                    ? ToxtricityUtil.GetRandomNature(ref rand, pk.Form)
+                    ? (byte)ToxtricityUtil.GetRandomNature(ref rand, pk.Form)
                     : (byte)rand.NextInt(25);
             if (criteria.Nature != Nature.Random && nature != (int)criteria.Nature)
                 return false;
-            pk.Nature = pk.StatNature = nature;
+            pk.Nature = pk.StatNature = (Nature)nature;
 
-            pk.HeightScalar = enc.Height != 0 ? enc.Height : (byte)(rand.NextInt(0x81) + rand.NextInt(0x80));
-            pk.WeightScalar = enc.Weight != 0 ? enc.Weight : (byte)(rand.NextInt(0x81) + rand.NextInt(0x80));
+            pk.HeightScalar = (Nature)(Nature)(Nature)(Nature)enc.Height != 0 ? enc.Height : (byte)(rand.NextInt(0x81) + rand.NextInt(0x80));
+            pk.WeightScalar = (Nature)(Nature)(Nature)(Nature)enc.Weight != 0 ? enc.Weight : (byte)(rand.NextInt(0x81) + rand.NextInt(0x80));
             pk.Scale = enc.ScaleType.GetSizeValue(enc.Scale, ref rand);
             return true;
         }
@@ -190,9 +190,9 @@ namespace WangPluginPkm.RNG.Methods
                 return false;
 
             byte nature = enc.Nature != Nature.Random ? (byte)enc.Nature : enc.Species == (int)Species.Toxtricity
-                    ? ToxtricityUtil.GetRandomNature(ref rand, pk.Form)
+                    ? (byte)ToxtricityUtil.GetRandomNature(ref rand, pk.Form)
                     : (byte)rand.NextInt(25);
-            if (pk.Nature != nature)
+            if ((int)pk.Nature != nature)
                 return false;
 
             if (enc.Height == 0)
@@ -356,7 +356,7 @@ namespace WangPluginPkm.RNG.Methods
             Tera.gender = gender;
 
             byte nature = enc.Nature != Nature.Random ? (byte)enc.Nature : enc.Species == (int)Species.Toxtricity
-                    ? ToxtricityUtil.GetRandomNature(ref rand, pk.Form)
+                    ? (byte)(ToxtricityUtil.GetRandomNature(ref rand, pk.Form))
                     : (byte)rand.NextInt(25);
             Tera.nature = nature;
 

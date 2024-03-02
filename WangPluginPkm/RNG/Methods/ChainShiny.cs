@@ -24,7 +24,7 @@ namespace WangPluginPkm.RNG.Methods
             {
                 return false;
             }
-            pk.Nature = (int)(pid % 100 % 25);
+            pk.Nature = (Nature)(int)(pid % 100 % 25);
             pk.RefreshAbility((int)(pk.PID & 1));
 
             pk.Gender = pk.GetSaneGender();

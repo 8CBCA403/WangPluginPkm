@@ -48,7 +48,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                     {
                         var pk6 = SearchDatabase.SearchPKM(SAV, Editor, 386, 27, 0, false, 316);
                         pk6.Form = (byte)i;
-                        pk6.OT_Name = "wang";
+                        pk6.OriginalTrainerName = "wang";
                         PKL.Add(pk6);
                     }
                     break;

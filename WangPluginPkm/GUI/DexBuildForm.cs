@@ -189,16 +189,16 @@ namespace WangPluginPkm.GUI
         {
             var T = pkm.TID16;
             var S = pkm.SID16;
-            var N = pkm.OT_Name;
+            var N = pkm.OriginalTrainerName;
             var TID16 = uint.Parse(TID16Box.Text);
             var SID16 = uint.Parse(SID16Box.Text);
-            var Name = OT_Name.Text;
+            var Name = OriginalTrainerName.Text;
             if (VersionFlag.ID7Flag(SAV.SAV.Version))
                 pkm.Language = GetLanguageBox7(type7);
 
             else
                 pkm.Language = GetLanguageBox5(type5);
-            pkm.OT_Name = Name;
+            pkm.OriginalTrainerName = Name;
             pkm.ClearNickname();
             if (VersionFlag.ID7Flag(SAV.SAV.Version))
             {
@@ -216,14 +216,14 @@ namespace WangPluginPkm.GUI
             var la = new LegalityAnalysis(pkm);
             if (la.Valid)
             {
-                pkm.OT_Gender = GetGender(typeG);
+                pkm.OriginalTrainerGender = (byte)GetGender(typeG);
                 pkm.ClearNickname();
             }
             else
             {
                 pkm.TID16 = T;
                 pkm.SID16 = S;
-                pkm.OT_Name = N;
+                pkm.OriginalTrainerName = N;
                 pkm.ClearNickname();
             }
         }
@@ -587,7 +587,7 @@ namespace WangPluginPkm.GUI
                     pk.Species = j;
                     pk.ClearNickname();
                     pk.Ability = pkc.Ability;
-                    pk.OT_Name = RandomString(6);
+                    pk.OriginalTrainerName = RandomString(6);
                     pk.SetSuggestedMoves();
                     if( pk.Move1 != 0)
                         pk.SetSuggestedMovePP(0);

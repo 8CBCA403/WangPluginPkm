@@ -309,7 +309,7 @@ namespace WangPluginPkm.GUI
             {
                 foreach (var enc in encounters)
                 {
-                    if (pk.Generation == 8 && pk.Met_Location == 244)
+                    if (pk.Generation == 8 && pk.MetLocation == 244)
                     {
                         FindNestPIDIV.PreSetPIDIV(pk, enc);
                         break;
@@ -647,7 +647,7 @@ namespace WangPluginPkm.GUI
             var pk = Editor.Data;
             if (pk.Generation == 9)
             {
-                if (pk.Met_Location == Locations.TeraCavern9)
+                if (pk.MetLocation == Locations.TeraCavern9)
                 {
                     pk.PID = (((uint)(pk.TID16 ^ pk.SID16) ^ (pk.PID & 0xFFFF) ^ 1u) << 16) | (pk.PID & 0xFFFF);
                 }

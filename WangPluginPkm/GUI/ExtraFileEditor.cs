@@ -79,7 +79,7 @@ namespace WangPluginPkm.GUI
             byte b = 0;
             SpeciesName.TryGetSpecies(SpeciesBox.Text, 9, out ushort s);
             pk.Species = s;
-            gp.Username1 = OT_Name.Text;
+            gp.Username1 = OriginalTrainerName.Text;
             ushort Move1 = (ushort)Array.IndexOf(GameInfo.Strings.movelist, Move1_TextBox.Text);
             ushort Move2 = (ushort)Array.IndexOf(GameInfo.Strings.movelist, Move2_TextBox.Text);
             //gp.Username2 = OName.Text;
@@ -121,7 +121,7 @@ namespace WangPluginPkm.GUI
             var Move2 = ParseSettings.GetMoveName(gp.Move2);
             SpeciesBox.Text = Name;
             NickNameBox.Text = gp.Nickname;
-            OT_Name.Text = gp.Username1;
+            OriginalTrainerName.Text = gp.Username1;
             //OName.Text = gp.Username2;
             HP_TextBox.Text = gp.IV_HP.ToString();
             Atk_TextBox.Text = gp.IV_ATK.ToString();

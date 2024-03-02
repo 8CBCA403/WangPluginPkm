@@ -15,14 +15,14 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
                 pk.CurrentLevel = 50;
                 pk.Species = 6;
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 4;
+                pk.Version = (GameVersion)4;
                 PKL.Add(pk);
 
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Venusaur, (int)GameVersion.LG);
                 pk.CurrentLevel = 50;
                 pk.Species = 3;
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 5;
+                pk.Version = (GameVersion)5;
                 PKL.Add(pk);
 
 

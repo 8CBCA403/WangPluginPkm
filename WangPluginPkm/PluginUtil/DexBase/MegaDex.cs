@@ -191,7 +191,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
             }
             else if (pk.Species == 94)
             {
-                if (pk.Version > 27)
+                if (pk.Version > (GameVersion)27)
                 {
                     pk.AbilityNumber = 1;
                     pk.Ability = 130;
@@ -240,22 +240,22 @@ namespace WangPluginPkm.PluginUtil.DexBase
             }
             if (pk.Species == 65)
             {
-                pk.OT_Name = "wang";
+                pk.OriginalTrainerName = "wang";
 
             }
             else if (pk.Species == 94)
             {
-                pk.OT_Name = "wang";
+                pk.OriginalTrainerName = "wang";
 
             }
             else if (pk.Species == 208)
             {
-                pk.OT_Name = "wang";
+                pk.OriginalTrainerName = "wang";
 
             }
             else if (pk.Species == 212)
             {
-                pk.OT_Name = "wang";
+                pk.OriginalTrainerName = "wang";
 
             }
         }

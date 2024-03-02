@@ -22,7 +22,7 @@ namespace WangPluginPkm.RNG.Methods
             if (!r.CheckShiny(r, pk))
                 return false;
             pk.Gender = pk.GetSaneGender();
-            pk.Nature = (int)pk.PID % 25;
+            pk.Nature = (Nature)((int)pk.PID % 25);
             pk.RefreshAbility((int)(pk.PID & 1));
             pk.AbilityNumber = (int)(pk.PID & 1) + 1;
             pk.SetRandomIVs();

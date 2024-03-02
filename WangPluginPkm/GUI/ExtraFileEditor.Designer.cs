@@ -24,7 +24,7 @@ namespace WangPluginPkm.GUI
             SpeciesBox = new TextBox();
             HP_TextBox = new TextBox();
             MetDate_TextBox = new TextBox();
-            OT_Name = new TextBox();
+            OriginalTrainerName = new TextBox();
             NickNameBox = new TextBox();
             CP_TextBox = new TextBox();
             Atk_TextBox = new TextBox();
@@ -40,7 +40,7 @@ namespace WangPluginPkm.GUI
             SpeciesLabel = new Label();
             CovertToPB7 = new Button();
             NickNameLabel = new Label();
-            OT_Name_Label = new Label();
+            OriginalTrainerName_Label = new Label();
             Move2_label = new Label();
             Move1_label = new Label();
             HP_Label = new Label();
@@ -154,7 +154,7 @@ namespace WangPluginPkm.GUI
             GP1Tab.Controls.Add(SpeciesBox);
             GP1Tab.Controls.Add(HP_TextBox);
             GP1Tab.Controls.Add(MetDate_TextBox);
-            GP1Tab.Controls.Add(OT_Name);
+            GP1Tab.Controls.Add(OriginalTrainerName);
             GP1Tab.Controls.Add(NickNameBox);
             GP1Tab.Controls.Add(CP_TextBox);
             GP1Tab.Controls.Add(Atk_TextBox);
@@ -170,7 +170,7 @@ namespace WangPluginPkm.GUI
             GP1Tab.Controls.Add(SpeciesLabel);
             GP1Tab.Controls.Add(CovertToPB7);
             GP1Tab.Controls.Add(NickNameLabel);
-            GP1Tab.Controls.Add(OT_Name_Label);
+            GP1Tab.Controls.Add(OriginalTrainerName_Label);
             GP1Tab.Controls.Add(Move2_label);
             GP1Tab.Controls.Add(Move1_label);
             GP1Tab.Controls.Add(HP_Label);
@@ -240,12 +240,12 @@ namespace WangPluginPkm.GUI
             MetDate_TextBox.Size = new System.Drawing.Size(106, 21);
             MetDate_TextBox.TabIndex = 24;
             // 
-            // OT_Name
+            // OriginalTrainerName
             // 
-            OT_Name.Location = new System.Drawing.Point(101, 78);
-            OT_Name.Name = "OT_Name";
-            OT_Name.Size = new System.Drawing.Size(106, 21);
-            OT_Name.TabIndex = 6;
+            OriginalTrainerName.Location = new System.Drawing.Point(101, 78);
+            OriginalTrainerName.Name = "OriginalTrainerName";
+            OriginalTrainerName.Size = new System.Drawing.Size(106, 21);
+            OriginalTrainerName.TabIndex = 6;
             // 
             // NickNameBox
             // 
@@ -384,15 +384,15 @@ namespace WangPluginPkm.GUI
             NickNameLabel.TabIndex = 9;
             NickNameLabel.Text = "昵称";
             // 
-            // OT_Name_Label
+            // OriginalTrainerName_Label
             // 
-            OT_Name_Label.AutoSize = true;
-            OT_Name_Label.Font = new System.Drawing.Font("黑体", 9F);
-            OT_Name_Label.Location = new System.Drawing.Point(20, 84);
-            OT_Name_Label.Name = "OT_Name_Label";
-            OT_Name_Label.Size = new System.Drawing.Size(65, 12);
-            OT_Name_Label.TabIndex = 10;
-            OT_Name_Label.Text = "初训家名字";
+            OriginalTrainerName_Label.AutoSize = true;
+            OriginalTrainerName_Label.Font = new System.Drawing.Font("黑体", 9F);
+            OriginalTrainerName_Label.Location = new System.Drawing.Point(20, 84);
+            OriginalTrainerName_Label.Name = "OriginalTrainerName_Label";
+            OriginalTrainerName_Label.Size = new System.Drawing.Size(65, 12);
+            OriginalTrainerName_Label.TabIndex = 10;
+            OriginalTrainerName_Label.Text = "初训家名字";
             // 
             // Move2_label
             // 
@@ -499,7 +499,7 @@ namespace WangPluginPkm.GUI
         private TextBox SpeciesBox;
         private TextBox HP_TextBox;
         private TextBox MetDate_TextBox;
-        private TextBox OT_Name;
+        private TextBox OriginalTrainerName;
         private TextBox NickNameBox;
         private TextBox CP_TextBox;
         private TextBox Atk_TextBox;
@@ -515,7 +515,7 @@ namespace WangPluginPkm.GUI
         private Label SpeciesLabel;
         private Button CovertToPB7;
         private Label NickNameLabel;
-        private Label OT_Name_Label;
+        private Label OriginalTrainerName_Label;
         private Label Move2_label;
         private Label Move1_label;
         private Label HP_Label;

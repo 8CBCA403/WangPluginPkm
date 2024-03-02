@@ -22,11 +22,11 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Turtwig, (int)GameVersion.D);
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 10;
+                pk.Version = (GameVersion)10;
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Chimchar, (int)GameVersion.P);
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 11;
+                pk.Version = (GameVersion)11;
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Piplup, (int)GameVersion.Pt);
                 pk = AchieveFunc.fun(pk, SAV);

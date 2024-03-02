@@ -37,19 +37,19 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                     switch (rand)
                     {
                         case 0:
-                            PKL[i].Version = (int)GameVersion.YW;
+                            PKL[i].Version = GameVersion.YW;
                             break;
                         case 1:
-                            PKL[i].Version = (int)GameVersion.GN;
+                            PKL[i].Version = GameVersion.GN;
                             break;
                         case 2:
-                            PKL[i].Version = (int)GameVersion.GN;
+                            PKL[i].Version = GameVersion.GN;
                             break;
                         case 4:
-                            PKL[i].Version = (int)GameVersion.YW;
+                            PKL[i].Version = GameVersion.YW;
                             break;
                         case 5:
-                            PKL[i].Version = (int)GameVersion.RD;
+                            PKL[i].Version = GameVersion.RD;
                             break;
                     }
                     switch (i)
@@ -101,12 +101,12 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             break;
                         case 26:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Sandshrew, (int)GameVersion.YW);
-                            PKL[i].Version = (int)GameVersion.YW;
+                            PKL[i].Version = GameVersion.YW;
                             break;
                         case 27:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Sandshrew, (int)GameVersion.YW);
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
-                            PKL[i].Version = (int)GameVersion.YW;
+                            PKL[i].Version = GameVersion.YW;
                             break;
                         case 30:
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
@@ -146,12 +146,12 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             break;
                         case 51:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Meowth, (int)GameVersion.GN);
-                            PKL[i].Version = (int)GameVersion.GN;
+                            PKL[i].Version = GameVersion.GN;
                             break;
                         case 52:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Meowth, (int)GameVersion.GN);
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
-                            PKL[i].Version = (int)GameVersion.GN;
+                            PKL[i].Version = GameVersion.GN;
                             break;
                         case 54:
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
@@ -305,7 +305,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                     {
                         PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Mew, (int)GameVersion.E);
                         PKL[i] = AchieveFunc.fun(PKL[i], SAV);
-                        PKL[i].OT_Name = "Meerk";
+                        PKL[i].OriginalTrainerName = "Meerk";
                         PKL[i].AbilityNumber = 1;
                     }
                     else if (i != 150 && i != 82)
@@ -363,19 +363,19 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                         switch (rand)
                         {
                             case 0:
-                                PKL[i].Version = 39;
+                                PKL[i].Version = (GameVersion)39;
                                 break;
                             case 1:
-                                PKL[i].Version = 40;
+                                PKL[i].Version = (GameVersion)40;
                                 break;
                             case 2:
-                                PKL[i].Version = 39;
+                                PKL[i].Version = (GameVersion)39;
                                 break;
                             case 4:
-                                PKL[i].Version = 41;
+                                PKL[i].Version = (GameVersion)41;
                                 break;
                             case 5:
-                                PKL[i].Version = 41;
+                                PKL[i].Version = (GameVersion)41;
                                 break;
                         }
                     }
@@ -551,7 +551,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             break;
                         case 98:
                             PKL[i].CurrentLevel = 70;
-                            PKL[i].Met_Level = 70;
+                            PKL[i].MetLevel = 70;
                             break;
                     }
                     if (i != 26 && i != 56)
@@ -805,7 +805,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             if (PKL[i] is IContestStats a)
                             {
-                                a.CNT_Beauty = 255;
+                                a.ContestBeauty = 255;
                             }
                             break;
                         case 102:
@@ -847,7 +847,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             {
                                 PKL[i].PID = 1177749629;
                                 PKL[i].EncryptionConstant = 1177749629;
-                                PKL[i].Nature = 4;
+                                PKL[i].Nature = (Nature)4;
                                 PKL[i].IV_HP = 21;
                                 PKL[i].IV_ATK = 31;
                                 PKL[i].IV_DEF = 31;
@@ -859,7 +859,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             break;
                     }
 
-                    PKL[i].Nature = (int)(PKL[i].PID % 25);
+                    PKL[i].Nature = (Nature)(int)(PKL[i].PID % 25);
                     PKL[i].ClearNickname();
                     PKL[i] = AchieveFunc.fun(PKL[i], SAV);
 
@@ -1023,11 +1023,11 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             break;
                         case 60:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)447, (int)GameVersion.Pt, 0, true, 0, 0, 1);
-                            //  PKL[i].Egg_Location = 2010;
+                            //  PKL[i].EggLocation = 2010;
                             break;
                         case 61:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)447, (int)GameVersion.Pt, 0, true, 0, 0, 1);
-                            //  PKL[i].Egg_Location = 2010;
+                            //  PKL[i].EggLocation = 2010;
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 65:
@@ -1185,7 +1185,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                 for (int i = 0; i < PKL.Count; i++)
                 {
                     // var context = PKL[i].Context;
-                    var origin = new EvolutionOrigin(PKL[i].Species, (byte)GameVersion.W, 5, 1, 100);
+                    var origin = new EvolutionOrigin(PKL[i].Species, (GameVersion)(byte)GameVersion.W, 5, 1, 100);
                     var chain = EvolutionChain.GetOriginChain(PKL[i], origin);
 
                     EncounterGenerator5 g5 = new();

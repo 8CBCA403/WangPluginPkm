@@ -11,7 +11,7 @@ namespace WangPluginPkm
                 #region
                 case 296:
                     {
-                        if (pk.Met_Location == 5)
+                        if (pk.MetLocation == 5)
                         {
                             if (Lockfun.Makuhita(ref seed))
                                 return true;
@@ -415,7 +415,7 @@ namespace WangPluginPkm
                     }
                 case 363:
                     {
-                        if (pk.Met_Location == 11)
+                        if (pk.MetLocation == 11)
                         {
                             if (Lockfun.SphealCipherLab(ref seed))
                                 return true;
@@ -432,7 +432,7 @@ namespace WangPluginPkm
                     }
                 case 273:
                     {
-                        if (pk.Met_Location == 11)
+                        if (pk.MetLocation == 11)
                         {
                             if (Lockfun.SeedotCipherLab(ref seed))
                                 return true;

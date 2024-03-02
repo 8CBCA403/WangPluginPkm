@@ -28,7 +28,7 @@ namespace WangPluginPkm.RNG.Methods
             pk.IV_SPA = (int)ivs[3];
             pk.IV_SPD = (int)ivs[4];
             pk.IV_SPE = (int)ivs[5];
-            pk.Nature = (int)(pid % 100 % 25);
+            pk.Nature = (Nature)(int)(pid % 100 % 25);
             pk.AbilityNumber = (int)(pid & 1);
             return true;
         }
