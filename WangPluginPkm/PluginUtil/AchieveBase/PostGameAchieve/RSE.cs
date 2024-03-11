@@ -19,7 +19,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Rayquaza, (int)GameVersion.E);
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 3;
+                pk.Version = (GameVersion)3;
                 PKL.Add(pk);
             }
             return PKL;

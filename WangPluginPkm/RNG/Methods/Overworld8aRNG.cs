@@ -89,7 +89,7 @@ namespace WangPluginPkm.RNG.Methods
             pk.RefreshAbility((int)rand.NextInt(2));
             pk.Gender = pk.GetSaneGender();
             int nature = (int)rand.NextInt(25);
-            pk.StatNature = pk.Nature = nature;
+            pk.StatNature = pk.Nature = (Nature)nature;
             PA8 pa = (PA8)pk;
             var (height, weight) = pa.IsAlpha
                 ? (byte.MaxValue, byte.MaxValue)
@@ -123,10 +123,10 @@ namespace WangPluginPkm.RNG.Methods
                     pid ^= 0x1000_0000;
             }
         }
-        private static byte GetRollCount(SlotType type) => (byte)(MaxRollCount + type switch
+        private static byte GetRollCount(SlotType8a type) => (byte)(MaxRollCount + type switch
         {
-            SlotType.OverworldMMO => 12,
-            SlotType.OverworldMass => 25,
+            SlotType8a.Standard => 12,
+            SlotType8a.MassOutbreakRegular => 25,
             _ => 0,
         });
     }

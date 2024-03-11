@@ -85,7 +85,7 @@ namespace WangPluginPkm.GUI
             {
                 Species = pk.Species,
                 SearchEgg = false,
-                Version = 47,
+                Version = (GameVersion)47,
             };
             var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
             var results = search.ToList();
@@ -125,10 +125,10 @@ namespace WangPluginPkm.GUI
             pk.Language = pkm.Language;
             pk.PID = pkm.PID;
             pk.EncryptionConstant = pkm.EncryptionConstant;
-            pk.OT_Name = pkm.OT_Name;
+            pk.OriginalTrainerName = pkm.OriginalTrainerName;
             pk.DisplayTID = pkm.DisplayTID;
             pk.DisplaySID = pkm.DisplaySID;
-            pk.OT_Gender = pkm.OT_Gender;
+            pk.OriginalTrainerGender = pkm.OriginalTrainerGender;
             pk.IVs = pkm.IVs;
             pk.EV_ATK = pkm.EV_ATK;
             pk.EV_DEF = pkm.EV_DEF;
@@ -172,7 +172,7 @@ namespace WangPluginPkm.GUI
                 for (int i = 0; i < L.Count(); i++)
                 {
                     pk = L[i];
-                    r += $"序号：{j}" + SearchDatabase.SearchMytheryGift(pk.Species, pk.Generation, pk.OT_Name, pk.SID16, pk.TID16, pk.Form);
+                    r += $"序号：{j}" + SearchDatabase.SearchMytheryGift(pk.Species, pk.Generation, pk.OriginalTrainerName, pk.SID16, pk.TID16, pk.Form);
                     j++;
                 }
             }

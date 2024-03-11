@@ -72,7 +72,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
             }
             if (pk.Species == 76)
             {
-                pk.OT_Name = "wang";
+                pk.OriginalTrainerName = "wang";
             }
 
         }

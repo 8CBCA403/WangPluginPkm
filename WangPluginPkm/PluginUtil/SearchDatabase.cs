@@ -16,7 +16,7 @@ namespace WangPluginPkm
                 SearchShiny = false,
                 Species = species,
                 SearchEgg = egg,
-                Version = version,
+                Version = (GameVersion)version,
             };
             var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
             var results = search.ToList();
@@ -40,7 +40,7 @@ namespace WangPluginPkm
                         enc = Results[i];
                         pk = enc.ConvertToPKM(SAV.SAV);
 
-                        if (pk.Met_Location == location)
+                        if (pk.MetLocation == location)
                             break;
                     }
                 }
@@ -61,7 +61,7 @@ namespace WangPluginPkm
                     {
                         enc = Results[i];
                         pk = enc.ConvertToPKM(SAV.SAV);
-                        if (pk.Met_Level == level)
+                        if (pk.MetLevel == level)
                             break;
                     }
 
@@ -79,7 +79,7 @@ namespace WangPluginPkm
             {
                 Species = species,
                 SearchEgg = egg,
-                Version = version,
+                Version = (GameVersion)version,
             };
             var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
             var results = search.ToList();
@@ -113,7 +113,7 @@ namespace WangPluginPkm
             {
                 Species = species,
                 SearchEgg = false,
-                Version = (int)SAV.SAV.Version,
+                Version = (GameVersion)(int)SAV.SAV.Version,
             };
             var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
             var results = search.ToList();
@@ -125,7 +125,7 @@ namespace WangPluginPkm
                     Results = results;
                     enc = Results[i];
                     pk = enc.ConvertToPKM(SAV.SAV);
-                    if (pk.Met_Location == 244)
+                    if (pk.MetLocation == 244)
                         break;
                 }
             }
@@ -206,7 +206,7 @@ namespace WangPluginPkm
                 }
             }
             p[0].Language = language;
-            p[0].OT_Name = OT;
+            p[0].OriginalTrainerName = OT;
             p[0].ClearNickname();
             return p[0];
         }
@@ -219,7 +219,7 @@ namespace WangPluginPkm
             res = res.Where(pkm => pkm.Species == species);
             res = res.Where(pkm => pkm.Form == form);
             res = res.Where(pkm => pkm.Generation == Generation);
-            res = res.Where(pkm => pkm.OT_Name == otname);
+            res = res.Where(pkm => pkm.OriginalTrainerName == otname);
             res = res.Where(pkm => pkm.SID16 == SID16);
             res = res.Where(pkm => pkm.TID16 == TID16);
             var results = res.ToArray();
@@ -248,7 +248,7 @@ namespace WangPluginPkm
             {
                 Species = species,
                 SearchEgg = egg,
-                Version = version,
+                Version = (GameVersion)version,
             };
             var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
             var results = search.ToList();
@@ -271,7 +271,7 @@ namespace WangPluginPkm
                     {
                         enc = Results[i];
                         pk = enc.ConvertToPKM(SAV.SAV, En);
-                        if (pk.Met_Location == location)
+                        if (pk.MetLocation == location)
                             break;
                     }
                 }
@@ -298,7 +298,7 @@ namespace WangPluginPkm
             {
                 Species = species,
                 SearchEgg = false,
-                Version = version,
+                Version = (GameVersion)version,
             };
             var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
             var results = search.ToList();
@@ -317,7 +317,7 @@ namespace WangPluginPkm
                         enc = Results[i];
                         pk = enc.ConvertToPKM(SAV.SAV);
 
-                        if (pk.Met_Location != loc)
+                        if (pk.MetLocation != loc)
                             break;
                     }
                 }

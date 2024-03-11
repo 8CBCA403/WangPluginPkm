@@ -10,7 +10,7 @@ namespace WangPluginPkm
             int[] ev = { 6, 252, 0, 252, 0, 0 };
             pk.IVs = iv;
             pk.SetEVs(ev);
-            pk.Nature = 13;
+            pk.Nature = (Nature)13;
             pk.StatNature = pk.Nature;
             return pk;
         }
@@ -20,7 +20,7 @@ namespace WangPluginPkm
             int[] ev = { 6, 0, 0, 252, 252, 0 };
             pk.IVs = iv;
             pk.SetEVs(ev);
-            pk.Nature = 10;
+            pk.Nature = (Nature)10;
             pk.StatNature = pk.Nature;
             return pk;
         }
@@ -30,7 +30,7 @@ namespace WangPluginPkm
             int[] ev = { 252, 252, 0, 0, 0, 6 };
             pk.IVs = iv;
             pk.SetEVs(ev);
-            pk.Nature = 2;
+            pk.Nature = (Nature)2;
             pk.StatNature = pk.Nature;
             return pk;
         }
@@ -40,7 +40,7 @@ namespace WangPluginPkm
             int[] ev = { 252, 0, 0, 0, 252, 6 };
             pk.IVs = iv;
             pk.SetEVs(ev);
-            pk.Nature = 17;
+            pk.Nature = (Nature)17;
             pk.StatNature = pk.Nature;
             return pk;
         }
@@ -50,13 +50,13 @@ namespace WangPluginPkm
             int[] ev = { 252, 0, 6, 0, 0, 252 };
             pk.IVs = iv;
             pk.SetEVs(ev);
-            pk.Nature = 22;
+            pk.Nature = (Nature)22;
             pk.StatNature = pk.Nature;
             return pk;
         }
         public static PKM Clearnike(PKM pk)
         {
-            pk.Nickname_Trash.Clear();
+            pk.NicknameTrash.Clear();
             pk.ClearNickname();
             return pk;
         }
@@ -65,13 +65,13 @@ namespace WangPluginPkm
             pk.Language = sav.SAV.Language;
             pk.TrainerTID7 = sav.SAV.TrainerTID7;
             pk.TrainerSID7 = sav.SAV.TrainerSID7;
-            pk.OT_Gender = sav.SAV.Gender;
-            pk.OT_Name = sav.SAV.OT;
+            pk.OriginalTrainerGender = sav.SAV.Gender;
+            pk.OriginalTrainerName = sav.SAV.OT;
             pk.Obedience_Level = 1;
             RibbonApplicator.RemoveAllValidRibbons(pk);
-            pk.HT_Language = 0;
-            pk.HT_Gender = 0;
-            pk.HT_Name = "";
+            pk.HandlingTrainerLanguage = 0;
+            pk.HandlingTrainerGender = 0;
+            pk.HandlingTrainerName = "";
             pk.SetMarking(0, MarkingColor.None);
             pk.SetMarking(1, MarkingColor.None);
             pk.SetMarking(2, MarkingColor.None);
@@ -79,9 +79,9 @@ namespace WangPluginPkm
             pk.SetMarking(4, MarkingColor.None);
             pk.SetMarking(5, MarkingColor.None);
 
-            pk.HT_Friendship = 0;
-            pk.HT_Trash.Clear();
-            pk.Nickname_Trash.Clear();
+            pk.HandlingTrainerFriendship = 0;
+            pk.HandlingTrainerTrash.Clear();
+            pk.NicknameTrash.Clear();
             pk.ClearNickname();
             return pk;
         }

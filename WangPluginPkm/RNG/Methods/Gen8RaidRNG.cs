@@ -91,16 +91,16 @@ namespace WangPluginPkm.RNG.Methods
                     break;
                 default:
                     var gender = (int)rng.NextInt(253) + 1 < gender_ratio ? 1 : 0;
-                    pk.Gender = gender;
+                    pk.Gender = (byte)gender;
 
                     break;
             }
 
             int nature = nature_param != -1 ? nature_param
                 : species == (int)Species.Toxtricity
-                    ? ToxtricityUtil.GetRandomNature(ref rng, pk.Form)
+                    ? (int)ToxtricityUtil.GetRandomNature(ref rng, pk.Form)
                     : (byte)rng.NextInt(25);
-            pk.Nature = nature;
+            pk.Nature = (Nature)nature;
 
 
             if (pk is IScaledSize s)
@@ -210,21 +210,22 @@ namespace WangPluginPkm.RNG.Methods
                 _ => ability_param,
             };
             pk.RefreshAbility(abil);
-
-            pk.Gender = gender_ratio switch
+            
+            var g =gender_ratio switch
             {
                 PersonalInfo.RatioMagicGenderless => 2,
                 PersonalInfo.RatioMagicFemale => 1,
                 PersonalInfo.RatioMagicMale => 0,
-                _ => (int)rng.NextInt(253) + 1 < gender_ratio ? 1 : 0,
+                _ => (rng.NextInt(253) + 1) < gender_ratio ? 1 : 0,
             };
+            pk.Gender = (byte)g;
 
             int nature = nature_param != -1 ? nature_param
                 : species == (int)Species.Toxtricity
-                    ? ToxtricityUtil.GetRandomNature(ref rng, pk.Form)
+                    ? (int)ToxtricityUtil.GetRandomNature(ref rng, pk.Form)
                     : (byte)rng.NextInt(25);
 
-            pk.Nature = pk.StatNature = nature;
+            pk.Nature = pk.StatNature = (Nature)nature;
 
             var height = (int)rng.NextInt(0x81) + (int)rng.NextInt(0x80);
             var weight = (int)rng.NextInt(0x81) + (int)rng.NextInt(0x80);

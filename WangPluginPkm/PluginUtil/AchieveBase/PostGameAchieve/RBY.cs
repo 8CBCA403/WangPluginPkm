@@ -40,14 +40,14 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
                 pk.Language = l;
                 pk = AchieveFunc.fun(pk, SAV);
                 pk.SID16 = 0;
-                pk.Version = 36;
+                pk.Version = (GameVersion)36;
 
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Pikachu, (int)GameVersion.RBY);
                 pk.Language = l;
                 pk = AchieveFunc.fun(pk, SAV);
                 pk.SID16 = 0;
-                pk.Version = 38;
+                pk.Version = (GameVersion)38;
 
                 PKL.Add(pk);
             }

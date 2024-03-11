@@ -10,7 +10,7 @@ namespace WangPluginPkm.GUI
             Gen_BTN = new Button();
             TID16Box = new TextBox();
             SID16Box = new TextBox();
-            OT_Name = new TextBox();
+            OriginalTrainerName = new TextBox();
             LanguageBox = new ComboBox();
             GenderBox = new ComboBox();
             TID16Label = new Label();
@@ -102,14 +102,14 @@ namespace WangPluginPkm.GUI
             SID16Box.TabIndex = 3;
             SID16Box.Text = "1111";
             // 
-            // OT_Name
+            // OriginalTrainerName
             // 
-            OT_Name.Font = new System.Drawing.Font("Arial", 9F);
-            OT_Name.Location = new System.Drawing.Point(182, 6);
-            OT_Name.Name = "OT_Name";
-            OT_Name.Size = new System.Drawing.Size(151, 21);
-            OT_Name.TabIndex = 4;
-            OT_Name.Text = "Wang";
+            OriginalTrainerName.Font = new System.Drawing.Font("Arial", 9F);
+            OriginalTrainerName.Location = new System.Drawing.Point(182, 6);
+            OriginalTrainerName.Name = "OriginalTrainerName";
+            OriginalTrainerName.Size = new System.Drawing.Size(151, 21);
+            OriginalTrainerName.TabIndex = 4;
+            OriginalTrainerName.Text = "Wang";
             // 
             // LanguageBox
             // 
@@ -283,7 +283,7 @@ namespace WangPluginPkm.GUI
             IDPage.Controls.Add(RandomEC_BTN);
             IDPage.Controls.Add(TID16Box);
             IDPage.Controls.Add(SID16Box);
-            IDPage.Controls.Add(OT_Name);
+            IDPage.Controls.Add(OriginalTrainerName);
             IDPage.Controls.Add(RandomPID_BTN);
             IDPage.Controls.Add(LanguageBox);
             IDPage.Controls.Add(GenderBox);
@@ -582,7 +582,7 @@ namespace WangPluginPkm.GUI
         private TextBox TID16Box;
         private TextBox SID16Box;
         private ComboBox LanguageBox;
-        private TextBox OT_Name;
+        private TextBox OriginalTrainerName;
         private ComboBox GenderBox;
         private Label TID16Label;
         private Label SID16Label;

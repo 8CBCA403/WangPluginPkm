@@ -45,11 +45,11 @@ namespace WangPluginPkm.PluginUtil.DexBase
             }
             else if (pk.Species == 68)
             {
-                pk.OT_Name = "wang";
+                pk.OriginalTrainerName = "wang";
             }
             else if (i == 24)
             {
-                pk.Nature = 15;
+                pk.Nature = (Nature)15;
                 pk.StatNature = pk.Nature;
                 pk.Form = 1;
                 pk.Ability = 58;
@@ -57,7 +57,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
             }
             else if (i == 25)
             {
-                pk.Nature = 13;
+                pk.Nature = (Nature)13;
                 pk.StatNature = pk.Nature;
                 pk.Form = 0;
                 pk.Ability = 244;
@@ -78,7 +78,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
             {
                 pk.Ability = 130;
                 pk.AbilityNumber = 1;
-                pk.OT_Name = "wang";
+                pk.OriginalTrainerName = "wang";
             }
             else if (pk.Species == 143)
             {

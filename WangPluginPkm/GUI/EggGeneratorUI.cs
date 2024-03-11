@@ -77,7 +77,7 @@ namespace WangPluginPkm.GUI
             {
                 Species = pk.Species,
                 SearchEgg = true,
-                Version = (int)SaveFileEditor.SAV.Version,
+                Version = SaveFileEditor.SAV.Version,
             };
             var search = EncounterUtil.SearchDatabase(setting, SaveFileEditor.SAV);
             var results = search.ToList();
@@ -89,10 +89,10 @@ namespace WangPluginPkm.GUI
                 pkm = enc.ConvertToPKM(SaveFileEditor.SAV, criteria);
                 pk = pkm;
                 pk.IsEgg = true;
-                pk.OT_Name = SaveFileEditor.SAV.OT;
+                pk.OriginalTrainerName = SaveFileEditor.SAV.OT;
                 pk.DisplayTID = SaveFileEditor.SAV.DisplayTID;
                 pk.DisplaySID = SaveFileEditor.SAV.DisplaySID;
-                pk.OT_Gender = SaveFileEditor.SAV.Gender;
+                pk.OriginalTrainerGender = SaveFileEditor.SAV.Gender;
                 if (Gender_CheckBox.Checked)
                     pk.Gender = pko.Gender;
                 if (Form_CheckBox.Checked)
@@ -108,9 +108,9 @@ namespace WangPluginPkm.GUI
                 pk.IVs = pko.IVs;
                 if (pk.Generation == 2)
                 {
-                    ((PK2)pk).OT_Name = "1";
-                    pk.Met_Level = 1;
-                    ((PK2)pk).Met_TimeOfDay = 1;
+                    ((PK2)pk).OriginalTrainerName = "1";
+                    pk.MetLevel = 1;
+                    ((PK2)pk).MetTimeOfDay = 1;
 
                     if (pko.IsShiny == true)
                         pk.SetShiny();
@@ -121,7 +121,7 @@ namespace WangPluginPkm.GUI
 
                     }
                     pk.Nickname = SpeciesName.GetEggName(pk.Language, pk.Format);
-                    pk.Met_Location = 0;
+                    pk.MetLocation = 0;
                 }
                 else if (pk.Gen3 == true)
                 {
@@ -134,13 +134,13 @@ namespace WangPluginPkm.GUI
                     {
                         pk.Ball = 4;
                     }
-                    if (pk.Version == 4 || pk.Version == 5)
+                    if (pk.Version is (GameVersion)4 or (GameVersion)5)
                     {
-                        pk.Met_Location = 146;
+                        pk.MetLocation = 146;
                     }
                     else
                     {
-                        pk.Met_Location = 32;
+                        pk.MetLocation = 32;
                     }
                 }
                 else if (pk.Gen4 == true)
@@ -149,7 +149,7 @@ namespace WangPluginPkm.GUI
                     {
                         pk.Ball = pko.Ball;
                     }
-                    pk.OT_Name = SaveFileEditor.SAV.OT;
+                    pk.OriginalTrainerName = SaveFileEditor.SAV.OT;
                     pk.Language = pko.Language;
                     if (pko.IsShiny == true)
                         pk.SetShiny();
@@ -162,12 +162,12 @@ namespace WangPluginPkm.GUI
                         pk.Nickname = "Egg";
                     }
                     pk.RefreshAbility((int)(pk.PID & 1));
-                    pk.Egg_Location = 2000;
-                    pk.Met_Location = 0;
+                    pk.EggLocation = 2000;
+                    pk.MetLocation = 0;
                 }
                 else if (pk.Gen5 == true)
                 {
-                    pk.OT_Name = SaveFileEditor.SAV.OT;
+                    pk.OriginalTrainerName = SaveFileEditor.SAV.OT;
                     pk.Language = pko.Language;
                     pk.PID = pko.PID;
                     pk.IsNicknamed = true;
@@ -179,15 +179,15 @@ namespace WangPluginPkm.GUI
                     {
                         pk.Nickname = "Egg";
                     }
-                    pk.Egg_Location = 60002;
-                    pk.Met_Location = 0;
+                    pk.EggLocation = 60002;
+                    pk.MetLocation = 0;
                     pk.RefreshAbility((int)(pk.PID >> 16 & 1));
                 }
                 else if (pk.Gen6 == true)
                 {
 
                     pk.Ability = pko.Ability;
-                    pk.OT_Name = SaveFileEditor.SAV.OT;
+                    pk.OriginalTrainerName = SaveFileEditor.SAV.OT;
                     pk.Language = pko.Language;
                     pk.PID = pko.PID;
                     pk.Ball = pko.Ball;
@@ -206,8 +206,8 @@ namespace WangPluginPkm.GUI
                     }
                      ((PK6)pk).FixMemories();
                     ((PK6)pk).RefreshAbility(pk.AbilityNumber);
-                    pk.Egg_Location = 60002;
-                    pk.Met_Location = 0;
+                    pk.EggLocation = 60002;
+                    pk.MetLocation = 0;
                 }
                 else if (pk.Gen7 == true)
                 {
@@ -215,7 +215,7 @@ namespace WangPluginPkm.GUI
                     {
                         pk.Ability = pko.Ability;
                     }
-                    pk.OT_Name = SaveFileEditor.SAV.OT;
+                    pk.OriginalTrainerName = SaveFileEditor.SAV.OT;
                     pk.Language = pko.Language;
                     pk.PID = pko.PID;
                     pk.Ball = pko.Ball;
@@ -234,8 +234,8 @@ namespace WangPluginPkm.GUI
                     {
                         pk.Nickname = "タマゴ";
                     }
-                    pk.Egg_Location = 60002;
-                    pk.Met_Location = 0;
+                    pk.EggLocation = 60002;
+                    pk.MetLocation = 0;
 
                 }
                 else if (pk.Gen8 == true)
@@ -244,7 +244,7 @@ namespace WangPluginPkm.GUI
                     {
                         pk.Ability = pko.Ability;
                     }
-                    pk.OT_Name = SaveFileEditor.SAV.OT;
+                    pk.OriginalTrainerName = SaveFileEditor.SAV.OT;
                     pk.Language = pko.Language;
                     pk.PID = pko.PID;
                     pk.Ball = pko.Ball;
@@ -263,15 +263,15 @@ namespace WangPluginPkm.GUI
                     {
                         pk.Nickname = "タマゴ";
                     }
-                    pk.Egg_Location = 60002;
-                    if (pk.Version == 49 || pk.Version == 48)
+                    pk.EggLocation = 60002;
+                    if (pk.Version is (GameVersion)49 or (GameVersion)48)
                     {
-                        pk.Egg_Location = 60010;
+                        pk.EggLocation = 60010;
                     }
-                    pk.Met_Location = 0;
-                    if (pk.Version == 49 || pk.Version == 48)
+                    pk.MetLocation = 0;
+                    if (pk.Version is (GameVersion)49 or (GameVersion)48)
                     {
-                        pk.Met_Location = 65535;
+                        pk.MetLocation = 65535;
                     }
                 }
                 else if (pk.Gen9 == true)
@@ -290,10 +290,10 @@ namespace WangPluginPkm.GUI
                         pk.Nickname = "タマゴ";
                     }
                     pk.Version = 0;
-                    pk.Met_Location = 0;
+                    pk.MetLocation = 0;
                     pk.StatNature = pk.Nature;
                 }
-                pk.OT_Friendship = 1;
+                pk.OriginalTrainerFriendship = 1;
                 pk.RefreshChecksum();
                 pk.SetBoxForm();
 

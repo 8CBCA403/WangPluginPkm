@@ -38,7 +38,7 @@ namespace WangPluginPkm.RNG.Methods
                 return false;
             }
             pk.SetIVs(IVs);
-            pk.Nature = (int)(pk.PID % 100 % 25);
+            pk.Nature = (Nature)(int)(pk.PID % 100 % 25);
             pk.Ability = (int)pk.PID & 1;
             pk.Gender = pk.GetSaneGender();
             return true;

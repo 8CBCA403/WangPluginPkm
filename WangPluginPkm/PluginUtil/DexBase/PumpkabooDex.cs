@@ -25,7 +25,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                                 {
                                     pk = Edit(pk);
                                 }
-                                pk.OT_Name = "wang";
+                                pk.OriginalTrainerName = "wang";
                                 pk.SetSuggestedMemories();
                                 pk.ClearNickname();
                                 PKL.Add(pk);
@@ -48,7 +48,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                                 {
                                     pk = Edit(pk);
                                 }
-                                pk.OT_Name = "wang";
+                                pk.OriginalTrainerName = "wang";
                                 pk.SetSuggestedMemories();
                                 pk.ClearNickname();
                                 PKL.Add(pk);
@@ -68,7 +68,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                             {
                                 pk = Edit(pk);
                             }
-                            pk.OT_Name = "wang";
+                            pk.OriginalTrainerName = "wang";
                             pk.SetSuggestedMemories();
                             pk.ClearNickname();
                             PKL.Add(pk);

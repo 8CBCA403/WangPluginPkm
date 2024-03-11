@@ -32,8 +32,8 @@ namespace WangPluginPkm.RNG.Methods
                 return false;
             }
             pk.HeldItem = (int)(C >> 31) + 169;
-            pk.Version = (int)(D >> 31) + 1;
-            pk.OT_Gender = (int)(E >> 31);
+            pk.Version = (GameVersion)((int)(D >> 31) + 1);
+            pk.OriginalTrainerGender = (byte)(int)(E >> 31);
             Span<int> ivs = stackalloc int[6];
             GetSequentialIVsUInt32(E, ivs);
 

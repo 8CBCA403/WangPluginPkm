@@ -92,13 +92,13 @@ namespace WangPluginPkm.RNG.Methods
                 var next = (int)xors.NextUInt(253) + 1 < genderRatio ? 1 : 0;
                 if (criteria.Gender is 0 or 1 && next != criteria.Gender)
                     return false;
-                pk.Gender = next;
+                pk.Gender = (byte)next;
             }
 
             if (criteria.Nature is Nature.Random)
-                pk.Nature = (int)xors.NextUInt(25);
+                pk.Nature = (Nature)xors.NextUInt(25);
             else // Skip nature, assuming Synchronize
-                pk.Nature = (int)criteria.Nature;
+                pk.Nature = (Nature)criteria.Nature;
             pk.StatNature = pk.Nature;
 
             // Remainder

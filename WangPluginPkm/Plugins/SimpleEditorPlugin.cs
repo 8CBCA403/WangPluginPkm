@@ -204,7 +204,7 @@ namespace WangPluginPkm.Plugins
             Paragraph header1 = new Paragraph($"超王宝可梦合法性检测报告")
                 .SetTextAlignment(TextAlignment.CENTER)
                 .SetFontSize(20).SetFont(f1);
-            Paragraph header2 = new Paragraph($"--------{p.OT_Name}的{GameStringsZh.Species[p.Species]}")
+            Paragraph header2 = new Paragraph($"--------{p.OriginalTrainerName}的{GameStringsZh.Species[p.Species]}")
                .SetTextAlignment(TextAlignment.RIGHT)
                .SetFontSize(20).SetFont(f1);
             Paragraph subheader = new Paragraph($"SuperWang检测时间:北京时间" +

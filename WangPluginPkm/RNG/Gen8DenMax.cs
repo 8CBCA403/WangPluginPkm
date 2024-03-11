@@ -126,7 +126,7 @@ namespace WangPluginPkm
                 T1 = "PID/EC/IV有改动";
                 C1 = "Orange";
             }
-            if (pk.Met_Location == 244 && Gen8MaxLairGodPool.MaxLairGodFlag(pk.Species))
+            if (pk.MetLocation == 244 && Gen8MaxLairGodPool.MaxLairGodFlag(pk.Species))
             {
                 num6 = 2;
                 ability = 0;

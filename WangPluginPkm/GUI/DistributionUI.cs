@@ -47,7 +47,7 @@ namespace WangPluginPkm.GUI
             var bindingSource1 = new BindingSource();
             bindingSource1.DataSource = Tr;
             Trainer_Box.DataSource = bindingSource1.DataSource;
-            Trainer_Box.DisplayMember = "OT_Name";
+            Trainer_Box.DisplayMember = "OriginalTrainerName";
             Trainer_Box.ValueMember = "TID16";
 
             BallBox.SelectedIndexChanged += (_, __) =>
@@ -103,8 +103,8 @@ namespace WangPluginPkm.GUI
                 pk.Move4_PPUps = Editor.Data.Move4_PPUps;
                 if (SetTrainer_Box.Checked)
                 {
-                    pk.OT_Name = Trainer.OT_Name;
-                    pk.OT_Gender = Trainer.Gender;
+                    pk.OriginalTrainerName = Trainer.OriginalTrainerName;
+                    pk.OriginalTrainerGender = (byte)Trainer.Gender;
                     pk.DisplayTID = Trainer.TID16;
                     pk.DisplaySID = Trainer.SID16;
                     pk.Language = Trainer.Language;
@@ -113,8 +113,8 @@ namespace WangPluginPkm.GUI
                 else if (Random_Trainer_Box.Checked)
                 {
                     var T = RandomT(Tr, i);
-                    pk.OT_Name = T.OT_Name;
-                    pk.OT_Gender = T.Gender;
+                    pk.OriginalTrainerName = T.OriginalTrainerName;
+                    pk.OriginalTrainerGender = (byte)T.Gender;
                     pk.DisplayTID = T.TID16;
                     pk.DisplaySID = T.SID16;
                     pk.Language = T.Language;
@@ -123,8 +123,8 @@ namespace WangPluginPkm.GUI
                 }
                 else if (Random_Name_Box.Checked)
                 {
-                    pk.OT_Name = RandomString(3);
-                    pk.OT_Gender = rand.Next(0, 2);
+                    pk.OriginalTrainerName = RandomString(3);
+                    pk.OriginalTrainerGender = (byte)rand.Next(0, 2);
                     pk.TID16 = (ushort)rand.Next(1 << 16);
                     pk.SID16 = (ushort)rand.Next(1 << 16);
                     pk.Language = 9;
@@ -133,7 +133,7 @@ namespace WangPluginPkm.GUI
                 pk.StatNature = pk.Nature;
                 if (Ball_Box.Checked)
                 {
-                    pk.Ball = (int)ball;
+                    pk.Ball = (byte)(int)ball;
                 }
                 if (RandPID_Box.Checked)
                 {
@@ -176,8 +176,8 @@ namespace WangPluginPkm.GUI
                 pk.Move4_PPUps = Editor.Data.Move4_PPUps;
                 if (SetTrainer_Box.Checked)
                 {
-                    pk.OT_Name = Trainer.OT_Name;
-                    pk.OT_Gender = Trainer.Gender;
+                    pk.OriginalTrainerName = Trainer.OriginalTrainerName;
+                    pk.OriginalTrainerGender = (byte)Trainer.Gender;
                     pk.DisplayTID = Trainer.TID16;
                     pk.DisplaySID = Trainer.SID16;
                     pk.Language = Trainer.Language;
@@ -186,8 +186,8 @@ namespace WangPluginPkm.GUI
                 else if (Random_Trainer_Box.Checked)
                 {
                     var T = RandomT(Tr, i);
-                    pk.OT_Name = T.OT_Name;
-                    pk.OT_Gender = T.Gender;
+                    pk.OriginalTrainerName = T.OriginalTrainerName;
+                    pk.OriginalTrainerGender = (byte)T.Gender;
                     pk.DisplayTID = T.TID16;
                     pk.DisplaySID = T.SID16;
                     pk.Language = T.Language;
@@ -228,8 +228,8 @@ namespace WangPluginPkm.GUI
                 var pk = SearchDatabase.GetGodPkm(SAV, Editor, c[j].Species);
                 if (SetTrainer_Box.Checked)
                 {
-                    pk.OT_Name = Trainer.OT_Name;
-                    pk.OT_Gender = Trainer.Gender;
+                    pk.OriginalTrainerName = Trainer.OriginalTrainerName;
+                    pk.OriginalTrainerGender = (byte)Trainer.Gender;
                     pk.DisplayTID = Trainer.TID16;
                     pk.DisplaySID = Trainer.SID16;
                     pk.Language = Trainer.Language;
@@ -240,8 +240,8 @@ namespace WangPluginPkm.GUI
                 else if (Random_Trainer_Box.Checked)
                 {
                     var T = RandomT(Tr, j);
-                    pk.OT_Name = T.OT_Name;
-                    pk.OT_Gender = T.Gender;
+                    pk.OriginalTrainerName = T.OriginalTrainerName;
+                    pk.OriginalTrainerGender = (byte)T.Gender;
                     pk.DisplayTID = T.TID16;
                     pk.DisplaySID = T.SID16;
                     pk.Language = T.Language;
@@ -250,8 +250,8 @@ namespace WangPluginPkm.GUI
                 }
                 else if (Random_Name_Box.Checked)
                 {
-                    pk.OT_Name = RandomString(3);
-                    pk.OT_Gender = rand.Next(0, 2);
+                    pk.OriginalTrainerName = RandomString(3);
+                    pk.OriginalTrainerGender = (byte)rand.Next(0, 2);
                     pk.TID16 = (ushort)rand.Next(1 << 16);
                     pk.SID16 = (ushort)rand.Next(1 << 16);
                     pk.Language = 9;
@@ -260,10 +260,10 @@ namespace WangPluginPkm.GUI
                 if (ShinyBox.Checked)
                 {
                     pk.IVs = c[j].IVs;
-                    pk.Nature = c[j].Nature;
+                    pk.Nature = (Nature)c[j].Nature;
                     pk.StatNature = pk.Nature;
                 }
-                pk.StatNature = c[j].Nature;
+                pk.StatNature = (Nature)c[j].Nature;
                 pk.SetEVs(c[j].EVs);
 
                 pk.Move1_PPUps = 3;
@@ -273,7 +273,7 @@ namespace WangPluginPkm.GUI
                 pk.HealPP();
                 if (Ball_Box.Checked)
                 {
-                    pk.Ball = (int)ball;
+                    pk.Ball = (byte)ball;
                 }
                 if (RandPID_Box.Checked && ShinyBox.Checked)
                 {
@@ -307,11 +307,11 @@ namespace WangPluginPkm.GUI
         }
         private void UseTrainer(PKM pk)
         {
-            pk.OT_Name = Trainer.OT_Name;
+            pk.OriginalTrainerName = Trainer.OriginalTrainerName;
             pk.DisplayTID = Trainer.TID16;
             pk.DisplaySID = Trainer.SID16;
             pk.Language = Trainer.Language;
-            pk.OT_Gender = Trainer.Gender;
+            pk.OriginalTrainerGender = (byte)Trainer.Gender;
             Editor.PopulateFields(pk);
         }
         private void Handle_MoveShop(PKM pk)
@@ -349,7 +349,7 @@ namespace WangPluginPkm.GUI
         {
             if (pk.Species is not 946 or 917 or 998 or 999 or 996 or 997 or 995 or 997)
             {
-                if (pk.Met_Location != 30024)
+                if (pk.MetLocation != 30024)
                     pk.SetRandomEC();
             }
 
@@ -422,11 +422,11 @@ namespace WangPluginPkm.GUI
                     {
                         foreach (PKM pk in p)
                         {
-                            pk.OT_Name = Trainer.OT_Name;
+                            pk.OriginalTrainerName = Trainer.OriginalTrainerName;
                             pk.DisplayTID = Trainer.TID16;
                             pk.DisplaySID = Trainer.SID16;
                             pk.Language = Trainer.Language;
-                            pk.OT_Gender = Trainer.Gender;
+                            pk.OriginalTrainerGender = (byte)Trainer.Gender;
                             pk.ClearNickname();
                         }
                     }
@@ -504,7 +504,7 @@ namespace WangPluginPkm.GUI
         {
             if (SAV.SAV.Generation == 9)
             {
-                if (pkm.Met_Location != 30024 && pkm.Species != 998
+                if (pkm.MetLocation != 30024 && pkm.Species != 998
                     && pkm.Species != 999 && pkm.Species != 996
                     && pkm.Species != 995 && pkm.Species != 994
                     && pkm.Species != 997)
@@ -521,17 +521,17 @@ namespace WangPluginPkm.GUI
         {
             if (SAV.SAV.Generation == 9)
             {
-                if (pkm.Met_Location != 30024 && pkm.Species != 998
+                if (pkm.MetLocation != 30024 && pkm.Species != 998
                     && pkm.Species != 999 && pkm.Species != 996
                     && pkm.Species != 995 && pkm.Species != 994
                     && pkm.Species != 997)
                 {
-                    if ((!(pkm.Species == 944 && pkm.Met_Location == 32)) &&
-                        (!(pkm.Species == 952 && pkm.Met_Location == 40)) &&
-                        (!(pkm.Species == 959 && pkm.Met_Location == 22)) &&
-                        (!(pkm.Species == 962 && pkm.Met_Location == 20)) &&
-                        (!(pkm.Species == 978 && pkm.Met_Location == 24)) &&
-                        (!(pkm.Species == 986 && pkm.Met_Location == 24)))
+                    if ((!(pkm.Species == 944 && pkm.MetLocation == 32)) &&
+                        (!(pkm.Species == 952 && pkm.MetLocation == 40)) &&
+                        (!(pkm.Species == 959 && pkm.MetLocation == 22)) &&
+                        (!(pkm.Species == 962 && pkm.MetLocation == 20)) &&
+                        (!(pkm.Species == 978 && pkm.MetLocation == 24)) &&
+                        (!(pkm.Species == 986 && pkm.MetLocation == 24)))
                     {
                         ((PK9)pkm).HeightScalar = 1;
                         ((PK9)pkm).WeightScalar = 1;
@@ -609,9 +609,9 @@ namespace WangPluginPkm.GUI
                 var baseDate = releaseDate.Date;
                 var days = (DateTime.Today - baseDate).Days;
                 var newEggMetDate = baseDate.AddDays(rand.Next(days));
-                pokemon.Egg_Day = newEggMetDate.Day;
-                pokemon.Egg_Year = newEggMetDate.Year - 2000;
-                pokemon.Egg_Month = newEggMetDate.Month;
+                pokemon.EggDay = (byte)newEggMetDate.Day;
+                pokemon.EggYear = (byte)(newEggMetDate.Year - 2000);
+                pokemon.EggMonth = (byte)newEggMetDate.Month;
                 Counter++;
             }
         }
@@ -627,9 +627,9 @@ namespace WangPluginPkm.GUI
                 var baseDate = PokemonEggCheck(pokemon, releaseDate.Date);
                 var days = (DateTime.Today - baseDate).Days;
                 var newMetDate = baseDate.AddDays(rand.Next(days));
-                pokemon.Met_Day = newMetDate.Day;
-                pokemon.Met_Year = newMetDate.Year - 2000;
-                pokemon.Met_Month = newMetDate.Month;
+                pokemon.MetDay = (byte)newMetDate.Day;
+                pokemon.MetYear = (byte)(newMetDate.Year - 2000);
+                pokemon.MetMonth = (byte)newMetDate.Month;
                 Counter++;
             }
         }
@@ -842,7 +842,7 @@ namespace WangPluginPkm.GUI
                      {
                          i++;
                          var T = RandomT(Tr, i);
-                         pkc.OT_Name = T.OT_Name;
+                         pkc.OriginalTrainerName = T.OriginalTrainerName;
                          pkc.OT_Gender = T.Gender;
                          pkc.DisplayTID= T.TID16;
                          pkc.DisplaySID = T.SID16;

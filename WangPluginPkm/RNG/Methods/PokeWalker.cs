@@ -10,7 +10,7 @@ namespace WangPluginPkm.RNG.Methods
             // Pokewalker PIDs cannot yield multiple abilities from the input nature-gender-trainerID. Disregard any ability request.
             do
             {
-                pk.PID = GetPokeWalkerPID(pk.TID16, pk.SID16, pk.Nature, pk.Gender, pk.PersonalInfo.Gender);
+                pk.PID = GetPokeWalkerPID(pk.TID16, pk.SID16, (int)pk.Nature, pk.Gender, pk.PersonalInfo.Gender);
             } while (!pk.IsGenderValid());
 
             pk.RefreshAbility((int)(pk.PID & 1));

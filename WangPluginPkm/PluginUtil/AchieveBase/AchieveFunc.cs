@@ -8,28 +8,28 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
         public static PKM fun(PKM pk, ISaveFileProvider SAV)
         {
             pk.ClearNickname();
-            if (pk.OT_Name == "PKHeX")
+            if (pk.OriginalTrainerName == "PKHeX")
             {
-                pk.OT_Name = "Wang";
+                pk.OriginalTrainerName = "Wang";
                 pk.TID16 = 48390;
                 pk.SID16 = 05266;
             }
-            else if (pk.OT_Name == "")
+            else if (pk.OriginalTrainerName == "")
             {
-                pk.OT_Name = "Wang";
+                pk.OriginalTrainerName = "Wang";
                 pk.TID16 = 48390;
                 pk.SID16 = 05266;
             }
             else if (pk.TID16 == SAV.SAV.TID16 && pk.SID16 == SAV.SAV.SID16)
             {
-                pk.OT_Name = "Wang";
+                pk.OriginalTrainerName = "Wang";
                 pk.TID16 = 48390;
                 pk.SID16 = 05266;
             }
-            if (pk.Version is 35 or 40 or 41 or 38 or 37 or 36 or 39 or 1 or 2 or 3)
+            if ((int)pk.Version is 35 or 40 or 41 or 38 or 37 or 36 or 39 or 1 or 2 or 3)
             {
                 pk.SID16 = 0;
-                pk.OT_Gender = 0;
+                pk.OriginalTrainerGender = 0;
             }
 
             //pk.SetSuggestedMoves();

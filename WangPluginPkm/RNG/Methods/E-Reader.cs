@@ -38,11 +38,11 @@ namespace WangPluginPkm.RNG.Methods
                 Nature = Scizor.Nature;
                 Gender = Scizor.Gender;
             }
-            pk.Nature = (int)(pk.PID % 100 % 25);
+            pk.Nature = (Nature)(int)(pk.PID % 100 % 25);
             pk.RefreshAbility((int)(pk.PID & 1));
-            pk.Gender = (pk.PID & 0xFF) < Ratio ? 1 : 0;
+            pk.Gender = (byte)((pk.PID & 0xFF) < Ratio ? 1 : 0);
 
-            if (pk.Nature != Nature || pk.Gender != Gender)
+            if ((int)pk.Nature != Nature || pk.Gender != Gender)
             {
                 return false;
             }

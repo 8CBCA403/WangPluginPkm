@@ -14,7 +14,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             {
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Mew, (int)GameVersion.E);
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.OT_Name = "Meerk";
+                pk.OriginalTrainerName = "Meerk";
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Deoxys, (int)GameVersion.E);
                 pk = AchieveFunc.fun(pk, SAV);

@@ -13,15 +13,15 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
             {
                 pk = SearchDatabase.SearchPKM(SAV, Editor, 4, (int)GameVersion.FR);
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 4;
+                pk.Version = (GameVersion)4;
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, 1, (int)GameVersion.LG);
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 5;
+                pk.Version = (GameVersion)5;
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, 7, (int)GameVersion.LG);
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 4;
+                pk.Version = (GameVersion)4;
                 PKL.Add(pk);
 
             }
@@ -36,18 +36,18 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
                 pk = SearchDatabase.SearchPKM(SAV, Editor, 152, (int)GameVersion.HG);
 
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 7;
+                pk.Version = (GameVersion)7;
                 PKL.Add(pk);
 
                 pk = SearchDatabase.SearchPKM(SAV, Editor, 155, (int)GameVersion.SS);
 
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 8;
+                pk.Version = (GameVersion)8;
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, 158, (int)GameVersion.HG);
 
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 7;
+                pk.Version = (GameVersion)7;
                 PKL.Add(pk);
 
             }
@@ -67,7 +67,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, 258, (int)GameVersion.E);
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 3;
+                pk.Version = (GameVersion)3;
                 PKL.Add(pk);
             }
             return PKL;
@@ -80,11 +80,11 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
             {
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Turtwig, (int)GameVersion.D);
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 10;
+                pk.Version = (GameVersion)10;
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Chimchar, (int)GameVersion.P);
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 11;
+                pk.Version = (GameVersion)11;
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Piplup, (int)GameVersion.Pt);
                 pk = AchieveFunc.fun(pk, SAV);

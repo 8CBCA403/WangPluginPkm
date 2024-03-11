@@ -24,7 +24,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
         }
         public static bool pokemonIsNature(PKM pkm, Nature nature)
         {
-            if (pkm.Nature == (int)nature)
+            if (pkm.Nature == nature)
             {
                 return true;
             }
@@ -69,7 +69,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
         }
         public static bool IsSheen(PB8 pkm)
         {
-            if (pkm.CNT_Sheen == 255)
+            if (pkm.ContestSheen == 255)
             {
                 return true;
             }
@@ -78,7 +78,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
         }
         public static bool IsCool(PB8 pkm)
         {
-            if (pkm.CNT_Cool == 255)
+            if (pkm.ContestCool == 255)
             {
                 return true;
             }
@@ -87,7 +87,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
         }
         public static bool IsBeauty(PB8 pkm)
         {
-            if (pkm.CNT_Beauty == 255)
+            if (pkm.ContestBeauty == 255)
             {
                 return true;
             }
@@ -96,7 +96,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
         }
         public static bool IsCute(PB8 pkm)
         {
-            if (pkm.CNT_Cute == 255)
+            if (pkm.ContestCute == 255)
             {
                 return true;
             }
@@ -105,7 +105,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
         }
         public static bool IsSmart(PB8 pkm)
         {
-            if (pkm.CNT_Smart == 255)
+            if (pkm.ContestSmart == 255)
             {
                 return true;
             }
@@ -114,7 +114,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase
         }
         public static bool IsTough(PB8 pkm)
         {
-            if (pkm.CNT_Tough == 255)
+            if (pkm.ContestTough == 255)
             {
                 return true;
             }

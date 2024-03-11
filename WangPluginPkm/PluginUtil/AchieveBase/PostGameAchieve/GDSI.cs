@@ -20,21 +20,21 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.HoOh, (int)GameVersion.C);
                 pk.Language = l;
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 41;
+                pk.Version = (GameVersion)41;
                 pk.SID16 = 0;
                 PKL.Add(pk);
 
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Lugia, (int)GameVersion.C);
                 pk.Language = l;
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 41;
+                pk.Version = (GameVersion)41;
                 pk.SID16 = 0;
 
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Suicune, (int)GameVersion.C);
                 pk.Language = l;
                 pk = AchieveFunc.fun(pk, SAV);
-                pk.Version = 41;
+                pk.Version = (GameVersion)41;
                 pk.SID16 = 0;
 
                 PKL.Add(pk);
