@@ -1,5 +1,6 @@
 ﻿using PKHeX.Core;
 using System.Collections.Generic;
+using WangPluginPkm.GUI;
 namespace WangPluginPkm
 {
     public partial class CheckRules
@@ -32,7 +33,7 @@ namespace WangPluginPkm
             A0S0SPA0
         }
 
-        public PkmCondition.ShinyType Shiny { get; set; }
+        public RNGForm.ShinyType Shiny { get; set; }
         public MethodType Method { get; set; }
         public bool CheckIV(CheckRules r, PKM pk)
         {
@@ -53,15 +54,15 @@ namespace WangPluginPkm
         public bool CheckShiny(CheckRules r, PKM pk)
         {
             var s = (uint)(pk.TID16 ^ pk.SID16) ^ ((pk.PID >> 16) ^ (pk.PID & 0xFFFF));
-            if (r.Shiny == PkmCondition.ShinyType.None)
+            if (r.Shiny == RNGForm.ShinyType.None)
                 return true;
-            else if (r.Shiny == PkmCondition.ShinyType.Shiny && s < 8)
+            else if (r.Shiny == RNGForm.ShinyType.Shiny && s < 8)
                 return true;
-            else if (r.Shiny == PkmCondition.ShinyType.Star && s < 8 && s != 0)
+            else if (r.Shiny == RNGForm.ShinyType.Star && s < 8 && s != 0)
                 return true;
-            else if (r.Shiny == PkmCondition.ShinyType.Sqaure && s == 0)
+            else if (r.Shiny == RNGForm.ShinyType.Sqaure && s == 0)
                 return true;
-            else if (r.Shiny == PkmCondition.ShinyType.ForceStar && s == 1)
+            else if (r.Shiny == RNGForm.ShinyType.ForceStar && s == 1)
                 return true;
             else
                 return false;
@@ -74,7 +75,7 @@ namespace WangPluginPkm
             {
                 case MethodType.Roaming8b:
                     {
-                        if (r.Shiny != PkmCondition.ShinyType.None)
+                        if (r.Shiny != RNGForm.ShinyType.None)
                         {
                             if (CheckIV(r, IV.V6))
                             {
@@ -88,7 +89,7 @@ namespace WangPluginPkm
                             {
                                 Getqeueu = SeedList.AddSeed(SeedList.SeedType.Roaming8_0a);
                             }
-                            else if (CheckIV(r, IV.S0) && r.Shiny != PkmCondition.ShinyType.Sqaure)
+                            else if (CheckIV(r, IV.S0) && r.Shiny != RNGForm.ShinyType.Sqaure)
                             {
                                 Getqeueu = SeedList.AddSeed(SeedList.SeedType.Roaming8_0s);
                             }
@@ -101,7 +102,7 @@ namespace WangPluginPkm
                         {
                             Getqeueu = SeedList.AddSeed(SeedList.SeedType.OverWorld8_0V);
                         }
-                        if (r.Shiny is PkmCondition.ShinyType.Sqaure or PkmCondition.ShinyType.None)
+                        if (r.Shiny is RNGForm.ShinyType.Sqaure or RNGForm.ShinyType.None)
                         {
                             if (CheckIV(r, IV.A0S0SPA0))
                             {
@@ -128,7 +129,7 @@ namespace WangPluginPkm
                     }
                 case MethodType.Method1:
                     {
-                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        if (r.Shiny == RNGForm.ShinyType.None)
                         {
                             if (CheckIV(r, IV.V0))
                             {
@@ -155,25 +156,25 @@ namespace WangPluginPkm
                     }
                 case MethodType.Method2:
                     {
-                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        if (r.Shiny == RNGForm.ShinyType.None)
                         {
-                            if (CheckIV(r, IV.V0) && r.Shiny == PkmCondition.ShinyType.None)
+                            if (CheckIV(r, IV.V0) && r.Shiny == RNGForm.ShinyType.None)
                             {
                                 Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_0V);
                             }
-                            else if (CheckIV(r, IV.V6) && r.Shiny == PkmCondition.ShinyType.None)
+                            else if (CheckIV(r, IV.V6) && r.Shiny == RNGForm.ShinyType.None)
                             {
                                 Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_6V);
                             }
-                            else if (CheckIV(r, IV.A0) && r.Shiny == PkmCondition.ShinyType.None)
+                            else if (CheckIV(r, IV.A0) && r.Shiny == RNGForm.ShinyType.None)
                             {
                                 Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_0a);
                             }
-                            else if (CheckIV(r, IV.S0) && r.Shiny == PkmCondition.ShinyType.None)
+                            else if (CheckIV(r, IV.S0) && r.Shiny == RNGForm.ShinyType.None)
                             {
                                 Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_0s);
                             }
-                            else if (CheckIV(r, IV.A0S0) && r.Shiny == PkmCondition.ShinyType.None)
+                            else if (CheckIV(r, IV.A0S0) && r.Shiny == RNGForm.ShinyType.None)
                             {
                                 Getqeueu = SeedList.AddSeed(SeedList.SeedType.Method2_0a0s);
                             }
@@ -182,7 +183,7 @@ namespace WangPluginPkm
                     }
                 case MethodType.Method3:
                     {
-                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        if (r.Shiny == RNGForm.ShinyType.None)
                         {
                             if (CheckIV(r, IV.V0))
                             {
@@ -209,7 +210,7 @@ namespace WangPluginPkm
                     }
                 case MethodType.Method4:
                     {
-                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        if (r.Shiny == RNGForm.ShinyType.None)
                         {
                             if (CheckIV(r, IV.V0))
                             {
@@ -236,7 +237,7 @@ namespace WangPluginPkm
                     }
                 case MethodType.Method1_Unown:
                     {
-                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        if (r.Shiny == RNGForm.ShinyType.None)
                         {
                             if (CheckIV(r, IV.V0))
                             {
@@ -263,7 +264,7 @@ namespace WangPluginPkm
                     }
                 case MethodType.Method2_Unown:
                     {
-                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        if (r.Shiny == RNGForm.ShinyType.None)
                         {
                             if (CheckIV(r, IV.V0))
                             {
@@ -290,7 +291,7 @@ namespace WangPluginPkm
                     }
                 case MethodType.Method3_Unown:
                     {
-                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        if (r.Shiny == RNGForm.ShinyType.None)
                         {
                             if (CheckIV(r, IV.V0))
                             {
@@ -317,7 +318,7 @@ namespace WangPluginPkm
                     }
                 case MethodType.Method4_Unown:
                     {
-                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        if (r.Shiny == RNGForm.ShinyType.None)
                         {
                             if (CheckIV(r, IV.V0))
                             {
@@ -342,9 +343,9 @@ namespace WangPluginPkm
                         }
                         break;
                     }
-                case MethodType.XDColo:
+                case MethodType.XD:
                     {
-                        if (r.Shiny == PkmCondition.ShinyType.None)
+                        if (r.Shiny == RNGForm.ShinyType.None)
                         {
                             if (CheckIV(r, IV.V0))
                             {

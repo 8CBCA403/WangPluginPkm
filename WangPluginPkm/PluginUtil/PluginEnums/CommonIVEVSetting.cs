@@ -67,7 +67,7 @@ namespace WangPluginPkm
             pk.TrainerSID7 = sav.SAV.TrainerSID7;
             pk.OriginalTrainerGender = sav.SAV.Gender;
             pk.OriginalTrainerName = sav.SAV.OT;
-            pk.Obedience_Level = 1;
+            pk.ObedienceLevel = 1;
             RibbonApplicator.RemoveAllValidRibbons(pk);
             pk.HandlingTrainerLanguage = 0;
             pk.HandlingTrainerGender = 0;

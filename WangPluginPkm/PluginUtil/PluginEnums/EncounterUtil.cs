@@ -15,7 +15,7 @@ namespace WangPluginPkm
             var pk = SAV.BlankPKM;
             var species = settings.Species;
             var results = EncounterUtil.GetAllSpeciesFormEncounters(species, SAV.Personal, versions, pk);
-            results = results.Where(z => z.EggEncounter == settings.SearchEgg);
+            results = results.Where(z => z.IsEgg == settings.SearchEgg);
             // return filtered results
             var comparer = new ReferenceComparer<IEncounterInfo>();
             results = results.Distinct(comparer); // only distinct objects

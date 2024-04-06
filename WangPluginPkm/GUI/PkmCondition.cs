@@ -48,7 +48,7 @@ namespace WangPluginPkm
             this.ShinyTypeBox1.SelectedIndexChanged += (_, __) =>
             {
                 selectedShiny = (ShinyType)Enum.Parse(typeof(ShinyType), this.ShinyTypeBox1.SelectedItem.ToString(), false);
-                rules.Shiny = selectedShiny;
+               // rules.Shiny = selectedShiny;
             };
             this.ShinyTypeBox1.SelectedIndex = 0;
 

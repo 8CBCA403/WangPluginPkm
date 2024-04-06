@@ -1,4 +1,5 @@
 ﻿using PKHeX.Core;
+using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.RNG.Methods
 {
@@ -73,16 +74,16 @@ namespace WangPluginPkm.RNG.Methods
             pk.RefreshChecksum();
             return true;
         }
-        private static uint GetRevisedPID(uint pid, int TID16, int SID16, PkmCondition.ShinyType shiny)
+        private static uint GetRevisedPID(uint pid, int TID16, int SID16,RNGForm.ShinyType shiny)
         {
             uint s = (uint)(TID16 ^ SID16) ^ pid >> 16 ^ pid & 0xFFFF;
-            if (shiny == PkmCondition.ShinyType.Sqaure && s != 0)
+            if (shiny == RNGForm.ShinyType.Sqaure && s != 0)
             {
                 pid = ((uint)(TID16 ^ SID16) ^ pid & 0xFFFF ^ 0) << 16 | pid & 0xFFFF;
                 return pid;
             }
 
-            else if (shiny == PkmCondition.ShinyType.None && s < 16)
+            else if (shiny == RNGForm.ShinyType.None && s < 16)
             {
 
                 return pid ^ 0x10000000;
