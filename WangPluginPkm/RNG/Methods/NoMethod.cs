@@ -1,5 +1,6 @@
 ﻿using PKHeX.Core;
 using System;
+using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.RNG.Methods
 {
@@ -21,29 +22,29 @@ namespace WangPluginPkm.RNG.Methods
             pk.IV_SPE = (int)r.minSpe;
             return true;
         }
-        private static uint CheckShiny(PKM pk, PkmCondition.ShinyType S)
+        private static uint CheckShiny(PKM pk, RNGForm.ShinyType S)
         {
             Random myObject = new Random();
             var r = (uint)myObject.Next(1, 8);
             if (pk.Gen8 == true)
                 r = (uint)myObject.Next(1, 16);
-            if (S == PkmCondition.ShinyType.None)
+            if (S == RNGForm.ShinyType.None)
                 return pk.PID;
-            else if (S == PkmCondition.ShinyType.Shiny)
+            else if (S == RNGForm.ShinyType.Shiny)
             {
                 pk.SetShiny();
                 return pk.PID;
             }
-            else if (S == PkmCondition.ShinyType.Star)
+            else if (S == RNGForm.ShinyType.Star)
             {
                 return ((uint)(pk.TID16 ^ pk.SID16) ^ pk.PID & 0xFFFF ^ r) << 16 | pk.PID & 0xFFFF;
             }
-            else if (S == PkmCondition.ShinyType.Sqaure)
+            else if (S == RNGForm.ShinyType.Sqaure)
             {
                 return ((uint)(pk.TID16 ^ pk.SID16) ^ pk.PID & 0xFFFF ^ 0u) << 16 | pk.PID & 0xFFFF;
             }
 
-            else if (S == PkmCondition.ShinyType.Star)
+            else if (S == RNGForm.ShinyType.Star)
                 return ((uint)(pk.TID16 ^ pk.SID16) ^ pk.PID & 0xFFFF ^ 1u) << 16 | pk.PID & 0xFFFF;
             else
                 return pk.PID;

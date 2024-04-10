@@ -1165,7 +1165,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             }
             CheckRules r = new()
             {
-                Shiny = PkmCondition.ShinyType.Shiny,
+                Shiny = RNGForm.ShinyType.Shiny,
             };
             PKM pk;
             var PKL = new List<PKM>();

@@ -36,7 +36,7 @@ namespace WangPluginPkm.RNG.Methods
             pk.OriginalTrainerGender = (byte)(int)(E >> 31);
             Span<int> ivs = stackalloc int[6];
             GetSequentialIVsUInt32(E, ivs);
-
+            pk.Nature = (Nature)(int)(pid % 100 % 25);
             pk.SetIVs(ivs);
             if (!r.CheckIV(r, pk))
             {
@@ -45,6 +45,7 @@ namespace WangPluginPkm.RNG.Methods
             pk.Gender = pk.GetSaneGender();
             return true;
         }
+
         private static void GetIVsInt32(Span<int> result, uint r1, uint r2)
         {
             result[5] = (int)r2 >> 10 & 0x1F;

@@ -70,7 +70,7 @@ namespace WangPluginPkm.GUI
             }
             var gp1 = new GP1M();
             data.CopyTo(gp1.Data, 0);
-            data.CopyTo(gpm.Data, 0);
+            data.CopyTo(gpm.Data.ToArray(), 0);
             gp = gp1;
         }
         private void EditGP(GP1M pk)

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WangPluginPkm.PluginUtil.ModifyPKM;
 using WangPluginPkm.RNG.Methods;
 using WangPluginPkm.RNG.ReverseRNG;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
@@ -14,11 +15,13 @@ using Roaming8bRNG = WangPluginPkm.RNG.Methods.Roaming8bRNG;
 
 namespace WangPluginPkm.GUI
 {
-    internal partial class RNGForm : Form
+    public partial class RNGForm : Form
     {
-
+        public CheckRules rules = new();
+        private int NumOfCountsPerThread = 1000; // 每个线程的计数数量
         private CancellationTokenSource SearchtokenSource = new();
         private CancellationTokenSource ChecktokenSource = new();
+        private CancellationTokenSource cancellationToken = new CancellationTokenSource();
         private const string Pk9Filter = "PK9 Entity |*.pk9|All Files|*.*";
         private bool CheckFlag = true;
         private ISaveFileProvider SAV { get; }
@@ -39,6 +42,16 @@ namespace WangPluginPkm.GUI
             Name = "Mothed1,2,4",
             Value = "M124",
         };
+        private ShinyType selectedShiny = ShinyType.None;
+        private MethodType RNGMethod = MethodType.None;
+        public enum ShinyType
+        {
+            None,
+            Shiny,
+            Star,
+            Sqaure,
+            ForceStar,
+        }
         public RNGForm(ISaveFileProvider sav, IPKMView editor)
 
         {
@@ -49,6 +62,32 @@ namespace WangPluginPkm.GUI
         }
         private void BindingData()
         {
+            this.MinHpNUD.DataBindings.Add("Text", rules, "minHP");
+            this.MaxHpNUD.DataBindings.Add("Text", rules, "maxHP");
+            this.MinAtkNUD.DataBindings.Add("Text", rules, "minAtk");
+            this.MaxAtkNUD.DataBindings.Add("Text", rules, "maxAtk");
+            this.MinDefNUD.DataBindings.Add("Text", rules, "minDef");
+            this.MaxDefNUD.DataBindings.Add("Text", rules, "maxDef");
+            this.MinSpaNUD.DataBindings.Add("Text", rules, "minSpA");
+            this.MaxSpaNUD.DataBindings.Add("Text", rules, "maxSpA");
+            this.MinSpdNUD.DataBindings.Add("Text", rules, "minSpD");
+            this.MaxSpdNUD.DataBindings.Add("Text", rules, "maxSpD");
+            this.MinSpeNUD.DataBindings.Add("Text", rules, "minSpe");
+            this.MaxSpeNUD.DataBindings.Add("Text", rules, "maxSpe");
+            this.RNGType_BOX.DataSource = Enum.GetNames(typeof(MethodType));
+            this.RNGType_BOX.SelectedIndexChanged += (_, __) =>
+            {
+                RNGMethod = (MethodType)Enum.Parse(typeof(MethodType), this.RNGType_BOX.SelectedItem.ToString(), false);
+                rules.Method = RNGMethod;
+            };
+            this.RNGType_BOX.SelectedIndex = 0;
+            this.ShinyType_BOX.DataSource = Enum.GetNames(typeof(ShinyType));
+            this.ShinyType_BOX.SelectedIndexChanged += (_, __) =>
+            {
+                selectedShiny = (ShinyType)Enum.Parse(typeof(ShinyType), this.ShinyType_BOX.SelectedItem.ToString(), false);
+                rules.Shiny = selectedShiny;
+            };
+            this.ShinyType_BOX.SelectedIndex = 0;
             if (SAV.SAV.Version is GameVersion.XD or GameVersion.COLO or GameVersion.CXD)
             {
                 this.TeamLockBox.Enabled = true;
@@ -101,42 +140,54 @@ namespace WangPluginPkm.GUI
             CheckPID();
 
         }
+        private void MaxSpeNUD_ValueChanged(object sender, EventArgs e)
+        {
+            var txtbox = (NumericUpDown)sender;
 
+            if (!uint.TryParse(txtbox.Text, out var iv))
+                iv = 0;
+            if (iv < 0 || iv > 31)
+            {
+                iv = 0;
+                txtbox.Value = 0;
+            }
+        }
         #region //Search
         private bool GenPkm(ref PKM pk, uint seed, byte form = 0)
         {
 
-            return ConditionForm.rules.Method switch
+            return rules.Method switch
             {
-                MethodType.None => NoMethod.GenPkm(ref pk, ConditionForm.rules),
-                MethodType.Method1 => Method1RNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Method1_Unown => UnownRNG.GenPkm(ref pk, 1, seed, ConditionForm.rules, form),
-                MethodType.Method2 => Method2RNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Method2_Unown => UnownRNG.GenPkm(ref pk, 2, seed, ConditionForm.rules, form),
-                MethodType.Method3 => Method3RNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Method3_Unown => UnownRNG.GenPkm(ref pk, 3, seed, ConditionForm.rules, form),
-                MethodType.Method4 => Method4RNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Method4_Unown => UnownRNG.GenPkm(ref pk, 4, seed, ConditionForm.rules, form),
-                MethodType.XDColo => XDColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Overworld8 => Overworld8RNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Roaming8b => Roaming8bRNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.BACD_R => BACD.GenPkm(ref pk, seed & 0xFFFF, ConditionForm.rules, 0),
-                MethodType.BACD_U => BACD.GenPkm(ref pk, seed, ConditionForm.rules, 1),
-                MethodType.BACD_R_S => BACD.GenPkm(ref pk, seed & 0xFFFF, ConditionForm.rules, 2),
-                MethodType.Method1Roaming => Method1Roaming.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Colo => ColoRNG.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.E_Reader => E_Reader.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.G5MGShiny => G5MGShiny.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.Gen5Wild => Gen5Wild.GenPkm(ref pk, seed, ConditionForm.rules),
-                MethodType.PokeWalker => PokeWalker.GenPkm(ref pk, ConditionForm.rules),
-                MethodType.PokeSpot => PokeSpot.GenPkm(ref pk, seed, ConditionForm.rules),
+                MethodType.None => NoMethod.GenPkm(ref pk, rules),
+                MethodType.Method1 => Method1RNG.GenPkm(ref pk, seed, rules),
+                MethodType.Method1_Unown => UnownRNG.GenPkm(ref pk, 1, seed, rules, form),
+                MethodType.Method2 => Method2RNG.GenPkm(ref pk, seed, rules),
+                MethodType.Method2_Unown => UnownRNG.GenPkm(ref pk, 2, seed, rules, form),
+                MethodType.Method3 => Method3RNG.GenPkm(ref pk, seed, rules),
+                MethodType.Method3_Unown => UnownRNG.GenPkm(ref pk, 3, seed, rules, form),
+                MethodType.Method4 => Method4RNG.GenPkm(ref pk, seed, rules),
+                MethodType.Method4_Unown => UnownRNG.GenPkm(ref pk, 4, seed, rules, form),
+                MethodType.XD => XDColoRNG.GenPkm(ref pk, seed, rules),
+                MethodType.Overworld8 => Overworld8RNG.GenPkm(ref pk, seed, rules),
+                MethodType.Roaming8b => Roaming8bRNG.GenPkm(ref pk, seed, rules),
+                MethodType.BACD_R => BACD.GenPkm(ref pk, seed & 0xFFFF, rules, 0),
+                MethodType.BACD_U => BACD.GenPkm(ref pk, seed, rules, 1),
+                MethodType.BACD_R_S => BACD.GenPkm(ref pk, seed & 0xFFFF, rules, 2),
+                MethodType.Method1Roaming => Method1Roaming.GenPkm(ref pk, seed, rules),
+                MethodType.Channel => ColoRNG.GenPkm(ref pk, seed, rules),
+                MethodType.ChannelJirachi => JiColoRNG.GenPkm(ref pk, seed, rules),
+                MethodType.E_Reader => E_Reader.GenPkm(ref pk, seed, rules),
+                MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed, rules),
+                MethodType.G5MGShiny => G5MGShiny.GenPkm(ref pk, seed, rules),
+                MethodType.Gen5Wild => Gen5Wild.GenPkm(ref pk, seed, rules),
+                MethodType.PokeWalker => PokeWalker.GenPkm(ref pk, rules),
+                MethodType.PokeSpot => PokeSpot.GenPkm(ref pk, seed, rules),
                 _ => throw new NotSupportedException(),
             };
         }
         private uint NextSeed(uint seed)
         {
-            return ConditionForm.rules.Method switch
+            return rules.Method switch
             {
                 MethodType.Method1 => Method1RNG.Next(seed),
                 MethodType.Method1_Unown => UnownRNG.Next(seed),
@@ -146,14 +197,15 @@ namespace WangPluginPkm.GUI
                 MethodType.Method3_Unown => UnownRNG.Next(seed),
                 MethodType.Method4 => Method4RNG.Next(seed),
                 MethodType.Method4_Unown => UnownRNG.Next(seed),
-                MethodType.XDColo => XDColoRNG.Next(seed),
+                MethodType.XD => XDColoRNG.Next(seed),
                 MethodType.Overworld8 => Overworld8RNG.Next(seed),
                 MethodType.Roaming8b => Roaming8bRNG.Next(seed),
                 MethodType.BACD_R => BACD.Next(seed),
                 MethodType.BACD_U => BACD.Next(seed),
                 MethodType.BACD_R_S => BACD.Next(seed),
                 MethodType.Method1Roaming => Method1Roaming.Next(seed),
-                MethodType.Colo => ColoRNG.Next(seed),
+                MethodType.Channel => ColoRNG.Next(seed),
+                MethodType.ChannelJirachi => JiColoRNG.Next(seed),
                 MethodType.E_Reader => E_Reader.Next(seed),
                 MethodType.ChainShiny => ChainShiny.Next(seed),
                 MethodType.G5MGShiny => G5MGShiny.Next(seed),
@@ -179,7 +231,7 @@ namespace WangPluginPkm.GUI
             List<uint> SeedList = new List<uint>();
             if (UsePreSeed.Checked == true)
             {
-                SeedList = CheckRules.PreSetSeed(ConditionForm.rules);
+                SeedList = CheckRules.PreSetSeed(rules);
                 MessageBox.Show($"预设种子数量:{SeedList.Count}");
             }
             SearchtokenSource = new();
@@ -201,11 +253,11 @@ namespace WangPluginPkm.GUI
                     while (true)
                     {
                         string hexString = seed.ToString("X");
-                        ConditionForm.ConditionBox.Text = "正在查找...";
-                        ConditionForm.SeedBox.Text = hexString;
+                        StateBox.Text = "正在查找...";
+                        SeedTB.Text = hexString;
                         if (SearchtokenSource.IsCancellationRequested)
                         {
-                            ConditionForm.ConditionBox.Text = "Stop";
+                            StateBox.Text = "Stop";
                             return;
                         }
 
@@ -258,7 +310,7 @@ namespace WangPluginPkm.GUI
                                     MessageBox.Show($"Success！");
                                     Editor.PopulateFields(pk, false);
                                     SAV.ReloadSlots();
-                                    ConditionForm.SeedBox.Text = $"{seed.ToString("X")}";
+                                    SeedTB.Text = $"{seed.ToString("X")}";
                                 });
                             break;
                         }
@@ -270,7 +322,7 @@ namespace WangPluginPkm.GUI
                     this.Invoke(() =>
                     {
                         GeneratorIsRunning(false);
-                        ConditionForm.ConditionBox.Text = "无事可做";
+                        StateBox.Text = "无事可做";
                     });
                 },
                 SearchtokenSource.Token);
@@ -767,6 +819,116 @@ namespace WangPluginPkm.GUI
             IVCheckBox.Text = $"{pkm.IV_HP}/{pkm.IV_ATK}/{pkm.IV_DEF}/{pkm.IV_SPA}/{pkm.IV_SPD}/{pkm.IV_SPE}";
         }
 
+        private void Start_BTN_Click(object sender, EventArgs e)
+        {
+            if (!Int32.TryParse(StepBox.Text, out NumOfCountsPerThread))
+            {
+                MessageBox.Show("步数不合法");
+            }
+            cancellationToken = new CancellationTokenSource(); // 重置CancellationTokenSource以便于新的运行
+            int threadnumber = (int)ThreadNumber.Value;
+            panelBox.Controls.Clear(); // Clear existing controls
 
+            int numOfTextBoxes = threadnumber;
+            for (int i = 0; i < numOfTextBoxes; i++)
+            {
+                FlowLayoutPanel panel = new FlowLayoutPanel();
+                panel.AutoSize = true;
+                panel.FlowDirection = FlowDirection.TopDown;
+                CheckedListBox newCheckedListBox = new CheckedListBox();
+                newCheckedListBox.Height = 100;
+                newCheckedListBox.Width = 150;
+                System.Windows.Forms.ProgressBar newProgressBar = new System.Windows.Forms.ProgressBar();
+                newProgressBar.Minimum = 1;
+                newProgressBar.Maximum = NumOfCountsPerThread;
+                newProgressBar.Width = 150;
+                panel.Controls.Add(newCheckedListBox);
+                panel.Controls.Add(newProgressBar);
+
+                panelBox.Controls.Add(panel);
+            }
+
+
+            for (int i = 0; i < numOfTextBoxes; i++)
+            {
+                int threadIndex = i;
+                Thread newThread = new Thread(() => PerformCounting(threadIndex));
+                newThread.Start();
+            }
+        }
+        private void PerformCounting(int threadIndex)
+        {
+            if (!Int32.TryParse(StepBox.Text, out NumOfCountsPerThread))
+            {
+                MessageBox.Show("步数不合法");
+                return;
+            }
+
+            FlowLayoutPanel panel = (FlowLayoutPanel)panelBox.Controls[threadIndex];
+            System.Windows.Forms.ProgressBar progressBar = (System.Windows.Forms.ProgressBar)panel.Controls[1];
+            System.Windows.Forms.CheckedListBox checkedList = (System.Windows.Forms.CheckedListBox)panel.Controls[0];
+            checkedList.ItemCheck += CheckedListBox_ItemCheck;
+
+            this.Invoke((MethodInvoker)delegate
+            {
+                checkedList.DisplayMember = "DisplayText";
+            });
+
+            int n = 0;
+            for (uint count = (uint)(threadIndex * NumOfCountsPerThread + 1); count <= (threadIndex + 1) * NumOfCountsPerThread; count++)
+            {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return; // Handle cancellation
+                }
+
+                var seed = count; // Prepare data for this iteration
+                this.BeginInvoke((MethodInvoker)delegate
+                {
+                    var pk = Editor.Data.Clone(); // Assume Clone creates a new instance
+                    if (GenPkm(ref pk, seed, pk.Form))
+                    {
+                        PKwithName item = new PKwithName(pk);
+                        checkedList.Items.Add(item); // 添加包装对象
+                    }
+                    progressBar.Value = Math.Min(++n, progressBar.Maximum); // Update progress bar
+                });
+
+                Thread.Sleep(10); // Control the pace of execution
+            }
+        }
+
+        private void CheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+                CheckedListBox list = sender as CheckedListBox;
+                if (list == null) return;
+
+                // 注意：由于ItemCheck事件在项的状态实际改变前触发，
+                // 所以你可能需要在此事件处理器中使用BeginInvoke来延迟执行方法调用，
+                // 以确保你访问的是项改变后的状态。
+                this.BeginInvoke((MethodInvoker)delegate
+                {
+                    // 验证e.Index范围
+                    if (e.Index >= 0 && e.Index < list.Items.Count)
+                    {
+                        var item = list.Items[e.Index];
+                        // 假设item是你的自定义对象，需要转换
+                        PKwithName yourObject = item as PKwithName;
+                        SAV.SAV.SetBoxSlotAtIndex(yourObject.OriginalItem, 0,0);
+                        SAV.ReloadSlots();
+                    }
+                });
+            
+
+           
+
+        }
+        private void Stop_BTN_Click(object sender, EventArgs e)
+        {
+            if (cancellationToken != null && !cancellationToken.IsCancellationRequested)
+            {
+                cancellationToken.Cancel(); // 发送取消请求
+            }
+        }
     }
 }

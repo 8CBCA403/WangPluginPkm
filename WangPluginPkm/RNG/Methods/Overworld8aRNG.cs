@@ -1,5 +1,6 @@
 ﻿using PKHeX.Core;
 using System;
+using WangPluginPkm.GUI;
 
 namespace WangPluginPkm.RNG.Methods
 {
@@ -39,7 +40,7 @@ namespace WangPluginPkm.RNG.Methods
             var fakeTID16 = (uint)rand.NextInt();
             uint pid = (uint)rand.NextInt();
             bool isShiny = false;
-            if (r.Shiny == PkmCondition.ShinyType.Shiny) // let's decide if it's shiny or not!
+            if (r.Shiny == RNGForm.ShinyType.Shiny) // let's decide if it's shiny or not!
             {
                 for (int i = 1; i < 12; i++)
                 {
