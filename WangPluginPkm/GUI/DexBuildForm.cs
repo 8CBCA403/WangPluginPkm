@@ -1,4 +1,6 @@
-﻿using PKHeX.Core;
+﻿using Newtonsoft.Json.Linq;
+using Org.BouncyCastle.Utilities;
+using PKHeX.Core;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,6 +13,7 @@ using WangPluginPkm.PluginUtil.AchieveBase.SpecificForm;
 using WangPluginPkm.PluginUtil.DexBase;
 using WangPluginPkm.PluginUtil.MeerkatBase;
 using WangPluginPkm.SortBase;
+using static System.Resources.ResXFileRef;
 using static WangPluginPkm.PluginUtil.Functions.DexBuildFunctions;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 
@@ -41,6 +44,8 @@ namespace WangPluginPkm.GUI
         public List<DexModClass> ML = new();
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
+        private readonly byte[] Raw;
+        private readonly IStringConverter Converter;
         public DexBuildForm(ISaveFileProvider sav, IPKMView editor)
         {
             SAV = sav;
@@ -1439,6 +1444,26 @@ namespace WangPluginPkm.GUI
             EffortValues.SetMax(values, pk);
             pk.SetEVs(values);
         }
+
+        private void Clear_Trash_BTN_Click(object sender, EventArgs e)
+        {
+            SAV.SAV.ModifyBoxes(ClearTrash);
+            SAV.ReloadSlots();
+        }
+        private void ClearTrash(PKM pk)
+        {
+            string temp = pk.OriginalTrainerName;
+            pk.OriginalTrainerTrash.Clear();
+            pk.OriginalTrainerName = temp;
+            temp = pk.HandlingTrainerName;
+            pk.HandlingTrainerTrash.Clear();
+            pk.HandlingTrainerName = temp;
+            temp = pk.Nickname;
+            pk.NicknameTrash.Clear();
+
+                ; pk.Nickname = temp;
+        }
+      
     }
 }
 

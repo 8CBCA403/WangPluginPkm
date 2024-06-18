@@ -52,6 +52,7 @@ namespace WangPluginPkm.GUI
             TIDCheck_BOX = new TextBox();
             Quick_Edit = new TabPage();
             Quick_EV_BTN = new Button();
+            Clear_Trash_BTN = new Button();
             DexTabControl.SuspendLayout();
             IDPage.SuspendLayout();
             DexBuilder.SuspendLayout();
@@ -277,6 +278,7 @@ namespace WangPluginPkm.GUI
             // IDPage
             // 
             IDPage.BackColor = System.Drawing.Color.WhiteSmoke;
+            IDPage.Controls.Add(Clear_Trash_BTN);
             IDPage.Controls.Add(DeleteBox_BTN);
             IDPage.Controls.Add(ClearAll_BTN);
             IDPage.Controls.Add(Gen_BTN);
@@ -531,10 +533,10 @@ namespace WangPluginPkm.GUI
             // Quick_Edit
             // 
             Quick_Edit.Controls.Add(Quick_EV_BTN);
-            Quick_Edit.Location = new System.Drawing.Point(4, 22);
+            Quick_Edit.Location = new System.Drawing.Point(4, 26);
             Quick_Edit.Name = "Quick_Edit";
             Quick_Edit.Padding = new Padding(3);
-            Quick_Edit.Size = new System.Drawing.Size(348, 158);
+            Quick_Edit.Size = new System.Drawing.Size(348, 154);
             Quick_Edit.TabIndex = 4;
             Quick_Edit.Text = "速配";
             Quick_Edit.UseVisualStyleBackColor = true;
@@ -548,6 +550,17 @@ namespace WangPluginPkm.GUI
             Quick_EV_BTN.Text = "速配努力值";
             Quick_EV_BTN.UseVisualStyleBackColor = true;
             Quick_EV_BTN.Click += Quick_EV_BTN_Click;
+            // 
+            // Clear_Trash_BTN
+            // 
+            Clear_Trash_BTN.Font = new System.Drawing.Font("黑体", 9F);
+            Clear_Trash_BTN.Location = new System.Drawing.Point(231, 111);
+            Clear_Trash_BTN.Name = "Clear_Trash_BTN";
+            Clear_Trash_BTN.Size = new System.Drawing.Size(102, 25);
+            Clear_Trash_BTN.TabIndex = 21;
+            Clear_Trash_BTN.Text = "删除垃圾字节";
+            Clear_Trash_BTN.UseVisualStyleBackColor = true;
+            Clear_Trash_BTN.Click += Clear_Trash_BTN_Click;
             // 
             // DexBuildForm
             // 
@@ -621,5 +634,6 @@ namespace WangPluginPkm.GUI
         private Label label1;
         private TabPage Quick_Edit;
         private Button Quick_EV_BTN;
+        private Button Clear_Trash_BTN;
     }
 }
