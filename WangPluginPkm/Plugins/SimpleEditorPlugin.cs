@@ -46,7 +46,7 @@ namespace WangPluginPkm.Plugins
             menuVSD.Opening += (s, e) =>
             {
                 var info = GetSenderInfo(ref s!);
-                if (info.Slot.Origin == SlotOrigin.Box && info.ReadCurrent().Species != (int)Species.None && info.CanWriteTo())
+                if ( info.ReadCurrent().Species != (int)Species.None && info.CanWriteTo())
                 {
                     ToolStripMenuItem insertSlotButton = new ToolStripMenuItem("在此处插空");
                     insertSlotButton.Image = Properties.Resources.Down;
@@ -178,11 +178,16 @@ namespace WangPluginPkm.Plugins
                 if (currMon.Species == (int)Species.None) break;
                 boxIndex++;
             }
+            if (boxIndex == SaveFileEditor.SAV.SlotCount)
+            {
+                MessageBox.Show("没有空间！");
+                return;
+            }
             currMon = SaveFileEditor.SAV.GetBoxSlotAtIndex(startIndex);
             SaveFileEditor.SAV.SetBoxSlotAtIndex(SaveFileEditor.SAV.BlankPKM, startIndex);
             for (int index = startIndex + 1; index <= boxIndex; index++)
             {
-                StorageSlotSource slotSource = SaveFileEditor.SAV.GetSlotFlags(index);
+                StorageSlotSource slotSource = SaveFileEditor.SAV.GetBoxSlotFlags(index);
                 if (slotSource.IsOverwriteProtected()) continue;
                 nextMon = SaveFileEditor.SAV.GetBoxSlotAtIndex(index);
                 SaveFileEditor.SAV.SetBoxSlotAtIndex(currMon, index, PKMImportSetting.UseDefault, PKMImportSetting.Skip);
