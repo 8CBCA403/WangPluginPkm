@@ -30,17 +30,20 @@ namespace WangPluginPkm.GUI
 {
     partial class BattleKingUI : Form
     {
-        public List<ShowdownSet> Sets = new();
-        public List<HomeRankClass> L = new();
+        int n = 0;
+        public List<ShowdownSet> Sets = [];
+        public List<HomeSeasonDetail> L = [];
+        public List<HomeRankClass> R = [];
+        public HomeRankClass v = null;
+        public HomeSeasonDetail u = null;
 
-        
         public static ISaveFileProvider SAV { private get; set; } = null!;
         private CancellationTokenSource PastetokenSource = new();
         private CancellationTokenSource FalinkVGCstokenSource = new();
         private CancellationTokenSource FalinkTournamentstokenSource = new();
         private CancellationTokenSource VGCPastestokenSource = new();
         public static IPKMView Editor { private get; set; } = null!;
-        private static List<ExpandPKM> BD = new List<ExpandPKM>();
+        private static List<ExpandPKM> BD = new();
         private enum Falinks
         {
             VGC,
@@ -125,7 +128,7 @@ namespace WangPluginPkm.GUI
         {
             IsRunning(true);
             int n = 0;
-            string supported = string.Join(";", SAV.SAV.PKMExtensions.Select(s => $"*.{s}").Concat(new[] { "*.pk" }));
+            string supported = string.Join(";", SAV.SAV.PKMExtensions.Select(s => $"*.{s}").Concat(["*.pk"]));
             using var ofd = new OpenFileDialog
             {
                 Filter = "All Files|*.*" + $"|Decrypted PKM File (*.pk)|" + supported,
@@ -441,7 +444,7 @@ namespace WangPluginPkm.GUI
         {
             {
                 TeamForm fr = new(Web_CB.SelectedIndex);
-                HttpClient client = new HttpClient();
+                HttpClient client = new();
                 string jsonContent;
                 MT_BTN.Enabled = false;
                 fr.Import_BTN.Enabled = true;
@@ -452,7 +455,7 @@ namespace WangPluginPkm.GUI
                 response = await client.GetAsync(jsUrl);
                 jsonContent = await response.Content.ReadAsStringAsync();
                 var data = JsonConvert.DeserializeObject<RootObject>(jsonContent);
-                Stopwatch st = new Stopwatch();
+                Stopwatch st = new();
                 st.Start();
                 try
                 {
@@ -473,7 +476,7 @@ namespace WangPluginPkm.GUI
                                     var response = await client.GetAsync(link);
                                     var content = await response.Content.ReadAsStringAsync();
 
-                                    HtmlAgilityPack.HtmlDocument docl = new HtmlAgilityPack.HtmlDocument();
+                                    HtmlAgilityPack.HtmlDocument docl = new();
                                     docl.LoadHtml(content);
 
                                     HtmlNode targetNode = docl.DocumentNode.SelectSingleNode("//pre[contains(@class, 'ml-5') and contains(@class, 'w-4/5') and contains(@class, 'whitespace-pre-wrap')]");
@@ -526,13 +529,13 @@ namespace WangPluginPkm.GUI
         {
             TeamForm fr = new(Web_CB.SelectedIndex);
 
-            HttpClient client = new HttpClient();
+            HttpClient client = new();
             MT_BTN.Enabled = false;
             fr.Import_BTN.Enabled = true;
             HttpResponseMessage response = await client.GetAsync(ImportURL_text.Text);
             string responseBody = await response.Content.ReadAsStringAsync();
             var r = (BFuction.GetString(responseBody, "_buildManifest.js", "_ssgManifest.js"));
-            Stopwatch st = new Stopwatch();
+            Stopwatch st = new();
             st.Start();
             try
             {
@@ -557,7 +560,7 @@ namespace WangPluginPkm.GUI
             int n;
             string jsonContent;
             HttpResponseMessage response;
-            HttpClient client = new HttpClient();
+            HttpClient client = new();
             var jsUrl = ImportURL_text.Text + "/_next/data/" + r + "/en/tournaments/" + CB.SelectedValue + ".json";
             response = await client.GetAsync(jsUrl);
             jsonContent = await response.Content.ReadAsStringAsync();
@@ -582,9 +585,9 @@ namespace WangPluginPkm.GUI
             {
                 case 0:
                     {
-                        List<string> st = new();
+                        List<string> st = [];
                         string targetClass = "select-bordered select select-sm w-64 overflow-ellipsis";
-                        HttpClient httpClient = new HttpClient();
+                        HttpClient httpClient = new();
                         try
                         {
                             string htmlContent = await httpClient.GetStringAsync(ImportURL_text.Text + "/zh-Hans/pastes/vgc/" + CB.SelectedValue);
@@ -618,7 +621,7 @@ namespace WangPluginPkm.GUI
                 case 1:
                     {
                         List<Tournament> st = new();
-                        HttpClient client = new HttpClient();
+                        HttpClient client = new();
                         List<Tournament> data;
                         string jsonContent;
                         HttpResponseMessage response = await client.GetAsync(ImportURL_text.Text);
@@ -782,72 +785,154 @@ namespace WangPluginPkm.GUI
             st = GetSheetTitles(sheetsService, spreadsheetId);
             VGCExcel_CB.DataSource = st;
         }
-
-        private async void Get_Rank_BTN_Click(object sender, EventArgs e)
+        private async void CheckS_BTN_Click(object sender, EventArgs e)
         {
-            string url = "https://resource.pokemon-home.com/battledata/ranking/scvi/qox62uoxgkjlt4f4g4pm/2/1688176797/traner-1";
-            var html = await HomeRankClass.DownloadPageAsync(url);
-            if(html!=null)
-            foreach (var h in html)
-            {
-                HomeRankClass r = new(h);
-                L.Add(r);
-            }
-            var departmentBindingList = new BindingList<HomeRankClass>(L);
+            n = 0;
+            Rank_List_Box.DataSource = null;
+            Rank_List_Box.ClearSelected();
+            L.Clear();
+            string url = "https://api.battle.pokemon-home.com/tt/cbd/competition/rankmatch/list";
+            var html = await HomeSeasonDetail.DownloadPageAsync(url);
+            if (html != null)
+                foreach (var h in html)
+                {
+
+                    HomeSeasonDetail r = new(h);
+                    switch (r.Rule)
+                    {
+                        case 0:
+                            r.DisplayName += "单打";
+                            break;
+                        case 1:
+                            r.DisplayName += "双打";
+                            break;
+                        default:
+                            break;
+                    }
+                    L.Add(r);
+                }
+            var departmentBindingList = new BindingList<HomeSeasonDetail>(L);
             var departmentSource = new BindingSource(departmentBindingList, null);
             Rank_List_Box.DataSource = departmentSource;
             Rank_List_Box.DisplayMember = "DisplayName";
             Rank_List_Box.ValueMember = "Description";
             Rank_List_Box.Refresh();
+
+        }
+        private async void Get_Rank_BTN_Click(object sender, EventArgs e)
+        {
+            // 获取TextBox的值
+            string cId = CID_BOX.Text.Trim();
+            string rst = RST_BOX.Text.Trim();
+            string ts1 = TS1_BOX.Text.Trim();
+
+            // 检查每个TextBox是否为空
+            if (string.IsNullOrEmpty(cId))
+            {
+                MessageBox.Show("CID 不能为空！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(rst))
+            {
+                MessageBox.Show("RST 不能为空！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(ts1))
+            {
+                MessageBox.Show("TS1 不能为空！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 生成链接
+            string rankUrl = $"https://resource.pokemon-home.com/battledata/ranking/scvi/{cId}/{rst}/{ts1}/traner-1";
+            n = 1;
+            R.Clear();
+            Rank_List_Box.DataSource = null;
+            Rank_List_Box.ClearSelected();
+
+            var html = await HomeRankClass.DownloadPageAsync(rankUrl);
+            if (html != null)
+                foreach (var h in html)
+                {
+                    HomeRankClass r = new(h);
+                    R.Add(r);
+                }
+            var departmentBindingList = new BindingList<HomeRankClass>(R);
+            var departmentSource = new BindingSource(departmentBindingList, null);
+            Rank_List_Box.DataSource = departmentSource;
+            Rank_List_Box.DisplayMember = "DisplayName";
+            Rank_List_Box.ValueMember = "Description";
+            Rank_List_Box.Refresh();
+
         }
 
         private async void Rank_List_Box_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string imageUrl = "";
-            var u = L[Rank_List_Box.SelectedIndex];
-            if (u.Description != null)
+            // 确保在进行操作前，选中的索引是有效的
+            if (Rank_List_Box.SelectedIndex == -1)
             {
-                RankBox.Text = $"{u.Description.Rank}";
-                NameBox.Text = u.Description.Name;
-                RankValueBox.Text = $"{u.Description.rating_value}";
-                if (u.Description.Lng != null)
-                {       
-                    LangBox.Text = $"{Lng(Int16.Parse(u.Description.Lng))}";
-                 }
-                imageUrl = "https://resource.pokemon-home.com/battledata/img/icons/trainer/" + u.Description.Icon;
+                return; // 如果没有选中任何项，直接返回
             }
-            if (!string.IsNullOrEmpty(imageUrl))
+            if (n == 0)
             {
-                try
-                {
-                    var httpClient = new HttpClient();
-                    HttpResponseMessage response = await httpClient.GetAsync(imageUrl);
-                    byte[] imageData = await response.Content.ReadAsByteArrayAsync();
-                    using (MemoryStream ms = new MemoryStream(imageData))
-                    {
-                        Image downloadedImage = Image.FromStream(ms);
-                        PlayerPic.Image = downloadedImage;
-                    }
-                }
-                catch (WebException ex)
-                {
-                    if (ex.Response is HttpWebResponse response && response.StatusCode == HttpStatusCode.Forbidden)
-                    {
-                        PlayerPic.Image = Properties.Resources._403; 
-                    }
-                    else
-                    {
-                        PlayerPic.Image = Properties.Resources._403; 
-                    }
-                }
-                catch 
-                {
-                    PlayerPic.Image = Properties.Resources._403;
-                }
+                u = L[Rank_List_Box.SelectedIndex];
+                S_Name.Text = u.DisplayName;
+                SStart_Box.Text = $"{u.Description.start}";
+                SEnd_Box.Text = $"{u.Description.end}";
+                CID_BOX.Text = $"{u.Cid}";
+                RST_BOX.Text = $"{u.Rst}";
+                TS1_BOX.Text = $"{u.Ts1}";
             }
-            else
+            else if (n == 1)
             {
-                MessageBox.Show("请输入图像的URL", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                v = R[Rank_List_Box.SelectedIndex];
+                string imageUrl = "";
+                if (v.Description != null)
+                {
+                    RankBox.Text = $"{v.Description.rank}";
+                    NameBox.Text = v.Description.name;
+                    RankValueBox.Text = $"{v.Description.rating_value}";
+                    if (v.Description.lng != null)
+                    {
+                        LangBox.Text = $"{Lng(Int16.Parse(v.Description.lng))}";
+                    }
+                    imageUrl = "https://resource.pokemon-home.com/battledata/img/icons/trainer/" + v.Description.icon;
+                }
+                if (!string.IsNullOrEmpty(imageUrl))
+                {
+                    try
+                    {
+                        var httpClient = new HttpClient();
+                        HttpResponseMessage response = await httpClient.GetAsync(imageUrl);
+                        byte[] imageData = await response.Content.ReadAsByteArrayAsync();
+                        using (MemoryStream ms = new MemoryStream(imageData))
+                        {
+                            Image downloadedImage = Image.FromStream(ms);
+                            PlayerPic.Image = downloadedImage;
+                        }
+                    }
+                    catch (WebException ex)
+                    {
+                        if (ex.Response is HttpWebResponse response && response.StatusCode == HttpStatusCode.Forbidden)
+                        {
+                            PlayerPic.Image = Properties.Resources._403;
+                        }
+                        else
+                        {
+                            PlayerPic.Image = Properties.Resources._403;
+                        }
+                    }
+                    catch
+                    {
+                        PlayerPic.Image = Properties.Resources._403;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("请输入图像的URL", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
         private string Lng(int l)
@@ -867,11 +952,53 @@ namespace WangPluginPkm.GUI
                 default:
                     return $"语言代码{l}";
             }
-                
+
         }
-       
+
+        private void Search_BTN_Click(object sender, EventArgs e)
+        {
+            string searchText = txtSearch.Text.Trim();
+
+            if (string.IsNullOrEmpty(searchText))
+            {
+                MessageBox.Show("请输入搜索关键词！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 标记是否找到匹配项
+            bool found = false;
+
+            // 遍历ListBox中的项
+            for (int i = 0; i < Rank_List_Box.Items.Count; i++)
+            {
+                var item = (HomeRankClass)Rank_List_Box.Items[i];
+                string itemNameWithoutRank = item.DisplayName.Substring(item.DisplayName.IndexOf(' ') + 1);
+                // 如果找到了包含搜索关键词的项
+                if (itemNameWithoutRank.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                {
+                    // 选中该项
+                    Rank_List_Box.SelectedIndex = i;
+
+                    // 滚动到该项
+                    Rank_List_Box.TopIndex = i;
+
+                    // 标记为已找到
+                    found = true;
+
+                    // 弹出提示框
+                    MessageBox.Show($"找到匹配项: {txtSearch.Text.Trim()}", "搜索结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+                }
+            }
+
+            // 如果没有找到匹配项
+            if (!found)
+            {
+                MessageBox.Show("未找到匹配的项！", "搜索结果", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
-    }
+}
 
 
 

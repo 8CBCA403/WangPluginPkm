@@ -8,6 +8,9 @@ namespace WangPluginPkm
         public bool OpenSound { get; set; } = false;
         public string GoogleapiKey { get; set; } = "";
         public string GoogleApplicationName { get; set; } = "";
+
+        public string HomeAuthorization { get; set; } = "";
+        public string HomeCookie { get; set; } = "";
         // 添加其他配置项
         public void SaveConfig(PluginConfig config)
         {

@@ -10,12 +10,16 @@ namespace WangPluginPkm.GUI
             AboutTextBox = new RichTextBox();
             PictureBox = new PictureBox();
             PluginSetting = new GroupBox();
+            ApplicationNameLB = new Label();
+            ApiKeyLB = new Label();
+            APP_TB = new TextBox();
+            API_TB = new TextBox();
             Sav_Config_BTN = new Button();
             SoundCheck = new CheckBox();
-            API_TB = new TextBox();
-            APP_TB = new TextBox();
-            ApiKeyLB = new Label();
-            ApplicationNameLB = new Label();
+            HA_LB = new Label();
+            HA_TB = new TextBox();
+            HC_LB = new Label();
+            HC_TB = new TextBox();
             ((System.ComponentModel.ISupportInitialize)PictureBox).BeginInit();
             PluginSetting.SuspendLayout();
             SuspendLayout();
@@ -41,6 +45,10 @@ namespace WangPluginPkm.GUI
             // 
             // PluginSetting
             // 
+            PluginSetting.Controls.Add(HC_TB);
+            PluginSetting.Controls.Add(HC_LB);
+            PluginSetting.Controls.Add(HA_TB);
+            PluginSetting.Controls.Add(HA_LB);
             PluginSetting.Controls.Add(ApplicationNameLB);
             PluginSetting.Controls.Add(ApiKeyLB);
             PluginSetting.Controls.Add(APP_TB);
@@ -53,6 +61,38 @@ namespace WangPluginPkm.GUI
             PluginSetting.TabIndex = 2;
             PluginSetting.TabStop = false;
             PluginSetting.Text = "插键设置";
+            // 
+            // ApplicationNameLB
+            // 
+            ApplicationNameLB.AutoSize = true;
+            ApplicationNameLB.Location = new System.Drawing.Point(437, 23);
+            ApplicationNameLB.Name = "ApplicationNameLB";
+            ApplicationNameLB.Size = new System.Drawing.Size(67, 17);
+            ApplicationNameLB.TabIndex = 5;
+            ApplicationNameLB.Text = "AppName";
+            // 
+            // ApiKeyLB
+            // 
+            ApiKeyLB.AutoSize = true;
+            ApiKeyLB.Location = new System.Drawing.Point(138, 23);
+            ApiKeyLB.Name = "ApiKeyLB";
+            ApiKeyLB.Size = new System.Drawing.Size(48, 17);
+            ApiKeyLB.TabIndex = 4;
+            ApiKeyLB.Text = "ApiKey";
+            // 
+            // APP_TB
+            // 
+            APP_TB.Location = new System.Drawing.Point(510, 20);
+            APP_TB.Name = "APP_TB";
+            APP_TB.Size = new System.Drawing.Size(227, 23);
+            APP_TB.TabIndex = 3;
+            // 
+            // API_TB
+            // 
+            API_TB.Location = new System.Drawing.Point(192, 20);
+            API_TB.Name = "API_TB";
+            API_TB.Size = new System.Drawing.Size(227, 23);
+            API_TB.TabIndex = 2;
             // 
             // Sav_Config_BTN
             // 
@@ -76,39 +116,39 @@ namespace WangPluginPkm.GUI
             SoundCheck.Text = "是否播放启动声音";
             SoundCheck.UseVisualStyleBackColor = true;
             // 
-            // API_TB
+            // HA_LB
             // 
-            API_TB.Location = new System.Drawing.Point(192, 20);
-            API_TB.Name = "API_TB";
-            API_TB.Size = new System.Drawing.Size(227, 23);
-            API_TB.TabIndex = 2;
+            HA_LB.AutoSize = true;
+            HA_LB.Location = new System.Drawing.Point(6, 52);
+            HA_LB.Name = "HA_LB";
+            HA_LB.Size = new System.Drawing.Size(120, 17);
+            HA_LB.TabIndex = 6;
+            HA_LB.Text = "HomeAuthorization";
             // 
-            // APP_TB
+            // HA_TB
             // 
-            APP_TB.Location = new System.Drawing.Point(510, 20);
-            APP_TB.Name = "APP_TB";
-            APP_TB.Size = new System.Drawing.Size(227, 23);
-            APP_TB.TabIndex = 3;
+            HA_TB.Location = new System.Drawing.Point(132, 49);
+            HA_TB.Name = "HA_TB";
+            HA_TB.Size = new System.Drawing.Size(227, 23);
+            HA_TB.TabIndex = 7;
             // 
-            // ApiKeyLB
+            // HC_LB
             // 
-            ApiKeyLB.AutoSize = true;
-            ApiKeyLB.Location = new System.Drawing.Point(138, 23);
-            ApiKeyLB.Name = "ApiKeyLB";
-            ApiKeyLB.Size = new System.Drawing.Size(48, 17);
-            ApiKeyLB.TabIndex = 4;
-            ApiKeyLB.Text = "ApiKey";
+            HC_LB.AutoSize = true;
+            HC_LB.Location = new System.Drawing.Point(371, 52);
+            HC_LB.Name = "HC_LB";
+            HC_LB.Size = new System.Drawing.Size(84, 17);
+            HC_LB.TabIndex = 8;
+            HC_LB.Text = "HomeCookie";
             // 
-            // ApplicationNameLB
+            // HC_TB
             // 
-            ApplicationNameLB.AutoSize = true;
-            ApplicationNameLB.Location = new System.Drawing.Point(437, 23);
-            ApplicationNameLB.Name = "ApplicationNameLB";
-            ApplicationNameLB.Size = new System.Drawing.Size(67, 17);
-            ApplicationNameLB.TabIndex = 5;
-            ApplicationNameLB.Text = "AppName";
+            HC_TB.Location = new System.Drawing.Point(461, 49);
+            HC_TB.Name = "HC_TB";
+            HC_TB.Size = new System.Drawing.Size(276, 23);
+            HC_TB.TabIndex = 9;
             // 
-            // AboutUI
+            // AboutandSettingUI
             // 
             ClientSize = new System.Drawing.Size(765, 383);
             Controls.Add(PluginSetting);
@@ -117,7 +157,7 @@ namespace WangPluginPkm.GUI
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
-            Name = "AboutUI";
+            Name = "AboutandSettingUI";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Super Wang";
             ((System.ComponentModel.ISupportInitialize)PictureBox).EndInit();
@@ -135,5 +175,9 @@ namespace WangPluginPkm.GUI
         private TextBox API_TB;
         private Label ApiKeyLB;
         private Label ApplicationNameLB;
+        private Label HA_LB;
+        private Label HC_LB;
+        private TextBox HA_TB;
+        private TextBox HC_TB;
     }
 }

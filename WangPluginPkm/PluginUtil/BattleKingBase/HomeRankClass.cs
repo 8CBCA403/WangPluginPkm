@@ -1,20 +1,30 @@
 ﻿using System.IO.Compression;
 using System.IO;
 using System.Net.Http;
+using RestSharp;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System;
+using System.Threading;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.Linq;
+using System.Text.Json.Nodes;
+using System.Text;
 #nullable enable
 namespace WangPluginPkm.PluginUtil.BattleKingBase
 {
-     class HomeRankClass
-     {
+    class HomeRankClass
+    {
         public string? DisplayName { get; set; }
         public RankData? Description { get; set; } = null;
 
-        public HomeRankClass(RankData d) 
-        { 
+        public HomeRankClass(RankData d)
+        {
             Description = d;
-            DisplayName = $"第{d.Rank}名" + " " + $"{d.Name}";
+            DisplayName = $"第{d.rank}名" + " " + $"{d.name}";
         }
         public static async Task<RankData[]?> DownloadPageAsync(string url)
         {
@@ -22,58 +32,64 @@ namespace WangPluginPkm.PluginUtil.BattleKingBase
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.DefaultRequestHeaders.Accept.ParseAdd("text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7");
-                    client.DefaultRequestHeaders.AcceptEncoding.ParseAdd("gzip, deflate, br");
-                    client.DefaultRequestHeaders.AcceptLanguage.ParseAdd("zh-CN,zh;q=0.9");
-                    client.DefaultRequestHeaders.CacheControl = new System.Net.Http.Headers.CacheControlHeaderValue { NoCache = true };
-                    client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
+                    // 设置请求头
+                    client.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7");
+                    client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
+                    client.DefaultRequestHeaders.Add("Accept-Language", "zh-CN,zh;q=0.9");
+                    client.DefaultRequestHeaders.Add("Cache-Control", "no-cache");
+                    client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Mobile Safari/537.36");
+                    // 发送GET请求
                     HttpResponseMessage response = await client.GetAsync(url);
+
+                    // 读取并处理响应
                     if (response.IsSuccessStatusCode)
                     {
-                        var contentStream = await response.Content.ReadAsStreamAsync();
-                        string responseBody;
-                        using (var decompressionStream = new GZipStream(contentStream, CompressionMode.Decompress))
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        using (Stream responseStream = await response.Content.ReadAsStreamAsync())
+                        using (GZipStream decompressionStream = new GZipStream(responseStream, CompressionMode.Decompress))
+                        using (StreamReader reader = new StreamReader(decompressionStream))
                         {
-                            using (StreamReader reader = new StreamReader(decompressionStream))
+                            responseBody = reader.ReadToEnd();
+                            var jsonOptions = new JsonSerializerOptions
                             {
-                                responseBody = reader.ReadToEnd();
-                                var jsonOptions = new JsonSerializerOptions
-                                {
-                                    PropertyNameCaseInsensitive = true,
-                                };
-                                var dataArray = JsonSerializer.Deserialize<RankData[]>(responseBody, jsonOptions);
-                                if (dataArray != null)
-                                {
-                                    return dataArray;
-                                }
-                                else
-                                {
-                                    return null;
-                                }
+                                PropertyNameCaseInsensitive = true,
+                            };
+                            var dataArray = System.Text.Json.JsonSerializer.Deserialize<RankData[]>(responseBody, jsonOptions);
+                            if (dataArray != null)
+                            {
+                                return dataArray;
+                            }
+                            else
+                            {
+                                return null;
                             }
                         }
                     }
                     else
                     {
-                        return null;
+                       return null;
                     }
                 }
-
+               
             }
-            catch
+            catch (Exception ex)
             {
                 return null;
             }
+
         }
-    }
+    }   
+            
+           
      class RankData
     {
-        public int Rank { get; set; }
+        public int rank { get; set; }
         public double rating_value { get; set; }
-        public string? Icon { get; set; }
-        public string? Name { get; set; }
-        public string? Lng { get; set; }
+        public string? icon { get; set; }
+        public string? name { get; set; }
+        public string? lng { get; set; }
        
     }
+    
 
 }

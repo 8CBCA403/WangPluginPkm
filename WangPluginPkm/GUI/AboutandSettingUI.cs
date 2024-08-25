@@ -13,6 +13,8 @@ namespace WangPluginPkm.GUI
             SoundCheck.Checked = config.OpenSound;
             API_TB.Text = config.GoogleapiKey;
             APP_TB.Text = config.GoogleApplicationName;
+            HA_TB.Text = config.HomeAuthorization;
+            HC_TB.Text = config.HomeCookie;
         }
         private void Setting()
         {
@@ -20,6 +22,9 @@ namespace WangPluginPkm.GUI
             plugin.OpenSound = SoundCheck.Checked;
             plugin.GoogleapiKey = API_TB.Text;
             plugin.GoogleApplicationName = APP_TB.Text;
+            plugin.HomeAuthorization = HA_TB.Text;
+            plugin.HomeCookie = HC_TB.Text;
+
             plugin.SaveConfig(plugin);
         }
         private void CreateBox()
