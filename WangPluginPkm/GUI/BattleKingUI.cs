@@ -38,12 +38,12 @@ namespace WangPluginPkm.GUI
         public HomeSeasonDetail u = null;
 
         public static ISaveFileProvider SAV { private get; set; } = null!;
-        private CancellationTokenSource PastetokenSource = new();
-        private CancellationTokenSource FalinkVGCstokenSource = new();
-        private CancellationTokenSource FalinkTournamentstokenSource = new();
-        private CancellationTokenSource VGCPastestokenSource = new();
+        private readonly CancellationTokenSource PastetokenSource = new();
+        private readonly CancellationTokenSource FalinkVGCstokenSource = new();
+        private readonly CancellationTokenSource FalinkTournamentstokenSource = new();
+        private readonly CancellationTokenSource VGCPastestokenSource = new();
         public static IPKMView Editor { private get; set; } = null!;
-        private static List<ExpandPKM> BD = new();
+        private static readonly List<ExpandPKM> BD = [];
         private enum Falinks
         {
             VGC,
@@ -254,21 +254,21 @@ namespace WangPluginPkm.GUI
             Debug.WriteLine($"Time to complete {nameof(ImportSetsToBoxes)}: {timespan.Minutes:00} minutes {timespan.Seconds:00} seconds {timespan.Milliseconds / 10:00} milliseconds");
 
         }
-        private string TranslatorZH(string text)
+        private static string TranslatorZH(string text)
         {
             string[] zh = text.Split(';');
             string s = "";
             string t = "";
-            for (int i = 0; i < zh.Count(); i++)
+            for (int i = 0; i < zh.Length; i++)
             {
-                t.Replace(";", "");
+                _ = t.Replace(";", "");
                 t = ShowdownTranslator<PKM>.Chinese2Showdown(zh[i]);
-                s = s + t;
+                s += t;
                 s += "\n\n";
             }
             return s;
         }
-        private string GetTextShowdownData(string text)
+        private static string GetTextShowdownData(string text)
         {
             if (ShowdownUtil.IsTextShowdownData(text))
                 return text;
@@ -280,7 +280,7 @@ namespace WangPluginPkm.GUI
             info = new SmogonSetList(rough);
             ImportSetsToBoxes(info.Sets, false);
         }
-        private PKM OpenFromPath(string path)
+        private static PKM OpenFromPath(string path)
         {
             var fi = new FileInfo(path);
             if (!fi.Exists)
@@ -318,10 +318,15 @@ namespace WangPluginPkm.GUI
             {
                 return false;
             }
+
+            ArgumentNullException.ThrowIfNull(path);
+
             switch (input)
             {
                 // case PKM pk: return OpenPKM(pk);
                 case byte[] pkms: return OpenPCBoxBin(pkms);
+                default:
+                    break;
             }
             return false;
         }
@@ -336,7 +341,7 @@ namespace WangPluginPkm.GUI
             TeamList_BOX.Items.Add(pk, CheckState.Checked);
             return true;
         }
-        protected PKM GetPKM(byte[] data) => new PK9(data);
+        protected static PKM GetPKM(byte[] data) => new PK9(data);
         private bool OpenPCBoxBin(byte[] pkms)
         {
             var pkdata = FileTradeHelper<PK9>.Bin2List(pkms);
@@ -471,30 +476,28 @@ namespace WangPluginPkm.GUI
                                 var item = data.PageProps.Pastes[i];
                                 var link = ImportURL_text.Text + "/pastes/" + item.Id;
 
-                                using (var client = new HttpClient())
+                                using var client = new HttpClient();
+                                var response = await client.GetAsync(link);
+                                var content = await response.Content.ReadAsStringAsync();
+
+                                HtmlAgilityPack.HtmlDocument docl = new();
+                                docl.LoadHtml(content);
+
+                                HtmlNode targetNode = docl.DocumentNode.SelectSingleNode("//pre[contains(@class, 'ml-5') and contains(@class, 'w-4/5') and contains(@class, 'whitespace-pre-wrap')]");
+                                if (targetNode != null)
                                 {
-                                    var response = await client.GetAsync(link);
-                                    var content = await response.Content.ReadAsStringAsync();
+                                    string textContent = targetNode.InnerText;
+                                    data.PageProps.Pastes[i].PS = textContent;
 
-                                    HtmlAgilityPack.HtmlDocument docl = new();
-                                    docl.LoadHtml(content);
-
-                                    HtmlNode targetNode = docl.DocumentNode.SelectSingleNode("//pre[contains(@class, 'ml-5') and contains(@class, 'w-4/5') and contains(@class, 'whitespace-pre-wrap')]");
-                                    if (targetNode != null)
+                                    // Ensure UI updates are done on the main thread
+                                    if (fr.IsHandleCreated)
                                     {
-                                        string textContent = targetNode.InnerText;
-                                        data.PageProps.Pastes[i].PS = textContent;
-
-                                        // Ensure UI updates are done on the main thread
-                                        if (fr.IsHandleCreated)
+                                        fr.Invoke((MethodInvoker)delegate
                                         {
-                                            fr.Invoke((MethodInvoker)delegate
-                                            {
-                                                fr.TeamListBox.Items.Add(data.PageProps.Pastes[i]);
-                                                fr.TeamListBox.DisplayMember = "Title";
-                                                fr.TeamListBox.Refresh();
-                                            });
-                                        }
+                                            fr.TeamListBox.Items.Add(data.PageProps.Pastes[i]);
+                                            fr.TeamListBox.DisplayMember = "Title";
+                                            fr.TeamListBox.Refresh();
+                                        });
                                     }
                                 }
                             }
@@ -591,7 +594,7 @@ namespace WangPluginPkm.GUI
                         try
                         {
                             string htmlContent = await httpClient.GetStringAsync(ImportURL_text.Text + "/zh-Hans/pastes/vgc/" + CB.SelectedValue);
-                            HtmlAgilityPack.HtmlDocument htmlDocument = new HtmlAgilityPack.HtmlDocument();
+                            HtmlAgilityPack.HtmlDocument htmlDocument = new();
                             htmlDocument.LoadHtml(htmlContent);
                             HtmlNodeCollection selectElements = htmlDocument.DocumentNode.SelectNodes($"//select[contains(@class, '{targetClass}')]");
                             if (selectElements != null)
@@ -620,7 +623,7 @@ namespace WangPluginPkm.GUI
                     break;
                 case 1:
                     {
-                        List<Tournament> st = new();
+                        List<Tournament> st = [];
                         HttpClient client = new();
                         List<Tournament> data;
                         string jsonContent;
@@ -791,8 +794,8 @@ namespace WangPluginPkm.GUI
             Rank_List_Box.DataSource = null;
             Rank_List_Box.ClearSelected();
             L.Clear();
-            string url = "https://api.battle.pokemon-home.com/tt/cbd/competition/rankmatch/list";
-            var html = await HomeSeasonDetail.DownloadPageAsync(url);
+            //string url = "https://api.battle.pokemon-home.com/tt/cbd/competition/rankmatch/list";
+            var html = await HomeSeasonDetail.DownloadPageAsync();
             if (html != null)
                 foreach (var h in html)
                 {
@@ -879,8 +882,8 @@ namespace WangPluginPkm.GUI
             {
                 u = L[Rank_List_Box.SelectedIndex];
                 S_Name.Text = u.DisplayName;
-                SStart_Box.Text = $"{u.Description.start}";
-                SEnd_Box.Text = $"{u.Description.end}";
+                SStart_Box.Text = $"{u.Description?.start}";
+                SEnd_Box.Text = $"{u.Description?.end}";
                 CID_BOX.Text = $"{u.Cid}";
                 RST_BOX.Text = $"{u.Rst}";
                 TS1_BOX.Text = $"{u.Ts1}";
@@ -907,11 +910,9 @@ namespace WangPluginPkm.GUI
                         var httpClient = new HttpClient();
                         HttpResponseMessage response = await httpClient.GetAsync(imageUrl);
                         byte[] imageData = await response.Content.ReadAsByteArrayAsync();
-                        using (MemoryStream ms = new MemoryStream(imageData))
-                        {
-                            Image downloadedImage = Image.FromStream(ms);
-                            PlayerPic.Image = downloadedImage;
-                        }
+                        using MemoryStream ms = new(imageData);
+                        Image downloadedImage = Image.FromStream(ms);
+                        PlayerPic.Image = downloadedImage;
                     }
                     catch (WebException ex)
                     {
@@ -935,24 +936,17 @@ namespace WangPluginPkm.GUI
                 }
             }
         }
-        private string Lng(int l)
+        private static string Lng(int l)
         {
-            switch (l)
+            return l switch
             {
-                case 1:
-                    return "日语";
-                case 2:
-                    return "英语";
-                case 8:
-                    return "韩语";
-                case 9:
-                    return "繁体中文";
-                case 10:
-                    return "简体中文";
-                default:
-                    return $"语言代码{l}";
-            }
-
+                1 => "日语",
+                2 => "英语",
+                8 => "韩语",
+                9 => "繁体中文",
+                10 => "简体中文",
+                _ => $"语言代码{l}",
+            };
         }
 
         private void Search_BTN_Click(object sender, EventArgs e)
@@ -972,22 +966,25 @@ namespace WangPluginPkm.GUI
             for (int i = 0; i < Rank_List_Box.Items.Count; i++)
             {
                 var item = (HomeRankClass)Rank_List_Box.Items[i];
-                string itemNameWithoutRank = item.DisplayName.Substring(item.DisplayName.IndexOf(' ') + 1);
-                // 如果找到了包含搜索关键词的项
-                if (itemNameWithoutRank.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                if (item.Description != null&&item.DisplayName!=null)
                 {
-                    // 选中该项
-                    Rank_List_Box.SelectedIndex = i;
+                    string itemNameWithoutRank = item.DisplayName[(item.DisplayName.IndexOf(' ') + 1)..];
+                    // 如果找到了包含搜索关键词的项
+                    if (itemNameWithoutRank.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // 选中该项
+                        Rank_List_Box.SelectedIndex = i;
 
-                    // 滚动到该项
-                    Rank_List_Box.TopIndex = i;
+                        // 滚动到该项
+                        Rank_List_Box.TopIndex = i;
 
-                    // 标记为已找到
-                    found = true;
+                        // 标记为已找到
+                        found = true;
 
-                    // 弹出提示框
-                    MessageBox.Show($"找到匹配项: {txtSearch.Text.Trim()}", "搜索结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    break;
+                        // 弹出提示框
+                        MessageBox.Show($"找到匹配项: {txtSearch.Text.Trim()}", "搜索结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    }
                 }
             }
 

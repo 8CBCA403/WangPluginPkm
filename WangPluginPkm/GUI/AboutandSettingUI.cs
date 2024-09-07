@@ -25,7 +25,7 @@ namespace WangPluginPkm.GUI
             plugin.HomeAuthorization = HA_TB.Text;
             plugin.HomeCookie = HC_TB.Text;
 
-            plugin.SaveConfig(plugin);
+            PluginConfig.SaveConfig(plugin);
         }
         private void CreateBox()
         {

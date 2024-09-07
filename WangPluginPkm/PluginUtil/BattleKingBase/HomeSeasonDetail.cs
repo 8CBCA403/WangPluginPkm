@@ -14,25 +14,16 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 #nullable enable
 namespace WangPluginPkm.PluginUtil.BattleKingBase
 {
-     class HomeSeasonDetail
+     class HomeSeasonDetail(SeasonDetail d)
     {
-        public string? DisplayName { get; set; }
-        public SeasonDetail? Description { get; set; } = null;
-        public string? Cid { get; set; }
-        public int? Rule {  get; set; }
-        public int? Rst{ get; set; }
-        public long? Ts1 { get; set; }
+        public string? DisplayName { get; set; } = $"{d.name}";
+        public SeasonDetail? Description { get; set; } = d;
+        public string? Cid { get; set; } = $"{d.cId}";
+        public int? Rule { get; set; } = d.rule;
+        public int? Rst { get; set; } = d.rst;
+        public long? Ts1 { get; set; } = d.ts1;
 
-        public HomeSeasonDetail(SeasonDetail d)
-        {
-            Description = d;
-            DisplayName = $"{d.name}";
-            Cid=$"{d.cId}";
-            Rule = d.rule;
-            Rst = d.rst;
-            Ts1 = d.ts1;
-        }
-        public static async Task<List<SeasonDetail>?> DownloadPageAsync(string url)
+        public static async Task<List<SeasonDetail>?> DownloadPageAsync()
             {
             var config = PluginConfig.LoadConfig();
             try
@@ -69,18 +60,28 @@ namespace WangPluginPkm.PluginUtil.BattleKingBase
 
                     try
                     {
-                        JsonNode jsonObject = JsonNode.Parse(responseBody);
+                     
+                            JsonNode? jsonObject = JsonNode.Parse(responseBody);
 
                         // 遍历list对象并提取SeasonDetail
-                        var listNode = jsonObject["list"];
-                        foreach (var seasonGroup in listNode.AsObject())
+                        if (jsonObject != null)
                         {
-                            foreach (var season in seasonGroup.Value.AsObject())
+                            var listNode = jsonObject["list"];
+                            if (listNode != null)
                             {
-                                SeasonDetail seasonDetail = season.Value.Deserialize<SeasonDetail>();
-                                if (seasonDetail != null && !seasonDetailsList.Any(s => s.cId == seasonDetail.cId))
+                                foreach (var seasonGroup in listNode.AsObject())
                                 {
-                                    seasonDetailsList.Add(seasonDetail);
+                                    if (seasonGroup.Value != null)
+                                    {
+                                        foreach (var season in seasonGroup.Value.AsObject())
+                                        {
+                                            SeasonDetail? seasonDetail = season.Value.Deserialize<SeasonDetail>();
+                                            if (seasonDetail != null && !seasonDetailsList.Any(s => s.cId == seasonDetail.cId))
+                                            {
+                                                seasonDetailsList.Add(seasonDetail);
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
