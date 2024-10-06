@@ -90,7 +90,7 @@ namespace WangPluginPkm.RNG.Methods
             else
             {
                 var next = (int)xors.NextUInt(253) + 1 < genderRatio ? 1 : 0;
-                if (criteria.Gender is 0 or 1 && next != criteria.Gender)
+                if (criteria.Gender is Gender.Female or Gender.Male && (Gender)next != criteria.Gender)
                     return false;
                 pk.Gender = (byte)next;
             }
