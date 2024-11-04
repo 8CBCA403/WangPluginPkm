@@ -44,8 +44,6 @@ namespace WangPluginPkm.GUI
         public List<DexModClass> ML = new();
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
-        private readonly byte[] Raw;
-        private readonly IStringConverter Converter;
         public DexBuildForm(ISaveFileProvider sav, IPKMView editor)
         {
             SAV = sav;
@@ -245,7 +243,7 @@ namespace WangPluginPkm.GUI
         }
         private static List<int> FindAllEmptySlots(IList<PKM> data, int start)
         {
-            List<int> list = new List<int>();
+            List<int> list = new ();
             for (int i = start; i < data.Count; i++)
             {
                 if (data[i].Species < 1)
@@ -1138,7 +1136,7 @@ namespace WangPluginPkm.GUI
         {
             var PL = SAV.SAV.GetAllPKM();
             int i = 0;
-            List<int> aL = new List<int>();
+            List<int> aL = new ();
             switch (mainHomeAchieve)
             {
                 case 1:

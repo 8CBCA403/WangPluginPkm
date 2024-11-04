@@ -20,6 +20,13 @@ namespace WangPluginPkm.PluginUtil.Functions
             }
             var o = a.Union(pkms).ToArray();
             o = o.OrderBySpecies().ToArray();
+            foreach (var pk in o)
+            {
+                pk.OriginalTrainerName = sav.OT;
+                pk.SetTrainerID16(sav.TID16, sav.SID16);
+                pk.Language = sav.Language;
+                pk.OriginalTrainerGender = sav.Gender;
+            }
             Span<PKM> bd = sav.BoxData.ToArray();
             o.CopyTo(bd);
             sav.BoxData = bd.ToArray();
@@ -29,6 +36,13 @@ namespace WangPluginPkm.PluginUtil.Functions
         {
             var sav = SaveFileEditor.SAV;
             Span<PKM> pkms = sav.GenerateLivingDex().ToArray();
+            foreach(var pk in pkms)
+            {
+                pk.OriginalTrainerName = sav.OT;
+                pk.SetTrainerID16(sav.TID16,sav.SID16);
+                pk.Language = sav.Language;
+                pk.OriginalTrainerGender = sav.Gender;
+            }
             Span<PKM> bd = sav.BoxData.ToArray();
             pkms.CopyTo(bd);
             sav.BoxData = bd.ToArray();

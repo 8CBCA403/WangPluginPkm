@@ -56,7 +56,7 @@ namespace WangPluginPkm
             var set = new ShowdownSet(editor);
             var criteria = EncounterCriteria.GetCriteria(set, editor.PersonalInfo);
             if (!isInChain)
-                criteria = criteria with { Gender = 2 }; // Genderless tabs and a gendered enc -> let's play safe.
+                criteria = criteria with { Gender = (Gender)2 }; // Genderless tabs and a gendered enc -> let's play safe.
             return criteria;
         }
         sealed class ReferenceComparer<T> : IEqualityComparer<T> where T : class

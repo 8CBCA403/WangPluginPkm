@@ -757,7 +757,7 @@ namespace WangPluginPkm.GUI
             {
                 for (int j = slotStart; j <= slotEnd; j++)
                 {
-                    if (!SAV.SAV.IsSlotOverwriteProtected(i, j))
+                    if (!SAV.SAV.IsBoxSlotOverwriteProtected(i, j))
                     {
                         int boxSlotOffset = SAV.SAV.GetBoxSlotOffset(i, j);
                         int num2 = boxSlotOffset;

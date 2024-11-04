@@ -38,15 +38,30 @@ namespace WangPluginPkm.GUI
             CB = new ComboBox();
             SmogonGroup = new GroupBox();
             Home_RankPage = new TabPage();
+            S_B = new GroupBox();
+            TS1_BOX = new TextBox();
+            label6 = new Label();
+            RST_BOX = new TextBox();
+            label5 = new Label();
+            label4 = new Label();
+            CID_BOX = new TextBox();
+            SEnd_Box = new TextBox();
+            SStart_Box = new TextBox();
+            label3 = new Label();
+            label2 = new Label();
+            S_Name = new TextBox();
+            label1 = new Label();
+            CheckS_BTN = new Button();
+            TrainerCard = new GroupBox();
+            PlayerPic = new PictureBox();
             LngLB = new Label();
             RKVLB = new Label();
-            NameLB = new Label();
-            RankLB = new Label();
-            RankValueBox = new TextBox();
-            LangBox = new TextBox();
-            NameBox = new TextBox();
             RankBox = new TextBox();
-            PlayerPic = new PictureBox();
+            NameLB = new Label();
+            NameBox = new TextBox();
+            RankLB = new Label();
+            LangBox = new TextBox();
+            RankValueBox = new TextBox();
             Rank_List_Box = new ListBox();
             Get_Rank_BTN = new Button();
             VGC_Check = new TabPage();
@@ -54,7 +69,8 @@ namespace WangPluginPkm.GUI
             ResultBox = new TextBox();
             TEST_BTN = new Button();
             TeamList_BOX = new CheckedListBox();
-            TrainerCard = new GroupBox();
+            txtSearch = new TextBox();
+            Search_BTN = new Button();
             BattleKingtabControl.SuspendLayout();
             PStabPage.SuspendLayout();
             WebtabPage.SuspendLayout();
@@ -63,9 +79,10 @@ namespace WangPluginPkm.GUI
             MT_Box.SuspendLayout();
             SmogonGroup.SuspendLayout();
             Home_RankPage.SuspendLayout();
+            S_B.SuspendLayout();
+            TrainerCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PlayerPic).BeginInit();
             VGC_Check.SuspendLayout();
-            TrainerCard.SuspendLayout();
             SuspendLayout();
             // 
             // LoadBattleTeam_BTN
@@ -332,6 +349,10 @@ namespace WangPluginPkm.GUI
             // 
             // Home_RankPage
             // 
+            Home_RankPage.Controls.Add(Search_BTN);
+            Home_RankPage.Controls.Add(txtSearch);
+            Home_RankPage.Controls.Add(S_B);
+            Home_RankPage.Controls.Add(CheckS_BTN);
             Home_RankPage.Controls.Add(TrainerCard);
             Home_RankPage.Controls.Add(Rank_List_Box);
             Home_RankPage.Controls.Add(Get_Rank_BTN);
@@ -342,6 +363,159 @@ namespace WangPluginPkm.GUI
             Home_RankPage.TabIndex = 4;
             Home_RankPage.Text = "Home查分器";
             Home_RankPage.UseVisualStyleBackColor = true;
+            // 
+            // S_B
+            // 
+            S_B.Controls.Add(TS1_BOX);
+            S_B.Controls.Add(label6);
+            S_B.Controls.Add(RST_BOX);
+            S_B.Controls.Add(label5);
+            S_B.Controls.Add(label4);
+            S_B.Controls.Add(CID_BOX);
+            S_B.Controls.Add(SEnd_Box);
+            S_B.Controls.Add(SStart_Box);
+            S_B.Controls.Add(label3);
+            S_B.Controls.Add(label2);
+            S_B.Controls.Add(S_Name);
+            S_B.Controls.Add(label1);
+            S_B.Location = new System.Drawing.Point(175, 173);
+            S_B.Name = "S_B";
+            S_B.Size = new System.Drawing.Size(329, 171);
+            S_B.TabIndex = 14;
+            S_B.TabStop = false;
+            S_B.Text = "赛季信息";
+            // 
+            // TS1_BOX
+            // 
+            TS1_BOX.Location = new System.Drawing.Point(230, 52);
+            TS1_BOX.Name = "TS1_BOX";
+            TS1_BOX.Size = new System.Drawing.Size(81, 21);
+            TS1_BOX.TabIndex = 22;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(202, 55);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(23, 12);
+            label6.TabIndex = 21;
+            label6.Text = "TS1";
+            // 
+            // RST_BOX
+            // 
+            RST_BOX.Location = new System.Drawing.Point(230, 20);
+            RST_BOX.Name = "RST_BOX";
+            RST_BOX.Size = new System.Drawing.Size(81, 21);
+            RST_BOX.TabIndex = 20;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(202, 23);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(23, 12);
+            label5.TabIndex = 19;
+            label5.Text = "RST";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(50, 119);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(23, 12);
+            label4.TabIndex = 18;
+            label4.Text = "CID";
+            // 
+            // CID_BOX
+            // 
+            CID_BOX.Location = new System.Drawing.Point(79, 116);
+            CID_BOX.Name = "CID_BOX";
+            CID_BOX.Size = new System.Drawing.Size(232, 21);
+            CID_BOX.TabIndex = 17;
+            // 
+            // SEnd_Box
+            // 
+            SEnd_Box.Location = new System.Drawing.Point(79, 84);
+            SEnd_Box.Name = "SEnd_Box";
+            SEnd_Box.Size = new System.Drawing.Size(117, 21);
+            SEnd_Box.TabIndex = 16;
+            // 
+            // SStart_Box
+            // 
+            SStart_Box.Location = new System.Drawing.Point(79, 52);
+            SStart_Box.Name = "SStart_Box";
+            SStart_Box.Size = new System.Drawing.Size(117, 21);
+            SStart_Box.TabIndex = 15;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(20, 87);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(53, 12);
+            label3.TabIndex = 14;
+            label3.Text = "结束日期";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(20, 55);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(53, 12);
+            label2.TabIndex = 13;
+            label2.Text = "开始日期";
+            // 
+            // S_Name
+            // 
+            S_Name.Location = new System.Drawing.Point(79, 20);
+            S_Name.Name = "S_Name";
+            S_Name.Size = new System.Drawing.Size(117, 21);
+            S_Name.TabIndex = 12;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(20, 23);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(53, 12);
+            label1.TabIndex = 9;
+            label1.Text = "赛季名称";
+            // 
+            // CheckS_BTN
+            // 
+            CheckS_BTN.Location = new System.Drawing.Point(175, 144);
+            CheckS_BTN.Name = "CheckS_BTN";
+            CheckS_BTN.Size = new System.Drawing.Size(88, 23);
+            CheckS_BTN.TabIndex = 13;
+            CheckS_BTN.Text = "获取赛季信息";
+            CheckS_BTN.UseVisualStyleBackColor = true;
+            CheckS_BTN.Click += CheckS_BTN_Click;
+            // 
+            // TrainerCard
+            // 
+            TrainerCard.Controls.Add(PlayerPic);
+            TrainerCard.Controls.Add(LngLB);
+            TrainerCard.Controls.Add(RKVLB);
+            TrainerCard.Controls.Add(RankBox);
+            TrainerCard.Controls.Add(NameLB);
+            TrainerCard.Controls.Add(NameBox);
+            TrainerCard.Controls.Add(RankLB);
+            TrainerCard.Controls.Add(LangBox);
+            TrainerCard.Controls.Add(RankValueBox);
+            TrainerCard.Location = new System.Drawing.Point(175, 6);
+            TrainerCard.Name = "TrainerCard";
+            TrainerCard.Size = new System.Drawing.Size(329, 132);
+            TrainerCard.TabIndex = 12;
+            TrainerCard.TabStop = false;
+            TrainerCard.Text = "训练师卡片";
+            // 
+            // PlayerPic
+            // 
+            PlayerPic.Location = new System.Drawing.Point(6, 20);
+            PlayerPic.Name = "PlayerPic";
+            PlayerPic.Size = new System.Drawing.Size(100, 100);
+            PlayerPic.TabIndex = 3;
+            PlayerPic.TabStop = false;
             // 
             // LngLB
             // 
@@ -361,6 +535,13 @@ namespace WangPluginPkm.GUI
             RKVLB.TabIndex = 10;
             RKVLB.Text = "分数";
             // 
+            // RankBox
+            // 
+            RankBox.Location = new System.Drawing.Point(147, 20);
+            RankBox.Name = "RankBox";
+            RankBox.Size = new System.Drawing.Size(46, 21);
+            RankBox.TabIndex = 4;
+            // 
             // NameLB
             // 
             NameLB.AutoSize = true;
@@ -369,6 +550,13 @@ namespace WangPluginPkm.GUI
             NameLB.Size = new System.Drawing.Size(29, 12);
             NameLB.TabIndex = 9;
             NameLB.Text = "名字";
+            // 
+            // NameBox
+            // 
+            NameBox.Location = new System.Drawing.Point(147, 47);
+            NameBox.Name = "NameBox";
+            NameBox.Size = new System.Drawing.Size(96, 21);
+            NameBox.TabIndex = 5;
             // 
             // RankLB
             // 
@@ -379,13 +567,6 @@ namespace WangPluginPkm.GUI
             RankLB.TabIndex = 8;
             RankLB.Text = "排名";
             // 
-            // RankValueBox
-            // 
-            RankValueBox.Location = new System.Drawing.Point(147, 99);
-            RankValueBox.Name = "RankValueBox";
-            RankValueBox.Size = new System.Drawing.Size(78, 21);
-            RankValueBox.TabIndex = 7;
-            // 
             // LangBox
             // 
             LangBox.Location = new System.Drawing.Point(147, 72);
@@ -393,27 +574,12 @@ namespace WangPluginPkm.GUI
             LangBox.Size = new System.Drawing.Size(78, 21);
             LangBox.TabIndex = 6;
             // 
-            // NameBox
+            // RankValueBox
             // 
-            NameBox.Location = new System.Drawing.Point(147, 47);
-            NameBox.Name = "NameBox";
-            NameBox.Size = new System.Drawing.Size(96, 21);
-            NameBox.TabIndex = 5;
-            // 
-            // RankBox
-            // 
-            RankBox.Location = new System.Drawing.Point(147, 20);
-            RankBox.Name = "RankBox";
-            RankBox.Size = new System.Drawing.Size(46, 21);
-            RankBox.TabIndex = 4;
-            // 
-            // PlayerPic
-            // 
-            PlayerPic.Location = new System.Drawing.Point(6, 20);
-            PlayerPic.Name = "PlayerPic";
-            PlayerPic.Size = new System.Drawing.Size(100, 100);
-            PlayerPic.TabIndex = 3;
-            PlayerPic.TabStop = false;
+            RankValueBox.Location = new System.Drawing.Point(147, 99);
+            RankValueBox.Name = "RankValueBox";
+            RankValueBox.Size = new System.Drawing.Size(78, 21);
+            RankValueBox.TabIndex = 7;
             // 
             // Rank_List_Box
             // 
@@ -427,7 +593,7 @@ namespace WangPluginPkm.GUI
             // 
             // Get_Rank_BTN
             // 
-            Get_Rank_BTN.Location = new System.Drawing.Point(175, 144);
+            Get_Rank_BTN.Location = new System.Drawing.Point(269, 144);
             Get_Rank_BTN.Name = "Get_Rank_BTN";
             Get_Rank_BTN.Size = new System.Drawing.Size(75, 23);
             Get_Rank_BTN.TabIndex = 0;
@@ -488,27 +654,26 @@ namespace WangPluginPkm.GUI
             TeamList_BOX.DragDrop += PKM_DragDrop;
             TeamList_BOX.DragEnter += PKM_DragEnter;
             // 
-            // TrainerCard
+            // txtSearch
             // 
-            TrainerCard.Controls.Add(PlayerPic);
-            TrainerCard.Controls.Add(LngLB);
-            TrainerCard.Controls.Add(RKVLB);
-            TrainerCard.Controls.Add(RankBox);
-            TrainerCard.Controls.Add(NameLB);
-            TrainerCard.Controls.Add(NameBox);
-            TrainerCard.Controls.Add(RankLB);
-            TrainerCard.Controls.Add(LangBox);
-            TrainerCard.Controls.Add(RankValueBox);
-            TrainerCard.Location = new System.Drawing.Point(175, 6);
-            TrainerCard.Name = "TrainerCard";
-            TrainerCard.Size = new System.Drawing.Size(329, 132);
-            TrainerCard.TabIndex = 12;
-            TrainerCard.TabStop = false;
-            TrainerCard.Text = "训练师卡片";
+            txtSearch.Location = new System.Drawing.Point(350, 144);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new System.Drawing.Size(100, 21);
+            txtSearch.TabIndex = 15;
+            // 
+            // Search_BTN
+            // 
+            Search_BTN.Location = new System.Drawing.Point(458, 144);
+            Search_BTN.Name = "Search_BTN";
+            Search_BTN.Size = new System.Drawing.Size(46, 23);
+            Search_BTN.TabIndex = 16;
+            Search_BTN.Text = "搜索";
+            Search_BTN.UseVisualStyleBackColor = true;
+            Search_BTN.Click += Search_BTN_Click;
             // 
             // BattleKingUI
             // 
-            ClientSize = new System.Drawing.Size(559, 402);
+            ClientSize = new System.Drawing.Size(561, 402);
             Controls.Add(BattleKingtabControl);
             Font = new System.Drawing.Font("黑体", 9F);
             FormBorderStyle = FormBorderStyle.Fixed3D;
@@ -529,11 +694,14 @@ namespace WangPluginPkm.GUI
             SmogonGroup.ResumeLayout(false);
             SmogonGroup.PerformLayout();
             Home_RankPage.ResumeLayout(false);
+            Home_RankPage.PerformLayout();
+            S_B.ResumeLayout(false);
+            S_B.PerformLayout();
+            TrainerCard.ResumeLayout(false);
+            TrainerCard.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)PlayerPic).EndInit();
             VGC_Check.ResumeLayout(false);
             VGC_Check.PerformLayout();
-            TrainerCard.ResumeLayout(false);
-            TrainerCard.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -580,5 +748,21 @@ namespace WangPluginPkm.GUI
         private Label RankLB;
         private Label LngLB;
         private GroupBox TrainerCard;
+        private GroupBox S_B;
+        private TextBox SEnd_Box;
+        private TextBox SStart_Box;
+        private Label label3;
+        private Label label2;
+        private TextBox S_Name;
+        private Label label1;
+        private Button CheckS_BTN;
+        private TextBox CID_BOX;
+        private Label label4;
+        private TextBox TS1_BOX;
+        private Label label6;
+        private TextBox RST_BOX;
+        private Label label5;
+        private Button Search_BTN;
+        private TextBox txtSearch;
     }
 }
