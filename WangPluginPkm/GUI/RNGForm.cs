@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using WangPluginPkm.PluginUtil.ModifyPKM;
 using WangPluginPkm.RNG.Methods;
 using WangPluginPkm.RNG.ReverseRNG;
+using static iText.Layout.Borders.Border;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
 using Roaming8bRNG = WangPluginPkm.RNG.Methods.Roaming8bRNG;
@@ -900,27 +901,27 @@ namespace WangPluginPkm.GUI
 
         private void CheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-                CheckedListBox list = sender as CheckedListBox;
-                if (list == null) return;
+            CheckedListBox list = sender as CheckedListBox;
+            if (list == null) return;
 
-                // 注意：由于ItemCheck事件在项的状态实际改变前触发，
-                // 所以你可能需要在此事件处理器中使用BeginInvoke来延迟执行方法调用，
-                // 以确保你访问的是项改变后的状态。
-                this.BeginInvoke((MethodInvoker)delegate
+            // 注意：由于ItemCheck事件在项的状态实际改变前触发，
+            // 所以你可能需要在此事件处理器中使用BeginInvoke来延迟执行方法调用，
+            // 以确保你访问的是项改变后的状态。
+            this.BeginInvoke((MethodInvoker)delegate
+            {
+                // 验证e.Index范围
+                if (e.Index >= 0 && e.Index < list.Items.Count)
                 {
-                    // 验证e.Index范围
-                    if (e.Index >= 0 && e.Index < list.Items.Count)
-                    {
-                        var item = list.Items[e.Index];
-                        // 假设item是你的自定义对象，需要转换
-                        PKwithName yourObject = item as PKwithName;
-                        SAV.SAV.SetBoxSlotAtIndex(yourObject.OriginalItem, 0,0);
-                        SAV.ReloadSlots();
-                    }
-                });
-            
+                    var item = list.Items[e.Index];
+                    // 假设item是你的自定义对象，需要转换
+                    PKwithName yourObject = item as PKwithName;
+                    SAV.SAV.SetBoxSlotAtIndex(yourObject.OriginalItem, 0, 0);
+                    SAV.ReloadSlots();
+                }
+            });
 
-           
+
+
 
         }
         private void Stop_BTN_Click(object sender, EventArgs e)
@@ -930,5 +931,7 @@ namespace WangPluginPkm.GUI
                 cancellationToken.Cancel(); // 发送取消请求
             }
         }
+
+
     }
 }
