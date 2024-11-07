@@ -19,10 +19,10 @@ namespace WangPluginPkm.Plugins
             modmenu.DropDownItems.Add(ctrl);
         }
 
-        private static void OpenForm(object sender, EventArgs e)
+        private  void OpenForm(object sender, EventArgs e)
         {
 
-            var form = new MutiCalcUI();
+            var form = new MutiCalcUI(SaveFileEditor, PKMEditor);
             form.Show();
         }
     }

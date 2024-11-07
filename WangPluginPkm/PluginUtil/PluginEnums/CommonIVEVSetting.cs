@@ -1,4 +1,5 @@
 ﻿using PKHeX.Core;
+using System;
 
 namespace WangPluginPkm
 {
@@ -56,8 +57,8 @@ namespace WangPluginPkm
         }
         public static PKM Clearnike(PKM pk)
         {
-            pk.NicknameTrash.Clear();
-            pk.ClearNickname();
+            ClearOTTrash(pk,pk.OriginalTrainerName);
+            ClearOTTrash(pk,pk.Nickname);
             return pk;
         }
         public static PK9 cid(PK9 pk, ISaveFileProvider sav)
@@ -84,6 +85,44 @@ namespace WangPluginPkm
             pk.NicknameTrash.Clear();
             pk.ClearNickname();
             return pk;
+        }
+        public static void ClearOTTrash(PKM pokemon, string OT)
+        {
+            Span<byte> trash = pokemon.OriginalTrainerTrash;
+            trash.Clear();
+            string name = OT;
+            int maxLength = trash.Length / 2;
+            int actualLength = Math.Min(name.Length, maxLength);
+            for (int i = 0; i < actualLength; i++)
+            {
+                char value = name[i];
+                trash[i * 2] = (byte)value;
+                trash[(i * 2) + 1] = (byte)(value >> 8);
+            }
+            if (actualLength < maxLength)
+            {
+                trash[actualLength * 2] = 0x00;
+                trash[(actualLength * 2) + 1] = 0x00;
+            }
+        }
+        public static void ClearNickTrash(PKM pokemon, string nick)
+        {
+            Span<byte> trash = pokemon.NicknameTrash;
+            trash.Clear();
+            string name = nick;
+            int maxLength = trash.Length / 2;
+            int actualLength = Math.Min(name.Length, maxLength);
+            for (int i = 0; i < actualLength; i++)
+            {
+                char value = name[i];
+                trash[i * 2] = (byte)value;
+                trash[(i * 2) + 1] = (byte)(value >> 8);
+            }
+            if (actualLength < maxLength)
+            {
+                trash[actualLength * 2] = 0x00;
+                trash[(actualLength * 2) + 1] = 0x00;
+            }
         }
 
     }

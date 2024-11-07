@@ -1,12 +1,21 @@
-﻿using System;
+﻿using Google.Apis.Sheets.v4.Data;
+using Microsoft.Z3;
+using PKHeX.Core;
+using System;
 using System.Windows.Forms;
+using static iText.Layout.Borders.Border;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace WangPluginPkm.GUI
 {
     public partial class MutiCalcUI : Form
     {
+        private ISaveFileProvider SAV { get; }
+        private IPKMView Editor { get; }
         public const double E = 2.7182818284590451;
-        public MutiCalcUI()
+        public MutiCalcUI(ISaveFileProvider sav, IPKMView editor)
         {
+            SAV = sav;
+            Editor = editor;
             InitializeComponent();
             BindingData();
         }
@@ -108,7 +117,6 @@ namespace WangPluginPkm.GUI
                     Nature = "24,Quirky";
                     break;
             }
-
             return Nature;
         }
         private static string ShowForm(byte v)
@@ -252,5 +260,40 @@ namespace WangPluginPkm.GUI
             UnownFormBox.Text = ShowForm(s);
         }
 
+        private void NSToS_BTN_Click(object sender, EventArgs e)
+        {
+            ushort tid;
+            ushort sid;
+            uint NonShinyPid;
+            uint ShinyPid;
+            ushort.TryParse(TID_TB.Text, out tid);
+            ushort.TryParse(SID_TB.Text, out sid);
+            uint.TryParse(NonShinyPID_TB.Text, System.Globalization.NumberStyles.HexNumber, null, out NonShinyPid);
+            uint xorv = (uint)XorN.Value;
+            ShinyPid = (uint)((tid ^ sid) ^ NonShinyPid & 0xFFFF ^ xorv) << 16 | NonShinyPid & 0xFFFF;
+            var r = ShinyPid.ToString("X8");
+            ShinyPID_TB.Text = r;
+        }
+        private void SToNS_BTN_Click(object sender, EventArgs e)
+        {
+            ushort tid;
+            ushort sid;
+            uint NonShinyPid;
+            uint ShinyPid;
+            ushort.TryParse(TID_TB.Text, out tid);
+            ushort.TryParse(SID_TB.Text, out sid);
+            uint.TryParse(ShinyPID_TB.Text, System.Globalization.NumberStyles.HexNumber, null, out ShinyPid);
+            uint xorv = (uint)XorN.Value;
+            NonShinyPid = (uint)(((ShinyPid >> 16) ^ (tid ^ sid) ^ xorv) << 16) | (ShinyPid & 0xFFFF);
+            var r = NonShinyPid.ToString("X8");
+            NonShinyPID_TB.Text = r;
+        }
+        private void ReadEditorBTN_Click(object sender, EventArgs e)
+        {
+            TID_TB.Text = Editor.Data.TID16.ToString();
+            SID_TB.Text = Editor.Data.SID16.ToString();
+        }
+
+      
     }
 }

@@ -47,6 +47,7 @@ namespace WangPluginPkm.GUI
             TeamLockBox = new CheckBox();
             Cancel = new Button();
             MutiSearchTab = new TabPage();
+            Stop_BTN = new Button();
             label8 = new Label();
             StepBox = new TextBox();
             ThreadLB = new Label();
@@ -121,7 +122,6 @@ namespace WangPluginPkm.GUI
             RNGmenuStrip = new MenuStrip();
             ToolStripMenuItem = new ToolStripMenuItem();
             Check_GB = new GroupBox();
-            Stop_BTN = new Button();
             SearchGroupBox.SuspendLayout();
             Check_Tab.SuspendLayout();
             R_TabPage.SuspendLayout();
@@ -556,13 +556,23 @@ namespace WangPluginPkm.GUI
             MutiSearchTab.Controls.Add(panelBox);
             MutiSearchTab.Controls.Add(Start_BTN);
             MutiSearchTab.Controls.Add(ThreadNumber);
-            MutiSearchTab.Location = new System.Drawing.Point(4, 22);
+            MutiSearchTab.Location = new System.Drawing.Point(4, 26);
             MutiSearchTab.Name = "MutiSearchTab";
             MutiSearchTab.Padding = new Padding(3);
-            MutiSearchTab.Size = new System.Drawing.Size(345, 267);
+            MutiSearchTab.Size = new System.Drawing.Size(345, 263);
             MutiSearchTab.TabIndex = 1;
             MutiSearchTab.Text = "多线程";
             MutiSearchTab.UseVisualStyleBackColor = true;
+            // 
+            // Stop_BTN
+            // 
+            Stop_BTN.Location = new System.Drawing.Point(317, 225);
+            Stop_BTN.Name = "Stop_BTN";
+            Stop_BTN.Size = new System.Drawing.Size(22, 23);
+            Stop_BTN.TabIndex = 6;
+            Stop_BTN.Text = "S";
+            Stop_BTN.UseVisualStyleBackColor = true;
+            Stop_BTN.Click += Stop_BTN_Click;
             // 
             // label8
             // 
@@ -1279,7 +1289,7 @@ namespace WangPluginPkm.GUI
             RNGmenuStrip.Items.AddRange(new ToolStripItem[] { ToolStripMenuItem });
             RNGmenuStrip.Location = new System.Drawing.Point(0, 0);
             RNGmenuStrip.Name = "RNGmenuStrip";
-            RNGmenuStrip.Size = new System.Drawing.Size(787, 25);
+            RNGmenuStrip.Size = new System.Drawing.Size(1251, 25);
             RNGmenuStrip.TabIndex = 46;
             RNGmenuStrip.Text = "menuStrip1";
             // 
@@ -1300,21 +1310,11 @@ namespace WangPluginPkm.GUI
             Check_GB.TabStop = false;
             Check_GB.Text = "检测";
             // 
-            // Stop_BTN
-            // 
-            Stop_BTN.Location = new System.Drawing.Point(317, 225);
-            Stop_BTN.Name = "Stop_BTN";
-            Stop_BTN.Size = new System.Drawing.Size(22, 23);
-            Stop_BTN.TabIndex = 6;
-            Stop_BTN.Text = "S";
-            Stop_BTN.UseVisualStyleBackColor = true;
-            Stop_BTN.Click += Stop_BTN_Click;
-            // 
             // RNGForm
             // 
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             BackColor = System.Drawing.SystemColors.Control;
-            ClientSize = new System.Drawing.Size(787, 362);
+            ClientSize = new System.Drawing.Size(1251, 362);
             Controls.Add(Check_GB);
             Controls.Add(SearchGroupBox);
             Controls.Add(RNGmenuStrip);
