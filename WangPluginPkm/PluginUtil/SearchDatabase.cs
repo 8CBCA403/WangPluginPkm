@@ -6,7 +6,7 @@ namespace WangPluginPkm
 {
     internal class SearchDatabase
     {
-        public static GameStrings GameStrings = GameInfo.GetStrings("zh");
+        public static GameStrings GameStrings = GameInfo.GetStrings("zh-Hans");
         public static PKM SearchPKM(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version, int form = 0, bool egg = false, int location = 0, int gender = 0, int r = 0, int level = 0)
         {
             List<IEncounterInfo> Results;

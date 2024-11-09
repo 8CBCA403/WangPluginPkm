@@ -69,6 +69,44 @@ namespace WangPluginPkm.GUI
             RandEC_BTN = new Button();
             groupBox5 = new GroupBox();
             DitributiontabControl = new TabControl();
+            Quickeditor = new TabPage();
+            label1 = new Label();
+            Quick_Write_BTN = new Button();
+            Quick_EV_BTN = new Button();
+            End_NUM = new NumericUpDown();
+            RunFilter_CLB = new CheckedListBox();
+            Start_NUM = new NumericUpDown();
+            Start_BTN = new Button();
+            End_LB = new Label();
+            Tera_CB = new ComboBox();
+            Start_LB = new Label();
+            Tera_LAB = new Label();
+            EndBox_NUM = new NumericUpDown();
+            SNA_CB = new ComboBox();
+            StartBox_NUM = new NumericUpDown();
+            EndBox = new Label();
+            SNL = new Label();
+            StartBox_LB = new Label();
+            Level_NUM = new NumericUpDown();
+            Current_Level_LB = new Label();
+            ABN_NU = new NumericUpDown();
+            ABNL = new Label();
+            FO_NU = new NumericUpDown();
+            EV_TB = new TextBox();
+            IV_TB = new TextBox();
+            BA_CB = new ComboBox();
+            LA_CB = new ComboBox();
+            AB_CB = new ComboBox();
+            IT_CB = new ComboBox();
+            NA_CB = new ComboBox();
+            EVL = new Label();
+            IVL = new Label();
+            BAL = new Label();
+            LAL = new Label();
+            ABL = new Label();
+            ITL = new Label();
+            FOL = new Label();
+            NAL = new Label();
             CopyPage = new TabPage();
             DisGroupBox = new GroupBox();
             DiscomboBox = new ComboBox();
@@ -79,6 +117,14 @@ namespace WangPluginPkm.GUI
             groupBox3.SuspendLayout();
             groupBox5.SuspendLayout();
             DitributiontabControl.SuspendLayout();
+            Quickeditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)End_NUM).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Start_NUM).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)EndBox_NUM).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)StartBox_NUM).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Level_NUM).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ABN_NU).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)FO_NU).BeginInit();
             CopyPage.SuspendLayout();
             DisGroupBox.SuspendLayout();
             EditBoxPage.SuspendLayout();
@@ -424,13 +470,396 @@ namespace WangPluginPkm.GUI
             // 
             // DitributiontabControl
             // 
+            DitributiontabControl.Controls.Add(Quickeditor);
             DitributiontabControl.Controls.Add(CopyPage);
             DitributiontabControl.Controls.Add(EditBoxPage);
             DitributiontabControl.Location = new System.Drawing.Point(12, 12);
             DitributiontabControl.Name = "DitributiontabControl";
             DitributiontabControl.SelectedIndex = 0;
-            DitributiontabControl.Size = new System.Drawing.Size(501, 256);
+            DitributiontabControl.Size = new System.Drawing.Size(501, 257);
             DitributiontabControl.TabIndex = 72;
+            // 
+            // Quickeditor
+            // 
+            Quickeditor.Controls.Add(label1);
+            Quickeditor.Controls.Add(Quick_Write_BTN);
+            Quickeditor.Controls.Add(Quick_EV_BTN);
+            Quickeditor.Controls.Add(End_NUM);
+            Quickeditor.Controls.Add(RunFilter_CLB);
+            Quickeditor.Controls.Add(Start_NUM);
+            Quickeditor.Controls.Add(Start_BTN);
+            Quickeditor.Controls.Add(End_LB);
+            Quickeditor.Controls.Add(Tera_CB);
+            Quickeditor.Controls.Add(Start_LB);
+            Quickeditor.Controls.Add(Tera_LAB);
+            Quickeditor.Controls.Add(EndBox_NUM);
+            Quickeditor.Controls.Add(SNA_CB);
+            Quickeditor.Controls.Add(StartBox_NUM);
+            Quickeditor.Controls.Add(EndBox);
+            Quickeditor.Controls.Add(SNL);
+            Quickeditor.Controls.Add(StartBox_LB);
+            Quickeditor.Controls.Add(Level_NUM);
+            Quickeditor.Controls.Add(Current_Level_LB);
+            Quickeditor.Controls.Add(ABN_NU);
+            Quickeditor.Controls.Add(ABNL);
+            Quickeditor.Controls.Add(FO_NU);
+            Quickeditor.Controls.Add(EV_TB);
+            Quickeditor.Controls.Add(IV_TB);
+            Quickeditor.Controls.Add(BA_CB);
+            Quickeditor.Controls.Add(LA_CB);
+            Quickeditor.Controls.Add(AB_CB);
+            Quickeditor.Controls.Add(IT_CB);
+            Quickeditor.Controls.Add(NA_CB);
+            Quickeditor.Controls.Add(EVL);
+            Quickeditor.Controls.Add(IVL);
+            Quickeditor.Controls.Add(BAL);
+            Quickeditor.Controls.Add(LAL);
+            Quickeditor.Controls.Add(ABL);
+            Quickeditor.Controls.Add(ITL);
+            Quickeditor.Controls.Add(FOL);
+            Quickeditor.Controls.Add(NAL);
+            Quickeditor.Location = new System.Drawing.Point(4, 22);
+            Quickeditor.Name = "Quickeditor";
+            Quickeditor.Padding = new Padding(3);
+            Quickeditor.Size = new System.Drawing.Size(493, 231);
+            Quickeditor.TabIndex = 2;
+            Quickeditor.Text = "速配器";
+            Quickeditor.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(314, 120);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(65, 12);
+            label1.TabIndex = 107;
+            label1.Text = "速配过滤器";
+            // 
+            // Quick_Write_BTN
+            // 
+            Quick_Write_BTN.Location = new System.Drawing.Point(215, 125);
+            Quick_Write_BTN.Name = "Quick_Write_BTN";
+            Quick_Write_BTN.Size = new System.Drawing.Size(93, 23);
+            Quick_Write_BTN.TabIndex = 106;
+            Quick_Write_BTN.Text = "刷新当前箱子";
+            Quick_Write_BTN.UseVisualStyleBackColor = true;
+            Quick_Write_BTN.Click += Quick_Write_BTN_Click;
+            // 
+            // Quick_EV_BTN
+            // 
+            Quick_EV_BTN.Location = new System.Drawing.Point(215, 98);
+            Quick_EV_BTN.Name = "Quick_EV_BTN";
+            Quick_EV_BTN.Size = new System.Drawing.Size(93, 23);
+            Quick_EV_BTN.TabIndex = 105;
+            Quick_EV_BTN.Text = "速配努力值";
+            Quick_EV_BTN.UseVisualStyleBackColor = true;
+            Quick_EV_BTN.Click += Quick_EV_BTN_Click;
+            // 
+            // End_NUM
+            // 
+            End_NUM.Location = new System.Drawing.Point(174, 189);
+            End_NUM.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
+            End_NUM.Name = "End_NUM";
+            End_NUM.Size = new System.Drawing.Size(35, 21);
+            End_NUM.TabIndex = 80;
+            End_NUM.Value = new decimal(new int[] { 30, 0, 0, 0 });
+            // 
+            // RunFilter_CLB
+            // 
+            RunFilter_CLB.FormattingEnabled = true;
+            RunFilter_CLB.HorizontalScrollbar = true;
+            RunFilter_CLB.Location = new System.Drawing.Point(314, 135);
+            RunFilter_CLB.Name = "RunFilter_CLB";
+            RunFilter_CLB.Size = new System.Drawing.Size(154, 84);
+            RunFilter_CLB.TabIndex = 104;
+            // 
+            // Start_NUM
+            // 
+            Start_NUM.Location = new System.Drawing.Point(174, 158);
+            Start_NUM.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
+            Start_NUM.Name = "Start_NUM";
+            Start_NUM.Size = new System.Drawing.Size(35, 21);
+            Start_NUM.TabIndex = 79;
+            Start_NUM.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // Start_BTN
+            // 
+            Start_BTN.Location = new System.Drawing.Point(215, 154);
+            Start_BTN.Name = "Start_BTN";
+            Start_BTN.Size = new System.Drawing.Size(93, 23);
+            Start_BTN.TabIndex = 103;
+            Start_BTN.Text = "开始速配";
+            Start_BTN.UseVisualStyleBackColor = true;
+            Start_BTN.Click += Start_BTN_Click;
+            // 
+            // End_LB
+            // 
+            End_LB.AutoSize = true;
+            End_LB.Location = new System.Drawing.Point(112, 191);
+            End_LB.Name = "End_LB";
+            End_LB.Size = new System.Drawing.Size(53, 12);
+            End_LB.TabIndex = 78;
+            End_LB.Text = "结束槽位";
+            // 
+            // Tera_CB
+            // 
+            Tera_CB.AutoCompleteMode = AutoCompleteMode.Append;
+            Tera_CB.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            Tera_CB.FormattingEnabled = true;
+            Tera_CB.Location = new System.Drawing.Point(238, 66);
+            Tera_CB.Name = "Tera_CB";
+            Tera_CB.Size = new System.Drawing.Size(57, 20);
+            Tera_CB.TabIndex = 94;
+            // 
+            // Start_LB
+            // 
+            Start_LB.AutoSize = true;
+            Start_LB.Location = new System.Drawing.Point(112, 161);
+            Start_LB.Name = "Start_LB";
+            Start_LB.Size = new System.Drawing.Size(53, 12);
+            Start_LB.TabIndex = 77;
+            Start_LB.Text = "开始槽位";
+            // 
+            // Tera_LAB
+            // 
+            Tera_LAB.AutoSize = true;
+            Tera_LAB.Location = new System.Drawing.Point(174, 69);
+            Tera_LAB.Name = "Tera_LAB";
+            Tera_LAB.Size = new System.Drawing.Size(53, 12);
+            Tera_LAB.TabIndex = 93;
+            Tera_LAB.Text = "钛晶属性";
+            // 
+            // EndBox_NUM
+            // 
+            EndBox_NUM.Location = new System.Drawing.Point(71, 189);
+            EndBox_NUM.Maximum = new decimal(new int[] { 32, 0, 0, 0 });
+            EndBox_NUM.Name = "EndBox_NUM";
+            EndBox_NUM.Size = new System.Drawing.Size(35, 21);
+            EndBox_NUM.TabIndex = 76;
+            EndBox_NUM.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // SNA_CB
+            // 
+            SNA_CB.AutoCompleteMode = AutoCompleteMode.Append;
+            SNA_CB.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            SNA_CB.FormattingEnabled = true;
+            SNA_CB.Location = new System.Drawing.Point(73, 37);
+            SNA_CB.Name = "SNA_CB";
+            SNA_CB.Size = new System.Drawing.Size(65, 20);
+            SNA_CB.TabIndex = 92;
+            // 
+            // StartBox_NUM
+            // 
+            StartBox_NUM.Location = new System.Drawing.Point(71, 158);
+            StartBox_NUM.Maximum = new decimal(new int[] { 32, 0, 0, 0 });
+            StartBox_NUM.Name = "StartBox_NUM";
+            StartBox_NUM.Size = new System.Drawing.Size(35, 21);
+            StartBox_NUM.TabIndex = 75;
+            StartBox_NUM.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // EndBox
+            // 
+            EndBox.AutoSize = true;
+            EndBox.Location = new System.Drawing.Point(15, 194);
+            EndBox.Name = "EndBox";
+            EndBox.Size = new System.Drawing.Size(53, 12);
+            EndBox.TabIndex = 74;
+            EndBox.Text = "结束箱子";
+            // 
+            // SNL
+            // 
+            SNL.AutoSize = true;
+            SNL.Location = new System.Drawing.Point(11, 40);
+            SNL.Name = "SNL";
+            SNL.Size = new System.Drawing.Size(53, 12);
+            SNL.TabIndex = 91;
+            SNL.Text = "薄荷性格";
+            // 
+            // StartBox_LB
+            // 
+            StartBox_LB.AutoSize = true;
+            StartBox_LB.Location = new System.Drawing.Point(15, 163);
+            StartBox_LB.Name = "StartBox_LB";
+            StartBox_LB.Size = new System.Drawing.Size(53, 12);
+            StartBox_LB.TabIndex = 73;
+            StartBox_LB.Text = "开始箱子";
+            // 
+            // Level_NUM
+            // 
+            Level_NUM.Location = new System.Drawing.Point(238, 37);
+            Level_NUM.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            Level_NUM.Name = "Level_NUM";
+            Level_NUM.Size = new System.Drawing.Size(56, 21);
+            Level_NUM.TabIndex = 90;
+            Level_NUM.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // Current_Level_LB
+            // 
+            Current_Level_LB.AutoSize = true;
+            Current_Level_LB.Location = new System.Drawing.Point(173, 39);
+            Current_Level_LB.Name = "Current_Level_LB";
+            Current_Level_LB.Size = new System.Drawing.Size(53, 12);
+            Current_Level_LB.TabIndex = 89;
+            Current_Level_LB.Text = "当前等级";
+            // 
+            // ABN_NU
+            // 
+            ABN_NU.Location = new System.Drawing.Point(376, 64);
+            ABN_NU.Name = "ABN_NU";
+            ABN_NU.Size = new System.Drawing.Size(56, 21);
+            ABN_NU.TabIndex = 85;
+            // 
+            // ABNL
+            // 
+            ABNL.AutoSize = true;
+            ABNL.Location = new System.Drawing.Point(314, 66);
+            ABNL.Name = "ABNL";
+            ABNL.Size = new System.Drawing.Size(53, 12);
+            ABNL.TabIndex = 84;
+            ABNL.Text = "特性序号";
+            // 
+            // FO_NU
+            // 
+            FO_NU.Location = new System.Drawing.Point(73, 68);
+            FO_NU.Name = "FO_NU";
+            FO_NU.Size = new System.Drawing.Size(56, 21);
+            FO_NU.TabIndex = 83;
+            // 
+            // EV_TB
+            // 
+            EV_TB.Location = new System.Drawing.Point(73, 131);
+            EV_TB.Name = "EV_TB";
+            EV_TB.Size = new System.Drawing.Size(136, 21);
+            EV_TB.TabIndex = 82;
+            EV_TB.Text = "0/0/0/0/0/0";
+            // 
+            // IV_TB
+            // 
+            IV_TB.Location = new System.Drawing.Point(73, 98);
+            IV_TB.Name = "IV_TB";
+            IV_TB.Size = new System.Drawing.Size(136, 21);
+            IV_TB.TabIndex = 81;
+            IV_TB.Text = "0/0/0/0/0/0";
+            // 
+            // BA_CB
+            // 
+            BA_CB.AutoCompleteMode = AutoCompleteMode.Append;
+            BA_CB.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            BA_CB.FormattingEnabled = true;
+            BA_CB.Location = new System.Drawing.Point(203, 6);
+            BA_CB.Name = "BA_CB";
+            BA_CB.Size = new System.Drawing.Size(91, 20);
+            BA_CB.TabIndex = 80;
+            // 
+            // LA_CB
+            // 
+            LA_CB.FormattingEnabled = true;
+            LA_CB.Location = new System.Drawing.Point(376, 93);
+            LA_CB.Name = "LA_CB";
+            LA_CB.Size = new System.Drawing.Size(92, 20);
+            LA_CB.TabIndex = 79;
+            // 
+            // AB_CB
+            // 
+            AB_CB.AutoCompleteMode = AutoCompleteMode.Append;
+            AB_CB.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            AB_CB.FormattingEnabled = true;
+            AB_CB.Location = new System.Drawing.Point(376, 36);
+            AB_CB.Name = "AB_CB";
+            AB_CB.Size = new System.Drawing.Size(91, 20);
+            AB_CB.TabIndex = 78;
+            // 
+            // IT_CB
+            // 
+            IT_CB.AutoCompleteMode = AutoCompleteMode.Append;
+            IT_CB.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            IT_CB.FormattingEnabled = true;
+            IT_CB.Location = new System.Drawing.Point(376, 5);
+            IT_CB.Name = "IT_CB";
+            IT_CB.Size = new System.Drawing.Size(91, 20);
+            IT_CB.TabIndex = 77;
+            // 
+            // NA_CB
+            // 
+            NA_CB.AutoCompleteMode = AutoCompleteMode.Append;
+            NA_CB.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            NA_CB.FormattingEnabled = true;
+            NA_CB.Location = new System.Drawing.Point(72, 6);
+            NA_CB.Name = "NA_CB";
+            NA_CB.Size = new System.Drawing.Size(65, 20);
+            NA_CB.TabIndex = 76;
+            // 
+            // EVL
+            // 
+            EVL.AutoSize = true;
+            EVL.Location = new System.Drawing.Point(23, 134);
+            EVL.Name = "EVL";
+            EVL.Size = new System.Drawing.Size(41, 12);
+            EVL.TabIndex = 74;
+            EVL.Text = "努力值";
+            // 
+            // IVL
+            // 
+            IVL.AutoSize = true;
+            IVL.Location = new System.Drawing.Point(35, 101);
+            IVL.Name = "IVL";
+            IVL.Size = new System.Drawing.Size(29, 12);
+            IVL.TabIndex = 73;
+            IVL.Text = "个体";
+            // 
+            // BAL
+            // 
+            BAL.AutoSize = true;
+            BAL.Location = new System.Drawing.Point(163, 9);
+            BAL.Name = "BAL";
+            BAL.Size = new System.Drawing.Size(29, 12);
+            BAL.TabIndex = 72;
+            BAL.Text = "球种";
+            // 
+            // LAL
+            // 
+            LAL.AutoSize = true;
+            LAL.Location = new System.Drawing.Point(338, 96);
+            LAL.Name = "LAL";
+            LAL.Size = new System.Drawing.Size(29, 12);
+            LAL.TabIndex = 71;
+            LAL.Text = "语言";
+            // 
+            // ABL
+            // 
+            ABL.AutoSize = true;
+            ABL.Location = new System.Drawing.Point(338, 39);
+            ABL.Name = "ABL";
+            ABL.Size = new System.Drawing.Size(29, 12);
+            ABL.TabIndex = 70;
+            ABL.Text = "特性";
+            // 
+            // ITL
+            // 
+            ITL.AutoSize = true;
+            ITL.Location = new System.Drawing.Point(326, 9);
+            ITL.Name = "ITL";
+            ITL.Size = new System.Drawing.Size(41, 12);
+            ITL.TabIndex = 69;
+            ITL.Text = "持有物";
+            // 
+            // FOL
+            // 
+            FOL.AutoSize = true;
+            FOL.Location = new System.Drawing.Point(34, 70);
+            FOL.Name = "FOL";
+            FOL.Size = new System.Drawing.Size(29, 12);
+            FOL.TabIndex = 68;
+            FOL.Text = "形态";
+            // 
+            // NAL
+            // 
+            NAL.AutoSize = true;
+            NAL.Location = new System.Drawing.Point(10, 9);
+            NAL.Name = "NAL";
+            NAL.Size = new System.Drawing.Size(53, 12);
+            NAL.TabIndex = 67;
+            NAL.Text = "原始性格";
             // 
             // CopyPage
             // 
@@ -439,10 +868,10 @@ namespace WangPluginPkm.GUI
             CopyPage.Controls.Add(groupBox1);
             CopyPage.Controls.Add(groupBox5);
             CopyPage.Controls.Add(groupBox2);
-            CopyPage.Location = new System.Drawing.Point(4, 22);
+            CopyPage.Location = new System.Drawing.Point(4, 26);
             CopyPage.Name = "CopyPage";
             CopyPage.Padding = new Padding(3);
-            CopyPage.Size = new System.Drawing.Size(493, 230);
+            CopyPage.Size = new System.Drawing.Size(493, 227);
             CopyPage.TabIndex = 0;
             CopyPage.Text = "派送器";
             // 
@@ -483,13 +912,13 @@ namespace WangPluginPkm.GUI
             EditBoxPage.Location = new System.Drawing.Point(4, 26);
             EditBoxPage.Name = "EditBoxPage";
             EditBoxPage.Padding = new Padding(3);
-            EditBoxPage.Size = new System.Drawing.Size(493, 226);
+            EditBoxPage.Size = new System.Drawing.Size(493, 227);
             EditBoxPage.TabIndex = 1;
             EditBoxPage.Text = "杂项编辑";
             // 
             // DistributionUI
             // 
-            ClientSize = new System.Drawing.Size(529, 273);
+            ClientSize = new System.Drawing.Size(529, 280);
             Controls.Add(DitributiontabControl);
             Font = new System.Drawing.Font("黑体", 9F);
             FormBorderStyle = FormBorderStyle.Fixed3D;
@@ -504,6 +933,15 @@ namespace WangPluginPkm.GUI
             groupBox3.ResumeLayout(false);
             groupBox5.ResumeLayout(false);
             DitributiontabControl.ResumeLayout(false);
+            Quickeditor.ResumeLayout(false);
+            Quickeditor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)End_NUM).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Start_NUM).EndInit();
+            ((System.ComponentModel.ISupportInitialize)EndBox_NUM).EndInit();
+            ((System.ComponentModel.ISupportInitialize)StartBox_NUM).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Level_NUM).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ABN_NU).EndInit();
+            ((System.ComponentModel.ISupportInitialize)FO_NU).EndInit();
             CopyPage.ResumeLayout(false);
             DisGroupBox.ResumeLayout(false);
             EditBoxPage.ResumeLayout(false);
@@ -522,5 +960,43 @@ namespace WangPluginPkm.GUI
         private GroupBox DisGroupBox;
         private ComboBox DiscomboBox;
         private Button GenDIs_BTN;
+        private TabPage Quickeditor;
+        private ComboBox Tera_CB;
+        private Label Tera_LAB;
+        private ComboBox SNA_CB;
+        private Label SNL;
+        private NumericUpDown Level_NUM;
+        private Label Current_Level_LB;
+        private NumericUpDown ABN_NU;
+        private Label ABNL;
+        private NumericUpDown FO_NU;
+        private TextBox EV_TB;
+        private TextBox IV_TB;
+        private ComboBox BA_CB;
+        private ComboBox LA_CB;
+        private ComboBox AB_CB;
+        private ComboBox IT_CB;
+        private ComboBox NA_CB;
+        private Label EVL;
+        private Label IVL;
+        private Label BAL;
+        private Label LAL;
+        private Label ABL;
+        private Label ITL;
+        private Label FOL;
+        private Label NAL;
+        private Button Start_BTN;
+        private CheckedListBox RunFilter_CLB;
+        private NumericUpDown End_NUM;
+        private NumericUpDown Start_NUM;
+        private Label End_LB;
+        private Label Start_LB;
+        private NumericUpDown EndBox_NUM;
+        private NumericUpDown StartBox_NUM;
+        private Label EndBox;
+        private Label StartBox_LB;
+        private Button Quick_Write_BTN;
+        private Button Quick_EV_BTN;
+        private Label label1;
     }
 }

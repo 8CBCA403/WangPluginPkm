@@ -17,7 +17,7 @@ namespace WangPluginPkm.GUI
 {
     public partial class SuperDataBase : Form
     {
-        public static GameStrings GameStringsZh = GameInfo.GetStrings("zh");
+        public static GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
 
@@ -53,82 +53,64 @@ namespace WangPluginPkm.GUI
             SP_CB.AutoCompleteCustomSource = auto(GameStringsZh.Species.ToArray());
             NA_CB.DataSource = GameStringsZh.Natures;
             NA_CB.AutoCompleteCustomSource = auto(GameStringsZh.Natures.ToArray());
-            if (SAV.SAV.Generation >= 8)
+            // Set DataSource once for both ComboBoxes
+            SNA_CB.DataSource = GameStringsZh.Natures.ToArray();
+            Tera_CB.DataSource = GameStringsZh.Types.ToArray();
+
+            // Enable or disable based on generation
+            SNA_CB.Enabled = SAV.SAV.Generation >= 8;
+            Tera_CB.Enabled = SAV.SAV.Generation == 9;
+            var moveComboBoxes = new[] { MOV1_CB, MOV2_CB, MOV3_CB, MOV4_CB };
+            var moveDataSources = new[] { MOV1, MOV2, MOV3, MOV4 };
+
+            for (int i = 0; i < moveComboBoxes.Length; i++)
             {
-                SNA_CB.Enabled = true;
-                SNA_CB.DataSource = GameStringsZh.Natures.ToArray();
+                moveComboBoxes[i].DataSource = moveDataSources[i];
+                moveComboBoxes[i].AutoCompleteCustomSource = auto(moveDataSources[i]);
             }
-            else
+
+            var remComboBoxes = new[] { REM1_CB, REM2_CB, REM3_CB, REM4_CB };
+            var remDataSources = new[] { REV1, REV2, REV3, REV4 };
+
+            for (int i = 0; i < remComboBoxes.Length; i++)
             {
-                SNA_CB.Enabled = false;
-                SNA_CB.DataSource = GameStringsZh.Natures.ToArray();
+                remComboBoxes[i].DataSource = remDataSources[i];
+                remComboBoxes[i].AutoCompleteCustomSource = auto(remDataSources[i]);
             }
-            if (SAV.SAV.Generation == 9)
-            {
-                Tera_CB.Enabled = true;
-                Tera_CB.DataSource = GameStringsZh.Types.ToArray();
-            }
-            else
-            {
-                Tera_CB.Enabled = false;
-                Tera_CB.DataSource = GameStringsZh.Types.ToArray();
-            }
-            MOV1_CB.DataSource = MOV1;
-            MOV1_CB.AutoCompleteCustomSource = auto(MOV1);
-            MOV2_CB.DataSource = MOV2;
-            MOV2_CB.AutoCompleteCustomSource = auto(MOV2);
-            MOV3_CB.DataSource = MOV3;
-            MOV3_CB.AutoCompleteCustomSource = auto(MOV3);
-            MOV4_CB.DataSource = MOV4;
-            MOV4_CB.AutoCompleteCustomSource = auto(MOV4);
-            REM1_CB.DataSource = REV1;
-            REM1_CB.AutoCompleteCustomSource = auto(REV1);
-            REM2_CB.DataSource = REV2;
-            REM2_CB.AutoCompleteCustomSource = auto(REV2);
-            REM3_CB.DataSource = REV3;
-            REM3_CB.AutoCompleteCustomSource = auto(REV3);
-            REM4_CB.DataSource = REV4;
-            REM3_CB.AutoCompleteCustomSource = auto(REV4);
+
+            // 设置其余 ComboBox 的数据源和自动完成源
             AB_CB.DataSource = GameStringsZh.Ability;
             AB_CB.AutoCompleteCustomSource = auto(GameStringsZh.Ability.ToArray());
+
             IT_CB.DataSource = GameStringsZh.Item;
             IT_CB.AutoCompleteCustomSource = auto(GameStringsZh.Item.ToArray());
+
             BA_CB.DataSource = GameStringsZh.balllist;
             BA_CB.AutoCompleteCustomSource = auto(GameStringsZh.balllist.ToArray());
+
             LA_CB.DataSource = Enum.GetNames(typeof(LanguageID));
             Filter_CB.DataSource = Enum.GetValues(typeof(Filter));
-            EditType.Add("性格");
-            EditType.Add("特性");
-            EditType.Add("持有物");
-            EditType.Add("球种");
-            EditType.Add("语言");
-            EditType.Add("形态");
-            EditType.Add("个体值");
-            EditType.Add("努力值");
-            EditType.Add("技能");
-            EditType.Add("遗传技能");
-            EditType.Add("等级");
-            switch (SAV.SAV.Generation)
+
+            // 初始化 EditType 列表
+            EditType.AddRange(new[]
             {
-                case 8:
-                    EditType.Add("薄荷性格");
-                    break;
-                case 9:
-                    EditType.Add("薄荷性格"); ;
-                    EditType.Add("太晶属性"); ;
-                    break;
-                default:
-                    break;
-            }
+        "性格", "特性", "持有物", "球种", "语言", "形态", "个体值", "努力值", "技能", "遗传技能", "等级"
+    });
+
+            // 根据世代条件添加特定项
+            if (SAV.SAV.Generation >= 8)
+                EditType.Add("薄荷性格");
+            if (SAV.SAV.Generation == 9)
+                EditType.Add("太晶属性");
+
+            // 设置 DataSource 并选中所有项目
             RunFilter_CLB.DataSource = EditType;
             for (int i = 0; i < RunFilter_CLB.Items.Count; i++)
             {
                 RunFilter_CLB.SetItemChecked(i, true);
             }
-            // PopulateFilteredDataSources(SAV.SAV);
         }
-
-        private void import_editor_BTN_Click(object sender, EventArgs e)
+            private void import_editor_BTN_Click(object sender, EventArgs e)
         {
             SP_CB.SelectedIndex = Editor.Data.Species;
             NA_CB.SelectedIndex = (int)Editor.Data.Nature;

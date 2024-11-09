@@ -21,7 +21,7 @@ namespace WangPluginPkm.GUI
 {
     partial class DexBuildForm : Form
     {
-        public static GameStrings GameStringsZh = GameInfo.GetStrings("zh");
+        public static GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
         private static Random rand = new Random();
         public static Stopwatch sw = new();
         private SoundPlayer Player = new SoundPlayer();
@@ -243,7 +243,7 @@ namespace WangPluginPkm.GUI
         }
         private static List<int> FindAllEmptySlots(IList<PKM> data, int start)
         {
-            List<int> list = new ();
+            List<int> list = new();
             for (int i = start; i < data.Count; i++)
             {
                 if (data[i].Species < 1)
@@ -1136,7 +1136,7 @@ namespace WangPluginPkm.GUI
         {
             var PL = SAV.SAV.GetAllPKM();
             int i = 0;
-            List<int> aL = new ();
+            List<int> aL = new();
             switch (mainHomeAchieve)
             {
                 case 1:
@@ -1428,20 +1428,7 @@ namespace WangPluginPkm.GUI
             }
         }
 
-        private void Quick_EV_BTN_Click(object sender, EventArgs e)
-        {
-            SAV.SAV.ModifyBoxes(EditEV);
-            SAV.ReloadSlots();
-            MessageBox.Show("速配完成！");
-
-        }
-
-        private void EditEV(PKM pk)
-        {
-            Span<int> values = stackalloc int[6];
-            EffortValues.SetMax(values, pk);
-            pk.SetEVs(values);
-        }
+       
 
         private void Clear_Trash_BTN_Click(object sender, EventArgs e)
         {
@@ -1459,9 +1446,10 @@ namespace WangPluginPkm.GUI
             temp = pk.Nickname;
             pk.NicknameTrash.Clear();
 
-                ; pk.Nickname = temp;
+            ; pk.Nickname = temp;
         }
-      
+
+    
     }
 }
 

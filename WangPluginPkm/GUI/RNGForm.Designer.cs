@@ -1289,7 +1289,7 @@ namespace WangPluginPkm.GUI
             RNGmenuStrip.Items.AddRange(new ToolStripItem[] { ToolStripMenuItem });
             RNGmenuStrip.Location = new System.Drawing.Point(0, 0);
             RNGmenuStrip.Name = "RNGmenuStrip";
-            RNGmenuStrip.Size = new System.Drawing.Size(1251, 25);
+            RNGmenuStrip.Size = new System.Drawing.Size(789, 25);
             RNGmenuStrip.TabIndex = 46;
             RNGmenuStrip.Text = "menuStrip1";
             // 
@@ -1314,7 +1314,7 @@ namespace WangPluginPkm.GUI
             // 
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             BackColor = System.Drawing.SystemColors.Control;
-            ClientSize = new System.Drawing.Size(1251, 362);
+            ClientSize = new System.Drawing.Size(789, 362);
             Controls.Add(Check_GB);
             Controls.Add(SearchGroupBox);
             Controls.Add(RNGmenuStrip);

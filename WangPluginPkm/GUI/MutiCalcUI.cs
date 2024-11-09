@@ -292,8 +292,10 @@ namespace WangPluginPkm.GUI
         {
             TID_TB.Text = Editor.Data.TID16.ToString();
             SID_TB.Text = Editor.Data.SID16.ToString();
+            (Editor.Data.IsShiny ? ShinyPID_TB : NonShinyPID_TB).Text = Editor.Data.PID.ToString("X");
+
         }
 
-      
+
     }
 }

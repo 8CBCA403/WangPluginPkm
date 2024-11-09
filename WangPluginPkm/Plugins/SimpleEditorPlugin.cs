@@ -21,7 +21,7 @@ namespace WangPluginPkm.Plugins
     {
         public override string Name => "常用功能/Simple Editor";
         public override int Priority => 13;
-        public static GameStrings GameStringsZh = GameInfo.GetStrings("zh");
+        public static GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {
             /*  var ctrl = new ToolStripMenuItem(Name)
