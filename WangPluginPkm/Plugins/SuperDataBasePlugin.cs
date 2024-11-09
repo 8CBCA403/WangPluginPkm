@@ -7,7 +7,7 @@ namespace WangPluginPkm.Plugins
     public class SuperDataBasePlugin : WangPluginPkm
     {
         public override string Name => "超级数据库/Super DataBase";
-        public override int Priority => 10;
+        public override int Priority => 6;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {

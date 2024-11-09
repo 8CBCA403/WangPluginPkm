@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using WangPluginPkm.PluginUtil.DisBase;
+using WangPluginPkm.PluginUtil.ModifyPKM;
 using static WangPluginPkm.PluginUtil.Functions.DistributionFunctions;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 
@@ -14,6 +15,7 @@ namespace WangPluginPkm.GUI
     partial class DistributionUI : Form
     {
         private const string TrainerFilter = "Trainer Info |*.txt|All Files|*.*";
+        private List<string> EditType = new List<string>();
         private int Counter = 0;
         private int IVEVValue = 0;
         private int CloneValue = 0;
@@ -27,12 +29,14 @@ namespace WangPluginPkm.GUI
         public BindingList<Trainer> Tr = new();
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
+        public static GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
         public DistributionUI(ISaveFileProvider sav, IPKMView editor)
         {
             SAV = sav;
             Editor = editor;
             InitializeComponent();
             BindingData();
+            NewBinding();
         }
         private void BindingData()
         {
@@ -90,6 +94,43 @@ namespace WangPluginPkm.GUI
             };
 
         }
+        private void NewBinding()
+        {
+            NA_CB.DataSource = GameStringsZh.Natures;
+            NA_CB.AutoCompleteCustomSource = auto(GameStringsZh.Natures.ToArray());
+            AB_CB.DataSource = GameStringsZh.Ability;
+            AB_CB.AutoCompleteCustomSource = auto(GameStringsZh.Ability.ToArray());
+            IT_CB.DataSource = GameStringsZh.Item;
+            IT_CB.AutoCompleteCustomSource = auto(GameStringsZh.Item.ToArray());
+            BA_CB.DataSource = GameStringsZh.balllist;
+            BA_CB.AutoCompleteCustomSource = auto(GameStringsZh.balllist.ToArray());
+            LA_CB.DataSource = Enum.GetNames(typeof(LanguageID));
+            // Set DataSource once for both ComboBoxes
+            SNA_CB.DataSource = GameStringsZh.Natures.ToArray();
+            Tera_CB.DataSource = GameStringsZh.Types.ToArray();
+
+            // Enable or disable based on generation
+            SNA_CB.Enabled = SAV.SAV.Generation >= 8;
+            Tera_CB.Enabled = SAV.SAV.Generation == 9;
+            // Initialize EditType list with common items
+            EditType.AddRange(new[] { "性格", "特性", "持有物", "球种", "语言", "形态", "个体值", "努力值", "等级" });
+
+            // Add generation-specific items
+            if (SAV.SAV.Generation >= 8)
+                EditType.Add("薄荷性格");
+            if (SAV.SAV.Generation == 9)
+                EditType.Add("太晶属性");
+
+            // Set DataSource and clear selections
+            RunFilter_CLB.DataSource = EditType;
+            for (int i = 0; i < RunFilter_CLB.Items.Count; i++)
+            {
+                RunFilter_CLB.SetItemChecked(i, false);
+            }
+
+
+        }
+        #region 派送器
         public void SetPkm()
         {
             List<PKM> PKL = new();
@@ -644,7 +685,30 @@ namespace WangPluginPkm.GUI
             }
             return gameReleaseDate;
         }
-        #region
+        private void GenDIs_BTN_Click(object sender, EventArgs e)
+        {
+            var PKL = new List<PKM>();
+            switch (Dis)
+            {
+                case 0:
+                    PKL = PerfectDitto.SearchDitto(SAV, Editor);
+                    break;
+            }
+            var BoxData = SAV.SAV.BoxData;
+            IList<PKM> arr2 = BoxData;
+            List<int> list = FindAllEmptySlots(arr2, 0);
+            if (PKL.Count != 0)
+            {
+                for (int i = 0; i < PKL.Count; i++)
+                {
+                    int index = list[i];
+                    SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
+                }
+            }
+            SAV.ReloadSlots();
+        }
+        #endregion
+        #region 神兽
         /* public void MytheryPK(PKM pk)
          {
              var db = EncounterEvent.GetAllEvents();
@@ -867,27 +931,167 @@ namespace WangPluginPkm.GUI
         #endregion
 
 
-        private void GenDIs_BTN_Click(object sender, EventArgs e)
+        private AutoCompleteStringCollection auto(string[] array)
         {
-            var PKL = new List<PKM>();
-            switch (Dis)
+            var autoComplete = new AutoCompleteStringCollection();
+            autoComplete.AddRange(array);
+            return autoComplete;
+        }
+        private void mod(PKM pk)
+        {
+            // 将IV和EV的输入解析为整数数组
+            int[] ivs = Array.ConvertAll(IV_TB.Text.Split('/'), int.Parse);
+            int[] evs = Array.ConvertAll(EV_TB.Text.Split('/'), int.Parse);
+
+            // 遍历 RunFilter_CLB 中选中的项目
+            for (int j = 0; j < RunFilter_CLB.Items.Count; j++)
             {
-                case 0:
-                    PKL = PerfectDitto.SearchDitto(SAV, Editor);
-                    break;
-            }
-            var BoxData = SAV.SAV.BoxData;
-            IList<PKM> arr2 = BoxData;
-            List<int> list = FindAllEmptySlots(arr2, 0);
-            if (PKL.Count != 0)
-            {
-                for (int i = 0; i < PKL.Count; i++)
+                if (RunFilter_CLB.GetItemChecked(j))
                 {
-                    int index = list[i];
-                    SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
+                    switch (j)
+                    {
+                        case 0:
+                            pk.Nature = (Nature)NA_CB.SelectedIndex;
+                            break;
+                        case 1:
+                            pk.Ability = AB_CB.SelectedIndex;
+                            pk.AbilityNumber = (int)ABN_NU.Value;
+                            break;
+                        case 2:
+                            pk.HeldItem = IT_CB.SelectedIndex;
+                            break;
+                        case 3:
+                            pk.Ball = (byte)BA_CB.SelectedIndex;
+                            break;
+                        case 4:
+                            pk.Language = LA_CB.SelectedIndex;
+                            pk.ClearNickname();
+                            break;
+                        case 5:
+                            pk.Form = (byte)FO_NU.Value;
+                            break;
+                        case 6:
+                            pk.IV_HP = ivs[0];
+                            pk.IV_ATK = ivs[1];
+                            pk.IV_DEF = ivs[2];
+                            pk.IV_SPA = ivs[3];
+                            pk.IV_SPD = ivs[4];
+                            pk.IV_SPE = ivs[5];
+                            break;
+                        case 7:
+                            pk.EV_HP = evs[0];
+                            pk.EV_ATK = evs[1];
+                            pk.EV_DEF = evs[2];
+                            pk.EV_SPA = evs[3];
+                            pk.EV_SPD = evs[4];
+                            pk.EV_SPE = evs[5];
+                            break;
+                        case 8:
+                            pk.CurrentLevel = (byte)Level_NUM.Value;
+                            break;
+                        case 9:
+                            pk.StatNature = (Nature)NA_CB.SelectedIndex;
+                            break;
+                        case 10:
+                            ((PK9)pk).TeraTypeOverride = Tera_CB.SelectedIndex == 18 ? (MoveType)99 : (MoveType)Tera_CB.SelectedIndex;
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
-            SAV.ReloadSlots();
         }
+
+
+        private void Start_BTN_Click(object sender, EventArgs e)
+        {
+            ModifyBoxes(mod, SAV.SAV.Generation, (int)StartBox_NUM.Value - 1, (int)Start_NUM.Value - 1, (int)EndBox_NUM.Value - 1, (int)End_NUM.Value - 1);
+            SAV.ReloadSlots();
+            MessageBox.Show("速配完成！");
+        }
+        public int ModifyBoxes(Action<PKM> action, int gen, int BoxStart = 0, int slotStart = 0, int BoxEnd = -1, int slotEnd = -1)
+        {
+            if ((uint)BoxEnd >= SAV.SAV.BoxCount)
+            {
+                BoxEnd = SAV.SAV.BoxCount - 1;
+            }
+
+            Span<byte> boxBuffer = GetInfo(gen);
+            int num = 0;
+            for (int i = BoxStart; i <= BoxEnd; i++)
+            {
+                for (int j = slotStart; j <= slotEnd; j++)
+                {
+                    if (!SAV.SAV.IsBoxSlotOverwriteProtected(i, j))
+                    {
+                        int boxSlotOffset = SAV.SAV.GetBoxSlotOffset(i, j);
+                        int num2 = boxSlotOffset;
+                        Span<byte> span = boxBuffer.Slice(num2, boxBuffer.Length - num2);
+                        if (SAV.SAV.IsPKMPresent(span))
+                        {
+                            PKM boxSlotAtIndex = SAV.SAV.GetBoxSlotAtIndex(i, j);
+                            action(boxSlotAtIndex);
+                            num++;
+                            SAV.SAV.SetBoxSlot(boxSlotAtIndex, span, PKMImportSetting.Skip, PKMImportSetting.Skip);
+                        }
+                    }
+                }
+            }
+
+            return num;
+        }
+        public Span<byte> GetInfo(int gen)
+        {
+            Span<byte> boxbuffer = SAV.SAV.Data;
+            switch (gen)
+            {
+                case 3:
+                    boxbuffer = ((SAV3)SAV.SAV).Storage;
+                    break;
+                case 4:
+                    boxbuffer = ((SAV4)SAV.SAV).Storage;
+                    break;
+                case 8:
+                    boxbuffer = ((SAV8SWSH)SAV.SAV).BoxInfo.Data;
+                    if (SAV.SAV.Version == GameVersion.PLA)
+                        boxbuffer = ((SAV8LA)SAV.SAV).BoxInfo.Data;
+                    break;
+                case 9:
+                    boxbuffer = ((SAV9SV)SAV.SAV).BoxInfo.Data;
+                    break;
+                default:
+                    break;
+            }
+            return boxbuffer;
+        }
+
+        private void Quick_Write_BTN_Click(object sender, EventArgs e)
+        {
+            int i = 0;
+            var pkl = SAV.SAV.GetBoxData(SAV.CurrentBox);
+            foreach (var v in pkl)
+            {
+                SAV.SAV.SetBoxSlotAtIndex(v, SAV.CurrentBox, i);
+                i++;
+            }
+            SAV.ReloadSlots();
+            MessageBox.Show("当前箱子刷新完毕！");
+        }
+        private void Quick_EV_BTN_Click(object sender, EventArgs e)
+        {
+            ModifyBoxes(EditEV, SAV.SAV.Generation, (int)StartBox_NUM.Value - 1, (int)Start_NUM.Value - 1, (int)EndBox_NUM.Value - 1, (int)End_NUM.Value - 1);
+            SAV.ReloadSlots();
+            MessageBox.Show("速配推荐努力值完成！");
+
+        }
+
+        private void EditEV(PKM pk)
+        {
+            Span<int> values = stackalloc int[6];
+            EffortValues.SetMax(values, pk);
+            pk.SetEVs(values);
+        }
+
+      
     }
 }

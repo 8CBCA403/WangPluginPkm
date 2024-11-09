@@ -11,6 +11,9 @@ namespace WangPluginPkm
 
         public string HomeAuthorization { get; set; } = "";
         public string HomeCookie { get; set; } = "";
+
+        public string PokemonPicUrl { get; set; } = "";
+
         // 添加其他配置项
         public static void SaveConfig(PluginConfig config)
         {

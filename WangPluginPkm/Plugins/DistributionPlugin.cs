@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PKHeX.Core;
+using System;
 using System.Windows.Forms;
 using WangPluginPkm.GUI;
 
@@ -11,6 +12,8 @@ namespace WangPluginPkm.Plugins
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {
+
+          
             var ctrl = new ToolStripMenuItem(Name)
             {
                 Image = Properties.Resources.Distribution
@@ -19,7 +22,7 @@ namespace WangPluginPkm.Plugins
             ctrl.Name = "派送器/Distribution Tools";
             modmenu.DropDownItems.Add(ctrl);
         }
-
+       
         private void OpenForm(object sender, EventArgs e)
         {
 
