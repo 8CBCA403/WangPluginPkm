@@ -12,13 +12,13 @@ namespace WangPluginPkm.Plugins
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {
-            var ctrl = new ToolStripMenuItem(Name)
+           /* var ctrl = new ToolStripMenuItem(Name)
             {
                 Image = Properties.Resources.TEST
             };
             ctrl.Click += OpenForm;
             ctrl.Name = "Test";
-            modmenu.DropDownItems.Add(ctrl);
+            modmenu.DropDownItems.Add(ctrl);*/
 
         }
 

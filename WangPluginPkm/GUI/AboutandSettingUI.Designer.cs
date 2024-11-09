@@ -10,16 +10,18 @@ namespace WangPluginPkm.GUI
             AboutTextBox = new RichTextBox();
             PictureBox = new PictureBox();
             PluginSetting = new GroupBox();
+            Pic_TB = new TextBox();
+            Pic_Label = new Label();
+            HC_TB = new TextBox();
+            HC_LB = new Label();
+            HA_TB = new TextBox();
+            HA_LB = new Label();
             ApplicationNameLB = new Label();
             ApiKeyLB = new Label();
             APP_TB = new TextBox();
             API_TB = new TextBox();
             Sav_Config_BTN = new Button();
             SoundCheck = new CheckBox();
-            HA_LB = new Label();
-            HA_TB = new TextBox();
-            HC_LB = new Label();
-            HC_TB = new TextBox();
             ((System.ComponentModel.ISupportInitialize)PictureBox).BeginInit();
             PluginSetting.SuspendLayout();
             SuspendLayout();
@@ -37,14 +39,16 @@ namespace WangPluginPkm.GUI
             // 
             // PictureBox
             // 
-            PictureBox.Location = new System.Drawing.Point(502, 126);
+            PictureBox.Location = new System.Drawing.Point(3, 126);
             PictureBox.Name = "PictureBox";
-            PictureBox.Size = new System.Drawing.Size(255, 255);
+            PictureBox.Size = new System.Drawing.Size(500, 500);
             PictureBox.TabIndex = 1;
             PictureBox.TabStop = false;
             // 
             // PluginSetting
             // 
+            PluginSetting.Controls.Add(Pic_TB);
+            PluginSetting.Controls.Add(Pic_Label);
             PluginSetting.Controls.Add(HC_TB);
             PluginSetting.Controls.Add(HC_LB);
             PluginSetting.Controls.Add(HA_TB);
@@ -57,15 +61,63 @@ namespace WangPluginPkm.GUI
             PluginSetting.Controls.Add(SoundCheck);
             PluginSetting.Location = new System.Drawing.Point(3, 12);
             PluginSetting.Name = "PluginSetting";
-            PluginSetting.Size = new System.Drawing.Size(754, 104);
+            PluginSetting.Size = new System.Drawing.Size(500, 104);
             PluginSetting.TabIndex = 2;
             PluginSetting.TabStop = false;
             PluginSetting.Text = "插键设置";
             // 
+            // Pic_TB
+            // 
+            Pic_TB.Location = new System.Drawing.Point(132, 78);
+            Pic_TB.Name = "Pic_TB";
+            Pic_TB.Size = new System.Drawing.Size(269, 23);
+            Pic_TB.TabIndex = 11;
+            // 
+            // Pic_Label
+            // 
+            Pic_Label.AutoSize = true;
+            Pic_Label.Location = new System.Drawing.Point(42, 81);
+            Pic_Label.Name = "Pic_Label";
+            Pic_Label.Size = new System.Drawing.Size(79, 17);
+            Pic_Label.TabIndex = 10;
+            Pic_Label.Text = "PokemonPic";
+            // 
+            // HC_TB
+            // 
+            HC_TB.Location = new System.Drawing.Point(337, 49);
+            HC_TB.Name = "HC_TB";
+            HC_TB.Size = new System.Drawing.Size(145, 23);
+            HC_TB.TabIndex = 9;
+            // 
+            // HC_LB
+            // 
+            HC_LB.AutoSize = true;
+            HC_LB.Location = new System.Drawing.Point(247, 52);
+            HC_LB.Name = "HC_LB";
+            HC_LB.Size = new System.Drawing.Size(84, 17);
+            HC_LB.TabIndex = 8;
+            HC_LB.Text = "HomeCookie";
+            // 
+            // HA_TB
+            // 
+            HA_TB.Location = new System.Drawing.Point(132, 49);
+            HA_TB.Name = "HA_TB";
+            HA_TB.Size = new System.Drawing.Size(105, 23);
+            HA_TB.TabIndex = 7;
+            // 
+            // HA_LB
+            // 
+            HA_LB.AutoSize = true;
+            HA_LB.Location = new System.Drawing.Point(6, 52);
+            HA_LB.Name = "HA_LB";
+            HA_LB.Size = new System.Drawing.Size(120, 17);
+            HA_LB.TabIndex = 6;
+            HA_LB.Text = "HomeAuthorization";
+            // 
             // ApplicationNameLB
             // 
             ApplicationNameLB.AutoSize = true;
-            ApplicationNameLB.Location = new System.Drawing.Point(437, 23);
+            ApplicationNameLB.Location = new System.Drawing.Point(323, 23);
             ApplicationNameLB.Name = "ApplicationNameLB";
             ApplicationNameLB.Size = new System.Drawing.Size(67, 17);
             ApplicationNameLB.TabIndex = 5;
@@ -82,21 +134,21 @@ namespace WangPluginPkm.GUI
             // 
             // APP_TB
             // 
-            APP_TB.Location = new System.Drawing.Point(510, 20);
+            APP_TB.Location = new System.Drawing.Point(396, 20);
             APP_TB.Name = "APP_TB";
-            APP_TB.Size = new System.Drawing.Size(227, 23);
+            APP_TB.Size = new System.Drawing.Size(86, 23);
             APP_TB.TabIndex = 3;
             // 
             // API_TB
             // 
             API_TB.Location = new System.Drawing.Point(192, 20);
             API_TB.Name = "API_TB";
-            API_TB.Size = new System.Drawing.Size(227, 23);
+            API_TB.Size = new System.Drawing.Size(125, 23);
             API_TB.TabIndex = 2;
             // 
             // Sav_Config_BTN
             // 
-            Sav_Config_BTN.Location = new System.Drawing.Point(662, 75);
+            Sav_Config_BTN.Location = new System.Drawing.Point(407, 75);
             Sav_Config_BTN.Name = "Sav_Config_BTN";
             Sav_Config_BTN.Size = new System.Drawing.Size(75, 23);
             Sav_Config_BTN.TabIndex = 1;
@@ -116,41 +168,9 @@ namespace WangPluginPkm.GUI
             SoundCheck.Text = "是否播放启动声音";
             SoundCheck.UseVisualStyleBackColor = true;
             // 
-            // HA_LB
-            // 
-            HA_LB.AutoSize = true;
-            HA_LB.Location = new System.Drawing.Point(6, 52);
-            HA_LB.Name = "HA_LB";
-            HA_LB.Size = new System.Drawing.Size(120, 17);
-            HA_LB.TabIndex = 6;
-            HA_LB.Text = "HomeAuthorization";
-            // 
-            // HA_TB
-            // 
-            HA_TB.Location = new System.Drawing.Point(132, 49);
-            HA_TB.Name = "HA_TB";
-            HA_TB.Size = new System.Drawing.Size(227, 23);
-            HA_TB.TabIndex = 7;
-            // 
-            // HC_LB
-            // 
-            HC_LB.AutoSize = true;
-            HC_LB.Location = new System.Drawing.Point(371, 52);
-            HC_LB.Name = "HC_LB";
-            HC_LB.Size = new System.Drawing.Size(84, 17);
-            HC_LB.TabIndex = 8;
-            HC_LB.Text = "HomeCookie";
-            // 
-            // HC_TB
-            // 
-            HC_TB.Location = new System.Drawing.Point(461, 49);
-            HC_TB.Name = "HC_TB";
-            HC_TB.Size = new System.Drawing.Size(276, 23);
-            HC_TB.TabIndex = 9;
-            // 
             // AboutandSettingUI
             // 
-            ClientSize = new System.Drawing.Size(765, 383);
+            ClientSize = new System.Drawing.Size(506, 634);
             Controls.Add(PluginSetting);
             Controls.Add(PictureBox);
             Controls.Add(AboutTextBox);
@@ -179,5 +199,7 @@ namespace WangPluginPkm.GUI
         private Label HC_LB;
         private TextBox HA_TB;
         private TextBox HC_TB;
+        private TextBox Pic_TB;
+        private Label Pic_Label;
     }
 }

@@ -7,7 +7,7 @@ namespace WangPluginPkm.Plugins
     public class BattleKingPlugin : WangPluginPkm
     {
         public override string Name => "对战王/BattleKing";
-        public override int Priority => 6;
+        public override int Priority => 8;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {

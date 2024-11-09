@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using WangPluginPkm.PluginUtil.ModifyPKM;
 using WangPluginPkm.RNG.Methods;
 using WangPluginPkm.RNG.ReverseRNG;
-using static iText.Layout.Borders.Border;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
 using Roaming8bRNG = WangPluginPkm.RNG.Methods.Roaming8bRNG;

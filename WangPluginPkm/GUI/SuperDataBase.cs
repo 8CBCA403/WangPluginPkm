@@ -10,8 +10,6 @@ using System.Net.Http;
 using System.Text;
 using System.Windows.Forms;
 using WangPluginPkm.PluginUtil.ModifyPKM;
-using static WangPluginPkm.CheckRules;
-using static WangPluginPkm.GUI.EggGeneratorUI;
 
 namespace WangPluginPkm.GUI
 {
@@ -423,7 +421,8 @@ namespace WangPluginPkm.GUI
                     default:
                         break;
                 }
-                string baseuri = "https://raw.githubusercontent.com/8CBCA403/pokepic/main/Normal/poke_capture_" + $"{((litePK)lp).Species.ToString().PadLeft(4, '0')}" + "_000_00000000_f_n.png";
+                var config = PluginConfig.LoadConfig();
+                string baseuri = $"{config.PokemonPicUrl}" + $"{((litePK)lp).Species.ToString().PadLeft(4, '0')}" + ".png";
                 try
                 {
                     using (HttpClient client = new HttpClient())

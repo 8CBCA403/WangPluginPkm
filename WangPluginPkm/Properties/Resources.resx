@@ -202,9 +202,6 @@
   <data name="TrashCan" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\img\TrashCan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Wanghaoran" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\img\Wanghaoran.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="_403" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\img\403.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

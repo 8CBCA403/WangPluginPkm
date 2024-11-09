@@ -14,6 +14,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WangPluginPkm.GUI;
+using static System.Net.WebRequestMethods;
 
 namespace WangPluginPkm.Plugins
 {
@@ -24,14 +25,6 @@ namespace WangPluginPkm.Plugins
         public static GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {
-            /*  var ctrl = new ToolStripMenuItem(Name)
-              {
-                  Image = Properties.Resources.pokeball
-              };
-              ctrl.Click += OpenForm;
-              ctrl.Name = "常用功能/Simple Editor";
-              modmenu.DropDownItems.Add(ctrl);
-            */
             AddCheckerToList();
         }
         private void OpenForm(object sender, EventArgs e)
@@ -198,9 +191,9 @@ namespace WangPluginPkm.Plugins
 
         private static async void CreatePDF(string result, PKM p)
         {
+            var config = PluginConfig.LoadConfig();
             string sp = p.Species.ToString().PadLeft(4, '0');
-            string baseuri = "https://raw.githubusercontent.com/8CBCA403/pokepic/main/Normal/poke_capture_" + $"{sp}" + "_000_00000000_f_n.png";
-            MessageBox.Show($"{baseuri}");
+            string baseuri = $"{config.PokemonPicUrl}" + $"{sp}" + ".png";
             Uri siteUri = new Uri(baseuri);
             PdfFont f1 = PdfFontFactory.CreateFont(@"Plugins\WangPluginPkm\simkai.ttf");
             PdfWriter writer = new PdfWriter(@"Plugins\WangPluginPkm\Reports\" + $"超王宝可梦合法性检测报告-{GameStringsZh.Species[p.Species]}{p.EncryptionConstant:X}.pdf");
@@ -222,7 +215,7 @@ namespace WangPluginPkm.Plugins
             ImageData imageData = ImageDataFactory.Create(ImageToByte(Properties.Resources.SuperWang));
             iText.Layout.Element.Image image = new iText.Layout.Element.Image(imageData).ScaleAbsolute(100, 100).SetFixedPosition(1, 450, 45);
             ImageData imageData1 = ImageDataFactory.Create(ImageToByte(await LoadImage(siteUri)));
-            iText.Layout.Element.Image image1 = new iText.Layout.Element.Image(imageData1).ScaleAbsolute(100, 100).SetFixedPosition(1, 450, 585);
+            iText.Layout.Element.Image image1 = new iText.Layout.Element.Image(imageData1).ScaleAbsolute(200, 200).SetFixedPosition(1, 380, 485);
             document.Add(image1);
             document.Add(image);
             document.Add(header1);

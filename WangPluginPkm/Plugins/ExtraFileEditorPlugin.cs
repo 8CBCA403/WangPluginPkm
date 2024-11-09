@@ -7,7 +7,7 @@ namespace WangPluginPkm.Plugins
     {
 
         public override string Name => "额外文件编辑器/ExtraFileEditor";
-        public override int Priority => 8;
+        public override int Priority => 10;
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {
