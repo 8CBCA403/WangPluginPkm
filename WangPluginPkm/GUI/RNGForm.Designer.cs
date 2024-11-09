@@ -122,6 +122,7 @@ namespace WangPluginPkm.GUI
             RNGmenuStrip = new MenuStrip();
             ToolStripMenuItem = new ToolStripMenuItem();
             Check_GB = new GroupBox();
+            label9 = new Label();
             SearchGroupBox.SuspendLayout();
             Check_Tab.SuspendLayout();
             R_TabPage.SuspendLayout();
@@ -634,7 +635,7 @@ namespace WangPluginPkm.GUI
             CalcBTN.Name = "CalcBTN";
             CalcBTN.Size = new System.Drawing.Size(114, 25);
             CalcBTN.TabIndex = 49;
-            CalcBTN.Text = "计算";
+            CalcBTN.Text = "Seed计算IV";
             CalcBTN.UseVisualStyleBackColor = true;
             CalcBTN.Click += CalcBTN_Click;
             // 
@@ -658,7 +659,7 @@ namespace WangPluginPkm.GUI
             // 
             // IVCheckBox
             // 
-            IVCheckBox.Location = new System.Drawing.Point(210, 190);
+            IVCheckBox.Location = new System.Drawing.Point(207, 190);
             IVCheckBox.Name = "IVCheckBox";
             IVCheckBox.Size = new System.Drawing.Size(124, 21);
             IVCheckBox.TabIndex = 46;
@@ -924,6 +925,7 @@ namespace WangPluginPkm.GUI
             // ReverseSeedPage
             // 
             ReverseSeedPage.BackColor = System.Drawing.Color.WhiteSmoke;
+            ReverseSeedPage.Controls.Add(label9);
             ReverseSeedPage.Controls.Add(CalcBTN);
             ReverseSeedPage.Controls.Add(IVCheck_Box);
             ReverseSeedPage.Controls.Add(SeedBox);
@@ -1310,6 +1312,15 @@ namespace WangPluginPkm.GUI
             Check_GB.TabStop = false;
             Check_GB.Text = "检测";
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(29, 193);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(29, 12);
+            label9.TabIndex = 50;
+            label9.Text = "Seed";
+            // 
             // RNGForm
             // 
             AutoValidate = AutoValidate.EnablePreventFocusChange;
@@ -1479,5 +1490,6 @@ namespace WangPluginPkm.GUI
         private Label SPE_LB;
         private GroupBox Check_GB;
         private Button Stop_BTN;
+        private Label label9;
     }
 }
