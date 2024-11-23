@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
-    <TargetFrameworks>net8.0-windows</TargetFrameworks>
-    <LangVersion>12</LangVersion>
+    <TargetFrameworks>net9.0-windows</TargetFrameworks>
+    <LangVersion>13</LangVersion>
     <LangVersion>preview</LangVersion>
     <Nullable>disable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>

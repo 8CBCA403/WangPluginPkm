@@ -36,12 +36,13 @@ namespace WangPluginPkm.GUI
         public List<HomeRankClass> R = [];
         public HomeRankClass v = null;
         public HomeSeasonDetail u = null;
-
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public static ISaveFileProvider SAV { private get; set; } = null!;
         private readonly CancellationTokenSource PastetokenSource = new();
         private readonly CancellationTokenSource FalinkVGCstokenSource = new();
         private readonly CancellationTokenSource FalinkTournamentstokenSource = new();
         private readonly CancellationTokenSource VGCPastestokenSource = new();
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public static IPKMView Editor { private get; set; } = null!;
         private static readonly List<ExpandPKM> BD = [];
         private enum Falinks
