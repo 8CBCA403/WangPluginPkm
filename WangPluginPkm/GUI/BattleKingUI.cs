@@ -277,8 +277,16 @@ namespace WangPluginPkm.GUI
         }
         private void GenSmogonSets(PKM rough)
         {
-            SmogonSetList info;
-            info = new SmogonSetList(rough);
+            SmogonSetGenerator info;
+            try
+            {
+                info = new SmogonSetGenerator(rough);
+            }
+            catch (Exception ex)
+            {
+                WinFormsUtil.Error($"生成出错！: {ex}");
+                return;
+            }
             ImportSetsToBoxes(info.Sets, false);
         }
         private static PKM OpenFromPath(string path)
@@ -816,7 +824,7 @@ namespace WangPluginPkm.GUI
                     L.Add(r);
                 }
             var departmentBindingList = new BindingList<HomeSeasonDetail>(L);
-            var departmentSource = new BindingSource(departmentBindingList, null);
+            var departmentSource = new BindingSource(departmentBindingList, "");
             Rank_List_Box.DataSource = departmentSource;
             Rank_List_Box.DisplayMember = "DisplayName";
             Rank_List_Box.ValueMember = "Description";
@@ -864,7 +872,7 @@ namespace WangPluginPkm.GUI
                     R.Add(r);
                 }
             var departmentBindingList = new BindingList<HomeRankClass>(R);
-            var departmentSource = new BindingSource(departmentBindingList, null);
+            var departmentSource = new BindingSource(departmentBindingList, "");
             Rank_List_Box.DataSource = departmentSource;
             Rank_List_Box.DisplayMember = "DisplayName";
             Rank_List_Box.ValueMember = "Description";

@@ -12,7 +12,7 @@ namespace WangPluginPkm.PluginUtil.Functions
         {
             var sav = SaveFileEditor.SAV;
             var a = sav.GetAllPKM();
-            var pkms = sav.GenerateLivingDex().ToList();
+            var pkms = sav.GenerateLivingDex(sav.Personal).ToList();
             foreach (var item in a)
             {
                 var pk = pkms.Find(x => x.Species == item.Species);
@@ -35,7 +35,7 @@ namespace WangPluginPkm.PluginUtil.Functions
         public static void LivingDex(ISaveFileProvider SaveFileEditor)
         {
             var sav = SaveFileEditor.SAV;
-            Span<PKM> pkms = sav.GenerateLivingDex().ToArray();
+            Span<PKM> pkms = sav.GenerateLivingDex(sav.Personal).ToArray();
             foreach(var pk in pkms)
             {
                 pk.OriginalTrainerName = sav.OT;
@@ -51,7 +51,7 @@ namespace WangPluginPkm.PluginUtil.Functions
         public static void LivingDexHome(ISaveFileProvider SaveFileEditor)
         {
             var sav = SaveFileEditor.SAV;
-            Span<PKM> pkms = sav.GenerateLivingDex().ToArray();
+            Span<PKM> pkms = sav.GenerateLivingDex(sav.Personal).ToArray();
             Span<PKM> bd = sav.BoxData.ToArray();
             pkms.CopyTo(bd);
             sav.BoxData = bd.ToArray();
