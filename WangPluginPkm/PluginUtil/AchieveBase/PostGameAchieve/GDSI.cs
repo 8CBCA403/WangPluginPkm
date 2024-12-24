@@ -18,25 +18,31 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
                 else if (sa.Region == 7)
                     l = 2;
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.HoOh, (int)GameVersion.C);
-                pk.Language = l;
+                pk.Language = 2;
                 pk = AchieveFunc.fun(pk, SAV);
                 pk.Version = (GameVersion)41;
                 pk.SID16 = 0;
                 PKL.Add(pk);
-
+                ((PK7)pk).ConsoleRegion = 1;
+                ((PK7)pk).Country = 49;
+                ((PK7)pk).Region = 24;
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Lugia, (int)GameVersion.C);
-                pk.Language = l;
+                pk.Language = 2;
                 pk = AchieveFunc.fun(pk, SAV);
                 pk.Version = (GameVersion)41;
                 pk.SID16 = 0;
-
+                ((PK7)pk).ConsoleRegion = 1;
+                ((PK7)pk).Country = 49;
+                ((PK7)pk).Region = 24;
                 PKL.Add(pk);
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Suicune, (int)GameVersion.C);
-                pk.Language = l;
+                pk.Language = 2;
                 pk = AchieveFunc.fun(pk, SAV);
                 pk.Version = (GameVersion)41;
                 pk.SID16 = 0;
-
+                ((PK7)pk).ConsoleRegion = 1;
+                ((PK7)pk).Country = 49;
+                ((PK7)pk).Region = 24;
                 PKL.Add(pk);
 
 
