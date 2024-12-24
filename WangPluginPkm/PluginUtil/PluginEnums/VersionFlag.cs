@@ -4,6 +4,7 @@ namespace WangPluginPkm
 {
     internal class VersionFlag
     {
+        
         public static bool Gen3Flag(int Version)
         {
             if (Version is 1 or 2 or 3 or 4 or 5)
@@ -60,16 +61,16 @@ namespace WangPluginPkm
             else
                 return false;
         }
-        public static bool Gen1VCFlag(int Version)
+        public static bool Gen1VCFlag(GameVersion version)
         {
-            if (Version is 35 or 36 or 37 or 38)
+            if (version is GameVersion.RBY or GameVersion.RB or GameVersion.YW or GameVersion.RD)
                 return true;
             else
                 return false;
         }
-        public static bool Gen2VCFlag(int Version)
+        public static bool Gen2VCFlag(GameVersion version)
         {
-            if (Version is 39 or 40 or 41)
+            if (version is GameVersion.GSC or GameVersion.GS or GameVersion.C)
                 return true;
             else
                 return false;
@@ -98,6 +99,9 @@ namespace WangPluginPkm
                 return false;
         }
 
-       
+        internal static bool Gen2VCFlag(int version)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

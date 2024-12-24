@@ -132,12 +132,20 @@ namespace WangPluginPkm.GUI
         {
             PKM val = pkm.Clone();
             PKM va = pkm.Clone();
+          
             if (!MythicalFlag.MFlag(pkm.Species))
             {
                 bool EggFlag = val.IsEgg || val.WasEgg || val.IsTradedEgg || val.WasTradedEgg || val.MetLevel <= 1;
-                if (VersionFlag.Gen1VCFlag((int)val.Version) || VersionFlag.Gen2VCFlag((int)val.Version))
+                
+                if(VersionFlag.Gen1VCFlag(val.Version)||
+                    VersionFlag.Gen2VCFlag(val.Version))
                 {
-                    pkm.PID = ShinyPID(val);
+                    pkm.IV_ATK = 15;
+                    pkm.IV_DEF = 10;
+                    pkm.IV_SPA = 10;
+                    pkm.IV_SPD = 10;
+                    pkm.IV_SPE = 10;
+                
                 }
                 if (VersionFlag.Gen3Flag((int)val.Version) ||
                     VersionFlag.Gen4Flag((int)val.Version) ||
@@ -471,7 +479,7 @@ namespace WangPluginPkm.GUI
             PKM val = pkm.Clone();
             PKM va = pkm.Clone();
             bool EggFlag = val.IsEgg || val.WasEgg || val.IsTradedEgg || val.WasTradedEgg || val.MetLevel <= 1;
-            if (VersionFlag.Gen1VCFlag((int)val.Version) || VersionFlag.Gen2VCFlag((int)val.Version))
+            if (VersionFlag.Gen1VCFlag(val.Version) || VersionFlag.Gen2VCFlag(val.Version))
             {
                 pkm.PID = ShinyPID(val);
             }

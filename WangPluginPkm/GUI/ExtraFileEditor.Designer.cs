@@ -9,6 +9,16 @@ namespace WangPluginPkm.GUI
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExtraFileEditor));
             OpenFile_Dialog = new OpenFileDialog();
             PKLEditor = new TabPage();
+            SP_TB = new TextBox();
+            Sp_LB = new Label();
+            OT_TB = new TextBox();
+            OT_Name = new Label();
+            Tittle_TB = new TextBox();
+            Tittle_LB = new Label();
+            Header_LB = new Label();
+            Header_TB = new TextBox();
+            ID_LB = new Label();
+            M_ID = new TextBox();
             PKL_CLB = new CheckedListBox();
             import_BTN = new Button();
             EH1tabPage = new TabPage();
@@ -47,7 +57,7 @@ namespace WangPluginPkm.GUI
             Atk_Label = new Label();
             Def_Label = new Label();
             PKM_TabControl = new TabControl();
-            PKL_TEXT = new TextBox();
+            ADD_BTN = new Button();
             PKLEditor.SuspendLayout();
             EH1tabPage.SuspendLayout();
             groupBox4.SuspendLayout();
@@ -62,7 +72,17 @@ namespace WangPluginPkm.GUI
             // 
             // PKLEditor
             // 
-            PKLEditor.Controls.Add(PKL_TEXT);
+            PKLEditor.Controls.Add(ADD_BTN);
+            PKLEditor.Controls.Add(SP_TB);
+            PKLEditor.Controls.Add(Sp_LB);
+            PKLEditor.Controls.Add(OT_TB);
+            PKLEditor.Controls.Add(OT_Name);
+            PKLEditor.Controls.Add(Tittle_TB);
+            PKLEditor.Controls.Add(Tittle_LB);
+            PKLEditor.Controls.Add(Header_LB);
+            PKLEditor.Controls.Add(Header_TB);
+            PKLEditor.Controls.Add(ID_LB);
+            PKLEditor.Controls.Add(M_ID);
             PKLEditor.Controls.Add(PKL_CLB);
             PKLEditor.Controls.Add(import_BTN);
             PKLEditor.Location = new System.Drawing.Point(4, 24);
@@ -72,6 +92,86 @@ namespace WangPluginPkm.GUI
             PKLEditor.TabIndex = 3;
             PKLEditor.Text = "PKLEditor(WC9)";
             PKLEditor.UseVisualStyleBackColor = true;
+            // 
+            // SP_TB
+            // 
+            SP_TB.Location = new System.Drawing.Point(250, 67);
+            SP_TB.Name = "SP_TB";
+            SP_TB.Size = new System.Drawing.Size(106, 21);
+            SP_TB.TabIndex = 11;
+            // 
+            // Sp_LB
+            // 
+            Sp_LB.AutoSize = true;
+            Sp_LB.Location = new System.Drawing.Point(211, 67);
+            Sp_LB.Name = "Sp_LB";
+            Sp_LB.Size = new System.Drawing.Size(31, 15);
+            Sp_LB.TabIndex = 10;
+            Sp_LB.Text = "种类";
+            // 
+            // OT_TB
+            // 
+            OT_TB.Location = new System.Drawing.Point(411, 33);
+            OT_TB.Name = "OT_TB";
+            OT_TB.Size = new System.Drawing.Size(118, 21);
+            OT_TB.TabIndex = 9;
+            // 
+            // OT_Name
+            // 
+            OT_Name.AutoSize = true;
+            OT_Name.Location = new System.Drawing.Point(362, 36);
+            OT_Name.Name = "OT_Name";
+            OT_Name.Size = new System.Drawing.Size(43, 15);
+            OT_Name.TabIndex = 8;
+            OT_Name.Text = "初训家";
+            // 
+            // Tittle_TB
+            // 
+            Tittle_TB.Location = new System.Drawing.Point(250, 33);
+            Tittle_TB.Name = "Tittle_TB";
+            Tittle_TB.Size = new System.Drawing.Size(106, 21);
+            Tittle_TB.TabIndex = 7;
+            // 
+            // Tittle_LB
+            // 
+            Tittle_LB.AutoSize = true;
+            Tittle_LB.Location = new System.Drawing.Point(211, 36);
+            Tittle_LB.Name = "Tittle_LB";
+            Tittle_LB.Size = new System.Drawing.Size(33, 15);
+            Tittle_LB.TabIndex = 6;
+            Tittle_LB.Text = "Tittle";
+            // 
+            // Header_LB
+            // 
+            Header_LB.AutoSize = true;
+            Header_LB.Location = new System.Drawing.Point(308, 9);
+            Header_LB.Name = "Header_LB";
+            Header_LB.Size = new System.Drawing.Size(48, 15);
+            Header_LB.TabIndex = 5;
+            Header_LB.Text = "Header";
+            // 
+            // Header_TB
+            // 
+            Header_TB.Location = new System.Drawing.Point(357, 6);
+            Header_TB.Name = "Header_TB";
+            Header_TB.Size = new System.Drawing.Size(172, 21);
+            Header_TB.TabIndex = 4;
+            // 
+            // ID_LB
+            // 
+            ID_LB.AutoSize = true;
+            ID_LB.Location = new System.Drawing.Point(211, 9);
+            ID_LB.Name = "ID_LB";
+            ID_LB.Size = new System.Drawing.Size(19, 15);
+            ID_LB.TabIndex = 3;
+            ID_LB.Text = "ID";
+            // 
+            // M_ID
+            // 
+            M_ID.Location = new System.Drawing.Point(236, 6);
+            M_ID.Name = "M_ID";
+            M_ID.Size = new System.Drawing.Size(66, 21);
+            M_ID.TabIndex = 2;
             // 
             // PKL_CLB
             // 
@@ -444,25 +544,27 @@ namespace WangPluginPkm.GUI
             // PKM_TabControl
             // 
             PKM_TabControl.Controls.Add(GP1Tab);
-            PKM_TabControl.Controls.Add(EH1tabPage);
             PKM_TabControl.Controls.Add(PKLEditor);
+            PKM_TabControl.Controls.Add(EH1tabPage);
             PKM_TabControl.Location = new System.Drawing.Point(12, 12);
             PKM_TabControl.Name = "PKM_TabControl";
             PKM_TabControl.SelectedIndex = 0;
             PKM_TabControl.Size = new System.Drawing.Size(543, 276);
             PKM_TabControl.TabIndex = 30;
             // 
-            // PKL_TEXT
+            // ADD_BTN
             // 
-            PKL_TEXT.Location = new System.Drawing.Point(211, 6);
-            PKL_TEXT.Multiline = true;
-            PKL_TEXT.Name = "PKL_TEXT";
-            PKL_TEXT.Size = new System.Drawing.Size(318, 212);
-            PKL_TEXT.TabIndex = 2;
+            ADD_BTN.Location = new System.Drawing.Point(308, 219);
+            ADD_BTN.Name = "ADD_BTN";
+            ADD_BTN.Size = new System.Drawing.Size(138, 23);
+            ADD_BTN.TabIndex = 12;
+            ADD_BTN.Text = "将现有WC9写入PKL";
+            ADD_BTN.UseVisualStyleBackColor = true;
+            ADD_BTN.Click += ADD_BTN_Click;
             // 
             // ExtraFileEditor
             // 
-            ClientSize = new System.Drawing.Size(565, 294);
+            ClientSize = new System.Drawing.Size(559, 294);
             Controls.Add(PKM_TabControl);
             Font = new System.Drawing.Font("Arial", 9F);
             FormBorderStyle = FormBorderStyle.Fixed3D;
@@ -522,6 +624,16 @@ namespace WangPluginPkm.GUI
         private Label Atk_Label;
         private Label Def_Label;
         private TabControl PKM_TabControl;
-        private TextBox PKL_TEXT;
+        private TextBox M_ID;
+        private Label ID_LB;
+        private Label Header_LB;
+        private TextBox Header_TB;
+        private TextBox Tittle_TB;
+        private Label Tittle_LB;
+        private Label OT_Name;
+        private TextBox OT_TB;
+        private TextBox SP_TB;
+        private Label Sp_LB;
+        private Button ADD_BTN;
     }
 }
