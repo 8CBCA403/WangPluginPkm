@@ -12,10 +12,10 @@ namespace WangPluginPkm.GUI
     {
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
-
+        private WC9 SWC9;
         private GP1M gp = new();
         private GP1 gpm = new();
-
+        public static GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
         private const string GoFilter = "Go Park Entity |*.gp1|All Files|*.*";
         private const string PK8Filter = "SWSH/PLA pokemon file |*.pb8|*.pa8|All Files|*.*";
         private const string PA8Filter = "PLA file |*.pa8|All Files|*.*";
@@ -23,8 +23,6 @@ namespace WangPluginPkm.GUI
         private static WC9[] GetWC9DB(ReadOnlySpan<byte> bin) => Get(bin, WC9.Size, static d => new WC9(d));
         private static T[] Get<T>(ReadOnlySpan<byte> bin, int size, Func<byte[], T> ctor)
         {
-            // bin is a multiple of size
-            // bin.Length % size == 0
             var result = new T[bin.Length / size];
             Debug.Assert(result.Length * size == bin.Length);
             for (int i = 0; i < result.Length; i++)
@@ -322,38 +320,104 @@ namespace WangPluginPkm.GUI
         }
         private void import_BTN_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = "选择文件";
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            openFileDialog.Filter = "pkl文件|*.pkl|所有文件|*.*";
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Title = "选择文件",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                Filter = "pkl文件|*.pkl|单个wc9文件|*.wc9|所有文件|*.*"
+            };
+
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string selectedFileName = openFileDialog.FileName;
-                using (FileStream resource = File.OpenRead(selectedFileName))
+
+                try
                 {
-                    var rawDB = GetBinary(resource);
-                    if (rawDB != null)
+                    using (FileStream resource = File.OpenRead(selectedFileName))
                     {
-                        MGDB_G9 = GetWC9DB(rawDB);
-                        PKL_CLB.DataSource = MGDB_G9;
-                        PKL_CLB.DisplayMember = "CardID";
-                        PKL_CLB.ValueMember = "CardID";
+                        byte[] rawDB = GetBinary(resource);
+                        if (rawDB != null && rawDB.Length > 0)
+                        {
+                            if (selectedFileName.EndsWith(".pkl", StringComparison.OrdinalIgnoreCase))
+                            {
+                                // 处理为 WC9 集合
+                                MGDB_G9 = GetWC9DB(rawDB); // 将 byte[] 转换为 WC9 对象列表
+                                if (MGDB_G9 != null && MGDB_G9.Length > 0)
+                                {
+                                    PKL_CLB.DataSource = MGDB_G9;
+                                    PKL_CLB.DisplayMember = "CardID";
+                                    PKL_CLB.ValueMember = "CardID";
+                                }
+                                else
+                                {
+                                    MessageBox.Show("无法解析所选文件，请检查文件内容是否正确！");
+                                }
+                            }
+                            else if (selectedFileName.EndsWith(".wc9", StringComparison.OrdinalIgnoreCase))
+                            {
+                                // 处理为单个 WC9 文件
+                                WC9 singleWC9 = new(rawDB); // 假设 ParseSingleWC9 方法用于解析单个 WC9 文件
+                                SWC9 = singleWC9;
+                                if (singleWC9 != null)
+                                {
+                                    // 将单个对象放入列表中，以便于显示
+                                    M_ID.Text = singleWC9.CardTitleIndex.ToString();
+                                    Header_TB.Text = singleWC9.CardHeader.ToString();
+                                    Tittle_TB.Text = singleWC9.CardTitle.ToString();
+                                    OT_TB.Text = singleWC9.GetOT(SAV.SAV.Language).ToString();
+                                    SP_TB.Text = GameStringsZh.Species[singleWC9.Species];
+                                }
+                                else
+                                {
+                                    MessageBox.Show("无法解析所选文件，请检查文件内容是否正确！");
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("不支持的文件类型！");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("所选文件为空或无法读取，请确认文件是否损坏！");
+                        }
                     }
-                    else
-                        MessageBox.Show("所选文件为空！");
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    MessageBox.Show("无法访问文件，请确保你有足够的权限读取该文件。");
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show($"文件读取出错：{ex.Message}");
+                }
+                catch (FormatException ex)
+                {
+                    MessageBox.Show($"文件格式不正确：{ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"发生未知错误：{ex.Message}");
                 }
             }
-            else
-            {
-                MessageBox.Show("用户取消了文件选择。");
-            }
-
         }
+
+
 
         private void PKL_CLB_SelectedIndexChanged(object sender, EventArgs e)
         {
+            M_ID.Text = MGDB_G9[PKL_CLB.SelectedIndex].CardTitleIndex.ToString();
+            Header_TB.Text = MGDB_G9[PKL_CLB.SelectedIndex].CardHeader.ToString();
+            Tittle_TB.Text = MGDB_G9[PKL_CLB.SelectedIndex].CardTitle.ToString();
+            OT_TB.Text = MGDB_G9[PKL_CLB.SelectedIndex].GetOT(SAV.SAV.Language).ToString();
+            SP_TB.Text = GameStringsZh.Species[MGDB_G9[PKL_CLB.SelectedIndex].Species];
 
-            PKL_TEXT.Text += MGDB_G9[PKL_CLB.SelectedIndex].CardTitleIndex.ToString() + "\r\n";
         }
+
+        private void ADD_BTN_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
