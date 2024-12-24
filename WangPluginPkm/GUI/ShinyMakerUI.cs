@@ -147,10 +147,10 @@ namespace WangPluginPkm.GUI
                     pkm.IV_SPE = 10;
                 
                 }
-                if (VersionFlag.Gen3Flag((int)val.Version) ||
-                    VersionFlag.Gen4Flag((int)val.Version) ||
-                    VersionFlag.Gen5Flag((int)val.Version) ||
-                    VersionFlag.CXDFlag((int)val.Version))
+                if (VersionFlag.Gen3Flag(val.Version) ||
+                    VersionFlag.Gen4Flag(val.Version) ||
+                    VersionFlag.Gen5Flag(val.Version) ||
+                    VersionFlag.CXDFlag(val.Version))
                 {
                     if (EggFlag)
                     {
@@ -174,7 +174,7 @@ namespace WangPluginPkm.GUI
                         pkm.RefreshChecksum();
 
                     }
-                    if ((!EggFlag) && (!VersionFlag.CXDFlag((int)val.Version)))
+                    if ((!EggFlag) && (!VersionFlag.CXDFlag(val.Version)))
                     {
                         const int maxResults = LCRNG.MaxCountSeedsIV;
                         Span<uint> seeds = stackalloc uint[maxResults];
@@ -218,7 +218,7 @@ namespace WangPluginPkm.GUI
                         }
                         pkm.RefreshChecksum();
                     }
-                    if (VersionFlag.CXDFlag((int)val.Version) && !GiftAndStarter.XDCGFFlag(val.Species))
+                    if (VersionFlag.CXDFlag(val.Version) && !GiftAndStarter.XDCGFFlag(val.Species))
                     {
 
                         const int maxResults = XDRNG.MaxCountSeedsIV;
@@ -261,13 +261,13 @@ namespace WangPluginPkm.GUI
                     }
 
                 }
-                if (VersionFlag.Gen6Flag((int)val.Version) ||
-                    VersionFlag.Gen7Flag((int)val.Version))
+                if (VersionFlag.Gen6Flag(val.Version) ||
+                    VersionFlag.Gen7Flag(val.Version))
                 {
                     pkm.PID = ShinyPID(val);
                     CommonEdits.SetRandomEC(pkm);
                 }
-                if (VersionFlag.Gen8SWSHFlag((int)val.Version))
+                if (VersionFlag.Gen8SWSHFlag(val.Version))
                 {
                     pkm.PID = Util.Rand32();
                     if (EggFlag || pkm.MetLocation == 162)
@@ -302,17 +302,17 @@ namespace WangPluginPkm.GUI
                         }
                     }
                 }
-                if (VersionFlag.Gen8PLAFlag((int)val.Version))
+                if (VersionFlag.Gen8PLAFlag(val.Version))
                 {
                     pkm.PID = ShinyPID(val);
                     CommonEdits.SetRandomEC(pkm);
                 }
-                if (VersionFlag.Gen8BDSPFlag((int)val.Version))
+                if (VersionFlag.Gen8BDSPFlag(val.Version))
                 {
                     pkm.PID = ShinyPID(val);
                     CommonEdits.SetRandomEC(pkm);
                 }
-                if (VersionFlag.Gen9Flag((int)val.Version))
+                if (VersionFlag.Gen9Flag(val.Version))
                 {
                     pkm.PID = ShinyPID(val);
                     CommonEdits.SetRandomEC(pkm);
@@ -483,10 +483,10 @@ namespace WangPluginPkm.GUI
             {
                 pkm.PID = ShinyPID(val);
             }
-            if (VersionFlag.Gen3Flag((int)val.Version) ||
-                VersionFlag.Gen4Flag((int)val.Version) ||
-                VersionFlag.Gen5Flag((int)val.Version) ||
-                VersionFlag.CXDFlag((int)val.Version))
+            if (VersionFlag.Gen3Flag(val.Version) ||
+                VersionFlag.Gen4Flag(val.Version) ||
+                VersionFlag.Gen5Flag(val.Version) ||
+                VersionFlag.CXDFlag(val.Version))
             {
                 if (EggFlag)
                 {
@@ -510,7 +510,7 @@ namespace WangPluginPkm.GUI
                     pkm.RefreshChecksum();
 
                 }
-                if ((!EggFlag) && (!VersionFlag.CXDFlag((int)val.Version)))
+                if ((!EggFlag) && (!VersionFlag.CXDFlag(val.Version)))
                 {
                     const int maxResults = LCRNG.MaxCountSeedsIV;
                     Span<uint> seeds = stackalloc uint[maxResults];
@@ -554,7 +554,7 @@ namespace WangPluginPkm.GUI
                     }
                     pkm.RefreshChecksum();
                 }
-                if (VersionFlag.CXDFlag((int)val.Version) && !GiftAndStarter.XDCGFFlag(val.Species))
+                if (VersionFlag.CXDFlag(val.Version) && !GiftAndStarter.XDCGFFlag(val.Species))
                 {
 
                     const int maxResults = XDRNG.MaxCountSeedsIV;
@@ -597,13 +597,13 @@ namespace WangPluginPkm.GUI
                 }
 
             }
-            if (VersionFlag.Gen6Flag((int)val.Version) ||
-                VersionFlag.Gen7Flag((int)val.Version))
+            if (VersionFlag.Gen6Flag(val.Version) ||
+                VersionFlag.Gen7Flag(val.Version))
             {
                 pkm.PID = ShinyPID(val);
                 CommonEdits.SetRandomEC(pkm);
             }
-            if (VersionFlag.Gen8SWSHFlag((int)val.Version))
+            if (VersionFlag.Gen8SWSHFlag(val.Version))
             {
                 pkm.PID = Util.Rand32();
                 if (EggFlag || pkm.MetLocation == 162)
@@ -638,17 +638,17 @@ namespace WangPluginPkm.GUI
                     }
                 }
             }
-            if (VersionFlag.Gen8PLAFlag((int)val.Version))
+            if (VersionFlag.Gen8PLAFlag(val.Version))
             {
                 pkm.PID = ShinyPID(val);
                 CommonEdits.SetRandomEC(pkm);
             }
-            if (VersionFlag.Gen8BDSPFlag((int)val.Version))
+            if (VersionFlag.Gen8BDSPFlag(val.Version))
             {
                 pkm.PID = ShinyPID(val);
                 CommonEdits.SetRandomEC(pkm);
             }
-            if (VersionFlag.Gen9Flag((int)val.Version))
+            if (VersionFlag.Gen9Flag(val.Version))
             {
                 pkm.PID = ShinyPID(val);
                 CommonEdits.SetRandomEC(pkm);
