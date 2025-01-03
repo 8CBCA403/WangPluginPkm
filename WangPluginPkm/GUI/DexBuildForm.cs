@@ -675,7 +675,6 @@ namespace WangPluginPkm.GUI
                 MessageBox.Show($"Box {boxNum} Slot {slotNum} is already empty");
             }
         }
-
         private void Run_BTN_Click(object sender, EventArgs e)
         {
             var PKL = new List<PKM>();
@@ -1023,7 +1022,6 @@ namespace WangPluginPkm.GUI
             }
             SAV.ReloadSlots();
         }
-
         private void GenDex_BTN_Click(object sender, EventArgs e)
         {
             if (SAV.SAV.Version != GameVersion.US && SAV.SAV.Version != GameVersion.UM)
@@ -1131,7 +1129,6 @@ namespace WangPluginPkm.GUI
         }
         */
         #endregion
-
         private void AchieveCheck_BTN_Click(object sender, EventArgs e)
         {
             var PL = SAV.SAV.GetAllPKM();
@@ -1401,7 +1398,6 @@ namespace WangPluginPkm.GUI
             }
 
         }
-
         private void Check_BTN_Click(object sender, EventArgs e)
         {
             SAV.ReloadSlots();
@@ -1427,9 +1423,6 @@ namespace WangPluginPkm.GUI
                 MessageBox.Show("太棒啦全对！");
             }
         }
-
-       
-
         private void Clear_Trash_BTN_Click(object sender, EventArgs e)
         {
             SAV.SAV.ModifyBoxes(ClearTrash);

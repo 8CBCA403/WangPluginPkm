@@ -929,8 +929,6 @@ namespace WangPluginPkm.GUI
 
          }*/
         #endregion
-
-
         private AutoCompleteStringCollection auto(string[] array)
         {
             var autoComplete = new AutoCompleteStringCollection();
@@ -1001,8 +999,6 @@ namespace WangPluginPkm.GUI
                 }
             }
         }
-
-
         private void Start_BTN_Click(object sender, EventArgs e)
         {
             ModifyBoxes(mod, SAV.SAV.Generation, (int)StartBox_NUM.Value - 1, (int)Start_NUM.Value - 1, (int)EndBox_NUM.Value - 1, (int)End_NUM.Value - 1);
@@ -1064,7 +1060,6 @@ namespace WangPluginPkm.GUI
             }
             return boxbuffer;
         }
-
         private void Quick_Write_BTN_Click(object sender, EventArgs e)
         {
             int i = 0;
@@ -1084,7 +1079,6 @@ namespace WangPluginPkm.GUI
             MessageBox.Show("速配推荐努力值完成！");
 
         }
-
         private void EditEV(PKM pk)
         {
             Span<int> values = stackalloc int[6];
