@@ -402,8 +402,6 @@ namespace WangPluginPkm.GUI
             }
         }
 
-
-
         private void PKL_CLB_SelectedIndexChanged(object sender, EventArgs e)
         {
             M_ID.Text = MGDB_G9[PKL_CLB.SelectedIndex].CardTitleIndex.ToString();

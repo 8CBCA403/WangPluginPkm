@@ -807,7 +807,6 @@ namespace WangPluginPkm.GUI
             var form = new SeedIntro();
             form.Show();
         }
-
         private void CalcBTN_Click(object sender, EventArgs e)
         {
             if (SeedCheckBox.Text == "")
@@ -818,7 +817,6 @@ namespace WangPluginPkm.GUI
             GenPkm(ref pkm, vOut);
             IVCheckBox.Text = $"{pkm.IV_HP}/{pkm.IV_ATK}/{pkm.IV_DEF}/{pkm.IV_SPA}/{pkm.IV_SPD}/{pkm.IV_SPE}";
         }
-
         private void Start_BTN_Click(object sender, EventArgs e)
         {
             if (!Int32.TryParse(StepBox.Text, out NumOfCountsPerThread))
@@ -902,17 +900,11 @@ namespace WangPluginPkm.GUI
         {
             CheckedListBox list = sender as CheckedListBox;
             if (list == null) return;
-
-            // 注意：由于ItemCheck事件在项的状态实际改变前触发，
-            // 所以你可能需要在此事件处理器中使用BeginInvoke来延迟执行方法调用，
-            // 以确保你访问的是项改变后的状态。
             this.BeginInvoke((MethodInvoker)delegate
             {
-                // 验证e.Index范围
                 if (e.Index >= 0 && e.Index < list.Items.Count)
                 {
                     var item = list.Items[e.Index];
-                    // 假设item是你的自定义对象，需要转换
                     PKwithName yourObject = item as PKwithName;
                     SAV.SAV.SetBoxSlotAtIndex(yourObject.OriginalItem, 0, 0);
                     SAV.ReloadSlots();
@@ -930,7 +922,5 @@ namespace WangPluginPkm.GUI
                 cancellationToken.Cancel(); // 发送取消请求
             }
         }
-
-
     }
 }

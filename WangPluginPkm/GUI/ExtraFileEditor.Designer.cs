@@ -9,6 +9,7 @@ namespace WangPluginPkm.GUI
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExtraFileEditor));
             OpenFile_Dialog = new OpenFileDialog();
             PKLEditor = new TabPage();
+            ADD_BTN = new Button();
             SP_TB = new TextBox();
             Sp_LB = new Label();
             OT_TB = new TextBox();
@@ -57,7 +58,6 @@ namespace WangPluginPkm.GUI
             Atk_Label = new Label();
             Def_Label = new Label();
             PKM_TabControl = new TabControl();
-            ADD_BTN = new Button();
             PKLEditor.SuspendLayout();
             EH1tabPage.SuspendLayout();
             groupBox4.SuspendLayout();
@@ -85,19 +85,29 @@ namespace WangPluginPkm.GUI
             PKLEditor.Controls.Add(M_ID);
             PKLEditor.Controls.Add(PKL_CLB);
             PKLEditor.Controls.Add(import_BTN);
-            PKLEditor.Location = new System.Drawing.Point(4, 24);
+            PKLEditor.Location = new System.Drawing.Point(4, 29);
             PKLEditor.Name = "PKLEditor";
             PKLEditor.Padding = new Padding(3);
-            PKLEditor.Size = new System.Drawing.Size(535, 248);
+            PKLEditor.Size = new System.Drawing.Size(535, 243);
             PKLEditor.TabIndex = 3;
             PKLEditor.Text = "PKLEditor(WC9)";
             PKLEditor.UseVisualStyleBackColor = true;
+            // 
+            // ADD_BTN
+            // 
+            ADD_BTN.Location = new System.Drawing.Point(308, 219);
+            ADD_BTN.Name = "ADD_BTN";
+            ADD_BTN.Size = new System.Drawing.Size(138, 23);
+            ADD_BTN.TabIndex = 12;
+            ADD_BTN.Text = "将现有WC9写入PKL";
+            ADD_BTN.UseVisualStyleBackColor = true;
+            ADD_BTN.Click += ADD_BTN_Click;
             // 
             // SP_TB
             // 
             SP_TB.Location = new System.Drawing.Point(250, 67);
             SP_TB.Name = "SP_TB";
-            SP_TB.Size = new System.Drawing.Size(106, 21);
+            SP_TB.Size = new System.Drawing.Size(106, 25);
             SP_TB.TabIndex = 11;
             // 
             // Sp_LB
@@ -105,7 +115,7 @@ namespace WangPluginPkm.GUI
             Sp_LB.AutoSize = true;
             Sp_LB.Location = new System.Drawing.Point(211, 67);
             Sp_LB.Name = "Sp_LB";
-            Sp_LB.Size = new System.Drawing.Size(31, 15);
+            Sp_LB.Size = new System.Drawing.Size(40, 17);
             Sp_LB.TabIndex = 10;
             Sp_LB.Text = "种类";
             // 
@@ -113,7 +123,7 @@ namespace WangPluginPkm.GUI
             // 
             OT_TB.Location = new System.Drawing.Point(411, 33);
             OT_TB.Name = "OT_TB";
-            OT_TB.Size = new System.Drawing.Size(118, 21);
+            OT_TB.Size = new System.Drawing.Size(118, 25);
             OT_TB.TabIndex = 9;
             // 
             // OT_Name
@@ -121,7 +131,7 @@ namespace WangPluginPkm.GUI
             OT_Name.AutoSize = true;
             OT_Name.Location = new System.Drawing.Point(362, 36);
             OT_Name.Name = "OT_Name";
-            OT_Name.Size = new System.Drawing.Size(43, 15);
+            OT_Name.Size = new System.Drawing.Size(56, 17);
             OT_Name.TabIndex = 8;
             OT_Name.Text = "初训家";
             // 
@@ -129,7 +139,7 @@ namespace WangPluginPkm.GUI
             // 
             Tittle_TB.Location = new System.Drawing.Point(250, 33);
             Tittle_TB.Name = "Tittle_TB";
-            Tittle_TB.Size = new System.Drawing.Size(106, 21);
+            Tittle_TB.Size = new System.Drawing.Size(106, 25);
             Tittle_TB.TabIndex = 7;
             // 
             // Tittle_LB
@@ -137,7 +147,7 @@ namespace WangPluginPkm.GUI
             Tittle_LB.AutoSize = true;
             Tittle_LB.Location = new System.Drawing.Point(211, 36);
             Tittle_LB.Name = "Tittle_LB";
-            Tittle_LB.Size = new System.Drawing.Size(33, 15);
+            Tittle_LB.Size = new System.Drawing.Size(38, 17);
             Tittle_LB.TabIndex = 6;
             Tittle_LB.Text = "Tittle";
             // 
@@ -146,7 +156,7 @@ namespace WangPluginPkm.GUI
             Header_LB.AutoSize = true;
             Header_LB.Location = new System.Drawing.Point(308, 9);
             Header_LB.Name = "Header_LB";
-            Header_LB.Size = new System.Drawing.Size(48, 15);
+            Header_LB.Size = new System.Drawing.Size(55, 17);
             Header_LB.TabIndex = 5;
             Header_LB.Text = "Header";
             // 
@@ -154,7 +164,7 @@ namespace WangPluginPkm.GUI
             // 
             Header_TB.Location = new System.Drawing.Point(357, 6);
             Header_TB.Name = "Header_TB";
-            Header_TB.Size = new System.Drawing.Size(172, 21);
+            Header_TB.Size = new System.Drawing.Size(172, 25);
             Header_TB.TabIndex = 4;
             // 
             // ID_LB
@@ -162,7 +172,7 @@ namespace WangPluginPkm.GUI
             ID_LB.AutoSize = true;
             ID_LB.Location = new System.Drawing.Point(211, 9);
             ID_LB.Name = "ID_LB";
-            ID_LB.Size = new System.Drawing.Size(19, 15);
+            ID_LB.Size = new System.Drawing.Size(22, 17);
             ID_LB.TabIndex = 3;
             ID_LB.Text = "ID";
             // 
@@ -170,7 +180,7 @@ namespace WangPluginPkm.GUI
             // 
             M_ID.Location = new System.Drawing.Point(236, 6);
             M_ID.Name = "M_ID";
-            M_ID.Size = new System.Drawing.Size(66, 21);
+            M_ID.Size = new System.Drawing.Size(66, 25);
             M_ID.TabIndex = 2;
             // 
             // PKL_CLB
@@ -178,7 +188,7 @@ namespace WangPluginPkm.GUI
             PKL_CLB.FormattingEnabled = true;
             PKL_CLB.Location = new System.Drawing.Point(6, 6);
             PKL_CLB.Name = "PKL_CLB";
-            PKL_CLB.Size = new System.Drawing.Size(199, 212);
+            PKL_CLB.Size = new System.Drawing.Size(199, 204);
             PKL_CLB.TabIndex = 1;
             PKL_CLB.SelectedIndexChanged += PKL_CLB_SelectedIndexChanged;
             // 
@@ -196,10 +206,10 @@ namespace WangPluginPkm.GUI
             // 
             EH1tabPage.BackColor = System.Drawing.Color.WhiteSmoke;
             EH1tabPage.Controls.Add(groupBox4);
-            EH1tabPage.Location = new System.Drawing.Point(4, 26);
+            EH1tabPage.Location = new System.Drawing.Point(4, 29);
             EH1tabPage.Name = "EH1tabPage";
             EH1tabPage.Padding = new Padding(3);
-            EH1tabPage.Size = new System.Drawing.Size(535, 246);
+            EH1tabPage.Size = new System.Drawing.Size(535, 243);
             EH1tabPage.TabIndex = 1;
             EH1tabPage.Text = "EH1Viewer";
             // 
@@ -219,7 +229,7 @@ namespace WangPluginPkm.GUI
             // 
             BOX_TextBox.Location = new System.Drawing.Point(44, 17);
             BOX_TextBox.Name = "BOX_TextBox";
-            BOX_TextBox.Size = new System.Drawing.Size(65, 21);
+            BOX_TextBox.Size = new System.Drawing.Size(65, 25);
             BOX_TextBox.TabIndex = 1;
             BOX_TextBox.Text = "1";
             // 
@@ -240,7 +250,7 @@ namespace WangPluginPkm.GUI
             BOX_Label.Font = new System.Drawing.Font("黑体", 9F);
             BOX_Label.Location = new System.Drawing.Point(6, 21);
             BOX_Label.Name = "BOX_Label";
-            BOX_Label.Size = new System.Drawing.Size(29, 12);
+            BOX_Label.Size = new System.Drawing.Size(39, 15);
             BOX_Label.TabIndex = 2;
             BOX_Label.Text = "箱子";
             // 
@@ -276,10 +286,10 @@ namespace WangPluginPkm.GUI
             GP1Tab.Controls.Add(HP_Label);
             GP1Tab.Controls.Add(Atk_Label);
             GP1Tab.Controls.Add(Def_Label);
-            GP1Tab.Location = new System.Drawing.Point(4, 24);
+            GP1Tab.Location = new System.Drawing.Point(4, 26);
             GP1Tab.Name = "GP1Tab";
             GP1Tab.Padding = new Padding(3);
-            GP1Tab.Size = new System.Drawing.Size(535, 248);
+            GP1Tab.Size = new System.Drawing.Size(535, 246);
             GP1Tab.TabIndex = 0;
             GP1Tab.Text = "GP1Editor";
             // 
@@ -288,7 +298,7 @@ namespace WangPluginPkm.GUI
             GenderBox.FormattingEnabled = true;
             GenderBox.Location = new System.Drawing.Point(213, 17);
             GenderBox.Name = "GenderBox";
-            GenderBox.Size = new System.Drawing.Size(69, 23);
+            GenderBox.Size = new System.Drawing.Size(69, 25);
             GenderBox.TabIndex = 20;
             // 
             // GeoName_Label
@@ -297,7 +307,7 @@ namespace WangPluginPkm.GUI
             GeoName_Label.Font = new System.Drawing.Font("黑体", 9F);
             GeoName_Label.Location = new System.Drawing.Point(32, 145);
             GeoName_Label.Name = "GeoName_Label";
-            GeoName_Label.Size = new System.Drawing.Size(53, 12);
+            GeoName_Label.Size = new System.Drawing.Size(71, 15);
             GeoName_Label.TabIndex = 29;
             GeoName_Label.Text = "地理位置";
             // 
@@ -316,77 +326,77 @@ namespace WangPluginPkm.GUI
             // 
             GeoName_TextBox.Location = new System.Drawing.Point(101, 140);
             GeoName_TextBox.Name = "GeoName_TextBox";
-            GeoName_TextBox.Size = new System.Drawing.Size(386, 21);
+            GeoName_TextBox.Size = new System.Drawing.Size(386, 25);
             GeoName_TextBox.TabIndex = 28;
             // 
             // SpeciesBox
             // 
             SpeciesBox.Location = new System.Drawing.Point(101, 17);
             SpeciesBox.Name = "SpeciesBox";
-            SpeciesBox.Size = new System.Drawing.Size(106, 21);
+            SpeciesBox.Size = new System.Drawing.Size(106, 25);
             SpeciesBox.TabIndex = 3;
             // 
             // HP_TextBox
             // 
             HP_TextBox.Location = new System.Drawing.Point(323, 17);
             HP_TextBox.Name = "HP_TextBox";
-            HP_TextBox.Size = new System.Drawing.Size(27, 21);
+            HP_TextBox.Size = new System.Drawing.Size(27, 25);
             HP_TextBox.TabIndex = 4;
             // 
             // MetDate_TextBox
             // 
             MetDate_TextBox.Location = new System.Drawing.Point(101, 109);
             MetDate_TextBox.Name = "MetDate_TextBox";
-            MetDate_TextBox.Size = new System.Drawing.Size(106, 21);
+            MetDate_TextBox.Size = new System.Drawing.Size(106, 25);
             MetDate_TextBox.TabIndex = 24;
             // 
             // OriginalTrainerName
             // 
             OriginalTrainerName.Location = new System.Drawing.Point(101, 78);
             OriginalTrainerName.Name = "OriginalTrainerName";
-            OriginalTrainerName.Size = new System.Drawing.Size(106, 21);
+            OriginalTrainerName.Size = new System.Drawing.Size(106, 25);
             OriginalTrainerName.TabIndex = 6;
             // 
             // NickNameBox
             // 
             NickNameBox.Location = new System.Drawing.Point(101, 47);
             NickNameBox.Name = "NickNameBox";
-            NickNameBox.Size = new System.Drawing.Size(106, 21);
+            NickNameBox.Size = new System.Drawing.Size(106, 25);
             NickNameBox.TabIndex = 7;
             // 
             // CP_TextBox
             // 
             CP_TextBox.Location = new System.Drawing.Point(250, 47);
             CP_TextBox.Name = "CP_TextBox";
-            CP_TextBox.Size = new System.Drawing.Size(78, 21);
+            CP_TextBox.Size = new System.Drawing.Size(78, 25);
             CP_TextBox.TabIndex = 22;
             // 
             // Atk_TextBox
             // 
             Atk_TextBox.Location = new System.Drawing.Point(390, 16);
             Atk_TextBox.Name = "Atk_TextBox";
-            Atk_TextBox.Size = new System.Drawing.Size(27, 21);
+            Atk_TextBox.Size = new System.Drawing.Size(27, 25);
             Atk_TextBox.TabIndex = 11;
             // 
             // Def_TextBox
             // 
             Def_TextBox.Location = new System.Drawing.Point(460, 16);
             Def_TextBox.Name = "Def_TextBox";
-            Def_TextBox.Size = new System.Drawing.Size(27, 21);
+            Def_TextBox.Size = new System.Drawing.Size(27, 25);
             Def_TextBox.TabIndex = 12;
             // 
             // Move2_TextBox
             // 
             Move2_TextBox.Location = new System.Drawing.Point(390, 78);
             Move2_TextBox.Name = "Move2_TextBox";
-            Move2_TextBox.Size = new System.Drawing.Size(97, 21);
+            Move2_TextBox.Size = new System.Drawing.Size(97, 25);
             Move2_TextBox.TabIndex = 17;
             // 
             // Move1_TextBox
             // 
             Move1_TextBox.Location = new System.Drawing.Point(390, 47);
             Move1_TextBox.Name = "Move1_TextBox";
-            Move1_TextBox.Size = new System.Drawing.Size(97, 21);
+            Move1_TextBox.Size = new System.Drawing.Size(97, 25);
             Move1_TextBox.TabIndex = 16;
             // 
             // ExportGP_BTN
@@ -406,7 +416,7 @@ namespace WangPluginPkm.GUI
             ShinyCheck.Font = new System.Drawing.Font("黑体", 9F);
             ShinyCheck.Location = new System.Drawing.Point(215, 80);
             ShinyCheck.Name = "ShinyCheck";
-            ShinyCheck.Size = new System.Drawing.Size(48, 16);
+            ShinyCheck.Size = new System.Drawing.Size(61, 19);
             ShinyCheck.TabIndex = 27;
             ShinyCheck.Text = "闪光";
             ShinyCheck.UseVisualStyleBackColor = true;
@@ -428,7 +438,7 @@ namespace WangPluginPkm.GUI
             AlolaForm_Check.Font = new System.Drawing.Font("黑体", 9F);
             AlolaForm_Check.Location = new System.Drawing.Point(215, 111);
             AlolaForm_Check.Name = "AlolaForm_Check";
-            AlolaForm_Check.Size = new System.Drawing.Size(84, 16);
+            AlolaForm_Check.Size = new System.Drawing.Size(109, 19);
             AlolaForm_Check.TabIndex = 26;
             AlolaForm_Check.Text = "阿罗拉形态";
             AlolaForm_Check.UseVisualStyleBackColor = true;
@@ -439,7 +449,7 @@ namespace WangPluginPkm.GUI
             Time_Label.Font = new System.Drawing.Font("黑体", 9F);
             Time_Label.Location = new System.Drawing.Point(32, 114);
             Time_Label.Name = "Time_Label";
-            Time_Label.Size = new System.Drawing.Size(53, 12);
+            Time_Label.Size = new System.Drawing.Size(71, 15);
             Time_Label.TabIndex = 25;
             Time_Label.Text = "相遇时间";
             // 
@@ -448,7 +458,7 @@ namespace WangPluginPkm.GUI
             CP_Label.AutoSize = true;
             CP_Label.Location = new System.Drawing.Point(215, 50);
             CP_Label.Name = "CP_Label";
-            CP_Label.Size = new System.Drawing.Size(24, 15);
+            CP_Label.Size = new System.Drawing.Size(29, 17);
             CP_Label.TabIndex = 23;
             CP_Label.Text = "CP";
             // 
@@ -458,7 +468,7 @@ namespace WangPluginPkm.GUI
             SpeciesLabel.Font = new System.Drawing.Font("黑体", 9F);
             SpeciesLabel.Location = new System.Drawing.Point(56, 22);
             SpeciesLabel.Name = "SpeciesLabel";
-            SpeciesLabel.Size = new System.Drawing.Size(29, 12);
+            SpeciesLabel.Size = new System.Drawing.Size(39, 15);
             SpeciesLabel.TabIndex = 8;
             SpeciesLabel.Text = "种类";
             // 
@@ -480,7 +490,7 @@ namespace WangPluginPkm.GUI
             NickNameLabel.Location = new System.Drawing.Point(56, 52);
             NickNameLabel.Name = "NickNameLabel";
             NickNameLabel.RightToLeft = RightToLeft.No;
-            NickNameLabel.Size = new System.Drawing.Size(29, 12);
+            NickNameLabel.Size = new System.Drawing.Size(39, 15);
             NickNameLabel.TabIndex = 9;
             NickNameLabel.Text = "昵称";
             // 
@@ -490,7 +500,7 @@ namespace WangPluginPkm.GUI
             OriginalTrainerName_Label.Font = new System.Drawing.Font("黑体", 9F);
             OriginalTrainerName_Label.Location = new System.Drawing.Point(20, 84);
             OriginalTrainerName_Label.Name = "OriginalTrainerName_Label";
-            OriginalTrainerName_Label.Size = new System.Drawing.Size(65, 12);
+            OriginalTrainerName_Label.Size = new System.Drawing.Size(87, 15);
             OriginalTrainerName_Label.TabIndex = 10;
             OriginalTrainerName_Label.Text = "初训家名字";
             // 
@@ -500,7 +510,7 @@ namespace WangPluginPkm.GUI
             Move2_label.Font = new System.Drawing.Font("黑体", 9F);
             Move2_label.Location = new System.Drawing.Point(337, 81);
             Move2_label.Name = "Move2_label";
-            Move2_label.Size = new System.Drawing.Size(35, 12);
+            Move2_label.Size = new System.Drawing.Size(47, 15);
             Move2_label.TabIndex = 19;
             Move2_label.Text = "技能2";
             // 
@@ -510,7 +520,7 @@ namespace WangPluginPkm.GUI
             Move1_label.Font = new System.Drawing.Font("黑体", 9F);
             Move1_label.Location = new System.Drawing.Point(337, 52);
             Move1_label.Name = "Move1_label";
-            Move1_label.Size = new System.Drawing.Size(35, 12);
+            Move1_label.Size = new System.Drawing.Size(47, 15);
             Move1_label.TabIndex = 18;
             Move1_label.Text = "技能1";
             // 
@@ -519,7 +529,7 @@ namespace WangPluginPkm.GUI
             HP_Label.AutoSize = true;
             HP_Label.Location = new System.Drawing.Point(289, 20);
             HP_Label.Name = "HP_Label";
-            HP_Label.Size = new System.Drawing.Size(24, 15);
+            HP_Label.Size = new System.Drawing.Size(28, 17);
             HP_Label.TabIndex = 13;
             HP_Label.Text = "HP";
             // 
@@ -528,7 +538,7 @@ namespace WangPluginPkm.GUI
             Atk_Label.AutoSize = true;
             Atk_Label.Location = new System.Drawing.Point(356, 20);
             Atk_Label.Name = "Atk_Label";
-            Atk_Label.Size = new System.Drawing.Size(23, 15);
+            Atk_Label.Size = new System.Drawing.Size(28, 17);
             Atk_Label.TabIndex = 14;
             Atk_Label.Text = "Atk";
             // 
@@ -537,30 +547,20 @@ namespace WangPluginPkm.GUI
             Def_Label.AutoSize = true;
             Def_Label.Location = new System.Drawing.Point(423, 20);
             Def_Label.Name = "Def_Label";
-            Def_Label.Size = new System.Drawing.Size(26, 15);
+            Def_Label.Size = new System.Drawing.Size(31, 17);
             Def_Label.TabIndex = 15;
             Def_Label.Text = "Def";
             // 
             // PKM_TabControl
             // 
             PKM_TabControl.Controls.Add(GP1Tab);
-            PKM_TabControl.Controls.Add(PKLEditor);
             PKM_TabControl.Controls.Add(EH1tabPage);
+            PKM_TabControl.Controls.Add(PKLEditor);
             PKM_TabControl.Location = new System.Drawing.Point(12, 12);
             PKM_TabControl.Name = "PKM_TabControl";
             PKM_TabControl.SelectedIndex = 0;
             PKM_TabControl.Size = new System.Drawing.Size(543, 276);
             PKM_TabControl.TabIndex = 30;
-            // 
-            // ADD_BTN
-            // 
-            ADD_BTN.Location = new System.Drawing.Point(308, 219);
-            ADD_BTN.Name = "ADD_BTN";
-            ADD_BTN.Size = new System.Drawing.Size(138, 23);
-            ADD_BTN.TabIndex = 12;
-            ADD_BTN.Text = "将现有WC9写入PKL";
-            ADD_BTN.UseVisualStyleBackColor = true;
-            ADD_BTN.Click += ADD_BTN_Click;
             // 
             // ExtraFileEditor
             // 
