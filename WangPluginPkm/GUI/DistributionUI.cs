@@ -1028,7 +1028,7 @@ namespace WangPluginPkm.GUI
                             PKM boxSlotAtIndex = SAV.SAV.GetBoxSlotAtIndex(i, j);
                             action(boxSlotAtIndex);
                             num++;
-                            SAV.SAV.SetBoxSlot(boxSlotAtIndex, span, PKMImportSetting.Skip, PKMImportSetting.Skip);
+                            SAV.SAV.SetBoxSlot(boxSlotAtIndex, span, EntityImportSettings.None);
                         }
                     }
                 }
@@ -1044,9 +1044,9 @@ namespace WangPluginPkm.GUI
                 case 3:
                     boxbuffer = ((SAV3)SAV.SAV).Storage;
                     break;
-                case 4:
+              /*  case 4:
                     boxbuffer = ((SAV4)SAV.SAV).Storage;
-                    break;
+                    break;*/
                 case 8:
                     boxbuffer = ((SAV8SWSH)SAV.SAV).BoxInfo.Data;
                     if (SAV.SAV.Version == GameVersion.PLA)

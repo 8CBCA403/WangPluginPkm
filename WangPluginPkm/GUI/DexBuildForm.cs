@@ -658,7 +658,7 @@ namespace WangPluginPkm.GUI
                 while (boxIndex < MAXSlot)
                 {
                     currMon = SAV.SAV.GetBoxSlotAtIndex(boxIndex);
-                    SAV.SAV.SetBoxSlotAtIndex(prevMon, boxIndex, PKMImportSetting.UseDefault, PKMImportSetting.Skip);
+                    SAV.SAV.SetBoxSlotAtIndex(prevMon, boxIndex, EntityImportSettings.None);
                     if (currMon.Species == (int)Species.None) break;
                     prevMon = currMon;
                     boxIndex++;

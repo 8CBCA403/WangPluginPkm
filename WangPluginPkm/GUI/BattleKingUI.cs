@@ -346,7 +346,7 @@ namespace WangPluginPkm.GUI
             Debug.WriteLine(c.GetDisplayString(pk, destType));
             if (tmp == null)
                 return false;
-            SAV.SAV.AdaptPKM(tmp);
+            SAV.SAV.AdaptToSaveFile(tmp);
             TeamList_BOX.Items.Add(pk, CheckState.Checked);
             return true;
         }

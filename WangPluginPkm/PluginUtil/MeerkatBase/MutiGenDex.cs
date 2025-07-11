@@ -1185,7 +1185,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                 for (int i = 0; i < PKL.Count; i++)
                 {
                     // var context = PKL[i].Context;
-                    var origin = new EvolutionOrigin(PKL[i].Species, (GameVersion)(byte)GameVersion.W, 5, 1, 100);
+                    var origin = new EvolutionOrigin(PKL[i].Species, EntityContext.Gen5, 5, 1, 100);
                     var chain = EvolutionChain.GetOriginChain(PKL[i], origin);
 
                     EncounterGenerator5 g5 = new();

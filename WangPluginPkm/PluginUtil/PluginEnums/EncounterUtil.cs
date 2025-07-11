@@ -54,7 +54,7 @@ namespace WangPluginPkm
             var tree = EvolutionTree.GetEvolutionTree(editor.Context);
             bool isInChain = tree.IsSpeciesDerivedFrom(editor.Species, editor.Form, enc.Species, enc.Form);
             var set = new ShowdownSet(editor);
-            var criteria = EncounterCriteria.GetCriteria(set, editor.PersonalInfo);
+            var criteria = EncounterCriteria.GetCriteria(set, editor.PersonalInfo, EncounterMutation.None);
             if (!isInChain)
                 criteria = criteria with { Gender = (Gender)2 }; // Genderless tabs and a gendered enc -> let's play safe.
             return criteria;

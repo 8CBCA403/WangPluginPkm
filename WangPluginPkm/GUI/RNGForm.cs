@@ -706,100 +706,100 @@ namespace WangPluginPkm.GUI
             }
             Editor.PopulateFields(pk);
         }
-        private void CheckTeraSeed_BTN_Click(object sender, EventArgs e)
-        {
-            var pk = (PK9)Editor.Data;
-            byte num5 = 0;
-            switch (Gen9GanderValue)
-            {
-                case 0:
-                    num5 = 0;
-                    break;
-                case 1:
-                    num5 = 31;
-                    break;
-                case 2:
-                    num5 = 63;
-                    break;
-                case 3:
-                    num5 = 127;
-                    break;
-                case 4:
-                    num5 = 191;
-                    break;
-                case 5:
-                    num5 = 225;
-                    break;
-                case 6:
-                    num5 = 254;
-                    break;
-                case 7:
-                    num5 = 255;
-                    break;
-            }
-            GenerateParam9 enc = new()
-            {
-                Species = pk.Species,
-                GenderRatio = num5,
-                Ability = (AbilityPermission)(Gen9AbilityValue - 1),
-                Nature = (Nature)pk.Nature,
-                FlawlessIVs = (byte)Gen9MinIV,
-                ScaleType = SizeType9.RANDOM,
-                Scale = 0,
-                Weight = 0,
-                Height = 0,
-                RollCount = 1,
-                Shiny = Shiny.Random,
-                IVs = new IndividualValueSet()
-                {
-                    HP = (sbyte)pk.IV_HP,
-                    ATK = (sbyte)pk.IV_ATK,
-                    DEF = (sbyte)pk.IV_DEF,
-                    SPA = (sbyte)pk.IV_SPA,
-                    SPD = (sbyte)pk.IV_SPD,
-                    SPE = (sbyte)pk.IV_SPE,
-                }
+        /*   private void CheckTeraSeed_BTN_Click(object sender, EventArgs e)
+           {
+               var pk = (PK9)Editor.Data;
+               byte num5 = 0;
+               switch (Gen9GanderValue)
+               {
+                   case 0:
+                       num5 = 0;
+                       break;
+                   case 1:
+                       num5 = 31;
+                       break;
+                   case 2:
+                       num5 = 63;
+                       break;
+                   case 3:
+                       num5 = 127;
+                       break;
+                   case 4:
+                       num5 = 191;
+                       break;
+                   case 5:
+                       num5 = 225;
+                       break;
+                   case 6:
+                       num5 = 254;
+                       break;
+                   case 7:
+                       num5 = 255;
+                       break;
+               }
+               GenerateParam9 enc = new()
+               {
+                   Species = pk.Species,
+                   GenderRatio = num5,
+                   Ability = (AbilityPermission)(Gen9AbilityValue - 1),
+                   Nature = (Nature)pk.Nature,
+                   FlawlessIVs = (byte)Gen9MinIV,
+                   ScaleType = SizeType9.RANDOM,
+                   Scale = 0,
+                   Weight = 0,
+                   Height = 0,
+                   RollCount = 1,
+                   Shiny = Shiny.Random,
+                   IVs = new IndividualValueSet()
+                   {
+                       HP = (sbyte)pk.IV_HP,
+                       ATK = (sbyte)pk.IV_ATK,
+                       DEF = (sbyte)pk.IV_DEF,
+                       SPA = (sbyte)pk.IV_SPA,
+                       SPD = (sbyte)pk.IV_SPD,
+                       SPE = (sbyte)pk.IV_SPE,
+                   }
 
-            };
-            var seed = Tera9RNG.GetOriginalSeed(pk);
-            var value = RNG.Methods.Encounter9RNG.SeedToValue(pk, enc, seed);
-            string GenderText = "";
-            string AbilityText = "";
-            TeraSeedBox.Text = $"{seed:X8}";
-            txtEC.Text = $"{value.EC:X8}";
-            txtPID.Text = $"{value.PID:X8}";
-            cmbNature.Text = $"{((Nature)value.nature).ToString()}";
-            numHeight.Value = value.Height;
-            numWeight.Value = value.Weight;
-            numScale.Value = value.Size;
-            IVstextBox.Text = $"{value.ivs[0]},{value.ivs[1]},{value.ivs[2]},{value.ivs[3]},{value.ivs[4]},{value.ivs[5]}";
-            switch (value.gender)
-            {
-                case 0:
-                    GenderText = "公";
-                    break;
-                case 1:
-                    GenderText = "母";
-                    break;
-                case 2:
-                    GenderText = "无性别";
-                    break;
-            }
-            GendertextBox.Text = $"{GenderText}";
-            switch (value.ability)
-            {
-                case 1:
-                    AbilityText = "特性一";
-                    break;
-                case 2:
-                    AbilityText = "特性二";
-                    break;
-                case 4:
-                    AbilityText = "梦特";
-                    break;
-            }
-            AbilitytextBox.Text = $"{AbilityText}";
-        }
+               };
+               var seed = Tera9RNG.GetOriginalSeed(pk);
+               var value = RNG.Methods.Encounter9RNG.SeedToValue(pk, enc, seed);
+               string GenderText = "";
+               string AbilityText = "";
+               TeraSeedBox.Text = $"{seed:X8}";
+               txtEC.Text = $"{value.EC:X8}";
+               txtPID.Text = $"{value.PID:X8}";
+               cmbNature.Text = $"{((Nature)value.nature).ToString()}";
+               numHeight.Value = value.Height;
+               numWeight.Value = value.Weight;
+               numScale.Value = value.Size;
+               IVstextBox.Text = $"{value.ivs[0]},{value.ivs[1]},{value.ivs[2]},{value.ivs[3]},{value.ivs[4]},{value.ivs[5]}";
+               switch (value.gender)
+               {
+                   case 0:
+                       GenderText = "公";
+                       break;
+                   case 1:
+                       GenderText = "母";
+                       break;
+                   case 2:
+                       GenderText = "无性别";
+                       break;
+               }
+               GendertextBox.Text = $"{GenderText}";
+               switch (value.ability)
+               {
+                   case 1:
+                       AbilityText = "特性一";
+                       break;
+                   case 2:
+                       AbilityText = "特性二";
+                       break;
+                   case 4:
+                       AbilityText = "梦特";
+                       break;
+               }
+               AbilitytextBox.Text = $"{AbilityText}";
+           }*/
         #endregion
         //Help
         private void ToolStripMenuItem_Click(object sender, EventArgs e)

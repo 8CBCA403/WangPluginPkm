@@ -183,7 +183,7 @@ namespace WangPluginPkm.Plugins
                 StorageSlotSource slotSource = SaveFileEditor.SAV.GetBoxSlotFlags(index);
                 if (slotSource.IsOverwriteProtected()) continue;
                 nextMon = SaveFileEditor.SAV.GetBoxSlotAtIndex(index);
-                SaveFileEditor.SAV.SetBoxSlotAtIndex(currMon, index, PKMImportSetting.UseDefault, PKMImportSetting.Skip);
+                SaveFileEditor.SAV.SetBoxSlotAtIndex(currMon, index, EntityImportSettings.None);
                 currMon = nextMon;
             }
             SaveFileEditor.ReloadSlots();
