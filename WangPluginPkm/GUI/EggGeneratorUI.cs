@@ -105,7 +105,9 @@ namespace WangPluginPkm.GUI
                 }
                 pk.CurrentHandler = 0;
                 pk.Nature = pko.Nature;
-                pk.IVs = pko.IVs;
+                Span<int> ivs = stackalloc int[6];
+                pko.GetIVs(ivs);
+                pk.SetIVs(ivs);
                 if (pk.Generation == 2)
                 {
                     ((PK2)pk).OriginalTrainerName = "1";

@@ -204,7 +204,9 @@ namespace WangPluginPkm.GUI
                             pkm.SID16 = (ushort)ShinySID16Lite(val);
                         }
                         pkm.PID = val.PID;
-                        pkm.IVs = val.IVs;
+                        Span<int> ivs = stackalloc int[6];
+                        val.GetIVs(ivs);
+                        pkm.SetIVs(ivs);
                         pkm.Gender = EntityGender.GetFromPID(pkm.Species, pkm.PID);
                         pkm.Nature = (Nature)(pkm.PID % 25);
                         pkm.StatNature = pkm.Nature;
@@ -253,7 +255,9 @@ namespace WangPluginPkm.GUI
                             pkm.SID16 = (ushort)ShinySID16Lite(val);
                         }
                         pkm.PID = val.PID;
-                        pkm.IVs = val.IVs;
+                        Span<int> ivs = stackalloc int[6];
+                        val.GetIVs(ivs);
+                        pkm.SetIVs(ivs);
                         pkm.Gender = EntityGender.GetFromPID(pkm.Species, pkm.PID);
                         pkm.Nature = (Nature)(pkm.PID % 25);
                         pkm.EncryptionConstant = pkm.PID;
@@ -324,7 +328,9 @@ namespace WangPluginPkm.GUI
                 pkm.TID16 = va.TID16;
                 pkm.SID16 = va.SID16;
                 pkm.PID = va.PID;
-                pkm.IVs = va.IVs;
+                Span<int> ivs = stackalloc int[6];
+                va.GetIVs(ivs);
+                pkm.SetIVs(ivs);
                 pkm.Ability = va.Ability;
                 pkm.AbilityNumber = va.AbilityNumber;
                 pkm.Nature = va.Nature;
@@ -540,7 +546,9 @@ namespace WangPluginPkm.GUI
                         pkm.SID16 = (ushort)ShinySID16Lite(val);
                     }
                     pkm.PID = val.PID;
-                    pkm.IVs = val.IVs;
+                    Span<int> ivs = stackalloc int[6];
+                    val.GetIVs(ivs);
+                    pkm.SetIVs(ivs);
                     pkm.Gender = EntityGender.GetFromPID(pkm.Species, pkm.PID);
                     pkm.Nature = (Nature)(int)(pkm.PID % 25);
                     pkm.StatNature = pkm.Nature;
@@ -589,7 +597,9 @@ namespace WangPluginPkm.GUI
                         pkm.SID16 = (ushort)ShinySID16Lite(val);
                     }
                     pkm.PID = val.PID;
-                    pkm.IVs = val.IVs;
+                    Span<int> ivs = stackalloc int[6];
+                    val.GetIVs(ivs);
+                    pkm.SetIVs(ivs);
                     pkm.Gender = EntityGender.GetFromPID(pkm.Species, pkm.PID);
                     pkm.Nature = (Nature)(int)(pkm.PID % 25);
                     pkm.EncryptionConstant = pkm.PID;
@@ -660,7 +670,9 @@ namespace WangPluginPkm.GUI
                 pkm.TID16 = va.TID16;
                 pkm.SID16 = va.SID16;
                 pkm.PID = va.PID;
-                pkm.IVs = va.IVs;
+                Span<int> ivs = stackalloc int[6];
+                va.GetIVs(ivs);
+                pkm.SetIVs(ivs);
                 pkm.Ability = va.Ability;
                 pkm.AbilityNumber = va.AbilityNumber;
                 pkm.Nature = va.Nature;

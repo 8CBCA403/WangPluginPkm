@@ -12,11 +12,7 @@ namespace WangPluginPkm.PluginUtil.AchieveBase.PostGameAchieve
             if (SAV.SAV.Version is GameVersion.US or GameVersion.UM or GameVersion.USUM)
             {
                 var sa = (SAV7)SAV.SAV;
-                int l = 0;
-                if (sa.Region == 0)
-                    l = 1;
-                else if (sa.Region == 7)
-                    l = 2;
+            
                 pk = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.HoOh, (int)GameVersion.C);
                 pk.Language = 2;
                 pk = AchieveFunc.fun(pk, SAV);

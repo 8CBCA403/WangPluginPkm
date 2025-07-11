@@ -129,7 +129,10 @@ namespace WangPluginPkm.GUI
             pk.DisplayTID = pkm.DisplayTID;
             pk.DisplaySID = pkm.DisplaySID;
             pk.OriginalTrainerGender = pkm.OriginalTrainerGender;
-            pk.IVs = pkm.IVs;
+            Span<int> ivs = stackalloc int[6];
+            pkm.GetIVs(ivs); // 源对象
+            pk.SetIVs(ivs);  // 目标对象
+
             pk.EV_ATK = pkm.EV_ATK;
             pk.EV_DEF = pkm.EV_DEF;
             pk.EV_HP = pkm.EV_HP;

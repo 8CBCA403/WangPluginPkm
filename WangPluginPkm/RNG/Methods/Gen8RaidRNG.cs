@@ -34,8 +34,10 @@ namespace WangPluginPkm.RNG.Methods
             pk.PID = pid;
             const int UNSET = -1;
             const int MAX = 31;
-            var ivs = pk.IVs;
-            for (int i = ivs.Count(); i < iv_count; i++)
+            Span<int> ivs = stackalloc int[6];
+            pk.GetIVs(ivs); // 获取当前 IV 数据
+
+            for (int i = ivs.Length; i < iv_count; i++)
             {
                 int index = (int)rng.NextInt(6);
                 while (ivs[index] != UNSET)
