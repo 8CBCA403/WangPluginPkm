@@ -706,7 +706,7 @@ namespace WangPluginPkm.GUI
             }
             Editor.PopulateFields(pk);
         }
-        /*   private void CheckTeraSeed_BTN_Click(object sender, EventArgs e)
+           private void CheckTeraSeed_BTN_Click(object sender, EventArgs e)
            {
                var pk = (PK9)Editor.Data;
                byte num5 = 0;
@@ -762,18 +762,20 @@ namespace WangPluginPkm.GUI
 
                };
                var seed = Tera9RNG.GetOriginalSeed(pk);
-               var value = RNG.Methods.Encounter9RNG.SeedToValue(pk, enc, seed);
+               var value = RNG.Methods.Encounter9RNG.SeedToValue(pk, enc, EncounterCriteria.Unrestricted, seed);
                string GenderText = "";
                string AbilityText = "";
                TeraSeedBox.Text = $"{seed:X8}";
-               txtEC.Text = $"{value.EC:X8}";
+               txtEC.Text = $"{value.EncryptionConstant:X8}";
                txtPID.Text = $"{value.PID:X8}";
-               cmbNature.Text = $"{((Nature)value.nature).ToString()}";
-               numHeight.Value = value.Height;
-               numWeight.Value = value.Weight;
-               numScale.Value = value.Size;
-               IVstextBox.Text = $"{value.ivs[0]},{value.ivs[1]},{value.ivs[2]},{value.ivs[3]},{value.ivs[4]},{value.ivs[5]}";
-               switch (value.gender)
+               cmbNature.Text = $"{((Nature)value.Nature).ToString()}";
+               numHeight.Value = value.HeightScalar;
+               numWeight.Value = value.WeightScalar;
+               numScale.Value = value.Scale;
+               Span<int> ivs = stackalloc int[6];
+               value.GetIVs(ivs);
+               IVstextBox.Text = $"{ivs[0]}, {ivs[1]}, {ivs[2]}, {ivs[3]}, {ivs[4]}, {ivs[5]}";
+               switch (value.Gender)
                {
                    case 0:
                        GenderText = "公";
@@ -786,7 +788,7 @@ namespace WangPluginPkm.GUI
                        break;
                }
                GendertextBox.Text = $"{GenderText}";
-               switch (value.ability)
+               switch (value.Ability)
                {
                    case 1:
                        AbilityText = "特性一";
@@ -799,7 +801,7 @@ namespace WangPluginPkm.GUI
                        break;
                }
                AbilitytextBox.Text = $"{AbilityText}";
-           }*/
+           }
         #endregion
         //Help
         private void ToolStripMenuItem_Click(object sender, EventArgs e)

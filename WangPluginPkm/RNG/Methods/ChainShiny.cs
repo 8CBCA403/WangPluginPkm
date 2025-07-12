@@ -39,6 +39,7 @@ namespace WangPluginPkm.RNG.Methods
             result[1] = (int)r1 >> 5 & 31;
             result[0] = (int)r1 & 31;
         }
+        
 
     }
 }
