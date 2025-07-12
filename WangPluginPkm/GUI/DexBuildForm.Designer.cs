@@ -87,7 +87,7 @@ namespace WangPluginPkm.GUI
             TID16Box.Font = new System.Drawing.Font("Arial", 9F);
             TID16Box.Location = new System.Drawing.Point(58, 6);
             TID16Box.Name = "TID16Box";
-            TID16Box.Size = new System.Drawing.Size(57, 21);
+            TID16Box.Size = new System.Drawing.Size(57, 25);
             TID16Box.TabIndex = 2;
             TID16Box.Text = "101010";
             // 
@@ -96,7 +96,7 @@ namespace WangPluginPkm.GUI
             SID16Box.Font = new System.Drawing.Font("Arial", 9F);
             SID16Box.Location = new System.Drawing.Point(56, 39);
             SID16Box.Name = "SID16Box";
-            SID16Box.Size = new System.Drawing.Size(59, 21);
+            SID16Box.Size = new System.Drawing.Size(59, 25);
             SID16Box.TabIndex = 3;
             SID16Box.Text = "1111";
             // 
@@ -105,7 +105,7 @@ namespace WangPluginPkm.GUI
             OriginalTrainerName.Font = new System.Drawing.Font("Arial", 9F);
             OriginalTrainerName.Location = new System.Drawing.Point(182, 6);
             OriginalTrainerName.Name = "OriginalTrainerName";
-            OriginalTrainerName.Size = new System.Drawing.Size(151, 21);
+            OriginalTrainerName.Size = new System.Drawing.Size(151, 25);
             OriginalTrainerName.TabIndex = 4;
             OriginalTrainerName.Text = "Wang";
             // 
@@ -114,7 +114,7 @@ namespace WangPluginPkm.GUI
             LanguageBox.FormattingEnabled = true;
             LanguageBox.Location = new System.Drawing.Point(188, 40);
             LanguageBox.Name = "LanguageBox";
-            LanguageBox.Size = new System.Drawing.Size(53, 20);
+            LanguageBox.Size = new System.Drawing.Size(53, 23);
             LanguageBox.TabIndex = 5;
             // 
             // GenderBox
@@ -122,7 +122,7 @@ namespace WangPluginPkm.GUI
             GenderBox.FormattingEnabled = true;
             GenderBox.Location = new System.Drawing.Point(247, 39);
             GenderBox.Name = "GenderBox";
-            GenderBox.Size = new System.Drawing.Size(86, 20);
+            GenderBox.Size = new System.Drawing.Size(86, 23);
             GenderBox.TabIndex = 6;
             // 
             // TID16Label
@@ -131,7 +131,7 @@ namespace WangPluginPkm.GUI
             TID16Label.Font = new System.Drawing.Font("黑体", 9F);
             TID16Label.Location = new System.Drawing.Point(13, 11);
             TID16Label.Name = "TID16Label";
-            TID16Label.Size = new System.Drawing.Size(29, 12);
+            TID16Label.Size = new System.Drawing.Size(39, 15);
             TID16Label.TabIndex = 7;
             TID16Label.Text = "表ID";
             // 
@@ -142,7 +142,7 @@ namespace WangPluginPkm.GUI
             SID16Label.Location = new System.Drawing.Point(13, 44);
             SID16Label.Name = "SID16Label";
             SID16Label.RightToLeft = RightToLeft.No;
-            SID16Label.Size = new System.Drawing.Size(29, 12);
+            SID16Label.Size = new System.Drawing.Size(39, 15);
             SID16Label.TabIndex = 8;
             SID16Label.Text = "里ID";
             // 
@@ -152,7 +152,7 @@ namespace WangPluginPkm.GUI
             OTLabel.Font = new System.Drawing.Font("黑体", 9F);
             OTLabel.Location = new System.Drawing.Point(123, 11);
             OTLabel.Name = "OTLabel";
-            OTLabel.Size = new System.Drawing.Size(41, 12);
+            OTLabel.Size = new System.Drawing.Size(55, 15);
             OTLabel.TabIndex = 9;
             OTLabel.Text = "初训家";
             // 
@@ -162,7 +162,7 @@ namespace WangPluginPkm.GUI
             LGLabel.Font = new System.Drawing.Font("黑体", 9F);
             LGLabel.Location = new System.Drawing.Point(123, 44);
             LGLabel.Name = "LGLabel";
-            LGLabel.Size = new System.Drawing.Size(59, 12);
+            LGLabel.Size = new System.Drawing.Size(79, 15);
             LGLabel.TabIndex = 10;
             LGLabel.Text = "语言/性别";
             // 
@@ -182,7 +182,7 @@ namespace WangPluginPkm.GUI
             SortBox.FormattingEnabled = true;
             SortBox.Location = new System.Drawing.Point(5, 7);
             SortBox.Name = "SortBox";
-            SortBox.Size = new System.Drawing.Size(229, 20);
+            SortBox.Size = new System.Drawing.Size(229, 23);
             SortBox.TabIndex = 12;
             // 
             // Legal_BTN
@@ -245,7 +245,7 @@ namespace WangPluginPkm.GUI
             Mod_Select_Box.FormattingEnabled = true;
             Mod_Select_Box.Location = new System.Drawing.Point(3, 43);
             Mod_Select_Box.Name = "Mod_Select_Box";
-            Mod_Select_Box.Size = new System.Drawing.Size(121, 20);
+            Mod_Select_Box.Size = new System.Drawing.Size(121, 23);
             Mod_Select_Box.TabIndex = 68;
             // 
             // FormAndSubDex_BTN
@@ -289,10 +289,10 @@ namespace WangPluginPkm.GUI
             IDPage.Controls.Add(TID16Label);
             IDPage.Controls.Add(SID16Label);
             IDPage.Controls.Add(OTLabel);
-            IDPage.Location = new System.Drawing.Point(4, 22);
+            IDPage.Location = new System.Drawing.Point(4, 25);
             IDPage.Name = "IDPage";
             IDPage.Padding = new Padding(3);
-            IDPage.Size = new System.Drawing.Size(348, 158);
+            IDPage.Size = new System.Drawing.Size(348, 155);
             IDPage.TabIndex = 0;
             IDPage.Text = "ID编辑器";
             // 
@@ -346,10 +346,10 @@ namespace WangPluginPkm.GUI
             DexBuilder.Controls.Add(Sort_BTN);
             DexBuilder.Controls.Add(LivingDex_BTN);
             DexBuilder.Controls.Add(BuildDex_BTN);
-            DexBuilder.Location = new System.Drawing.Point(4, 26);
+            DexBuilder.Location = new System.Drawing.Point(4, 29);
             DexBuilder.Name = "DexBuilder";
             DexBuilder.Padding = new Padding(3);
-            DexBuilder.Size = new System.Drawing.Size(348, 154);
+            DexBuilder.Size = new System.Drawing.Size(348, 151);
             DexBuilder.TabIndex = 1;
             DexBuilder.Text = "图鉴制作器";
             // 
@@ -380,7 +380,7 @@ namespace WangPluginPkm.GUI
             Solt_Label.Font = new System.Drawing.Font("黑体", 10.5F);
             Solt_Label.Location = new System.Drawing.Point(84, 118);
             Solt_Label.Name = "Solt_Label";
-            Solt_Label.Size = new System.Drawing.Size(35, 14);
+            Solt_Label.Size = new System.Drawing.Size(44, 18);
             Solt_Label.TabIndex = 73;
             Solt_Label.Text = "槽位";
             // 
@@ -390,7 +390,7 @@ namespace WangPluginPkm.GUI
             Box_Label.Font = new System.Drawing.Font("黑体", 10.5F);
             Box_Label.Location = new System.Drawing.Point(6, 118);
             Box_Label.Name = "Box_Label";
-            Box_Label.Size = new System.Drawing.Size(35, 14);
+            Box_Label.Size = new System.Drawing.Size(44, 18);
             Box_Label.TabIndex = 72;
             Box_Label.Text = "箱子";
             // 
@@ -398,7 +398,7 @@ namespace WangPluginPkm.GUI
             // 
             SoltnumericUpDown.Location = new System.Drawing.Point(120, 116);
             SoltnumericUpDown.Name = "SoltnumericUpDown";
-            SoltnumericUpDown.Size = new System.Drawing.Size(36, 21);
+            SoltnumericUpDown.Size = new System.Drawing.Size(36, 25);
             SoltnumericUpDown.TabIndex = 71;
             SoltnumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
@@ -406,7 +406,7 @@ namespace WangPluginPkm.GUI
             // 
             BoxnumericUpDown.Location = new System.Drawing.Point(42, 116);
             BoxnumericUpDown.Name = "BoxnumericUpDown";
-            BoxnumericUpDown.Size = new System.Drawing.Size(36, 21);
+            BoxnumericUpDown.Size = new System.Drawing.Size(36, 25);
             BoxnumericUpDown.TabIndex = 70;
             BoxnumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
@@ -418,10 +418,10 @@ namespace WangPluginPkm.GUI
             Home_Page.Controls.Add(SubcomboBox);
             Home_Page.Controls.Add(MaincomboBox);
             Home_Page.Controls.Add(AchieveGen_BTN);
-            Home_Page.Location = new System.Drawing.Point(4, 26);
+            Home_Page.Location = new System.Drawing.Point(4, 29);
             Home_Page.Name = "Home_Page";
             Home_Page.Padding = new Padding(3);
-            Home_Page.Size = new System.Drawing.Size(348, 154);
+            Home_Page.Size = new System.Drawing.Size(348, 151);
             Home_Page.TabIndex = 2;
             Home_Page.Text = "Home成就制作器";
             // 
@@ -448,7 +448,7 @@ namespace WangPluginPkm.GUI
             SubcomboBox.FormattingEnabled = true;
             SubcomboBox.Location = new System.Drawing.Point(6, 38);
             SubcomboBox.Name = "SubcomboBox";
-            SubcomboBox.Size = new System.Drawing.Size(336, 20);
+            SubcomboBox.Size = new System.Drawing.Size(336, 23);
             SubcomboBox.TabIndex = 4;
             // 
             // MaincomboBox
@@ -456,7 +456,7 @@ namespace WangPluginPkm.GUI
             MaincomboBox.FormattingEnabled = true;
             MaincomboBox.Location = new System.Drawing.Point(6, 6);
             MaincomboBox.Name = "MaincomboBox";
-            MaincomboBox.Size = new System.Drawing.Size(336, 20);
+            MaincomboBox.Size = new System.Drawing.Size(336, 23);
             MaincomboBox.TabIndex = 3;
             // 
             // AchieveGen_BTN
@@ -479,10 +479,10 @@ namespace WangPluginPkm.GUI
             ID_Cheak.Controls.Add(Check_BTN);
             ID_Cheak.Controls.Add(SIDCheck_Box);
             ID_Cheak.Controls.Add(TIDCheck_BOX);
-            ID_Cheak.Location = new System.Drawing.Point(4, 26);
+            ID_Cheak.Location = new System.Drawing.Point(4, 29);
             ID_Cheak.Name = "ID_Cheak";
             ID_Cheak.Padding = new Padding(3);
-            ID_Cheak.Size = new System.Drawing.Size(348, 154);
+            ID_Cheak.Size = new System.Drawing.Size(348, 151);
             ID_Cheak.TabIndex = 3;
             ID_Cheak.Text = "ID检索器";
             // 
@@ -491,7 +491,7 @@ namespace WangPluginPkm.GUI
             label2.AutoSize = true;
             label2.Location = new System.Drawing.Point(112, 10);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(17, 12);
+            label2.Size = new System.Drawing.Size(23, 15);
             label2.TabIndex = 5;
             label2.Text = "里";
             // 
@@ -500,7 +500,7 @@ namespace WangPluginPkm.GUI
             label1.AutoSize = true;
             label1.Location = new System.Drawing.Point(7, 10);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(17, 12);
+            label1.Size = new System.Drawing.Size(23, 15);
             label1.TabIndex = 4;
             label1.Text = "表";
             // 
@@ -527,14 +527,14 @@ namespace WangPluginPkm.GUI
             // 
             SIDCheck_Box.Location = new System.Drawing.Point(135, 6);
             SIDCheck_Box.Name = "SIDCheck_Box";
-            SIDCheck_Box.Size = new System.Drawing.Size(77, 21);
+            SIDCheck_Box.Size = new System.Drawing.Size(77, 25);
             SIDCheck_Box.TabIndex = 1;
             // 
             // TIDCheck_BOX
             // 
             TIDCheck_BOX.Location = new System.Drawing.Point(30, 6);
             TIDCheck_BOX.Name = "TIDCheck_BOX";
-            TIDCheck_BOX.Size = new System.Drawing.Size(76, 21);
+            TIDCheck_BOX.Size = new System.Drawing.Size(76, 25);
             TIDCheck_BOX.TabIndex = 0;
             // 
             // DexBuildForm

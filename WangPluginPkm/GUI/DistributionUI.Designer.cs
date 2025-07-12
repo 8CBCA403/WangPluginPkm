@@ -152,7 +152,7 @@ namespace WangPluginPkm.GUI
             ShinyBox.Font = new System.Drawing.Font("黑体", 9F);
             ShinyBox.Location = new System.Drawing.Point(7, 20);
             ShinyBox.Name = "ShinyBox";
-            ShinyBox.Size = new System.Drawing.Size(48, 16);
+            ShinyBox.Size = new System.Drawing.Size(61, 19);
             ShinyBox.TabIndex = 28;
             ShinyBox.Text = "闪光";
             ShinyBox.UseVisualStyleBackColor = true;
@@ -174,7 +174,7 @@ namespace WangPluginPkm.GUI
             SetTrainer_Box.Font = new System.Drawing.Font("黑体", 9F);
             SetTrainer_Box.Location = new System.Drawing.Point(58, 20);
             SetTrainer_Box.Name = "SetTrainer_Box";
-            SetTrainer_Box.Size = new System.Drawing.Size(84, 16);
+            SetTrainer_Box.Size = new System.Drawing.Size(109, 19);
             SetTrainer_Box.TabIndex = 36;
             SetTrainer_Box.Text = "指定训练家";
             SetTrainer_Box.UseVisualStyleBackColor = true;
@@ -206,7 +206,7 @@ namespace WangPluginPkm.GUI
             BallBox.FormattingEnabled = true;
             BallBox.Location = new System.Drawing.Point(333, 44);
             BallBox.Name = "BallBox";
-            BallBox.Size = new System.Drawing.Size(62, 20);
+            BallBox.Size = new System.Drawing.Size(62, 23);
             BallBox.TabIndex = 48;
             // 
             // Trainer_Box
@@ -214,7 +214,7 @@ namespace WangPluginPkm.GUI
             Trainer_Box.FormattingEnabled = true;
             Trainer_Box.Location = new System.Drawing.Point(8, 22);
             Trainer_Box.Name = "Trainer_Box";
-            Trainer_Box.Size = new System.Drawing.Size(100, 20);
+            Trainer_Box.Size = new System.Drawing.Size(100, 23);
             Trainer_Box.TabIndex = 49;
             // 
             // Use_Trainer_BTN
@@ -234,7 +234,7 @@ namespace WangPluginPkm.GUI
             RandPID_Box.Font = new System.Drawing.Font("黑体", 9F);
             RandPID_Box.Location = new System.Drawing.Point(332, 20);
             RandPID_Box.Name = "RandPID_Box";
-            RandPID_Box.Size = new System.Drawing.Size(66, 16);
+            RandPID_Box.Size = new System.Drawing.Size(85, 19);
             RandPID_Box.TabIndex = 52;
             RandPID_Box.Text = "随机PID";
             RandPID_Box.UseVisualStyleBackColor = true;
@@ -278,7 +278,7 @@ namespace WangPluginPkm.GUI
             Ball_Box.Font = new System.Drawing.Font("黑体", 9F);
             Ball_Box.Location = new System.Drawing.Point(401, 46);
             Ball_Box.Name = "Ball_Box";
-            Ball_Box.Size = new System.Drawing.Size(48, 16);
+            Ball_Box.Size = new System.Drawing.Size(61, 19);
             Ball_Box.TabIndex = 61;
             Ball_Box.Text = "球种";
             Ball_Box.UseVisualStyleBackColor = true;
@@ -288,7 +288,7 @@ namespace WangPluginPkm.GUI
             Edit_EVIVN_Box.FormattingEnabled = true;
             Edit_EVIVN_Box.Location = new System.Drawing.Point(8, 18);
             Edit_EVIVN_Box.Name = "Edit_EVIVN_Box";
-            Edit_EVIVN_Box.Size = new System.Drawing.Size(100, 20);
+            Edit_EVIVN_Box.Size = new System.Drawing.Size(100, 23);
             Edit_EVIVN_Box.TabIndex = 62;
             // 
             // Clone_Select_Box
@@ -296,7 +296,7 @@ namespace WangPluginPkm.GUI
             Clone_Select_Box.FormattingEnabled = true;
             Clone_Select_Box.Location = new System.Drawing.Point(6, 44);
             Clone_Select_Box.Name = "Clone_Select_Box";
-            Clone_Select_Box.Size = new System.Drawing.Size(100, 20);
+            Clone_Select_Box.Size = new System.Drawing.Size(100, 23);
             Clone_Select_Box.TabIndex = 63;
             // 
             // Trainer_Select_Box
@@ -304,7 +304,7 @@ namespace WangPluginPkm.GUI
             Trainer_Select_Box.FormattingEnabled = true;
             Trainer_Select_Box.Location = new System.Drawing.Point(224, 22);
             Trainer_Select_Box.Name = "Trainer_Select_Box";
-            Trainer_Select_Box.Size = new System.Drawing.Size(100, 20);
+            Trainer_Select_Box.Size = new System.Drawing.Size(100, 23);
             Trainer_Select_Box.TabIndex = 64;
             // 
             // Random_Trainer_Box
@@ -313,7 +313,7 @@ namespace WangPluginPkm.GUI
             Random_Trainer_Box.Font = new System.Drawing.Font("黑体", 9F);
             Random_Trainer_Box.Location = new System.Drawing.Point(141, 20);
             Random_Trainer_Box.Name = "Random_Trainer_Box";
-            Random_Trainer_Box.Size = new System.Drawing.Size(84, 16);
+            Random_Trainer_Box.Size = new System.Drawing.Size(109, 19);
             Random_Trainer_Box.TabIndex = 65;
             Random_Trainer_Box.Text = "随机训练家";
             Random_Trainer_Box.UseVisualStyleBackColor = true;
@@ -344,7 +344,7 @@ namespace WangPluginPkm.GUI
             RandEC_Box.Font = new System.Drawing.Font("黑体", 9F);
             RandEC_Box.Location = new System.Drawing.Point(403, 20);
             RandEC_Box.Name = "RandEC_Box";
-            RandEC_Box.Size = new System.Drawing.Size(60, 16);
+            RandEC_Box.Size = new System.Drawing.Size(77, 19);
             RandEC_Box.TabIndex = 69;
             RandEC_Box.Text = "随机EC";
             RandEC_Box.UseVisualStyleBackColor = true;
@@ -355,7 +355,7 @@ namespace WangPluginPkm.GUI
             Random_Name_Box.Font = new System.Drawing.Font("黑体", 9F);
             Random_Name_Box.Location = new System.Drawing.Point(225, 20);
             Random_Name_Box.Name = "Random_Name_Box";
-            Random_Name_Box.Size = new System.Drawing.Size(108, 16);
+            Random_Name_Box.Size = new System.Drawing.Size(141, 19);
             Random_Name_Box.TabIndex = 68;
             Random_Name_Box.Text = "随机训练家名字";
             Random_Name_Box.UseVisualStyleBackColor = true;
@@ -518,10 +518,10 @@ namespace WangPluginPkm.GUI
             Quickeditor.Controls.Add(ITL);
             Quickeditor.Controls.Add(FOL);
             Quickeditor.Controls.Add(NAL);
-            Quickeditor.Location = new System.Drawing.Point(4, 22);
+            Quickeditor.Location = new System.Drawing.Point(4, 25);
             Quickeditor.Name = "Quickeditor";
             Quickeditor.Padding = new Padding(3);
-            Quickeditor.Size = new System.Drawing.Size(493, 231);
+            Quickeditor.Size = new System.Drawing.Size(493, 228);
             Quickeditor.TabIndex = 2;
             Quickeditor.Text = "速配器";
             Quickeditor.UseVisualStyleBackColor = true;
@@ -531,7 +531,7 @@ namespace WangPluginPkm.GUI
             label1.AutoSize = true;
             label1.Location = new System.Drawing.Point(314, 120);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(65, 12);
+            label1.Size = new System.Drawing.Size(87, 15);
             label1.TabIndex = 107;
             label1.Text = "速配过滤器";
             // 
@@ -560,7 +560,7 @@ namespace WangPluginPkm.GUI
             End_NUM.Location = new System.Drawing.Point(174, 189);
             End_NUM.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
             End_NUM.Name = "End_NUM";
-            End_NUM.Size = new System.Drawing.Size(35, 21);
+            End_NUM.Size = new System.Drawing.Size(35, 25);
             End_NUM.TabIndex = 80;
             End_NUM.Value = new decimal(new int[] { 30, 0, 0, 0 });
             // 
@@ -578,7 +578,7 @@ namespace WangPluginPkm.GUI
             Start_NUM.Location = new System.Drawing.Point(174, 158);
             Start_NUM.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
             Start_NUM.Name = "Start_NUM";
-            Start_NUM.Size = new System.Drawing.Size(35, 21);
+            Start_NUM.Size = new System.Drawing.Size(35, 25);
             Start_NUM.TabIndex = 79;
             Start_NUM.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
@@ -597,7 +597,7 @@ namespace WangPluginPkm.GUI
             End_LB.AutoSize = true;
             End_LB.Location = new System.Drawing.Point(112, 191);
             End_LB.Name = "End_LB";
-            End_LB.Size = new System.Drawing.Size(53, 12);
+            End_LB.Size = new System.Drawing.Size(71, 15);
             End_LB.TabIndex = 78;
             End_LB.Text = "结束槽位";
             // 
@@ -608,7 +608,7 @@ namespace WangPluginPkm.GUI
             Tera_CB.FormattingEnabled = true;
             Tera_CB.Location = new System.Drawing.Point(238, 66);
             Tera_CB.Name = "Tera_CB";
-            Tera_CB.Size = new System.Drawing.Size(57, 20);
+            Tera_CB.Size = new System.Drawing.Size(57, 23);
             Tera_CB.TabIndex = 94;
             // 
             // Start_LB
@@ -616,7 +616,7 @@ namespace WangPluginPkm.GUI
             Start_LB.AutoSize = true;
             Start_LB.Location = new System.Drawing.Point(112, 161);
             Start_LB.Name = "Start_LB";
-            Start_LB.Size = new System.Drawing.Size(53, 12);
+            Start_LB.Size = new System.Drawing.Size(71, 15);
             Start_LB.TabIndex = 77;
             Start_LB.Text = "开始槽位";
             // 
@@ -625,7 +625,7 @@ namespace WangPluginPkm.GUI
             Tera_LAB.AutoSize = true;
             Tera_LAB.Location = new System.Drawing.Point(174, 69);
             Tera_LAB.Name = "Tera_LAB";
-            Tera_LAB.Size = new System.Drawing.Size(53, 12);
+            Tera_LAB.Size = new System.Drawing.Size(71, 15);
             Tera_LAB.TabIndex = 93;
             Tera_LAB.Text = "钛晶属性";
             // 
@@ -634,7 +634,7 @@ namespace WangPluginPkm.GUI
             EndBox_NUM.Location = new System.Drawing.Point(71, 189);
             EndBox_NUM.Maximum = new decimal(new int[] { 32, 0, 0, 0 });
             EndBox_NUM.Name = "EndBox_NUM";
-            EndBox_NUM.Size = new System.Drawing.Size(35, 21);
+            EndBox_NUM.Size = new System.Drawing.Size(35, 25);
             EndBox_NUM.TabIndex = 76;
             EndBox_NUM.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
@@ -645,7 +645,7 @@ namespace WangPluginPkm.GUI
             SNA_CB.FormattingEnabled = true;
             SNA_CB.Location = new System.Drawing.Point(73, 37);
             SNA_CB.Name = "SNA_CB";
-            SNA_CB.Size = new System.Drawing.Size(65, 20);
+            SNA_CB.Size = new System.Drawing.Size(65, 23);
             SNA_CB.TabIndex = 92;
             // 
             // StartBox_NUM
@@ -653,7 +653,7 @@ namespace WangPluginPkm.GUI
             StartBox_NUM.Location = new System.Drawing.Point(71, 158);
             StartBox_NUM.Maximum = new decimal(new int[] { 32, 0, 0, 0 });
             StartBox_NUM.Name = "StartBox_NUM";
-            StartBox_NUM.Size = new System.Drawing.Size(35, 21);
+            StartBox_NUM.Size = new System.Drawing.Size(35, 25);
             StartBox_NUM.TabIndex = 75;
             StartBox_NUM.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
@@ -662,7 +662,7 @@ namespace WangPluginPkm.GUI
             EndBox.AutoSize = true;
             EndBox.Location = new System.Drawing.Point(15, 194);
             EndBox.Name = "EndBox";
-            EndBox.Size = new System.Drawing.Size(53, 12);
+            EndBox.Size = new System.Drawing.Size(71, 15);
             EndBox.TabIndex = 74;
             EndBox.Text = "结束箱子";
             // 
@@ -671,7 +671,7 @@ namespace WangPluginPkm.GUI
             SNL.AutoSize = true;
             SNL.Location = new System.Drawing.Point(11, 40);
             SNL.Name = "SNL";
-            SNL.Size = new System.Drawing.Size(53, 12);
+            SNL.Size = new System.Drawing.Size(71, 15);
             SNL.TabIndex = 91;
             SNL.Text = "薄荷性格";
             // 
@@ -680,7 +680,7 @@ namespace WangPluginPkm.GUI
             StartBox_LB.AutoSize = true;
             StartBox_LB.Location = new System.Drawing.Point(15, 163);
             StartBox_LB.Name = "StartBox_LB";
-            StartBox_LB.Size = new System.Drawing.Size(53, 12);
+            StartBox_LB.Size = new System.Drawing.Size(71, 15);
             StartBox_LB.TabIndex = 73;
             StartBox_LB.Text = "开始箱子";
             // 
@@ -689,7 +689,7 @@ namespace WangPluginPkm.GUI
             Level_NUM.Location = new System.Drawing.Point(238, 37);
             Level_NUM.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             Level_NUM.Name = "Level_NUM";
-            Level_NUM.Size = new System.Drawing.Size(56, 21);
+            Level_NUM.Size = new System.Drawing.Size(56, 25);
             Level_NUM.TabIndex = 90;
             Level_NUM.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
@@ -698,7 +698,7 @@ namespace WangPluginPkm.GUI
             Current_Level_LB.AutoSize = true;
             Current_Level_LB.Location = new System.Drawing.Point(173, 39);
             Current_Level_LB.Name = "Current_Level_LB";
-            Current_Level_LB.Size = new System.Drawing.Size(53, 12);
+            Current_Level_LB.Size = new System.Drawing.Size(71, 15);
             Current_Level_LB.TabIndex = 89;
             Current_Level_LB.Text = "当前等级";
             // 
@@ -706,7 +706,7 @@ namespace WangPluginPkm.GUI
             // 
             ABN_NU.Location = new System.Drawing.Point(376, 64);
             ABN_NU.Name = "ABN_NU";
-            ABN_NU.Size = new System.Drawing.Size(56, 21);
+            ABN_NU.Size = new System.Drawing.Size(56, 25);
             ABN_NU.TabIndex = 85;
             // 
             // ABNL
@@ -714,7 +714,7 @@ namespace WangPluginPkm.GUI
             ABNL.AutoSize = true;
             ABNL.Location = new System.Drawing.Point(314, 66);
             ABNL.Name = "ABNL";
-            ABNL.Size = new System.Drawing.Size(53, 12);
+            ABNL.Size = new System.Drawing.Size(71, 15);
             ABNL.TabIndex = 84;
             ABNL.Text = "特性序号";
             // 
@@ -722,14 +722,14 @@ namespace WangPluginPkm.GUI
             // 
             FO_NU.Location = new System.Drawing.Point(73, 68);
             FO_NU.Name = "FO_NU";
-            FO_NU.Size = new System.Drawing.Size(56, 21);
+            FO_NU.Size = new System.Drawing.Size(56, 25);
             FO_NU.TabIndex = 83;
             // 
             // EV_TB
             // 
             EV_TB.Location = new System.Drawing.Point(73, 131);
             EV_TB.Name = "EV_TB";
-            EV_TB.Size = new System.Drawing.Size(136, 21);
+            EV_TB.Size = new System.Drawing.Size(136, 25);
             EV_TB.TabIndex = 82;
             EV_TB.Text = "0/0/0/0/0/0";
             // 
@@ -737,7 +737,7 @@ namespace WangPluginPkm.GUI
             // 
             IV_TB.Location = new System.Drawing.Point(73, 98);
             IV_TB.Name = "IV_TB";
-            IV_TB.Size = new System.Drawing.Size(136, 21);
+            IV_TB.Size = new System.Drawing.Size(136, 25);
             IV_TB.TabIndex = 81;
             IV_TB.Text = "0/0/0/0/0/0";
             // 
@@ -748,7 +748,7 @@ namespace WangPluginPkm.GUI
             BA_CB.FormattingEnabled = true;
             BA_CB.Location = new System.Drawing.Point(203, 6);
             BA_CB.Name = "BA_CB";
-            BA_CB.Size = new System.Drawing.Size(91, 20);
+            BA_CB.Size = new System.Drawing.Size(91, 23);
             BA_CB.TabIndex = 80;
             // 
             // LA_CB
@@ -756,7 +756,7 @@ namespace WangPluginPkm.GUI
             LA_CB.FormattingEnabled = true;
             LA_CB.Location = new System.Drawing.Point(376, 93);
             LA_CB.Name = "LA_CB";
-            LA_CB.Size = new System.Drawing.Size(92, 20);
+            LA_CB.Size = new System.Drawing.Size(92, 23);
             LA_CB.TabIndex = 79;
             // 
             // AB_CB
@@ -766,7 +766,7 @@ namespace WangPluginPkm.GUI
             AB_CB.FormattingEnabled = true;
             AB_CB.Location = new System.Drawing.Point(376, 36);
             AB_CB.Name = "AB_CB";
-            AB_CB.Size = new System.Drawing.Size(91, 20);
+            AB_CB.Size = new System.Drawing.Size(91, 23);
             AB_CB.TabIndex = 78;
             // 
             // IT_CB
@@ -776,7 +776,7 @@ namespace WangPluginPkm.GUI
             IT_CB.FormattingEnabled = true;
             IT_CB.Location = new System.Drawing.Point(376, 5);
             IT_CB.Name = "IT_CB";
-            IT_CB.Size = new System.Drawing.Size(91, 20);
+            IT_CB.Size = new System.Drawing.Size(91, 23);
             IT_CB.TabIndex = 77;
             // 
             // NA_CB
@@ -786,7 +786,7 @@ namespace WangPluginPkm.GUI
             NA_CB.FormattingEnabled = true;
             NA_CB.Location = new System.Drawing.Point(72, 6);
             NA_CB.Name = "NA_CB";
-            NA_CB.Size = new System.Drawing.Size(65, 20);
+            NA_CB.Size = new System.Drawing.Size(65, 23);
             NA_CB.TabIndex = 76;
             // 
             // EVL
@@ -794,7 +794,7 @@ namespace WangPluginPkm.GUI
             EVL.AutoSize = true;
             EVL.Location = new System.Drawing.Point(23, 134);
             EVL.Name = "EVL";
-            EVL.Size = new System.Drawing.Size(41, 12);
+            EVL.Size = new System.Drawing.Size(55, 15);
             EVL.TabIndex = 74;
             EVL.Text = "努力值";
             // 
@@ -803,7 +803,7 @@ namespace WangPluginPkm.GUI
             IVL.AutoSize = true;
             IVL.Location = new System.Drawing.Point(35, 101);
             IVL.Name = "IVL";
-            IVL.Size = new System.Drawing.Size(29, 12);
+            IVL.Size = new System.Drawing.Size(39, 15);
             IVL.TabIndex = 73;
             IVL.Text = "个体";
             // 
@@ -812,7 +812,7 @@ namespace WangPluginPkm.GUI
             BAL.AutoSize = true;
             BAL.Location = new System.Drawing.Point(163, 9);
             BAL.Name = "BAL";
-            BAL.Size = new System.Drawing.Size(29, 12);
+            BAL.Size = new System.Drawing.Size(39, 15);
             BAL.TabIndex = 72;
             BAL.Text = "球种";
             // 
@@ -821,7 +821,7 @@ namespace WangPluginPkm.GUI
             LAL.AutoSize = true;
             LAL.Location = new System.Drawing.Point(338, 96);
             LAL.Name = "LAL";
-            LAL.Size = new System.Drawing.Size(29, 12);
+            LAL.Size = new System.Drawing.Size(39, 15);
             LAL.TabIndex = 71;
             LAL.Text = "语言";
             // 
@@ -830,7 +830,7 @@ namespace WangPluginPkm.GUI
             ABL.AutoSize = true;
             ABL.Location = new System.Drawing.Point(338, 39);
             ABL.Name = "ABL";
-            ABL.Size = new System.Drawing.Size(29, 12);
+            ABL.Size = new System.Drawing.Size(39, 15);
             ABL.TabIndex = 70;
             ABL.Text = "特性";
             // 
@@ -839,7 +839,7 @@ namespace WangPluginPkm.GUI
             ITL.AutoSize = true;
             ITL.Location = new System.Drawing.Point(326, 9);
             ITL.Name = "ITL";
-            ITL.Size = new System.Drawing.Size(41, 12);
+            ITL.Size = new System.Drawing.Size(55, 15);
             ITL.TabIndex = 69;
             ITL.Text = "持有物";
             // 
@@ -848,7 +848,7 @@ namespace WangPluginPkm.GUI
             FOL.AutoSize = true;
             FOL.Location = new System.Drawing.Point(34, 70);
             FOL.Name = "FOL";
-            FOL.Size = new System.Drawing.Size(29, 12);
+            FOL.Size = new System.Drawing.Size(39, 15);
             FOL.TabIndex = 68;
             FOL.Text = "形态";
             // 
@@ -857,7 +857,7 @@ namespace WangPluginPkm.GUI
             NAL.AutoSize = true;
             NAL.Location = new System.Drawing.Point(10, 9);
             NAL.Name = "NAL";
-            NAL.Size = new System.Drawing.Size(53, 12);
+            NAL.Size = new System.Drawing.Size(71, 15);
             NAL.TabIndex = 67;
             NAL.Text = "原始性格";
             // 
@@ -868,10 +868,10 @@ namespace WangPluginPkm.GUI
             CopyPage.Controls.Add(groupBox1);
             CopyPage.Controls.Add(groupBox5);
             CopyPage.Controls.Add(groupBox2);
-            CopyPage.Location = new System.Drawing.Point(4, 26);
+            CopyPage.Location = new System.Drawing.Point(4, 29);
             CopyPage.Name = "CopyPage";
             CopyPage.Padding = new Padding(3);
-            CopyPage.Size = new System.Drawing.Size(493, 227);
+            CopyPage.Size = new System.Drawing.Size(493, 224);
             CopyPage.TabIndex = 0;
             CopyPage.Text = "派送器";
             // 
@@ -891,7 +891,7 @@ namespace WangPluginPkm.GUI
             DiscomboBox.FormattingEnabled = true;
             DiscomboBox.Location = new System.Drawing.Point(8, 18);
             DiscomboBox.Name = "DiscomboBox";
-            DiscomboBox.Size = new System.Drawing.Size(100, 20);
+            DiscomboBox.Size = new System.Drawing.Size(100, 23);
             DiscomboBox.TabIndex = 62;
             // 
             // GenDIs_BTN
@@ -909,10 +909,10 @@ namespace WangPluginPkm.GUI
             // 
             EditBoxPage.BackColor = System.Drawing.Color.WhiteSmoke;
             EditBoxPage.Controls.Add(groupBox3);
-            EditBoxPage.Location = new System.Drawing.Point(4, 26);
+            EditBoxPage.Location = new System.Drawing.Point(4, 29);
             EditBoxPage.Name = "EditBoxPage";
             EditBoxPage.Padding = new Padding(3);
-            EditBoxPage.Size = new System.Drawing.Size(493, 227);
+            EditBoxPage.Size = new System.Drawing.Size(493, 224);
             EditBoxPage.TabIndex = 1;
             EditBoxPage.Text = "杂项编辑";
             // 

@@ -27,19 +27,17 @@ namespace WangPluginPkm
             var config = PluginConfig.LoadConfig();
             globalArgs = args;
             var timer = new System.Windows.Forms.Timer();
-            timer.Interval = 500; // 延迟 0.5 秒
+            timer.Interval = 500; 
             timer.Tick += (_, _) =>
             {
-                timer.Stop(); // 只执行一次
-
-                // 查找主窗体
+                timer.Stop(); 
                 var mainForm = Application.OpenForms
                     .Cast<Form>()
                     .FirstOrDefault(f => f.GetType().Name.Contains("PKHeX") || f.Name.Contains("Main"));
 
                 if (mainForm != null)
                 {
-                    mainForm.Icon = Properties.Resources.icon;
+                    mainForm.Icon = Properties.Resources.SW;
                 }
             };
             timer.Start();
@@ -61,9 +59,6 @@ namespace WangPluginPkm
             var toolsitems = tools.DropDownItems;
             var modmenusearch = toolsitems.Find(ParentMenuName, false);
             var modmenu = GetModMenu(tools, modmenusearch);
-            //var form = tools.GetCurrentParent().FindForm();
-          //  if (form is not null)
-             //   form.Icon = Properties.Resources.icon;
             AddPluginControl(modmenu);
         }
         private static ToolStripMenuItem GetModMenu(ToolStripDropDownItem tools, IReadOnlyList<ToolStripItem> search)

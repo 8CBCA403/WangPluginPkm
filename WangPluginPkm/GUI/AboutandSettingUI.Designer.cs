@@ -70,7 +70,7 @@ namespace WangPluginPkm.GUI
             // 
             Pic_TB.Location = new System.Drawing.Point(132, 78);
             Pic_TB.Name = "Pic_TB";
-            Pic_TB.Size = new System.Drawing.Size(269, 23);
+            Pic_TB.Size = new System.Drawing.Size(269, 27);
             Pic_TB.TabIndex = 11;
             // 
             // Pic_Label
@@ -78,7 +78,7 @@ namespace WangPluginPkm.GUI
             Pic_Label.AutoSize = true;
             Pic_Label.Location = new System.Drawing.Point(42, 81);
             Pic_Label.Name = "Pic_Label";
-            Pic_Label.Size = new System.Drawing.Size(79, 17);
+            Pic_Label.Size = new System.Drawing.Size(89, 20);
             Pic_Label.TabIndex = 10;
             Pic_Label.Text = "PokemonPic";
             // 
@@ -86,7 +86,7 @@ namespace WangPluginPkm.GUI
             // 
             HC_TB.Location = new System.Drawing.Point(337, 49);
             HC_TB.Name = "HC_TB";
-            HC_TB.Size = new System.Drawing.Size(145, 23);
+            HC_TB.Size = new System.Drawing.Size(145, 27);
             HC_TB.TabIndex = 9;
             // 
             // HC_LB
@@ -94,7 +94,7 @@ namespace WangPluginPkm.GUI
             HC_LB.AutoSize = true;
             HC_LB.Location = new System.Drawing.Point(247, 52);
             HC_LB.Name = "HC_LB";
-            HC_LB.Size = new System.Drawing.Size(84, 17);
+            HC_LB.Size = new System.Drawing.Size(96, 20);
             HC_LB.TabIndex = 8;
             HC_LB.Text = "HomeCookie";
             // 
@@ -102,7 +102,7 @@ namespace WangPluginPkm.GUI
             // 
             HA_TB.Location = new System.Drawing.Point(132, 49);
             HA_TB.Name = "HA_TB";
-            HA_TB.Size = new System.Drawing.Size(105, 23);
+            HA_TB.Size = new System.Drawing.Size(105, 27);
             HA_TB.TabIndex = 7;
             // 
             // HA_LB
@@ -110,7 +110,7 @@ namespace WangPluginPkm.GUI
             HA_LB.AutoSize = true;
             HA_LB.Location = new System.Drawing.Point(6, 52);
             HA_LB.Name = "HA_LB";
-            HA_LB.Size = new System.Drawing.Size(120, 17);
+            HA_LB.Size = new System.Drawing.Size(140, 20);
             HA_LB.TabIndex = 6;
             HA_LB.Text = "HomeAuthorization";
             // 
@@ -119,7 +119,7 @@ namespace WangPluginPkm.GUI
             ApplicationNameLB.AutoSize = true;
             ApplicationNameLB.Location = new System.Drawing.Point(323, 23);
             ApplicationNameLB.Name = "ApplicationNameLB";
-            ApplicationNameLB.Size = new System.Drawing.Size(67, 17);
+            ApplicationNameLB.Size = new System.Drawing.Size(77, 20);
             ApplicationNameLB.TabIndex = 5;
             ApplicationNameLB.Text = "AppName";
             // 
@@ -128,7 +128,7 @@ namespace WangPluginPkm.GUI
             ApiKeyLB.AutoSize = true;
             ApiKeyLB.Location = new System.Drawing.Point(138, 23);
             ApiKeyLB.Name = "ApiKeyLB";
-            ApiKeyLB.Size = new System.Drawing.Size(48, 17);
+            ApiKeyLB.Size = new System.Drawing.Size(56, 20);
             ApiKeyLB.TabIndex = 4;
             ApiKeyLB.Text = "ApiKey";
             // 
@@ -136,14 +136,14 @@ namespace WangPluginPkm.GUI
             // 
             APP_TB.Location = new System.Drawing.Point(396, 20);
             APP_TB.Name = "APP_TB";
-            APP_TB.Size = new System.Drawing.Size(86, 23);
+            APP_TB.Size = new System.Drawing.Size(86, 27);
             APP_TB.TabIndex = 3;
             // 
             // API_TB
             // 
             API_TB.Location = new System.Drawing.Point(192, 20);
             API_TB.Name = "API_TB";
-            API_TB.Size = new System.Drawing.Size(125, 23);
+            API_TB.Size = new System.Drawing.Size(125, 27);
             API_TB.TabIndex = 2;
             // 
             // Sav_Config_BTN
@@ -163,7 +163,7 @@ namespace WangPluginPkm.GUI
             SoundCheck.CheckState = CheckState.Checked;
             SoundCheck.Location = new System.Drawing.Point(9, 22);
             SoundCheck.Name = "SoundCheck";
-            SoundCheck.Size = new System.Drawing.Size(123, 21);
+            SoundCheck.Size = new System.Drawing.Size(159, 24);
             SoundCheck.TabIndex = 0;
             SoundCheck.Text = "是否播放启动声音";
             SoundCheck.UseVisualStyleBackColor = true;

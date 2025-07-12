@@ -115,7 +115,7 @@ namespace WangPluginPkm.GUI
             Sp_LB.AutoSize = true;
             Sp_LB.Location = new System.Drawing.Point(211, 67);
             Sp_LB.Name = "Sp_LB";
-            Sp_LB.Size = new System.Drawing.Size(40, 17);
+            Sp_LB.Size = new System.Drawing.Size(36, 17);
             Sp_LB.TabIndex = 10;
             Sp_LB.Text = "种类";
             // 
@@ -131,7 +131,7 @@ namespace WangPluginPkm.GUI
             OT_Name.AutoSize = true;
             OT_Name.Location = new System.Drawing.Point(362, 36);
             OT_Name.Name = "OT_Name";
-            OT_Name.Size = new System.Drawing.Size(56, 17);
+            OT_Name.Size = new System.Drawing.Size(50, 17);
             OT_Name.TabIndex = 8;
             OT_Name.Text = "初训家";
             // 

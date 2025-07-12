@@ -38,6 +38,8 @@ namespace WangPluginPkm.GUI
             CB = new ComboBox();
             SmogonGroup = new GroupBox();
             Home_RankPage = new TabPage();
+            Search_BTN = new Button();
+            txtSearch = new TextBox();
             S_B = new GroupBox();
             TS1_BOX = new TextBox();
             label6 = new Label();
@@ -69,8 +71,6 @@ namespace WangPluginPkm.GUI
             ResultBox = new TextBox();
             TEST_BTN = new Button();
             TeamList_BOX = new CheckedListBox();
-            txtSearch = new TextBox();
-            Search_BTN = new Button();
             BattleKingtabControl.SuspendLayout();
             PStabPage.SuspendLayout();
             WebtabPage.SuspendLayout();
@@ -139,7 +139,7 @@ namespace WangPluginPkm.GUI
             // 
             ConditionBox.Location = new System.Drawing.Point(6, 20);
             ConditionBox.Name = "ConditionBox";
-            ConditionBox.Size = new System.Drawing.Size(171, 21);
+            ConditionBox.Size = new System.Drawing.Size(171, 25);
             ConditionBox.TabIndex = 6;
             ConditionBox.Text = "Nothing to check";
             // 
@@ -159,7 +159,7 @@ namespace WangPluginPkm.GUI
             ChineseCheckBox.AutoSize = true;
             ChineseCheckBox.Location = new System.Drawing.Point(71, 308);
             ChineseCheckBox.Name = "ChineseCheckBox";
-            ChineseCheckBox.Size = new System.Drawing.Size(72, 16);
+            ChineseCheckBox.Size = new System.Drawing.Size(93, 19);
             ChineseCheckBox.TabIndex = 8;
             ChineseCheckBox.Text = "中文指令";
             ChineseCheckBox.UseVisualStyleBackColor = true;
@@ -183,10 +183,10 @@ namespace WangPluginPkm.GUI
             PStabPage.Controls.Add(PSBox);
             PStabPage.Controls.Add(ChineseCheckBox);
             PStabPage.Controls.Add(LoadTeamFromPSCode_BTN);
-            PStabPage.Location = new System.Drawing.Point(4, 22);
+            PStabPage.Location = new System.Drawing.Point(4, 25);
             PStabPage.Name = "PStabPage";
             PStabPage.Padding = new Padding(3);
-            PStabPage.Size = new System.Drawing.Size(528, 351);
+            PStabPage.Size = new System.Drawing.Size(528, 348);
             PStabPage.TabIndex = 0;
             PStabPage.Text = "PS指令模式";
             // 
@@ -195,10 +195,10 @@ namespace WangPluginPkm.GUI
             WebtabPage.BackColor = System.Drawing.Color.WhiteSmoke;
             WebtabPage.Controls.Add(UrlBox);
             WebtabPage.Controls.Add(LoadBattleTeam_BTN);
-            WebtabPage.Location = new System.Drawing.Point(4, 26);
+            WebtabPage.Location = new System.Drawing.Point(4, 29);
             WebtabPage.Name = "WebtabPage";
             WebtabPage.Padding = new Padding(3);
-            WebtabPage.Size = new System.Drawing.Size(528, 347);
+            WebtabPage.Size = new System.Drawing.Size(528, 344);
             WebtabPage.TabIndex = 1;
             WebtabPage.Text = "网址模式";
             // 
@@ -208,10 +208,10 @@ namespace WangPluginPkm.GUI
             STtabPage.Controls.Add(VGCPaste_GB);
             STtabPage.Controls.Add(MT_Box);
             STtabPage.Controls.Add(SmogonGroup);
-            STtabPage.Location = new System.Drawing.Point(4, 26);
+            STtabPage.Location = new System.Drawing.Point(4, 29);
             STtabPage.Name = "STtabPage";
             STtabPage.Padding = new Padding(3);
-            STtabPage.Size = new System.Drawing.Size(528, 347);
+            STtabPage.Size = new System.Drawing.Size(528, 344);
             STtabPage.TabIndex = 2;
             STtabPage.Text = "策略爬取";
             // 
@@ -253,7 +253,7 @@ namespace WangPluginPkm.GUI
             VGCExcel_CB.FormattingEnabled = true;
             VGCExcel_CB.Location = new System.Drawing.Point(6, 78);
             VGCExcel_CB.Name = "VGCExcel_CB";
-            VGCExcel_CB.Size = new System.Drawing.Size(201, 20);
+            VGCExcel_CB.Size = new System.Drawing.Size(201, 23);
             VGCExcel_CB.TabIndex = 15;
             // 
             // VGCPaste_TB
@@ -294,14 +294,14 @@ namespace WangPluginPkm.GUI
             Web_CB.FormattingEnabled = true;
             Web_CB.Location = new System.Drawing.Point(6, 20);
             Web_CB.Name = "Web_CB";
-            Web_CB.Size = new System.Drawing.Size(85, 20);
+            Web_CB.Size = new System.Drawing.Size(85, 23);
             Web_CB.TabIndex = 14;
             // 
             // ImportURL_text
             // 
             ImportURL_text.Location = new System.Drawing.Point(97, 20);
             ImportURL_text.Name = "ImportURL_text";
-            ImportURL_text.Size = new System.Drawing.Size(220, 21);
+            ImportURL_text.Size = new System.Drawing.Size(220, 25);
             ImportURL_text.TabIndex = 13;
             ImportURL_text.Text = "https://www.falinks-teambuilder.com/";
             // 
@@ -332,7 +332,7 @@ namespace WangPluginPkm.GUI
             CB.FormattingEnabled = true;
             CB.Location = new System.Drawing.Point(6, 53);
             CB.Name = "CB";
-            CB.Size = new System.Drawing.Size(311, 20);
+            CB.Size = new System.Drawing.Size(311, 23);
             CB.TabIndex = 12;
             // 
             // SmogonGroup
@@ -356,13 +356,30 @@ namespace WangPluginPkm.GUI
             Home_RankPage.Controls.Add(TrainerCard);
             Home_RankPage.Controls.Add(Rank_List_Box);
             Home_RankPage.Controls.Add(Get_Rank_BTN);
-            Home_RankPage.Location = new System.Drawing.Point(4, 22);
+            Home_RankPage.Location = new System.Drawing.Point(4, 29);
             Home_RankPage.Name = "Home_RankPage";
             Home_RankPage.Padding = new Padding(3);
-            Home_RankPage.Size = new System.Drawing.Size(528, 351);
+            Home_RankPage.Size = new System.Drawing.Size(528, 344);
             Home_RankPage.TabIndex = 4;
             Home_RankPage.Text = "Home查分器";
             Home_RankPage.UseVisualStyleBackColor = true;
+            // 
+            // Search_BTN
+            // 
+            Search_BTN.Location = new System.Drawing.Point(458, 144);
+            Search_BTN.Name = "Search_BTN";
+            Search_BTN.Size = new System.Drawing.Size(46, 23);
+            Search_BTN.TabIndex = 16;
+            Search_BTN.Text = "搜索";
+            Search_BTN.UseVisualStyleBackColor = true;
+            Search_BTN.Click += Search_BTN_Click;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new System.Drawing.Point(350, 144);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new System.Drawing.Size(100, 25);
+            txtSearch.TabIndex = 15;
             // 
             // S_B
             // 
@@ -389,7 +406,7 @@ namespace WangPluginPkm.GUI
             // 
             TS1_BOX.Location = new System.Drawing.Point(230, 52);
             TS1_BOX.Name = "TS1_BOX";
-            TS1_BOX.Size = new System.Drawing.Size(81, 21);
+            TS1_BOX.Size = new System.Drawing.Size(81, 25);
             TS1_BOX.TabIndex = 22;
             // 
             // label6
@@ -397,7 +414,7 @@ namespace WangPluginPkm.GUI
             label6.AutoSize = true;
             label6.Location = new System.Drawing.Point(202, 55);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(23, 12);
+            label6.Size = new System.Drawing.Size(31, 15);
             label6.TabIndex = 21;
             label6.Text = "TS1";
             // 
@@ -405,7 +422,7 @@ namespace WangPluginPkm.GUI
             // 
             RST_BOX.Location = new System.Drawing.Point(230, 20);
             RST_BOX.Name = "RST_BOX";
-            RST_BOX.Size = new System.Drawing.Size(81, 21);
+            RST_BOX.Size = new System.Drawing.Size(81, 25);
             RST_BOX.TabIndex = 20;
             // 
             // label5
@@ -413,7 +430,7 @@ namespace WangPluginPkm.GUI
             label5.AutoSize = true;
             label5.Location = new System.Drawing.Point(202, 23);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(23, 12);
+            label5.Size = new System.Drawing.Size(31, 15);
             label5.TabIndex = 19;
             label5.Text = "RST";
             // 
@@ -422,7 +439,7 @@ namespace WangPluginPkm.GUI
             label4.AutoSize = true;
             label4.Location = new System.Drawing.Point(50, 119);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(23, 12);
+            label4.Size = new System.Drawing.Size(31, 15);
             label4.TabIndex = 18;
             label4.Text = "CID";
             // 
@@ -430,21 +447,21 @@ namespace WangPluginPkm.GUI
             // 
             CID_BOX.Location = new System.Drawing.Point(79, 116);
             CID_BOX.Name = "CID_BOX";
-            CID_BOX.Size = new System.Drawing.Size(232, 21);
+            CID_BOX.Size = new System.Drawing.Size(232, 25);
             CID_BOX.TabIndex = 17;
             // 
             // SEnd_Box
             // 
             SEnd_Box.Location = new System.Drawing.Point(79, 84);
             SEnd_Box.Name = "SEnd_Box";
-            SEnd_Box.Size = new System.Drawing.Size(117, 21);
+            SEnd_Box.Size = new System.Drawing.Size(117, 25);
             SEnd_Box.TabIndex = 16;
             // 
             // SStart_Box
             // 
             SStart_Box.Location = new System.Drawing.Point(79, 52);
             SStart_Box.Name = "SStart_Box";
-            SStart_Box.Size = new System.Drawing.Size(117, 21);
+            SStart_Box.Size = new System.Drawing.Size(117, 25);
             SStart_Box.TabIndex = 15;
             // 
             // label3
@@ -452,7 +469,7 @@ namespace WangPluginPkm.GUI
             label3.AutoSize = true;
             label3.Location = new System.Drawing.Point(20, 87);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(53, 12);
+            label3.Size = new System.Drawing.Size(71, 15);
             label3.TabIndex = 14;
             label3.Text = "结束日期";
             // 
@@ -461,7 +478,7 @@ namespace WangPluginPkm.GUI
             label2.AutoSize = true;
             label2.Location = new System.Drawing.Point(20, 55);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(53, 12);
+            label2.Size = new System.Drawing.Size(71, 15);
             label2.TabIndex = 13;
             label2.Text = "开始日期";
             // 
@@ -469,7 +486,7 @@ namespace WangPluginPkm.GUI
             // 
             S_Name.Location = new System.Drawing.Point(79, 20);
             S_Name.Name = "S_Name";
-            S_Name.Size = new System.Drawing.Size(117, 21);
+            S_Name.Size = new System.Drawing.Size(117, 25);
             S_Name.TabIndex = 12;
             // 
             // label1
@@ -477,7 +494,7 @@ namespace WangPluginPkm.GUI
             label1.AutoSize = true;
             label1.Location = new System.Drawing.Point(20, 23);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(53, 12);
+            label1.Size = new System.Drawing.Size(71, 15);
             label1.TabIndex = 9;
             label1.Text = "赛季名称";
             // 
@@ -522,7 +539,7 @@ namespace WangPluginPkm.GUI
             LngLB.AutoSize = true;
             LngLB.Location = new System.Drawing.Point(112, 77);
             LngLB.Name = "LngLB";
-            LngLB.Size = new System.Drawing.Size(29, 12);
+            LngLB.Size = new System.Drawing.Size(39, 15);
             LngLB.TabIndex = 11;
             LngLB.Text = "语言";
             // 
@@ -531,7 +548,7 @@ namespace WangPluginPkm.GUI
             RKVLB.AutoSize = true;
             RKVLB.Location = new System.Drawing.Point(112, 104);
             RKVLB.Name = "RKVLB";
-            RKVLB.Size = new System.Drawing.Size(29, 12);
+            RKVLB.Size = new System.Drawing.Size(39, 15);
             RKVLB.TabIndex = 10;
             RKVLB.Text = "分数";
             // 
@@ -539,7 +556,7 @@ namespace WangPluginPkm.GUI
             // 
             RankBox.Location = new System.Drawing.Point(147, 20);
             RankBox.Name = "RankBox";
-            RankBox.Size = new System.Drawing.Size(46, 21);
+            RankBox.Size = new System.Drawing.Size(46, 25);
             RankBox.TabIndex = 4;
             // 
             // NameLB
@@ -547,7 +564,7 @@ namespace WangPluginPkm.GUI
             NameLB.AutoSize = true;
             NameLB.Location = new System.Drawing.Point(112, 50);
             NameLB.Name = "NameLB";
-            NameLB.Size = new System.Drawing.Size(29, 12);
+            NameLB.Size = new System.Drawing.Size(39, 15);
             NameLB.TabIndex = 9;
             NameLB.Text = "名字";
             // 
@@ -555,7 +572,7 @@ namespace WangPluginPkm.GUI
             // 
             NameBox.Location = new System.Drawing.Point(147, 47);
             NameBox.Name = "NameBox";
-            NameBox.Size = new System.Drawing.Size(96, 21);
+            NameBox.Size = new System.Drawing.Size(96, 25);
             NameBox.TabIndex = 5;
             // 
             // RankLB
@@ -563,7 +580,7 @@ namespace WangPluginPkm.GUI
             RankLB.AutoSize = true;
             RankLB.Location = new System.Drawing.Point(112, 23);
             RankLB.Name = "RankLB";
-            RankLB.Size = new System.Drawing.Size(29, 12);
+            RankLB.Size = new System.Drawing.Size(39, 15);
             RankLB.TabIndex = 8;
             RankLB.Text = "排名";
             // 
@@ -571,23 +588,22 @@ namespace WangPluginPkm.GUI
             // 
             LangBox.Location = new System.Drawing.Point(147, 72);
             LangBox.Name = "LangBox";
-            LangBox.Size = new System.Drawing.Size(78, 21);
+            LangBox.Size = new System.Drawing.Size(78, 25);
             LangBox.TabIndex = 6;
             // 
             // RankValueBox
             // 
             RankValueBox.Location = new System.Drawing.Point(147, 99);
             RankValueBox.Name = "RankValueBox";
-            RankValueBox.Size = new System.Drawing.Size(78, 21);
+            RankValueBox.Size = new System.Drawing.Size(78, 25);
             RankValueBox.TabIndex = 7;
             // 
             // Rank_List_Box
             // 
             Rank_List_Box.FormattingEnabled = true;
-            Rank_List_Box.ItemHeight = 12;
             Rank_List_Box.Location = new System.Drawing.Point(6, 5);
             Rank_List_Box.Name = "Rank_List_Box";
-            Rank_List_Box.Size = new System.Drawing.Size(163, 340);
+            Rank_List_Box.Size = new System.Drawing.Size(163, 334);
             Rank_List_Box.TabIndex = 2;
             Rank_List_Box.SelectedIndexChanged += Rank_List_Box_SelectedIndexChanged;
             // 
@@ -608,10 +624,10 @@ namespace WangPluginPkm.GUI
             VGC_Check.Controls.Add(ResultBox);
             VGC_Check.Controls.Add(TEST_BTN);
             VGC_Check.Controls.Add(TeamList_BOX);
-            VGC_Check.Location = new System.Drawing.Point(4, 26);
+            VGC_Check.Location = new System.Drawing.Point(4, 29);
             VGC_Check.Name = "VGC_Check";
             VGC_Check.Padding = new Padding(3);
-            VGC_Check.Size = new System.Drawing.Size(528, 347);
+            VGC_Check.Size = new System.Drawing.Size(528, 344);
             VGC_Check.TabIndex = 3;
             VGC_Check.Text = "VGC队伍检测";
             // 
@@ -620,7 +636,7 @@ namespace WangPluginPkm.GUI
             Helper_TB.Font = new System.Drawing.Font("黑体", 9F);
             Helper_TB.Location = new System.Drawing.Point(6, 6);
             Helper_TB.Name = "Helper_TB";
-            Helper_TB.Size = new System.Drawing.Size(192, 21);
+            Helper_TB.Size = new System.Drawing.Size(192, 25);
             Helper_TB.TabIndex = 3;
             Helper_TB.Text = "请将有6只精灵的bin文件拖入下方";
             // 
@@ -649,27 +665,10 @@ namespace WangPluginPkm.GUI
             TeamList_BOX.FormattingEnabled = true;
             TeamList_BOX.Location = new System.Drawing.Point(6, 33);
             TeamList_BOX.Name = "TeamList_BOX";
-            TeamList_BOX.Size = new System.Drawing.Size(192, 276);
+            TeamList_BOX.Size = new System.Drawing.Size(192, 264);
             TeamList_BOX.TabIndex = 0;
             TeamList_BOX.DragDrop += PKM_DragDrop;
             TeamList_BOX.DragEnter += PKM_DragEnter;
-            // 
-            // txtSearch
-            // 
-            txtSearch.Location = new System.Drawing.Point(350, 144);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new System.Drawing.Size(100, 21);
-            txtSearch.TabIndex = 15;
-            // 
-            // Search_BTN
-            // 
-            Search_BTN.Location = new System.Drawing.Point(458, 144);
-            Search_BTN.Name = "Search_BTN";
-            Search_BTN.Size = new System.Drawing.Size(46, 23);
-            Search_BTN.TabIndex = 16;
-            Search_BTN.Text = "搜索";
-            Search_BTN.UseVisualStyleBackColor = true;
-            Search_BTN.Click += Search_BTN_Click;
             // 
             // BattleKingUI
             // 

@@ -2,18 +2,23 @@
 using PKHeX.Core.Searching;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 namespace WangPluginPkm
 {
     internal class SearchDatabase
     {
         public static GameStrings GameStrings = GameInfo.GetStrings("zh-Hans");
-        public static PKM SearchPKM(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version, int form = 0, bool egg = false, int location = 0, int gender = 0, int r = 0, int level = 0)
+    
+        public static PKM SearchPKM(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version, int form = 0, bool egg = false, int location = 0, int gender = 0, int r = 0, byte level = 0)
         {
             var setting = new SearchSettings
             {
                 SearchShiny = false,
                 Species = species,
                 SearchEgg = egg,
+                Level=level,
+                
+                SearchLevel = SearchComparison.Equals,
                 Version = (GameVersion)version,
             };
             var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
@@ -33,11 +38,7 @@ namespace WangPluginPkm
                 results = results.Where(pkm => pkm.ConvertToPKM(SAV.SAV).Gender == gender - 1).ToList();
                 if (results.Count == 0) return null;
             }
-            if (level != 0)
-            {
-                results = results.Where(pkm => pkm.ConvertToPKM(SAV.SAV).MetLevel == level).ToList();
-                if (results.Count == 0) return null;
-            }
+            
             var enc = results.ElementAtOrDefault(r);
             if (enc == null) return null;
 
@@ -46,7 +47,6 @@ namespace WangPluginPkm
 
             return pk;
         }
-
         public static List<PKM> SearchPKMList(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version, int form = 0, bool egg = false)
         {
             var setting = new SearchSettings
@@ -251,8 +251,96 @@ namespace WangPluginPkm
             return pk;
         }
 
+        public static PKM GetWildGen3PKM(ISaveFileProvider provider, ushort species)
+        {
+            var sav = provider.SAV;
+            var version = GameVersion.E; 
+            var flags = EncounterTypeGroup.Slot; 
+            var evo = new EvoCriteria { Species = species };
 
+            var encounters = new EncounterPossible3([evo], flags, version);
+            while (encounters.MoveNext())
+            {
+                var enc = encounters.Current;
+                var pkm = enc.ConvertToPKM(sav);
+                var converted = EntityConverter.ConvertToType(pkm, sav.PKMType, out _);
+                return converted;
+            }
 
+            return null!; 
+        }
+        public static PKM GetWildGen1PKM(ISaveFileProvider provider, ushort species)
+        {
+            var sav = provider.SAV;
+            var version = GameVersion.YW;
+            var flags = EncounterTypeGroup.Slot;
+            var evo = new EvoCriteria { Species = species };
+
+            var encounters = new EncounterPossible1([evo], flags, version);
+            while (encounters.MoveNext())
+            {
+                var enc = encounters.Current;
+                var pkm = enc.ConvertToPKM(sav);
+                var converted = EntityConverter.ConvertToType(pkm, sav.PKMType, out _);
+                return converted;
+            }
+
+            return null!;
+        }
+        public static PKM GetWildGen4PKM(SaveFile sav, ushort species, GameVersion version,Gender gender)
+        {
+            var blank = EntityBlank.GetBlank(sav.PKMType);
+            blank.Version = version;
+            var evo = new[] {
+            new EvoCriteria {
+            Species = species,
+            Form = 0,
+            LevelMin = 1,
+            LevelMax = 100,
+            LevelUpRequired = 0,
+            Method = EvolutionType.None
+                }
+            };
+            var flags = EncounterTypeGroup.Slot;
+            var ep4 = new EncounterPossible4(evo, flags, version, blank);
+            while (ep4.MoveNext())
+            {
+                var enc = ep4.Current;
+                var pkm = enc.ConvertToPKM(sav);
+
+                if (pkm.Gender == (byte)gender)
+                {
+                    return EntityConverter.ConvertToType(pkm, sav.PKMType, out _);
+                }
+            }
+            return null;
+        }
+        public static PKM GetWildGen5PKM(SaveFile sav, ushort species, GameVersion version, Gender gender)
+        {
+        var evo = new[] {
+        new EvoCriteria {
+        Species = species,
+        Form = 0,
+        LevelMin = 1,
+        LevelMax = 100,
+        LevelUpRequired = 0,
+        Method = EvolutionType.None
+            }
+         };
+            var flags = EncounterTypeGroup.Slot;
+            var ep4 = new EncounterPossible5(evo, flags, version);
+            while (ep4.MoveNext())
+            {
+                var enc = ep4.Current;
+                var pkm = enc.ConvertToPKM(sav);
+
+                if (pkm.Gender == (byte)gender) 
+                {
+                    return EntityConverter.ConvertToType(pkm, sav.PKMType, out _);
+                }
+            }
+            return null;
+        }
     }
 }
 

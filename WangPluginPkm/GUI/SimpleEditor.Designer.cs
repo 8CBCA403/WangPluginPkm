@@ -63,7 +63,7 @@ namespace WangPluginPkm.GUI
             Controls.Add(LegalizeReport);
             Controls.Add(ClearRecord);
             Controls.Add(AllRibbon);
-            Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Font = new System.Drawing.Font("Arial", 9F);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;

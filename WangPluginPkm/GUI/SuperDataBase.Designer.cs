@@ -110,99 +110,99 @@
             // SPL
             // 
             SPL.AutoSize = true;
-            SPL.Location = new System.Drawing.Point(32, 48);
+            SPL.Location = new System.Drawing.Point(37, 56);
             SPL.Name = "SPL";
-            SPL.Size = new System.Drawing.Size(32, 17);
+            SPL.Size = new System.Drawing.Size(41, 20);
             SPL.TabIndex = 0;
             SPL.Text = "种类";
             // 
             // NAL
             // 
             NAL.AutoSize = true;
-            NAL.Location = new System.Drawing.Point(8, 79);
+            NAL.Location = new System.Drawing.Point(9, 93);
             NAL.Name = "NAL";
-            NAL.Size = new System.Drawing.Size(56, 17);
+            NAL.Size = new System.Drawing.Size(73, 20);
             NAL.TabIndex = 1;
             NAL.Text = "原始性格";
             // 
             // FOL
             // 
             FOL.AutoSize = true;
-            FOL.Location = new System.Drawing.Point(32, 140);
+            FOL.Location = new System.Drawing.Point(37, 165);
             FOL.Name = "FOL";
-            FOL.Size = new System.Drawing.Size(32, 17);
+            FOL.Size = new System.Drawing.Size(41, 20);
             FOL.TabIndex = 2;
             FOL.Text = "形态";
             // 
             // ITL
             // 
             ITL.AutoSize = true;
-            ITL.Location = new System.Drawing.Point(20, 171);
+            ITL.Location = new System.Drawing.Point(23, 201);
             ITL.Name = "ITL";
-            ITL.Size = new System.Drawing.Size(44, 17);
+            ITL.Size = new System.Drawing.Size(57, 20);
             ITL.TabIndex = 3;
             ITL.Text = "持有物";
             // 
             // ABL
             // 
             ABL.AutoSize = true;
-            ABL.Location = new System.Drawing.Point(32, 201);
+            ABL.Location = new System.Drawing.Point(37, 236);
             ABL.Name = "ABL";
-            ABL.Size = new System.Drawing.Size(32, 17);
+            ABL.Size = new System.Drawing.Size(41, 20);
             ABL.TabIndex = 4;
             ABL.Text = "特性";
             // 
             // LAL
             // 
             LAL.AutoSize = true;
-            LAL.Location = new System.Drawing.Point(33, 260);
+            LAL.Location = new System.Drawing.Point(38, 306);
             LAL.Name = "LAL";
-            LAL.Size = new System.Drawing.Size(32, 17);
+            LAL.Size = new System.Drawing.Size(41, 20);
             LAL.TabIndex = 5;
             LAL.Text = "语言";
             // 
             // BAL
             // 
             BAL.AutoSize = true;
-            BAL.Location = new System.Drawing.Point(163, 201);
+            BAL.Location = new System.Drawing.Point(186, 236);
             BAL.Name = "BAL";
-            BAL.Size = new System.Drawing.Size(32, 17);
+            BAL.Size = new System.Drawing.Size(41, 20);
             BAL.TabIndex = 6;
             BAL.Text = "球种";
             // 
             // IVL
             // 
             IVL.AutoSize = true;
-            IVL.Location = new System.Drawing.Point(33, 291);
+            IVL.Location = new System.Drawing.Point(38, 342);
             IVL.Name = "IVL";
-            IVL.Size = new System.Drawing.Size(32, 17);
+            IVL.Size = new System.Drawing.Size(41, 20);
             IVL.TabIndex = 7;
             IVL.Text = "个体";
             // 
             // EVL
             // 
             EVL.AutoSize = true;
-            EVL.Location = new System.Drawing.Point(21, 324);
+            EVL.Location = new System.Drawing.Point(24, 381);
             EVL.Name = "EVL";
-            EVL.Size = new System.Drawing.Size(44, 17);
+            EVL.Size = new System.Drawing.Size(57, 20);
             EVL.TabIndex = 8;
             EVL.Text = "努力值";
             // 
             // MOVL
             // 
             MOVL.AutoSize = true;
-            MOVL.Location = new System.Drawing.Point(33, 353);
+            MOVL.Location = new System.Drawing.Point(38, 415);
             MOVL.Name = "MOVL";
-            MOVL.Size = new System.Drawing.Size(32, 17);
+            MOVL.Size = new System.Drawing.Size(41, 20);
             MOVL.TabIndex = 9;
             MOVL.Text = "招式";
             // 
             // REML
             // 
             REML.AutoSize = true;
-            REML.Location = new System.Drawing.Point(9, 444);
+            REML.Location = new System.Drawing.Point(10, 522);
             REML.Name = "REML";
-            REML.Size = new System.Drawing.Size(56, 17);
+            REML.Size = new System.Drawing.Size(73, 20);
             REML.TabIndex = 10;
             REML.Text = "回忆招式";
             // 
@@ -211,9 +211,10 @@
             SP_CB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             SP_CB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             SP_CB.FormattingEnabled = true;
-            SP_CB.Location = new System.Drawing.Point(71, 45);
+            SP_CB.Location = new System.Drawing.Point(81, 53);
+            SP_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             SP_CB.Name = "SP_CB";
-            SP_CB.Size = new System.Drawing.Size(91, 25);
+            SP_CB.Size = new System.Drawing.Size(103, 28);
             SP_CB.TabIndex = 11;
             SP_CB.SelectedIndexChanged += SP_CB_SelectedIndexChanged;
             // 
@@ -222,9 +223,10 @@
             NA_CB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             NA_CB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             NA_CB.FormattingEnabled = true;
-            NA_CB.Location = new System.Drawing.Point(70, 76);
+            NA_CB.Location = new System.Drawing.Point(80, 89);
+            NA_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             NA_CB.Name = "NA_CB";
-            NA_CB.Size = new System.Drawing.Size(65, 25);
+            NA_CB.Size = new System.Drawing.Size(74, 28);
             NA_CB.TabIndex = 12;
             // 
             // IT_CB
@@ -232,9 +234,10 @@
             IT_CB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             IT_CB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             IT_CB.FormattingEnabled = true;
-            IT_CB.Location = new System.Drawing.Point(70, 167);
+            IT_CB.Location = new System.Drawing.Point(80, 196);
+            IT_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             IT_CB.Name = "IT_CB";
-            IT_CB.Size = new System.Drawing.Size(91, 25);
+            IT_CB.Size = new System.Drawing.Size(103, 28);
             IT_CB.TabIndex = 14;
             // 
             // AB_CB
@@ -242,17 +245,19 @@
             AB_CB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             AB_CB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             AB_CB.FormattingEnabled = true;
-            AB_CB.Location = new System.Drawing.Point(70, 198);
+            AB_CB.Location = new System.Drawing.Point(80, 233);
+            AB_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             AB_CB.Name = "AB_CB";
-            AB_CB.Size = new System.Drawing.Size(91, 25);
+            AB_CB.Size = new System.Drawing.Size(103, 28);
             AB_CB.TabIndex = 15;
             // 
             // LA_CB
             // 
             LA_CB.FormattingEnabled = true;
-            LA_CB.Location = new System.Drawing.Point(71, 257);
+            LA_CB.Location = new System.Drawing.Point(81, 302);
+            LA_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             LA_CB.Name = "LA_CB";
-            LA_CB.Size = new System.Drawing.Size(92, 25);
+            LA_CB.Size = new System.Drawing.Size(105, 28);
             LA_CB.TabIndex = 16;
             // 
             // BA_CB
@@ -260,24 +265,27 @@
             BA_CB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             BA_CB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             BA_CB.FormattingEnabled = true;
-            BA_CB.Location = new System.Drawing.Point(203, 198);
+            BA_CB.Location = new System.Drawing.Point(232, 233);
+            BA_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             BA_CB.Name = "BA_CB";
-            BA_CB.Size = new System.Drawing.Size(91, 25);
+            BA_CB.Size = new System.Drawing.Size(103, 28);
             BA_CB.TabIndex = 17;
             // 
             // IV_TB
             // 
-            IV_TB.Location = new System.Drawing.Point(71, 288);
+            IV_TB.Location = new System.Drawing.Point(81, 339);
+            IV_TB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             IV_TB.Name = "IV_TB";
-            IV_TB.Size = new System.Drawing.Size(223, 23);
+            IV_TB.Size = new System.Drawing.Size(254, 27);
             IV_TB.TabIndex = 18;
             IV_TB.Text = "0/0/0/0/0/0";
             // 
             // EV_TB
             // 
-            EV_TB.Location = new System.Drawing.Point(71, 321);
+            EV_TB.Location = new System.Drawing.Point(81, 378);
+            EV_TB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             EV_TB.Name = "EV_TB";
-            EV_TB.Size = new System.Drawing.Size(223, 23);
+            EV_TB.Size = new System.Drawing.Size(254, 27);
             EV_TB.TabIndex = 19;
             EV_TB.Text = "0/0/0/0/0/0";
             // 
@@ -286,9 +294,10 @@
             MOV1_CB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             MOV1_CB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             MOV1_CB.FormattingEnabled = true;
-            MOV1_CB.Location = new System.Drawing.Point(36, 373);
+            MOV1_CB.Location = new System.Drawing.Point(41, 439);
+            MOV1_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             MOV1_CB.Name = "MOV1_CB";
-            MOV1_CB.Size = new System.Drawing.Size(121, 25);
+            MOV1_CB.Size = new System.Drawing.Size(138, 28);
             MOV1_CB.TabIndex = 20;
             // 
             // REM1_CB
@@ -296,9 +305,10 @@
             REM1_CB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             REM1_CB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             REM1_CB.FormattingEnabled = true;
-            REM1_CB.Location = new System.Drawing.Point(36, 464);
+            REM1_CB.Location = new System.Drawing.Point(41, 546);
+            REM1_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             REM1_CB.Name = "REM1_CB";
-            REM1_CB.Size = new System.Drawing.Size(121, 25);
+            REM1_CB.Size = new System.Drawing.Size(138, 28);
             REM1_CB.TabIndex = 21;
             // 
             // MOV2_CB
@@ -306,9 +316,10 @@
             MOV2_CB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             MOV2_CB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             MOV2_CB.FormattingEnabled = true;
-            MOV2_CB.Location = new System.Drawing.Point(174, 373);
+            MOV2_CB.Location = new System.Drawing.Point(199, 439);
+            MOV2_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             MOV2_CB.Name = "MOV2_CB";
-            MOV2_CB.Size = new System.Drawing.Size(121, 25);
+            MOV2_CB.Size = new System.Drawing.Size(138, 28);
             MOV2_CB.TabIndex = 22;
             // 
             // MOV3_CB
@@ -316,9 +327,10 @@
             MOV3_CB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             MOV3_CB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             MOV3_CB.FormattingEnabled = true;
-            MOV3_CB.Location = new System.Drawing.Point(36, 404);
+            MOV3_CB.Location = new System.Drawing.Point(41, 475);
+            MOV3_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             MOV3_CB.Name = "MOV3_CB";
-            MOV3_CB.Size = new System.Drawing.Size(121, 25);
+            MOV3_CB.Size = new System.Drawing.Size(138, 28);
             MOV3_CB.TabIndex = 23;
             // 
             // MOV4_CB
@@ -326,9 +338,10 @@
             MOV4_CB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             MOV4_CB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             MOV4_CB.FormattingEnabled = true;
-            MOV4_CB.Location = new System.Drawing.Point(174, 404);
+            MOV4_CB.Location = new System.Drawing.Point(199, 475);
+            MOV4_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             MOV4_CB.Name = "MOV4_CB";
-            MOV4_CB.Size = new System.Drawing.Size(121, 25);
+            MOV4_CB.Size = new System.Drawing.Size(138, 28);
             MOV4_CB.TabIndex = 24;
             // 
             // REM2_CB
@@ -336,9 +349,10 @@
             REM2_CB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             REM2_CB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             REM2_CB.FormattingEnabled = true;
-            REM2_CB.Location = new System.Drawing.Point(173, 464);
+            REM2_CB.Location = new System.Drawing.Point(198, 546);
+            REM2_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             REM2_CB.Name = "REM2_CB";
-            REM2_CB.Size = new System.Drawing.Size(122, 25);
+            REM2_CB.Size = new System.Drawing.Size(139, 28);
             REM2_CB.TabIndex = 25;
             // 
             // REM3_CB
@@ -346,9 +360,10 @@
             REM3_CB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             REM3_CB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             REM3_CB.FormattingEnabled = true;
-            REM3_CB.Location = new System.Drawing.Point(36, 495);
+            REM3_CB.Location = new System.Drawing.Point(41, 582);
+            REM3_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             REM3_CB.Name = "REM3_CB";
-            REM3_CB.Size = new System.Drawing.Size(121, 25);
+            REM3_CB.Size = new System.Drawing.Size(138, 28);
             REM3_CB.TabIndex = 26;
             // 
             // REM4_CB
@@ -356,16 +371,18 @@
             REM4_CB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             REM4_CB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             REM4_CB.FormattingEnabled = true;
-            REM4_CB.Location = new System.Drawing.Point(173, 495);
+            REM4_CB.Location = new System.Drawing.Point(198, 582);
+            REM4_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             REM4_CB.Name = "REM4_CB";
-            REM4_CB.Size = new System.Drawing.Size(121, 25);
+            REM4_CB.Size = new System.Drawing.Size(138, 28);
             REM4_CB.TabIndex = 27;
             // 
             // import_editor_BTN
             // 
-            import_editor_BTN.Location = new System.Drawing.Point(66, 526);
+            import_editor_BTN.Location = new System.Drawing.Point(75, 619);
+            import_editor_BTN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             import_editor_BTN.Name = "import_editor_BTN";
-            import_editor_BTN.Size = new System.Drawing.Size(91, 26);
+            import_editor_BTN.Size = new System.Drawing.Size(104, 31);
             import_editor_BTN.TabIndex = 28;
             import_editor_BTN.Text = "导入面板";
             import_editor_BTN.UseVisualStyleBackColor = true;
@@ -373,32 +390,35 @@
             // 
             // FO_NU
             // 
-            FO_NU.Location = new System.Drawing.Point(71, 138);
+            FO_NU.Location = new System.Drawing.Point(81, 162);
+            FO_NU.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             FO_NU.Name = "FO_NU";
-            FO_NU.Size = new System.Drawing.Size(56, 23);
+            FO_NU.Size = new System.Drawing.Size(64, 27);
             FO_NU.TabIndex = 29;
             // 
             // ABNL
             // 
             ABNL.AutoSize = true;
-            ABNL.Location = new System.Drawing.Point(9, 230);
+            ABNL.Location = new System.Drawing.Point(10, 271);
             ABNL.Name = "ABNL";
-            ABNL.Size = new System.Drawing.Size(56, 17);
+            ABNL.Size = new System.Drawing.Size(73, 20);
             ABNL.TabIndex = 30;
             ABNL.Text = "特性序号";
             // 
             // ABN_NU
             // 
-            ABN_NU.Location = new System.Drawing.Point(71, 228);
+            ABN_NU.Location = new System.Drawing.Point(81, 268);
+            ABN_NU.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             ABN_NU.Name = "ABN_NU";
-            ABN_NU.Size = new System.Drawing.Size(56, 23);
+            ABN_NU.Size = new System.Drawing.Size(64, 27);
             ABN_NU.TabIndex = 31;
             // 
             // Export_BTN
             // 
-            Export_BTN.Location = new System.Drawing.Point(66, 558);
+            Export_BTN.Location = new System.Drawing.Point(75, 656);
+            Export_BTN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Export_BTN.Name = "Export_BTN";
-            Export_BTN.Size = new System.Drawing.Size(91, 26);
+            Export_BTN.Size = new System.Drawing.Size(104, 31);
             Export_BTN.TabIndex = 32;
             Export_BTN.Text = "导出模板";
             Export_BTN.UseVisualStyleBackColor = true;
@@ -408,17 +428,19 @@
             // 
             Lp_LIST.FormattingEnabled = true;
             Lp_LIST.HorizontalScrollbar = true;
-            Lp_LIST.Location = new System.Drawing.Point(314, 112);
+            Lp_LIST.Location = new System.Drawing.Point(359, 132);
+            Lp_LIST.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Lp_LIST.Name = "Lp_LIST";
-            Lp_LIST.Size = new System.Drawing.Size(212, 400);
+            Lp_LIST.Size = new System.Drawing.Size(242, 466);
             Lp_LIST.TabIndex = 33;
             Lp_LIST.SelectedIndexChanged += Lp_LIST_SelectedIndexChanged;
             // 
             // Sav_BTN
             // 
-            Sav_BTN.Location = new System.Drawing.Point(173, 526);
+            Sav_BTN.Location = new System.Drawing.Point(198, 619);
+            Sav_BTN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Sav_BTN.Name = "Sav_BTN";
-            Sav_BTN.Size = new System.Drawing.Size(91, 26);
+            Sav_BTN.Size = new System.Drawing.Size(104, 31);
             Sav_BTN.TabIndex = 34;
             Sav_BTN.Text = "保存模板->";
             Sav_BTN.UseVisualStyleBackColor = true;
@@ -426,26 +448,28 @@
             // 
             // File_TB
             // 
-            File_TB.Location = new System.Drawing.Point(71, 14);
+            File_TB.Location = new System.Drawing.Point(81, 16);
+            File_TB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             File_TB.Name = "File_TB";
-            File_TB.Size = new System.Drawing.Size(223, 23);
+            File_TB.Size = new System.Drawing.Size(254, 27);
             File_TB.TabIndex = 35;
             File_TB.Text = "新配置";
             // 
             // FileL
             // 
             FileL.AutoSize = true;
-            FileL.Location = new System.Drawing.Point(20, 17);
+            FileL.Location = new System.Drawing.Point(23, 20);
             FileL.Name = "FileL";
-            FileL.Size = new System.Drawing.Size(44, 17);
+            FileL.Size = new System.Drawing.Size(57, 20);
             FileL.TabIndex = 36;
             FileL.Text = "文件名";
             // 
             // Import_BTN
             // 
-            Import_BTN.Location = new System.Drawing.Point(174, 558);
+            Import_BTN.Location = new System.Drawing.Point(199, 656);
+            Import_BTN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Import_BTN.Name = "Import_BTN";
-            Import_BTN.Size = new System.Drawing.Size(91, 26);
+            Import_BTN.Size = new System.Drawing.Size(104, 31);
             Import_BTN.TabIndex = 37;
             Import_BTN.Text = "导入模板";
             Import_BTN.UseVisualStyleBackColor = true;
@@ -453,16 +477,18 @@
             // 
             // Search_Tb
             // 
-            Search_Tb.Location = new System.Drawing.Point(314, 45);
+            Search_Tb.Location = new System.Drawing.Point(359, 53);
+            Search_Tb.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Search_Tb.Name = "Search_Tb";
-            Search_Tb.Size = new System.Drawing.Size(212, 23);
+            Search_Tb.Size = new System.Drawing.Size(242, 27);
             Search_Tb.TabIndex = 38;
             // 
             // Filter_BTN
             // 
-            Filter_BTN.Location = new System.Drawing.Point(430, 74);
+            Filter_BTN.Location = new System.Drawing.Point(491, 87);
+            Filter_BTN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Filter_BTN.Name = "Filter_BTN";
-            Filter_BTN.Size = new System.Drawing.Size(96, 26);
+            Filter_BTN.Size = new System.Drawing.Size(110, 31);
             Filter_BTN.TabIndex = 39;
             Filter_BTN.Text = "过滤";
             Filter_BTN.UseVisualStyleBackColor = true;
@@ -470,9 +496,10 @@
             // 
             // RUN_BTN
             // 
-            RUN_BTN.Location = new System.Drawing.Point(656, 558);
+            RUN_BTN.Location = new System.Drawing.Point(750, 656);
+            RUN_BTN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             RUN_BTN.Name = "RUN_BTN";
-            RUN_BTN.Size = new System.Drawing.Size(102, 26);
+            RUN_BTN.Size = new System.Drawing.Size(117, 31);
             RUN_BTN.TabIndex = 40;
             RUN_BTN.Text = "开始覆写";
             RUN_BTN.UseVisualStyleBackColor = true;
@@ -480,9 +507,10 @@
             // 
             // Delet_BTN
             // 
-            Delet_BTN.Location = new System.Drawing.Point(379, 526);
+            Delet_BTN.Location = new System.Drawing.Point(433, 619);
+            Delet_BTN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Delet_BTN.Name = "Delet_BTN";
-            Delet_BTN.Size = new System.Drawing.Size(82, 26);
+            Delet_BTN.Size = new System.Drawing.Size(94, 31);
             Delet_BTN.TabIndex = 41;
             Delet_BTN.Text = "删除配置";
             Delet_BTN.UseVisualStyleBackColor = true;
@@ -491,44 +519,47 @@
             // StartBox_LB
             // 
             StartBox_LB.AutoSize = true;
-            StartBox_LB.Location = new System.Drawing.Point(559, 502);
+            StartBox_LB.Location = new System.Drawing.Point(639, 591);
             StartBox_LB.Name = "StartBox_LB";
-            StartBox_LB.Size = new System.Drawing.Size(56, 17);
+            StartBox_LB.Size = new System.Drawing.Size(73, 20);
             StartBox_LB.TabIndex = 42;
             StartBox_LB.Text = "开始箱子";
             // 
             // EndBox
             // 
             EndBox.AutoSize = true;
-            EndBox.Location = new System.Drawing.Point(559, 533);
+            EndBox.Location = new System.Drawing.Point(639, 627);
             EndBox.Name = "EndBox";
-            EndBox.Size = new System.Drawing.Size(56, 17);
+            EndBox.Size = new System.Drawing.Size(73, 20);
             EndBox.TabIndex = 44;
             EndBox.Text = "结束箱子";
             // 
             // StartBox_NUM
             // 
-            StartBox_NUM.Location = new System.Drawing.Point(615, 497);
+            StartBox_NUM.Location = new System.Drawing.Point(703, 585);
+            StartBox_NUM.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             StartBox_NUM.Maximum = new decimal(new int[] { 32, 0, 0, 0 });
             StartBox_NUM.Name = "StartBox_NUM";
-            StartBox_NUM.Size = new System.Drawing.Size(35, 23);
+            StartBox_NUM.Size = new System.Drawing.Size(40, 27);
             StartBox_NUM.TabIndex = 45;
             StartBox_NUM.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // EndBox_NUM
             // 
-            EndBox_NUM.Location = new System.Drawing.Point(615, 528);
+            EndBox_NUM.Location = new System.Drawing.Point(703, 621);
+            EndBox_NUM.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             EndBox_NUM.Maximum = new decimal(new int[] { 32, 0, 0, 0 });
             EndBox_NUM.Name = "EndBox_NUM";
-            EndBox_NUM.Size = new System.Drawing.Size(35, 23);
+            EndBox_NUM.Size = new System.Drawing.Size(40, 27);
             EndBox_NUM.TabIndex = 46;
             EndBox_NUM.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // SeletAll_BTN
             // 
-            SeletAll_BTN.Location = new System.Drawing.Point(314, 526);
+            SeletAll_BTN.Location = new System.Drawing.Point(359, 619);
+            SeletAll_BTN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             SeletAll_BTN.Name = "SeletAll_BTN";
-            SeletAll_BTN.Size = new System.Drawing.Size(59, 27);
+            SeletAll_BTN.Size = new System.Drawing.Size(67, 32);
             SeletAll_BTN.TabIndex = 47;
             SeletAll_BTN.Text = "全选";
             SeletAll_BTN.UseVisualStyleBackColor = true;
@@ -536,9 +567,10 @@
             // 
             // DeSelect_BTN
             // 
-            DeSelect_BTN.Location = new System.Drawing.Point(467, 527);
+            DeSelect_BTN.Location = new System.Drawing.Point(534, 620);
+            DeSelect_BTN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             DeSelect_BTN.Name = "DeSelect_BTN";
-            DeSelect_BTN.Size = new System.Drawing.Size(59, 26);
+            DeSelect_BTN.Size = new System.Drawing.Size(67, 31);
             DeSelect_BTN.TabIndex = 48;
             DeSelect_BTN.Text = "反选";
             DeSelect_BTN.UseVisualStyleBackColor = true;
@@ -546,9 +578,10 @@
             // 
             // Edit_BTN
             // 
-            Edit_BTN.Location = new System.Drawing.Point(314, 557);
+            Edit_BTN.Location = new System.Drawing.Point(359, 655);
+            Edit_BTN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Edit_BTN.Name = "Edit_BTN";
-            Edit_BTN.Size = new System.Drawing.Size(212, 27);
+            Edit_BTN.Size = new System.Drawing.Size(242, 32);
             Edit_BTN.TabIndex = 49;
             Edit_BTN.Text = "修改";
             Edit_BTN.UseVisualStyleBackColor = true;
@@ -556,9 +589,10 @@
             // 
             // Recover_BTN
             // 
-            Recover_BTN.Location = new System.Drawing.Point(314, 74);
+            Recover_BTN.Location = new System.Drawing.Point(359, 87);
+            Recover_BTN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Recover_BTN.Name = "Recover_BTN";
-            Recover_BTN.Size = new System.Drawing.Size(100, 26);
+            Recover_BTN.Size = new System.Drawing.Size(114, 31);
             Recover_BTN.TabIndex = 50;
             Recover_BTN.Text = "复原过滤";
             Recover_BTN.UseVisualStyleBackColor = true;
@@ -567,44 +601,47 @@
             // Filter_CB
             // 
             Filter_CB.FormattingEnabled = true;
-            Filter_CB.Location = new System.Drawing.Point(376, 14);
+            Filter_CB.Location = new System.Drawing.Point(430, 16);
+            Filter_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Filter_CB.Name = "Filter_CB";
-            Filter_CB.Size = new System.Drawing.Size(150, 25);
+            Filter_CB.Size = new System.Drawing.Size(171, 28);
             Filter_CB.TabIndex = 51;
             // 
             // Filter_LB
             // 
             Filter_LB.AutoSize = true;
-            Filter_LB.Location = new System.Drawing.Point(314, 15);
+            Filter_LB.Location = new System.Drawing.Point(359, 18);
             Filter_LB.Name = "Filter_LB";
-            Filter_LB.Size = new System.Drawing.Size(56, 17);
+            Filter_LB.Size = new System.Drawing.Size(73, 20);
             Filter_LB.TabIndex = 52;
             Filter_LB.Text = "过滤条件";
             // 
             // PKBox
             // 
             PKBox.Cursor = System.Windows.Forms.Cursors.No;
-            PKBox.Location = new System.Drawing.Point(174, 42);
+            PKBox.Location = new System.Drawing.Point(199, 49);
+            PKBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             PKBox.Name = "PKBox";
-            PKBox.Size = new System.Drawing.Size(120, 150);
+            PKBox.Size = new System.Drawing.Size(137, 176);
             PKBox.TabIndex = 53;
             PKBox.TabStop = false;
             // 
             // Current_Level_LB
             // 
             Current_Level_LB.AutoSize = true;
-            Current_Level_LB.Location = new System.Drawing.Point(173, 231);
+            Current_Level_LB.Location = new System.Drawing.Point(198, 272);
             Current_Level_LB.Name = "Current_Level_LB";
-            Current_Level_LB.Size = new System.Drawing.Size(56, 17);
+            Current_Level_LB.Size = new System.Drawing.Size(73, 20);
             Current_Level_LB.TabIndex = 54;
             Current_Level_LB.Text = "当前等级";
             // 
             // Level_NUM
             // 
-            Level_NUM.Location = new System.Drawing.Point(238, 229);
+            Level_NUM.Location = new System.Drawing.Point(272, 269);
+            Level_NUM.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Level_NUM.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             Level_NUM.Name = "Level_NUM";
-            Level_NUM.Size = new System.Drawing.Size(56, 23);
+            Level_NUM.Size = new System.Drawing.Size(64, 27);
             Level_NUM.TabIndex = 55;
             Level_NUM.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
@@ -612,53 +649,56 @@
             // 
             RunFilter_CLB.FormattingEnabled = true;
             RunFilter_CLB.HorizontalScrollbar = true;
-            RunFilter_CLB.Location = new System.Drawing.Point(546, 289);
+            RunFilter_CLB.Location = new System.Drawing.Point(624, 340);
+            RunFilter_CLB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             RunFilter_CLB.Name = "RunFilter_CLB";
-            RunFilter_CLB.Size = new System.Drawing.Size(212, 202);
+            RunFilter_CLB.Size = new System.Drawing.Size(242, 224);
             RunFilter_CLB.TabIndex = 56;
             // 
             // Start_LB
             // 
             Start_LB.AutoSize = true;
-            Start_LB.Location = new System.Drawing.Point(656, 500);
+            Start_LB.Location = new System.Drawing.Point(750, 588);
             Start_LB.Name = "Start_LB";
-            Start_LB.Size = new System.Drawing.Size(56, 17);
+            Start_LB.Size = new System.Drawing.Size(73, 20);
             Start_LB.TabIndex = 57;
             Start_LB.Text = "开始槽位";
             // 
             // End_LB
             // 
             End_LB.AutoSize = true;
-            End_LB.Location = new System.Drawing.Point(656, 530);
+            End_LB.Location = new System.Drawing.Point(750, 624);
             End_LB.Name = "End_LB";
-            End_LB.Size = new System.Drawing.Size(56, 17);
+            End_LB.Size = new System.Drawing.Size(73, 20);
             End_LB.TabIndex = 58;
             End_LB.Text = "结束槽位";
             // 
             // Start_NUM
             // 
-            Start_NUM.Location = new System.Drawing.Point(718, 497);
+            Start_NUM.Location = new System.Drawing.Point(821, 585);
+            Start_NUM.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Start_NUM.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
             Start_NUM.Name = "Start_NUM";
-            Start_NUM.Size = new System.Drawing.Size(35, 23);
+            Start_NUM.Size = new System.Drawing.Size(40, 27);
             Start_NUM.TabIndex = 59;
             Start_NUM.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // End_NUM
             // 
-            End_NUM.Location = new System.Drawing.Point(718, 528);
+            End_NUM.Location = new System.Drawing.Point(821, 621);
+            End_NUM.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             End_NUM.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
             End_NUM.Name = "End_NUM";
-            End_NUM.Size = new System.Drawing.Size(35, 23);
+            End_NUM.Size = new System.Drawing.Size(40, 27);
             End_NUM.TabIndex = 60;
             End_NUM.Value = new decimal(new int[] { 30, 0, 0, 0 });
             // 
             // Run_LB
             // 
             Run_LB.AutoSize = true;
-            Run_LB.Location = new System.Drawing.Point(546, 266);
+            Run_LB.Location = new System.Drawing.Point(624, 313);
             Run_LB.Name = "Run_LB";
-            Run_LB.Size = new System.Drawing.Size(56, 17);
+            Run_LB.Size = new System.Drawing.Size(73, 20);
             Run_LB.TabIndex = 61;
             Run_LB.Text = "覆写条件";
             // 
@@ -667,17 +707,18 @@
             SNA_CB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             SNA_CB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             SNA_CB.FormattingEnabled = true;
-            SNA_CB.Location = new System.Drawing.Point(71, 107);
+            SNA_CB.Location = new System.Drawing.Point(81, 126);
+            SNA_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             SNA_CB.Name = "SNA_CB";
-            SNA_CB.Size = new System.Drawing.Size(65, 25);
+            SNA_CB.Size = new System.Drawing.Size(74, 28);
             SNA_CB.TabIndex = 63;
             // 
             // SNL
             // 
             SNL.AutoSize = true;
-            SNL.Location = new System.Drawing.Point(9, 110);
+            SNL.Location = new System.Drawing.Point(10, 129);
             SNL.Name = "SNL";
-            SNL.Size = new System.Drawing.Size(56, 17);
+            SNL.Size = new System.Drawing.Size(73, 20);
             SNL.TabIndex = 62;
             SNL.Text = "薄荷性格";
             // 
@@ -686,34 +727,37 @@
             Tera_CB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             Tera_CB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             Tera_CB.FormattingEnabled = true;
-            Tera_CB.Location = new System.Drawing.Point(238, 258);
+            Tera_CB.Location = new System.Drawing.Point(272, 304);
+            Tera_CB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Tera_CB.Name = "Tera_CB";
-            Tera_CB.Size = new System.Drawing.Size(57, 25);
+            Tera_CB.Size = new System.Drawing.Size(65, 28);
             Tera_CB.TabIndex = 65;
             // 
             // Tera_LAB
             // 
             Tera_LAB.AutoSize = true;
-            Tera_LAB.Location = new System.Drawing.Point(174, 261);
+            Tera_LAB.Location = new System.Drawing.Point(199, 307);
             Tera_LAB.Name = "Tera_LAB";
-            Tera_LAB.Size = new System.Drawing.Size(56, 17);
+            Tera_LAB.Size = new System.Drawing.Size(73, 20);
             Tera_LAB.TabIndex = 64;
             Tera_LAB.Text = "钛晶属性";
             // 
             // PS_Box
             // 
-            PS_Box.Location = new System.Drawing.Point(546, 35);
+            PS_Box.Location = new System.Drawing.Point(624, 41);
+            PS_Box.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             PS_Box.Multiline = true;
             PS_Box.Name = "PS_Box";
             PS_Box.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            PS_Box.Size = new System.Drawing.Size(212, 196);
+            PS_Box.Size = new System.Drawing.Size(242, 230);
             PS_Box.TabIndex = 66;
             // 
             // Load_PS_BTN
             // 
-            Load_PS_BTN.Location = new System.Drawing.Point(578, 237);
+            Load_PS_BTN.Location = new System.Drawing.Point(661, 279);
+            Load_PS_BTN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Load_PS_BTN.Name = "Load_PS_BTN";
-            Load_PS_BTN.Size = new System.Drawing.Size(144, 26);
+            Load_PS_BTN.Size = new System.Drawing.Size(165, 31);
             Load_PS_BTN.TabIndex = 67;
             Load_PS_BTN.Text = "<-从PS导入模板";
             Load_PS_BTN.UseVisualStyleBackColor = true;
@@ -722,17 +766,18 @@
             // PS_LB
             // 
             PS_LB.AutoSize = true;
-            PS_LB.Location = new System.Drawing.Point(546, 15);
+            PS_LB.Location = new System.Drawing.Point(624, 18);
             PS_LB.Name = "PS_LB";
-            PS_LB.Size = new System.Drawing.Size(53, 17);
+            PS_LB.Size = new System.Drawing.Size(60, 20);
             PS_LB.TabIndex = 68;
             PS_LB.Text = "PSCode";
             // 
             // Pktopl_BTN
             // 
-            Pktopl_BTN.Location = new System.Drawing.Point(546, 558);
+            Pktopl_BTN.Location = new System.Drawing.Point(624, 656);
+            Pktopl_BTN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Pktopl_BTN.Name = "Pktopl_BTN";
-            Pktopl_BTN.Size = new System.Drawing.Size(104, 26);
+            Pktopl_BTN.Size = new System.Drawing.Size(119, 31);
             Pktopl_BTN.TabIndex = 69;
             Pktopl_BTN.Text = "开始转换";
             Pktopl_BTN.UseVisualStyleBackColor = true;
@@ -740,9 +785,9 @@
             // 
             // SuperDataBase
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(770, 601);
+            ClientSize = new System.Drawing.Size(880, 707);
             Controls.Add(Pktopl_BTN);
             Controls.Add(PS_LB);
             Controls.Add(Load_PS_BTN);
@@ -813,6 +858,7 @@
             Controls.Add(SPL);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             MaximizeBox = false;
             Name = "SuperDataBase";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

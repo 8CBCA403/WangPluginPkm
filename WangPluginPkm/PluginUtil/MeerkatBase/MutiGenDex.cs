@@ -3,6 +3,7 @@ using PKHeX.Core.AutoMod;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using WangPluginPkm.GUI;
 using WangPluginPkm.PluginUtil.AchieveBase;
 using WangPluginPkm.RNG.Methods;
@@ -24,10 +25,14 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             {
                 PKL.Add(SearchDatabase.SearchPKM(SAV, Editor, (ushort)i, (int)GameVersion.RD));
             }
-            if (PKL.Count != 0)
+           
+                if (PKL.Count != 0)
             {
                 for (int i = 0; i < PKL.Count; i++)
                 {
+                    PKL[i] ??= PKL[0] is not null
+                    ? EntityConverter.ConvertToType(PKL[0], SAV.SAV.PKMType, out _)
+                    : throw new InvalidOperationException("PKL[0] is null, cannot clone to PKL[i]");
                     PKL[i] = EntityConverter.ConvertToType(PKL[i], SAV.SAV.PKMType, out _);
                     Random random = new Random();
                     int rand = random.Next(0, 5);
@@ -152,6 +157,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Meowth, (int)GameVersion.GN);
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             PKL[i].Version = GameVersion.GN;
+                           
                             break;
                         case 54:
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
@@ -163,7 +169,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 59:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Poliwag, (int)GameVersion.RD, 0, false, 0, 0, 0, 15);
+                            SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Poliwag, (int)GameVersion.RD, 0, false, 0, 0, 0, 15);
                             break;
                         case 60:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Poliwag, (int)GameVersion.RD, 0, false, 0, 0, 0, 15);
@@ -181,6 +187,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             break;
                         case 66:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Machop, (int)GameVersion.RD, 0, false, 0, 0, 0, 24);
+
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 67:
@@ -223,12 +230,16 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                         case 84:
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
+                        case 85:
+                            PKL[i] = SearchDatabase.GetWildGen1PKM(SAV, (ushort)Species.Seel);
+                            break;
                         case 86:
-                            PKL[i] = AchieveFunc.evo1H(PKL[i]);
-                            PKL[i].CurrentLevel = 40;
+                            PKL[i] = SearchDatabase.GetWildGen1PKM(SAV, (ushort)Species.Dewgong);
                             break;
                         case 88:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Grimer, (int)GameVersion.RD);
+                            if (PKL[i] == null)
+                                MessageBox.Show($"{i}");
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 90:
@@ -236,6 +247,8 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             break;
                         case 92:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Gastly, (int)GameVersion.RD);
+                            if (PKL[i] == null)
+                                MessageBox.Show($"{i}");
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 93:
@@ -304,8 +317,10 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                     if (i == 150 && shiny)
                     {
                         PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Mew, (int)GameVersion.E);
+                        if (PKL[i] == null)
+                            MessageBox.Show($"{i}");
                         PKL[i] = AchieveFunc.fun(PKL[i], SAV);
-                        PKL[i].OriginalTrainerName = "Meerk";
+                        PKL[i].OriginalTrainerName = "Wang";
                         PKL[i].AbilityNumber = 1;
                     }
                     else if (i != 150 && i != 82)
@@ -352,6 +367,9 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             {
                 for (int i = 0; i < PKL.Count; i++)
                 {
+                    PKL[i] ??= PKL[0] is not null
+                    ? EntityConverter.ConvertToType(PKL[0], SAV.SAV.PKMType, out _)
+                    : throw new InvalidOperationException("PKL[0] is null, cannot clone to PKL[i]");
                     PKL[i] = EntityConverter.ConvertToType(PKL[i], SAV.SAV.PKMType, out var r2);
                     if (i != 99)
                     {
@@ -363,19 +381,19 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                         switch (rand)
                         {
                             case 0:
-                                PKL[i].Version = (GameVersion)39;
+                                PKL[i].Version = GameVersion.GD;
                                 break;
                             case 1:
-                                PKL[i].Version = (GameVersion)40;
+                                PKL[i].Version = GameVersion.SI;
                                 break;
                             case 2:
-                                PKL[i].Version = (GameVersion)39;
+                                PKL[i].Version = GameVersion.GD;
                                 break;
                             case 4:
-                                PKL[i].Version = (GameVersion)41;
+                                PKL[i].Version = GameVersion.C;
                                 break;
                             case 5:
-                                PKL[i].Version = (GameVersion)41;
+                                PKL[i].Version = GameVersion.C;
                                 break;
                         }
                     }
@@ -406,10 +424,10 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 13:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 165, (int)GameVersion.SI);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor,(ushort)Species.Ledyba, (int)GameVersion.SI);
                             break;
                         case 14:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 165, (int)GameVersion.SI);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Ledyba, (int)GameVersion.SI);
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 16:
@@ -424,19 +442,19 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 20:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 172, (int)GameVersion.SI, 0, true);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Pichu, (int)GameVersion.SI, 0, true);
                             break;
                         case 21:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 173, (int)GameVersion.SI, 0, true);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Cleffa, (int)GameVersion.SI, 0, true);
                             break;
                         case 22:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 174, (int)GameVersion.SI, 0, true);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Igglybuff, (int)GameVersion.SI, 0, true);
                             break;
                         case 23:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 175, (int)GameVersion.SI, 0, true);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Togepi, (int)GameVersion.SI, 0, true);
                             break;
                         case 24:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 175, (int)GameVersion.SI, 0, true);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Togepi, (int)GameVersion.SI, 0, true);
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 28:
@@ -446,7 +464,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo2H(PKL[i]);
                             break;
                         case 30:
-                            PKL[i].Species = 182;
+                            PKL[i].Species = (ushort)Species.Bellossom;
                             PKL[i].CurrentLevel = 50;
                             PKL[i].RefreshAbility(2);
                             break;
@@ -454,7 +472,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 34:
-                            PKL[i].Species = 186;
+                            PKL[i].Species = (ushort)Species.Politoed;
                             PKL[i].CurrentLevel = 50;
                             PKL[i].RefreshAbility(2);
                             break;
@@ -468,17 +486,17 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 44:
-                            PKL[i].Species = 196;
+                            PKL[i].Species = (ushort)Species.Espeon;
                             PKL[i].CurrentLevel = 26;
                             PKL[i].RefreshAbility(2);
                             break;
                         case 45:
-                            PKL[i].Species = 197;
+                            PKL[i].Species = (ushort)Species.Umbreon;
                             PKL[i].CurrentLevel = 26;
                             PKL[i].RefreshAbility(2);
                             break;
                         case 47:
-                            PKL[i].Species = 199;
+                            PKL[i].Species = (ushort)Species.Slowking;
                             PKL[i].CurrentLevel = 50;
                             PKL[i].RefreshAbility(2);
                             break;
@@ -486,7 +504,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 56:
-                            PKL[i].Species = 208;
+                            PKL[i].Species = (ushort)Species.Steelix;
                             PKL[i].CurrentLevel = 50;
                             PKL[i].RefreshAbility(2);
                             break;
@@ -506,40 +524,40 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 73:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 224, (int)GameVersion.SI);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Octillery, (int)GameVersion.SI);
                             break;
                         case 75:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 227, (int)GameVersion.SI);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Skarmory, (int)GameVersion.SI);
                             break;
                         case 77:
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 78:
-                            PKL[i].Species = 230;
+                            PKL[i].Species = (ushort)Species. Kingdra;
                             PKL[i].CurrentLevel = 50;
                             PKL[i].RefreshAbility(2);
                             break;
                         case 79:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 231, (int)GameVersion.SI);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Phanpy, (int)GameVersion.SI);
                             break;
                         case 80:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 231, (int)GameVersion.SI);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Phanpy, (int)GameVersion.SI);
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 85:
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 86:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 238, (int)GameVersion.SI, 0, true);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Smoochum, (int)GameVersion.SI, 0, true);
                             break;
                         case 87:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 239, (int)GameVersion.SI, 0, true);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Elekid, (int)GameVersion.SI, 0, true);
                             break;
                         case 88:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 240, (int)GameVersion.SI, 0, true);
+                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Magby, (int)GameVersion.SI, 0, true);
                             break;
                         case 90:
-                            PKL[i].Species = 242;
+                            PKL[i].Species = (ushort)Species.Blissey;
                             PKL[i].CurrentLevel = 50;
                             PKL[i].RefreshAbility(2);
                             break;
@@ -603,6 +621,9 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             {
                 for (int i = 0; i < PKL.Count; i++)
                 {
+                    PKL[i] ??= PKL[0] is not null
+                  ? EntityConverter.ConvertToType(PKL[0], SAV.SAV.PKMType, out _)
+                  : throw new InvalidOperationException("PKL[0] is null, cannot clone to PKL[i]");
                     PKL[i] = EntityConverter.ConvertToType(PKL[i], SAV.SAV.PKMType, out _);
                     switch (i)
                     {
@@ -677,14 +698,14 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo2(PKL[i]);
                             break;
                         case 21:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)273, (int)GameVersion.E, 0, false, 0, 0, 0, 3);
+                            PKL[i] = SearchDatabase.GetWildGen3PKM(SAV, (ushort)Species.Seedot);
                             break;
                         case 22:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)273, (int)GameVersion.E, 0, false, 0, 0, 0, 3);
+                            PKL[i] = SearchDatabase.GetWildGen3PKM(SAV, (ushort)Species.Seedot);
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 23:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)273, (int)GameVersion.E, 0, false, 0, 0, 0, 3);
+                            PKL[i] = SearchDatabase.GetWildGen3PKM(SAV, (ushort)Species.Seedot);
                             PKL[i] = AchieveFunc.evo2(PKL[i]);
                             break;
                         case 25:
@@ -896,6 +917,9 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             {
                 for (int i = 0; i < PKL.Count; i++)
                 {
+                    PKL[i] ??= PKL[0] is not null
+                    ? EntityConverter.ConvertToType(PKL[0], SAV.SAV.PKMType, out _)
+                    : throw new InvalidOperationException("PKL[0] is null, cannot clone to PKL[i]");
                     PKL[i] = EntityConverter.ConvertToType(PKL[i], SAV.SAV.PKMType, out var r2);
                     switch (i)
                     {
@@ -947,11 +971,11 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 26:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)412, (int)GameVersion.Pt, 0, false, 0, 2); ;
+                            PKL[i] = SearchDatabase.GetWildGen4PKM(SAV.SAV, (ushort)Species.Burmy, GameVersion.Pt, Gender.Female); 
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 27:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)412, (int)GameVersion.Pt, 0, false, 0, 1);
+                            PKL[i] = SearchDatabase.GetWildGen4PKM(SAV.SAV, (ushort)Species.Burmy, GameVersion.Pt, Gender.Male);
                             PKL[i] = AchieveFunc.evo2(PKL[i]);
                             break;
                         case 28:
@@ -1016,18 +1040,16 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 54:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)441, (int)GameVersion.Pt, 0, false, 0, 0, 0, 25);
+                            PKL[i] = SearchDatabase.GetWildGen4PKM(SAV.SAV, (ushort)Species.Chatot, GameVersion.Pt, Gender.Male);
                             break;
                         case 58:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 60:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)447, (int)GameVersion.Pt, 0, true, 0, 0, 1);
-                            //  PKL[i].EggLocation = 2010;
                             break;
                         case 61:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)447, (int)GameVersion.Pt, 0, true, 0, 0, 1);
-                            //  PKL[i].EggLocation = 2010;
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 65:
@@ -1113,7 +1135,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i].RefreshAbility(0);
                             break;
                         case 88:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)280, (int)GameVersion.Pt, 0, false, 0, 1);
+                            PKL[i] = SearchDatabase.GetWildGen4PKM(SAV.SAV, (ushort)Species.Ralts, GameVersion.Pt, Gender.Male);
                             PKL[i].Species = 475;
                             PKL[i].CurrentLevel = 50;
                             PKL[i].RefreshAbility(0);
@@ -1129,7 +1151,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i].RefreshAbility(0);
                             break;
                         case 91:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)361, (int)GameVersion.Pt, 0, false, 0, 2);
+                            PKL[i] = SearchDatabase.GetWildGen4PKM(SAV.SAV, (ushort)Species.Snorunt, GameVersion.Pt, Gender.Female);
                             PKL[i].Species = 478;
                             PKL[i].CurrentLevel = 50;
                             PKL[i].RefreshAbility(0);
@@ -1184,7 +1206,9 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             {
                 for (int i = 0; i < PKL.Count; i++)
                 {
-                    // var context = PKL[i].Context;
+                    PKL[i] ??= PKL[0] is not null
+                   ? EntityConverter.ConvertToType(PKL[0], SAV.SAV.PKMType, out _)
+                   : throw new InvalidOperationException("PKL[0] is null, cannot clone to PKL[i]");
                     var origin = new EvolutionOrigin(PKL[i].Species, EntityContext.Gen5, 5, 1, 100);
                     var chain = EvolutionChain.GetOriginChain(PKL[i], origin);
 
@@ -1354,16 +1378,16 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 80:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 574, (int)GameVersion.B, 0, true);
+                            PKL[i] = SearchDatabase.GetWildGen5PKM(SAV.SAV,(ushort)Species.Gothita, GameVersion.B, Gender.Female);
                             break;
                         case 81:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 574, (int)GameVersion.B, 0, true);
+                            PKL[i] = SearchDatabase.GetWildGen5PKM(SAV.SAV, (ushort)Species.Gothita, GameVersion.B, Gender.Female);
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             PKL[i].CurrentLevel = 50;
                             PKL[i].RefreshAbility(0);
                             break;
                         case 82:
-                            PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, 574, (int)GameVersion.B, 0, true);
+                            PKL[i] = SearchDatabase.GetWildGen5PKM(SAV.SAV, (ushort)Species.Gothita, GameVersion.B, Gender.Female);
                             PKL[i] = AchieveFunc.evo2(PKL[i]);
                             PKL[i].CurrentLevel = 70;
                             PKL[i].RefreshAbility(0);
@@ -1627,6 +1651,9 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             {
                 for (int i = 0; i < PKL.Count; i++)
                 {
+                    PKL[i] ??= PKL[0] is not null
+                  ? EntityConverter.ConvertToType(PKL[0], SAV.SAV.PKMType, out _)
+                  : throw new InvalidOperationException("PKL[0] is null, cannot clone to PKL[i]");
                     PKL[i] = EntityConverter.ConvertToType(PKL[i], SAV.SAV.PKMType, out var r2);
                     switch (i)
                     {
@@ -1796,6 +1823,9 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
             {
                 for (int i = 0; i < PKL.Count; i++)
                 {
+                    PKL[i] ??= PKL[0] is not null
+                    ? EntityConverter.ConvertToType(PKL[0], SAV.SAV.PKMType, out _)
+                    : throw new InvalidOperationException("PKL[0] is null, cannot clone to PKL[i]");
                     PKL[i] = EntityConverter.ConvertToType(PKL[i], SAV.SAV.PKMType, out var r2);
                     switch (i)
                     {
@@ -1931,10 +1961,14 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
         }
         public static List<PKM> SetAll(ISaveFileProvider SAV, IPKMView Editor, bool shiny)
         {
-            List<PKM> PKL = SetGen1(SAV, Editor, shiny).Concat(SetGen2(SAV, Editor, shiny)).
-                                  Concat(SetGen3(SAV, Editor, shiny)).Concat(SetGen4(SAV, Editor, shiny)).
-                                  Concat(SetGen5(SAV, Editor, shiny)).Concat(SetGen6(SAV, Editor, shiny)).
-                                  Concat(SetGen7(SAV, Editor, shiny)).ToList();
+            List<PKM> PKL = 
+                    SetGen1(SAV, Editor, shiny).
+                    Concat(SetGen2(SAV, Editor, shiny)).
+                    Concat(SetGen3(SAV, Editor, shiny)).
+                    Concat(SetGen4(SAV, Editor, shiny)).
+                    Concat(SetGen5(SAV, Editor, shiny)).
+                    Concat(SetGen6(SAV, Editor, shiny)).
+                    Concat(SetGen7(SAV, Editor, shiny)).ToList(); 
             return PKL;
         }
     }

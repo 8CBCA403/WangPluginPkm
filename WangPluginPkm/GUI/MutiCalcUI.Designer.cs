@@ -316,10 +316,10 @@ namespace WangPluginPkm.GUI
             tabPage2.Controls.Add(UnownPidTextBox);
             tabPage2.Controls.Add(FormCalc);
             tabPage2.Controls.Add(UnownLabel);
-            tabPage2.Location = new System.Drawing.Point(4, 26);
+            tabPage2.Location = new System.Drawing.Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new System.Drawing.Size(616, 283);
+            tabPage2.Size = new System.Drawing.Size(616, 280);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "特殊计算";
             tabPage2.UseVisualStyleBackColor = true;
