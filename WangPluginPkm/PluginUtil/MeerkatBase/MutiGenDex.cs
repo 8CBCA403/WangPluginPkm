@@ -128,6 +128,10 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
 
                             break;
+                        case 38:
+                            PKL[i] = SearchDatabase.GetWildGen1PKM(SAV, (ushort)Species.Jigglypuff, GameVersion.RD,5);
+
+                            break;
                         case 41:
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
@@ -231,10 +235,10 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 85:
-                            PKL[i] = SearchDatabase.GetWildGen1PKM(SAV, (ushort)Species.Seel);
+                            PKL[i] = SearchDatabase.GetWildGen1PKM(SAV, (ushort)Species.Seel, GameVersion.YW);
                             break;
                         case 86:
-                            PKL[i] = SearchDatabase.GetWildGen1PKM(SAV, (ushort)Species.Dewgong);
+                            PKL[i] = SearchDatabase.GetWildGen1PKM(SAV, (ushort)Species.Dewgong, GameVersion.YW);
                             break;
                         case 88:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Grimer, (int)GameVersion.RD);
@@ -267,12 +271,18 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                         case 102:
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
+                        case 107:
+                            PKL[i] = SearchDatabase.GetWildGen1PKM(SAV, (ushort)Species.Lickitung, GameVersion.YW);
+                            break;
                         case 109:
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 111:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Rhyhorn, (int)GameVersion.RD);
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
+                            break;
+                        case 113:
+                            PKL[i] = SearchDatabase.GetWildGen1PKM(SAV, (ushort)Species.Tangela, GameVersion.YW);
                             break;
                         case 116:
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);

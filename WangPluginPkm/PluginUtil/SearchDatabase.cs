@@ -269,23 +269,22 @@ namespace WangPluginPkm
 
             return null!; 
         }
-        public static PKM GetWildGen1PKM(ISaveFileProvider provider, ushort species)
+        public static PKM GetWildGen1PKM(ISaveFileProvider provider, ushort species, GameVersion version, int level = 0)
         {
             var sav = provider.SAV;
-            var version = GameVersion.YW;
-            var flags = EncounterTypeGroup.Slot;
             var evo = new EvoCriteria { Species = species };
+            var encounters = new EncounterPossible1([evo], EncounterTypeGroup.Slot, version);
 
-            var encounters = new EncounterPossible1([evo], flags, version);
             while (encounters.MoveNext())
             {
-                var enc = encounters.Current;
-                var pkm = enc.ConvertToPKM(sav);
-                var converted = EntityConverter.ConvertToType(pkm, sav.PKMType, out _);
-                return converted;
+                var raw = encounters.Current.ConvertToPKM(sav);
+                var pkm = EntityConverter.ConvertToType(raw, sav.PKMType, out _);
+
+                if (level == 0 || pkm.MetLevel == level)
+                    return pkm;
             }
 
-            return null!;
+            return null;
         }
         public static PKM GetWildGen4PKM(SaveFile sav, ushort species, GameVersion version,Gender gender)
         {
