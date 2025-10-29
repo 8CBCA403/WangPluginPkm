@@ -478,7 +478,7 @@ public static class LumioseRNG
         else
             return false;
     }
-    public static uint Next(uint seed)
+    public static uint Next(ulong seed)
     {
         // 将 32-bit 扩展成 64-bit 作为初始状态
         var rng = new Xoroshiro128Plus(seed);

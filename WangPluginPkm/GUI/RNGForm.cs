@@ -183,8 +183,17 @@ namespace WangPluginPkm.GUI
                 MethodType.Gen5Wild => Gen5Wild.GenPkm(ref pk, seed, rules),
                 MethodType.PokeWalker => PokeWalker.GenPkm(ref pk, rules),
                 MethodType.PokeSpot => PokeSpot.GenPkm(ref pk, seed, rules),
-                MethodType.Lumiose=> LumioseRNG.GenPkm(ref pk, seed, rules),
+              
                 _ => throw new NotSupportedException(),
+            };
+        }
+        private bool GenPkm(ref PKM pk, ulong seed64, byte form = 0)
+        {
+            return rules.Method switch
+            {
+                MethodType.Lumiose => LumioseRNG.GenPkm(ref pk, seed64, rules),   // 直接用 64 位
+                                                                                  // 其余方法仍然是 32 位算法，只吃低 32 位
+                _ => GenPkm(ref pk, checked((uint)seed64), form),
             };
         }
         private uint NextSeed(uint seed)
@@ -214,8 +223,16 @@ namespace WangPluginPkm.GUI
                 MethodType.Gen5Wild => Gen5Wild.Next(seed),
                 MethodType.PokeWalker => PokeWalker.Next(seed),
                 MethodType.PokeSpot => PokeSpot.Next(seed),
-                MethodType.Lumiose => LumioseRNG.Next(seed),
+               
                 _ => throw new NotSupportedException(),
+            };
+        }
+        private ulong NextSeed(ulong seed64)
+        {
+            return rules.Method switch
+            {
+                MethodType.Lumiose => LumioseRNG.Next(seed64),
+                _ => NextSeed(checked((uint)seed64)),
             };
         }
         private void GeneratorIsRunning(bool running)
@@ -229,6 +246,7 @@ namespace WangPluginPkm.GUI
             GeneratorIsRunning(true);
 
             uint seed = 0;
+            ulong seed64=0;
             int i = 0;
             int j = 0;
             List<uint> SeedList = new List<uint>();
@@ -245,17 +263,31 @@ namespace WangPluginPkm.GUI
             Task.Factory.StartNew(
                 () =>
                 {
-                    if (ZeroSeed_Check.Checked)
-                        seed = Convert.ToUInt32(ZeroSeed_TB.Text, 16);
+                    if (rules.Method is not MethodType.Lumiose)
+                    {
+                        if (ZeroSeed_Check.Checked)
+                            seed = Convert.ToUInt32(ZeroSeed_TB.Text, 16);
+                        else
+                            seed = Util.Rand32();
+                    }
                     else
-                        seed = Util.Rand32();
-                    var cloneseed = seed;
+                    {
+                        if (ZeroSeed_Check.Checked)
+                            seed64 = (uint)Convert.ToUInt64(ZeroSeed_TB.Text, 16);
+                        else
+                            seed64 = seed64 = (ulong)Random.Shared.NextInt64(long.MinValue, long.MaxValue);
+                    }
+                        var cloneseed = seed;
                     var pk = Editor.Data;
                     var p = Editor.Data.Clone();
 
                     while (true)
                     {
-                        string hexString = seed.ToString("X");
+                        string hexString = "";
+                        if (rules.Method is not MethodType.Lumiose)
+                            hexString = seed.ToString("X");
+                        else
+                            hexString = seed64.ToString("X");
                         StateBox.Text = "正在查找...";
                         SeedTB.Text = hexString;
                         if (SearchtokenSource.IsCancellationRequested)
@@ -278,8 +310,8 @@ namespace WangPluginPkm.GUI
                                 continue;
                             }
                         }
-
-                        if (GenPkm(ref pk, seed, p.Form))
+                        if (rules.Method == MethodType.Lumiose ? GenPkm(ref pk, seed64, p.Form): GenPkm(ref pk, seed, p.Form))
+                           
                         {
                             if (Check_Frame.Checked)
                             {
@@ -289,11 +321,22 @@ namespace WangPluginPkm.GUI
                                 {
                                     if (SeedList.Count == 0)
                                     {
-                                        if (ZeroSeed_Check.Checked)
-                                            seed++;
+                                        if (rules.Method is not MethodType.Lumiose)
+                                        {
+                                            if (ZeroSeed_Check.Checked)
+                                                seed++;
+                                            else
+                                                seed = Util.Rand32();
+                                        }
                                         else
-                                            seed = Util.Rand32();
+                                        {
+                                            if (ZeroSeed_Check.Checked)
+                                                seed64++;
+                                            else
+                                                seed64 = (ulong)Random.Shared.NextInt64(long.MinValue, long.MaxValue);
+                                        }
                                     }
+
                                     if (SeedList.Count != 0 && j < SeedList.Count)
                                     {
                                         seed = SeedList[j];
@@ -313,14 +356,31 @@ namespace WangPluginPkm.GUI
                                     MessageBox.Show($"Success！");
                                     Editor.PopulateFields(pk, false);
                                     SAV.ReloadSlots();
-                                    SeedTB.Text = $"{seed.ToString("X")}";
+                                    if (rules.Method is not MethodType.Lumiose)
+                                    {
+                                        SeedTB.Text = $"{seed.ToString("X")}";
+                                    }
+                                    else
+                                    {
+                                        SeedTB.Text = $"{seed64.ToString("X")}";
+                                    }
                                 });
                             break;
                         }
-                        if (ZeroSeed_Check.Checked)
-                            seed++;
+                        if (rules.Method is not MethodType.Lumiose)
+                        {
+                            if (ZeroSeed_Check.Checked)
+                                seed++;
+                            else
+                                seed = NextSeed(seed);
+                        }
                         else
-                            seed = NextSeed(seed);
+                        {
+                            if (ZeroSeed_Check.Checked)
+                                seed64++;
+                            else
+                                seed64 = NextSeed(seed64);
+                        }
                     }
                     this.Invoke(() =>
                     {
