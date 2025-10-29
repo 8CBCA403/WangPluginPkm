@@ -1,5 +1,8 @@
+ï»¿using PKHeX.Core;
 using System;
-using PKHeX.Core;
+using System.Windows.Forms;
+using WangPluginPkm.GUI;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 namespace WangPluginPkm.RNG.Methods;
 
 public static class LumioseRNG
@@ -398,21 +401,21 @@ public static class LumioseRNG
 
         _ => throw new ArgumentOutOfRangeException(nameof(ratio), ratio, null),
     };
-    // ´Ó PA9 µÄÎïÖÖ/ĞÎÌ¬»ñÈ¡¸öÈË×ÊÁÏ£¨ZA Ä¿Ç°¸´ÓÃ SV ±í£»ÈçÄã¹¤³ÌÓĞ ZA ×¨±í£¬Ìæ»»ÏÂÃæÕâÒ»ĞĞ£©
+    // ä» PA9 çš„ç‰©ç§/å½¢æ€è·å–ä¸ªäººèµ„æ–™ï¼ˆZA ç›®å‰å¤ç”¨ SV è¡¨ï¼›å¦‚ä½ å·¥ç¨‹æœ‰ ZA ä¸“è¡¨ï¼Œæ›¿æ¢ä¸‹é¢è¿™ä¸€è¡Œï¼‰
     private static PersonalInfo GetPersonal(PA9 pk) =>
         PersonalTable.SV.GetFormEntry(pk.Species, pk.Form);
 
     /// <summary>
-    /// ÊÊÅä ZA£¨PA9£©µÄÉú³ÉÆ÷£º¸ø¶¨ seed Óë¹æÔò£¬³¢ÊÔÉú³ÉÒ»Ö»Âú×ã¹æÔòµÄ¸öÌå¡£
+    /// é€‚é… ZAï¼ˆPA9ï¼‰çš„ç”Ÿæˆå™¨ï¼šç»™å®š seed ä¸è§„åˆ™ï¼Œå°è¯•ç”Ÿæˆä¸€åªæ»¡è¶³è§„åˆ™çš„ä¸ªä½“ã€‚
     /// </summary>
-    /// <param name="pk">ÊäÈë£º´ø Species/AltForm/ÑµÁ·¼ÒID£»Êä³ö£ºÉú³ÉºóµÄ¸öÌå</param>
-    /// <param name="seed">64-bit ÖÖ×Ó</param>
-    /// <param name="r">ÄãµÄ CheckRules£¨½öÑİÊ¾ÓÃ IV Çø¼ä£¬ÆäËû¿É×ÔĞĞÀ©Õ¹£©</param>
-    /// <param name="flawless">ÔâÓöµÄ±£µ×V¸öÊı£¨°´³¡¾°ÌîĞ´£»Ä¬ÈÏ 0£©</param>
-    /// <param name="requireShiny">ÊÇ·ñÇ¿ÖÆÉÁ£¨null=ËæÔµ£»true=±ØĞëÉÁ£»false=±ØĞë²»ÉÁ£©</param>
-    /// <param name="desiredNature">Èç¹ûÒª¹Ì¶¨ĞÔ¸ñ£¬´«Èë Nature£»·ñÔò null</param>
-    /// <param name="desiredGender">ÈôÒª¹Ì¶¨ĞÔ±ğ£º0=¡á,1=¡â,2=ÎŞĞÔ±ğ£»·ñÔò null</param>
-    /// <param name="allowHA">ÊÇ·ñÔÊĞíÃÎÌØ²ÎÓëËæ»ú£¨ÎïÖÖÓĞHA²ÅÉúĞ§£©</param>
+    /// <param name="pk">è¾“å…¥ï¼šå¸¦ Species/AltForm/è®­ç»ƒå®¶IDï¼›è¾“å‡ºï¼šç”Ÿæˆåçš„ä¸ªä½“</param>
+    /// <param name="seed">64-bit ç§å­</param>
+    /// <param name="r">ä½ çš„ CheckRulesï¼ˆä»…æ¼”ç¤ºç”¨ IV åŒºé—´ï¼Œå…¶ä»–å¯è‡ªè¡Œæ‰©å±•ï¼‰</param>
+    /// <param name="flawless">é­é‡çš„ä¿åº•Vä¸ªæ•°ï¼ˆæŒ‰åœºæ™¯å¡«å†™ï¼›é»˜è®¤ 0ï¼‰</param>
+    /// <param name="requireShiny">æ˜¯å¦å¼ºåˆ¶é—ªï¼ˆnull=éšç¼˜ï¼›true=å¿…é¡»é—ªï¼›false=å¿…é¡»ä¸é—ªï¼‰</param>
+    /// <param name="desiredNature">å¦‚æœè¦å›ºå®šæ€§æ ¼ï¼Œä¼ å…¥ Natureï¼›å¦åˆ™ null</param>
+    /// <param name="desiredGender">è‹¥è¦å›ºå®šæ€§åˆ«ï¼š0=â™‚,1=â™€,2=æ— æ€§åˆ«ï¼›å¦åˆ™ null</param>
+    /// <param name="allowHA">æ˜¯å¦å…è®¸æ¢¦ç‰¹å‚ä¸éšæœºï¼ˆç‰©ç§æœ‰HAæ‰ç”Ÿæ•ˆï¼‰</param>
     public static bool GenPkm(
         ref PKM pk,
         ulong seed,
@@ -422,46 +425,33 @@ public static class LumioseRNG
         Nature? desiredNature = null,
         byte? desiredGender = null)
     {
-        // 1) ¹¹Ôì enc£ºÓÃÎïÖÖÊÂÊµ£¨ĞÔ±ğ±È/HA¿ÉÓÃĞÔ/±£µ×VÊı¡­£©
+        // 1) æ„é€  encï¼šç”¨ç‰©ç§äº‹å®ï¼ˆæ€§åˆ«æ¯”/HAå¯ç”¨æ€§/ä¿åº•Væ•°â€¦ï¼‰
         var pi = GetPersonal((PA9)pk);
         var enc = new GenerateParam9a
         {
-            GenderRatio = pi.Gender, // Éú³ÉÊ±°´¸Ã±ÈÀı³éĞÔ±ğ²¢»ØĞ´ pk.Gender
+            GenderRatio = pi.Gender, // ç”Ÿæˆæ—¶æŒ‰è¯¥æ¯”ä¾‹æŠ½æ€§åˆ«å¹¶å›å†™ pk.Gender
             FlawlessIVs = flawless,
             Nature = desiredNature ?? Nature.Random,
             Shiny = requireShiny == null ? Shiny.Random : (requireShiny.Value ? Shiny.Always : Shiny.Never),
-            Correlation = LumioseCorrelation.Normal, // ÈçĞèÒÔÑµÁ·¼ÒIDÓ°ÏìPID£¬¿É¸ÄÎª SkipTrainer
+            Correlation = LumioseCorrelation.Normal, // å¦‚éœ€ä»¥è®­ç»ƒå®¶IDå½±å“PIDï¼Œå¯æ”¹ä¸º SkipTrainer
         };
-
-        // 2) ¹¹Ôì criteria£º¾¡Á¿¡°·Å¿í¡±£¬±ÜÃâÉú³É½×¶Î±»ÌáÇ°·ñµô
-        var criteria = new EncounterCriteria();
-
-        // 3) Éú³É£ºÓÃÁÙÊ±¸öÌå³Ğ½Ó£¬±ÜÃâÊ§°ÜÊ±ÎÛÈ¾Íâ²¿ pk
-        var cand = new PA9
+        if (pk is PA9 p)
         {
-            Species = pk.Species,
-            Form = pk.Form,
-
-            // ÕâĞ©ID»áÓ°Ïì shiny ÊÊÅäÓë PID µ÷Õû£¬Îñ±Ø´ÓÔ­ pk ´«Èë
-            TID16 = pk.TID16,
-            SID16 = pk.SID16,
-            ID32 = pk.ID32,
-        };
-
-        bool ok = LumioseRNG.GenerateData(cand, enc, criteria, seed); // Ê§°ÜÖ±½Ó¶ªÆú¸Ã seed
-        if (!ok)
-            return false;
-
-        // 4) ÃüÖĞºó°´ÄãµÄ¹æÔò¶ş´ÎĞ£Ñé£¨IV Çø¼ä¡¢¸ü¶àÌõ¼şµÈ£©
-        if (!CheckIV(r, cand))
-            return false;
-
-        // 5) Í¨¹ıÔòĞ´»Ø
-        pk = cand;
-        return true;
+            GData(p, seed);
+            if (!CheckIV(r, pk))
+                return false;
+            if (!CheckShiny(r, pk))
+                return false;
+            return true;
+            // å¦‚æœä½ å¸Œæœ›åœ¨é ZA ç›´æ¥å¤±è´¥ï¼š
+          
+        }
+        return false;
+        // æˆ–è€…æŠ›å¼‚å¸¸ï¼š
+        // throw new NotSupportedException("LumioseRNG ä»…æ”¯æŒ PA9ï¼ˆZAï¼‰ä¸ªä½“ã€‚");
     }
 
-    // Ö±½Ó¸´ÓÃÄãÏÖÓĞµÄÇø¼äĞ£ÑéĞ´·¨£¨Ê¾Òâ£»ÄãÒÑÊµÏÖ£©
+    // ç›´æ¥å¤ç”¨ä½ ç°æœ‰çš„åŒºé—´æ ¡éªŒå†™æ³•ï¼ˆç¤ºæ„ï¼›ä½ å·²å®ç°ï¼‰
     private static bool CheckIV(CheckRules r, PKM pk)
     {
         if (pk.IV_HP < r.minHP || pk.IV_HP > r.maxHP) return false;
@@ -472,10 +462,118 @@ public static class LumioseRNG
         if (pk.IV_SPE < r.minSpe || pk.IV_SPE > r.maxSpe) return false;
         return true;
     }
+    public static bool CheckShiny(CheckRules r, PKM pk)
+    {
+        var s = (uint)(pk.TID16 ^ pk.SID16) ^ ((pk.PID >> 16) ^ (pk.PID & 0xFFFF));
+        if (r.Shiny == RNGForm.ShinyType.None)
+            return true;
+        else if (r.Shiny == RNGForm.ShinyType.Shiny && s < 8)
+            return true;
+        else if (r.Shiny == RNGForm.ShinyType.Star && s < 8 && s != 0)
+            return true;
+        else if (r.Shiny == RNGForm.ShinyType.Sqaure && s == 0)
+            return true;
+        else if (r.Shiny == RNGForm.ShinyType.ForceStar && s == 1)
+            return true;
+        else
+            return false;
+    }
     public static uint Next(uint seed)
     {
-        // ½« 32-bit À©Õ¹³É 64-bit ×÷Îª³õÊ¼×´Ì¬
+        // å°† 32-bit æ‰©å±•æˆ 64-bit ä½œä¸ºåˆå§‹çŠ¶æ€
         var rng = new Xoroshiro128Plus(seed);
-        return (uint)rng.Next(); // Êä³öÒ»¸öËæ»ú uint
+        return (uint)rng.Next(); // è¾“å‡ºä¸€ä¸ªéšæœº uint
     }
+    public static PKM GData(PA9 pk, in ulong seed)
+    {
+        var criteria = new EncounterCriteria();             // æˆ– EncounterCriteria.Unrestricted
+
+        var g = PersonalTable.SV.GetFormEntry(pk.Species, pk.Form).Gender;
+        var enc = new GenerateParam9a(
+            GenderRatio: g,  
+            FlawlessIVs: 0,     // æ— ä¿åº•V
+            RollCount: 1        // å•æ¬¡é—ªå…‰ roll
+        );
+        var rand = new Xoroshiro128Plus(seed);
+        pk.EncryptionConstant = (uint)rand.NextInt(uint.MaxValue);
+        pk.PID = GetAdaptedPID(ref rand, pk, enc);
+
+        if (enc.Shiny is Shiny.Random && criteria.Shiny.IsShiny() != pk.IsShiny)
+            return pk;
+
+        Span<int> ivs = [UNSET, UNSET, UNSET, UNSET, UNSET, UNSET];
+        if (enc.IVs.IsSpecified)
+        {
+            enc.IVs.CopyToSpeedLast(ivs);
+        }
+        else if (enc.Correlation is LumioseCorrelation.PreApplyIVs)
+        {
+            if (enc.FlawlessIVs != 0)
+                GenerouslyPreApplyIVs(criteria, ivs, enc.FlawlessIVs);
+        }
+        else
+        {
+            for (int i = 0; i < enc.FlawlessIVs; i++)
+            {
+                int index;
+                do { index = (int)rand.NextInt(6); }
+                while (ivs[index] != UNSET);
+                ivs[index] = MAX;
+            }
+        }
+
+        for (int i = 0; i < 6; i++)
+        {
+            if (ivs[i] == UNSET)
+                ivs[i] = (int)rand.NextInt(MAX + 1);
+        }
+
+        if (enc.Correlation == LumioseCorrelation.ReApplyIVs)
+        {
+            criteria.SetRandomIVs(pk, flawless: enc.FlawlessIVs);
+        }
+        else
+        {
+            if (!criteria.IsIVsCompatibleSpeedLast(ivs))
+                return pk;
+            pk.IV32 = (uint)ivs[0] |
+                      (uint)(ivs[1] << 05) |
+                      (uint)(ivs[2] << 10) |
+                      (uint)(ivs[5] << 15) | // speed is last in the array, but in the middle of the 32bit value
+                      (uint)(ivs[3] << 20) |
+                      (uint)(ivs[4] << 25);
+        }
+
+        int ability = enc.Ability switch
+        {
+            AbilityPermission.Any12H => (int)rand.NextInt(3) << 1,
+            AbilityPermission.Any12 => (int)rand.NextInt(2) << 1,
+            _ => (int)enc.Ability,
+        };
+        pk.RefreshAbility(ability >> 1);
+
+        var gender_ratio = enc.GenderRatio;
+        byte gender = gender_ratio switch
+        {
+            PersonalInfo.RatioMagicGenderless => 2,
+            PersonalInfo.RatioMagicFemale => 1,
+            PersonalInfo.RatioMagicMale => 0,
+            _ => GetGender(gender_ratio, rand.NextInt(100)),
+        };
+        if (criteria.IsSpecifiedGender() && !criteria.IsSatisfiedGender(gender))
+            return pk;
+        pk.Gender = gender;
+
+        var nature = enc.Nature != Nature.Random ? enc.Nature
+            : (Nature)rand.NextInt(25);
+
+        // Compromise on Nature -- some are fixed, some are random. If the request wants a specific nature, just mint it.
+        if (criteria.IsSpecifiedNature() && !criteria.IsSatisfiedNature(nature))
+            return pk;
+        pk.Nature = pk.StatNature = nature;
+
+        pk.Scale = enc.SizeType.GetSizeValue(enc.Scale, ref rand);
+        return pk;
+    }
+
 }
