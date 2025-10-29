@@ -14,7 +14,7 @@ namespace WangPluginPkm
             var versions = settings.GetVersions(SAV);
             var pk = SAV.BlankPKM;
             var species = settings.Species;
-            var results = EncounterUtil.GetAllSpeciesFormEncounters(species, SAV.Personal, versions, pk);
+            var results = EncounterUtil.GetAllSpeciesFormEncounters(species, SAV.Personal, versions.ToArray(), pk);
             results = results.Where(z => z.IsEgg == settings.SearchEgg);
             // return filtered results
             var comparer = new ReferenceComparer<IEncounterInfo>();
@@ -23,13 +23,14 @@ namespace WangPluginPkm
         }
         private static IEnumerable<IEncounterInfo> GetAllSpeciesFormEncounters(int species, IPersonalTable pt, IReadOnlyList<GameVersion> versions, PKM pk)
         {
+            var verArr = versions.ToArray(); 
             var pi = pt.GetFormEntry((ushort)species, 0);
             var fc = pi.FormCount;
             for (int f = 0; f < fc; f++)
             {
                 if (FormInfo.IsBattleOnlyForm((ushort)species, (byte)f, pk.Format))
                     continue;
-                var encs = GetEncounters(species, f, pk, versions);
+                var encs = GetEncounters(species, f, pk, verArr);
                 foreach (var enc in encs)
                     yield return enc;
             }
@@ -45,7 +46,7 @@ namespace WangPluginPkm
             pkm.Species = (ushort)species;
             pkm.Form = (byte)form;
             pkm.SetGender(pkm.GetSaneGender());
-            return EncounterMovesetGenerator.GenerateEncounters(pkm, null, versions);
+            return EncounterMovesetGenerator.GenerateEncounters(pkm, null, (GameVersion[])versions);
         }
         public static EncounterCriteria GetCriteria(ISpeciesForm enc, PKM editor)
         {

@@ -269,7 +269,7 @@ namespace WangPluginPkm.GUI
                 return;
             }
             var gp1 = new PK8();
-            data.CopyTo(gp1.Data, 0);
+            gp1.Data.CopyTo(data); ;
             gp = gp1;
         }
 

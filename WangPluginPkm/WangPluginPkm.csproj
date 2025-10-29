@@ -23,21 +23,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Costura.Fody" Version="5.7.0">
+    <PackageReference Include="Costura.Fody" Version="6.0.0">
       <DisableFody Condition="'$(Configuration)' == 'Debug'">true</DisableFody>
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Google.Apis" Version="1.64.0" />
-    <PackageReference Include="Google.Apis.Sheets.v4" Version="1.64.0.3148" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.57" />
-    <PackageReference Include="itext7" Version="8.0.2" />
-    <PackageReference Include="itext7.bouncy-castle-adapter" Version="8.0.2" />
+    <PackageReference Include="Google.Apis" Version="1.72.0" />
+    <PackageReference Include="Google.Apis.Sheets.v4" Version="1.70.0.3819" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
+    <PackageReference Include="itext7" Version="9.3.0" />
+    <PackageReference Include="itext7.bouncy-castle-adapter" Version="9.3.0" />
     <PackageReference Include="Microsoft.Z3" Version="4.12.2" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
-    <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.2" />
-    <PackageReference Include="PKHeX.Core" Version="25.6.9" />
-    <PackageReference Include="RestSharp" Version="112.0.0" />
+    <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.3" />
+    <PackageReference Include="PKHeX.Core" Version="25.10.27" />
+    <PackageReference Include="RestSharp" Version="112.1.0" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="PKHeX.Core.AutoMod">
