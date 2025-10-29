@@ -344,7 +344,7 @@ namespace WangPluginPkm.GUI
             // 
             SeedTB.Location = new System.Drawing.Point(211, 45);
             SeedTB.Name = "SeedTB";
-            SeedTB.Size = new System.Drawing.Size(97, 25);
+            SeedTB.Size = new System.Drawing.Size(109, 25);
             SeedTB.TabIndex = 43;
             // 
             // StateBox
@@ -482,7 +482,7 @@ namespace WangPluginPkm.GUI
             // 
             ZeroSeed_TB.Location = new System.Drawing.Point(140, 190);
             ZeroSeed_TB.Name = "ZeroSeed_TB";
-            ZeroSeed_TB.Size = new System.Drawing.Size(100, 25);
+            ZeroSeed_TB.Size = new System.Drawing.Size(139, 25);
             ZeroSeed_TB.TabIndex = 27;
             ZeroSeed_TB.Text = "0";
             // 

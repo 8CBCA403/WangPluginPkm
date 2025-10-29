@@ -61,62 +61,63 @@
             // HP_Label
             // 
             HP_Label.AutoSize = true;
-            HP_Label.Location = new System.Drawing.Point(73, 80);
+            HP_Label.Location = new System.Drawing.Point(83, 94);
             HP_Label.Name = "HP_Label";
-            HP_Label.Size = new System.Drawing.Size(32, 17);
+            HP_Label.Size = new System.Drawing.Size(41, 20);
             HP_Label.TabIndex = 6;
             HP_Label.Text = "血量";
             // 
             // Atk_Label
             // 
             Atk_Label.AutoSize = true;
-            Atk_Label.Location = new System.Drawing.Point(111, 80);
+            Atk_Label.Location = new System.Drawing.Point(127, 94);
             Atk_Label.Name = "Atk_Label";
-            Atk_Label.Size = new System.Drawing.Size(32, 17);
+            Atk_Label.Size = new System.Drawing.Size(41, 20);
             Atk_Label.TabIndex = 7;
             Atk_Label.Text = "物攻";
             // 
             // Def_Label
             // 
             Def_Label.AutoSize = true;
-            Def_Label.Location = new System.Drawing.Point(148, 80);
+            Def_Label.Location = new System.Drawing.Point(169, 94);
             Def_Label.Name = "Def_Label";
-            Def_Label.Size = new System.Drawing.Size(32, 17);
+            Def_Label.Size = new System.Drawing.Size(41, 20);
             Def_Label.TabIndex = 8;
             Def_Label.Text = "物防";
             // 
             // Spa_Label
             // 
             Spa_Label.AutoSize = true;
-            Spa_Label.Location = new System.Drawing.Point(186, 80);
+            Spa_Label.Location = new System.Drawing.Point(213, 94);
             Spa_Label.Name = "Spa_Label";
-            Spa_Label.Size = new System.Drawing.Size(32, 17);
+            Spa_Label.Size = new System.Drawing.Size(41, 20);
             Spa_Label.TabIndex = 9;
             Spa_Label.Text = "特攻";
             // 
             // Spd_Label
             // 
             Spd_Label.AutoSize = true;
-            Spd_Label.Location = new System.Drawing.Point(223, 80);
+            Spd_Label.Location = new System.Drawing.Point(255, 94);
             Spd_Label.Name = "Spd_Label";
-            Spd_Label.Size = new System.Drawing.Size(32, 17);
+            Spd_Label.Size = new System.Drawing.Size(41, 20);
             Spd_Label.TabIndex = 10;
             Spd_Label.Text = "特防";
             // 
             // Spe_Label
             // 
             Spe_Label.AutoSize = true;
-            Spe_Label.Location = new System.Drawing.Point(261, 80);
+            Spe_Label.Location = new System.Drawing.Point(298, 94);
             Spe_Label.Name = "Spe_Label";
-            Spe_Label.Size = new System.Drawing.Size(32, 17);
+            Spe_Label.Size = new System.Drawing.Size(41, 20);
             Spe_Label.TabIndex = 11;
             Spe_Label.Text = "速度";
             // 
             // HpMin
             // 
-            HpMin.Location = new System.Drawing.Point(75, 111);
+            HpMin.Location = new System.Drawing.Point(86, 131);
+            HpMin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             HpMin.Name = "HpMin";
-            HpMin.Size = new System.Drawing.Size(30, 23);
+            HpMin.Size = new System.Drawing.Size(34, 27);
             HpMin.TabIndex = 12;
             HpMin.Text = "0";
             HpMin.TextChanged += IVS_TextChanged;
@@ -124,17 +125,18 @@
             // Min_Label
             // 
             Min_Label.AutoSize = true;
-            Min_Label.Location = new System.Drawing.Point(19, 114);
+            Min_Label.Location = new System.Drawing.Point(22, 134);
             Min_Label.Name = "Min_Label";
-            Min_Label.Size = new System.Drawing.Size(44, 17);
+            Min_Label.Size = new System.Drawing.Size(57, 20);
             Min_Label.TabIndex = 13;
             Min_Label.Text = "最小值";
             // 
             // HpMax
             // 
-            HpMax.Location = new System.Drawing.Point(75, 148);
+            HpMax.Location = new System.Drawing.Point(86, 174);
+            HpMax.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             HpMax.Name = "HpMax";
-            HpMax.Size = new System.Drawing.Size(30, 23);
+            HpMax.Size = new System.Drawing.Size(34, 27);
             HpMax.TabIndex = 14;
             HpMax.Text = "31";
             HpMax.TextChanged += IVS_TextChanged;
@@ -142,98 +144,108 @@
             // Max_Label
             // 
             Max_Label.AutoSize = true;
-            Max_Label.Location = new System.Drawing.Point(19, 151);
+            Max_Label.Location = new System.Drawing.Point(22, 178);
             Max_Label.Name = "Max_Label";
-            Max_Label.Size = new System.Drawing.Size(44, 17);
+            Max_Label.Size = new System.Drawing.Size(57, 20);
             Max_Label.TabIndex = 15;
             Max_Label.Text = "最大值";
             // 
             // AtkMin
             // 
-            AtkMin.Location = new System.Drawing.Point(113, 111);
+            AtkMin.Location = new System.Drawing.Point(129, 131);
+            AtkMin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             AtkMin.Name = "AtkMin";
-            AtkMin.Size = new System.Drawing.Size(30, 23);
+            AtkMin.Size = new System.Drawing.Size(34, 27);
             AtkMin.TabIndex = 16;
             AtkMin.Text = "0";
             AtkMin.TextChanged += IVS_TextChanged;
             // 
             // AtkMax
             // 
-            AtkMax.Location = new System.Drawing.Point(113, 148);
+            AtkMax.Location = new System.Drawing.Point(129, 174);
+            AtkMax.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             AtkMax.Name = "AtkMax";
-            AtkMax.Size = new System.Drawing.Size(30, 23);
+            AtkMax.Size = new System.Drawing.Size(34, 27);
             AtkMax.TabIndex = 17;
             AtkMax.Text = "31";
             AtkMax.TextChanged += IVS_TextChanged;
             // 
             // DefMax
             // 
-            DefMax.Location = new System.Drawing.Point(151, 148);
+            DefMax.Location = new System.Drawing.Point(173, 174);
+            DefMax.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             DefMax.Name = "DefMax";
-            DefMax.Size = new System.Drawing.Size(30, 23);
+            DefMax.Size = new System.Drawing.Size(34, 27);
             DefMax.TabIndex = 18;
             DefMax.Text = "31";
             DefMax.TextChanged += IVS_TextChanged;
             // 
             // DefMin
             // 
-            DefMin.Location = new System.Drawing.Point(151, 111);
+            DefMin.Location = new System.Drawing.Point(173, 131);
+            DefMin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             DefMin.Name = "DefMin";
-            DefMin.Size = new System.Drawing.Size(30, 23);
+            DefMin.Size = new System.Drawing.Size(34, 27);
             DefMin.TabIndex = 19;
             DefMin.Text = "0";
             DefMin.TextChanged += IVS_TextChanged;
             // 
             // SpaMin
             // 
-            SpaMin.Location = new System.Drawing.Point(188, 111);
+            SpaMin.Location = new System.Drawing.Point(215, 131);
+            SpaMin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             SpaMin.Name = "SpaMin";
-            SpaMin.Size = new System.Drawing.Size(30, 23);
+            SpaMin.Size = new System.Drawing.Size(34, 27);
             SpaMin.TabIndex = 20;
             SpaMin.Text = "0";
             SpaMin.TextChanged += IVS_TextChanged;
             // 
             // SpaMax
             // 
-            SpaMax.Location = new System.Drawing.Point(188, 148);
+            SpaMax.Location = new System.Drawing.Point(215, 174);
+            SpaMax.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             SpaMax.Name = "SpaMax";
-            SpaMax.Size = new System.Drawing.Size(30, 23);
+            SpaMax.Size = new System.Drawing.Size(34, 27);
             SpaMax.TabIndex = 21;
             SpaMax.Text = "31";
             SpaMax.TextChanged += IVS_TextChanged;
             // 
             // SpdMin
             // 
-            SpdMin.Location = new System.Drawing.Point(226, 111);
+            SpdMin.Location = new System.Drawing.Point(258, 131);
+            SpdMin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             SpdMin.Name = "SpdMin";
-            SpdMin.Size = new System.Drawing.Size(30, 23);
+            SpdMin.Size = new System.Drawing.Size(34, 27);
             SpdMin.TabIndex = 22;
             SpdMin.Text = "0";
             SpdMin.TextChanged += IVS_TextChanged;
             // 
             // SpdMax
             // 
-            SpdMax.Location = new System.Drawing.Point(226, 148);
+            SpdMax.Location = new System.Drawing.Point(258, 174);
+            SpdMax.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             SpdMax.Name = "SpdMax";
-            SpdMax.Size = new System.Drawing.Size(30, 23);
+            SpdMax.Size = new System.Drawing.Size(34, 27);
             SpdMax.TabIndex = 23;
             SpdMax.Text = "31";
             SpdMax.TextChanged += IVS_TextChanged;
             // 
             // SpeMin
             // 
-            SpeMin.Location = new System.Drawing.Point(264, 111);
+            SpeMin.Location = new System.Drawing.Point(302, 131);
+            SpeMin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             SpeMin.Name = "SpeMin";
-            SpeMin.Size = new System.Drawing.Size(30, 23);
+            SpeMin.Size = new System.Drawing.Size(34, 27);
             SpeMin.TabIndex = 24;
             SpeMin.Text = "0";
             SpeMin.TextChanged += IVS_TextChanged;
             // 
             // SpeMax
             // 
-            SpeMax.Location = new System.Drawing.Point(264, 148);
+            SpeMax.Location = new System.Drawing.Point(302, 174);
+            SpeMax.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             SpeMax.Name = "SpeMax";
-            SpeMax.Size = new System.Drawing.Size(30, 23);
+            SpeMax.Size = new System.Drawing.Size(34, 27);
             SpeMax.TabIndex = 25;
             SpeMax.Text = "31";
             SpeMax.TextChanged += IVS_TextChanged;
@@ -241,74 +253,78 @@
             // ShinyTypeLabel1
             // 
             ShinyTypeLabel1.AutoSize = true;
-            ShinyTypeLabel1.Location = new System.Drawing.Point(3, 48);
+            ShinyTypeLabel1.Location = new System.Drawing.Point(3, 56);
             ShinyTypeLabel1.Name = "ShinyTypeLabel1";
-            ShinyTypeLabel1.Size = new System.Drawing.Size(56, 17);
+            ShinyTypeLabel1.Size = new System.Drawing.Size(73, 20);
             ShinyTypeLabel1.TabIndex = 26;
             ShinyTypeLabel1.Text = "闪光种类";
             // 
             // ShinyTypeBox1
             // 
             ShinyTypeBox1.FormattingEnabled = true;
-            ShinyTypeBox1.Location = new System.Drawing.Point(66, 44);
+            ShinyTypeBox1.Location = new System.Drawing.Point(75, 52);
+            ShinyTypeBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             ShinyTypeBox1.Name = "ShinyTypeBox1";
-            ShinyTypeBox1.Size = new System.Drawing.Size(106, 25);
+            ShinyTypeBox1.Size = new System.Drawing.Size(121, 28);
             ShinyTypeBox1.TabIndex = 27;
             // 
             // SeedBox
             // 
-            SeedBox.Location = new System.Drawing.Point(214, 45);
+            SeedBox.Location = new System.Drawing.Point(245, 53);
+            SeedBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             SeedBox.Name = "SeedBox";
-            SeedBox.Size = new System.Drawing.Size(94, 23);
+            SeedBox.Size = new System.Drawing.Size(128, 27);
             SeedBox.TabIndex = 28;
             SeedBox.Text = "没有seed";
             // 
             // MethodBox
             // 
             MethodBox.FormattingEnabled = true;
-            MethodBox.Location = new System.Drawing.Point(66, 11);
+            MethodBox.Location = new System.Drawing.Point(75, 13);
+            MethodBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             MethodBox.Name = "MethodBox";
-            MethodBox.Size = new System.Drawing.Size(105, 25);
+            MethodBox.Size = new System.Drawing.Size(119, 28);
             MethodBox.TabIndex = 29;
             // 
             // ConditionBox
             // 
-            ConditionBox.Location = new System.Drawing.Point(214, 12);
+            ConditionBox.Location = new System.Drawing.Point(245, 14);
+            ConditionBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             ConditionBox.Name = "ConditionBox";
-            ConditionBox.Size = new System.Drawing.Size(94, 23);
+            ConditionBox.Size = new System.Drawing.Size(107, 27);
             ConditionBox.TabIndex = 30;
             ConditionBox.Text = "无事可做";
             // 
             // RNGLabel
             // 
             RNGLabel.AutoSize = true;
-            RNGLabel.Location = new System.Drawing.Point(3, 15);
+            RNGLabel.Location = new System.Drawing.Point(3, 18);
             RNGLabel.Name = "RNGLabel";
-            RNGLabel.Size = new System.Drawing.Size(59, 17);
+            RNGLabel.Size = new System.Drawing.Size(71, 20);
             RNGLabel.TabIndex = 31;
             RNGLabel.Text = "RNG类型";
             // 
             // Condition_Lb
             // 
             Condition_Lb.AutoSize = true;
-            Condition_Lb.Location = new System.Drawing.Point(177, 15);
+            Condition_Lb.Location = new System.Drawing.Point(202, 18);
             Condition_Lb.Name = "Condition_Lb";
-            Condition_Lb.Size = new System.Drawing.Size(32, 17);
+            Condition_Lb.Size = new System.Drawing.Size(41, 20);
             Condition_Lb.TabIndex = 32;
             Condition_Lb.Text = "状态";
             // 
             // SeedLB
             // 
             SeedLB.AutoSize = true;
-            SeedLB.Location = new System.Drawing.Point(176, 48);
+            SeedLB.Location = new System.Drawing.Point(201, 56);
             SeedLB.Name = "SeedLB";
-            SeedLB.Size = new System.Drawing.Size(37, 17);
+            SeedLB.Size = new System.Drawing.Size(42, 20);
             SeedLB.TabIndex = 33;
             SeedLB.Text = "Seed";
             // 
             // PkmCondition
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(SeedLB);
             Controls.Add(Condition_Lb);
@@ -338,8 +354,9 @@
             Controls.Add(Def_Label);
             Controls.Add(Atk_Label);
             Controls.Add(HP_Label);
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Name = "PkmCondition";
-            Size = new System.Drawing.Size(329, 184);
+            Size = new System.Drawing.Size(376, 216);
             ResumeLayout(false);
             PerformLayout();
         }

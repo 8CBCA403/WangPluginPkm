@@ -478,11 +478,11 @@ public static class LumioseRNG
         else
             return false;
     }
-    public static uint Next(ulong seed)
+    public static ulong Next(ulong seed)
     {
         // 将 32-bit 扩展成 64-bit 作为初始状态
         var rng = new Xoroshiro128Plus(seed);
-        return (uint)rng.Next(); // 输出一个随机 uint
+        return rng.Next(); // 或 rng.Next() 若它返回 ulong
     }
     public static PKM GData(PA9 pk, in ulong seed)
     {

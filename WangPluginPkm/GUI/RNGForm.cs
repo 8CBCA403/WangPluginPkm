@@ -241,158 +241,192 @@ namespace WangPluginPkm.GUI
             Cancel.Enabled = running;
         }
 
-        private void Search_Click(object sender, EventArgs e)
+        private async void Search_Click(object sender, EventArgs e)
         {
             GeneratorIsRunning(true);
 
             uint seed = 0;
-            ulong seed64=0;
-            int i = 0;
-            int j = 0;
-            List<uint> SeedList = new List<uint>();
-            if (UsePreSeed.Checked == true)
+            ulong seed64 = 0;
+            var i = 0;
+            var j = 0;
+
+            var seedList = new List<uint>();
+            if (UsePreSeed.Checked)
             {
-                SeedList = CheckRules.PreSetSeed(rules);
-                MessageBox.Show($"预设种子数量:{SeedList.Count}");
+                seedList = CheckRules.PreSetSeed(rules);
+                await InvokeAsync(() => MessageBox.Show($"预设种子数量:{seedList.Count}"));
+                seedList = seedList.OrderBy(_ => rng.Next()).ToList();
             }
+
             SearchtokenSource = new();
-            if (UsePreSeed.Checked == true)
+            var token = SearchtokenSource.Token;
+
+            try
             {
-                SeedList = SeedList.OrderBy(a => rng.Next()).ToList();
-            }
-            Task.Factory.StartNew(
-                () =>
+                // —— 起始种子初始化 ——
+                if (rules.Method is not MethodType.Lumiose)
                 {
-                    if (rules.Method is not MethodType.Lumiose)
+                    seed = ZeroSeed_Check.Checked
+                        ? Convert.ToUInt32(ZeroSeed_TB.Text, 16)
+                        : Util.Rand32();
+                }
+                else
+                {
+                    seed64 = ZeroSeed_Check.Checked
+                        ? Convert.ToUInt64(ZeroSeed_TB.Text, 16)
+                        : (ulong)Random.Shared.NextInt64(long.MinValue, long.MaxValue);
+                }
+
+                var cloneSeed = seed;          // 队伍锁推进用（沿用你的逻辑）
+                var pk = Editor.Data;   // 引用
+                var p = Editor.Data.Clone(); // 快照
+
+                await Task.Run(async () =>
+                {
+                    // 进入循环前固定分支，避免 UI 改动导致分支抖动
+                    var isLumiose = rules.Method == MethodType.Lumiose;
+
+                    // 统一显示：Lumiose 固定 X16，非 Lumiose 固定 X8
+                    string CurrentHex() => isLumiose ? seed64.ToString("X16") : seed.ToString("X8");
+
+                    // 统一推进：保持你原有“ZeroSeed: ++，否则 Next()”的规则
+                    void Advance()
                     {
-                        if (ZeroSeed_Check.Checked)
-                            seed = Convert.ToUInt32(ZeroSeed_TB.Text, 16);
+                        if (!isLumiose)
+                        {
+                            seed = ZeroSeed_Check.Checked ? seed + 1 : NextSeed(seed);
+                        }
                         else
-                            seed = Util.Rand32();
+                        {
+                            seed64 = ZeroSeed_Check.Checked ? seed64 + 1 : LumioseRNG.Next(seed64); // 直接调 64 位 Next
+                        }
                     }
-                    else
-                    {
-                        if (ZeroSeed_Check.Checked)
-                            seed64 = (uint)Convert.ToUInt64(ZeroSeed_TB.Text, 16);
-                        else
-                            seed64 = seed64 = (ulong)Random.Shared.NextInt64(long.MinValue, long.MaxValue);
-                    }
-                        var cloneseed = seed;
-                    var pk = Editor.Data;
-                    var p = Editor.Data.Clone();
 
                     while (true)
                     {
-                        string hexString = "";
-                        if (rules.Method is not MethodType.Lumiose)
-                            hexString = seed.ToString("X");
-                        else
-                            hexString = seed64.ToString("X");
-                        StateBox.Text = "正在查找...";
-                        SeedTB.Text = hexString;
-                        if (SearchtokenSource.IsCancellationRequested)
-                        {
-                            StateBox.Text = "Stop";
-                            return;
-                        }
+                        token.ThrowIfCancellationRequested();
 
-                        if (SeedList.Count != 0 && i <= SeedList.Count)
+                        // 只从一个出口写 Seed 文本，永远保持位宽正确
+                        await InvokeAsync(() =>
                         {
-                            seed = SeedList[i];
+                            StateBox.Text = "正在查找...";
+                            SeedTB.Text = CurrentHex();
+                        });
+
+                        // 预设种子（你没用会跳过；保留原逻辑）
+                        if (seedList.Count != 0 && i < seedList.Count)
+                        {
+                            if (isLumiose)
+                                seed64 = seedList[i]; // 你的预设是 uint，这里自然提升到低 32 位；高 32 位为 0
+                            else
+                                seed = seedList[i];
                             i++;
                         }
-                        if (TeamLockBox.Checked == true)
+
+                        // 队伍锁（沿用你原先只推进 32 位 cloneseed 的策略）
+                        if (TeamLockBox.Checked && !LockCheck.ChooseLock(pk.Species, p, ref seed))
                         {
-                            if (LockCheck.ChooseLock(pk.Species, p, ref seed) == false)
-                            {
-                                cloneseed = NextSeed(cloneseed);
-                                seed = cloneseed;
-                                continue;
-                            }
+                            cloneSeed = NextSeed(cloneSeed);
+                            seed = cloneSeed;
+                            continue;
                         }
-                        if (rules.Method == MethodType.Lumiose ? GenPkm(ref pk, seed64, p.Form): GenPkm(ref pk, seed, p.Form))
-                           
+
+                        // 生成：固定使用 isLumiose 分支，避免依赖 rules.Method
+                        var ok = isLumiose
+                            ? GenPkm(ref pk, seed64, p.Form)
+                            : GenPkm(ref pk, seed, p.Form);
+
+                        if (ok)
                         {
                             if (Check_Frame.Checked)
                             {
-
                                 var la = new LegalityAnalysis(pk);
-                                if (la.Info.FrameMatches == false)
+                                if (!la.Info.FrameMatches)
                                 {
-                                    if (SeedList.Count == 0)
+                                    if (seedList.Count == 0)
                                     {
-                                        if (rules.Method is not MethodType.Lumiose)
-                                        {
-                                            if (ZeroSeed_Check.Checked)
-                                                seed++;
-                                            else
-                                                seed = Util.Rand32();
-                                        }
+                                        // ZeroSeed：++；否则随机（保持你的策略）
+                                        if (!isLumiose)
+                                            seed = ZeroSeed_Check.Checked ? seed + 1 : Util.Rand32();
                                         else
-                                        {
-                                            if (ZeroSeed_Check.Checked)
-                                                seed64++;
-                                            else
-                                                seed64 = (ulong)Random.Shared.NextInt64(long.MinValue, long.MaxValue);
-                                        }
+                                            seed64 = ZeroSeed_Check.Checked ? seed64 + 1 : (ulong)Random.Shared.NextInt64(long.MinValue, long.MaxValue);
                                     }
 
-                                    if (SeedList.Count != 0 && j < SeedList.Count)
+                                    if (seedList.Count != 0 && j < seedList.Count)
                                     {
-                                        seed = SeedList[j];
+                                        if (isLumiose)
+                                            seed64 = seedList[j];
+                                        else
+                                            seed = seedList[j];
                                         j++;
                                     }
-                                    if (j >= SeedList.Count && SeedList.Count != 0)
+
+                                    if (j >= seedList.Count && seedList.Count != 0)
                                     {
-                                        MessageBox.Show("没有匹配！");
+                                        await InvokeAsync(() => MessageBox.Show("没有匹配！"));
                                         break;
                                     }
 
                                     continue;
                                 }
                             }
-                            this.Invoke(() =>
-                                {
-                                    MessageBox.Show($"Success！");
-                                    Editor.PopulateFields(pk, false);
-                                    SAV.ReloadSlots();
-                                    if (rules.Method is not MethodType.Lumiose)
-                                    {
-                                        SeedTB.Text = $"{seed.ToString("X")}";
-                                    }
-                                    else
-                                    {
-                                        SeedTB.Text = $"{seed64.ToString("X")}";
-                                    }
-                                });
+
+                            await InvokeAsync(() =>
+                            {
+                                MessageBox.Show("Success！");
+                                Editor.PopulateFields(pk, false);
+                                SAV.ReloadSlots();
+                                SeedTB.Text = CurrentHex(); // 命中后同样只从一个出口写
+                            });
                             break;
                         }
-                        if (rules.Method is not MethodType.Lumiose)
-                        {
-                            if (ZeroSeed_Check.Checked)
-                                seed++;
-                            else
-                                seed = NextSeed(seed);
-                        }
-                        else
-                        {
-                            if (ZeroSeed_Check.Checked)
-                                seed64++;
-                            else
-                                seed64 = NextSeed(seed64);
-                        }
+
+                        // 未命中：推进一步（只从一个出口推进）
+                        Advance();
                     }
-                    this.Invoke(() =>
-                    {
-                        GeneratorIsRunning(false);
+                }, token);
+            }
+            catch (OperationCanceledException)
+            {
+                await InvokeAsync(() => StateBox.Text = "Stop");
+            }
+            finally
+            {
+                await InvokeAsync(() =>
+                {
+                    GeneratorIsRunning(false);
+                    if (StateBox.Text != "Stop")
                         StateBox.Text = "无事可做";
-                    });
-                },
-                SearchtokenSource.Token);
+                });
+            }
+
+            Task InvokeAsync(Action action)
+            {
+                if (!IsHandleCreated || !InvokeRequired)
+                {
+                    action();
+                    return Task.CompletedTask;
+                }
+
+                var tcs = new TaskCompletionSource();
+                BeginInvoke(new MethodInvoker(() =>
+                {
+                    try { action(); tcs.SetResult(); }
+                    catch (Exception ex) { tcs.SetException(ex); }
+                }));
+                return tcs.Task;
+            }
         }
-        private void Cancel_Click(object sender, EventArgs e)
+
+        private async void Cancel_Click(object sender, EventArgs e)
         {
-            SearchtokenSource.Cancel();
+            if (SearchtokenSource is { IsCancellationRequested: false })
+            {
+                SearchtokenSource.Cancel();
+                await Task.Delay(100); 
+                StateBox.Text = "Stop";
+            }
+
             GeneratorIsRunning(false);
         }
         #endregion
