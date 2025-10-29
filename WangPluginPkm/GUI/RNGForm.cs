@@ -12,6 +12,7 @@ using WangPluginPkm.RNG.ReverseRNG;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
 using Roaming8bRNG = WangPluginPkm.RNG.Methods.Roaming8bRNG;
+using LumioseRNG = WangPluginPkm.RNG.Methods.LumioseRNG;
 
 namespace WangPluginPkm.GUI
 {
@@ -182,6 +183,7 @@ namespace WangPluginPkm.GUI
                 MethodType.Gen5Wild => Gen5Wild.GenPkm(ref pk, seed, rules),
                 MethodType.PokeWalker => PokeWalker.GenPkm(ref pk, rules),
                 MethodType.PokeSpot => PokeSpot.GenPkm(ref pk, seed, rules),
+                MethodType.Lumiose=> LumioseRNG.GenPkm(ref pk, seed, rules),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -212,6 +214,7 @@ namespace WangPluginPkm.GUI
                 MethodType.Gen5Wild => Gen5Wild.Next(seed),
                 MethodType.PokeWalker => PokeWalker.Next(seed),
                 MethodType.PokeSpot => PokeSpot.Next(seed),
+                MethodType.Lumiose => LumioseRNG.Next(seed),
                 _ => throw new NotSupportedException(),
             };
         }

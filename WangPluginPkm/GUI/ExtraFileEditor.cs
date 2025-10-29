@@ -116,9 +116,8 @@ namespace WangPluginPkm.GUI
             ImportGP1From(path);
             var Name = SpeciesName.GetSpeciesName(gp.Species, 9);
             GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
-            var Move1=GameStringsZh.movelist[gp.Move1];
-            var Move2=GameStringsZh.movelist[gp.Move2];
-            
+            var Move1 = GameStringsZh.movelist[gp.Move1];
+            var Move2 = GameStringsZh.movelist[gp.Move2];            
             SpeciesBox.Text = Name;
             NickNameBox.Text = gp.Nickname;
             OriginalTrainerName.Text = gp.Username1;
