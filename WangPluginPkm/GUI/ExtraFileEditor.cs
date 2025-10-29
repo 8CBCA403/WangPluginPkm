@@ -1,5 +1,4 @@
-﻿using iText.Svg.Renderers.Path.Impl;
-using PKHeX.Core;
+﻿using PKHeX.Core;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -116,9 +115,8 @@ namespace WangPluginPkm.GUI
             string path = sfd.FileName;
             ImportGP1From(path);
             var Name = SpeciesName.GetSpeciesName(gp.Species, 9);
-            var strs = GameInfo.GetStrings("zh");          // 或 GameInfo.GetStrings(save.Generation) / GameInfo.GetStrings(lang)
-            string Move1 = strs.movelist[gp.Move1];
-            string Move2 = strs.movelist[gp.Move2];
+            var Move1 = ParseSettings.GetMoveName(gp.Move1);
+            var Move2 = ParseSettings.GetMoveName(gp.Move2);
             SpeciesBox.Text = Name;
             NickNameBox.Text = gp.Nickname;
             OriginalTrainerName.Text = gp.Username1;
