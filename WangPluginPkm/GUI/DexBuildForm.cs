@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using Org.BouncyCastle.Utilities;
+﻿
 using PKHeX.Core;
 using System;
 using System.Collections.Generic;

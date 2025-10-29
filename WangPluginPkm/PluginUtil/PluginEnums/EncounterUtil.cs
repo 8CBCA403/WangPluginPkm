@@ -14,7 +14,7 @@ namespace WangPluginPkm
             var versions = settings.GetVersions(SAV);
             var pk = SAV.BlankPKM;
             var species = settings.Species;
-            var results = EncounterUtil.GetAllSpeciesFormEncounters(species, SAV.Personal, versions, pk);
+            var results = EncounterUtil.GetAllSpeciesFormEncounters(species, SAV.Personal, versions.ToArray(), pk);
             results = results.Where(z => z.IsEgg == settings.SearchEgg);
             // return filtered results
             var comparer = new ReferenceComparer<IEncounterInfo>();
@@ -45,7 +45,7 @@ namespace WangPluginPkm
             pkm.Species = (ushort)species;
             pkm.Form = (byte)form;
             pkm.SetGender(pkm.GetSaneGender());
-            return EncounterMovesetGenerator.GenerateEncounters(pkm, null, versions);
+            return EncounterMovesetGenerator.GenerateEncounters(pkm, null, versions.ToArray());
         }
         public static EncounterCriteria GetCriteria(ISpeciesForm enc, PKM editor)
         {
