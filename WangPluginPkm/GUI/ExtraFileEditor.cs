@@ -115,8 +115,10 @@ namespace WangPluginPkm.GUI
             string path = sfd.FileName;
             ImportGP1From(path);
             var Name = SpeciesName.GetSpeciesName(gp.Species, 9);
-           // var Move1 = ParseSettings.GetMoveName(gp.Move1);
-          //  var Move2 = ParseSettings.GetMoveName(gp.Move2);
+            GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
+            var Move1=GameStringsZh.movelist[gp.Move1];
+            var Move2=GameStringsZh.movelist[gp.Move2];
+            
             SpeciesBox.Text = Name;
             NickNameBox.Text = gp.Nickname;
             OriginalTrainerName.Text = gp.Username1;
@@ -124,8 +126,8 @@ namespace WangPluginPkm.GUI
             HP_TextBox.Text = gp.IV_HP.ToString();
             Atk_TextBox.Text = gp.IV_ATK.ToString();
             Def_TextBox.Text = gp.IV_DEF.ToString();
-          //  Move1_TextBox.Text = Move1;
-          //  Move2_TextBox.Text = Move2;
+            Move1_TextBox.Text = Move1;
+            Move2_TextBox.Text = Move2;
             CP_TextBox.Text = gp.CP.ToString();
             GenderBox.SelectedIndex = gp.Gender % 4;
             MetDate_TextBox.Text = gp.Date.ToString();

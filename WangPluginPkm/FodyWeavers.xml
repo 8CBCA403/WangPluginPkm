@@ -1,5 +1,11 @@
 ﻿<Weavers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FodyWeavers.xsd">
-  
-  <Costura />
-  
+
+    <Costura
+      CreateTemporaryAssemblies="true"
+      IncludeDebugSymbols="false"
+      ExcludeAssemblies="PKHeX.Core;PKHeX.WinForms;System.*;Microsoft.*;netstandard;mscorlib"
+      ExcludeRuntimeAssemblies="PKHeX.Core;PKHeX.WinForms"
+      DisableCompression="true" />
+
+ 
 </Weavers>
