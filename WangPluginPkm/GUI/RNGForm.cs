@@ -13,6 +13,7 @@ using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
 using Roaming8bRNG = WangPluginPkm.RNG.Methods.Roaming8bRNG;
 using LumioseRNG = WangPluginPkm.RNG.Methods.LumioseRNG;
+using WangPluginPkm.RNG;
 
 namespace WangPluginPkm.GUI
 {
@@ -43,8 +44,6 @@ namespace WangPluginPkm.GUI
             Name = "Mothed1,2,4",
             Value = "M124",
         };
-        private ShinyType selectedShiny = ShinyType.None;
-        private MethodType RNGMethod = MethodType.None;
         public enum ShinyType
         {
             None,
@@ -53,12 +52,17 @@ namespace WangPluginPkm.GUI
             Sqaure,
             ForceStar,
         }
+        private ShinyType selectedShiny = ShinyType.None;
+        private MethodType RNGMethod = MethodType.None;
+        private RNGService _rngService;
+
         public RNGForm(ISaveFileProvider sav, IPKMView editor)
 
         {
             SAV = sav;
             Editor = editor;
             InitializeComponent();
+            _rngService = new RNGService(rules);
             BindingData();
         }
         private void BindingData()
@@ -138,6 +142,17 @@ namespace WangPluginPkm.GUI
             {
                 Gen9MinIV = Gen9IvcomboBox.SelectedIndex;
             };
+
+            // Ensure Mod_ComboBox handler is only added once
+            this.Mod_ComboBox.SelectedIndexChanged += (_, __) =>
+            {
+                if (this.Mod_ComboBox.SelectedItem is RNGModClass mod)
+                {
+                    MD = mod;
+                    ECBox.Enabled = MD?.Value is "Overworld8" or "Tera9";
+                }
+            };
+
             CheckPID();
 
         }
@@ -147,94 +162,16 @@ namespace WangPluginPkm.GUI
 
             if (!uint.TryParse(txtbox.Text, out var iv))
                 iv = 0;
-            if (iv < 0 || iv > 31)
+            if (iv > 31)
             {
-                iv = 0;
                 txtbox.Value = 0;
             }
         }
         #region //Search
-        private bool GenPkm(ref PKM pk, uint seed, byte form = 0)
-        {
-
-            return rules.Method switch
-            {
-                MethodType.None => NoMethod.GenPkm(ref pk, rules),
-                MethodType.Method1 => Method1RNG.GenPkm(ref pk, seed, rules),
-                MethodType.Method1_Unown => UnownRNG.GenPkm(ref pk, 1, seed, rules, form),
-                MethodType.Method2 => Method2RNG.GenPkm(ref pk, seed, rules),
-                MethodType.Method2_Unown => UnownRNG.GenPkm(ref pk, 2, seed, rules, form),
-                MethodType.Method3 => Method3RNG.GenPkm(ref pk, seed, rules),
-                MethodType.Method3_Unown => UnownRNG.GenPkm(ref pk, 3, seed, rules, form),
-                MethodType.Method4 => Method4RNG.GenPkm(ref pk, seed, rules),
-                MethodType.Method4_Unown => UnownRNG.GenPkm(ref pk, 4, seed, rules, form),
-                MethodType.XD => XDColoRNG.GenPkm(ref pk, seed, rules),
-                MethodType.Overworld8 => Overworld8RNG.GenPkm(ref pk, seed, rules),
-                MethodType.Roaming8b => Roaming8bRNG.GenPkm(ref pk, seed, rules),
-                MethodType.BACD_R => BACD.GenPkm(ref pk, seed & 0xFFFF, rules, 0),
-                MethodType.BACD_U => BACD.GenPkm(ref pk, seed, rules, 1),
-                MethodType.BACD_R_S => BACD.GenPkm(ref pk, seed & 0xFFFF, rules, 2),
-                MethodType.Method1Roaming => Method1Roaming.GenPkm(ref pk, seed, rules),
-                MethodType.Channel => ColoRNG.GenPkm(ref pk, seed, rules),
-                MethodType.ChannelJirachi => JiColoRNG.GenPkm(ref pk, seed, rules),
-                MethodType.E_Reader => E_Reader.GenPkm(ref pk, seed, rules),
-                MethodType.ChainShiny => ChainShiny.GenPkm(ref pk, seed, rules),
-                MethodType.G5MGShiny => G5MGShiny.GenPkm(ref pk, seed, rules),
-                MethodType.Gen5Wild => Gen5Wild.GenPkm(ref pk, seed, rules),
-                MethodType.PokeWalker => PokeWalker.GenPkm(ref pk, rules),
-                MethodType.PokeSpot => PokeSpot.GenPkm(ref pk, seed, rules),
-              
-                _ => throw new NotSupportedException(),
-            };
-        }
-        private bool GenPkm(ref PKM pk, ulong seed64, byte form = 0)
-        {
-            return rules.Method switch
-            {
-                MethodType.Lumiose => LumioseRNG.GenPkm(ref pk, seed64, rules),   // 直接用 64 位
-                                                                                  // 其余方法仍然是 32 位算法，只吃低 32 位
-                _ => GenPkm(ref pk, checked((uint)seed64), form),
-            };
-        }
-        private uint NextSeed(uint seed)
-        {
-            return rules.Method switch
-            {
-                MethodType.Method1 => Method1RNG.Next(seed),
-                MethodType.Method1_Unown => UnownRNG.Next(seed),
-                MethodType.Method2 => Method2RNG.Next(seed),
-                MethodType.Method2_Unown => UnownRNG.Next(seed),
-                MethodType.Method3 => Method3RNG.Next(seed),
-                MethodType.Method3_Unown => UnownRNG.Next(seed),
-                MethodType.Method4 => Method4RNG.Next(seed),
-                MethodType.Method4_Unown => UnownRNG.Next(seed),
-                MethodType.XD => XDColoRNG.Next(seed),
-                MethodType.Overworld8 => Overworld8RNG.Next(seed),
-                MethodType.Roaming8b => Roaming8bRNG.Next(seed),
-                MethodType.BACD_R => BACD.Next(seed),
-                MethodType.BACD_U => BACD.Next(seed),
-                MethodType.BACD_R_S => BACD.Next(seed),
-                MethodType.Method1Roaming => Method1Roaming.Next(seed),
-                MethodType.Channel => ColoRNG.Next(seed),
-                MethodType.ChannelJirachi => JiColoRNG.Next(seed),
-                MethodType.E_Reader => E_Reader.Next(seed),
-                MethodType.ChainShiny => ChainShiny.Next(seed),
-                MethodType.G5MGShiny => G5MGShiny.Next(seed),
-                MethodType.Gen5Wild => Gen5Wild.Next(seed),
-                MethodType.PokeWalker => PokeWalker.Next(seed),
-                MethodType.PokeSpot => PokeSpot.Next(seed),
-               
-                _ => throw new NotSupportedException(),
-            };
-        }
-        private ulong NextSeed(ulong seed64)
-        {
-            return rules.Method switch
-            {
-                MethodType.Lumiose => LumioseRNG.Next(seed64),
-                _ => NextSeed(checked((uint)seed64)),
-            };
-        }
+        private bool GenPkm(ref PKM pk, uint seed, byte form =0) => _rngService.GenPkm(ref pk, seed, form);
+        private bool GenPkm(ref PKM pk, ulong seed64, byte form =0) => _rngService.GenPkm(ref pk, seed64, form);
+        private uint NextSeed(uint seed) => _rngService.NextSeed(seed);
+        private ulong NextSeed(ulong seed64) => _rngService.NextSeed(seed64);
         private void GeneratorIsRunning(bool running)
         {
             Search.Enabled = !running;
@@ -247,8 +184,7 @@ namespace WangPluginPkm.GUI
 
             uint seed = 0;
             ulong seed64 = 0;
-            var i = 0;
-            var j = 0;
+
 
             var seedList = new List<uint>();
             if (UsePreSeed.Checked)
@@ -277,114 +213,104 @@ namespace WangPluginPkm.GUI
                         : (ulong)Random.Shared.NextInt64(long.MinValue, long.MaxValue);
                 }
 
-                var cloneSeed = seed;          // 队伍锁推进用（沿用你的逻辑）
-                var pk = Editor.Data;   // 引用
-                var p = Editor.Data.Clone(); // 快照
+                // 手动准备参数并调用搜索引擎
+                var initialSeed32 = seed;
+                var initialSeed64 = seed64;
+                // choose UI update interval:0 = no UI updates until finish (max speed), otherwise ms interval
+                int uiInterval =100;
+                // if a checkbox named FastModeCheckBox exists and is checked, set interval to5 minutes (300000 ms)
+                try { if (this.Controls.Find("FastModeCheckBox", true).FirstOrDefault() is CheckBox cb && cb.Checked) uiInterval =300_000; } catch { }
 
-                await Task.Run(async () =>
+                // target roughly50% CPU: use about half of logical processors as workers
+                int workers = Math.Max(1, (int)Math.Ceiling(Environment.ProcessorCount *0.5));
+                long lastDisplayedMs =0;
+
+                // If fast mode, show initial0 minutes and initial seed immediately so user sees activity
+                bool fastMode = false;
+                try { if (this.Controls.Find("FastModeCheckBox", true).FirstOrDefault() is CheckBox fcb && fcb.Checked) fastMode = true; } catch { }
+                if (fastMode)
                 {
-                    // 进入循环前固定分支，避免 UI 改动导致分支抖动
-                    var isLumiose = rules.Method == MethodType.Lumiose;
+                    // initial seed display
+                    if (rules.Method is not MethodType.Lumiose)
+                        SeedTB.Text = initialSeed32.ToString("X8");
+                    else
+                        SeedTB.Text = initialSeed64.ToString("X16");
+                    StateBox.Text = "0 分钟";
+                }
 
-                    // 统一显示：Lumiose 固定 X16，非 Lumiose 固定 X8
-                    string CurrentHex() => isLumiose ? seed64.ToString("X16") : seed.ToString("X8");
-
-                    // 统一推进：保持你原有“ZeroSeed: ++，否则 Next()”的规则
-                    void Advance()
+                var engineResult = await RNGSearchEngine.RunSearchAsync(
+ _rngService,
+                    rules,
+                    Editor,
+                    SAV,
+                    initialSeed32,
+                    initialSeed64,
+                    seedList,
+                    ZeroSeed_Check.Checked,
+                    TeamLockBox.Checked,
+                    Check_Frame.Checked,
+                    async (payload) => await InvokeAsync(() =>
+ {
+ // payload format: "<seedHex>|<elapsedMs>|<rate>"
+                    StateBox.Text = "正在查找...";
+                    try
                     {
-                        if (!isLumiose)
+                        var parts = payload.Split('|');
+                        var seedHex = parts.Length >0 ? parts[0] : "0";
+                        var elapsedMs = parts.Length >1 ? long.Parse(parts[1]) :0;
+                        // rate = parts[2] ignored here
+                        // only update display every uiInterval; engine already rate-limited
+                        SeedTB.Text = seedHex;
+                        // compute minutes passed rounded to nearest multiple of (uiInterval in ms)
+                        if (lastDisplayedMs ==0) lastDisplayedMs = elapsedMs;
+                        var delta = elapsedMs - lastDisplayedMs;
+                        // show minutes incrementing by uiInterval steps converted to minutes
+                        // if uiInterval is300000 (5 min), this yields0,5,10...
+                        // compute minutes as (elapsedMs /60000) rounded down to nearest multiple of (uiInterval/60000)
+                        long intervalMinutes =1;
+                        try
                         {
-                            seed = ZeroSeed_Check.Checked ? seed + 1 : NextSeed(seed);
+                            // attempt to read uiInterval from the FastModeCheckBox logic: if FastModeCheckBox checked we used300000
+                            var cb = this.Controls.Find("FastModeCheckBox", true).FirstOrDefault() as CheckBox;
+                            if (cb != null && cb.Checked) intervalMinutes =5;
+                            else intervalMinutes =0; //0 signals realtime; we'll display minutes as elapsed/60000
+                        }
+                        catch { intervalMinutes =0; }
+
+                        if (intervalMinutes >0)
+                        {
+                            long mins = (elapsedMs /60000) / intervalMinutes * intervalMinutes;
+                            StateBox.Text = $"{mins} 分钟";
                         }
                         else
                         {
-                            seed64 = ZeroSeed_Check.Checked ? seed64 + 1 : LumioseRNG.Next(seed64); // 直接调 64 位 Next
+                            long mins = elapsedMs /60000;
+                            StateBox.Text = $"{mins} 分钟";
                         }
                     }
-
-                    while (true)
+                    catch
                     {
-                        token.ThrowIfCancellationRequested();
-
-                        // 只从一个出口写 Seed 文本，永远保持位宽正确
-                        await InvokeAsync(() =>
-                        {
-                            StateBox.Text = "正在查找...";
-                            SeedTB.Text = CurrentHex();
-                        });
-
-                        // 预设种子（你没用会跳过；保留原逻辑）
-                        if (seedList.Count != 0 && i < seedList.Count)
-                        {
-                            if (isLumiose)
-                                seed64 = seedList[i]; // 你的预设是 uint，这里自然提升到低 32 位；高 32 位为 0
-                            else
-                                seed = seedList[i];
-                            i++;
-                        }
-
-                        // 队伍锁（沿用你原先只推进 32 位 cloneseed 的策略）
-                        if (TeamLockBox.Checked && !LockCheck.ChooseLock(pk.Species, p, ref seed))
-                        {
-                            cloneSeed = NextSeed(cloneSeed);
-                            seed = cloneSeed;
-                            continue;
-                        }
-
-                        // 生成：固定使用 isLumiose 分支，避免依赖 rules.Method
-                        var ok = isLumiose
-                            ? GenPkm(ref pk, seed64, p.Form)
-                            : GenPkm(ref pk, seed, p.Form);
-
-                        if (ok)
-                        {
-                            if (Check_Frame.Checked)
-                            {
-                                var la = new LegalityAnalysis(pk);
-                                if (!la.Info.FrameMatches)
-                                {
-                                    if (seedList.Count == 0)
-                                    {
-                                        // ZeroSeed：++；否则随机（保持你的策略）
-                                        if (!isLumiose)
-                                            seed = ZeroSeed_Check.Checked ? seed + 1 : Util.Rand32();
-                                        else
-                                            seed64 = ZeroSeed_Check.Checked ? seed64 + 1 : (ulong)Random.Shared.NextInt64(long.MinValue, long.MaxValue);
-                                    }
-
-                                    if (seedList.Count != 0 && j < seedList.Count)
-                                    {
-                                        if (isLumiose)
-                                            seed64 = seedList[j];
-                                        else
-                                            seed = seedList[j];
-                                        j++;
-                                    }
-
-                                    if (j >= seedList.Count && seedList.Count != 0)
-                                    {
-                                        await InvokeAsync(() => MessageBox.Show("没有匹配！"));
-                                        break;
-                                    }
-
-                                    continue;
-                                }
-                            }
-
-                            await InvokeAsync(() =>
-                            {
-                                MessageBox.Show("Success！");
-                                Editor.PopulateFields(pk, false);
-                                SAV.ReloadSlots();
-                                SeedTB.Text = CurrentHex(); // 命中后同样只从一个出口写
-                            });
-                            break;
-                        }
-
-                        // 未命中：推进一步（只从一个出口推进）
-                        Advance();
+                        SeedTB.Text = payload;
                     }
-                }, token);
+                }),
+ token,
+ uiInterval,
+ workers);
+
+                if (!engineResult.Found)
+                {
+                    await InvokeAsync(() => MessageBox.Show("没有匹配！"));
+                }
+                else
+                {
+                    await InvokeAsync(() =>
+                    {
+                        MessageBox.Show("Success！");
+                        Editor.PopulateFields(engineResult.FoundPKM, false);
+                        SAV.ReloadSlots();
+                        SeedTB.Text = engineResult.SeedHex;
+                    });
+                }
             }
             catch (OperationCanceledException)
             {
@@ -423,7 +349,7 @@ namespace WangPluginPkm.GUI
             if (SearchtokenSource is { IsCancellationRequested: false })
             {
                 SearchtokenSource.Cancel();
-                await Task.Delay(100); 
+                await Task.Delay(100);
                 StateBox.Text = "Stop";
             }
 
@@ -573,19 +499,18 @@ namespace WangPluginPkm.GUI
         private void ReverseCheck_BTN_Click(object sender, EventArgs e)
         {
             Span<uint> Seeds = stackalloc uint[6];
-            var S = Seeds.ToArray();
-            uint EC = 0;
-            uint PID = 0;
-            uint hp = 0;
-            uint atk = 0;
-            uint def = 0;
-            uint spa = 0;
-            uint spd = 0;
-            uint spe = 0;
+            uint EC =0;
+            uint PID =0;
+            uint hp =0;
+            uint atk =0;
+            uint def =0;
+            uint spa =0;
+            uint spd =0;
+            uint spe =0;
             Span<string> s = new();
             var PIDHEX = "0x" + PIDBox.Text;
             var IVString = IVTextBox.Text;
-            if (IVString.Length != 0)
+            if (IVString.Length !=0)
             {
                 s = IVString.Split(',');
                 hp = Convert.ToUInt16(s[0]);
@@ -601,128 +526,108 @@ namespace WangPluginPkm.GUI
             var ECHEX = "0x" + ECBox.Text;
             if (ECHEX != "0x")
                 EC = Convert.ToUInt32(ECHEX, 16);
-            uint seed = 0;
+            uint seed =0;
+
+            uint[] resultSeeds = Array.Empty<uint>();
+
             if (PIDECCheck_Box.Checked)
             {
-                switch (MD.Value)
-                {
-                    case "M124":
-                        {
-                            LCRNGReversal.GetSeeds(Seeds, PID);
-                            S = Seeds.ToArray();
-                            S = S.Where(val => val != 0).ToArray();
-                            break;
-                        }
-                    case "M3":
-                        {
-                            LCRNGReversalSkip.GetSeeds(Seeds, PID);
-                            S = Seeds.ToArray();
-                            S = S.Where(val => val != 0).ToArray();
-                            break;
-                        }
-                    case "M124U":
-                        {
-                            LCRNGReversal.GetSeeds(Seeds, PID, true);
-                            S = Seeds.ToArray();
-                            S = S.Where(val => val != 0).ToArray();
-                            break;
-                        }
-                    case "M3U":
-                        {
-                            LCRNGReversalSkip.GetSeeds(Seeds, PID, true);
-                            S = Seeds.ToArray();
-                            S = S.Where(val => val != 0).ToArray();
-                            break;
-                        }
-                    case "XDColo":
-                        {
-                            XDRNGReversal.GetSeeds(Seeds, PID);
-                            S = Seeds.ToArray();
-                            S = S.Where(val => val != 0).ToArray();
-                            for (int i = 0; i < S.Length; i++)
-                            {
-                                S[i] = XDRNG.Prev3(S[i]);
-                            }
-                            break;
-                        }
-                    case "Overworld8":
-                        {
-                            seed = Overworld8Reversal.GetOriginalSeed(EC, PID);
-                            break;
-                        }
-                    case "Tera9":
-                        {
-                            seed = Tera9RNGReverse.GetOriginalSeed(EC, PID);
-                            break;
-                        }
-                }
-
+                resultSeeds = GetSeedsByPID(EC, PID);
             }
+
             if (IVCheck_Box.Checked)
             {
-                switch (MD.Value)
-                {
-                    case "M1":
-                        {
-                            LCRNGReversal.GetSeedsIVs(Seeds, hp, atk, def, spa, spd, spe);
-                            S = Seeds.ToArray();
-                            S = S.Where(val => val != 0).ToArray();
-                            for (int i = 0; i < S.Length; i++)
-                            {
-                                S[i] = LCRNG.Prev2(S[i]);
-                            }
-                            break;
-                        }
-                    case "M23":
-                        {
-                            LCRNGReversal.GetSeedsIVs(Seeds, hp, atk, def, spa, spd, spe);
-                            S = Seeds.ToArray();
-                            S = S.Where(val => val != 0).ToArray();
-                            for (int i = 0; i < S.Length; i++)
-                            {
-                                S[i] = LCRNG.Prev3(S[i]);
-                            }
-                            break;
-                        }
-                    case "M4":
-                        {
-                            LCRNGReversalSkip.GetSeedsIVs(Seeds, hp, atk, def, spa, spd, spe);
-                            S = Seeds.ToArray();
-                            S = S.Where(val => val != 0).ToArray();
-                            for (int i = 0; i < S.Length; i++)
-                            {
-                                S[i] = LCRNG.Prev3(S[i]);
-                            }
-                            break;
-                        }
-                    case "XDColo":
-                        {
-                            XDRNGReversal.GetSeeds(Seeds, hp, atk, def, spa, spd, spe);
-                            S = Seeds.ToArray();
-                            S = S.Where(val => val != 0).ToArray();
-                            break;
-                        }
-                }
+                var ivSeeds = GetSeedsByIV(hp, atk, def, spa, spd, spe);
+                // if both checks enabled, merge unique non-zero seeds
+                resultSeeds = resultSeeds.Length ==0 ? ivSeeds : resultSeeds.Concat(ivSeeds).Where(v => v !=0).Distinct().ToArray();
             }
-            if (Seeds.Length != 0)
+
+            if (resultSeeds.Length !=0)
             {
                 SeedBox.Clear();
-                var r = PrintSeed(S, seed).Split('\n');
-                for (int i = 0; i < r.Length; i++)
+                var r = PrintSeed(resultSeeds, seed).Split('\n');
+                for (int i =0; i < r.Length; i++)
                     SeedBox.AppendText($"{r[i]}" + Environment.NewLine);
             }
         }
-        private string PrintSeed(uint[] seeds, uint seed = 0)
+
+        private uint[] GetSeedsByPID(uint EC, uint PID)
+        {
+            var arr = new uint[6];
+            switch (MD.Value)
+            {
+                case "M124":
+                    LCRNGReversal.GetSeeds(arr.AsSpan(), PID);
+                    break;
+                case "M3":
+                    LCRNGReversalSkip.GetSeeds(arr.AsSpan(), PID);
+                    break;
+                case "M124U":
+                    LCRNGReversal.GetSeeds(arr.AsSpan(), PID, true);
+                    break;
+                case "M3U":
+                    LCRNGReversalSkip.GetSeeds(arr.AsSpan(), PID, true);
+                    break;
+                case "XDColo":
+                    XDRNGReversal.GetSeeds(arr.AsSpan(), PID);
+                    for (int i =0; i < arr.Length; i++)
+                        if (arr[i] !=0)
+                            arr[i] = XDRNG.Prev3(arr[i]);
+                    break;
+                case "Overworld8":
+                    return new[] { Overworld8Reversal.GetOriginalSeed(EC, PID) };
+                case "Tera9":
+                    return new[] { Tera9RNGReverse.GetOriginalSeed(EC, PID) };
+                default:
+                    return Array.Empty<uint>();
+            }
+
+            return arr.Where(val => val !=0).ToArray();
+        }
+
+        private uint[] GetSeedsByIV(uint hp, uint atk, uint def, uint spa, uint spd, uint spe)
+        {
+            var arr = new uint[6];
+            switch (MD.Value)
+            {
+                case "M1":
+                    LCRNGReversal.GetSeedsIVs(arr.AsSpan(), hp, atk, def, spa, spd, spe);
+                    for (int i =0; i < arr.Length; i++)
+                        if (arr[i] !=0)
+                            arr[i] = LCRNG.Prev2(arr[i]);
+                    break;
+                case "M23":
+                    LCRNGReversal.GetSeedsIVs(arr.AsSpan(), hp, atk, def, spa, spd, spe);
+                    for (int i =0; i < arr.Length; i++)
+                        if (arr[i] !=0)
+                            arr[i] = LCRNG.Prev3(arr[i]);
+                    break;
+                case "M4":
+                    LCRNGReversalSkip.GetSeedsIVs(arr.AsSpan(), hp, atk, def, spa, spd, spe);
+                    for (int i =0; i < arr.Length; i++)
+                        if (arr[i] !=0)
+                            arr[i] = LCRNG.Prev3(arr[i]);
+                    break;
+                case "XDColo":
+                    XDRNGReversal.GetSeeds(arr.AsSpan(), hp, atk, def, spa, spd, spe);
+                    break;
+                default:
+                    return Array.Empty<uint>();
+            }
+
+            return arr.Where(val => val !=0).ToArray();
+        }
+        private string PrintSeed(uint[] seeds, uint seed =0)
         {
             string result = "";
-            if (seeds.Length != 0 && MD.Value != "Overworld8" && MD.Value != "Tera9")
+            if (seeds.Length !=0 && MD.Value != "Overworld8" && MD.Value != "Tera9")
             {
-                for (int i = 0; i < seeds.Length; i++)
+                for (int i =0; i < seeds.Length; i++)
                 {
                     result += seeds[i].ToString("X") + '\n';
                 }
             }
-            else if (seed != 0 && (MD.Value is "Overworld8" or "Tera9"))
+            else if (seed !=0 && (MD.Value is "Overworld8" or "Tera9"))
             {
                 result = seed.ToString("X");
             }
@@ -759,16 +664,7 @@ namespace WangPluginPkm.GUI
             Mod_ComboBox.DataSource = bindingSource1.DataSource;
             Mod_ComboBox.DisplayMember = "Name";
             Mod_ComboBox.ValueMember = "Value";
-            this.Mod_ComboBox.SelectedIndexChanged += (_, __) =>
-            {
-                MD = (RNGModClass)this.Mod_ComboBox.SelectedItem;
-                if (MD.Value is "Overworld8" or "Tera9")
-                {
-                    ECBox.Enabled = true;
-                }
-                else
-                    ECBox.Enabled = false;
-            };
+            // handler moved to BindingData to avoid duplicate subscriptions
             IVTextBox.Enabled = false;
             PIDBox.Enabled = true;
         }
@@ -780,11 +676,7 @@ namespace WangPluginPkm.GUI
             Mod_ComboBox.DataSource = bindingSource1.DataSource;
             Mod_ComboBox.DisplayMember = "Name";
             Mod_ComboBox.ValueMember = "Value";
-            this.Mod_ComboBox.SelectedIndexChanged += (_, __) =>
-            {
-                MD = (RNGModClass)this.Mod_ComboBox.SelectedItem;
-                ECBox.Enabled = false;
-            };
+            // handler moved to BindingData to avoid duplicate subscriptions
             IVTextBox.Enabled = true;
             PIDBox.Enabled = false;
         }
@@ -921,6 +813,7 @@ namespace WangPluginPkm.GUI
             if (!Int32.TryParse(StepBox.Text, out NumOfCountsPerThread))
             {
                 MessageBox.Show("步数不合法");
+                return;
             }
             cancellationToken = new CancellationTokenSource(); // 重置CancellationTokenSource以便于新的运行
             int threadnumber = (int)ThreadNumber.Value;
@@ -935,8 +828,10 @@ namespace WangPluginPkm.GUI
                 CheckedListBox newCheckedListBox = new CheckedListBox();
                 newCheckedListBox.Height = 100;
                 newCheckedListBox.Width = 150;
+                newCheckedListBox.DisplayMember = "DisplayText";
+                newCheckedListBox.ItemCheck += CheckedListBox_ItemCheck; // register handler on UI thread
                 System.Windows.Forms.ProgressBar newProgressBar = new System.Windows.Forms.ProgressBar();
-                newProgressBar.Minimum = 1;
+                newProgressBar.Minimum = 0;
                 newProgressBar.Maximum = NumOfCountsPerThread;
                 newProgressBar.Width = 150;
                 panel.Controls.Add(newCheckedListBox);
@@ -946,79 +841,88 @@ namespace WangPluginPkm.GUI
             }
 
 
+            // start tasks instead of raw threads
             for (int i = 0; i < numOfTextBoxes; i++)
             {
                 int threadIndex = i;
-                Thread newThread = new Thread(() => PerformCounting(threadIndex));
-                newThread.Start();
+                _ = Task.Run(() => PerformCountingAsync(threadIndex, cancellationToken.Token));
             }
         }
-        private void PerformCounting(int threadIndex)
+
+        private async Task PerformCountingAsync(int threadIndex, CancellationToken ct)
         {
             if (!Int32.TryParse(StepBox.Text, out NumOfCountsPerThread))
             {
-                MessageBox.Show("步数不合法");
+                Invoke(new Action(() => MessageBox.Show("步数不合法")));
                 return;
             }
+
+            if (threadIndex < 0 || threadIndex >= panelBox.Controls.Count)
+                return;
 
             FlowLayoutPanel panel = (FlowLayoutPanel)panelBox.Controls[threadIndex];
             System.Windows.Forms.ProgressBar progressBar = (System.Windows.Forms.ProgressBar)panel.Controls[1];
             System.Windows.Forms.CheckedListBox checkedList = (System.Windows.Forms.CheckedListBox)panel.Controls[0];
-            checkedList.ItemCheck += CheckedListBox_ItemCheck;
-
-            this.Invoke((MethodInvoker)delegate
-            {
-                checkedList.DisplayMember = "DisplayText";
-            });
 
             int n = 0;
-            for (uint count = (uint)(threadIndex * NumOfCountsPerThread + 1); count <= (threadIndex + 1) * NumOfCountsPerThread; count++)
+            uint start = (uint)(threadIndex * NumOfCountsPerThread + 1);
+            uint end = (uint)((threadIndex + 1) * NumOfCountsPerThread);
+
+            for (uint count = start; count <= end; count++)
             {
-                if (cancellationToken.IsCancellationRequested)
-                {
-                    return; // Handle cancellation
-                }
+                ct.ThrowIfCancellationRequested();
 
                 var seed = count; // Prepare data for this iteration
-                this.BeginInvoke((MethodInvoker)delegate
+
+                // Run generation on threadpool to avoid UI freeze
+                var ok = await Task.Run(() =>
                 {
                     var pk = Editor.Data.Clone(); // Assume Clone creates a new instance
                     if (GenPkm(ref pk, seed, pk.Form))
-                    {
-                        PKwithName item = new PKwithName(pk);
-                        checkedList.Items.Add(item); // 添加包装对象
-                    }
-                    progressBar.Value = Math.Min(++n, progressBar.Maximum); // Update progress bar
-                });
+                        return (true, pk);
+                    return (false, (PKM)null);
+                }, ct);
 
-                Thread.Sleep(10); // Control the pace of execution
+                if (ok.Item1)
+                {
+                    Invoke(new Action(() =>
+                    {
+                        PKwithName item = new PKwithName(ok.Item2);
+                        checkedList.Items.Add(item); // add wrapped object
+                        progressBar.Value = Math.Min(++n, progressBar.Maximum); // Update progress bar
+                    }));
+                }
+                else
+                {
+                    // still update progress even if not found
+                    Invoke(new Action(() => progressBar.Value = Math.Min(++n, progressBar.Maximum)));
+                }
+
+                // optional tiny yield to keep UI responsive
+                await Task.Yield();
             }
         }
 
         private void CheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            CheckedListBox list = sender as CheckedListBox;
-            if (list == null) return;
+            if (sender is not CheckedListBox list) return;
             this.BeginInvoke((MethodInvoker)delegate
             {
                 if (e.Index >= 0 && e.Index < list.Items.Count)
                 {
-                    var item = list.Items[e.Index];
-                    PKwithName yourObject = item as PKwithName;
-                    SAV.SAV.SetBoxSlotAtIndex(yourObject.OriginalItem, 0, 0);
-                    SAV.ReloadSlots();
+                    if (list.Items[e.Index] is PKwithName yourObject)
+                    {
+                        SAV.SAV.SetBoxSlotAtIndex(yourObject.OriginalItem, 0, 0);
+                        SAV.ReloadSlots();
+                    }
                 }
             });
-
-
-
-
         }
         private void Stop_BTN_Click(object sender, EventArgs e)
         {
             if (cancellationToken != null && !cancellationToken.IsCancellationRequested)
             {
-                cancellationToken.Cancel(); // 发送取消请求
+                cancellationToken.Cancel(); //发送取消请求
             }
         }
     }
