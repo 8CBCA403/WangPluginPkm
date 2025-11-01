@@ -22,42 +22,8 @@ namespace WangPluginPkm.GUI
     public partial class RNGForm : Form
     {
         public enum SearchGender : byte { Male = 0, Female = 1, Genderless = 2 }
-
-        public readonly struct PkmCriteria
-        {
-            public readonly int HP, ATK, DEF, SPA, SPD, SPE;
-            public readonly Nature Nature;
-            public readonly byte Gender;
-
-            public PkmCriteria(int hp, int atk, int def, int spa, int spd, int spe, Nature nature, SearchGender gender)
-            {
-                HP = hp; ATK = atk; DEF = def; SPA = spa; SPD = spd; SPE = spe;
-                Nature = nature;
-                Gender = (byte)gender;
-            }
-
-            public static PkmCriteria FromPKM(PKM pk)
-            => new PkmCriteria(pk.IV_HP, pk.IV_ATK, pk.IV_DEF, pk.IV_SPA, pk.IV_SPD, pk.IV_SPE, pk.Nature, (SearchGender)pk.Gender);
-
-            public bool Matches(PKM pk)
-            {
-                if (pk.IV_HP != HP) return false;
-                if (pk.IV_ATK != ATK) return false;
-                if (pk.IV_DEF != DEF) return false;
-                if (pk.IV_SPA != SPA) return false;
-                if (pk.IV_SPD != SPD) return false;
-                if (pk.IV_SPE != SPE) return false;
-                if (pk.Nature != Nature) return false;
-                if (pk.Gender != Gender) return false;
-                return true;
-            }
-
-            // implicit conversion from tuple (ints, Nature, SearchGender)
-            public static implicit operator PkmCriteria((int, int, int, int, int, int, Nature, SearchGender) t)
-            => new PkmCriteria(t.Item1, t.Item2, t.Item3, t.Item4, t.Item5, t.Item6, t.Item7, t.Item8);
-        }
-
         public CheckRules rules = new();
+        public CheckRules r = new();
         private CancellationTokenSource SearchtokenSource = new();
         private CancellationTokenSource ChecktokenSource = new();
         private CancellationTokenSource cancellationToken = new CancellationTokenSource();
@@ -72,6 +38,8 @@ namespace WangPluginPkm.GUI
         public int Gen9GanderValue = 0;
         public int Gen9AbilityValue = 0;
         public int Gen9MinIV = 0;
+        public Nature NatureValue = Nature.Hardy;
+        public Gender GenderValue = Gender.Male;
         public PK9 newpk = new();
         public List<RNGModClass> L = new();
         private static Random rng = new Random();
@@ -90,6 +58,7 @@ namespace WangPluginPkm.GUI
             ForceStar,
         }
         private ShinyType selectedShiny = ShinyType.None;
+        private ShinyType s = ShinyType.None;
         private MethodType RNGMethod = MethodType.None;
         private RNGService _rngService;
 
@@ -116,6 +85,30 @@ namespace WangPluginPkm.GUI
             this.MaxSpdNUD.DataBindings.Add("Text", rules, "maxSpD");
             this.MinSpeNUD.DataBindings.Add("Text", rules, "minSpe");
             this.MaxSpeNUD.DataBindings.Add("Text", rules, "maxSpe");
+            this.HPMINNUD.DataBindings.Add("Text", r, "minHP");
+            this.HPMAXNUD.DataBindings.Add("Text", r, "maxHP");
+            this.ATKMINNUD.DataBindings.Add("Text", r, "minAtk");
+            this.ATKMAXNUD.DataBindings.Add("Text", r, "maxAtk");
+            this.DEFMINNUD.DataBindings.Add("Text", r, "minDef");
+            this.DEFMAXNUD.DataBindings.Add("Text", r, "maxDef");
+            this.SPAMINNUD.DataBindings.Add("Text", r, "minSpA");
+            this.SPAMAXNUD.DataBindings.Add("Text", r, "maxSpA");
+            this.SPEMINNUD.DataBindings.Add("Text", r, "minSpD");
+            this.SPEMAXNUD.DataBindings.Add("Text", r, "maxSpD");
+            this.SPDMINNUD.DataBindings.Add("Text", r, "minSpe");
+            this.SPDMAXNUD.DataBindings.Add("Text", r, "maxSpe");
+            this.NcomboBox.DataSource = Enum.GetNames(typeof(Nature));
+            this.GcomboBox.DataSource = Enum.GetNames(typeof(Gender));
+            this.NcomboBox.SelectedIndexChanged += (_, __) =>
+            {
+                NatureValue = (Nature)Enum.Parse(typeof(Nature), this.NcomboBox.SelectedItem.ToString(), false);
+                r.N = NatureValue;
+            };
+            this.GcomboBox.SelectedIndexChanged += (_, __) =>
+            {
+                GenderValue = (Gender)Enum.Parse(typeof(Gender), this.GcomboBox.SelectedItem.ToString(), false);
+                r.G = GenderValue;
+            };
             this.RNGType_BOX.DataSource = Enum.GetNames(typeof(MethodType));
             this.RNGType_BOX.SelectedIndexChanged += (_, __) =>
             {
@@ -1017,7 +1010,7 @@ namespace WangPluginPkm.GUI
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Start_Search_BTN_Click(object sender, EventArgs e)
         {
 
             if (SearchtokenSource != null && !SearchtokenSource.IsCancellationRequested)
@@ -1030,17 +1023,17 @@ namespace WangPluginPkm.GUI
             // Disable the button so user knows search is running
             if (!IsHandleCreated || !InvokeRequired)
             {
-                button1.Enabled = false;
+                Start_Search_BTN.Enabled = false;
             }
             else
             {
-                BeginInvoke(new MethodInvoker(() => button1.Enabled = false));
+                BeginInvoke(new MethodInvoker(() => Start_Search_BTN.Enabled = false));
             }
 
             GeneratorIsRunning(true);
             SearchtokenSource = new CancellationTokenSource();
             var token = SearchtokenSource.Token;
-            PkmCriteria criteria = (31, 0, 31, 31, 31, 31, Nature.Modest, SearchGender.Female);
+           
 
             _ = Task.Run(() =>
             {
@@ -1059,7 +1052,7 @@ namespace WangPluginPkm.GUI
                     while (!token.IsCancellationRequested)
                     {
                                  // Call the provided SearchDatabase method to obtain a PKM candidate
-                        var candidate = SearchDatabase.SearchPKM(SAV, Editor, 152, (int)GameVersion.ZA);
+                        var candidate = SearchDatabase.SearchPKMM(SAV, Editor, Editor.Data.Species, (int)SAV.SAV.Version,(int)ENUD.Value);
                         if (candidate is null)
                         {
                                      // small delay to avoid tight loop if DB returns null frequently
@@ -1068,7 +1061,7 @@ namespace WangPluginPkm.GUI
                         }
 
                                  // Validate criteria
-                        if (criteria.Matches(candidate))
+                        if (Matches(candidate,r))
                         {
                                      // Populate UI and notify user on UI thread
                             if (!IsHandleCreated || !InvokeRequired)
@@ -1106,7 +1099,7 @@ namespace WangPluginPkm.GUI
                     // Re-enable controls on UI thread
                     if (!IsHandleCreated || !InvokeRequired)
                     {
-                        button1.Enabled = true;
+                        Start_Search_BTN.Enabled = true;
                         GeneratorIsRunning(false);
                         StateBox.Text = "Stop";
                     }
@@ -1114,7 +1107,7 @@ namespace WangPluginPkm.GUI
                     {
                         BeginInvoke(new MethodInvoker(() =>
                      {
-                button1.Enabled = true;
+                Start_Search_BTN.Enabled = true;
                 GeneratorIsRunning(false);
                 StateBox.Text = "Stop";
             }));
@@ -1123,7 +1116,7 @@ namespace WangPluginPkm.GUI
             }, token);
         }
 
-        private async void button2_Click(object sender, EventArgs e)
+        private async void Stop_Search_BTN_Click(object sender, EventArgs e)
         {
             if (SearchtokenSource != null && !SearchtokenSource.IsCancellationRequested)
             {
@@ -1131,8 +1124,29 @@ namespace WangPluginPkm.GUI
                 await Task.Delay(100);
                 try { StateBox.Text = "Stop"; } catch { }
             }
-            try { button1.Enabled = true; } catch { }
+            try { Start_Search_BTN.Enabled = true; } catch { }
             GeneratorIsRunning(false);
+        }
+        public bool Matches(PKM pk, CheckRules r)
+        {
+            if (pk.IV_HP < r.minHP || pk.IV_HP > r.maxHP)
+                return false;
+            if (pk.IV_ATK < r.minAtk || pk.IV_ATK > r.maxAtk)
+                return false;
+            if (pk.IV_DEF < r.minDef || pk.IV_DEF > r.maxDef)
+                return false;
+            if (pk.IV_SPA < r.minSpA || pk.IV_SPA > r.maxSpA)
+                return false;
+            if (pk.IV_SPD < r.minSpD || pk.IV_SPD > r.maxSpD)
+                return false;
+            if (pk.IV_SPE < r.minSpe || pk.IV_SPE > r.maxSpe)
+                return false;
+            if (pk.Gender != (byte)r.G)
+                return false;
+            if (pk.Nature != r.N)
+                return false;
+            return true;
+
         }
     }
 }

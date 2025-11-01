@@ -32,7 +32,8 @@ namespace WangPluginPkm
             SPA0,
             A0S0SPA0
         }
-
+        public Nature N { get; set; } = 0;
+        public Gender G { get; set; } = 0;
         public RNGForm.ShinyType Shiny { get; set; }
         public MethodType Method { get; set; }
         public bool CheckIV(CheckRules r, PKM pk)

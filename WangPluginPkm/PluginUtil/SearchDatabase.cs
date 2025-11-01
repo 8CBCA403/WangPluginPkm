@@ -3,6 +3,7 @@ using PKHeX.Core.Searching;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Forms;
 namespace WangPluginPkm
 {
@@ -40,6 +41,28 @@ namespace WangPluginPkm
                 if (results.Count == 0) return null;
             }
             
+            var enc = results.ElementAtOrDefault(r);
+            if (enc == null) return null;
+
+            PKM pk = enc.ConvertToPKM(SAV.SAV);
+            pk = EntityConverter.ConvertToType(pk, SAV.SAV.PKMType, out var r2);
+
+            return pk;
+        }
+        public static PKM SearchPKMM(ISaveFileProvider SAV, IPKMView Editor, ushort species, int version, int r = 0)
+        {
+            var setting = new SearchSettings
+            {
+                SearchShiny = false,
+                Species = species,
+                SearchEgg = false,
+                SearchLevel = SearchComparison.Equals,
+                Version = (GameVersion)version,
+            };
+            var search = EncounterUtil.SearchDatabase(setting, SAV.SAV);
+            var results = search.ToList();
+            if (results.Count == 0) return null;
+           
             var enc = results.ElementAtOrDefault(r);
             if (enc == null) return null;
 

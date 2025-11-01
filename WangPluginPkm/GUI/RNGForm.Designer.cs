@@ -49,8 +49,35 @@ namespace WangPluginPkm.GUI
             TeamLockBox = new CheckBox();
             Cancel = new Button();
             MutiSearchTab = new TabPage();
-            button2 = new Button();
-            button1 = new Button();
+            label20 = new Label();
+            ENUD = new NumericUpDown();
+            label19 = new Label();
+            label18 = new Label();
+            label17 = new Label();
+            GcomboBox = new ComboBox();
+            NcomboBox = new ComboBox();
+            SPDMAXNUD = new NumericUpDown();
+            SPEMAXNUD = new NumericUpDown();
+            SPAMAXNUD = new NumericUpDown();
+            DEFMAXNUD = new NumericUpDown();
+            ATKMAXNUD = new NumericUpDown();
+            HPMAXNUD = new NumericUpDown();
+            SPDMINNUD = new NumericUpDown();
+            SPEMINNUD = new NumericUpDown();
+            SPAMINNUD = new NumericUpDown();
+            DEFMINNUD = new NumericUpDown();
+            ATKMINNUD = new NumericUpDown();
+            HPMINNUD = new NumericUpDown();
+            label8 = new Label();
+            label10 = new Label();
+            label11 = new Label();
+            label12 = new Label();
+            label13 = new Label();
+            label14 = new Label();
+            label15 = new Label();
+            label16 = new Label();
+            Stop_Search_BTN = new Button();
+            Start_Search_BTN = new Button();
             CalcBTN = new Button();
             label7 = new Label();
             label6 = new Label();
@@ -136,6 +163,19 @@ namespace WangPluginPkm.GUI
             ((System.ComponentModel.ISupportInitialize)MinAtkNUD).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MinHpNUD).BeginInit();
             MutiSearchTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ENUD).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)SPDMAXNUD).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)SPEMAXNUD).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)SPAMAXNUD).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)DEFMAXNUD).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ATKMAXNUD).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)HPMAXNUD).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)SPDMINNUD).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)SPEMINNUD).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)SPAMINNUD).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)DEFMINNUD).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ATKMINNUD).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)HPMINNUD).BeginInit();
             RNGFormTabControl.SuspendLayout();
             ReverseSeedPage.SuspendLayout();
             SWSHPage.SuspendLayout();
@@ -162,7 +202,7 @@ namespace WangPluginPkm.GUI
             SearchGroupBox.Controls.Add(Check_Tab);
             SearchGroupBox.Location = new System.Drawing.Point(12, 31);
             SearchGroupBox.Name = "SearchGroupBox";
-            SearchGroupBox.Size = new System.Drawing.Size(440, 390);
+            SearchGroupBox.Size = new System.Drawing.Size(440, 343);
             SearchGroupBox.TabIndex = 24;
             SearchGroupBox.TabStop = false;
             SearchGroupBox.Text = "查找";
@@ -174,7 +214,7 @@ namespace WangPluginPkm.GUI
             Check_Tab.Location = new System.Drawing.Point(6, 20);
             Check_Tab.Name = "Check_Tab";
             Check_Tab.SelectedIndex = 0;
-            Check_Tab.Size = new System.Drawing.Size(428, 364);
+            Check_Tab.Size = new System.Drawing.Size(428, 317);
             Check_Tab.TabIndex = 45;
             // 
             // R_TabPage
@@ -219,7 +259,7 @@ namespace WangPluginPkm.GUI
             R_TabPage.Location = new System.Drawing.Point(4, 25);
             R_TabPage.Name = "R_TabPage";
             R_TabPage.Padding = new Padding(3);
-            R_TabPage.Size = new System.Drawing.Size(420, 335);
+            R_TabPage.Size = new System.Drawing.Size(420, 288);
             R_TabPage.TabIndex = 0;
             R_TabPage.Text = "常规查找";
             R_TabPage.UseVisualStyleBackColor = true;
@@ -568,35 +608,298 @@ namespace WangPluginPkm.GUI
             // 
             // MutiSearchTab
             // 
-            MutiSearchTab.Controls.Add(button2);
-            MutiSearchTab.Controls.Add(button1);
+            MutiSearchTab.Controls.Add(label20);
+            MutiSearchTab.Controls.Add(ENUD);
+            MutiSearchTab.Controls.Add(label19);
+            MutiSearchTab.Controls.Add(label18);
+            MutiSearchTab.Controls.Add(label17);
+            MutiSearchTab.Controls.Add(GcomboBox);
+            MutiSearchTab.Controls.Add(NcomboBox);
+            MutiSearchTab.Controls.Add(SPDMAXNUD);
+            MutiSearchTab.Controls.Add(SPEMAXNUD);
+            MutiSearchTab.Controls.Add(SPAMAXNUD);
+            MutiSearchTab.Controls.Add(DEFMAXNUD);
+            MutiSearchTab.Controls.Add(ATKMAXNUD);
+            MutiSearchTab.Controls.Add(HPMAXNUD);
+            MutiSearchTab.Controls.Add(SPDMINNUD);
+            MutiSearchTab.Controls.Add(SPEMINNUD);
+            MutiSearchTab.Controls.Add(SPAMINNUD);
+            MutiSearchTab.Controls.Add(DEFMINNUD);
+            MutiSearchTab.Controls.Add(ATKMINNUD);
+            MutiSearchTab.Controls.Add(HPMINNUD);
+            MutiSearchTab.Controls.Add(label8);
+            MutiSearchTab.Controls.Add(label10);
+            MutiSearchTab.Controls.Add(label11);
+            MutiSearchTab.Controls.Add(label12);
+            MutiSearchTab.Controls.Add(label13);
+            MutiSearchTab.Controls.Add(label14);
+            MutiSearchTab.Controls.Add(label15);
+            MutiSearchTab.Controls.Add(label16);
+            MutiSearchTab.Controls.Add(Stop_Search_BTN);
+            MutiSearchTab.Controls.Add(Start_Search_BTN);
             MutiSearchTab.Location = new System.Drawing.Point(4, 25);
             MutiSearchTab.Name = "MutiSearchTab";
             MutiSearchTab.Padding = new Padding(3);
-            MutiSearchTab.Size = new System.Drawing.Size(420, 335);
+            MutiSearchTab.Size = new System.Drawing.Size(420, 288);
             MutiSearchTab.TabIndex = 1;
-            MutiSearchTab.Text = "多线程";
+            MutiSearchTab.Text = "终极解决方案";
             MutiSearchTab.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // label20
             // 
-            button2.Location = new System.Drawing.Point(163, 153);
-            button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(94, 29);
-            button2.TabIndex = 1;
-            button2.Text = "停止";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            label20.AutoSize = true;
+            label20.Location = new System.Drawing.Point(63, 72);
+            label20.Name = "label20";
+            label20.Size = new System.Drawing.Size(119, 15);
+            label20.TabIndex = 82;
+            label20.Text = "相遇库里的序号";
             // 
-            // button1
+            // ENUD
             // 
-            button1.Location = new System.Drawing.Point(145, 118);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(143, 29);
-            button1.TabIndex = 0;
-            button1.Text = "超级菊草叶宝宝！";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            ENUD.Location = new System.Drawing.Point(185, 70);
+            ENUD.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
+            ENUD.Name = "ENUD";
+            ENUD.Size = new System.Drawing.Size(53, 25);
+            ENUD.TabIndex = 81;
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new System.Drawing.Font("黑体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 134);
+            label19.ForeColor = System.Drawing.Color.Red;
+            label19.Location = new System.Drawing.Point(3, 25);
+            label19.Name = "label19";
+            label19.Size = new System.Drawing.Size(433, 30);
+            label19.TabIndex = 80;
+            label19.Text = "直接无限roll相遇库直到找到！";
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new System.Drawing.Point(205, 211);
+            label18.Name = "label18";
+            label18.Size = new System.Drawing.Size(39, 15);
+            label18.TabIndex = 79;
+            label18.Text = "公母";
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new System.Drawing.Point(18, 211);
+            label17.Name = "label17";
+            label17.Size = new System.Drawing.Size(39, 15);
+            label17.TabIndex = 78;
+            label17.Text = "性格";
+            // 
+            // GcomboBox
+            // 
+            GcomboBox.FormattingEnabled = true;
+            GcomboBox.Location = new System.Drawing.Point(250, 206);
+            GcomboBox.Name = "GcomboBox";
+            GcomboBox.Size = new System.Drawing.Size(106, 23);
+            GcomboBox.TabIndex = 77;
+            // 
+            // NcomboBox
+            // 
+            NcomboBox.FormattingEnabled = true;
+            NcomboBox.Location = new System.Drawing.Point(63, 206);
+            NcomboBox.Name = "NcomboBox";
+            NcomboBox.Size = new System.Drawing.Size(108, 23);
+            NcomboBox.TabIndex = 76;
+            // 
+            // SPDMAXNUD
+            // 
+            SPDMAXNUD.Location = new System.Drawing.Point(362, 160);
+            SPDMAXNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
+            SPDMAXNUD.Name = "SPDMAXNUD";
+            SPDMAXNUD.Size = new System.Drawing.Size(50, 25);
+            SPDMAXNUD.TabIndex = 75;
+            SPDMAXNUD.Value = new decimal(new int[] { 31, 0, 0, 0 });
+            // 
+            // SPEMAXNUD
+            // 
+            SPEMAXNUD.Location = new System.Drawing.Point(306, 161);
+            SPEMAXNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
+            SPEMAXNUD.Name = "SPEMAXNUD";
+            SPEMAXNUD.Size = new System.Drawing.Size(50, 25);
+            SPEMAXNUD.TabIndex = 74;
+            SPEMAXNUD.Value = new decimal(new int[] { 31, 0, 0, 0 });
+            // 
+            // SPAMAXNUD
+            // 
+            SPAMAXNUD.Location = new System.Drawing.Point(244, 161);
+            SPAMAXNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
+            SPAMAXNUD.Name = "SPAMAXNUD";
+            SPAMAXNUD.Size = new System.Drawing.Size(56, 25);
+            SPAMAXNUD.TabIndex = 73;
+            SPAMAXNUD.Value = new decimal(new int[] { 31, 0, 0, 0 });
+            // 
+            // DEFMAXNUD
+            // 
+            DEFMAXNUD.Location = new System.Drawing.Point(185, 162);
+            DEFMAXNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
+            DEFMAXNUD.Name = "DEFMAXNUD";
+            DEFMAXNUD.Size = new System.Drawing.Size(53, 25);
+            DEFMAXNUD.TabIndex = 72;
+            DEFMAXNUD.Value = new decimal(new int[] { 31, 0, 0, 0 });
+            // 
+            // ATKMAXNUD
+            // 
+            ATKMAXNUD.Location = new System.Drawing.Point(131, 161);
+            ATKMAXNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
+            ATKMAXNUD.Name = "ATKMAXNUD";
+            ATKMAXNUD.Size = new System.Drawing.Size(48, 25);
+            ATKMAXNUD.TabIndex = 71;
+            ATKMAXNUD.Value = new decimal(new int[] { 31, 0, 0, 0 });
+            // 
+            // HPMAXNUD
+            // 
+            HPMAXNUD.Location = new System.Drawing.Point(69, 162);
+            HPMAXNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
+            HPMAXNUD.Name = "HPMAXNUD";
+            HPMAXNUD.Size = new System.Drawing.Size(54, 25);
+            HPMAXNUD.TabIndex = 70;
+            HPMAXNUD.Value = new decimal(new int[] { 31, 0, 0, 0 });
+            // 
+            // SPDMINNUD
+            // 
+            SPDMINNUD.Location = new System.Drawing.Point(362, 130);
+            SPDMINNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
+            SPDMINNUD.Name = "SPDMINNUD";
+            SPDMINNUD.Size = new System.Drawing.Size(50, 25);
+            SPDMINNUD.TabIndex = 69;
+            // 
+            // SPEMINNUD
+            // 
+            SPEMINNUD.Location = new System.Drawing.Point(306, 130);
+            SPEMINNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
+            SPEMINNUD.Name = "SPEMINNUD";
+            SPEMINNUD.Size = new System.Drawing.Size(50, 25);
+            SPEMINNUD.TabIndex = 68;
+            // 
+            // SPAMINNUD
+            // 
+            SPAMINNUD.Location = new System.Drawing.Point(244, 131);
+            SPAMINNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
+            SPAMINNUD.Name = "SPAMINNUD";
+            SPAMINNUD.Size = new System.Drawing.Size(56, 25);
+            SPAMINNUD.TabIndex = 67;
+            // 
+            // DEFMINNUD
+            // 
+            DEFMINNUD.Location = new System.Drawing.Point(185, 130);
+            DEFMINNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
+            DEFMINNUD.Name = "DEFMINNUD";
+            DEFMINNUD.Size = new System.Drawing.Size(53, 25);
+            DEFMINNUD.TabIndex = 66;
+            // 
+            // ATKMINNUD
+            // 
+            ATKMINNUD.Location = new System.Drawing.Point(131, 131);
+            ATKMINNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
+            ATKMINNUD.Name = "ATKMINNUD";
+            ATKMINNUD.Size = new System.Drawing.Size(48, 25);
+            ATKMINNUD.TabIndex = 65;
+            // 
+            // HPMINNUD
+            // 
+            HPMINNUD.Location = new System.Drawing.Point(71, 130);
+            HPMINNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
+            HPMINNUD.Name = "HPMINNUD";
+            HPMINNUD.Size = new System.Drawing.Size(54, 25);
+            HPMINNUD.TabIndex = 64;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(362, 107);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(39, 15);
+            label8.TabIndex = 63;
+            label8.Text = "速度";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new System.Drawing.Point(306, 107);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(39, 15);
+            label10.TabIndex = 62;
+            label10.Text = "特防";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new System.Drawing.Point(244, 107);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(39, 15);
+            label11.TabIndex = 61;
+            label11.Text = "特攻";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(185, 107);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(39, 15);
+            label12.TabIndex = 60;
+            label12.Text = "物防";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(131, 107);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(39, 15);
+            label13.TabIndex = 59;
+            label13.Text = "物攻";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new System.Drawing.Point(71, 107);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(39, 15);
+            label14.TabIndex = 58;
+            label14.Text = "血量";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new System.Drawing.Point(8, 163);
+            label15.Name = "label15";
+            label15.Size = new System.Drawing.Size(55, 15);
+            label15.TabIndex = 57;
+            label15.Text = "最大值";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new System.Drawing.Point(8, 134);
+            label16.Name = "label16";
+            label16.Size = new System.Drawing.Size(55, 15);
+            label16.TabIndex = 56;
+            label16.Text = "最小值";
+            // 
+            // Stop_Search_BTN
+            // 
+            Stop_Search_BTN.Location = new System.Drawing.Point(253, 243);
+            Stop_Search_BTN.Name = "Stop_Search_BTN";
+            Stop_Search_BTN.Size = new System.Drawing.Size(94, 29);
+            Stop_Search_BTN.TabIndex = 1;
+            Stop_Search_BTN.Text = "停止";
+            Stop_Search_BTN.UseVisualStyleBackColor = true;
+            Stop_Search_BTN.Click += Stop_Search_BTN_Click;
+            // 
+            // Start_Search_BTN
+            // 
+            Start_Search_BTN.Location = new System.Drawing.Point(87, 243);
+            Start_Search_BTN.Name = "Start_Search_BTN";
+            Start_Search_BTN.Size = new System.Drawing.Size(95, 29);
+            Start_Search_BTN.TabIndex = 0;
+            Start_Search_BTN.Text = "开始！";
+            Start_Search_BTN.UseVisualStyleBackColor = true;
+            Start_Search_BTN.Click += Start_Search_BTN_Click;
             // 
             // CalcBTN
             // 
@@ -1293,7 +1596,7 @@ namespace WangPluginPkm.GUI
             // 
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             BackColor = System.Drawing.SystemColors.Control;
-            ClientSize = new System.Drawing.Size(856, 433);
+            ClientSize = new System.Drawing.Size(856, 386);
             Controls.Add(Check_GB);
             Controls.Add(SearchGroupBox);
             Controls.Add(RNGmenuStrip);
@@ -1324,6 +1627,20 @@ namespace WangPluginPkm.GUI
             ((System.ComponentModel.ISupportInitialize)MinAtkNUD).EndInit();
             ((System.ComponentModel.ISupportInitialize)MinHpNUD).EndInit();
             MutiSearchTab.ResumeLayout(false);
+            MutiSearchTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)ENUD).EndInit();
+            ((System.ComponentModel.ISupportInitialize)SPDMAXNUD).EndInit();
+            ((System.ComponentModel.ISupportInitialize)SPEMAXNUD).EndInit();
+            ((System.ComponentModel.ISupportInitialize)SPAMAXNUD).EndInit();
+            ((System.ComponentModel.ISupportInitialize)DEFMAXNUD).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ATKMAXNUD).EndInit();
+            ((System.ComponentModel.ISupportInitialize)HPMAXNUD).EndInit();
+            ((System.ComponentModel.ISupportInitialize)SPDMINNUD).EndInit();
+            ((System.ComponentModel.ISupportInitialize)SPEMINNUD).EndInit();
+            ((System.ComponentModel.ISupportInitialize)SPAMINNUD).EndInit();
+            ((System.ComponentModel.ISupportInitialize)DEFMINNUD).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ATKMINNUD).EndInit();
+            ((System.ComponentModel.ISupportInitialize)HPMINNUD).EndInit();
             RNGFormTabControl.ResumeLayout(false);
             ReverseSeedPage.ResumeLayout(false);
             ReverseSeedPage.PerformLayout();
@@ -1452,7 +1769,34 @@ namespace WangPluginPkm.GUI
         private Label label9;
         private CheckBox FastModeCheckBox;
         private CheckBox TraverseModeCheckBox;
-        private Button button1;
-        private Button button2;
+        private Button Start_Search_BTN;
+        private Button Stop_Search_BTN;
+        private NumericUpDown SPDMAXNUD;
+        private NumericUpDown SPEMAXNUD;
+        private NumericUpDown SPAMAXNUD;
+        private NumericUpDown DEFMAXNUD;
+        private NumericUpDown ATKMAXNUD;
+        private NumericUpDown HPMAXNUD;
+        private NumericUpDown SPDMINNUD;
+        private NumericUpDown SPEMINNUD;
+        private NumericUpDown SPAMINNUD;
+        private NumericUpDown DEFMINNUD;
+        private NumericUpDown ATKMINNUD;
+        private NumericUpDown HPMINNUD;
+        private Label label8;
+        private Label label10;
+        private Label label11;
+        private Label label12;
+        private Label label13;
+        private Label label14;
+        private Label label15;
+        private Label label16;
+        private Label label18;
+        private Label label17;
+        private ComboBox GcomboBox;
+        private ComboBox NcomboBox;
+        private Label label19;
+        private Label label20;
+        private NumericUpDown ENUD;
     }
 }
