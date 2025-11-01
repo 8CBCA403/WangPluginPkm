@@ -57,7 +57,8 @@ namespace WangPluginPkm.GUI
 
             // Enable or disable based on generation
             SNA_CB.Enabled = SAV.SAV.Generation >= 8;
-            Tera_CB.Enabled = SAV.SAV.Generation == 9;
+            if(SAV.SAV.Version == GameVersion.SL|| SAV.SAV.Version == GameVersion.VL)
+            Tera_CB.Enabled=true;
             var moveComboBoxes = new[] { MOV1_CB, MOV2_CB, MOV3_CB, MOV4_CB };
             var moveDataSources = new[] { MOV1, MOV2, MOV3, MOV4 };
 
@@ -98,8 +99,13 @@ namespace WangPluginPkm.GUI
             // 根据世代条件添加特定项
             if (SAV.SAV.Generation >= 8)
                 EditType.Add("薄荷性格");
-            if (SAV.SAV.Generation == 9)
-                EditType.Add("太晶属性");
+            if (SAV.SAV.Version is GameVersion.SL or GameVersion.VL)
+            {
+                if (SAV.SAV.Version != GameVersion.ZA)
+                {
+                    EditType.Add("太晶属性");
+                }
+            }
 
             // 设置 DataSource 并选中所有项目
             RunFilter_CLB.DataSource = EditType;
@@ -134,12 +140,20 @@ namespace WangPluginPkm.GUI
                     SNA_CB.SelectedIndex = (int)((PK8)Editor.Data).StatNature;
                     break;
                 case 9:
-                    SNA_CB.SelectedIndex = (int)((PK9)Editor.Data).StatNature;
-                    if ((int)((PK9)Editor.Data).TeraType == 99)
-                        Tera_CB.SelectedIndex = 18;
+                    if (SAV.SAV.Version != GameVersion.ZA)
+                    {
+                        SNA_CB.SelectedIndex = (int)((PK9)Editor.Data).StatNature;
+                   
+                        if ((int)((PK9)Editor.Data).TeraType == 99)
+                            Tera_CB.SelectedIndex = 18;
+                        else
+                            Tera_CB.SelectedIndex = (int)((PK9)Editor.Data).TeraType;
+                    }
                     else
-                        Tera_CB.SelectedIndex = (int)((PK9)Editor.Data).TeraType;
-                    break;
+                    {
+                        SNA_CB.SelectedIndex = (int)((PA9)Editor.Data).StatNature;
+                    }
+                        break;
                 default:
                     break;
             }
@@ -280,11 +294,16 @@ namespace WangPluginPkm.GUI
                     lp.StatNature = SNA_CB.SelectedIndex;
                     break;
                 case 9:
-                    lp.StatNature = SNA_CB.SelectedIndex;
-                    if (Tera_CB.SelectedIndex == 18)
-                        lp.TeraType = 99;
-                    else
-                        lp.TeraType = Tera_CB.SelectedIndex;
+           
+                        lp.StatNature = SNA_CB.SelectedIndex;
+                    if (SAV.SAV.Version != GameVersion.ZA)
+                    {
+                        if (Tera_CB.SelectedIndex == 18)
+                            lp.TeraType = 99;
+                        else
+                            lp.TeraType = Tera_CB.SelectedIndex;
+                    }
+
                     break;
                 default:
                     break;
@@ -330,7 +349,8 @@ namespace WangPluginPkm.GUI
                             break;
                         case 9:
                             lp.StatNature = Int32.Parse(st[0]);
-                            lp.TeraType = Int32.Parse(st[1]);
+                            if (SAV.SAV.Version != GameVersion.ZA)
+                                lp.TeraType = Int32.Parse(st[1]);
                             break;
                         default:
                             break;
@@ -413,10 +433,13 @@ namespace WangPluginPkm.GUI
                         break;
                     case 9:
                         SNA_CB.SelectedIndex = ((litePK)lp).StatNature;
-                        if (((litePK)lp).TeraType == 99)
-                            Tera_CB.SelectedIndex = 18;
-                        else
-                            Tera_CB.SelectedIndex = ((litePK)lp).TeraType;
+                        if (SAV.SAV.Version != GameVersion.ZA)
+                        {
+                            if (((litePK)lp).TeraType == 99)
+                                Tera_CB.SelectedIndex = 18;
+                            else
+                                Tera_CB.SelectedIndex = ((litePK)lp).TeraType;
+                        }
                         break;
                     default:
                         break;
@@ -574,7 +597,10 @@ namespace WangPluginPkm.GUI
                                     break;
                                 case 12:
                                     {
-                                        ((PK9)pk).TeraTypeOverride = (MoveType)litePKs[i].TeraType;
+                                        if (SAV.SAV.Version != GameVersion.ZA)
+                                        {
+                                            ((PK9)pk).TeraTypeOverride = (MoveType)litePKs[i].TeraType;
+                                        }
                                     }
                                     break;
 
@@ -673,10 +699,13 @@ namespace WangPluginPkm.GUI
                     break;
                 case 9:
                     pk.StatNature = SNA_CB.SelectedIndex;
-                    if (Tera_CB.SelectedIndex == 18)
-                        pk.TeraType = 99;
-                    else
-                        pk.TeraType = Tera_CB.SelectedIndex;
+                    if (SAV.SAV.Version != GameVersion.ZA)
+                    {
+                        if (Tera_CB.SelectedIndex == 18)
+                            pk.TeraType = 99;
+                        else
+                            pk.TeraType = Tera_CB.SelectedIndex;
+                    }
                     break;
                 default:
                     break;
@@ -788,7 +817,10 @@ namespace WangPluginPkm.GUI
                         boxbuffer = ((SAV8LA)SAV.SAV).BoxInfo.Data;
                     break;
                 case 9:
-                    boxbuffer = ((SAV9SV)SAV.SAV).BoxInfo.Data;
+                    if(SAV.SAV.Version != GameVersion.ZA)
+                        boxbuffer = ((SAV9SV)SAV.SAV).BoxInfo.Data;
+                    else
+                        boxbuffer = ((SAV9ZA)SAV.SAV).BoxInfo.Data;
                     break;
                 default:
                     break;
@@ -914,8 +946,13 @@ namespace WangPluginPkm.GUI
                     lp.StatNature = (int)((PK8)pk).StatNature;
                     break;
                 case 9:
-                    lp.StatNature = (int)((PK9)pk).StatNature;
-                    lp.TeraType = (int)((PK9)pk).TeraType;
+                    if (SAV.SAV.Version != GameVersion.ZA)
+                    {
+                        lp.StatNature = (int)((PK9)pk).StatNature;
+                        lp.TeraType = (int)((PK9)pk).TeraType;
+                    }
+                    else
+                        lp.StatNature = (int)((PA9)pk).StatNature;
                     break;
                 default:
                     break;

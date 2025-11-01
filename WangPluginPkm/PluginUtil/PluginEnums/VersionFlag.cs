@@ -65,7 +65,10 @@ namespace WangPluginPkm
         {
             return version is GameVersion.SL or GameVersion.VL;
         }
-
+        public static bool Gen9aFlag(GameVersion version)
+        {
+            return version is GameVersion.ZA;
+        }
         public static bool ID7Flag(GameVersion version)
         {
             return version is GameVersion.SN or GameVersion.MN or GameVersion.US or GameVersion.UM or

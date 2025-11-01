@@ -27,7 +27,6 @@
         Overworld8,
         Roaming8b,
         Lumiose,
-        Gift9a
         // Wild8b,
         // Overworld8a,
     }

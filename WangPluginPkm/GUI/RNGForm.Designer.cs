@@ -657,7 +657,7 @@ namespace WangPluginPkm.GUI
             // ENUD
             // 
             ENUD.Location = new System.Drawing.Point(185, 70);
-            ENUD.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
+            ENUD.Maximum = new decimal(new int[] { 2000, 0, 0, 0 });
             ENUD.Name = "ENUD";
             ENUD.Size = new System.Drawing.Size(53, 25);
             ENUD.TabIndex = 81;
@@ -676,7 +676,7 @@ namespace WangPluginPkm.GUI
             // label18
             // 
             label18.AutoSize = true;
-            label18.Location = new System.Drawing.Point(205, 211);
+            label18.Location = new System.Drawing.Point(85, 108);
             label18.Name = "label18";
             label18.Size = new System.Drawing.Size(39, 15);
             label18.TabIndex = 79;
@@ -685,7 +685,7 @@ namespace WangPluginPkm.GUI
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new System.Drawing.Point(18, 211);
+            label17.Location = new System.Drawing.Point(248, 74);
             label17.Name = "label17";
             label17.Size = new System.Drawing.Size(39, 15);
             label17.TabIndex = 78;
@@ -694,22 +694,22 @@ namespace WangPluginPkm.GUI
             // GcomboBox
             // 
             GcomboBox.FormattingEnabled = true;
-            GcomboBox.Location = new System.Drawing.Point(250, 206);
+            GcomboBox.Location = new System.Drawing.Point(130, 103);
             GcomboBox.Name = "GcomboBox";
-            GcomboBox.Size = new System.Drawing.Size(106, 23);
+            GcomboBox.Size = new System.Drawing.Size(108, 23);
             GcomboBox.TabIndex = 77;
             // 
             // NcomboBox
             // 
             NcomboBox.FormattingEnabled = true;
-            NcomboBox.Location = new System.Drawing.Point(63, 206);
+            NcomboBox.Location = new System.Drawing.Point(293, 69);
             NcomboBox.Name = "NcomboBox";
             NcomboBox.Size = new System.Drawing.Size(108, 23);
             NcomboBox.TabIndex = 76;
             // 
             // SPDMAXNUD
             // 
-            SPDMAXNUD.Location = new System.Drawing.Point(362, 160);
+            SPDMAXNUD.Location = new System.Drawing.Point(353, 187);
             SPDMAXNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
             SPDMAXNUD.Name = "SPDMAXNUD";
             SPDMAXNUD.Size = new System.Drawing.Size(50, 25);
@@ -718,7 +718,7 @@ namespace WangPluginPkm.GUI
             // 
             // SPEMAXNUD
             // 
-            SPEMAXNUD.Location = new System.Drawing.Point(306, 161);
+            SPEMAXNUD.Location = new System.Drawing.Point(297, 188);
             SPEMAXNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
             SPEMAXNUD.Name = "SPEMAXNUD";
             SPEMAXNUD.Size = new System.Drawing.Size(50, 25);
@@ -727,7 +727,7 @@ namespace WangPluginPkm.GUI
             // 
             // SPAMAXNUD
             // 
-            SPAMAXNUD.Location = new System.Drawing.Point(244, 161);
+            SPAMAXNUD.Location = new System.Drawing.Point(235, 188);
             SPAMAXNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
             SPAMAXNUD.Name = "SPAMAXNUD";
             SPAMAXNUD.Size = new System.Drawing.Size(56, 25);
@@ -736,7 +736,7 @@ namespace WangPluginPkm.GUI
             // 
             // DEFMAXNUD
             // 
-            DEFMAXNUD.Location = new System.Drawing.Point(185, 162);
+            DEFMAXNUD.Location = new System.Drawing.Point(176, 189);
             DEFMAXNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
             DEFMAXNUD.Name = "DEFMAXNUD";
             DEFMAXNUD.Size = new System.Drawing.Size(53, 25);
@@ -745,7 +745,7 @@ namespace WangPluginPkm.GUI
             // 
             // ATKMAXNUD
             // 
-            ATKMAXNUD.Location = new System.Drawing.Point(131, 161);
+            ATKMAXNUD.Location = new System.Drawing.Point(122, 188);
             ATKMAXNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
             ATKMAXNUD.Name = "ATKMAXNUD";
             ATKMAXNUD.Size = new System.Drawing.Size(48, 25);
@@ -754,7 +754,7 @@ namespace WangPluginPkm.GUI
             // 
             // HPMAXNUD
             // 
-            HPMAXNUD.Location = new System.Drawing.Point(69, 162);
+            HPMAXNUD.Location = new System.Drawing.Point(60, 189);
             HPMAXNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
             HPMAXNUD.Name = "HPMAXNUD";
             HPMAXNUD.Size = new System.Drawing.Size(54, 25);
@@ -763,7 +763,7 @@ namespace WangPluginPkm.GUI
             // 
             // SPDMINNUD
             // 
-            SPDMINNUD.Location = new System.Drawing.Point(362, 130);
+            SPDMINNUD.Location = new System.Drawing.Point(353, 157);
             SPDMINNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
             SPDMINNUD.Name = "SPDMINNUD";
             SPDMINNUD.Size = new System.Drawing.Size(50, 25);
@@ -771,7 +771,7 @@ namespace WangPluginPkm.GUI
             // 
             // SPEMINNUD
             // 
-            SPEMINNUD.Location = new System.Drawing.Point(306, 130);
+            SPEMINNUD.Location = new System.Drawing.Point(297, 157);
             SPEMINNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
             SPEMINNUD.Name = "SPEMINNUD";
             SPEMINNUD.Size = new System.Drawing.Size(50, 25);
@@ -779,7 +779,7 @@ namespace WangPluginPkm.GUI
             // 
             // SPAMINNUD
             // 
-            SPAMINNUD.Location = new System.Drawing.Point(244, 131);
+            SPAMINNUD.Location = new System.Drawing.Point(235, 158);
             SPAMINNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
             SPAMINNUD.Name = "SPAMINNUD";
             SPAMINNUD.Size = new System.Drawing.Size(56, 25);
@@ -787,7 +787,7 @@ namespace WangPluginPkm.GUI
             // 
             // DEFMINNUD
             // 
-            DEFMINNUD.Location = new System.Drawing.Point(185, 130);
+            DEFMINNUD.Location = new System.Drawing.Point(176, 157);
             DEFMINNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
             DEFMINNUD.Name = "DEFMINNUD";
             DEFMINNUD.Size = new System.Drawing.Size(53, 25);
@@ -795,7 +795,7 @@ namespace WangPluginPkm.GUI
             // 
             // ATKMINNUD
             // 
-            ATKMINNUD.Location = new System.Drawing.Point(131, 131);
+            ATKMINNUD.Location = new System.Drawing.Point(122, 158);
             ATKMINNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
             ATKMINNUD.Name = "ATKMINNUD";
             ATKMINNUD.Size = new System.Drawing.Size(48, 25);
@@ -803,7 +803,7 @@ namespace WangPluginPkm.GUI
             // 
             // HPMINNUD
             // 
-            HPMINNUD.Location = new System.Drawing.Point(71, 130);
+            HPMINNUD.Location = new System.Drawing.Point(62, 157);
             HPMINNUD.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
             HPMINNUD.Name = "HPMINNUD";
             HPMINNUD.Size = new System.Drawing.Size(54, 25);
@@ -812,7 +812,7 @@ namespace WangPluginPkm.GUI
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(362, 107);
+            label8.Location = new System.Drawing.Point(353, 134);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(39, 15);
             label8.TabIndex = 63;
@@ -821,7 +821,7 @@ namespace WangPluginPkm.GUI
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new System.Drawing.Point(306, 107);
+            label10.Location = new System.Drawing.Point(297, 134);
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(39, 15);
             label10.TabIndex = 62;
@@ -830,7 +830,7 @@ namespace WangPluginPkm.GUI
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new System.Drawing.Point(244, 107);
+            label11.Location = new System.Drawing.Point(235, 134);
             label11.Name = "label11";
             label11.Size = new System.Drawing.Size(39, 15);
             label11.TabIndex = 61;
@@ -839,7 +839,7 @@ namespace WangPluginPkm.GUI
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new System.Drawing.Point(185, 107);
+            label12.Location = new System.Drawing.Point(176, 134);
             label12.Name = "label12";
             label12.Size = new System.Drawing.Size(39, 15);
             label12.TabIndex = 60;
@@ -848,7 +848,7 @@ namespace WangPluginPkm.GUI
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new System.Drawing.Point(131, 107);
+            label13.Location = new System.Drawing.Point(122, 134);
             label13.Name = "label13";
             label13.Size = new System.Drawing.Size(39, 15);
             label13.TabIndex = 59;
@@ -857,7 +857,7 @@ namespace WangPluginPkm.GUI
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new System.Drawing.Point(71, 107);
+            label14.Location = new System.Drawing.Point(62, 134);
             label14.Name = "label14";
             label14.Size = new System.Drawing.Size(39, 15);
             label14.TabIndex = 58;
@@ -866,7 +866,7 @@ namespace WangPluginPkm.GUI
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new System.Drawing.Point(8, 163);
+            label15.Location = new System.Drawing.Point(-1, 190);
             label15.Name = "label15";
             label15.Size = new System.Drawing.Size(55, 15);
             label15.TabIndex = 57;
@@ -875,7 +875,7 @@ namespace WangPluginPkm.GUI
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new System.Drawing.Point(8, 134);
+            label16.Location = new System.Drawing.Point(-1, 161);
             label16.Name = "label16";
             label16.Size = new System.Drawing.Size(55, 15);
             label16.TabIndex = 56;

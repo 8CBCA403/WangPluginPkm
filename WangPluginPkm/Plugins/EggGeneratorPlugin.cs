@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using WangPluginPkm.GUI;
-
+using PKHeX.Core;
 namespace WangPluginPkm.Plugins
 {
     public class EggGeneratorPlugin : WangPluginPkm
@@ -11,21 +11,34 @@ namespace WangPluginPkm.Plugins
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {
-            var ctrl = new ToolStripMenuItem(Name)
+            if (SaveFileEditor.SAV.Version != GameVersion.PLA && SaveFileEditor.SAV.Version != GameVersion.ZA)
             {
-                Image = Properties.Resources.Egg
-            };
-            ctrl.Click += OpenForm;
-            ctrl.Name = "变蛋器/Egg Generator";
-            modmenu.DropDownItems.Add(ctrl);
+
+                var ctrl = new ToolStripMenuItem(Name)
+                {
+                    Image = Properties.Resources.Egg
+                };
+                ctrl.Click += OpenForm;
+                ctrl.Name = "变蛋器/Egg Generator";
+                modmenu.DropDownItems.Add(ctrl);
+            }
+            else
+                return;
 
         }
 
         private void OpenForm(object sender, EventArgs e)
         {
-
-            var form = new EggGeneratorUI(SaveFileEditor, PKMEditor);
-            form.Show();
+            if (SaveFileEditor.SAV.Version != GameVersion.PLA && SaveFileEditor.SAV.Version != GameVersion.ZA)
+            {
+                var form = new EggGeneratorUI(SaveFileEditor, PKMEditor);
+                form.Show();
+            }
+            else
+            {
+                MessageBox.Show("该存档版本不支持变蛋器功能。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
         }
     }
 }

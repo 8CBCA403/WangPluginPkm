@@ -58,7 +58,7 @@ namespace WangPluginPkm.GUI
             ForceStar,
         }
         private ShinyType selectedShiny = ShinyType.None;
-        private ShinyType s = ShinyType.None;
+    //    private ShinyType s = ShinyType.None;
         private MethodType RNGMethod = MethodType.None;
         private RNGService _rngService;
 
@@ -123,6 +123,13 @@ namespace WangPluginPkm.GUI
                 rules.Shiny = selectedShiny;
             };
             this.ShinyType_BOX.SelectedIndex = 0;
+         /*   this.ScomboBox.DataSource = Enum.GetNames(typeof(ShinyType));
+            this.ScomboBox.SelectedIndexChanged += (_, __) =>
+            {
+                s = (ShinyType)Enum.Parse(typeof(ShinyType), this.ScomboBox.SelectedItem.ToString(), false);
+                r.Shiny = s;
+            };*/
+           // this.ScomboBox.SelectedIndex = 0;
             if (SAV.SAV.Version is GameVersion.XD or GameVersion.COLO or GameVersion.CXD)
             {
                 this.TeamLockBox.Enabled = true;
@@ -1144,6 +1151,8 @@ namespace WangPluginPkm.GUI
             if (pk.Gender != (byte)r.G)
                 return false;
             if (pk.Nature != r.N)
+                return false;
+            if (!r.CheckShiny(r, pk))
                 return false;
             return true;
 

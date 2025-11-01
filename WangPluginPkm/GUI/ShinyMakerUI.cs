@@ -321,6 +321,11 @@ namespace WangPluginPkm.GUI
                     pkm.PID = ShinyPID(val);
                     CommonEdits.SetRandomEC(pkm);
                 }
+                if (VersionFlag.Gen9aFlag(val.Version))
+                {
+                    pkm.PID = ShinyPID(val);
+                    CommonEdits.SetRandomEC(pkm);
+                }
             }
             var la = new LegalityAnalysis(pkm);
             if (!la.Valid)

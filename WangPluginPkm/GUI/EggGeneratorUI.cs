@@ -240,7 +240,7 @@ namespace WangPluginPkm.GUI
                     pk.MetLocation = 0;
 
                 }
-                else if (pk.Gen8 == true)
+                else if (pk.Gen8 == true&&pk.Version!=GameVersion.PLA)
                 {
                     if (Ability_CheckBox.Checked)
                     {
@@ -276,7 +276,7 @@ namespace WangPluginPkm.GUI
                         pk.MetLocation = 65535;
                     }
                 }
-                else if (pk.Gen9 == true)
+                else if (pk.Gen9 == true&&SAV.SAV.Version!=GameVersion.ZA)
                 {
                     pk.IsNicknamed = true;
                     if (pk.Language == 10 || pk.Language == 9)
