@@ -45,6 +45,7 @@ namespace WangPluginPkm.RNG
  { MethodType.Gen5Wild, (ref PKM pk, uint s, byte f) => MethodsRNG.Gen5Wild.GenPkm(ref pk, s, _rules) },
  { MethodType.PokeWalker, (ref PKM pk, uint s, byte f) => MethodsRNG.PokeWalker.GenPkm(ref pk, _rules) },
  { MethodType.PokeSpot, (ref PKM pk, uint s, byte f) => MethodsRNG.PokeSpot.GenPkm(ref pk, s, _rules) },
+
  };
 
  _next32Map = new Dictionary<MethodType, Next32>

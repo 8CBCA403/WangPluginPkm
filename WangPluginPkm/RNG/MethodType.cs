@@ -26,7 +26,8 @@
         E_Reader,
         Overworld8,
         Roaming8b,
-        Lumiose
+        Lumiose,
+        Gift9a
         // Wild8b,
         // Overworld8a,
     }

@@ -1,5 +1,6 @@
 ﻿using PKHeX.Core;
 using PKHeX.Core.Searching;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -340,6 +341,8 @@ namespace WangPluginPkm
             }
             return null;
         }
+
+ 
     }
 }
 

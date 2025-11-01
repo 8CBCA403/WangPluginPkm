@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 using WangPluginPkm.PluginUtil.ModifyPKM;
 using WangPluginPkm.RNG.Methods;
 using WangPluginPkm.RNG.ReverseRNG;
@@ -19,8 +21,43 @@ namespace WangPluginPkm.GUI
 {
     public partial class RNGForm : Form
     {
+        public enum SearchGender : byte { Male = 0, Female = 1, Genderless = 2 }
+
+        public readonly struct PkmCriteria
+        {
+            public readonly int HP, ATK, DEF, SPA, SPD, SPE;
+            public readonly Nature Nature;
+            public readonly byte Gender;
+
+            public PkmCriteria(int hp, int atk, int def, int spa, int spd, int spe, Nature nature, SearchGender gender)
+            {
+                HP = hp; ATK = atk; DEF = def; SPA = spa; SPD = spd; SPE = spe;
+                Nature = nature;
+                Gender = (byte)gender;
+            }
+
+            public static PkmCriteria FromPKM(PKM pk)
+            => new PkmCriteria(pk.IV_HP, pk.IV_ATK, pk.IV_DEF, pk.IV_SPA, pk.IV_SPD, pk.IV_SPE, pk.Nature, (SearchGender)pk.Gender);
+
+            public bool Matches(PKM pk)
+            {
+                if (pk.IV_HP != HP) return false;
+                if (pk.IV_ATK != ATK) return false;
+                if (pk.IV_DEF != DEF) return false;
+                if (pk.IV_SPA != SPA) return false;
+                if (pk.IV_SPD != SPD) return false;
+                if (pk.IV_SPE != SPE) return false;
+                if (pk.Nature != Nature) return false;
+                if (pk.Gender != Gender) return false;
+                return true;
+            }
+
+            // implicit conversion from tuple (ints, Nature, SearchGender)
+            public static implicit operator PkmCriteria((int, int, int, int, int, int, Nature, SearchGender) t)
+            => new PkmCriteria(t.Item1, t.Item2, t.Item3, t.Item4, t.Item5, t.Item6, t.Item7, t.Item8);
+        }
+
         public CheckRules rules = new();
-        private int NumOfCountsPerThread = 1000; // 每个线程的计数数量
         private CancellationTokenSource SearchtokenSource = new();
         private CancellationTokenSource ChecktokenSource = new();
         private CancellationTokenSource cancellationToken = new CancellationTokenSource();
@@ -168,8 +205,8 @@ namespace WangPluginPkm.GUI
             }
         }
         #region //Search
-        private bool GenPkm(ref PKM pk, uint seed, byte form =0) => _rngService.GenPkm(ref pk, seed, form);
-        private bool GenPkm(ref PKM pk, ulong seed64, byte form =0) => _rngService.GenPkm(ref pk, seed64, form);
+        private bool GenPkm(ref PKM pk, uint seed, byte form = 0) => _rngService.GenPkm(ref pk, seed, form);
+        private bool GenPkm(ref PKM pk, ulong seed64, byte form = 0) => _rngService.GenPkm(ref pk, seed64, form);
         private uint NextSeed(uint seed) => _rngService.NextSeed(seed);
         private ulong NextSeed(ulong seed64) => _rngService.NextSeed(seed64);
         private void GeneratorIsRunning(bool running)
@@ -217,13 +254,13 @@ namespace WangPluginPkm.GUI
                 var initialSeed32 = seed;
                 var initialSeed64 = seed64;
                 // choose UI update interval:0 = no UI updates until finish (max speed), otherwise ms interval
-                int uiInterval =100;
+                int uiInterval = 100;
                 // if a checkbox named FastModeCheckBox exists and is checked, set interval to5 minutes (300000 ms)
-                try { if (this.Controls.Find("FastModeCheckBox", true).FirstOrDefault() is CheckBox cb && cb.Checked) uiInterval =300_000; } catch { }
+                try { if (this.Controls.Find("FastModeCheckBox", true).FirstOrDefault() is CheckBox cb && cb.Checked) uiInterval = 300_000; } catch { }
 
                 // target roughly50% CPU: use about half of logical processors as workers
-                int workers = Math.Max(1, (int)Math.Ceiling(Environment.ProcessorCount *0.5));
-                long lastDisplayedMs =0;
+                int workers = Math.Max(1, (int)Math.Ceiling(Environment.ProcessorCount * 0.5));
+                long lastDisplayedMs = 0;
 
                 // If fast mode, show initial0 minutes and initial seed immediately so user sees activity
                 bool fastMode = false;
@@ -238,6 +275,54 @@ namespace WangPluginPkm.GUI
                     StateBox.Text = "0 分钟";
                 }
 
+                // check traverse mode: both FastModeCheckBox and TraverseModeCheckBox must be checked
+                bool traverseMode = false;
+                try
+                {
+                    var tcb = this.Controls.Find("TraverseModeCheckBox", true).FirstOrDefault() as CheckBox;
+                    var fcb = this.Controls.Find("FastModeCheckBox", true).FirstOrDefault() as CheckBox;
+                    traverseMode = tcb != null && fcb != null && tcb.Checked && fcb.Checked;
+                }
+                catch { }
+
+                if (traverseMode)
+                {
+                    //选择输出文件
+                    string outPath = null;
+                    await InvokeAsync(() =>
+                    {
+                        using var sfd = new SaveFileDialog()
+                        {
+                            Filter = "Text Files|*.txt|All Files|*.*",
+                            FileName = "1.txt",
+                            Title = "Select output file for matching seeds"
+                        };
+                        if (sfd.ShowDialog(this) == DialogResult.OK)
+                            outPath = sfd.FileName;
+                    });
+
+                    if (string.IsNullOrEmpty(outPath))
+                    {
+                        // 用户取消保存对话框，继续常规搜索
+                    }
+                    else
+                    {
+                        // 启动遍历任务并返回（遍历过程中会响应取消）
+                        if (rules.Method is not MethodType.Lumiose)
+                        {
+                            await TraverseSeedsAsync(initialSeed32, token, outPath, uiInterval, workers);
+                        }
+                        else
+                        {
+                            await TraverseSeedsAsync(initialSeed64, token, outPath, uiInterval, workers);
+                        }
+
+                        await InvokeAsync(() => MessageBox.Show("遍历完成或已取消"));
+                        return;
+                    }
+                }
+
+                // 手动准备参数并调用搜索引擎
                 var engineResult = await RNGSearchEngine.RunSearchAsync(
  _rngService,
                     rules,
@@ -251,48 +336,48 @@ namespace WangPluginPkm.GUI
                     Check_Frame.Checked,
                     async (payload) => await InvokeAsync(() =>
  {
- // payload format: "<seedHex>|<elapsedMs>|<rate>"
-                    StateBox.Text = "正在查找...";
-                    try
-                    {
-                        var parts = payload.Split('|');
-                        var seedHex = parts.Length >0 ? parts[0] : "0";
-                        var elapsedMs = parts.Length >1 ? long.Parse(parts[1]) :0;
-                        // rate = parts[2] ignored here
-                        // only update display every uiInterval; engine already rate-limited
-                        SeedTB.Text = seedHex;
-                        // compute minutes passed rounded to nearest multiple of (uiInterval in ms)
-                        if (lastDisplayedMs ==0) lastDisplayedMs = elapsedMs;
-                        var delta = elapsedMs - lastDisplayedMs;
-                        // show minutes incrementing by uiInterval steps converted to minutes
-                        // if uiInterval is300000 (5 min), this yields0,5,10...
-                        // compute minutes as (elapsedMs /60000) rounded down to nearest multiple of (uiInterval/60000)
-                        long intervalMinutes =1;
-                        try
-                        {
-                            // attempt to read uiInterval from the FastModeCheckBox logic: if FastModeCheckBox checked we used300000
-                            var cb = this.Controls.Find("FastModeCheckBox", true).FirstOrDefault() as CheckBox;
-                            if (cb != null && cb.Checked) intervalMinutes =5;
-                            else intervalMinutes =0; //0 signals realtime; we'll display minutes as elapsed/60000
-                        }
-                        catch { intervalMinutes =0; }
+     // payload format: "<seedHex>|<elapsedMs>|<rate>"
+     StateBox.Text = "正在查找...";
+     try
+     {
+         var parts = payload.Split('|');
+         var seedHex = parts.Length > 0 ? parts[0] : "0";
+         var elapsedMs = parts.Length > 1 ? long.Parse(parts[1]) : 0;
+         // rate = parts[2] ignored here
+         // only update display every uiInterval; engine already rate-limited
+         SeedTB.Text = seedHex;
+         // compute minutes passed rounded to nearest multiple of (uiInterval in ms)
+         if (lastDisplayedMs == 0) lastDisplayedMs = elapsedMs;
+         var delta = elapsedMs - lastDisplayedMs;
+         // show minutes incrementing by uiInterval steps converted to minutes
+         // if uiInterval is300000 (5 min), this yields0,5,10...
+         // compute minutes as (elapsedMs /60000) rounded down to nearest multiple of (uiInterval/60000)
+         long intervalMinutes = 1;
+         try
+         {
+             // attempt to read uiInterval from the FastModeCheckBox logic: if FastModeCheckBox checked we used300000
+             var cb = this.Controls.Find("FastModeCheckBox", true).FirstOrDefault() as CheckBox;
+             if (cb != null && cb.Checked) intervalMinutes = 5;
+             else intervalMinutes = 0; //0 signals realtime; we'll display minutes as elapsed/60000
+         }
+         catch { intervalMinutes = 0; }
 
-                        if (intervalMinutes >0)
-                        {
-                            long mins = (elapsedMs /60000) / intervalMinutes * intervalMinutes;
-                            StateBox.Text = $"{mins} 分钟";
-                        }
-                        else
-                        {
-                            long mins = elapsedMs /60000;
-                            StateBox.Text = $"{mins} 分钟";
-                        }
-                    }
-                    catch
-                    {
-                        SeedTB.Text = payload;
-                    }
-                }),
+         if (intervalMinutes > 0)
+         {
+             long mins = (elapsedMs / 60000) / intervalMinutes * intervalMinutes;
+             StateBox.Text = $"{mins} 分钟";
+         }
+         else
+         {
+             long mins = elapsedMs / 60000;
+             StateBox.Text = $"{mins} 分钟";
+         }
+     }
+     catch
+     {
+         SeedTB.Text = payload;
+     }
+ }),
  token,
  uiInterval,
  workers);
@@ -342,6 +427,107 @@ namespace WangPluginPkm.GUI
                 }));
                 return tcs.Task;
             }
+        }
+
+        // Traverse implementations: uint and ulong with multi-worker and time-based UI updates
+        private async Task TraverseSeedsAsync(uint startSeed, CancellationToken token, string outputPath, int uiIntervalMs, int workers)
+        {
+            await Task.Run(async () =>
+            {
+                object fileLock = new();
+                // single stream for append
+                using var fs = new FileStream(outputPath, FileMode.Append, FileAccess.Write, FileShare.Read);
+                using var sw = new StreamWriter(fs);
+                var watch = Stopwatch.StartNew();
+                long lastUpdate = 0;
+
+                var tasks = new List<Task>(workers);
+                for (int w = 0; w < workers; w++)
+                {
+                    int workerIndex = w;
+                    tasks.Add(Task.Run(() =>
+                    {
+                        // each worker steps by 'workers'
+                        for (ulong cur = (ulong)startSeed + (uint)workerIndex; cur <= uint.MaxValue; cur += (uint)workers)
+                        {
+                            token.ThrowIfCancellationRequested();
+                            uint s = (uint)cur;
+                            var pk = Editor.Data.Clone();
+                            bool ok = false;
+                            try { ok = GenPkm(ref pk, s, pk.Form); } catch { }
+                            if (ok)
+                            {
+                                lock (fileLock)
+                                {
+                                    sw.WriteLine(s.ToString("X8"));
+                                    sw.Flush();
+                                }
+                            }
+
+                            if (watch.ElapsedMilliseconds - lastUpdate >= uiIntervalMs)
+                            {
+                                lastUpdate = watch.ElapsedMilliseconds;
+                                try { Invoke(new Action(() => SeedTB.Text = s.ToString("X8"))); } catch { }
+                            }
+
+                            // break condition if next step would overflow
+                            if (uint.MaxValue - (uint)workers < (uint)cur) break;
+                        }
+                    }, token));
+                }
+
+                await Task.WhenAll(tasks);
+            }, token);
+        }
+
+        private async Task TraverseSeedsAsync(ulong startSeed, CancellationToken token, string outputPath, int uiIntervalMs, int workers)
+        {
+            await Task.Run(async () =>
+            {
+                object fileLock = new();
+                using var fs = new FileStream(outputPath, FileMode.Append, FileAccess.Write, FileShare.Read);
+                using var sw = new StreamWriter(fs);
+                var watch = Stopwatch.StartNew();
+                long lastUpdate = 0;
+
+                var tasks = new List<Task>(workers);
+                for (int w = 0; w < workers; w++)
+                {
+                    int workerIndex = w;
+                    tasks.Add(Task.Run(() =>
+                    {
+                        // step by workers; detect wrap-around
+                        ulong cur = startSeed + (ulong)workerIndex;
+                        while (true)
+                        {
+                            if (cur < startSeed && cur != startSeed) break; // wrapped
+                            token.ThrowIfCancellationRequested();
+                            var pk = Editor.Data.Clone();
+                            bool ok = false;
+                            try { ok = GenPkm(ref pk, cur, pk.Form); } catch { }
+                            if (ok)
+                            {
+                                lock (fileLock)
+                                {
+                                    sw.WriteLine(cur.ToString("X16"));
+                                    sw.Flush();
+                                }
+                            }
+
+                            if (watch.ElapsedMilliseconds - lastUpdate >= uiIntervalMs)
+                            {
+                                lastUpdate = watch.ElapsedMilliseconds;
+                                try { Invoke(new Action(() => SeedTB.Text = cur.ToString("X16"))); } catch { }
+                            }
+
+                            if (ulong.MaxValue - (ulong)workers < cur) break; // next add would overflow
+                            cur += (ulong)workers;
+                        }
+                    }, token));
+                }
+
+                await Task.WhenAll(tasks);
+            }, token);
         }
 
         private async void Cancel_Click(object sender, EventArgs e)
@@ -499,18 +685,18 @@ namespace WangPluginPkm.GUI
         private void ReverseCheck_BTN_Click(object sender, EventArgs e)
         {
             Span<uint> Seeds = stackalloc uint[6];
-            uint EC =0;
-            uint PID =0;
-            uint hp =0;
-            uint atk =0;
-            uint def =0;
-            uint spa =0;
-            uint spd =0;
-            uint spe =0;
+            uint EC = 0;
+            uint PID = 0;
+            uint hp = 0;
+            uint atk = 0;
+            uint def = 0;
+            uint spa = 0;
+            uint spd = 0;
+            uint spe = 0;
             Span<string> s = new();
             var PIDHEX = "0x" + PIDBox.Text;
             var IVString = IVTextBox.Text;
-            if (IVString.Length !=0)
+            if (IVString.Length != 0)
             {
                 s = IVString.Split(',');
                 hp = Convert.ToUInt16(s[0]);
@@ -526,7 +712,7 @@ namespace WangPluginPkm.GUI
             var ECHEX = "0x" + ECBox.Text;
             if (ECHEX != "0x")
                 EC = Convert.ToUInt32(ECHEX, 16);
-            uint seed =0;
+            uint seed = 0;
 
             uint[] resultSeeds = Array.Empty<uint>();
 
@@ -539,14 +725,14 @@ namespace WangPluginPkm.GUI
             {
                 var ivSeeds = GetSeedsByIV(hp, atk, def, spa, spd, spe);
                 // if both checks enabled, merge unique non-zero seeds
-                resultSeeds = resultSeeds.Length ==0 ? ivSeeds : resultSeeds.Concat(ivSeeds).Where(v => v !=0).Distinct().ToArray();
+                resultSeeds = resultSeeds.Length == 0 ? ivSeeds : resultSeeds.Concat(ivSeeds).Where(v => v != 0).Distinct().ToArray();
             }
 
-            if (resultSeeds.Length !=0)
+            if (resultSeeds.Length != 0)
             {
                 SeedBox.Clear();
                 var r = PrintSeed(resultSeeds, seed).Split('\n');
-                for (int i =0; i < r.Length; i++)
+                for (int i = 0; i < r.Length; i++)
                     SeedBox.AppendText($"{r[i]}" + Environment.NewLine);
             }
         }
@@ -570,8 +756,8 @@ namespace WangPluginPkm.GUI
                     break;
                 case "XDColo":
                     XDRNGReversal.GetSeeds(arr.AsSpan(), PID);
-                    for (int i =0; i < arr.Length; i++)
-                        if (arr[i] !=0)
+                    for (int i = 0; i < arr.Length; i++)
+                        if (arr[i] != 0)
                             arr[i] = XDRNG.Prev3(arr[i]);
                     break;
                 case "Overworld8":
@@ -582,7 +768,7 @@ namespace WangPluginPkm.GUI
                     return Array.Empty<uint>();
             }
 
-            return arr.Where(val => val !=0).ToArray();
+            return arr.Where(val => val != 0).ToArray();
         }
 
         private uint[] GetSeedsByIV(uint hp, uint atk, uint def, uint spa, uint spd, uint spe)
@@ -592,20 +778,20 @@ namespace WangPluginPkm.GUI
             {
                 case "M1":
                     LCRNGReversal.GetSeedsIVs(arr.AsSpan(), hp, atk, def, spa, spd, spe);
-                    for (int i =0; i < arr.Length; i++)
-                        if (arr[i] !=0)
+                    for (int i = 0; i < arr.Length; i++)
+                        if (arr[i] != 0)
                             arr[i] = LCRNG.Prev2(arr[i]);
                     break;
                 case "M23":
                     LCRNGReversal.GetSeedsIVs(arr.AsSpan(), hp, atk, def, spa, spd, spe);
-                    for (int i =0; i < arr.Length; i++)
-                        if (arr[i] !=0)
+                    for (int i = 0; i < arr.Length; i++)
+                        if (arr[i] != 0)
                             arr[i] = LCRNG.Prev3(arr[i]);
                     break;
                 case "M4":
                     LCRNGReversalSkip.GetSeedsIVs(arr.AsSpan(), hp, atk, def, spa, spd, spe);
-                    for (int i =0; i < arr.Length; i++)
-                        if (arr[i] !=0)
+                    for (int i = 0; i < arr.Length; i++)
+                        if (arr[i] != 0)
                             arr[i] = LCRNG.Prev3(arr[i]);
                     break;
                 case "XDColo":
@@ -615,19 +801,19 @@ namespace WangPluginPkm.GUI
                     return Array.Empty<uint>();
             }
 
-            return arr.Where(val => val !=0).ToArray();
+            return arr.Where(val => val != 0).ToArray();
         }
-        private string PrintSeed(uint[] seeds, uint seed =0)
+        private string PrintSeed(uint[] seeds, uint seed = 0)
         {
             string result = "";
-            if (seeds.Length !=0 && MD.Value != "Overworld8" && MD.Value != "Tera9")
+            if (seeds.Length != 0 && MD.Value != "Overworld8" && MD.Value != "Tera9")
             {
-                for (int i =0; i < seeds.Length; i++)
+                for (int i = 0; i < seeds.Length; i++)
                 {
                     result += seeds[i].ToString("X") + '\n';
                 }
             }
-            else if (seed !=0 && (MD.Value is "Overworld8" or "Tera9"))
+            else if (seed != 0 && (MD.Value is "Overworld8" or "Tera9"))
             {
                 result = seed.ToString("X");
             }
@@ -695,102 +881,101 @@ namespace WangPluginPkm.GUI
             }
             Editor.PopulateFields(pk);
         }
-           private void CheckTeraSeed_BTN_Click(object sender, EventArgs e)
-           {
-               var pk = (PK9)Editor.Data;
-               byte num5 = 0;
-               switch (Gen9GanderValue)
-               {
-                   case 0:
-                       num5 = 0;
-                       break;
-                   case 1:
-                       num5 = 31;
-                       break;
-                   case 2:
-                       num5 = 63;
-                       break;
-                   case 3:
-                       num5 = 127;
-                       break;
-                   case 4:
-                       num5 = 191;
-                       break;
-                   case 5:
-                       num5 = 225;
-                       break;
-                   case 6:
-                       num5 = 254;
-                       break;
-                   case 7:
-                       num5 = 255;
-                       break;
-               }
-               GenerateParam9 enc = new()
-               {
-                   Species = pk.Species,
-                   GenderRatio = num5,
-                   Ability = (AbilityPermission)(Gen9AbilityValue - 1),
-                   Nature = (Nature)pk.Nature,
-                   FlawlessIVs = (byte)Gen9MinIV,
-                   ScaleType = SizeType9.RANDOM,
-                   Scale = 0,
-                   Weight = 0,
-                   Height = 0,
-                   RollCount = 1,
-                   Shiny = Shiny.Random,
-                   IVs = new IndividualValueSet()
-                   {
-                       HP = (sbyte)pk.IV_HP,
-                       ATK = (sbyte)pk.IV_ATK,
-                       DEF = (sbyte)pk.IV_DEF,
-                       SPA = (sbyte)pk.IV_SPA,
-                       SPD = (sbyte)pk.IV_SPD,
-                       SPE = (sbyte)pk.IV_SPE,
-                   }
-
-               };
-               var seed = Tera9RNG.GetOriginalSeed(pk);
-               var value = RNG.Methods.Encounter9RNG.SeedToValue(pk, enc, EncounterCriteria.Unrestricted, seed);
-               string GenderText = "";
-               string AbilityText = "";
-               TeraSeedBox.Text = $"{seed:X8}";
-               txtEC.Text = $"{value.EncryptionConstant:X8}";
-               txtPID.Text = $"{value.PID:X8}";
-               cmbNature.Text = $"{((Nature)value.Nature).ToString()}";
-               numHeight.Value = value.HeightScalar;
-               numWeight.Value = value.WeightScalar;
-               numScale.Value = value.Scale;
-               Span<int> ivs = stackalloc int[6];
-               value.GetIVs(ivs);
-               IVstextBox.Text = $"{ivs[0]}, {ivs[1]}, {ivs[2]}, {ivs[3]}, {ivs[4]}, {ivs[5]}";
-               switch (value.Gender)
-               {
-                   case 0:
-                       GenderText = "公";
-                       break;
-                   case 1:
-                       GenderText = "母";
-                       break;
-                   case 2:
-                       GenderText = "无性别";
-                       break;
-               }
-               GendertextBox.Text = $"{GenderText}";
-               switch (value.Ability)
-               {
-                   case 1:
-                       AbilityText = "特性一";
-                       break;
-                   case 2:
-                       AbilityText = "特性二";
-                       break;
-                   case 4:
-                       AbilityText = "梦特";
-                       break;
-               }
-               AbilitytextBox.Text = $"{AbilityText}";
-           }
+        private void CheckTeraSeed_BTN_Click(object sender, EventArgs e)
+        {
+            var pk = (PK9)Editor.Data;
+            byte num5 = 0;
+            switch (Gen9GanderValue)
+            {
+                case 0:
+                    num5 = 0;
+                    break;
+                case 1:
+                    num5 = 31;
+                    break;
+                case 2:
+                    num5 = 63;
+                    break;
+                case 3:
+                    num5 = 127;
+                    break;
+                case 4:
+                    num5 = 191;
+                    break;
+                case 5:
+                    num5 = 225;
+                    break;
+                case 6:
+                    num5 = 254;
+                    break;
+                case 7:
+                    num5 = 255;
+                    break;
+            }
+            GenerateParam9 enc = new()
+            {
+                Species = pk.Species,
+                GenderRatio = num5,
+                Ability = (AbilityPermission)(Gen9AbilityValue - 1),
+                Nature = (Nature)pk.Nature,
+                FlawlessIVs = (byte)Gen9MinIV,
+                ScaleType = SizeType9.RANDOM,
+                Scale = 0,
+                Weight = 0,
+                Height = 0,
+                RollCount = 1,
+                Shiny = Shiny.Random,
+                IVs = new IndividualValueSet()
+                {
+                    HP = (sbyte)pk.IV_HP,
+                    ATK = (sbyte)pk.IV_ATK,
+                    DEF = (sbyte)pk.IV_DEF,
+                    SPA = (sbyte)pk.IV_SPA,
+                    SPD = (sbyte)pk.IV_SPD,
+                    SPE = (sbyte)pk.IV_SPE,
+                }
+            };
+            var seed = Tera9RNG.GetOriginalSeed(pk);
+            var value = RNG.Methods.Encounter9RNG.SeedToValue(pk, enc, EncounterCriteria.Unrestricted, seed);
+            string GenderText = "";
+            string AbilityText = "";
+            TeraSeedBox.Text = $"{seed:X8}";
+            txtEC.Text = $"{value.EncryptionConstant:X8}";
+            txtPID.Text = $"{value.PID:X8}";
+            cmbNature.Text = $"{((Nature)value.Nature).ToString()}";
+            numHeight.Value = value.HeightScalar;
+            numWeight.Value = value.WeightScalar;
+            numScale.Value = value.Scale;
+            Span<int> ivs = stackalloc int[6];
+            value.GetIVs(ivs);
+            IVstextBox.Text = $"{ivs[0]}, {ivs[1]}, {ivs[2]}, {ivs[3]}, {ivs[4]}, {ivs[5]}";
+            switch (value.Gender)
+            {
+                case 0:
+                    GenderText = "公";
+                    break;
+                case 1:
+                    GenderText = "母";
+                    break;
+                case 2:
+                    GenderText = "无性别";
+                    break;
+            }
+            GendertextBox.Text = $"{GenderText}";
+            switch (value.Ability)
+            {
+                case 1:
+                    AbilityText = "特性一";
+                    break;
+                case 2:
+                    AbilityText = "特性二";
+                    break;
+                case 4:
+                    AbilityText = "梦特";
+                    break;
+            }
+            AbilitytextBox.Text = $"{AbilityText}";
+        }
         #endregion
         //Help
         private void ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -807,100 +992,6 @@ namespace WangPluginPkm.GUI
             var pkm = Editor.Data;
             GenPkm(ref pkm, vOut);
             IVCheckBox.Text = $"{pkm.IV_HP}/{pkm.IV_ATK}/{pkm.IV_DEF}/{pkm.IV_SPA}/{pkm.IV_SPD}/{pkm.IV_SPE}";
-        }
-        private void Start_BTN_Click(object sender, EventArgs e)
-        {
-            if (!Int32.TryParse(StepBox.Text, out NumOfCountsPerThread))
-            {
-                MessageBox.Show("步数不合法");
-                return;
-            }
-            cancellationToken = new CancellationTokenSource(); // 重置CancellationTokenSource以便于新的运行
-            int threadnumber = (int)ThreadNumber.Value;
-            panelBox.Controls.Clear(); // Clear existing controls
-
-            int numOfTextBoxes = threadnumber;
-            for (int i = 0; i < numOfTextBoxes; i++)
-            {
-                FlowLayoutPanel panel = new FlowLayoutPanel();
-                panel.AutoSize = true;
-                panel.FlowDirection = FlowDirection.TopDown;
-                CheckedListBox newCheckedListBox = new CheckedListBox();
-                newCheckedListBox.Height = 100;
-                newCheckedListBox.Width = 150;
-                newCheckedListBox.DisplayMember = "DisplayText";
-                newCheckedListBox.ItemCheck += CheckedListBox_ItemCheck; // register handler on UI thread
-                System.Windows.Forms.ProgressBar newProgressBar = new System.Windows.Forms.ProgressBar();
-                newProgressBar.Minimum = 0;
-                newProgressBar.Maximum = NumOfCountsPerThread;
-                newProgressBar.Width = 150;
-                panel.Controls.Add(newCheckedListBox);
-                panel.Controls.Add(newProgressBar);
-
-                panelBox.Controls.Add(panel);
-            }
-
-
-            // start tasks instead of raw threads
-            for (int i = 0; i < numOfTextBoxes; i++)
-            {
-                int threadIndex = i;
-                _ = Task.Run(() => PerformCountingAsync(threadIndex, cancellationToken.Token));
-            }
-        }
-
-        private async Task PerformCountingAsync(int threadIndex, CancellationToken ct)
-        {
-            if (!Int32.TryParse(StepBox.Text, out NumOfCountsPerThread))
-            {
-                Invoke(new Action(() => MessageBox.Show("步数不合法")));
-                return;
-            }
-
-            if (threadIndex < 0 || threadIndex >= panelBox.Controls.Count)
-                return;
-
-            FlowLayoutPanel panel = (FlowLayoutPanel)panelBox.Controls[threadIndex];
-            System.Windows.Forms.ProgressBar progressBar = (System.Windows.Forms.ProgressBar)panel.Controls[1];
-            System.Windows.Forms.CheckedListBox checkedList = (System.Windows.Forms.CheckedListBox)panel.Controls[0];
-
-            int n = 0;
-            uint start = (uint)(threadIndex * NumOfCountsPerThread + 1);
-            uint end = (uint)((threadIndex + 1) * NumOfCountsPerThread);
-
-            for (uint count = start; count <= end; count++)
-            {
-                ct.ThrowIfCancellationRequested();
-
-                var seed = count; // Prepare data for this iteration
-
-                // Run generation on threadpool to avoid UI freeze
-                var ok = await Task.Run(() =>
-                {
-                    var pk = Editor.Data.Clone(); // Assume Clone creates a new instance
-                    if (GenPkm(ref pk, seed, pk.Form))
-                        return (true, pk);
-                    return (false, (PKM)null);
-                }, ct);
-
-                if (ok.Item1)
-                {
-                    Invoke(new Action(() =>
-                    {
-                        PKwithName item = new PKwithName(ok.Item2);
-                        checkedList.Items.Add(item); // add wrapped object
-                        progressBar.Value = Math.Min(++n, progressBar.Maximum); // Update progress bar
-                    }));
-                }
-                else
-                {
-                    // still update progress even if not found
-                    Invoke(new Action(() => progressBar.Value = Math.Min(++n, progressBar.Maximum)));
-                }
-
-                // optional tiny yield to keep UI responsive
-                await Task.Yield();
-            }
         }
 
         private void CheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -924,6 +1015,124 @@ namespace WangPluginPkm.GUI
             {
                 cancellationToken.Cancel(); //发送取消请求
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            if (SearchtokenSource != null && !SearchtokenSource.IsCancellationRequested)
+            {
+                SearchtokenSource.Cancel();
+                GeneratorIsRunning(false);
+                return;
+            }
+
+            // Disable the button so user knows search is running
+            if (!IsHandleCreated || !InvokeRequired)
+            {
+                button1.Enabled = false;
+            }
+            else
+            {
+                BeginInvoke(new MethodInvoker(() => button1.Enabled = false));
+            }
+
+            GeneratorIsRunning(true);
+            SearchtokenSource = new CancellationTokenSource();
+            var token = SearchtokenSource.Token;
+            PkmCriteria criteria = (31, 0, 31, 31, 31, 31, Nature.Modest, SearchGender.Female);
+
+            _ = Task.Run(() =>
+            {
+                try
+                {
+                    int workers = Math.Max(1, (int)Math.Ceiling(Environment.ProcessorCount * 0.5));
+                    var tasks = new List<Task>(workers);
+
+                    for (int w = 0; w < workers; w++)
+                    {
+                        int workerId = w;
+                        tasks.Add(Task.Run(() =>
+                     {
+                try
+                {
+                    while (!token.IsCancellationRequested)
+                    {
+                                 // Call the provided SearchDatabase method to obtain a PKM candidate
+                        var candidate = SearchDatabase.SearchPKM(SAV, Editor, 152, (int)GameVersion.ZA);
+                        if (candidate is null)
+                        {
+                                     // small delay to avoid tight loop if DB returns null frequently
+                            Thread.Sleep(10);
+                            continue;
+                        }
+
+                                 // Validate criteria
+                        if (criteria.Matches(candidate))
+                        {
+                                     // Populate UI and notify user on UI thread
+                            if (!IsHandleCreated || !InvokeRequired)
+                            {
+                                Editor.PopulateFields(candidate, false);
+                                MessageBox.Show("Success！", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                BeginInvoke(new MethodInvoker(() =>
+                             {
+                Editor.PopulateFields(candidate, false);
+                MessageBox.Show("Success！", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }));
+                            }
+
+                                     // stop all workers by cancelling token
+                            try { SearchtokenSource.Cancel(); } catch { }
+                            break;
+                        }
+                                 // no sleep here to keep CPU usage higher; worker count is half of logical processors so roughly50% CPU
+                    }
+                }
+                catch (OperationCanceledException) { }
+                catch { }
+            }, token));
+                    }
+
+                    Task.WaitAll(tasks.ToArray());
+                }
+                catch (OperationCanceledException) { }
+                catch { }
+                finally
+                {
+                    // Re-enable controls on UI thread
+                    if (!IsHandleCreated || !InvokeRequired)
+                    {
+                        button1.Enabled = true;
+                        GeneratorIsRunning(false);
+                        StateBox.Text = "Stop";
+                    }
+                    else
+                    {
+                        BeginInvoke(new MethodInvoker(() =>
+                     {
+                button1.Enabled = true;
+                GeneratorIsRunning(false);
+                StateBox.Text = "Stop";
+            }));
+                    }
+                }
+            }, token);
+        }
+
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            if (SearchtokenSource != null && !SearchtokenSource.IsCancellationRequested)
+            {
+                try { SearchtokenSource.Cancel(); } catch { }
+                await Task.Delay(100);
+                try { StateBox.Text = "Stop"; } catch { }
+            }
+            try { button1.Enabled = true; } catch { }
+            GeneratorIsRunning(false);
         }
     }
 }

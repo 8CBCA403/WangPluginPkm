@@ -250,9 +250,6 @@ namespace WangPluginPkm.RNG
  ulong local64 = initSeed64 + (ulong)workerId;
  uint local = initSeed32 + (uint)workerId;
 
- // define max
- ulong max64 = ulong.MaxValue;
- uint max32 = uint.MaxValue;
 
  // If using seedList, we'll dequeue; else iterate sequentially
  while (!localToken.IsCancellationRequested && !tcs.Task.IsCompleted)
