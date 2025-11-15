@@ -903,7 +903,7 @@ namespace WangPluginPkm.GUI
             // 
             // CalcBTN
             // 
-            CalcBTN.Location = new System.Drawing.Point(64, 217);
+            CalcBTN.Location = new System.Drawing.Point(64, 230);
             CalcBTN.Name = "CalcBTN";
             CalcBTN.Size = new System.Drawing.Size(114, 25);
             CalcBTN.TabIndex = 49;
@@ -914,7 +914,7 @@ namespace WangPluginPkm.GUI
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(184, 193);
+            label7.Location = new System.Drawing.Point(203, 193);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(23, 15);
             label7.TabIndex = 48;
@@ -931,7 +931,7 @@ namespace WangPluginPkm.GUI
             // 
             // IVCheckBox
             // 
-            IVCheckBox.Location = new System.Drawing.Point(207, 190);
+            IVCheckBox.Location = new System.Drawing.Point(232, 190);
             IVCheckBox.Name = "IVCheckBox";
             IVCheckBox.Size = new System.Drawing.Size(124, 25);
             IVCheckBox.TabIndex = 46;
@@ -1117,7 +1117,7 @@ namespace WangPluginPkm.GUI
             // IVBox
             // 
             IVBox.AutoSize = true;
-            IVBox.Location = new System.Drawing.Point(39, 72);
+            IVBox.Location = new System.Drawing.Point(51, 72);
             IVBox.Name = "IVBox";
             IVBox.Size = new System.Drawing.Size(23, 15);
             IVBox.TabIndex = 43;
@@ -1126,7 +1126,7 @@ namespace WangPluginPkm.GUI
             // IVTextBox
             // 
             IVTextBox.Enabled = false;
-            IVTextBox.Location = new System.Drawing.Point(65, 69);
+            IVTextBox.Location = new System.Drawing.Point(73, 69);
             IVTextBox.Name = "IVTextBox";
             IVTextBox.Size = new System.Drawing.Size(124, 25);
             IVTextBox.TabIndex = 42;
@@ -1178,7 +1178,7 @@ namespace WangPluginPkm.GUI
             // Mod_ComboBox
             // 
             Mod_ComboBox.FormattingEnabled = true;
-            Mod_ComboBox.Location = new System.Drawing.Point(64, 35);
+            Mod_ComboBox.Location = new System.Drawing.Point(73, 37);
             Mod_ComboBox.Name = "Mod_ComboBox";
             Mod_ComboBox.Size = new System.Drawing.Size(124, 23);
             Mod_ComboBox.TabIndex = 37;
@@ -1225,7 +1225,7 @@ namespace WangPluginPkm.GUI
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new System.Drawing.Point(29, 193);
+            label9.Location = new System.Drawing.Point(19, 193);
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(39, 15);
             label9.TabIndex = 50;

@@ -1,5 +1,4 @@
-﻿
-using PKHeX.Core;
+﻿using PKHeX.Core;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,7 +11,6 @@ using WangPluginPkm.PluginUtil.AchieveBase.SpecificForm;
 using WangPluginPkm.PluginUtil.DexBase;
 using WangPluginPkm.PluginUtil.MeerkatBase;
 using WangPluginPkm.SortBase;
-using static System.Resources.ResXFileRef;
 using static WangPluginPkm.PluginUtil.Functions.DexBuildFunctions;
 using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 
@@ -21,15 +19,15 @@ namespace WangPluginPkm.GUI
     partial class DexBuildForm : Form
     {
         public static GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
-        private static Random rand = new Random();
-        public static Stopwatch sw = new();
-        private SoundPlayer Player = new SoundPlayer();
-        public VersionClass version = new VersionClass
+        private static readonly Random rand = new();
+        public static readonly Stopwatch sw = new();
+        private readonly SoundPlayer Player = new();
+        public VersionClass version = new()
         {
             Name = "按照全国图鉴顺序",
             Version = "National",
         };
-        public DexModClass mod = new DexModClass
+        public DexModClass mod = new()
         {
             Name = "无",
             Value = "None",
@@ -58,7 +56,7 @@ namespace WangPluginPkm.GUI
                 this.GenderBox.DataSource = Enum.GetNames(typeof(DexFormOTGender));
                 this.LanguageBox.SelectedIndexChanged += (_, __) =>
                 {
-                    type7 = (DexFormLanguage7)Enum.Parse(typeof(DexFormLanguage7), this.LanguageBox.SelectedItem.ToString(), false);
+                    type7 = (DexFormLanguage7)Enum.Parse(typeof(DexFormLanguage7), this.LanguageBox.SelectedItem!.ToString()!, false);
                 };
             }
             else
@@ -67,13 +65,13 @@ namespace WangPluginPkm.GUI
                 this.GenderBox.DataSource = Enum.GetNames(typeof(DexFormOTGender));
                 this.LanguageBox.SelectedIndexChanged += (_, __) =>
                 {
-                    type5 = (DexFormLanguage5)Enum.Parse(typeof(DexFormLanguage5), this.LanguageBox.SelectedItem.ToString(), false);
+                    type5 = (DexFormLanguage5)Enum.Parse(typeof(DexFormLanguage5), this.LanguageBox.SelectedItem!.ToString()!, false);
                 };
 
             }
             this.GenderBox.SelectedIndexChanged += (_, __) =>
             {
-                typeG = (DexFormOTGender)Enum.Parse(typeof(DexFormOTGender), this.GenderBox.SelectedItem.ToString(), false);
+                typeG = (DexFormOTGender)Enum.Parse(typeof(DexFormOTGender), this.GenderBox.SelectedItem!.ToString()!, false);
             };
             this.LanguageBox.SelectedIndex = 0;
             this.GenderBox.SelectedIndex = 0;
@@ -85,7 +83,7 @@ namespace WangPluginPkm.GUI
             SortBox.ValueMember = "Version";
             this.SortBox.SelectedIndexChanged += (_, __) =>
             {
-                version = (VersionClass)this.SortBox.SelectedItem;
+                version = (VersionClass)this.SortBox.SelectedItem!;
             };
 
             ML = DexModClass.DexModList(sav);
@@ -99,15 +97,8 @@ namespace WangPluginPkm.GUI
             FormAndSubDex_BTN.Enabled = false;
             this.Mod_Select_Box.SelectedIndexChanged += (_, __) =>
             {
-                mod = (DexModClass)this.Mod_Select_Box.SelectedItem;
-                if (mod.Value == "None")
-                {
-                    FormAndSubDex_BTN.Enabled = false;
-                }
-                else
-                {
-                    FormAndSubDex_BTN.Enabled = true;
-                }
+                mod = (DexModClass)this.Mod_Select_Box.SelectedItem!;
+                FormAndSubDex_BTN.Enabled = mod.Value != "None";
             };
             this.AchieveGen_BTN.Enabled = true;
             this.AchieveCheck_BTN.Enabled = false;
@@ -189,45 +180,65 @@ namespace WangPluginPkm.GUI
         }
         public void SetID(PKM pkm)
         {
-            var T = pkm.TID16;
-            var S = pkm.SID16;
-            var N = pkm.OriginalTrainerName;
-            var TID16 = uint.Parse(TID16Box.Text);
-            var SID16 = uint.Parse(SID16Box.Text);
-            var Name = OriginalTrainerName.Text;
+            // Preserve original in case we need to revert
+            var original = new
+            {
+                pkm.TID16,
+                pkm.SID16,
+                pkm.TrainerTID7,
+                pkm.TrainerSID7,
+                pkm.OriginalTrainerName,
+                pkm.Language,
+                pkm.OriginalTrainerGender
+            };
+
+            uint tidParsed = 0, sidParsed = 0;
+            _ = uint.TryParse(TID16Box.Text, out tidParsed);
+            _ = uint.TryParse(SID16Box.Text, out sidParsed);
+            var name = OriginalTrainerName.Text ?? string.Empty;
+
             if (VersionFlag.ID7Flag(SAV.SAV.Version))
                 pkm.Language = GetLanguageBox7(type7);
-
             else
                 pkm.Language = GetLanguageBox5(type5);
-            pkm.OriginalTrainerName = Name;
-            pkm.ClearNickname();
+
+            pkm.OriginalTrainerName = name;
+
             if (VersionFlag.ID7Flag(SAV.SAV.Version))
             {
-                pkm.TrainerTID7 = TID16;
-                pkm.TrainerSID7 = SID16;
-                pkm.ClearNickname();
+                pkm.TrainerTID7 = tidParsed;
+                pkm.TrainerSID7 = sidParsed;
             }
             else
             {
-                pkm.TID16 = (ushort)TID16;
-                pkm.SID16 = (ushort)SID16;
-                pkm.ClearNickname();
-
+                pkm.TID16 = (ushort)tidParsed;
+                pkm.SID16 = (ushort)sidParsed;
             }
+
             var la = new LegalityAnalysis(pkm);
             if (la.Valid)
             {
                 pkm.OriginalTrainerGender = (byte)GetGender(typeG);
-                pkm.ClearNickname();
             }
             else
             {
-                pkm.TID16 = T;
-                pkm.SID16 = S;
-                pkm.OriginalTrainerName = N;
-                pkm.ClearNickname();
+                // Revert all changes
+                if (VersionFlag.ID7Flag(SAV.SAV.Version))
+                {
+                    pkm.TrainerTID7 = original.TrainerTID7;
+                    pkm.TrainerSID7 = original.TrainerSID7;
+                }
+                else
+                {
+                    pkm.TID16 = original.TID16;
+                    pkm.SID16 = original.SID16;
+                }
+                pkm.OriginalTrainerName = original.OriginalTrainerName;
+                pkm.Language = original.Language;
+                pkm.OriginalTrainerGender = (byte)original.OriginalTrainerGender;
             }
+
+            pkm.ClearNickname();
         }
         private void SortByRegionalDex(Func<PKM, IComparable>[] sortFunctions)
         {
@@ -240,6 +251,7 @@ namespace WangPluginPkm.GUI
             SAV.SAV.SortBoxes();
             SAV.ReloadSlots();
         }
+
         private static List<int> FindAllEmptySlots(IList<PKM> data, int start)
         {
             List<int> list = new();
@@ -252,6 +264,65 @@ namespace WangPluginPkm.GUI
             }
             return list;
         }
+
+        private int FillIntoFirstEmptySlots(IEnumerable<PKM> pks)
+        {
+            var boxData = SAV.SAV.BoxData;
+            List<int> empty = FindAllEmptySlots(boxData, 0);
+            int placed = 0;
+            using var e1 = pks.GetEnumerator();
+            using var e2 = empty.GetEnumerator();
+            while (e1.MoveNext() && e2.MoveNext())
+            {
+                SAV.SAV.SetBoxSlotAtIndex(e1.Current, e2.Current);
+                placed++;
+            }
+            return placed;
+        }
+
+        private void OverwriteFromStart(IList<PKM> pks)
+        {
+            SAV.SAV.ModifyBoxes(ClearPKM);
+            for (int i = 0; i < pks.Count; i++)
+                SAV.SAV.SetBoxSlotAtIndex(pks[i], i);
+            SAV.ReloadSlots();
+        }
+
+        private static Func<PKM, IComparable>[]? GetSortFunctionsByVersion(string v) => v switch
+        {
+            "RYBG" => Gen1_Kanto.GetSortFunctions(),
+            "GS" => Gen2_Johto.GetSortFunctions(),
+            "E" => Gen3_Hoenn.GetSortFunctions(),
+            "FRGL" => Gen3_Kanto.GetSortFunctions(),
+            "DP" => Gen4_Sinnoh.GetDPSortFunctions(),
+            "Platinum" => Gen4_Sinnoh.GetPtSortFunctions(),
+            "GHSS" => Gen4_Johto.GetSortFunctions(),
+            "BW" => Gen5_Unova.GetBWSortFunctions(),
+            "B2W2" => Gen5_Unova.GetB2W2SortFunctions(),
+            "XY" => Gen6_Kalos.GetSortFunctions(),
+            "ORAS" => Gen6_Hoenn.GetSortFunctions(),
+            "SM" => Gen7_Alola.GetFullSMSortFunctions(),
+            "USUM" => Gen7_Alola.GetFullUSUMSortFunctions(),
+            "LPLE" => Gen7_Kanto.GetSortFunctions(),
+            "SWSH" => Gen8_Galar.GetGalarDexSortFunctions(),
+            "SWSH1" => Gen8_Galar.GetIoADexSortFunctions(),
+            "SWSH2" => Gen8_Galar.GetCTDexSortFunction(),
+            "SWSH3" => Gen8_Galar.GetFullGalarDexSortFunctions(),
+            "BDSP" => Gen8_Sinnoh.GetSortFunctions(),
+            "PLA" => Gen8_Hisui.GetSortFunctions(),
+            "SV" => Gen9__Paldea.GetSortFunctions(),
+            _ => null
+        };
+
+        private static void RunTimed(string label, Action action)
+        {
+            sw.Start();
+            action();
+            sw.Stop();
+            MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", label);
+            sw.Reset();
+        }
+
         private void Gen_BTN_Click(object sender, EventArgs e)
         {
             Gen(SAV);
@@ -261,19 +332,11 @@ namespace WangPluginPkm.GUI
         }
         private void BuildDex_BTN_Click(object sender, EventArgs e)
         {
-            sw.Start();
-            UnionPKM(SAV);
-            sw.Stop();
-            MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
-            sw.Reset();
+            RunTimed("SuperWang", () => UnionPKM(SAV));
         }
         private void LivingDex_BTN_Click(object sender, EventArgs e)
         {
-            sw.Start();
-            LivingDex(SAV);
-            sw.Stop();
-            MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
-            sw.Reset();
+            RunTimed("SuperWang", () => LivingDex(SAV));
         }
         private void Legal_BTN_Click(object sender, EventArgs e)
         {
@@ -283,12 +346,11 @@ namespace WangPluginPkm.GUI
         }
         private void LegalAll_BTN_Click(object sender, EventArgs e)
         {
-            sw.Start();
-            LegalAll(SAV);
-            SAV.ReloadSlots();
-            sw.Stop();
-            MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
-            sw.Reset();
+            RunTimed("SuperWang", () =>
+            {
+                LegalAll(SAV);
+                SAV.ReloadSlots();
+            });
         }
         private void ClearAll_BTN_Click(object sender, EventArgs e)
         {
@@ -302,118 +364,13 @@ namespace WangPluginPkm.GUI
         }
         private void Sort_BTN_Click(object sender, EventArgs e)
         {
-            switch (version.Version)
+            if (version.Version == "National")
+                SortByNationalDex();
+            else
             {
-                case "National":
-                    {
-                        SortByNationalDex();
-                        break;
-                    }
-                case "RYBG":
-                    {
-                        SortByRegionalDex(Gen1_Kanto.GetSortFunctions());
-                        break;
-                    }
-                case "GS":
-                    {
-                        SortByRegionalDex(Gen2_Johto.GetSortFunctions());
-                        break;
-                    }
-                case "E":
-                    {
-                        SortByRegionalDex(Gen3_Hoenn.GetSortFunctions());
-                        break;
-                    }
-                case "FRGL":
-                    {
-                        SortByRegionalDex(Gen3_Kanto.GetSortFunctions());
-                        break;
-                    }
-                case "DP":
-                    {
-                        SortByRegionalDex(Gen4_Sinnoh.GetDPSortFunctions());
-                        break;
-                    }
-                case "Platinum":
-                    {
-                        SortByRegionalDex(Gen4_Sinnoh.GetPtSortFunctions());
-                        break;
-                    }
-                case "GHSS":
-                    {
-                        SortByRegionalDex(Gen4_Johto.GetSortFunctions());
-                        break;
-                    }
-                case "BW":
-                    {
-                        SortByRegionalDex(Gen5_Unova.GetBWSortFunctions());
-                        break;
-                    }
-                case "B2W2":
-                    {
-                        SortByRegionalDex(Gen5_Unova.GetB2W2SortFunctions());
-                        break;
-                    }
-                case "XY":
-                    {
-                        SortByRegionalDex(Gen6_Kalos.GetSortFunctions());
-                        break;
-                    }
-                case "ORAS":
-                    {
-                        SortByRegionalDex(Gen6_Hoenn.GetSortFunctions());
-                        break;
-                    }
-                case "SM":
-                    {
-                        SortByRegionalDex(Gen7_Alola.GetFullSMSortFunctions());
-                        break;
-                    }
-                case "USUM":
-                    {
-                        SortByRegionalDex(Gen7_Alola.GetFullUSUMSortFunctions());
-                        break;
-                    }
-                case "LPLE":
-                    {
-                        SortByRegionalDex(Gen7_Kanto.GetSortFunctions());
-                        break;
-                    }
-                case "SWSH":
-                    {
-                        SortByRegionalDex(Gen8_Galar.GetGalarDexSortFunctions());
-                        break;
-                    }
-                case "SWSH1":
-                    {
-                        SortByRegionalDex(Gen8_Galar.GetIoADexSortFunctions());
-                        break;
-                    }
-                case "SWSH2":
-                    {
-                        SortByRegionalDex(Gen8_Galar.GetCTDexSortFunction());
-                        break;
-                    }
-                case "SWSH3":
-                    {
-                        SortByRegionalDex(Gen8_Galar.GetFullGalarDexSortFunctions());
-                        break;
-                    }
-                case "BDSP":
-                    {
-                        SortByRegionalDex(Gen8_Sinnoh.GetSortFunctions());
-                        break;
-                    }
-                case "PLA":
-                    {
-                        SortByRegionalDex(Gen8_Hisui.GetSortFunctions());
-                        break;
-                    }
-                case "SV":
-                    {
-                        SortByRegionalDex(Gen9__Paldea.GetSortFunctions());
-                        break;
-                    }
+                var fns = GetSortFunctionsByVersion(version.Version);
+                if (fns != null)
+                    SortByRegionalDex(fns);
             }
             MessageBox.Show("排序完成", "SuperWang");
         }
@@ -530,18 +487,9 @@ namespace WangPluginPkm.GUI
                     PKL = TatsugiriDex.TatsugiriSets(SAV, Editor);
                     break;
             }
-            var BoxData = SAV.SAV.BoxData;
-            IList<PKM> arr2 = BoxData;
-            List<int> list = FindAllEmptySlots(arr2, 0);
-            if (PKL.Count != 0)
-            {
-                for (int i = 0; i < PKL.Count; i++)
-                {
-                    int index = list[i];
-                    SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
-                }
-            }
-            //  LegalBox(SAV);
+
+            if (PKL.Count > 0)
+                FillIntoFirstEmptySlots(PKL);
             SAV.ReloadSlots();
         }
         private void RandomEC_BTN_Click(object sender, EventArgs e)
@@ -549,77 +497,7 @@ namespace WangPluginPkm.GUI
             SAV.SAV.ModifyBoxes(RandomPKMEC);
             SAV.ReloadSlots();
         }
-        #region
-        /*
-          private void GODex_BTN_Click(object sender, EventArgs e)
-        {
-            GODex(SAV);
-        }
-        private void GODex(ISaveFileProvider SaveFileEditor)
-        {
-            List<IEncounterInfo> Results;
-            IEncounterInfo enc;
-            PKM pk ;
-            ushort j;
-            List<PKM> pkMList;
-            List<PKM> p=new();
-            pkMList = (List<PKM>)SaveFileEditor.SAV.GetAllPKM();
-           // MessageBox.Show($"{pkMList.Count()}");
-            for (int i = 0; i < pkMList.Count(); i++)
-            {
-                pk = pkMList[i];
-                var pkc = pk.Clone();
-                j = pk.Species;
-                var setting = new SearchSettings
-                {
-                    Species = pk.Species,
-                    SearchEgg = false,
-                    Version = 34,
-                };
-                var search = EncounterUtil.SearchDatabase(setting, SaveFileEditor.SAV);
-                var results = search.ToList();
-               // MessageBox.Show($"{results.Count}");
 
-                if (results.Count != 0)
-                {
-                    Results = results;
-                    enc = Results[0];
-                    var criteria = EncounterUtil.GetCriteria(enc, pk);
-                    EntityConverter.TryMakePKMCompatible(enc.ConvertToPKM(SaveFileEditor.SAV, criteria), pk, out var c, out pk);
-                    pk.Species = j;
-                    pk.ClearNickname();
-                    pk.Ability = pkc.Ability;
-                    pk.OriginalTrainerName = RandomString(6);
-                    pk.SetSuggestedMoves();
-                    if( pk.Move1 != 0)
-                        pk.SetSuggestedMovePP(0);
-                    if (pk.Move2 != 0)
-                        pk.SetSuggestedMovePP(1);
-                    if (pk.Move3 != 0)
-                        pk.SetSuggestedMovePP(2);
-                    if (pk.Move4 != 0)
-                        pk.SetSuggestedMovePP(3);
-                    pk.RefreshChecksum();
-                    p.Add(pk);
-                }
-                else
-                    p.Add(pkc);
-            }
-            for (int i = 0; i < SaveFileEditor.SAV.BoxCount; i++)
-            {
-                for (j = 0; j < 30; j++)
-                {
-                    if (pkMList.Count >(i * 30 + j))
-                        SaveFileEditor.SAV.SetBoxSlotAtIndex(p[i * 30 + j], i, j);
-                    else
-                        break;
-                }
-            }
-            SaveFileEditor.ReloadSlots();
-        }*/
-        #endregion
-
-        //https://github.com/foohyfooh/PKHeXInsertionPlugin
         private void Insertion_BTN_Click(object sender, EventArgs e)
         {
             int boxNum = (int)BoxnumericUpDown.Value;
@@ -685,11 +563,7 @@ namespace WangPluginPkm.GUI
                         case 0:
                             if (SAV.SAV.Version == GameVersion.GE || SAV.SAV.Version == GameVersion.GP)
                             {
-                                sw.Start();
-                                LivingDexHome(SAV);
-                                sw.Stop();
-                                MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
-                                sw.Reset();
+                                RunTimed("SuperWang", () => LivingDexHome(SAV));
                             }
                             else
                             {
@@ -699,29 +573,14 @@ namespace WangPluginPkm.GUI
                         case 1:
                             if (SAV.SAV.Version == GameVersion.SW || SAV.SAV.Version == GameVersion.SH)
                             {
-                                sw.Start();
-                                LivingDexHome(SAV);
-                                IEnumerable<PKM> sortMethod(IEnumerable<PKM> pkms, int i) => pkms.OrderByCustom(Gen8_Galar.GetGalarDexSortFunctions());
-                                SAV.SAV.SortBoxes(0, -1, sortMethod);
-                                List<PKM> L = (List<PKM>)SAV.SAV.GetAllPKM();
-                                var n = L.Count;
-                                SAV.SAV.ModifyBoxes(ClearPKM);
-                                for (int i = 400; i < n; i++)
+                                RunTimed("SuperWang", () =>
                                 {
-                                    L.RemoveAt(400);
-                                }
-                                if (L.Count != 0)
-                                {
-                                    for (int i = 0; i < L.Count; i++)
-                                    {
-
-                                        SAV.SAV.SetBoxSlotAtIndex(L[i], i);
-                                    }
-                                }
-                                SAV.ReloadSlots();
-                                sw.Stop();
-                                MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
-                                sw.Reset();
+                                    LivingDexHome(SAV);
+                                    IEnumerable<PKM> sortMethod(IEnumerable<PKM> pkms, int i) => pkms.OrderByCustom(Gen8_Galar.GetGalarDexSortFunctions());
+                                    SAV.SAV.SortBoxes(0, -1, sortMethod);
+                                    var list = SAV.SAV.GetAllPKM().ToList().Take(400).ToList();
+                                    OverwriteFromStart(list);
+                                });
                             }
                             else
                             {
@@ -731,29 +590,14 @@ namespace WangPluginPkm.GUI
                         case 2:
                             if (SAV.SAV.Version == GameVersion.SW || SAV.SAV.Version == GameVersion.SH)
                             {
-                                sw.Start();
-                                LivingDexHome(SAV);
-                                IEnumerable<PKM> sortMethod(IEnumerable<PKM> pkms, int i) => pkms.OrderByCustom(Gen8_Galar.GetIoADexSortFunctions());
-                                SAV.SAV.SortBoxes(0, -1, sortMethod);
-                                List<PKM> L = (List<PKM>)SAV.SAV.GetAllPKM();
-                                var n = L.Count;
-                                SAV.SAV.ModifyBoxes(ClearPKM);
-                                for (int i = 211; i < n; i++)
+                                RunTimed("SuperWang", () =>
                                 {
-                                    L.RemoveAt(211);
-                                }
-                                if (L.Count != 0)
-                                {
-                                    for (int i = 0; i < L.Count; i++)
-                                    {
-
-                                        SAV.SAV.SetBoxSlotAtIndex(L[i], i);
-                                    }
-                                }
-                                SAV.ReloadSlots();
-                                sw.Stop();
-                                MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
-                                sw.Reset();
+                                    LivingDexHome(SAV);
+                                    IEnumerable<PKM> sortMethod(IEnumerable<PKM> pkms, int i) => pkms.OrderByCustom(Gen8_Galar.GetIoADexSortFunctions());
+                                    SAV.SAV.SortBoxes(0, -1, sortMethod);
+                                    var list = SAV.SAV.GetAllPKM().ToList().Take(211).ToList();
+                                    OverwriteFromStart(list);
+                                });
                             }
                             else
                             {
@@ -763,29 +607,14 @@ namespace WangPluginPkm.GUI
                         case 3:
                             if (SAV.SAV.Version == GameVersion.SW || SAV.SAV.Version == GameVersion.SH)
                             {
-                                sw.Start();
-                                LivingDexHome(SAV);
-                                IEnumerable<PKM> sortMethod(IEnumerable<PKM> pkms, int i) => pkms.OrderByCustom(Gen8_Galar.GetCTDexSortFunction());
-                                SAV.SAV.SortBoxes(0, -1, sortMethod);
-                                List<PKM> L = (List<PKM>)SAV.SAV.GetAllPKM();
-                                var n = L.Count;
-                                SAV.SAV.ModifyBoxes(ClearPKM);
-                                for (int i = 210; i < n; i++)
+                                RunTimed("SuperWang", () =>
                                 {
-                                    L.RemoveAt(210);
-                                }
-                                if (L.Count != 0)
-                                {
-                                    for (int i = 0; i < L.Count; i++)
-                                    {
-
-                                        SAV.SAV.SetBoxSlotAtIndex(L[i], i);
-                                    }
-                                }
-                                SAV.ReloadSlots();
-                                sw.Stop();
-                                MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
-                                sw.Reset();
+                                    LivingDexHome(SAV);
+                                    IEnumerable<PKM> sortMethod(IEnumerable<PKM> pkms, int i) => pkms.OrderByCustom(Gen8_Galar.GetCTDexSortFunction());
+                                    SAV.SAV.SortBoxes(0, -1, sortMethod);
+                                    var list = SAV.SAV.GetAllPKM().ToList().Take(210).ToList();
+                                    OverwriteFromStart(list);
+                                });
                             }
                             else
                             {
@@ -795,11 +624,7 @@ namespace WangPluginPkm.GUI
                         case 4:
                             if (SAV.SAV.Version == GameVersion.BD || SAV.SAV.Version == GameVersion.SP)
                             {
-                                sw.Start();
-                                LivingDexHome(SAV);
-                                sw.Stop();
-                                MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
-                                sw.Reset();
+                                RunTimed("SuperWang", () => LivingDexHome(SAV));
                             }
                             else
                             {
@@ -809,11 +634,7 @@ namespace WangPluginPkm.GUI
                         case 5:
                             if (SAV.SAV.Version == GameVersion.PLA)
                             {
-                                sw.Start();
-                                LivingDexHome(SAV);
-                                sw.Stop();
-                                MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
-                                sw.Reset();
+                                RunTimed("SuperWang", () => LivingDexHome(SAV));
                             }
                             else
                             {
@@ -1008,17 +829,9 @@ namespace WangPluginPkm.GUI
                     }
                 default: break;
             }
-            var BoxData = SAV.SAV.BoxData;
-            IList<PKM> arr2 = BoxData;
-            List<int> list = FindAllEmptySlots(arr2, 0);
+
             if (PKL.Count != 0)
-            {
-                for (int i = 0; i < PKL.Count; i++)
-                {
-                    int index = list[i];
-                    SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
-                }
-            }
+                FillIntoFirstEmptySlots(PKL);
             SAV.ReloadSlots();
         }
         private void GenDex_BTN_Click(object sender, EventArgs e)
@@ -1028,106 +841,15 @@ namespace WangPluginPkm.GUI
                 MessageBox.Show("本功能只适用于究极日月！");
                 return;
             }
-            sw.Start();
-            var PKL = MutiGenDex.SetAll(SAV, Editor, false);
-            var BoxData = SAV.SAV.BoxData;
-            IList<PKM> arr2 = BoxData;
-            List<int> list = FindAllEmptySlots(arr2, 0);
-            for (int i = 0; i < PKL.Count; i++)
+            RunTimed("SuperWang", () =>
             {
-                int index = list[i];
-                SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
-            }
-            SAV.ReloadSlots();
-            sw.Stop();
-            MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
-            sw.Reset();
-            Player.Stream = Properties.Resources.dex;
-            Player.Play();
+                var PKL = MutiGenDex.SetAll(SAV, Editor, false);
+                FillIntoFirstEmptySlots(PKL);
+                SAV.ReloadSlots();
+                Player.Stream = Properties.Resources.dex;
+                Player.Play();
+            });
         }
-        #region meerkat
-        /*
-        private void RunMarkeet_BTN_Click(object sender, EventArgs e)
-        {
-            var PKL = new List<PKM>();
-            var PKLB = new List<PKM>();
-            switch (Markeet)
-            {
-                case 0:
-                    PKL = SAV.SAV.GenerateLivingDex(true, ShinycheckBox.Checked, false, false).ToList();
-                    PKL.RemoveAt(22);
-                    PKL.RemoveAt(130);
-                    PKL.RemoveAt(883);
-                    PKL.RemoveAt(886);
-                    PKL.RemoveAt(894);
-                    PKL.RemoveAt(905);
-                    PKL.RemoveAt(907);
-                    PKL.RemoveAt(911);
-                    PKL.RemoveAt(953);
-                    PKL.RemoveAt(954);
-                    MessageBox.Show($"{PKL.Count}");
-                    break;
-                case 1:
-                    sw.Start();
-                    PKL = SAV.SAV.GenerateLivingDex(true, ShinycheckBox.Checked, false, false).ToList();
-                    PKL.RemoveAt(22);
-                    PKL.RemoveAt(130);
-                    PKL.RemoveAt(883);
-                    PKL.RemoveAt(886);
-                    PKL.RemoveAt(894);
-                    PKL.RemoveAt(905);
-                    PKL.RemoveAt(907);
-                    PKL.RemoveAt(911);
-                    PKL.RemoveAt(953);
-                    PKL.RemoveAt(954);
-                    PKL.RemoveAt(960);
-                    for (int i = 0; i < 23; i++)
-                    {
-                        PKLB.Add(PKL[960 + i]);
-                    }
-                    PKLB = PKLB.Concat(TaoBaoCombo1One.Sets(SAV, Editor)).ToList();
-                    sw.Stop();
-                    MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
-                    sw.Reset();
-                    break;
-            }
-
-            var BoxData = SAV.SAV.BoxData;
-            IList<PKM> arr2 = BoxData;
-            List<int> list = FindAllEmptySlots(arr2, 0);
-            if (PKL.Count != 0)
-            {
-                if (Markeet == 0)
-                {
-                    for (int i = 0; i < 960; i++)
-                    {
-                        int index = list[i];
-                        SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
-                    }
-                    MessageBox.Show($"注意这个存档满了换下一个");
-                }
-                else if (Markeet == 1)
-                {
-                    for (int i = 0; i < PKLB.Count; i++)
-                    {
-                        int index = list[i];
-                        SAV.SAV.SetBoxSlotAtIndex(PKLB[i], index);
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < PKL.Count; i++)
-                    {
-                        int index = list[i];
-                        SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
-                    }
-                }
-            }
-            SAV.ReloadSlots();
-
-        }
-        */
-        #endregion
         private void AchieveCheck_BTN_Click(object sender, EventArgs e)
         {
             var PL = SAV.SAV.GetAllPKM();
@@ -1200,7 +922,7 @@ namespace WangPluginPkm.GUI
                                 {
                                     aL.Add(pk.Ability);
                                 }
-                                var dis = aL.DistinctBy(i => i);
+                                var dis = aL.Distinct();
                                 Result.Text = $"当前存档中有{dis.Count()}种特性";
                                 break;
                             case 3:
@@ -1211,7 +933,7 @@ namespace WangPluginPkm.GUI
                                     aL.Add(pk.Move3);
                                     aL.Add(pk.Move4);
                                 }
-                                var Pdis = aL.DistinctBy(i => i);
+                                var Pdis = aL.Distinct();
                                 Result.Text = $"当前存档中有{Pdis.Count() - 1}种技能";
                                 break;
                             case 4:
@@ -1222,7 +944,7 @@ namespace WangPluginPkm.GUI
                                     aL.Add(pk.Move3);
                                     aL.Add(pk.Move4);
                                 }
-                                var Sdis = aL.DistinctBy(i => i);
+                                var Sdis = aL.Distinct();
                                 Result.Text = $"当前存档中有{Sdis.Count() - 1}种技能";
                                 break;
                             case 5:
@@ -1233,7 +955,7 @@ namespace WangPluginPkm.GUI
                                     aL.Add(pk.Move3);
                                     aL.Add(pk.Move4);
                                 }
-                                var Cdis = aL.DistinctBy(i => i);
+                                var Cdis = aL.Distinct();
                                 Result.Text = $"当前存档中有{Cdis.Count() - 1}种技能";
                                 break;
                             case 6:

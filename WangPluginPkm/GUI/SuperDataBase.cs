@@ -25,7 +25,6 @@ namespace WangPluginPkm.GUI
 
         public SuperDataBase(ISaveFileProvider sav, IPKMView editor)
         {
-
             InitializeComponent();
             SAV = sav;
             Editor = editor;
@@ -39,45 +38,35 @@ namespace WangPluginPkm.GUI
 
         private void BindingData()
         {
-            var MOV1 = GameStringsZh.Move.ToArray();
-            var MOV2 = GameStringsZh.Move.ToArray();
-            var MOV3 = GameStringsZh.Move.ToArray();
-            var MOV4 = GameStringsZh.Move.ToArray();
-            var REV1 = GameStringsZh.Move.ToArray();
-            var REV2 = GameStringsZh.Move.ToArray();
-            var REV3 = GameStringsZh.Move.ToArray();
-            var REV4 = GameStringsZh.Move.ToArray();
+            // Reuse the same move arrays rather than cloning multiple times
+            var moves = GameStringsZh.Move.ToArray();
+            var rems = GameStringsZh.Move.ToArray();
+
             SP_CB.DataSource = GameStringsZh.Species;
             SP_CB.AutoCompleteCustomSource = auto(GameStringsZh.Species.ToArray());
             NA_CB.DataSource = GameStringsZh.Natures;
             NA_CB.AutoCompleteCustomSource = auto(GameStringsZh.Natures.ToArray());
-            // Set DataSource once for both ComboBoxes
             SNA_CB.DataSource = GameStringsZh.Natures.ToArray();
             Tera_CB.DataSource = GameStringsZh.Types.ToArray();
 
-            // Enable or disable based on generation
+            // Enable based on generation/game
             SNA_CB.Enabled = SAV.SAV.Generation >= 8;
-            if(SAV.SAV.Version == GameVersion.SL|| SAV.SAV.Version == GameVersion.VL)
-            Tera_CB.Enabled=true;
-            var moveComboBoxes = new[] { MOV1_CB, MOV2_CB, MOV3_CB, MOV4_CB };
-            var moveDataSources = new[] { MOV1, MOV2, MOV3, MOV4 };
+            Tera_CB.Enabled = SAV.SAV.Version is GameVersion.SL or GameVersion.VL;
 
+            var moveComboBoxes = new[] { MOV1_CB, MOV2_CB, MOV3_CB, MOV4_CB };
             for (int i = 0; i < moveComboBoxes.Length; i++)
             {
-                moveComboBoxes[i].DataSource = moveDataSources[i];
-                moveComboBoxes[i].AutoCompleteCustomSource = auto(moveDataSources[i]);
+                moveComboBoxes[i].DataSource = moves;
+                moveComboBoxes[i].AutoCompleteCustomSource = auto(moves);
             }
 
             var remComboBoxes = new[] { REM1_CB, REM2_CB, REM3_CB, REM4_CB };
-            var remDataSources = new[] { REV1, REV2, REV3, REV4 };
-
             for (int i = 0; i < remComboBoxes.Length; i++)
             {
-                remComboBoxes[i].DataSource = remDataSources[i];
-                remComboBoxes[i].AutoCompleteCustomSource = auto(remDataSources[i]);
+                remComboBoxes[i].DataSource = rems;
+                remComboBoxes[i].AutoCompleteCustomSource = auto(rems);
             }
 
-            // 设置其余 ComboBox 的数据源和自动完成源
             AB_CB.DataSource = GameStringsZh.Ability;
             AB_CB.AutoCompleteCustomSource = auto(GameStringsZh.Ability.ToArray());
 
@@ -90,32 +79,27 @@ namespace WangPluginPkm.GUI
             LA_CB.DataSource = Enum.GetNames(typeof(LanguageID));
             Filter_CB.DataSource = Enum.GetValues(typeof(Filter));
 
-            // 初始化 EditType 列表
             EditType.AddRange(new[]
             {
-        "性格", "特性", "持有物", "球种", "语言", "形态", "个体值", "努力值", "技能", "遗传技能", "等级"
-    });
+                "性格", "特性", "持有物", "球种", "语言", "形态", "个体值", "努力值", "技能", "遗传技能", "等级"
+            });
 
-            // 根据世代条件添加特定项
             if (SAV.SAV.Generation >= 8)
                 EditType.Add("薄荷性格");
-            if (SAV.SAV.Version is GameVersion.SL or GameVersion.VL)
-            {
-                if (SAV.SAV.Version != GameVersion.ZA)
-                {
-                    EditType.Add("太晶属性");
-                }
-            }
+            if (SAV.SAV.Version is GameVersion.SL or GameVersion.VL && SAV.SAV.Version != GameVersion.ZA)
+                EditType.Add("太晶属性");
 
-            // 设置 DataSource 并选中所有项目
             RunFilter_CLB.DataSource = EditType;
             for (int i = 0; i < RunFilter_CLB.Items.Count; i++)
-            {
                 RunFilter_CLB.SetItemChecked(i, true);
-            }
         }
-            private void import_editor_BTN_Click(object sender, EventArgs e)
+        private void import_editor_BTN_Click(object sender, EventArgs e)
         {
+            if (Editor?.Data == null)
+            {
+                MessageBox.Show("当前编辑器没有宝可梦数据");
+                return;
+            }
             SP_CB.SelectedIndex = Editor.Data.Species;
             NA_CB.SelectedIndex = (int)Editor.Data.Nature;
             AB_CB.SelectedIndex = Editor.Data.Ability;
@@ -143,17 +127,13 @@ namespace WangPluginPkm.GUI
                     if (SAV.SAV.Version != GameVersion.ZA)
                     {
                         SNA_CB.SelectedIndex = (int)((PK9)Editor.Data).StatNature;
-                   
-                        if ((int)((PK9)Editor.Data).TeraType == 99)
-                            Tera_CB.SelectedIndex = 18;
-                        else
-                            Tera_CB.SelectedIndex = (int)((PK9)Editor.Data).TeraType;
+                        Tera_CB.SelectedIndex = (int)((PK9)Editor.Data).TeraType == 99 ? 18 : (int)((PK9)Editor.Data).TeraType;
                     }
                     else
                     {
                         SNA_CB.SelectedIndex = (int)((PA9)Editor.Data).StatNature;
                     }
-                        break;
+                    break;
                 default:
                     break;
             }
@@ -204,12 +184,13 @@ namespace WangPluginPkm.GUI
                     return;
                 }
             }
-            if (savpklist(r).Count != 0)
+            var list = savpklist(r);
+            if (list.Count != 0)
             {
                 Lp_LIST.Items.Clear();
-                foreach (var lp in savpklist(r))
+                foreach (var x in list)
                 {
-                    Lp_LIST.Items.Add(lp, CheckState.Checked);
+                    Lp_LIST.Items.Add(x, CheckState.Checked);
                     this.Lp_LIST.DisplayMember = "Name";
                 }
             }
@@ -221,15 +202,13 @@ namespace WangPluginPkm.GUI
         public static byte[] StringToByteArray(string str)
         {
             if (str == null)
-                return null;
-
+                return Array.Empty<byte>();
             return Encoding.UTF8.GetBytes(str);
         }
         public static string ByteArrayToString(byte[] bt)
         {
             if (bt == null)
-                return null;
-
+                return string.Empty;
             return Encoding.UTF8.GetString(bt);
         }
         private void Sav_BTN_Click(object sender, EventArgs e)
@@ -239,32 +218,19 @@ namespace WangPluginPkm.GUI
         }
         private string savlist()
         {
-            string r = "";
-            string re = "";
-            foreach (var lp in Lp_LIST.CheckedItems)
+            var sb = new StringBuilder();
+            foreach (var item in Lp_LIST.CheckedItems)
             {
-                if (lp is litePK)
-
-                    re = litePK.lptoSt((litePK)lp);
-                r += re;
+                if (item is litePK l)
+                    sb.Append(litePK.lptoSt(l));
             }
-            return r;
+            return sb.ToString();
         }
-      
+
         private litePK savlp()
         {
-            string[] iv = IV_TB.Text.Split('/');
-            int[] ivs = new int[6];
-            for (int i = 0; i < 6; i++)
-            {
-                ivs[i] = int.Parse(iv[i]);
-            }
-            string[] ev = EV_TB.Text.Split('/');
-            int[] evs = new int[6];
-            for (int i = 0; i < 6; i++)
-            {
-                evs[i] = int.Parse(ev[i]);
-            }
+            int[] ivs = ParseStatArray(IV_TB.Text, 6, 31, 0, 31);
+            int[] evs = ParseStatArray(EV_TB.Text, 6, 0, 0, 252);
             litePK lp = new()
             {
                 Name = File_TB.Text,
@@ -294,16 +260,9 @@ namespace WangPluginPkm.GUI
                     lp.StatNature = SNA_CB.SelectedIndex;
                     break;
                 case 9:
-           
-                        lp.StatNature = SNA_CB.SelectedIndex;
+                    lp.StatNature = SNA_CB.SelectedIndex;
                     if (SAV.SAV.Version != GameVersion.ZA)
-                    {
-                        if (Tera_CB.SelectedIndex == 18)
-                            lp.TeraType = 99;
-                        else
-                            lp.TeraType = Tera_CB.SelectedIndex;
-                    }
-
+                        lp.TeraType = Tera_CB.SelectedIndex == 18 ? 99 : Tera_CB.SelectedIndex;
                     break;
                 default:
                     break;
@@ -316,70 +275,62 @@ namespace WangPluginPkm.GUI
             List<litePK> lt = new();
             int[] mov = new int[4];
             int[] remov = new int[4];
-            var STarray = "";
             var ss = s.Split("#");
             for (int j = 0; j < ss.Length - 1; j++)
             {
                 litePK lp = new();
                 var lps = ss[j];
                 var lpsarray = lps.Split(":");
+                if (lpsarray.Length < 5)
+                    continue;
                 var baselpsarray = lpsarray[0];
                 var ivlpsarray = lpsarray[1];
                 var evlpsarray = lpsarray[2];
                 var movlpsarray = lpsarray[3];
                 var removlpsarray = lpsarray[4];
                 var baselps = baselpsarray.Split(",");
-                lp.Name = baselps[0];
-                lp.Species = Int32.Parse(baselps[1]);
-                lp.Nature = Int32.Parse(baselps[2]);
-                lp.Ability = Int32.Parse(baselps[3]);
-                lp.HeldItem = Int32.Parse(baselps[4]);
-                lp.Ball = Int32.Parse(baselps[5]);
-                lp.Language = Int32.Parse(baselps[6]);
-                lp.Form = Int32.Parse(baselps[7]);
-                lp.AbilityNumber = Int32.Parse(baselps[8]);
+                lp.Name = baselps.ElementAtOrDefault(0) ?? string.Empty;
+                lp.Species = TryParseInt(baselps.ElementAtOrDefault(1));
+                lp.Nature = TryParseInt(baselps.ElementAtOrDefault(2));
+                lp.Ability = TryParseInt(baselps.ElementAtOrDefault(3));
+                lp.HeldItem = TryParseInt(baselps.ElementAtOrDefault(4));
+                lp.Ball = TryParseInt(baselps.ElementAtOrDefault(5));
+                lp.Language = TryParseInt(baselps.ElementAtOrDefault(6));
+                lp.Form = TryParseInt(baselps.ElementAtOrDefault(7));
+                lp.AbilityNumber = TryParseInt(baselps.ElementAtOrDefault(8));
+
                 if (lpsarray.Length > 5)
                 {
-                    STarray = lpsarray[5];
-                    var st = STarray.Split(',');
+                    var STarray = lpsarray[5].Split(',');
                     switch (SAV.SAV.Generation)
                     {
                         case 8:
-                            lp.StatNature = Int32.Parse(st[0]);
+                            lp.StatNature = TryParseInt(STarray.ElementAtOrDefault(0));
                             break;
                         case 9:
-                            lp.StatNature = Int32.Parse(st[0]);
+                            lp.StatNature = TryParseInt(STarray.ElementAtOrDefault(0));
                             if (SAV.SAV.Version != GameVersion.ZA)
-                                lp.TeraType = Int32.Parse(st[1]);
+                                lp.TeraType = TryParseInt(STarray.ElementAtOrDefault(1));
                             break;
                         default:
                             break;
                     }
                 }
-                if (baselps.Length < 10)
-                    lp.CurrentLevel = 1;
-                else
-                {
-                    lp.CurrentLevel = Int32.Parse(baselps[9]);
-                }
+                lp.CurrentLevel = baselps.Length < 10 ? 1 : TryParseInt(baselps.ElementAtOrDefault(9));
+
+                lp.IVS ??= new int[6];
                 var ivlps = ivlpsarray.Split("/");
                 for (int i = 0; i < 6; i++)
-                {
-                    lp.IVS[i] = Int32.Parse(ivlps[i]);
+                    lp.IVS[i] = TryParseInt(ivlps.ElementAtOrDefault(i));
 
-                }
+                lp.EVS ??= new int[6];
                 var evlps = evlpsarray.Split("/");
                 for (int i = 0; i < 6; i++)
-                {
-                    lp.EVS[i] = Int32.Parse(evlps[i]);
-                }
+                    lp.EVS[i] = TryParseInt(evlps.ElementAtOrDefault(i));
 
                 var movlps = movlpsarray.Split(",");
                 for (int i = 0; i < 4; i++)
-                {
-                    mov[i] = Int32.Parse(movlps[i]);
-
-                }
+                    mov[i] = TryParseInt(movlps.ElementAtOrDefault(i));
                 lp.Move1 = mov[0];
                 lp.Move2 = mov[1];
                 lp.Move3 = mov[2];
@@ -387,10 +338,7 @@ namespace WangPluginPkm.GUI
 
                 var removlps = removlpsarray.Split(",");
                 for (int i = 0; i < 4; i++)
-                {
-                    remov[i] = Int32.Parse(removlps[i]);
-
-                }
+                    remov[i] = TryParseInt(removlps.ElementAtOrDefault(i));
                 lp.RelearnMove1 = remov[0];
                 lp.RelearnMove2 = remov[1];
                 lp.RelearnMove3 = remov[2];
@@ -402,50 +350,44 @@ namespace WangPluginPkm.GUI
         }
         private async void Lp_LIST_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             var lp = Lp_LIST.SelectedItem;
-            if (lp is litePK)
+            if (lp is litePK x)
             {
-                File_TB.Text = ((litePK)lp).Name;
-                SP_CB.SelectedIndex = ((litePK)lp).Species;
-                NA_CB.SelectedIndex = ((litePK)lp).Nature;
-                AB_CB.SelectedIndex = ((litePK)lp).Ability;
-                IT_CB.SelectedIndex = ((litePK)lp).HeldItem;
-                BA_CB.SelectedIndex = ((litePK)lp).Ball;
-                LA_CB.SelectedIndex = ((litePK)lp).Language;
-                FO_NU.Value = ((litePK)lp).Form;
-                ABN_NU.Value = ((litePK)lp).AbilityNumber;
-                MOV1_CB.SelectedIndex = ((litePK)lp).Move1;
-                MOV2_CB.SelectedIndex = ((litePK)lp).Move2;
-                MOV3_CB.SelectedIndex = ((litePK)lp).Move3;
-                MOV4_CB.SelectedIndex = ((litePK)lp).Move4;
-                REM1_CB.SelectedIndex = ((litePK)lp).RelearnMove1;
-                REM2_CB.SelectedIndex = ((litePK)lp).RelearnMove2;
-                REM3_CB.SelectedIndex = ((litePK)lp).RelearnMove3;
-                REM4_CB.SelectedIndex = ((litePK)lp).RelearnMove4;
-                IV_TB.Text = $"{((litePK)lp).IVS[0]}/{((litePK)lp).IVS[1]}/{((litePK)lp).IVS[2]}/{((litePK)lp).IVS[3]}/{((litePK)lp).IVS[4]}/{((litePK)lp).IVS[5]}";
-                EV_TB.Text = $"{((litePK)lp).EVS[0]}/{((litePK)lp).EVS[1]}/{((litePK)lp).EVS[2]}/{((litePK)lp).EVS[3]}/{((litePK)lp).EVS[4]}/{((litePK)lp).EVS[5]}";
-                Level_NUM.Value = ((litePK)lp).CurrentLevel;
+                File_TB.Text = x.Name;
+                SP_CB.SelectedIndex = x.Species;
+                NA_CB.SelectedIndex = x.Nature;
+                AB_CB.SelectedIndex = x.Ability;
+                IT_CB.SelectedIndex = x.HeldItem;
+                BA_CB.SelectedIndex = x.Ball;
+                LA_CB.SelectedIndex = x.Language;
+                FO_NU.Value = x.Form;
+                ABN_NU.Value = x.AbilityNumber;
+                MOV1_CB.SelectedIndex = x.Move1;
+                MOV2_CB.SelectedIndex = x.Move2;
+                MOV3_CB.SelectedIndex = x.Move3;
+                MOV4_CB.SelectedIndex = x.Move4;
+                REM1_CB.SelectedIndex = x.RelearnMove1;
+                REM2_CB.SelectedIndex = x.RelearnMove2;
+                REM3_CB.SelectedIndex = x.RelearnMove3;
+                REM4_CB.SelectedIndex = x.RelearnMove4;
+                IV_TB.Text = $"{x.IVS[0]}/{x.IVS[1]}/{x.IVS[2]}/{x.IVS[3]}/{x.IVS[4]}/{x.IVS[5]}";
+                EV_TB.Text = $"{x.EVS[0]}/{x.EVS[1]}/{x.EVS[2]}/{x.EVS[3]}/{x.EVS[4]}/{x.EVS[5]}";
+                Level_NUM.Value = x.CurrentLevel;
                 switch (SAV.SAV.Generation)
                 {
                     case 8:
-                        SNA_CB.SelectedIndex = ((litePK)lp).StatNature;
+                        SNA_CB.SelectedIndex = x.StatNature;
                         break;
                     case 9:
-                        SNA_CB.SelectedIndex = ((litePK)lp).StatNature;
+                        SNA_CB.SelectedIndex = x.StatNature;
                         if (SAV.SAV.Version != GameVersion.ZA)
-                        {
-                            if (((litePK)lp).TeraType == 99)
-                                Tera_CB.SelectedIndex = 18;
-                            else
-                                Tera_CB.SelectedIndex = ((litePK)lp).TeraType;
-                        }
+                            Tera_CB.SelectedIndex = x.TeraType == 99 ? 18 : x.TeraType;
                         break;
                     default:
                         break;
                 }
                 var config = PluginConfig.LoadConfig();
-                string baseuri = $"{config.PokemonPicUrl}" + $"{((litePK)lp).Species.ToString().PadLeft(4, '0')}" + ".png";
+                string baseuri = $"{config.PokemonPicUrl}{x.Species.ToString().PadLeft(4, '0')}.png";
                 try
                 {
                     using (HttpClient client = new HttpClient())
@@ -495,7 +437,6 @@ namespace WangPluginPkm.GUI
         }
         private void mod(PKM pk)
         {
-
             List<litePK> litePKs = new List<litePK>();
             foreach (var pl in Lp_LIST.CheckedItems)
             {
@@ -512,98 +453,69 @@ namespace WangPluginPkm.GUI
                             switch (j)
                             {
                                 case 0:
-                                    {
-                                        pk.Nature = (Nature)litePKs[i].Nature;
-                                    }
+                                    pk.Nature = (Nature)litePKs[i].Nature;
                                     break;
                                 case 1:
-                                    {
-                                        pk.Ability = litePKs[i].Ability;
-                                        pk.AbilityNumber = (int)litePKs[i].AbilityNumber;
-                                    }
+                                    pk.Ability = litePKs[i].Ability;
+                                    pk.AbilityNumber = (int)litePKs[i].AbilityNumber;
                                     break;
                                 case 2:
-                                    {
-                                        pk.HeldItem = litePKs[i].HeldItem;
-                                    }
+                                    pk.HeldItem = litePKs[i].HeldItem;
                                     break;
                                 case 3:
-                                    {
-                                        pk.Ball = (byte)litePKs[i].Ball;
-                                    }
+                                    pk.Ball = (byte)litePKs[i].Ball;
                                     break;
                                 case 4:
-                                    {
-                                        pk.Language = litePKs[i].Language;
-                                        pk.ClearNickname();
-                                    }
+                                    pk.Language = litePKs[i].Language;
+                                    pk.ClearNickname();
                                     break;
                                 case 5:
-                                    {
-                                        pk.Form = (byte)litePKs[i].Form;
-                                    }
+                                    pk.Form = (byte)litePKs[i].Form;
                                     break;
                                 case 6:
-                                    {
-                                        pk.IV_HP = litePKs[i].IVS[0];
-                                        pk.IV_ATK = litePKs[i].IVS[1];
-                                        pk.IV_DEF = litePKs[i].IVS[2];
-                                        pk.IV_SPA = litePKs[i].IVS[3];
-                                        pk.IV_SPD = litePKs[i].IVS[4];
-                                        pk.IV_SPE = litePKs[i].IVS[5];
-                                    }
+                                    pk.IV_HP = litePKs[i].IVS[0];
+                                    pk.IV_ATK = litePKs[i].IVS[1];
+                                    pk.IV_DEF = litePKs[i].IVS[2];
+                                    pk.IV_SPA = litePKs[i].IVS[3];
+                                    pk.IV_SPD = litePKs[i].IVS[4];
+                                    pk.IV_SPE = litePKs[i].IVS[5];
                                     break;
                                 case 7:
-                                    {
-                                        pk.EV_HP = litePKs[i].EVS[0];
-                                        pk.EV_ATK = litePKs[i].EVS[1];
-                                        pk.EV_DEF = litePKs[i].EVS[2];
-                                        pk.EV_SPA = litePKs[i].EVS[3];
-                                        pk.EV_SPD = litePKs[i].EVS[4];
-                                        pk.EV_SPE = litePKs[i].EVS[5];
-                                    }
+                                    pk.EV_HP = litePKs[i].EVS[0];
+                                    pk.EV_ATK = litePKs[i].EVS[1];
+                                    pk.EV_DEF = litePKs[i].EVS[2];
+                                    pk.EV_SPA = litePKs[i].EVS[3];
+                                    pk.EV_SPD = litePKs[i].EVS[4];
+                                    pk.EV_SPE = litePKs[i].EVS[5];
                                     break;
                                 case 8:
-                                    {
-                                        pk.Move1 = (ushort)litePKs[i].Move1;
-                                        pk.Move2 = (ushort)litePKs[i].Move2;
-                                        pk.Move3 = (ushort)litePKs[i].Move3;
-                                        pk.Move4 = (ushort)litePKs[i].Move4;
-                                        pk.HealPP();
-                                    }
+                                    pk.Move1 = (ushort)litePKs[i].Move1;
+                                    pk.Move2 = (ushort)litePKs[i].Move2;
+                                    pk.Move3 = (ushort)litePKs[i].Move3;
+                                    pk.Move4 = (ushort)litePKs[i].Move4;
+                                    pk.HealPP();
                                     break;
                                 case 9:
+                                    if (pk.WasEgg)
                                     {
-                                        if (pk.WasEgg)
-                                        {
-                                            pk.RelearnMove1 = (ushort)litePKs[i].RelearnMove1;
-                                            pk.RelearnMove2 = (ushort)litePKs[i].RelearnMove2;
-                                            pk.RelearnMove3 = (ushort)litePKs[i].RelearnMove3;
-                                            pk.RelearnMove4 = (ushort)litePKs[i].RelearnMove4;
-                                        }
+                                        pk.RelearnMove1 = (ushort)litePKs[i].RelearnMove1;
+                                        pk.RelearnMove2 = (ushort)litePKs[i].RelearnMove2;
+                                        pk.RelearnMove3 = (ushort)litePKs[i].RelearnMove3;
+                                        pk.RelearnMove4 = (ushort)litePKs[i].RelearnMove4;
                                     }
                                     break;
                                 case 10:
-                                    {
-                                        pk.CurrentLevel = (byte)litePKs[i].CurrentLevel;
-
-                                    }
+                                    pk.CurrentLevel = (byte)litePKs[i].CurrentLevel;
                                     break;
                                 case 11:
-                                    {
-
-                                        pk.StatNature = (Nature)litePKs[i].StatNature;
-                                    }
+                                    pk.StatNature = (Nature)litePKs[i].StatNature;
                                     break;
                                 case 12:
+                                    if (SAV.SAV.Version != GameVersion.ZA)
                                     {
-                                        if (SAV.SAV.Version != GameVersion.ZA)
-                                        {
-                                            ((PK9)pk).TeraTypeOverride = (MoveType)litePKs[i].TeraType;
-                                        }
+                                        ((PK9)pk).TeraTypeOverride = (MoveType)litePKs[i].TeraType;
                                     }
                                     break;
-
                                 default:
                                     break;
                             }
@@ -631,7 +543,6 @@ namespace WangPluginPkm.GUI
             {
                 int index = Lp_LIST.Items.IndexOf(Lp_LIST.CheckedItems[i]);
                 Lp_LIST.Items.RemoveAt(index);
-
             }
             Lp_LIST.Refresh();
         }
@@ -658,19 +569,11 @@ namespace WangPluginPkm.GUI
         {
             var it = Lp_LIST.SelectedItem;
             int index = Lp_LIST.Items.IndexOf(it);
+            if (index < 0)
+                return;
             litePK pk = (litePK)Lp_LIST.Items[index];
-            string[] iv = IV_TB.Text.Split('/');
-            int[] ivs = new int[6];
-            for (int i = 0; i < 6; i++)
-            {
-                ivs[i] = int.Parse(iv[i]);
-            }
-            string[] ev = EV_TB.Text.Split('/');
-            int[] evs = new int[6];
-            for (int i = 0; i < 6; i++)
-            {
-                evs[i] = int.Parse(ev[i]);
-            }
+            int[] ivs = ParseStatArray(IV_TB.Text, 6, 31, 0, 31);
+            int[] evs = ParseStatArray(EV_TB.Text, 6, 0, 0, 252);
 
             pk.Name = File_TB.Text;
             pk.Species = SP_CB.SelectedIndex;
@@ -700,12 +603,7 @@ namespace WangPluginPkm.GUI
                 case 9:
                     pk.StatNature = SNA_CB.SelectedIndex;
                     if (SAV.SAV.Version != GameVersion.ZA)
-                    {
-                        if (Tera_CB.SelectedIndex == 18)
-                            pk.TeraType = 99;
-                        else
-                            pk.TeraType = Tera_CB.SelectedIndex;
-                    }
+                        pk.TeraType = Tera_CB.SelectedIndex == 18 ? 99 : Tera_CB.SelectedIndex;
                     break;
                 default:
                     break;
@@ -717,16 +615,18 @@ namespace WangPluginPkm.GUI
         {
             var re = from litePK obj in Lp_LIST.Items select obj;
             lp = re.ToList();
+            var prop = typeof(litePK).GetProperty(name);
+            if (prop == null)
+                return;
             var fo = from litePK obj in Lp_LIST.Items
-                     where obj.GetType().GetProperty(name).GetValue(obj, null).Equals(value)
+                     let val = prop.GetValue(obj, null)
+                     where Equals(val, value)
                      select obj;
             var f = fo.ToList();
 
             Lp_LIST.Items.Clear();
             for (int i = 0; i < f.Count; i++)
-            {
                 Lp_LIST.Items.Add(f[i], true);
-            }
 
             Lp_LIST.Refresh();
         }
@@ -749,17 +649,13 @@ namespace WangPluginPkm.GUI
             }
             Lp_LIST.Items.Clear();
             for (int i = 0; i < lp.Count; i++)
-            {
                 Lp_LIST.Items.Add(lp[i], true);
-            }
             Lp_LIST.Refresh();
         }
         public int ModifyBoxes(Action<PKM> action, int gen, int BoxStart = 0, int slotStart = 0, int BoxEnd = -1, int slotEnd = -1)
         {
             if ((uint)BoxEnd >= SAV.SAV.BoxCount)
-            {
                 BoxEnd = SAV.SAV.BoxCount - 1;
-            }
 
             Span<byte> boxBuffer = GetInfo(gen);
             int num = 0;
@@ -770,8 +666,7 @@ namespace WangPluginPkm.GUI
                     if (!SAV.SAV.IsBoxSlotOverwriteProtected(i, j))
                     {
                         int boxSlotOffset = SAV.SAV.GetBoxSlotOffset(i, j);
-                        int num2 = boxSlotOffset;
-                        Span<byte> span = boxBuffer.Slice(num2, boxBuffer.Length - num2);
+                        Span<byte> span = boxBuffer.Slice(boxSlotOffset);
                         if (SAV.SAV.IsPKMPresent(span))
                         {
                             PKM boxSlotAtIndex = SAV.SAV.GetBoxSlotAtIndex(i, j);
@@ -785,7 +680,7 @@ namespace WangPluginPkm.GUI
 
             return num;
         }
-       private  void Muticonvert(int startBox, int startSlot, int endBox, int endSlot)
+        private void Muticonvert(int startBox, int startSlot, int endBox, int endSlot)
         {
             for (int box = startBox; box <= endBox; box++)
             {
@@ -794,7 +689,7 @@ namespace WangPluginPkm.GUI
 
                 for (int slot = start; slot <= end; slot++)
                 {
-                    Lp_LIST.Items.Add(convertpktolpk(SAV.SAV.GetBoxSlotAtIndex(box,slot)), true);
+                    Lp_LIST.Items.Add(convertpktolpk(SAV.SAV.GetBoxSlotAtIndex(box, slot)), true);
                     this.Lp_LIST.DisplayMember = "Name";
                 }
             }
@@ -808,16 +703,16 @@ namespace WangPluginPkm.GUI
                 case 3:
                     boxbuffer = ((SAV3)SAV.SAV).Storage;
                     break;
-               /* case 4:
-                    boxbuffer = ((SAV4)SAV.SAV).Storage;
-                    break;*/
+                /* case 4:
+                     boxbuffer = ((SAV4)SAV.SAV).Storage;
+                     break;*/
                 case 8:
                     boxbuffer = ((SAV8SWSH)SAV.SAV).BoxInfo.Data;
                     if (SAV.SAV.Version == GameVersion.PLA)
                         boxbuffer = ((SAV8LA)SAV.SAV).BoxInfo.Data;
                     break;
                 case 9:
-                    if(SAV.SAV.Version != GameVersion.ZA)
+                    if (SAV.SAV.Version != GameVersion.ZA)
                         boxbuffer = ((SAV9SV)SAV.SAV).BoxInfo.Data;
                     else
                         boxbuffer = ((SAV9ZA)SAV.SAV).BoxInfo.Data;
@@ -831,7 +726,6 @@ namespace WangPluginPkm.GUI
         private void Load_PS_BTN_Click(object sender, EventArgs e)
         {
             Import(PS_Box.Text);
-
         }
         public void Import(string source)
         {
@@ -873,7 +767,6 @@ namespace WangPluginPkm.GUI
                 }
                 Lp_LIST.Refresh();
             }
-
         }
         private litePK ImportSetToTabs(ShowdownSet set, bool skipDialog = false)
         {
@@ -881,7 +774,6 @@ namespace WangPluginPkm.GUI
             var sav = SAV.SAV;
             var legal = sav.GetLegalFromSet(regen).Created;
             return convertpktolpk(legal);
-
         }
 
         public List<litePK> ImportToExisting(SaveFile tr, IReadOnlyList<ShowdownSet> sets)
@@ -938,7 +830,6 @@ namespace WangPluginPkm.GUI
                 IVS = iv,
                 EVS = ev,
                 CurrentLevel = pk.CurrentLevel
-
             };
             switch (SAV.SAV.Generation)
             {
@@ -1005,10 +896,29 @@ namespace WangPluginPkm.GUI
 
         private void Pktopl_BTN_Click(object sender, EventArgs e)
         {
-
             Muticonvert((int)StartBox_NUM.Value - 1, (int)Start_NUM.Value - 1, (int)EndBox_NUM.Value - 1, (int)End_NUM.Value - 1);
             Lp_LIST.Refresh();
             MessageBox.Show($"{Lp_LIST.Items.Count}转换完成！");
+        }
+
+        // helpers
+        private static int[] ParseStatArray(string text, int expected, int defaultValue, int min, int max)
+        {
+            var parts = (text ?? string.Empty).Split('/');
+            var arr = new int[expected];
+            for (int i = 0; i < expected; i++)
+            {
+                if (!int.TryParse(parts.ElementAtOrDefault(i), out var v))
+                    v = defaultValue;
+                if (v < min) v = min;
+                if (v > max) v = max;
+                arr[i] = v;
+            }
+            return arr;
+        }
+        private static int TryParseInt(string s)
+        {
+            return int.TryParse(s, out var v) ? v : 0;
         }
     }
 }

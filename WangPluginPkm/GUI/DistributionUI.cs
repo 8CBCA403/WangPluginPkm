@@ -1053,7 +1053,10 @@ namespace WangPluginPkm.GUI
                         boxbuffer = ((SAV8LA)SAV.SAV).BoxInfo.Data;
                     break;
                 case 9:
-                    boxbuffer = ((SAV9SV)SAV.SAV).BoxInfo.Data;
+                    if (SAV.SAV.Version != GameVersion.ZA)
+                        boxbuffer = ((SAV9SV)SAV.SAV).BoxInfo.Data;
+                    else
+                        boxbuffer = ((SAV9ZA)SAV.SAV).BoxInfo.Data;
                     break;
                 default:
                     break;
