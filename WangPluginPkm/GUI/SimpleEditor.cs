@@ -230,7 +230,8 @@ namespace WangPluginPkm.GUI
         {
             PK8 pk;
             pk = gp;
-            var o = PokeCrypto.EncryptArray8(pk.Data);
+            pk.RefreshChecksum();
+            var o = pk.Data;
             using var sfd = new SaveFileDialog
             {
                 FileName = "A",

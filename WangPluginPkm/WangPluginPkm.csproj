@@ -3,11 +3,9 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
-    <TargetFrameworks>net9.0-windows</TargetFrameworks>
-    <LangVersion>13</LangVersion>
+    <TargetFrameworks>net10.0-windows</TargetFrameworks>
     <LangVersion>preview</LangVersion>
     <Nullable>disable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>Resources\img\SW.ico</ApplicationIcon>
     <Platforms>AnyCPU;x64</Platforms>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
@@ -35,7 +33,7 @@
     <PackageReference Include="Microsoft.Z3" Version="4.12.2" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
     <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.3" />
-    <PackageReference Include="PKHeX.Core" Version="25.11.7" />
+    <PackageReference Include="PKHeX.Core" Version="26.5.5" />
     <PackageReference Include="RestSharp" Version="112.1.0" />
   </ItemGroup>
   <ItemGroup>

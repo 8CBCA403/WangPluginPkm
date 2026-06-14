@@ -286,9 +286,8 @@ namespace WangPluginPkm.GUI
             string path = sfd.FileName;
             var data = File.ReadAllBytes(path);
 
-            var chs = CalculateChecksum(data);
-            WriteUInt16LittleEndian(data.AsSpan(0x06), chs);
-            var pk = PokeCrypto.EncryptArray8A(data);
+            var pa8 = new PA8(data);
+            pa8.RefreshChecksum();
 
             using var sfds = new SaveFileDialog
             {
@@ -300,7 +299,7 @@ namespace WangPluginPkm.GUI
 
             if (sfd.ShowDialog() != DialogResult.OK)
                 return;
-            File.WriteAllBytes("test.pa8", pk);
+            File.WriteAllBytes("test.pa8", pa8.Data);
         }
         private ushort CalculateChecksum(byte[] Data)
         {
