@@ -4,6 +4,10 @@
     <OutputType>Library</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
     <TargetFrameworks>net10.0-windows</TargetFrameworks>
+<<<<<<< Updated upstream
+=======
+    <LangVersion>13</LangVersion>
+>>>>>>> Stashed changes
     <LangVersion>preview</LangVersion>
     <Nullable>disable</Nullable>
     <ApplicationIcon>Resources\img\SW.ico</ApplicationIcon>
