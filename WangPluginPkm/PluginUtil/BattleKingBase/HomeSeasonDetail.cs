@@ -28,7 +28,7 @@ namespace WangPluginPkm.PluginUtil.BattleKingBase
             var config = PluginConfig.LoadConfig();
             try
                 {
-                    var client = new RestClient();
+                    using var client = new RestClient();
                     var request = new RestRequest("https://api.battle.pokemon-home.com/tt/cbd/competition/rankmatch/list", Method.Post); // 直接使用字符串作为请求方法
                     request.AddHeader("Host", "api.battle.pokemon-home.com");
                     request.AddHeader("Accept", "application/json, text/javascript, */*; q=0.01");

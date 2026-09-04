@@ -50,7 +50,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
             else if (i == 24)
             {
                 pk.Nature = (Nature)15;
-                pk.StatNature = pk.Nature;
+                pk.StatAlignment = pk.Nature;
                 pk.Form = 1;
                 pk.Ability = 58;
                 pk.AbilityNumber = 2;
@@ -58,7 +58,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
             else if (i == 25)
             {
                 pk.Nature = (Nature)13;
-                pk.StatNature = pk.Nature;
+                pk.StatAlignment = pk.Nature;
                 pk.Form = 0;
                 pk.Ability = 244;
                 pk.AbilityNumber = 1;

@@ -26,7 +26,7 @@ namespace WangPluginPkm.PluginUtil.ModifyPKM
         public int[] EVS { get; set; } = new int[6];
         public int CurrentLevel { get; set; }
 
-        public int StatNature { get; set; } = 0;
+        public int StatAlignment { get; set; } = 0;
 
         public int TeraType { get; set; } = 0;
         public static string lptoSt(litePK pk)
@@ -45,7 +45,7 @@ namespace WangPluginPkm.PluginUtil.ModifyPKM
             r = $"{pk.Name},{pk.Species},{pk.Nature},{pk.Ability},{pk.HeldItem},{pk.Ball},{pk.Language}," +
                 $"{pk.Form},{pk.AbilityNumber},{pk.CurrentLevel}:{ivst}:{evst}:{pk.Move1},{pk.Move2},{pk.Move3},{pk.Move4}:" +
                 $"{pk.RelearnMove1},{pk.RelearnMove2},{pk.RelearnMove3},{pk.RelearnMove4}:" +
-                $"{pk.StatNature},{pk.TeraType}#";
+                $"{pk.StatAlignment},{pk.TeraType}#";
             return r;
         }
     }

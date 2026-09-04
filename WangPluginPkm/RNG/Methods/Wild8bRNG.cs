@@ -99,7 +99,7 @@ namespace WangPluginPkm.RNG.Methods
                 pk.Nature = (Nature)xors.NextUInt(25);
             else // Skip nature, assuming Synchronize
                 pk.Nature = (Nature)criteria.Nature;
-            pk.StatNature = pk.Nature;
+            pk.StatAlignment = pk.Nature;
 
             // Remainder
             var scale = (IScaledSize)pk;

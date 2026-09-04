@@ -12,7 +12,7 @@ namespace WangPluginPkm
             pk.IVs = iv;
             pk.SetEVs(ev);
             pk.Nature = (Nature)13;
-            pk.StatNature = pk.Nature;
+            pk.StatAlignment = pk.Nature;
             return pk;
         }
         public static PKM SPAIVEV(PKM pk)
@@ -22,7 +22,7 @@ namespace WangPluginPkm
             pk.IVs = iv;
             pk.SetEVs(ev);
             pk.Nature = (Nature)10;
-            pk.StatNature = pk.Nature;
+            pk.StatAlignment = pk.Nature;
             return pk;
         }
         public static PKM ATK_0SPEIVEV(PKM pk)
@@ -32,7 +32,7 @@ namespace WangPluginPkm
             pk.IVs = iv;
             pk.SetEVs(ev);
             pk.Nature = (Nature)2;
-            pk.StatNature = pk.Nature;
+            pk.StatAlignment = pk.Nature;
             return pk;
         }
         public static PKM SPA_0SPEIVEV(PKM pk)
@@ -42,7 +42,7 @@ namespace WangPluginPkm
             pk.IVs = iv;
             pk.SetEVs(ev);
             pk.Nature = (Nature)17;
-            pk.StatNature = pk.Nature;
+            pk.StatAlignment = pk.Nature;
             return pk;
         }
         public static PKM TANKIVEV(PKM pk)
@@ -52,7 +52,7 @@ namespace WangPluginPkm
             pk.IVs = iv;
             pk.SetEVs(ev);
             pk.Nature = (Nature)22;
-            pk.StatNature = pk.Nature;
+            pk.StatAlignment = pk.Nature;
             return pk;
         }
         public static PKM Clearnike(PKM pk)

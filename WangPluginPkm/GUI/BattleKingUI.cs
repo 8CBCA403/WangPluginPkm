@@ -16,6 +16,7 @@ using System.Linq;
 using System.Media;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,6 +28,7 @@ namespace WangPluginPkm.GUI
 {
     partial class BattleKingUI : Form
     {
+        private const string VgcSpreadsheetId = "1axlwmzPA49rYkqXh7zHvAtSP-TKbM0ijGYBPRflLSWw";
         int n = 0;
         public List<ShowdownSet> Sets = [];
         public List<HomeSeasonDetail> L = [];
@@ -38,7 +40,6 @@ namespace WangPluginPkm.GUI
         private readonly CancellationTokenSource PastetokenSource = new();
         private readonly CancellationTokenSource FalinkVGCstokenSource = new();
         private readonly CancellationTokenSource FalinkTournamentstokenSource = new();
-        private readonly CancellationTokenSource VGCPastestokenSource = new();
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public static IPKMView Editor { private get; set; } = null!;
         private static readonly List<ExpandPKM> BD = [];
@@ -569,7 +570,7 @@ namespace WangPluginPkm.GUI
                     {
                         List<Tournament> st = [];
                         using HttpClient client = new();
-                        List<Tournament> data;
+                        List<Tournament>? data;
                         string jsonContent;
                         HttpResponseMessage response = await client.GetAsync(ImportURL_text.Text);
                         string responseBody = await response.Content.ReadAsStringAsync();
@@ -609,81 +610,85 @@ namespace WangPluginPkm.GUI
             await Selectc();
             MessageBox.Show("导入了网页！");
         }
-        private void GoogleSheet()
+        private static SheetsService CreateSheetsService()
         {
             var config = PluginConfig.LoadConfig();
-            var sheetsService = new SheetsService(new BaseClientService.Initializer()
+            return new SheetsService(new BaseClientService.Initializer()
             {
                 ApiKey = config.GoogleapiKey,
-                ApplicationName = config.GoogleapiKey
+                ApplicationName = string.IsNullOrWhiteSpace(config.GoogleApplicationName)
+                    ? nameof(WangPluginPkm)
+                    : config.GoogleApplicationName,
             });
-            string spreadsheetId = "1axlwmzPA49rYkqXh7zHvAtSP-TKbM0ijGYBPRflLSWw";
-            if (VGCExcel_CB.SelectedValue != null)
-                PrintCellsContainingKeywordInSheet(sheetsService, spreadsheetId, (string)VGCExcel_CB.SelectedValue, "pokepast.es");
         }
-        private static List<string> GetSheetTitles(SheetsService service, string spreadsheetId)
-        {
-            var spreadsheet = service.Spreadsheets.Get(spreadsheetId).Execute();
-            var sheetTitles = new List<string>();
 
-            foreach (var sheet in spreadsheet.Sheets)
-            {
-                sheetTitles.Add(sheet.Properties.Title);
-            }
+        private static async Task<List<string>> GetSheetTitlesAsync(SheetsService service)
+        {
+            var spreadsheet = await service.Spreadsheets.Get(VgcSpreadsheetId).ExecuteAsync();
+            return spreadsheet.Sheets
+                .Select(sheet => sheet.Properties?.Title)
+                .Where(title => !string.IsNullOrWhiteSpace(title))
+                .Select(title => title!)
+                .ToList();
+        }
 
-            return sheetTitles;
-        }
-        private static IList<IList<object>> ReadData(SheetsService service, string spreadsheetId, string range)
+        private static async Task<string> GetPasteLinksAsync(SheetsService service, string sheetName)
         {
-            var request = service.Spreadsheets.Values.Get(spreadsheetId, range);
-            ValueRange response = request.Execute();
-            return response.Values;
-        }
-        private void PrintCellsContainingKeywordInSheet(SheetsService service, string spreadsheetId, string sheetName, string keyword)
-        {
-            var sheetData = service.Spreadsheets.Values.Get(spreadsheetId, $"{sheetName}!A:FZ").Execute();
-            int cnt = 0;
-            if (sheetData.Values != null && sheetData.Values.Count > 0)
+            string escapedSheetName = sheetName.Replace("'", "''");
+            var sheetData = await service.Spreadsheets.Values
+                .Get(VgcSpreadsheetId, $"'{escapedSheetName}'!A:FZ")
+                .ExecuteAsync();
+
+            var result = new StringBuilder($"{sheetName}中的队伍如下:{Environment.NewLine}");
+            int count = 0;
+            if (sheetData.Values != null)
             {
-                VGCPaste_TB.Text += ($"{sheetName}中的队伍如下:") + Environment.NewLine;
-                for (int rowIndex = 0; rowIndex < sheetData.Values.Count; rowIndex++)
+                foreach (var row in sheetData.Values)
                 {
-                    var row = sheetData.Values[rowIndex];
-                    for (int colIndex = 0; colIndex < row.Count; colIndex++)
+                    foreach (var cell in row)
                     {
-                        var cellValue = row[colIndex]?.ToString();
-                        if (!string.IsNullOrEmpty(cellValue) && cellValue.Contains(keyword))
-                        {
-                            cnt++;
-                            VGCPaste_TB.Text += ($"队伍{cnt}:{cellValue}") + Environment.NewLine;
-                        }
+                        string? value = cell?.ToString();
+                        if (string.IsNullOrEmpty(value) || !value.Contains("pokepast.es", StringComparison.OrdinalIgnoreCase))
+                            continue;
+
+                        result.AppendLine($"队伍{++count}:{value}");
                     }
                 }
-                if (cnt == 0)
-                    VGCPaste_TB.Text += ("此表格没有队伍");
             }
-            else
-            {
-                VGCPaste_TB.Text += ("此表格没有队伍");
-            }
+
+            if (count == 0)
+                result.Append("此表格没有队伍");
+            return result.ToString();
         }
-        private void VGCPastes_Click(object sender, EventArgs e)
+
+        private async void VGCPastes_Click(object sender, EventArgs e)
         {
             VGCPaste_TB.Clear();
-            Task.Factory.StartNew(() => { GoogleSheet(); }, VGCPastestokenSource.Token);
-        }
-        private void CVGC_BTN_Click(object sender, EventArgs e)
-        {
-            List<string> st;
-            var config = PluginConfig.LoadConfig();
-            var sheetsService = new SheetsService(new BaseClientService.Initializer()
+            if (VGCExcel_CB.SelectedValue is not string sheetName)
+                return;
+
+            try
             {
-                ApiKey = config.GoogleapiKey,
-                ApplicationName = config.GoogleapiKey
-            });
-            string spreadsheetId = "1axlwmzPA49rYkqXh7zHvAtSP-TKbM0ijGYBPRflLSWw";
-            st = GetSheetTitles(sheetsService, spreadsheetId);
-            VGCExcel_CB.DataSource = st;
+                using var service = CreateSheetsService();
+                VGCPaste_TB.Text = await GetPasteLinksAsync(service, sheetName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"读取 Google 表格失败：{ex.Message}");
+            }
+        }
+
+        private async void CVGC_BTN_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using var service = CreateSheetsService();
+                VGCExcel_CB.DataSource = await GetSheetTitlesAsync(service);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"读取 Google 表格目录失败：{ex.Message}");
+            }
         }
         private async void CheckS_BTN_Click(object sender, EventArgs e)
         {

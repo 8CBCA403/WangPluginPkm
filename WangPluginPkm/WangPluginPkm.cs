@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Media;
+using System.Threading;
 using System.Windows.Forms;
 using WangPluginPkm.PluginUtil;
 
@@ -13,24 +14,37 @@ namespace WangPluginPkm
         private const string ParentMenuName = "SuperWang";
         private const string ParentMenuText = "超王插件PKM";
         private const string ParentMenuParent = "Menu_Tools";
-        private SoundPlayer Player = new SoundPlayer();
+        private static readonly SoundPlayer Player = new();
+        private static int HostInitialized;
         public abstract string Name { get; }
         public abstract int Priority { get; }
         public ISaveFileProvider SaveFileEditor { get; private set; } = null!;
         public IPKMView PKMEditor { get; private set; } = null!;
 
-        public IEncounterGenerator EncounterGenerator { get; private set; } = null!;
-        public object[] globalArgs;
-
         public void Initialize(params object[] args)
         {
+            SaveFileEditor = Array.Find(args, z => z is ISaveFileProvider) as ISaveFileProvider
+                ?? throw new ArgumentException("Missing save file provider.", nameof(args));
+            PKMEditor = Array.Find(args, z => z is IPKMView) as IPKMView
+                ?? throw new ArgumentException("Missing PKM editor.", nameof(args));
+            var menu = Array.Find(args, z => z is ToolStrip) as ToolStrip
+                ?? throw new ArgumentException("Missing PKHeX menu strip.", nameof(args));
+
+            if (Interlocked.Exchange(ref HostInitialized, 1) == 0)
+                InitializeHost();
+
+            LoadMenuStrip(menu);
+        }
+
+        private static void InitializeHost()
+        {
             var config = PluginConfig.LoadConfig();
-            globalArgs = args;
             var timer = new System.Windows.Forms.Timer();
-            timer.Interval = 500; 
+            timer.Interval = 500;
             timer.Tick += (_, _) =>
             {
-                timer.Stop(); 
+                timer.Stop();
+                timer.Dispose();
                 var mainForm = Application.OpenForms
                     .Cast<Form>()
                     .FirstOrDefault(f => f.GetType().Name.Contains("PKHeX") || f.Name.Contains("Main"));
@@ -41,20 +55,16 @@ namespace WangPluginPkm
                 }
             };
             timer.Start();
-            SaveFileEditor = (ISaveFileProvider)Array.Find(args, z => z is ISaveFileProvider);
-            PKMEditor = (IPKMView)Array.Find(args, z => z is IPKMView);
-            var menu = (ToolStrip)Array.Find(args, z => z is ToolStrip);
             if (config.OpenSound)
             {
                 Player.Stream = Properties.Resources.SuperSound;
                 Player.Play();
             }
-            LoadMenuStrip(menu);
         }
         private void LoadMenuStrip(ToolStrip menuStrip)
         {
-            var items = menuStrip.Items;
-            if (items.Find(ParentMenuParent, false)[0] is not ToolStripDropDownItem tools)
+            var matches = menuStrip.Items.Find(ParentMenuParent, false);
+            if (matches.Length == 0 || matches[0] is not ToolStripDropDownItem tools)
                 return;
             var toolsitems = tools.DropDownItems;
             var modmenusearch = toolsitems.Find(ParentMenuName, false);
@@ -63,8 +73,8 @@ namespace WangPluginPkm
         }
         private static ToolStripMenuItem GetModMenu(ToolStripDropDownItem tools, IReadOnlyList<ToolStripItem> search)
         {
-            if (search.Count != 0)
-                return (ToolStripMenuItem)search[0];
+            if (search.Count != 0 && search[0] is ToolStripMenuItem existing)
+                return existing;
 
             var modmenu = CreateBaseGroupItem();
             tools.DropDownItems.Insert(0, modmenu);

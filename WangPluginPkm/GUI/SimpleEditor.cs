@@ -141,7 +141,7 @@ namespace WangPluginPkm.GUI
             pk.EV_SPE = pkm.EV_SPE;
             pk.Nature = pkm.Nature;
             pk.AbilityNumber = pkm.AbilityNumber;
-            pk.StatNature = pkm.StatNature;
+            pk.StatAlignment = pkm.StatAlignment;
             pk.CurrentLevel = pkm.CurrentLevel;
             pk.Ball = pkm.Ball;
             pk.GV_ATK = 7;

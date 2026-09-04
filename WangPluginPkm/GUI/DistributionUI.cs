@@ -137,7 +137,7 @@ namespace WangPluginPkm.GUI
             for (int i = 0; i < 30; i++)
             {
                 var pk = Editor.Data.Clone();
-                pk.StatNature = Editor.Data.StatNature;
+                pk.StatAlignment = Editor.Data.StatAlignment;
                 pk.Move1_PPUps = Editor.Data.Move1_PPUps;
                 pk.Move2_PPUps = Editor.Data.Move2_PPUps;
                 pk.Move3_PPUps = Editor.Data.Move3_PPUps;
@@ -171,7 +171,7 @@ namespace WangPluginPkm.GUI
                     pk.Language = 9;
                     pk.ClearNickname();
                 }
-                pk.StatNature = pk.Nature;
+                pk.StatAlignment = pk.Nature;
                 if (Ball_Box.Checked)
                 {
                     pk.Ball = (byte)(int)ball;
@@ -210,7 +210,7 @@ namespace WangPluginPkm.GUI
             for (int i = 0; i < 5; i++)
             {
                 var pk = Editor.Data.Clone();
-                pk.StatNature = Editor.Data.StatNature;
+                pk.StatAlignment = Editor.Data.StatAlignment;
                 pk.Move1_PPUps = Editor.Data.Move1_PPUps;
                 pk.Move2_PPUps = Editor.Data.Move2_PPUps;
                 pk.Move3_PPUps = Editor.Data.Move3_PPUps;
@@ -302,9 +302,9 @@ namespace WangPluginPkm.GUI
                 {
                     pk.IVs = c[j].IVs;
                     pk.Nature = (Nature)c[j].Nature;
-                    pk.StatNature = pk.Nature;
+                    pk.StatAlignment = pk.Nature;
                 }
-                pk.StatNature = (Nature)c[j].Nature;
+                pk.StatAlignment = (Nature)c[j].Nature;
                 pk.SetEVs(c[j].EVs);
 
                 pk.Move1_PPUps = 3;
@@ -388,7 +388,7 @@ namespace WangPluginPkm.GUI
         }
         private void EC(PKM pk)
         {
-            if (pk.Species is not 946 or 917 or 998 or 999 or 996 or 997 or 995 or 997)
+            if (pk.Species is not (946 or 917 or 998 or 999 or 996 or 997 or 995))
             {
                 if (pk.MetLocation != 30024)
                     pk.SetRandomEC();
@@ -900,7 +900,7 @@ namespace WangPluginPkm.GUI
                                    break;
                            }
 
-                     pkc.StatNature = pkc.Nature;
+                     pkc.StatAlignment = pkc.Nature;
 
                      if (SetTrainer_Box.Checked)
                      {
@@ -988,7 +988,7 @@ namespace WangPluginPkm.GUI
                             pk.CurrentLevel = (byte)Level_NUM.Value;
                             break;
                         case 9:
-                            pk.StatNature = (Nature)NA_CB.SelectedIndex;
+                            pk.StatAlignment = (Nature)NA_CB.SelectedIndex;
                             break;
                         case 10:
                             ((PK9)pk).TeraTypeOverride = Tera_CB.SelectedIndex == 18 ? (MoveType)99 : (MoveType)Tera_CB.SelectedIndex;

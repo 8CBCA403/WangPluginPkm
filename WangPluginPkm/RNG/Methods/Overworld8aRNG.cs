@@ -90,7 +90,7 @@ namespace WangPluginPkm.RNG.Methods
             pk.RefreshAbility((int)rand.NextInt(2));
             pk.Gender = pk.GetSaneGender();
             int nature = (int)rand.NextInt(25);
-            pk.StatNature = pk.Nature = (Nature)nature;
+            pk.StatAlignment = pk.Nature = (Nature)nature;
             PA8 pa = (PA8)pk;
             var (height, weight) = pa.IsAlpha
                 ? (byte.MaxValue, byte.MaxValue)

@@ -157,7 +157,7 @@ namespace WangPluginPkm.PluginUtil.DisBase
 
 
             }
-            pk.StatNature = pk.Nature;
+            pk.StatAlignment = pk.Nature;
             return pk;
         }
 

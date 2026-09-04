@@ -169,7 +169,7 @@ namespace WangPluginPkm.GUI
                         }
                         pkm.Nature = (Nature)(int)(pkm.PID % 25);
                         pkm.Gender = EntityGender.GetFromPID(pkm.Species, pkm.PID);
-                        pkm.StatNature = pkm.Nature;
+                        pkm.StatAlignment = pkm.Nature;
                         pkm.EncryptionConstant = pkm.PID;
                         pkm.RefreshChecksum();
 
@@ -209,7 +209,7 @@ namespace WangPluginPkm.GUI
                         pkm.SetIVs(ivs);
                         pkm.Gender = EntityGender.GetFromPID(pkm.Species, pkm.PID);
                         pkm.Nature = (Nature)(pkm.PID % 25);
-                        pkm.StatNature = pkm.Nature;
+                        pkm.StatAlignment = pkm.Nature;
                         pkm.EncryptionConstant = pkm.PID;
                         pkm.RefreshAbility((int)(pkm.PID & 1));
                         Span<int> abilityarray = stackalloc int[10]; ;
@@ -339,7 +339,7 @@ namespace WangPluginPkm.GUI
                 pkm.Ability = va.Ability;
                 pkm.AbilityNumber = va.AbilityNumber;
                 pkm.Nature = va.Nature;
-                pkm.StatNature = va.StatNature;
+                pkm.StatAlignment = va.StatAlignment;
                 pkm.Gender = va.Gender;
                 pkm.EncryptionConstant = va.EncryptionConstant;
                 if (pkm is IScaledSize s && va is IScaledSize p)
@@ -516,7 +516,7 @@ namespace WangPluginPkm.GUI
                     }
                     pkm.Nature = (Nature)(int)(pkm.PID % 25);
                     pkm.Gender = EntityGender.GetFromPID(pkm.Species, pkm.PID);
-                    pkm.StatNature = pkm.Nature;
+                    pkm.StatAlignment = pkm.Nature;
                     pkm.EncryptionConstant = pkm.PID;
                     pkm.RefreshChecksum();
 
@@ -556,7 +556,7 @@ namespace WangPluginPkm.GUI
                     pkm.SetIVs(ivs);
                     pkm.Gender = EntityGender.GetFromPID(pkm.Species, pkm.PID);
                     pkm.Nature = (Nature)(int)(pkm.PID % 25);
-                    pkm.StatNature = pkm.Nature;
+                    pkm.StatAlignment = pkm.Nature;
                     pkm.EncryptionConstant = pkm.PID;
                     pkm.RefreshAbility((int)(pkm.PID & 1));
                     Span<int> abilityarray = stackalloc int[10]; ;
@@ -681,7 +681,7 @@ namespace WangPluginPkm.GUI
                 pkm.Ability = va.Ability;
                 pkm.AbilityNumber = va.AbilityNumber;
                 pkm.Nature = va.Nature;
-                pkm.StatNature = va.StatNature;
+                pkm.StatAlignment = va.StatAlignment;
                 pkm.Gender = va.Gender;
                 pkm.EncryptionConstant = va.EncryptionConstant;
                 if (pkm is IScaledSize s && va is IScaledSize p)

@@ -245,7 +245,7 @@ namespace WangPluginPkm.GUI
                 SetEggNicknameByLanguage(pkm);
                 pkm.Version = 0;
                 pkm.MetLocation = 0;
-                pkm.StatNature = pkm.Nature;
+                pkm.StatAlignment = pkm.Nature;
             }
 
             pkm.OriginalTrainerFriendship = 1;

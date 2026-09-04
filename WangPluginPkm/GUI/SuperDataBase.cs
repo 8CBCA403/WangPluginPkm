@@ -121,17 +121,17 @@ namespace WangPluginPkm.GUI
             switch (SAV.SAV.Generation)
             {
                 case 8:
-                    SNA_CB.SelectedIndex = (int)((PK8)Editor.Data).StatNature;
+                    SNA_CB.SelectedIndex = (int)((PK8)Editor.Data).StatAlignment;
                     break;
                 case 9:
                     if (SAV.SAV.Version != GameVersion.ZA)
                     {
-                        SNA_CB.SelectedIndex = (int)((PK9)Editor.Data).StatNature;
+                        SNA_CB.SelectedIndex = (int)((PK9)Editor.Data).StatAlignment;
                         Tera_CB.SelectedIndex = (int)((PK9)Editor.Data).TeraType == 99 ? 18 : (int)((PK9)Editor.Data).TeraType;
                     }
                     else
                     {
-                        SNA_CB.SelectedIndex = (int)((PA9)Editor.Data).StatNature;
+                        SNA_CB.SelectedIndex = (int)((PA9)Editor.Data).StatAlignment;
                     }
                     break;
                 default:
@@ -257,10 +257,10 @@ namespace WangPluginPkm.GUI
             switch (SAV.SAV.Generation)
             {
                 case 8:
-                    lp.StatNature = SNA_CB.SelectedIndex;
+                    lp.StatAlignment = SNA_CB.SelectedIndex;
                     break;
                 case 9:
-                    lp.StatNature = SNA_CB.SelectedIndex;
+                    lp.StatAlignment = SNA_CB.SelectedIndex;
                     if (SAV.SAV.Version != GameVersion.ZA)
                         lp.TeraType = Tera_CB.SelectedIndex == 18 ? 99 : Tera_CB.SelectedIndex;
                     break;
@@ -305,10 +305,10 @@ namespace WangPluginPkm.GUI
                     switch (SAV.SAV.Generation)
                     {
                         case 8:
-                            lp.StatNature = TryParseInt(STarray.ElementAtOrDefault(0));
+                            lp.StatAlignment = TryParseInt(STarray.ElementAtOrDefault(0));
                             break;
                         case 9:
-                            lp.StatNature = TryParseInt(STarray.ElementAtOrDefault(0));
+                            lp.StatAlignment = TryParseInt(STarray.ElementAtOrDefault(0));
                             if (SAV.SAV.Version != GameVersion.ZA)
                                 lp.TeraType = TryParseInt(STarray.ElementAtOrDefault(1));
                             break;
@@ -376,10 +376,10 @@ namespace WangPluginPkm.GUI
                 switch (SAV.SAV.Generation)
                 {
                     case 8:
-                        SNA_CB.SelectedIndex = x.StatNature;
+                        SNA_CB.SelectedIndex = x.StatAlignment;
                         break;
                     case 9:
-                        SNA_CB.SelectedIndex = x.StatNature;
+                        SNA_CB.SelectedIndex = x.StatAlignment;
                         if (SAV.SAV.Version != GameVersion.ZA)
                             Tera_CB.SelectedIndex = x.TeraType == 99 ? 18 : x.TeraType;
                         break;
@@ -508,7 +508,7 @@ namespace WangPluginPkm.GUI
                                     pk.CurrentLevel = (byte)litePKs[i].CurrentLevel;
                                     break;
                                 case 11:
-                                    pk.StatNature = (Nature)litePKs[i].StatNature;
+                                    pk.StatAlignment = (Nature)litePKs[i].StatAlignment;
                                     break;
                                 case 12:
                                     if (SAV.SAV.Version != GameVersion.ZA)
@@ -598,10 +598,10 @@ namespace WangPluginPkm.GUI
             switch (SAV.SAV.Generation)
             {
                 case 8:
-                    pk.StatNature = SNA_CB.SelectedIndex;
+                    pk.StatAlignment = SNA_CB.SelectedIndex;
                     break;
                 case 9:
-                    pk.StatNature = SNA_CB.SelectedIndex;
+                    pk.StatAlignment = SNA_CB.SelectedIndex;
                     if (SAV.SAV.Version != GameVersion.ZA)
                         pk.TeraType = Tera_CB.SelectedIndex == 18 ? 99 : Tera_CB.SelectedIndex;
                     break;
@@ -834,16 +834,16 @@ namespace WangPluginPkm.GUI
             switch (SAV.SAV.Generation)
             {
                 case 8:
-                    lp.StatNature = (int)((PK8)pk).StatNature;
+                    lp.StatAlignment = (int)((PK8)pk).StatAlignment;
                     break;
                 case 9:
                     if (SAV.SAV.Version != GameVersion.ZA)
                     {
-                        lp.StatNature = (int)((PK9)pk).StatNature;
+                        lp.StatAlignment = (int)((PK9)pk).StatAlignment;
                         lp.TeraType = (int)((PK9)pk).TeraType;
                     }
                     else
-                        lp.StatNature = (int)((PA9)pk).StatNature;
+                        lp.StatAlignment = (int)((PA9)pk).StatAlignment;
                     break;
                 default:
                     break;

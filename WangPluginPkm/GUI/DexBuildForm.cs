@@ -288,6 +288,7 @@ namespace WangPluginPkm.GUI
             SAV.ReloadSlots();
         }
 
+#nullable enable
         private static Func<PKM, IComparable>[]? GetSortFunctionsByVersion(string v) => v switch
         {
             "RYBG" => Gen1_Kanto.GetSortFunctions(),
@@ -313,6 +314,7 @@ namespace WangPluginPkm.GUI
             "SV" => Gen9__Paldea.GetSortFunctions(),
             _ => null
         };
+#nullable restore
 
         private static void RunTimed(string label, Action action)
         {

@@ -10,16 +10,17 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WangPluginPkm.GUI;
-using static System.Net.WebRequestMethods;
 
 namespace WangPluginPkm.Plugins
 {
     public class SimpleEditorPlugin : WangPluginPkm
     {
+        private static readonly HttpClient HttpClient = new();
         public override string Name => "常用功能/Simple Editor";
         public override int Priority => 13;
         public static GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
@@ -47,7 +48,6 @@ namespace WangPluginPkm.Plugins
                     insertSlotButton.Click += (s, e) =>
                          InsertSlot(SaveFileEditor.CurrentBox, info.Slot.Slot);
                     var pk = info.Slot.Read(SaveFileEditor.SAV);
-                    PKM p = PKMEditor.Data;
                     var la = new LegalityAnalysis(pk);
                     var ATKIVEV = new ToolStripMenuItem("物攻手");
                     var SPAIVEV = new ToolStripMenuItem("特攻手");
@@ -73,9 +73,17 @@ namespace WangPluginPkm.Plugins
                     IVEVN.DropDownItems.Add(ATK_0SPEIVEV);
                     IVEVN.DropDownItems.Add(SPA_0SPEIVEV);
                     IVEVN.DropDownItems.Add(TANKIVEV);
-                    SavePDF.Click += (s, e) =>
+                    SavePDF.Click += async (s, e) =>
                     {
-                        CreatePDF(la.Report(true), pk);
+                        try
+                        {
+                            await CreatePdfAsync(la.Report(true), pk);
+                            MessageBox.Show("已生成合法检测报告");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"生成检测报告失败：{ex.Message}");
+                        }
                     };
                     clearnick.Click += (s, e) =>
                     {
@@ -106,11 +114,14 @@ namespace WangPluginPkm.Plugins
                     {
                         info.Slot.WriteTo(SaveFileEditor.SAV, CommonIVEVSetting.TANKIVEV(pk));
                     };
-                    menuVSD.Closing += (s, e) => menuVSD.Items.Remove(insertSlotButton);
-                    menuVSD.Closing += (s, e) => menuVSD.Items.Remove(IVEVN);
-                    menuVSD.Closing += (s, e) => menuVSD.Items.Remove(SavePDF);
-                    menuVSD.Closing += (s, e) => menuVSD.Items.Remove(clearnick);
-                    menuVSD.Closing += (s, e) => menuVSD.Items.Remove(changeid);
+                    ToolStripItem[] transientItems = [insertSlotButton, IVEVN, SavePDF, clearnick, changeid];
+                    void Cleanup(object _, ToolStripDropDownClosingEventArgs __)
+                    {
+                        foreach (var item in transientItems)
+                            menuVSD.Items.Remove(item);
+                        menuVSD.Closing -= Cleanup;
+                    }
+                    menuVSD.Closing += Cleanup;
                 }
             };
         }
@@ -189,16 +200,20 @@ namespace WangPluginPkm.Plugins
             SaveFileEditor.ReloadSlots();
         }
 
-        private static async void CreatePDF(string result, PKM p)
+        private static async Task CreatePdfAsync(string result, PKM p)
         {
             var config = PluginConfig.LoadConfig();
             string sp = p.Species.ToString().PadLeft(4, '0');
-            string baseuri = $"{config.PokemonPicUrl}" + $"{sp}" + ".png";
+            string baseuri = $"{config.PokemonPicUrl}{sp}.png";
             Uri siteUri = new Uri(baseuri);
-            PdfFont f1 = PdfFontFactory.CreateFont(@"Plugins\WangPluginPkm\simkai.ttf");
-            PdfWriter writer = new PdfWriter(@"Plugins\WangPluginPkm\Reports\" + $"超王宝可梦合法性检测报告-{GameStringsZh.Species[p.Species]}{p.EncryptionConstant:X}.pdf");
-            PdfDocument pdf = new PdfDocument(writer);
-            Document document = new Document(pdf);
+            string pluginDirectory = Path.Combine(AppContext.BaseDirectory, "Plugins", "WangPluginPkm");
+            string reportsDirectory = Path.Combine(pluginDirectory, "Reports");
+            Directory.CreateDirectory(reportsDirectory);
+            string reportPath = Path.Combine(reportsDirectory, $"超王宝可梦合法性检测报告-{GameStringsZh.Species[p.Species]}{p.EncryptionConstant:X}.pdf");
+            PdfFont f1 = PdfFontFactory.CreateFont(Path.Combine(pluginDirectory, "simkai.ttf"));
+            using PdfWriter writer = new(reportPath);
+            using PdfDocument pdf = new(writer);
+            using Document document = new(pdf);
             Paragraph header1 = new Paragraph($"超王宝可梦合法性检测报告")
                 .SetTextAlignment(TextAlignment.CENTER)
                 .SetFontSize(20).SetFont(f1);
@@ -223,8 +238,6 @@ namespace WangPluginPkm.Plugins
             document.Add(subheader);
             document.Add(ls);
             document.Add(content);
-            document.Close();
-            MessageBox.Show("已生成合法检测报告");
         }
         public static byte[]? ImageToByte(System.Drawing.Image img)
         {
@@ -232,21 +245,16 @@ namespace WangPluginPkm.Plugins
             var result = converter.ConvertTo(img, typeof(byte[])) as byte[];
             return result;
         }
-        public async static Task<Bitmap> LoadImage(Uri uri)
+        public static async Task<Bitmap> LoadImage(Uri uri)
         {
             Bitmap bitmapImage = new(Properties.Resources.SuperWang);
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
-                    using (var response = await client.GetAsync(uri))
-                    {
-                        response.EnsureSuccessStatusCode();
-                        System.IO.Stream responseStream = response.Content.ReadAsStream();
-                        bitmapImage = new Bitmap(responseStream);
-                        return bitmapImage;
-                    }
-                }
+                using var response = await HttpClient.GetAsync(uri);
+                response.EnsureSuccessStatusCode();
+                await using Stream responseStream = await response.Content.ReadAsStreamAsync();
+                using Bitmap downloaded = new(responseStream);
+                return new Bitmap(downloaded);
             }
             catch (Exception ex)
             {

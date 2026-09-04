@@ -40,7 +40,7 @@ namespace WangPluginPkm
             {
                 //  enc.ConvertToPKM(enc.Context);
                 pk.RefreshAbility(iterPKM.AbilityNumber >> 1);
-                pk.StatNature = iterPKM.StatNature;
+                pk.StatAlignment = iterPKM.StatAlignment;
                 return;
             }
 
@@ -64,7 +64,7 @@ namespace WangPluginPkm
             if (FormInfo.IsFormChangeable(pk.Species, pk.Form, iterPKM.Form, (EntityContext)pk.Format, (EntityContext)iterPKM.Format))
                 pk.Form = iterPKM.Form; // set alt form if it can be freely changed!
             pk.RefreshAbility(iterPKM.AbilityNumber >> 1);
-            pk.StatNature = iterPKM.StatNature;
+            pk.StatAlignment = iterPKM.StatAlignment;
         }
         public static ulong GetRandomULong()
         {

@@ -113,7 +113,7 @@ public static class LumioseRNG
         // Compromise on Nature -- some are fixed, some are random. If the request wants a specific nature, just mint it.
         if (criteria.IsSpecifiedNature() && !criteria.IsSatisfiedNature(nature))
             return false;
-        pk.Nature = pk.StatNature = nature;
+        pk.Nature = pk.StatAlignment = nature;
 
         pk.Scale = enc.SizeType.GetSizeValue(enc.Scale, ref rand);
         return true;
@@ -570,7 +570,7 @@ public static class LumioseRNG
         // Compromise on Nature -- some are fixed, some are random. If the request wants a specific nature, just mint it.
         if (criteria.IsSpecifiedNature() && !criteria.IsSatisfiedNature(nature))
             return pk;
-        pk.Nature = pk.StatNature = nature;
+        pk.Nature = pk.StatAlignment = nature;
 
         pk.Scale = enc.SizeType.GetSizeValue(enc.Scale, ref rand);
         return pk;
