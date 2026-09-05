@@ -1,4 +1,4 @@
-﻿using Google.Apis.Sheets.v4.Data;
+using Google.Apis.Sheets.v4.Data;
 using Microsoft.Z3;
 using PKHeX.Core;
 using System;
@@ -7,7 +7,7 @@ using static iText.Layout.Borders.Border;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace WangPluginPkm.GUI
 {
-    public partial class MutiCalcUI : Form
+    public partial class MutiCalcUI : PluginForm
     {
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }

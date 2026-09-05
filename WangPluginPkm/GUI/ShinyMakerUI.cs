@@ -1,4 +1,4 @@
-﻿using PKHeX.Core;
+using PKHeX.Core;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -9,7 +9,7 @@ using Overworld8RNG = WangPluginPkm.RNG.Methods.Overworld8RNG;
 
 namespace WangPluginPkm.GUI
 {
-    partial class ShinyMakerUI : Form
+    partial class ShinyMakerUI : PluginForm
     {
         public static uint XorNumber;
         public static Stopwatch sw = new();

@@ -1,4 +1,4 @@
-﻿using PKHeX.Core;
+using PKHeX.Core;
 using PKHeX.Core.AutoMod;
 using PKHeX.Core.Enhancements;
 using System;
@@ -13,7 +13,7 @@ using WangPluginPkm.PluginUtil.ModifyPKM;
 
 namespace WangPluginPkm.GUI
 {
-    public partial class SuperDataBase : Form
+    public partial class SuperDataBase : PluginForm
     {
         public static GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
         private ISaveFileProvider SAV { get; }
@@ -38,7 +38,8 @@ namespace WangPluginPkm.GUI
 
         private void BindingData()
         {
-            // Reuse the same move arrays rather than cloning multiple times
+            // Each selector needs its own currency manager; sharing an array also
+            // shares the selected position through the form's BindingContext.
             var moves = GameStringsZh.Move.ToArray();
             var rems = GameStringsZh.Move.ToArray();
 
@@ -56,14 +57,14 @@ namespace WangPluginPkm.GUI
             var moveComboBoxes = new[] { MOV1_CB, MOV2_CB, MOV3_CB, MOV4_CB };
             for (int i = 0; i < moveComboBoxes.Length; i++)
             {
-                moveComboBoxes[i].DataSource = moves;
+                moveComboBoxes[i].DataSource = moves.ToArray();
                 moveComboBoxes[i].AutoCompleteCustomSource = auto(moves);
             }
 
             var remComboBoxes = new[] { REM1_CB, REM2_CB, REM3_CB, REM4_CB };
             for (int i = 0; i < remComboBoxes.Length; i++)
             {
-                remComboBoxes[i].DataSource = rems;
+                remComboBoxes[i].DataSource = rems.ToArray();
                 remComboBoxes[i].AutoCompleteCustomSource = auto(rems);
             }
 
@@ -121,7 +122,7 @@ namespace WangPluginPkm.GUI
             switch (SAV.SAV.Generation)
             {
                 case 8:
-                    SNA_CB.SelectedIndex = (int)((PK8)Editor.Data).StatAlignment;
+                    SNA_CB.SelectedIndex = (int)Editor.Data.StatAlignment;
                     break;
                 case 9:
                     if (SAV.SAV.Version != GameVersion.ZA)
@@ -834,7 +835,7 @@ namespace WangPluginPkm.GUI
             switch (SAV.SAV.Generation)
             {
                 case 8:
-                    lp.StatAlignment = (int)((PK8)pk).StatAlignment;
+                    lp.StatAlignment = (int)pk.StatAlignment;
                     break;
                 case 9:
                     if (SAV.SAV.Version != GameVersion.ZA)

@@ -1,4 +1,4 @@
-﻿using PKHeX.Core;
+using PKHeX.Core;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -19,7 +19,7 @@ using WangPluginPkm.RNG;
 
 namespace WangPluginPkm.GUI
 {
-    public partial class RNGForm : Form
+    public partial class RNGForm : PluginForm
     {
         public enum SearchGender : byte { Male = 0, Female = 1, Genderless = 2 }
         public CheckRules rules = new();

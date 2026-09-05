@@ -1,4 +1,4 @@
-﻿using PKHeX.Core;
+using PKHeX.Core;
 using PKHeX.Core.Searching;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace WangPluginPkm.GUI
 {
-    partial class SimpleEditor : Form
+    partial class SimpleEditor : PluginForm
     {
 
         private IPKMView Editor { get; }

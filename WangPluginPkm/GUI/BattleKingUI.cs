@@ -1,4 +1,4 @@
-﻿using Google.Apis.Services;
+using Google.Apis.Services;
 using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
 using HtmlAgilityPack;
@@ -26,7 +26,7 @@ using WangPluginPkm.PluginUtil.ModifyPKM;
 
 namespace WangPluginPkm.GUI
 {
-    partial class BattleKingUI : Form
+    partial class BattleKingUI : PluginForm
     {
         private const string VgcSpreadsheetId = "1axlwmzPA49rYkqXh7zHvAtSP-TKbM0ijGYBPRflLSWw";
         int n = 0;
@@ -65,25 +65,30 @@ namespace WangPluginPkm.GUI
 
         private async void LoadBattleTeam_BTN_Click(object sender, EventArgs e)
         {
-            var url = UrlBox.Text.Trim();
-            var suburl = url.Split('\n');
+            var suburl = UrlBox.Text.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
             if (suburl.Length == 0)
                 return;
 
-            await Task.Run(() =>
+            LoadBattleTeam_BTN.Enabled = false;
+            try
             {
                 for (int i = 0; i < suburl.Length; i++)
                 {
                     TeamPasteInfo info;
                     try
                     {
-                        info = new TeamPasteInfo(suburl[i]);
+                        // Fetch/parse away from the UI thread, then import on the
+                        // captured UI context (PopulateFields and ReloadSlots).
+                        info = await Task.Run(() => new TeamPasteInfo(suburl[i]), PastetokenSource.Token);
                     }
                     catch
                     {
-                        MessageBox.Show("An error occurred while trying to obtain the contents of the URL.");
+                        if (!IsDisposed)
+                            MessageBox.Show(this, "An error occurred while trying to obtain the contents of the URL.");
                         return;
                     }
+                    if (IsDisposed || Disposing)
+                        return;
                     if (!info.Valid)
                     {
                         MessageBox.Show("The data inside the URL are not valid Showdown Sets");
@@ -96,9 +101,18 @@ namespace WangPluginPkm.GUI
                     }
                     Import(info.Sets);
                 }
-            }, PastetokenSource.Token);
-
-            MessageBox.Show($"导入了{suburl.Length}个队伍");
+                MessageBox.Show(this, $"已处理{suburl.Length}个队伍链接，请以编辑器和盒子中的结果为准。");
+            }
+            catch (Exception ex)
+            {
+                if (!IsDisposed)
+                    MessageBox.Show(this, $"导入失败：{ex.Message}");
+            }
+            finally
+            {
+                if (!IsDisposed)
+                    LoadBattleTeam_BTN.Enabled = true;
+            }
         }
 
         private void LoadTeamFromPSCode_BTN_Click(object sender, EventArgs e)

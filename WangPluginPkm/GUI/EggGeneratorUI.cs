@@ -1,4 +1,4 @@
-﻿using PKHeX.Core;
+using PKHeX.Core;
 using PKHeX.Core.AutoMod;
 using PKHeX.Core.Searching;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Windows.Forms;
 namespace WangPluginPkm.GUI
 {
-    partial class EggGeneratorUI : Form
+    partial class EggGeneratorUI : PluginForm
     {
 
         public enum BOX

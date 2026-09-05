@@ -1,4 +1,4 @@
-﻿using PKHeX.Core;
+using PKHeX.Core;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,7 +16,7 @@ using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 
 namespace WangPluginPkm.GUI
 {
-    partial class DexBuildForm : Form
+    partial class DexBuildForm : PluginForm
     {
         public static GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
         private static readonly Random rand = new();

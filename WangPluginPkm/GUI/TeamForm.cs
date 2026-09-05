@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 using WangPluginPkm.PluginUtil.BattleKingBase;
 
 namespace WangPluginPkm.GUI
 {
-    public partial class TeamForm : Form
+    public partial class TeamForm : PluginForm
     {
         public int i = 0;
         public TeamForm(int n)

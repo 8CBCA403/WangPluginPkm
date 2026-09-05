@@ -1,4 +1,4 @@
-﻿using PKHeX.Core;
+using PKHeX.Core;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +8,7 @@ using static System.Buffers.Binary.BinaryPrimitives;
 
 namespace WangPluginPkm.GUI
 {
-    partial class ExtraFileEditor : Form
+    partial class ExtraFileEditor : PluginForm
     {
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }

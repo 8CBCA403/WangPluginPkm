@@ -1,4 +1,4 @@
-﻿using PKHeX.Core;
+using PKHeX.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using static WangPluginPkm.PluginUtil.PluginEnums.GUIEnums;
 
 namespace WangPluginPkm.GUI
 {
-    partial class DistributionUI : Form
+    partial class DistributionUI : PluginForm
     {
         private const string TrainerFilter = "Trainer Info |*.txt|All Files|*.*";
         private List<string> EditType = new List<string>();

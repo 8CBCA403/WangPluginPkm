@@ -1,4 +1,4 @@
-﻿using PKHeX.Core;
+using PKHeX.Core;
 using System;
 using System.Windows.Forms;
 
@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace WangPluginPkm.GUI
 {
-    internal class TESTForm : Form
+    internal class TESTForm : PluginForm
     {
         private Button SetAll_BTN;
 

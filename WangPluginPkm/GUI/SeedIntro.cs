@@ -1,7 +1,7 @@
-﻿using System.Windows.Forms;
+using System.Windows.Forms;
 namespace WangPluginPkm.GUI
 {
-    public partial class SeedIntro : Form
+    public partial class SeedIntro : PluginForm
     {
         public SeedIntro()
         {
