@@ -18,7 +18,7 @@ namespace WangPluginPkm.GUI
 {
     partial class DexBuildForm : PluginForm
     {
-        public static GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
+        public static GameStrings GameStringsZh = GameInfo.GetStrings(PluginLocalization.Language);
         private static readonly Random rand = new();
         public static readonly Stopwatch sw = new();
         private readonly SoundPlayer Player = new();
@@ -321,7 +321,7 @@ namespace WangPluginPkm.GUI
             sw.Start();
             action();
             sw.Stop();
-            MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", label);
+            global::WangPluginPkm.PluginMessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", label);
             sw.Reset();
         }
 
@@ -329,7 +329,7 @@ namespace WangPluginPkm.GUI
         {
             Gen(SAV);
             SAV.ReloadSlots();
-            MessageBox.Show("搞定了！");
+            global::WangPluginPkm.PluginMessageBox.Show("搞定了！");
 
         }
         private void BuildDex_BTN_Click(object sender, EventArgs e)
@@ -344,7 +344,7 @@ namespace WangPluginPkm.GUI
         {
             LegalBox(SAV);
             SAV.ReloadSlots();
-            MessageBox.Show("搞定啦");
+            global::WangPluginPkm.PluginMessageBox.Show("搞定啦");
         }
         private void LegalAll_BTN_Click(object sender, EventArgs e)
         {
@@ -374,7 +374,7 @@ namespace WangPluginPkm.GUI
                 if (fns != null)
                     SortByRegionalDex(fns);
             }
-            MessageBox.Show("排序完成", "SuperWang");
+            global::WangPluginPkm.PluginMessageBox.Show("排序完成", "SuperWang");
         }
         private void DeleteBox_BTN_Click(object sender, EventArgs e)
         {
@@ -524,7 +524,7 @@ namespace WangPluginPkm.GUI
 
             if (hadError)
             {
-                MessageBox.Show(errorText);
+                global::WangPluginPkm.PluginMessageBox.Show(errorText);
                 return;
             }
 
@@ -544,14 +544,14 @@ namespace WangPluginPkm.GUI
                 }
                 if (currMon.Species != (int)Species.None)
                 {
-                    MessageBox.Show($"Box {MAXBox} Slot {MAXSlot} was erased");
+                    global::WangPluginPkm.PluginMessageBox.Show($"Box {MAXBox} Slot {MAXSlot} was erased");
                 }
                 SAV.ReloadSlots();
 
             }
             else
             {
-                MessageBox.Show($"Box {boxNum} Slot {slotNum} is already empty");
+                global::WangPluginPkm.PluginMessageBox.Show($"Box {boxNum} Slot {slotNum} is already empty");
             }
         }
         private void Run_BTN_Click(object sender, EventArgs e)
@@ -569,7 +569,7 @@ namespace WangPluginPkm.GUI
                             }
                             else
                             {
-                                MessageBox.Show("版本不对！");
+                                global::WangPluginPkm.PluginMessageBox.Show("版本不对！");
                             }
                             break;
                         case 1:
@@ -586,7 +586,7 @@ namespace WangPluginPkm.GUI
                             }
                             else
                             {
-                                MessageBox.Show("版本不对！");
+                                global::WangPluginPkm.PluginMessageBox.Show("版本不对！");
                             }
                             break;
                         case 2:
@@ -603,7 +603,7 @@ namespace WangPluginPkm.GUI
                             }
                             else
                             {
-                                MessageBox.Show("版本不对！");
+                                global::WangPluginPkm.PluginMessageBox.Show("版本不对！");
                             }
                             break;
                         case 3:
@@ -620,7 +620,7 @@ namespace WangPluginPkm.GUI
                             }
                             else
                             {
-                                MessageBox.Show("版本不对！");
+                                global::WangPluginPkm.PluginMessageBox.Show("版本不对！");
                             }
                             break;
                         case 4:
@@ -630,7 +630,7 @@ namespace WangPluginPkm.GUI
                             }
                             else
                             {
-                                MessageBox.Show("版本不对！");
+                                global::WangPluginPkm.PluginMessageBox.Show("版本不对！");
                             }
                             break;
                         case 5:
@@ -640,7 +640,7 @@ namespace WangPluginPkm.GUI
                             }
                             else
                             {
-                                MessageBox.Show("版本不对！");
+                                global::WangPluginPkm.PluginMessageBox.Show("版本不对！");
                             }
                             break;
                     }
@@ -840,7 +840,7 @@ namespace WangPluginPkm.GUI
         {
             if (SAV.SAV.Version != GameVersion.US && SAV.SAV.Version != GameVersion.UM)
             {
-                MessageBox.Show("本功能只适用于究极日月！");
+                global::WangPluginPkm.PluginMessageBox.Show("本功能只适用于究极日月！");
                 return;
             }
             RunTimed("SuperWang", () =>
@@ -868,7 +868,9 @@ namespace WangPluginPkm.GUI
                                 i++;
                             }
                         }
-                        Result.Text = $"当前存档中有{i}只属性为{GameStringsZh.Types[(int)CheckAchieve.T(subHomeAchieve)]}属性的宝可梦";
+                        Result.Text = LocalizedResult(
+                            $"当前存档中有{i}只属性为{GameStringsZh.Types[(int)CheckAchieve.T(subHomeAchieve)]}属性的宝可梦",
+                            $"The current save contains {i} Pokémon of the {GameStringsZh.Types[(int)CheckAchieve.T(subHomeAchieve)]} type.");
                     }
                     break;
                 case 2:
@@ -880,7 +882,9 @@ namespace WangPluginPkm.GUI
                                 i++;
                             }
                         }
-                        Result.Text = $"当前存档中有{i}只球种为{CheckAchieve.B(subHomeAchieve)}的宝可梦";
+                        Result.Text = LocalizedResult(
+                            $"当前存档中有{i}只球种为{CheckAchieve.B(subHomeAchieve)}的宝可梦",
+                            $"The current save contains {i} Pokémon in {CheckAchieve.B(subHomeAchieve)} balls.");
                     }
                     break;
                 case 3:
@@ -892,7 +896,9 @@ namespace WangPluginPkm.GUI
                                 i++;
                             }
                         }
-                        Result.Text = $"当前存档中有{i}只性格为{GameStringsZh.Natures[(int)CheckAchieve.N(subHomeAchieve)]}的宝可梦";
+                        Result.Text = LocalizedResult(
+                            $"当前存档中有{i}只性格为{GameStringsZh.Natures[(int)CheckAchieve.N(subHomeAchieve)]}的宝可梦",
+                            $"The current save contains {i} Pokémon with the {GameStringsZh.Natures[(int)CheckAchieve.N(subHomeAchieve)]} nature.");
                     }
                     break;
                 case 7:
@@ -907,7 +913,7 @@ namespace WangPluginPkm.GUI
                                         i++;
                                     }
                                 }
-                                Result.Text = $"当前存档中有{i}只宝可梦";
+                                Result.Text = LocalizedResult($"当前存档中有{i}只宝可梦", $"The current save contains {i} Pokémon.");
                                 break;
                             case 1:
                                 foreach (var pk in PL)
@@ -917,7 +923,7 @@ namespace WangPluginPkm.GUI
                                         i++;
                                     }
                                 }
-                                Result.Text = $"当前存档中有{i}只异色宝可梦";
+                                Result.Text = LocalizedResult($"当前存档中有{i}只异色宝可梦", $"The current save contains {i} shiny Pokémon.");
                                 break;
                             case 2:
                                 foreach (var pk in PL)
@@ -925,7 +931,7 @@ namespace WangPluginPkm.GUI
                                     aL.Add(pk.Ability);
                                 }
                                 var dis = aL.Distinct();
-                                Result.Text = $"当前存档中有{dis.Count()}种特性";
+                                Result.Text = LocalizedResult($"当前存档中有{dis.Count()}种特性", $"The current save contains {dis.Count()} distinct abilities.");
                                 break;
                             case 3:
                                 foreach (var pk in PL)
@@ -936,7 +942,7 @@ namespace WangPluginPkm.GUI
                                     aL.Add(pk.Move4);
                                 }
                                 var Pdis = aL.Distinct();
-                                Result.Text = $"当前存档中有{Pdis.Count() - 1}种技能";
+                                Result.Text = LocalizedResult($"当前存档中有{Pdis.Count() - 1}种技能", $"The current save contains {Pdis.Count() - 1} distinct moves.");
                                 break;
                             case 4:
                                 foreach (var pk in PL)
@@ -947,7 +953,7 @@ namespace WangPluginPkm.GUI
                                     aL.Add(pk.Move4);
                                 }
                                 var Sdis = aL.Distinct();
-                                Result.Text = $"当前存档中有{Sdis.Count() - 1}种技能";
+                                Result.Text = LocalizedResult($"当前存档中有{Sdis.Count() - 1}种技能", $"The current save contains {Sdis.Count() - 1} distinct moves.");
                                 break;
                             case 5:
                                 foreach (var pk in PL)
@@ -958,7 +964,7 @@ namespace WangPluginPkm.GUI
                                     aL.Add(pk.Move4);
                                 }
                                 var Cdis = aL.Distinct();
-                                Result.Text = $"当前存档中有{Cdis.Count() - 1}种技能";
+                                Result.Text = LocalizedResult($"当前存档中有{Cdis.Count() - 1}种技能", $"The current save contains {Cdis.Count() - 1} distinct moves.");
                                 break;
                             case 6:
                                 if (SAV.SAV.Version == GameVersion.PLA)
@@ -970,11 +976,11 @@ namespace WangPluginPkm.GUI
                                             i++;
                                         }
                                     }
-                                    Result.Text = $"当前存档中有{i}只奋斗等级最高宝可梦";
+                                    Result.Text = LocalizedResult($"当前存档中有{i}只奋斗等级最高宝可梦", $"The current save contains {i} Pokémon with maximum effort levels.");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("版本不对！");
+                                    global::WangPluginPkm.PluginMessageBox.Show("版本不对！");
                                 }
                                 break;
                             case 7:
@@ -987,11 +993,11 @@ namespace WangPluginPkm.GUI
                                             i++;
                                         }
                                     }
-                                    Result.Text = $"当前存档中有{i}只头目宝可梦";
+                                    Result.Text = LocalizedResult($"当前存档中有{i}只头目宝可梦", $"The current save contains {i} alpha Pokémon.");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("版本不对！");
+                                    global::WangPluginPkm.PluginMessageBox.Show("版本不对！");
                                 }
                                 break;
                             case 8:
@@ -1005,11 +1011,11 @@ namespace WangPluginPkm.GUI
                                         }
                                     }
 
-                                    Result.Text = $"当前存档中有{i}只光泽达到最棒的宝可梦";
+                                    Result.Text = LocalizedResult($"当前存档中有{i}只光泽达到最棒的宝可梦", $"The current save contains {i} Pokémon with maximum sheen.");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("版本不对！");
+                                    global::WangPluginPkm.PluginMessageBox.Show("版本不对！");
                                 }
                                 break;
                             case 9:
@@ -1022,11 +1028,11 @@ namespace WangPluginPkm.GUI
                                             i++;
                                         }
                                     }
-                                    Result.Text = $"当前存档中有{i}只帅气达到最棒的宝可梦";
+                                    Result.Text = LocalizedResult($"当前存档中有{i}只帅气达到最棒的宝可梦", $"The current save contains {i} Pokémon with maximum coolness.");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("版本不对！");
+                                    global::WangPluginPkm.PluginMessageBox.Show("版本不对！");
                                 }
                                 break;
                             case 10:
@@ -1039,11 +1045,11 @@ namespace WangPluginPkm.GUI
                                             i++;
                                         }
                                     }
-                                    Result.Text = $"当前存档中有{i}只美丽达到最棒的宝可梦";
+                                    Result.Text = LocalizedResult($"当前存档中有{i}只美丽达到最棒的宝可梦", $"The current save contains {i} Pokémon with maximum beauty.");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("版本不对！");
+                                    global::WangPluginPkm.PluginMessageBox.Show("版本不对！");
                                 }
                                 break;
                             case 11:
@@ -1056,11 +1062,11 @@ namespace WangPluginPkm.GUI
                                             i++;
                                         }
                                     }
-                                    Result.Text = $"当前存档中有{i}只可爱达到最棒的宝可梦";
+                                    Result.Text = LocalizedResult($"当前存档中有{i}只可爱达到最棒的宝可梦", $"The current save contains {i} Pokémon with maximum cuteness.");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("版本不对！");
+                                    global::WangPluginPkm.PluginMessageBox.Show("版本不对！");
                                 }
                                 break;
                             case 12:
@@ -1073,11 +1079,11 @@ namespace WangPluginPkm.GUI
                                             i++;
                                         }
                                     }
-                                    Result.Text = $"当前存档中有{i}只聪明达到最棒的宝可梦";
+                                    Result.Text = LocalizedResult($"当前存档中有{i}只聪明达到最棒的宝可梦", $"The current save contains {i} Pokémon with maximum cleverness.");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("版本不对！请使用晶灿钻石或明亮珍珠版本");
+                                    global::WangPluginPkm.PluginMessageBox.Show("版本不对！请使用晶灿钻石或明亮珍珠版本");
                                 }
                                 break;
                             case 13:
@@ -1090,11 +1096,11 @@ namespace WangPluginPkm.GUI
                                             i++;
                                         }
                                     }
-                                    Result.Text = $"当前存档中有{i}只强壮达到最棒的宝可梦";
+                                    Result.Text = LocalizedResult($"当前存档中有{i}只强壮达到最棒的宝可梦", $"The current save contains {i} Pokémon with maximum toughness.");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("版本不对！请使用晶灿钻石或明亮珍珠版本");
+                                    global::WangPluginPkm.PluginMessageBox.Show("版本不对！请使用晶灿钻石或明亮珍珠版本");
                                 }
                                 break;
                             case 14:
@@ -1108,11 +1114,11 @@ namespace WangPluginPkm.GUI
                                             i++;
                                         }
                                     }
-                                    Result.Text = $"当前存档中有{i}只携带闪亮之星奖章的宝可梦";
+                                    Result.Text = LocalizedResult($"当前存档中有{i}只携带闪亮之星奖章的宝可梦", $"The current save contains {i} Pokémon with the Twinkling Star Ribbon.");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("版本不对！请使用晶灿钻石或明亮珍珠版本");
+                                    global::WangPluginPkm.PluginMessageBox.Show("版本不对！请使用晶灿钻石或明亮珍珠版本");
                                 }
                                 break;
                         }
@@ -1121,6 +1127,9 @@ namespace WangPluginPkm.GUI
             }
 
         }
+        private static string LocalizedResult(string chinese, string english) =>
+            PluginLocalization.IsChinese ? chinese : english;
+
         private void Check_BTN_Click(object sender, EventArgs e)
         {
             SAV.ReloadSlots();
@@ -1143,7 +1152,7 @@ namespace WangPluginPkm.GUI
             }
             if (n == 0)
             {
-                MessageBox.Show("太棒啦全对！");
+                global::WangPluginPkm.PluginMessageBox.Show("太棒啦全对！");
             }
         }
         private void Clear_Trash_BTN_Click(object sender, EventArgs e)

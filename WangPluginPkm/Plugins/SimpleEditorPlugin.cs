@@ -23,7 +23,7 @@ namespace WangPluginPkm.Plugins
         private static readonly HttpClient HttpClient = new();
         public override string Name => "常用功能/Simple Editor";
         public override int Priority => 13;
-        public static GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
+        public static GameStrings GameStringsZh = GameInfo.GetStrings(PluginLocalization.Language);
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {
             AddCheckerToList();
@@ -39,25 +39,38 @@ namespace WangPluginPkm.Plugins
             var menuVSD = (ContextMenuStrip)((dynamic)SaveFileEditor).menu.mnuVSD;
             menuVSD.Opening += (s, e) =>
             {
+                for (int i = menuVSD.Items.Count - 1; i >= 0; i--)
+                {
+                    if (!menuVSD.Items[i].Name.StartsWith("WangPluginPkm.", StringComparison.Ordinal))
+                        continue;
+                    var stale = menuVSD.Items[i];
+                    menuVSD.Items.RemoveAt(i);
+                    stale.Dispose();
+                }
                 var info = GetSenderInfo(ref s!);
                 if ( info.ReadCurrent().Species != (int)Species.None && info.CanWriteTo())
                 {
-                    ToolStripMenuItem insertSlotButton = new ToolStripMenuItem("在此处插空");
+                    ToolStripMenuItem insertSlotButton = new ToolStripMenuItem(PluginLocalization.Translate("在此处插空"));
                     insertSlotButton.Image = Properties.Resources.Down;
                     menuVSD.Items.Add(insertSlotButton);
                     insertSlotButton.Click += (s, e) =>
                          InsertSlot(SaveFileEditor.CurrentBox, info.Slot.Slot);
                     var pk = info.Slot.Read(SaveFileEditor.SAV);
                     var la = new LegalityAnalysis(pk);
-                    var ATKIVEV = new ToolStripMenuItem("物攻手");
-                    var SPAIVEV = new ToolStripMenuItem("特攻手");
-                    var ATK_0SPEIVEV = new ToolStripMenuItem("物攻0速");
-                    var SPA_0SPEIVEV = new ToolStripMenuItem("特攻0速");
-                    var TANKIVEV = new ToolStripMenuItem("坦克");
-                    var IVEVN = new ToolStripMenuItem("快捷三维编辑器");
-                    var SavePDF = new ToolStripMenuItem("打印检测报告PDF");
-                    var clearnick = new ToolStripMenuItem("清除昵称垃圾字节");
-                    var changeid = new ToolStripMenuItem("把id由PKHeX改成存档id(仅适用于SV)");
+                    var ATKIVEV = new ToolStripMenuItem(PluginLocalization.Translate("物攻手"));
+                    var SPAIVEV = new ToolStripMenuItem(PluginLocalization.Translate("特攻手"));
+                    var ATK_0SPEIVEV = new ToolStripMenuItem(PluginLocalization.Translate("物攻0速"));
+                    var SPA_0SPEIVEV = new ToolStripMenuItem(PluginLocalization.Translate("特攻0速"));
+                    var TANKIVEV = new ToolStripMenuItem(PluginLocalization.Translate("坦克"));
+                    var IVEVN = new ToolStripMenuItem(PluginLocalization.Translate("快捷三维编辑器"));
+                    var SavePDF = new ToolStripMenuItem(PluginLocalization.Translate("打印检测报告PDF"));
+                    var clearnick = new ToolStripMenuItem(PluginLocalization.Translate("清除昵称垃圾字节"));
+                    var changeid = new ToolStripMenuItem(PluginLocalization.Translate("把id由PKHeX改成存档id(仅适用于SV)"));
+                    insertSlotButton.Name = "WangPluginPkm.InsertSlot";
+                    IVEVN.Name = "WangPluginPkm.QuickStats";
+                    SavePDF.Name = "WangPluginPkm.LegalityPdf";
+                    clearnick.Name = "WangPluginPkm.ClearNicknameTrash";
+                    changeid.Name = "WangPluginPkm.ApplySaveId";
                     IVEVN.Image = Properties.Resources.Atom;
                     SavePDF.Image = Properties.Resources.Report;
                     clearnick.Image = Properties.Resources.TrashCan;
@@ -78,11 +91,11 @@ namespace WangPluginPkm.Plugins
                         try
                         {
                             await CreatePdfAsync(la.Report(true), pk);
-                            MessageBox.Show("已生成合法检测报告");
+                            global::WangPluginPkm.PluginMessageBox.Show("已生成合法检测报告");
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show($"生成检测报告失败：{ex.Message}");
+                            global::WangPluginPkm.PluginMessageBox.Show($"生成检测报告失败：{ex.Message}");
                         }
                     };
                     clearnick.Click += (s, e) =>
@@ -184,7 +197,7 @@ namespace WangPluginPkm.Plugins
             }
             if (boxIndex == SaveFileEditor.SAV.SlotCount)
             {
-                MessageBox.Show("没有空间！");
+                global::WangPluginPkm.PluginMessageBox.Show("没有空间！");
                 return;
             }
             currMon = SaveFileEditor.SAV.GetBoxSlotAtIndex(startIndex);

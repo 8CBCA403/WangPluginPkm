@@ -243,7 +243,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                         case 88:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Grimer, (int)GameVersion.RD);
                             if (PKL[i] == null)
-                                MessageBox.Show($"{i}");
+                                global::WangPluginPkm.PluginMessageBox.Show($"{i}");
                             PKL[i] = AchieveFunc.evo1H(PKL[i]);
                             break;
                         case 90:
@@ -252,7 +252,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                         case 92:
                             PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Gastly, (int)GameVersion.RD);
                             if (PKL[i] == null)
-                                MessageBox.Show($"{i}");
+                                global::WangPluginPkm.PluginMessageBox.Show($"{i}");
                             PKL[i] = AchieveFunc.evo1(PKL[i]);
                             break;
                         case 93:
@@ -328,7 +328,7 @@ namespace WangPluginPkm.PluginUtil.MeerkatBase
                     {
                         PKL[i] = SearchDatabase.SearchPKM(SAV, Editor, (ushort)Species.Mew, (int)GameVersion.E);
                         if (PKL[i] == null)
-                            MessageBox.Show($"{i}");
+                            global::WangPluginPkm.PluginMessageBox.Show($"{i}");
                         PKL[i] = AchieveFunc.fun(PKL[i], SAV);
                         PKL[i].OriginalTrainerName = "Wang";
                         PKL[i].AbilityNumber = 1;

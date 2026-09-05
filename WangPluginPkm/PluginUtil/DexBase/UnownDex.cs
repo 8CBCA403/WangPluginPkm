@@ -86,7 +86,7 @@ namespace WangPluginPkm.PluginUtil.DexBase
                     }
                     break;
                 default:
-                    MessageBox.Show("本作无法获得！");
+                    global::WangPluginPkm.PluginMessageBox.Show("本作无法获得！");
                     break;
 
             }

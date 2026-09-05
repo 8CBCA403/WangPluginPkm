@@ -1,5 +1,7 @@
 using System.Reflection;
+using System.Text.RegularExpressions;
 using PKHeX.Core;
+using WangPluginPkm;
 using WangPluginPkm.GUI;
 
 internal static class Program
@@ -11,6 +13,7 @@ internal static class Program
         Application.EnableVisualStyles();
         Application.SetColorMode(args.Length == 0 || args.Contains("--dark") ? SystemColorMode.Dark : SystemColorMode.Classic);
         Control.CheckForIllegalCrossThreadCalls = true;
+        GameInfo.CurrentLanguage = args.Contains("--zh") ? "zh-Hans" : "en";
 
         if (args.Length == 0 || args.Contains("--preview"))
         {
@@ -18,6 +21,35 @@ internal static class Program
             using var preview = (Form)Activator.CreateInstance(type, nonPublic: true)!;
             Application.Run(preview);
             return;
+        }
+
+        Assert(PluginLocalization.Translate("闪光器/Shiny Maker") ==
+            (args.Contains("--zh") ? "闪光器" : "Shiny Maker"), "Bilingual menu selection");
+        Assert(PluginLocalization.Translate("多功能计算器/Muti Calculator") ==
+            (args.Contains("--zh") ? "多功能计算器" : "Multi Calculator"), "Legacy English menu spelling normalized");
+        Assert(PluginLocalization.Translate("开始查找") ==
+            (args.Contains("--zh") ? "开始查找" : "Start Search"), "Localized control text");
+        Assert(PluginLocalization.Translate("正在检测PID/EC/IV") ==
+            (args.Contains("--zh") ? "正在检测PID/EC/IV" : "Checking PID / EC / IVs"), "Technical slashes are preserved");
+        using (var localizedRoot = new Panel())
+        {
+            var label = new Label { Text = "保存设置" };
+            var input = new TextBox { Text = "用户输入" };
+            localizedRoot.Controls.Add(label);
+            localizedRoot.Controls.Add(input);
+            PluginLocalization.Apply(localizedRoot);
+            Assert(label.Text == (args.Contains("--zh") ? "保存设置" : "Save Settings"), "Control tree localization");
+            Assert(input.Text == "用户输入", "User input is not translated");
+        }
+        if (!args.Contains("--zh"))
+        {
+            var gui = Path.GetFullPath("../../../../../WangPluginPkm/GUI", AppContext.BaseDirectory);
+            var untranslated = Directory.EnumerateFiles(gui, "*.Designer.cs")
+                .SelectMany(File.ReadLines)
+                .Select(line => Regex.Unescape(Regex.Match(line, "\\.Text = \\\"([^\\\"]*)\\\"").Groups[1].Value))
+                .Where(text => Regex.IsMatch(text, @"\p{IsCJKUnifiedIdeographs}") && PluginLocalization.Translate(text) == text)
+                .Distinct().Order().ToArray();
+            Assert(untranslated.Length == 0, $"Designer localization coverage: {string.Join(" | ", untranslated)}");
         }
 
         foreach (var (save, entity) in new (SaveFile, PKM)[]

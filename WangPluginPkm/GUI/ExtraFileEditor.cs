@@ -15,7 +15,7 @@ namespace WangPluginPkm.GUI
         private WC9 SWC9;
         private GP1M gp = new();
         private GP1 gpm = new();
-        public static GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
+        public static GameStrings GameStringsZh = GameInfo.GetStrings(PluginLocalization.Language);
         private const string GoFilter = "Go Park Entity |*.gp1|All Files|*.*";
         private const string PK8Filter = "SWSH/PLA pokemon file |*.pb8|*.pa8|All Files|*.*";
         private const string PA8Filter = "PLA file |*.pa8|All Files|*.*";
@@ -63,7 +63,7 @@ namespace WangPluginPkm.GUI
             var data = File.ReadAllBytes(path);
             if (data.Length != GP1.SIZE)
             {
-                MessageBox.Show(MessageStrings.MsgFileLoadIncompatible);
+                global::WangPluginPkm.PluginMessageBox.Show(MessageStrings.MsgFileLoadIncompatible);
                 return;
             }
             var gp1 = new GP1M();
@@ -115,7 +115,7 @@ namespace WangPluginPkm.GUI
             string path = sfd.FileName;
             ImportGP1From(path);
             var Name = SpeciesName.GetSpeciesName(gp.Species, 9);
-            GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
+            GameStrings GameStringsZh = GameInfo.GetStrings(PluginLocalization.Language);
             var Move1 = GameStringsZh.movelist[gp.Move1];
             var Move2 = GameStringsZh.movelist[gp.Move2];            
             SpeciesBox.Text = Name;
@@ -192,7 +192,7 @@ namespace WangPluginPkm.GUI
             string extension = Path.GetExtension(path);
             if (data.Length != 344 || data.Length != 376)
             {
-                MessageBox.Show(MessageStrings.MsgFileLoadIncompatible);
+                global::WangPluginPkm.PluginMessageBox.Show(MessageStrings.MsgFileLoadIncompatible);
 
             }
             switch (extension)
@@ -227,7 +227,7 @@ namespace WangPluginPkm.GUI
                         break;
                     }
                 }
-                MessageBox.Show($"选取了{PK.Count}只宝可梦");
+                global::WangPluginPkm.PluginMessageBox.Show($"选取了{PK.Count}只宝可梦");
                 for (i = 0; i < PK.Count; i++)
                 {
                     SAV.SAV.SetBoxSlotAtIndex(PK[i], BOX, i);
@@ -258,7 +258,7 @@ namespace WangPluginPkm.GUI
                 p.Add(pk);
             }
             else
-                MessageBox.Show("ERROR");
+                global::WangPluginPkm.PluginMessageBox.Show("ERROR");
 
         }
         private PKH DecryptEH1(byte[] ek1)
@@ -350,7 +350,7 @@ namespace WangPluginPkm.GUI
                                 }
                                 else
                                 {
-                                    MessageBox.Show("无法解析所选文件，请检查文件内容是否正确！");
+                                    global::WangPluginPkm.PluginMessageBox.Show("无法解析所选文件，请检查文件内容是否正确！");
                                 }
                             }
                             else if (selectedFileName.EndsWith(".wc9", StringComparison.OrdinalIgnoreCase))
@@ -369,35 +369,35 @@ namespace WangPluginPkm.GUI
                                 }
                                 else
                                 {
-                                    MessageBox.Show("无法解析所选文件，请检查文件内容是否正确！");
+                                    global::WangPluginPkm.PluginMessageBox.Show("无法解析所选文件，请检查文件内容是否正确！");
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("不支持的文件类型！");
+                                global::WangPluginPkm.PluginMessageBox.Show("不支持的文件类型！");
                             }
                         }
                         else
                         {
-                            MessageBox.Show("所选文件为空或无法读取，请确认文件是否损坏！");
+                            global::WangPluginPkm.PluginMessageBox.Show("所选文件为空或无法读取，请确认文件是否损坏！");
                         }
                     }
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    MessageBox.Show("无法访问文件，请确保你有足够的权限读取该文件。");
+                    global::WangPluginPkm.PluginMessageBox.Show("无法访问文件，请确保你有足够的权限读取该文件。");
                 }
                 catch (IOException ex)
                 {
-                    MessageBox.Show($"文件读取出错：{ex.Message}");
+                    global::WangPluginPkm.PluginMessageBox.Show($"文件读取出错：{ex.Message}");
                 }
                 catch (FormatException ex)
                 {
-                    MessageBox.Show($"文件格式不正确：{ex.Message}");
+                    global::WangPluginPkm.PluginMessageBox.Show($"文件格式不正确：{ex.Message}");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"发生未知错误：{ex.Message}");
+                    global::WangPluginPkm.PluginMessageBox.Show($"发生未知错误：{ex.Message}");
                 }
             }
         }

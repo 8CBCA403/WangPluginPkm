@@ -378,7 +378,7 @@ namespace WangPluginPkm.GUI
             }
             SAV.ReloadSlots();
             sw.Stop();
-            MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+            global::WangPluginPkm.PluginMessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
         }
         private void Shiny_BTN_Click(object sender, EventArgs e)
         {
@@ -397,7 +397,7 @@ namespace WangPluginPkm.GUI
                     break;
             }
             sw.Stop();
-            MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+            global::WangPluginPkm.PluginMessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
             sw.Reset();
             Player.Stream = Properties.Resources.shinys;
             Player.Play();
@@ -442,7 +442,7 @@ namespace WangPluginPkm.GUI
                     break;
             }
             sw.Stop();
-            MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+            global::WangPluginPkm.PluginMessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
             sw.Reset();
         }
         private void Xor_BTN_Click(object sender, EventArgs e)
@@ -462,7 +462,7 @@ namespace WangPluginPkm.GUI
                     break;
             }
             sw.Stop();
-            MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+            global::WangPluginPkm.PluginMessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
             sw.Reset();
         }
         private void ForceStar_Click(object sender, EventArgs e)
@@ -482,7 +482,7 @@ namespace WangPluginPkm.GUI
                     break;
             }
             sw.Stop();
-            MessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
+            global::WangPluginPkm.PluginMessageBox.Show($"搞定啦！用时：{sw.ElapsedMilliseconds}毫秒", "SuperWang");
             sw.Reset();
         }
         public static PKM ShinyFunctionPlus(PKM pkm)

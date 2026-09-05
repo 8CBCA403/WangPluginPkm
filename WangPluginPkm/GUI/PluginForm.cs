@@ -10,6 +10,8 @@ namespace WangPluginPkm.GUI
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            if (!DesignMode)
+                PluginLocalization.Apply(this);
             if (!DesignMode && Application.IsDarkModeEnabled && !SystemInformation.HighContrast)
                 ApplyDarkTheme(this);
         }

@@ -12,7 +12,6 @@ namespace WangPluginPkm
     public abstract class WangPluginPkm : IPlugin
     {
         private const string ParentMenuName = "SuperWang";
-        private const string ParentMenuText = "超王插件PKM";
         private const string ParentMenuParent = "Menu_Tools";
         private static readonly SoundPlayer Player = new();
         private static int HostInitialized;
@@ -70,6 +69,8 @@ namespace WangPluginPkm
             var modmenusearch = toolsitems.Find(ParentMenuName, false);
             var modmenu = GetModMenu(tools, modmenusearch);
             AddPluginControl(modmenu);
+            PluginLocalization.Apply(modmenu.DropDownItems);
+            PluginMenuIcons.Apply(modmenu);
         }
         private static ToolStripMenuItem GetModMenu(ToolStripDropDownItem tools, IReadOnlyList<ToolStripItem> search)
         {
@@ -81,9 +82,8 @@ namespace WangPluginPkm
             return modmenu;
         }
 
-        private static ToolStripMenuItem CreateBaseGroupItem() => new(ParentMenuText)
+        private static ToolStripMenuItem CreateBaseGroupItem() => new(PluginLocalization.Translate("超王插件PKM"))
         {
-            Image = Properties.Resources.SuperWang,
             Name = ParentMenuName,
         };
         protected abstract void AddPluginControl(ToolStripDropDownItem modmenu);

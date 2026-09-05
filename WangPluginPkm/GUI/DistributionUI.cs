@@ -29,7 +29,7 @@ namespace WangPluginPkm.GUI
         public BindingList<Trainer> Tr = new();
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
-        public static GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
+        public static GameStrings GameStringsZh = GameInfo.GetStrings(PluginLocalization.Language);
         public DistributionUI(ISaveFileProvider sav, IPKMView editor)
         {
             SAV = sav;
@@ -421,7 +421,7 @@ namespace WangPluginPkm.GUI
             }
             else
             {
-                MessageBox.Show("目前只支持剑盾！");
+                global::WangPluginPkm.PluginMessageBox.Show("目前只支持剑盾！");
             }
             SAV.ReloadSlots();
         }
@@ -916,7 +916,7 @@ namespace WangPluginPkm.GUI
                      p.Add(pkc);
                  }
              }
-             MessageBox.Show($"{p.Count()}");
+             global::WangPluginPkm.PluginMessageBox.Show($"{p.Count()}");
              var BoxData = SAV.SAV.BoxData;
              IList<PKM> arr2 = BoxData;
              List<int> list = FindAllEmptySlots(arr2, 0);
@@ -1003,7 +1003,7 @@ namespace WangPluginPkm.GUI
         {
             ModifyBoxes(mod, SAV.SAV.Generation, (int)StartBox_NUM.Value - 1, (int)Start_NUM.Value - 1, (int)EndBox_NUM.Value - 1, (int)End_NUM.Value - 1);
             SAV.ReloadSlots();
-            MessageBox.Show("速配完成！");
+            global::WangPluginPkm.PluginMessageBox.Show("速配完成！");
         }
         public int ModifyBoxes(Action<PKM> action, int gen, int BoxStart = 0, int slotStart = 0, int BoxEnd = -1, int slotEnd = -1)
         {
@@ -1073,13 +1073,13 @@ namespace WangPluginPkm.GUI
                 i++;
             }
             SAV.ReloadSlots();
-            MessageBox.Show("当前箱子刷新完毕！");
+            global::WangPluginPkm.PluginMessageBox.Show("当前箱子刷新完毕！");
         }
         private void Quick_EV_BTN_Click(object sender, EventArgs e)
         {
             ModifyBoxes(EditEV, SAV.SAV.Generation, (int)StartBox_NUM.Value - 1, (int)Start_NUM.Value - 1, (int)EndBox_NUM.Value - 1, (int)End_NUM.Value - 1);
             SAV.ReloadSlots();
-            MessageBox.Show("速配推荐努力值完成！");
+            global::WangPluginPkm.PluginMessageBox.Show("速配推荐努力值完成！");
 
         }
         private void EditEV(PKM pk)

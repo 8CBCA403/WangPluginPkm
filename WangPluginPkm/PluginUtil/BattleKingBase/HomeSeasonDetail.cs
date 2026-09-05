@@ -89,20 +89,20 @@ namespace WangPluginPkm.PluginUtil.BattleKingBase
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("读取或反序列化JSON文件时发生错误: " + ex.Message);
+                        global::WangPluginPkm.PluginMessageBox.Show("读取或反序列化JSON文件时发生错误: " + ex.Message);
                     }
 
                 }
 
                     else
                     {
-                        MessageBox.Show($"{response.StatusCode}\n{response.StatusDescription}");
+                        global::WangPluginPkm.PluginMessageBox.Show($"{response.StatusCode}\n{response.StatusDescription}");
                         return null;
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    global::WangPluginPkm.PluginMessageBox.Show(ex.Message);
                 }
                 return null;
 

@@ -36,7 +36,7 @@ namespace WangPluginPkm.Plugins
             }
             else
             {
-                MessageBox.Show("该存档版本不支持变蛋器功能。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                global::WangPluginPkm.PluginMessageBox.Show("该存档版本不支持变蛋器功能。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
         }

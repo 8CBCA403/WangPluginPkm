@@ -15,7 +15,7 @@ namespace WangPluginPkm.GUI
 {
     public partial class SuperDataBase : PluginForm
     {
-        public static GameStrings GameStringsZh = GameInfo.GetStrings("zh-Hans");
+        public static GameStrings GameStringsZh = GameInfo.GetStrings(PluginLocalization.Language);
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
 
@@ -98,7 +98,7 @@ namespace WangPluginPkm.GUI
         {
             if (Editor?.Data == null)
             {
-                MessageBox.Show("当前编辑器没有宝可梦数据");
+                global::WangPluginPkm.PluginMessageBox.Show("当前编辑器没有宝可梦数据");
                 return;
             }
             SP_CB.SelectedIndex = Editor.Data.Species;
@@ -140,7 +140,7 @@ namespace WangPluginPkm.GUI
             }
             this.Lp_LIST.DisplayMember = "Name";
             Level_NUM.Value = Editor.Data.CurrentLevel;
-            MessageBox.Show("导入了面板！");
+            global::WangPluginPkm.PluginMessageBox.Show("导入了面板！");
         }
         private AutoCompleteStringCollection auto(string[] array)
         {
@@ -158,11 +158,11 @@ namespace WangPluginPkm.GUI
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
                     File.WriteAllBytes(sfd.FileName, StringToByteArray(savlist()));
-                    MessageBox.Show("导出了文件！");
+                    global::WangPluginPkm.PluginMessageBox.Show("导出了文件！");
                 }
                 else
                 {
-                    MessageBox.Show("您未选择文件");
+                    global::WangPluginPkm.PluginMessageBox.Show("您未选择文件");
                     return;
                 }
             }
@@ -177,11 +177,11 @@ namespace WangPluginPkm.GUI
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
                     r = ByteArrayToString(File.ReadAllBytes(sfd.FileName));
-                    MessageBox.Show("导入了文件！");
+                    global::WangPluginPkm.PluginMessageBox.Show("导入了文件！");
                 }
                 else
                 {
-                    MessageBox.Show("您未选择文件");
+                    global::WangPluginPkm.PluginMessageBox.Show("您未选择文件");
                     return;
                 }
             }
@@ -197,7 +197,7 @@ namespace WangPluginPkm.GUI
             }
             else
             {
-                MessageBox.Show("列表里没有文件");
+                global::WangPluginPkm.PluginMessageBox.Show("列表里没有文件");
             }
         }
         public static byte[] StringToByteArray(string str)
@@ -434,7 +434,7 @@ namespace WangPluginPkm.GUI
         {
             ModifyBoxes(mod, SAV.SAV.Generation, (int)StartBox_NUM.Value - 1, (int)Start_NUM.Value - 1, (int)EndBox_NUM.Value - 1, (int)End_NUM.Value - 1);
             SAV.ReloadSlots();
-            MessageBox.Show("覆写完成！");
+            global::WangPluginPkm.PluginMessageBox.Show("覆写完成！");
         }
         private void mod(PKM pk)
         {
@@ -610,7 +610,7 @@ namespace WangPluginPkm.GUI
                     break;
             }
             Lp_LIST.SetItemChecked(index, true);
-            MessageBox.Show("修改完成！");
+            global::WangPluginPkm.PluginMessageBox.Show("修改完成！");
         }
         private void FilterItemsByProperty(string name, object value)
         {
@@ -645,7 +645,7 @@ namespace WangPluginPkm.GUI
         {
             if (lp.Count == 0)
             {
-                MessageBox.Show("没有可复原列表！");
+                global::WangPluginPkm.PluginMessageBox.Show("没有可复原列表！");
                 return;
             }
             Lp_LIST.Items.Clear();
@@ -899,7 +899,7 @@ namespace WangPluginPkm.GUI
         {
             Muticonvert((int)StartBox_NUM.Value - 1, (int)Start_NUM.Value - 1, (int)EndBox_NUM.Value - 1, (int)End_NUM.Value - 1);
             Lp_LIST.Refresh();
-            MessageBox.Show($"{Lp_LIST.Items.Count}转换完成！");
+            global::WangPluginPkm.PluginMessageBox.Show($"{Lp_LIST.Items.Count}转换完成！");
         }
 
         // helpers

@@ -53,7 +53,9 @@ namespace WangPluginPkm.GUI
         {
             InitializeComponent();
             Web_CB.DataSource = Enum.GetValues(typeof(Falinks));
-            TB.Text = "注意，神偷-VGCPaste功能需要Google api key以及App Name" + Environment.NewLine + "在此处申请 https://console.cloud.google.com/apis";
+            TB.Text = PluginLocalization.IsChinese
+                ? "注意，神偷-VGCPaste功能需要Google api key以及App Name" + Environment.NewLine + "在此处申请 https://console.cloud.google.com/apis"
+                : "VGC Paste import requires a Google API key and application name." + Environment.NewLine + "Create credentials at https://console.cloud.google.com/apis";
             SAV = sav;
             Editor = editor;
         }
@@ -84,29 +86,29 @@ namespace WangPluginPkm.GUI
                     catch
                     {
                         if (!IsDisposed)
-                            MessageBox.Show(this, "An error occurred while trying to obtain the contents of the URL.");
+                            global::WangPluginPkm.PluginMessageBox.Show(this, "An error occurred while trying to obtain the contents of the URL.");
                         return;
                     }
                     if (IsDisposed || Disposing)
                         return;
                     if (!info.Valid)
                     {
-                        MessageBox.Show("The data inside the URL are not valid Showdown Sets");
+                        global::WangPluginPkm.PluginMessageBox.Show("The data inside the URL are not valid Showdown Sets");
                         return;
                     }
                     if (info.Source == TeamPasteInfo.PasteSource.None)
                     {
-                        MessageBox.Show("The URL provided is not from a supported website.");
+                        global::WangPluginPkm.PluginMessageBox.Show("The URL provided is not from a supported website.");
                         return;
                     }
                     Import(info.Sets);
                 }
-                MessageBox.Show(this, $"已处理{suburl.Length}个队伍链接，请以编辑器和盒子中的结果为准。");
+                global::WangPluginPkm.PluginMessageBox.Show(this, $"已处理{suburl.Length}个队伍链接，请以编辑器和盒子中的结果为准。");
             }
             catch (Exception ex)
             {
                 if (!IsDisposed)
-                    MessageBox.Show(this, $"导入失败：{ex.Message}");
+                    global::WangPluginPkm.PluginMessageBox.Show(this, $"导入失败：{ex.Message}");
             }
             finally
             {
@@ -161,7 +163,7 @@ namespace WangPluginPkm.GUI
                 }
             }
             IsRunning(false);
-            MessageBox.Show($"导出了{count}只");
+            global::WangPluginPkm.PluginMessageBox.Show($"导出了{count}只");
         }
         public void Import(string source)
         {
@@ -169,7 +171,7 @@ namespace WangPluginPkm.GUI
             {
                 var teams = ShowdownTeamSet.GetTeams(source);
                 var names = teams.Select(z => z.Summary);
-                MessageBox.Show(string.Join(Environment.NewLine, names));
+                global::WangPluginPkm.PluginMessageBox.Show(string.Join(Environment.NewLine, names));
                 Import(teams.SelectMany(z => z.Team).ToList());
                 return;
             }
@@ -393,12 +395,12 @@ namespace WangPluginPkm.GUI
         {
             if (SAV.SAV.Version != GameVersion.VL && SAV.SAV.Version != GameVersion.SL && SAV.SAV.Version != GameVersion.SV)
             {
-                MessageBox.Show("目前VGC版本为朱紫！");
+                global::WangPluginPkm.PluginMessageBox.Show("目前VGC版本为朱紫！");
                 return;
             }
             if (BD.Count < 6)
             {
-                MessageBox.Show("队伍不足6只，无法检测！");
+                global::WangPluginPkm.PluginMessageBox.Show("队伍不足6只，无法检测！");
                 return;
             }
             ResultBox.Clear();
@@ -491,11 +493,11 @@ namespace WangPluginPkm.GUI
                 MT_BTN.Enabled = true;
                 fr.Import_BTN.Enabled = true;
                 st.Stop();
-                MessageBox.Show($"经过时间{st.ElapsedMilliseconds / 1000}秒");
+                global::WangPluginPkm.PluginMessageBox.Show($"经过时间{st.ElapsedMilliseconds / 1000}秒");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                global::WangPluginPkm.PluginMessageBox.Show("Error: " + ex.Message);
             }
         }
         public async Task NewTournamentsGet()
@@ -516,11 +518,11 @@ namespace WangPluginPkm.GUI
                 MT_BTN.Enabled = true;
                 fr.Import_BTN.Enabled = true;
                 st.Stop();
-                MessageBox.Show($"经过时间{st.ElapsedMilliseconds / 1000}秒");
+                global::WangPluginPkm.PluginMessageBox.Show($"经过时间{st.ElapsedMilliseconds / 1000}秒");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                global::WangPluginPkm.PluginMessageBox.Show("Error: " + ex.Message);
             }
         }
         public async Task SubTournamentsGet(string r, TeamForm fr)
@@ -575,7 +577,7 @@ namespace WangPluginPkm.GUI
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("出错了！可能是输入了错误的网址，获得正确网址请联系老吴" + Environment.NewLine + ex.Message);
+                            global::WangPluginPkm.PluginMessageBox.Show("出错了！可能是输入了错误的网址，获得正确网址请联系老吴" + Environment.NewLine + ex.Message);
                         }
                         CB.DataSource = st;
                     }
@@ -611,7 +613,7 @@ namespace WangPluginPkm.GUI
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Error: " + ex.Message);
+                            global::WangPluginPkm.PluginMessageBox.Show("Error: " + ex.Message);
                         }
                     }
                     break;
@@ -622,7 +624,7 @@ namespace WangPluginPkm.GUI
         private async void C_BTN_Click(object sender, EventArgs e)
         {
             await Selectc();
-            MessageBox.Show("导入了网页！");
+            global::WangPluginPkm.PluginMessageBox.Show("导入了网页！");
         }
         private static SheetsService CreateSheetsService()
         {
@@ -688,7 +690,7 @@ namespace WangPluginPkm.GUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"读取 Google 表格失败：{ex.Message}");
+                global::WangPluginPkm.PluginMessageBox.Show($"读取 Google 表格失败：{ex.Message}");
             }
         }
 
@@ -701,7 +703,7 @@ namespace WangPluginPkm.GUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"读取 Google 表格目录失败：{ex.Message}");
+                global::WangPluginPkm.PluginMessageBox.Show($"读取 Google 表格目录失败：{ex.Message}");
             }
         }
         private async void CheckS_BTN_Click(object sender, EventArgs e)
@@ -745,17 +747,17 @@ namespace WangPluginPkm.GUI
 
             if (string.IsNullOrEmpty(cId))
             {
-                MessageBox.Show("CID 不能为空！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                global::WangPluginPkm.PluginMessageBox.Show("CID 不能为空！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (string.IsNullOrEmpty(rst))
             {
-                MessageBox.Show("RST 不能为空！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                global::WangPluginPkm.PluginMessageBox.Show("RST 不能为空！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (string.IsNullOrEmpty(ts1))
             {
-                MessageBox.Show("TS1 不能为空！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                global::WangPluginPkm.PluginMessageBox.Show("TS1 不能为空！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -828,7 +830,7 @@ namespace WangPluginPkm.GUI
                 }
                 else
                 {
-                    MessageBox.Show("请输入图像的URL", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    global::WangPluginPkm.PluginMessageBox.Show("请输入图像的URL", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -851,7 +853,7 @@ namespace WangPluginPkm.GUI
 
             if (string.IsNullOrEmpty(searchText))
             {
-                MessageBox.Show("请输入搜索关键词！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                global::WangPluginPkm.PluginMessageBox.Show("请输入搜索关键词！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -868,7 +870,7 @@ namespace WangPluginPkm.GUI
                         Rank_List_Box.SelectedIndex = i;
                         Rank_List_Box.TopIndex = i;
                         found = true;
-                        MessageBox.Show($"找到匹配项: {txtSearch.Text.Trim()}", "搜索结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        global::WangPluginPkm.PluginMessageBox.Show($"找到匹配项: {txtSearch.Text.Trim()}", "搜索结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     }
                 }
@@ -876,7 +878,7 @@ namespace WangPluginPkm.GUI
 
             if (!found)
             {
-                MessageBox.Show("未找到匹配的项！", "搜索结果", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                global::WangPluginPkm.PluginMessageBox.Show("未找到匹配的项！", "搜索结果", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

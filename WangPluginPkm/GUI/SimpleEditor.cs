@@ -33,16 +33,16 @@ namespace WangPluginPkm.GUI
         private void LegalizeReport_Click(object sender, EventArgs e)
         {
             var la = new LegalityAnalysis(Editor.Data);
-            MessageBox.Show($"{la.Report(true)}");
+            global::WangPluginPkm.PluginMessageBox.Show($"{la.Report(true)}");
         }
         private void Master_Click(object sender, EventArgs e)
         {
             if (SAV.SAV.Version != GameVersion.PLA)
-                MessageBox.Show("只适用于阿尔宙斯！", "SuperWang");
+                global::WangPluginPkm.PluginMessageBox.Show("只适用于阿尔宙斯！", "SuperWang");
             else
             {
                 Handle_MoveShop();
-                MessageBox.Show("搞定了！", "SuperWang");
+                global::WangPluginPkm.PluginMessageBox.Show("搞定了！", "SuperWang");
             }
         }
         private void Handle_MoveShop()
@@ -179,7 +179,7 @@ namespace WangPluginPkm.GUI
                     j++;
                 }
             }
-            MessageBox.Show($"{r}");
+            global::WangPluginPkm.PluginMessageBox.Show($"{r}");
         }
 
         private void Check_Gift_Click(object sender, EventArgs e)
@@ -266,7 +266,7 @@ namespace WangPluginPkm.GUI
             var data = File.ReadAllBytes(path);
             if (data.Length != 344)
             {
-                MessageBox.Show(MessageStrings.MsgFileLoadIncompatible);
+                global::WangPluginPkm.PluginMessageBox.Show(MessageStrings.MsgFileLoadIncompatible);
                 return;
             }
             var gp1 = new PK8();

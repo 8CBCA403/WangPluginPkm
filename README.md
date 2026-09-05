@@ -4,6 +4,12 @@
 
  A pkhex plugin with several function. "make pokemon looks more real"
  使用方法见wiki
+
+## Language and theme / 语言与主题
+
+The plugin follows PKHeX's selected language and color mode. Simplified Chinese and English are supported; other PKHeX languages currently fall back to English.
+
+插件会跟随 PKHeX 当前选择的语言和深浅色模式。目前完整支持简体中文和英文，其他语言暂时回退到英文。
  
  Credits (in no particular order)
 - Manu098vm 

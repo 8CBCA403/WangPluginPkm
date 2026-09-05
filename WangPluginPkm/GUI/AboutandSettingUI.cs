@@ -115,11 +115,11 @@ namespace WangPluginPkm.GUI
             try
             {
                 Setting();
-                MessageBox.Show(this, "设置已保存。", "超王插件");
+                global::WangPluginPkm.PluginMessageBox.Show(this, "设置已保存。", "超王插件");
             }
             catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
             {
-                MessageBox.Show(this, $"设置保存失败：{ex.Message}", "超王插件", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                global::WangPluginPkm.PluginMessageBox.Show(this, $"设置保存失败：{ex.Message}", "超王插件", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

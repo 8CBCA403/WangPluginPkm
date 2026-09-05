@@ -15,7 +15,7 @@ namespace WangPluginPkm.PluginUtil
         {
             System.Media.SystemSounds.Hand.Play();
             string msg = string.Join(Environment.NewLine + Environment.NewLine, lines);
-            return MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return global::WangPluginPkm.PluginMessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         internal static DialogResult Alert(params string[] lines) => Alert(true, lines);
@@ -25,19 +25,19 @@ namespace WangPluginPkm.PluginUtil
             if (sound)
                 System.Media.SystemSounds.Asterisk.Play();
             string msg = string.Join(Environment.NewLine + Environment.NewLine, lines);
-            return MessageBox.Show(msg, "Alert", MessageBoxButtons.OK, sound ? MessageBoxIcon.Information : MessageBoxIcon.None);
+            return global::WangPluginPkm.PluginMessageBox.Show(msg, "Alert", MessageBoxButtons.OK, sound ? MessageBoxIcon.Information : MessageBoxIcon.None);
         }
 
         internal static DialogResult Prompt(MessageBoxButtons btn, params string[] lines)
         {
             System.Media.SystemSounds.Asterisk.Play();
             string msg = string.Join(Environment.NewLine + Environment.NewLine, lines);
-            return MessageBox.Show(msg, "Prompt", btn, MessageBoxIcon.Question);
+            return global::WangPluginPkm.PluginMessageBox.Show(msg, "Prompt", btn, MessageBoxIcon.Question);
         }
 
         internal static void ShowSuccess()
         {
-            MessageBox.Show("Success");
+            global::WangPluginPkm.PluginMessageBox.Show("Success");
         }
         #endregion
 

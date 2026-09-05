@@ -227,7 +227,7 @@ namespace WangPluginPkm.GUI
             if (UsePreSeed.Checked)
             {
                 seedList = CheckRules.PreSetSeed(rules);
-                await InvokeAsync(() => MessageBox.Show($"预设种子数量:{seedList.Count}"));
+                await InvokeAsync(() => global::WangPluginPkm.PluginMessageBox.Show($"预设种子数量:{seedList.Count}"));
                 seedList = seedList.OrderBy(_ => rng.Next()).ToList();
             }
 
@@ -272,7 +272,7 @@ namespace WangPluginPkm.GUI
                         SeedTB.Text = initialSeed32.ToString("X8");
                     else
                         SeedTB.Text = initialSeed64.ToString("X16");
-                    StateBox.Text = "0 分钟";
+                    StateBox.Text = PluginLocalization.Translate("0 分钟");
                 }
 
                 // check traverse mode: both FastModeCheckBox and TraverseModeCheckBox must be checked
@@ -317,7 +317,7 @@ namespace WangPluginPkm.GUI
                             await TraverseSeedsAsync(initialSeed64, token, outPath, uiInterval, workers);
                         }
 
-                        await InvokeAsync(() => MessageBox.Show("遍历完成或已取消"));
+                        await InvokeAsync(() => global::WangPluginPkm.PluginMessageBox.Show("遍历完成或已取消"));
                         return;
                     }
                 }
@@ -337,7 +337,7 @@ namespace WangPluginPkm.GUI
                     async (payload) => await InvokeAsync(() =>
  {
      // payload format: "<seedHex>|<elapsedMs>|<rate>"
-     StateBox.Text = "正在查找...";
+     StateBox.Text = PluginLocalization.Translate("正在查找...");
      try
      {
          var parts = payload.Split('|');
@@ -365,12 +365,12 @@ namespace WangPluginPkm.GUI
          if (intervalMinutes > 0)
          {
              long mins = (elapsedMs / 60000) / intervalMinutes * intervalMinutes;
-             StateBox.Text = $"{mins} 分钟";
+             StateBox.Text = PluginLocalization.Translate($"{mins} 分钟");
          }
          else
          {
              long mins = elapsedMs / 60000;
-             StateBox.Text = $"{mins} 分钟";
+             StateBox.Text = PluginLocalization.Translate($"{mins} 分钟");
          }
      }
      catch
@@ -384,13 +384,13 @@ namespace WangPluginPkm.GUI
 
                 if (!engineResult.Found)
                 {
-                    await InvokeAsync(() => MessageBox.Show("没有匹配！"));
+                    await InvokeAsync(() => global::WangPluginPkm.PluginMessageBox.Show("没有匹配！"));
                 }
                 else
                 {
                     await InvokeAsync(() =>
                     {
-                        MessageBox.Show("Success！");
+                        global::WangPluginPkm.PluginMessageBox.Show("Success！");
                         Editor.PopulateFields(engineResult.FoundPKM, false);
                         SAV.ReloadSlots();
                         SeedTB.Text = engineResult.SeedHex;
@@ -407,7 +407,7 @@ namespace WangPluginPkm.GUI
                 {
                     GeneratorIsRunning(false);
                     if (StateBox.Text != "Stop")
-                        StateBox.Text = "无事可做";
+                        StateBox.Text = PluginLocalization.Translate("无事可做");
                 });
             }
 
@@ -1074,14 +1074,14 @@ namespace WangPluginPkm.GUI
                             if (!IsHandleCreated || !InvokeRequired)
                             {
                                 Editor.PopulateFields(candidate, false);
-                                MessageBox.Show("Success！", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                global::WangPluginPkm.PluginMessageBox.Show("Success！", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             else
                             {
                                 BeginInvoke(new MethodInvoker(() =>
                              {
                 Editor.PopulateFields(candidate, false);
-                MessageBox.Show("Success！", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                global::WangPluginPkm.PluginMessageBox.Show("Success！", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }));
                             }
 
