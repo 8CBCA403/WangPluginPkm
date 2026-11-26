@@ -33,7 +33,7 @@
     <PackageReference Include="Microsoft.Z3" Version="4.12.2" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
     <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.3" />
-    <PackageReference Include="PKHeX.Core" Version="26.8.26" />
+    <PackageReference Include="PKHeX.Core" Version="26.10.18" />
     <PackageReference Include="RestSharp" Version="112.1.0" />
   </ItemGroup>
   <ItemGroup>

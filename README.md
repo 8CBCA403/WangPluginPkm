@@ -2,8 +2,25 @@
 ![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
 
- A pkhex plugin with several function. "make pokemon looks more real"
- 使用方法见wiki
+WangPluginPkm adds RNG tools, Pokédex building, batch editing, and other utilities to PKHeX.
+
+WangPluginPkm 为 PKHeX 提供 RNG 工具、图鉴制作、批量编辑等功能。详细用法见[项目 Wiki](https://github.com/8CBCA403/WangPluginPkm/wiki)。
+
+## Compatibility and installation / 兼容性与安装
+
+This source version targets [PKHeX 26.10.18](https://github.com/kwsch/PKHeX/releases/tag/26.10.18) and uses [PKHeX.Core 26.10.18](https://www.nuget.org/packages/PKHeX.Core/26.10.18). Download PKHeX from [Project Pokémon](https://projectpokemon.org/home/files/file/1-pkhex/). Close PKHeX, place the matching build's `WangPluginPkm.dll` and `libz3.dll` in the `plugins` folder next to `PKHeX.exe`, then restart PKHeX and open the plugin from **Tools**.
+
+当前源码适配 PKHeX 26.10.18，依赖 PKHeX.Core 26.10.18。退出 PKHeX 后，将对应构建的 `WangPluginPkm.dll` 和 `libz3.dll` 放入 `PKHeX.exe` 同目录下的 `plugins` 文件夹。重新启动后，从「工具」菜单打开插件。已有旧版插件时，请替换同名 DLL。
+
+## Build from source / 从源码编译
+
+Use the .NET 10 SDK on Windows. The Release build places both plugin DLLs in `WangPluginPkm/bin/Release/net10.0-windows/`.
+
+请在 Windows 上使用 .NET 10 SDK 编译。Release 构建所需的两个 DLL 都在上述输出目录中。
+
+```powershell
+dotnet build WangPluginPkm/WangPluginPkm.csproj -c Release
+```
 
 ## Language and theme / 语言与主题
 
