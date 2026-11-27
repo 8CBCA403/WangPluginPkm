@@ -1,101 +1,56 @@
-# WangPlugin
-![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
+# WangPluginPkm · 超王插件PKM
 
+WangPluginPkm 是用于 Windows 版 PKHeX 的宝可梦存档编辑插件。你可以在同一个存档里研究一只宝可梦的随机数（RNG）、按地区图鉴整理盒子，或在「超级数据库」中筛选一批宝可梦文件，统一调整招式、等级和努力值。
 
-WangPluginPkm adds RNG tools, Pokédex building, batch editing, and other utilities to PKHeX.
+[English](README.en.md) · [使用教程 Wiki](https://github.com/8CBCA403/WangPluginPkm/wiki) · [历史发布包](https://github.com/8CBCA403/WangPluginPkm/releases)
 
-WangPluginPkm 为 PKHeX 提供 RNG 工具、图鉴制作、批量编辑等功能。详细用法见[项目 Wiki](https://github.com/8CBCA403/WangPluginPkm/wiki)。
+## 选择版本
 
-## Compatibility and installation / 兼容性与安装
+| 想用哪个版本 | 获取方式 | 配套 PKHeX |
+| --- | --- | --- |
+| 当前源码（`main`） | 按下方步骤编译插件 | [PKHeX 26.10.18](https://github.com/kwsch/PKHeX/releases/tag/26.10.18)，源码引用 PKHeX.Core 26.10.18 |
+| 历史整合包 v1.7.1 | 从 [v1.7.1 发布页](https://github.com/8CBCA403/WangPluginPkm/releases/tag/v1.7.1) 下载并解压 `PKHeX20241109+WangPlugins.zip` | 直接运行整合包自带的 PKHeX |
 
-This source version targets [PKHeX 26.10.18](https://github.com/kwsch/PKHeX/releases/tag/26.10.18) and uses [PKHeX.Core 26.10.18](https://www.nuget.org/packages/PKHeX.Core/26.10.18). Download PKHeX from [Project Pokémon](https://projectpokemon.org/home/files/file/1-pkhex/). Close PKHeX, place the matching build's `WangPluginPkm.dll` and `libz3.dll` in the `plugins` folder next to `PKHeX.exe`, then restart PKHeX and open the plugin from **Tools**.
+## 编译和安装当前源码
 
-当前源码适配 PKHeX 26.10.18，依赖 PKHeX.Core 26.10.18。退出 PKHeX 后，将对应构建的 `WangPluginPkm.dll` 和 `libz3.dll` 放入 `PKHeX.exe` 同目录下的 `plugins` 文件夹。重新启动后，从「工具」菜单打开插件。已有旧版插件时，请替换同名 DLL。
+1. 在 Windows 上安装 [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)，下载或克隆本仓库。在仓库根目录运行下面的命令。
 
-## Build from source / 从源码编译
+   ```powershell
+   dotnet build WangPluginPkm/WangPluginPkm.csproj -c Release
+   ```
 
-Use the .NET 10 SDK on Windows. The Release build places both plugin DLLs in `WangPluginPkm/bin/Release/net10.0-windows/`.
+2. 关闭 PKHeX。从 `WangPluginPkm/bin/Release/net10.0-windows/` 复制两个 DLL 到 `PKHeX.exe` 旁的 `plugins` 文件夹。首次安装时创建该文件夹，升级时替换同名文件。
 
-请在 Windows 上使用 .NET 10 SDK 编译。Release 构建所需的两个 DLL 都在上述输出目录中。
+   ```text
+   PKHeX.exe
+   plugins/
+     WangPluginPkm.dll
+     libz3.dll
+   ```
+
+3. 启动 PKHeX，打开 **工具 → 超王插件PKM → 关于和设置** 确认加载成功。英文界面对应 **Tools → Wang PKM Plugin → About and Settings**。插件跟随宿主的语言和深浅色设置，提供简体中文和英文界面。
+
+## 按任务找工具
+
+| 想做什么 | 菜单入口 | 使用提示 |
+| --- | --- | --- |
+| 查找种子、从 Seed 计算 IV、用 IV 或 PID 反推 | RNG面板 | 先打开目标宝可梦所属世代的存档，再把宝可梦放到 PKHeX 左侧编辑面板。 |
+| 制作图鉴、整理盒子 | 图鉴制作器、全部箱子排序 | 图鉴制作器可生成形态，排序菜单会根据存档提供可用的地区图鉴顺序。 |
+| 批量修改一组文件 | 超级数据库 | 可以按种类或文件名筛选，并选择本次要修改的字段，例如等级、招式或努力值。建议先在副本上确认结果。 |
+| 处理闪光、蛋或配信数据 | 闪光器、变蛋器、派送器 | 可用操作取决于当前存档和宝可梦格式。 |
+| 导入对战队伍、查看赛季排名 | 对战王 | 网页队伍与 HOME 排名依赖对应的在线服务。 |
+
+数据库图片可在「关于和设置」里配置地址前缀。插件在前缀后拼接四位全国图鉴编号和 `.png`，例如皮卡丘使用 `0025.png`。留空时显示默认图。
+
+## 开发与反馈
+
+菜单入口在 [Plugins](WangPluginPkm/Plugins)，窗体及事件处理在 [GUI](WangPluginPkm/GUI)。修改后可运行 [Windows 回归检查](tests/PluginRegression/README.md)。测试使用空白存档。
 
 ```powershell
-dotnet build WangPluginPkm/WangPluginPkm.csproj -c Release
+dotnet run --project tests/PluginRegression -c Release -- --dark
+dotnet run --project tests/PluginRegression -c Release -- --light --zh
 ```
 
-## Language and theme / 语言与主题
+遇到问题时，请在 [Issues](https://github.com/8CBCA403/WangPluginPkm/issues) 附上 PKHeX 版本、插件来源（发布标签或提交号）、游戏版本、触发问题的菜单和复现步骤。提交截图或日志前，请移除 Cookie、API 密钥及其他凭据。
 
-The plugin follows PKHeX's selected language and color mode. Simplified Chinese and English are supported; other PKHeX languages currently fall back to English.
-
-插件会跟随 PKHeX 当前选择的语言和深浅色模式。目前完整支持简体中文和英文，其他语言暂时回退到英文。
- 
- Credits (in no particular order)
-- Manu098vm 
-(https://github.com/Manu098vm/SVResearches)
-(https://github.com/Manu098vm/Tera-Finder)
-- PiousVenom 
-(https://github.com/PiousVenom/PKHeX-Plugin-RandomDates)
-- foohyfooh 
-(https://github.com/foohyfooh/PKHeXInsertionPlugin)
- - Wang.Song BDSPRoaming
-(https://github.com/g0dw5)
-- Caleeeeeeeeeeeee PIDFinder 猎游者
-(https://github.com/ca1e/PIDFinder)
-- Easy World
-(https://github.com/easyworld)
-- CScorpion-h
-(https://github.com/CScorpion-h)
-- 感谢污教授编写的教程wiki
-- foohyfooh PKHeXSortingPlugin
-(https://github.com/foohyfooh/PKHeXSortingPlugin)
-- Leanny PKHeXSortingPlugin
-(https://github.com/Leanny/PKHeX_Raid_Plugin)
-- Bill Young, Mike Suleski, and Andrew Ringer for [RNGReporter]
-(https://github.com/Slashmolder/RNGReporter)
-(https://github.com/Slashmolder/lrng)
-- chiizu for PPRNG
-(https://github.com/chiizu/PPRNG)
-- wwwwwwzx for 3DSRNG Tool
-(https://github.com/wwwwwwzx/3DSRNGTool)
-- kwsch for providing the IPlugin interface in PKHeX.
-(https://github.com/kwsch) 
-- berichan for adding USB-Botbase support to LiveHeX.
-(https://github.com/berichan) 
-- soopercool101 for many improvements to Smogon StrategyDex imports and various other fixes.
-(https://github.com/soopercool101) 
-- Lusamine for all the help with stress testing the code with wacky sets!
-(https://github.com/Lusamine) 
-- ReignOfComputer for the sets found in [RoCs-PC]
-(https://github.com/ReignOfComputer)
-which are used for unit testing.
-(https://github.com/ReignOfComputer/RoCs-PC) 
-- TORNADO for help with test cases.
-- Rino6357 and crzyc for initial help with the Wiki.
-(https://github.com/Rino6357)
-(https://github.com/crzyc) 
-- hp3721 for help with adding localization based on PKHeX's implementation.
-(https://github.com/hp3721) 
-- Bappsack for his help on Discord in voice chats!
-(https://github.com/Bappsack) 
-- chenzw95  for help with integration.
-(https://github.com/chenzw95)
-- BernardoGiordano for many ideas on improving speed.
-(https://github.com/BernardoGiordano) 
-- olliz0r for developing and maintaining sys-botbase as well which is necessary for LiveHeX to work.
-(https://github.com/olliz0r) 
-- SteveCookTU and [olliz0r] for [LedyLib] from which a lot of the NTR processing code is liberally referenced.
-(https://github.com/olliz0r)
-(https://github.com/SteveCookTU)
-(https://github.com/olliz0r/Ledybot/tree/master/LedyLib)
-- fishguy6564 for creating USB-Botbase (by extending sys-botbase).
-(https://github.com/fishguy6564) 
-- FlatIcon for their icons. Author credits (Those Icons, Pixel perfect).
-(https://www.flaticon.com/)
-- Project Pokémon for their Mystery Gift Event Gallery.
-(https://github.com/projectpokemon/) 
-
-
-- The PokemonRNG team for various contributions and research (zaksabeast, EzPzstreamz, Shiny_Sylveon, Vlad, Feder)
-- Other great people for various help and research (OmegaDonut, Bond697, Kaphotics, SciresM, Zari, amab, Marin, Lean, etc)
-- And all the countless users who have helped improve this project with ideas and suggestions!
-
-
+本项目采用 [GNU AGPL v3](LICENSE)。历代 RNG 研究、插件实现、教程和测试的贡献者见[致谢名单](CREDITS.md)。

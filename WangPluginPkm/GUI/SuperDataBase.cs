@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using WangPluginPkm.PluginUtil.ModifyPKM;
 
@@ -16,6 +17,10 @@ namespace WangPluginPkm.GUI
     public partial class SuperDataBase : PluginForm
     {
         public static GameStrings GameStringsZh = GameInfo.GetStrings(PluginLocalization.Language);
+        private static readonly HttpClient PreviewClient = new();
+        private CancellationTokenSource previewRequest;
+        private Bitmap previewBitmap;
+
         private ISaveFileProvider SAV { get; }
         private IPKMView Editor { get; }
 
@@ -26,6 +31,12 @@ namespace WangPluginPkm.GUI
         public SuperDataBase(ISaveFileProvider sav, IPKMView editor)
         {
             InitializeComponent();
+            PKBox.SizeMode = PictureBoxSizeMode.Zoom;
+            PKBox.Disposed += (_, _) =>
+            {
+                previewRequest?.Cancel();
+                previewBitmap?.Dispose();
+            };
             SAV = sav;
             Editor = editor;
             BindingData();
@@ -351,6 +362,11 @@ namespace WangPluginPkm.GUI
         }
         private async void Lp_LIST_SelectedIndexChanged(object sender, EventArgs e)
         {
+            previewRequest?.Cancel();
+            PKBox.Image = null;
+            previewBitmap?.Dispose();
+            previewBitmap = null;
+
             var lp = Lp_LIST.SelectedItem;
             if (lp is litePK x)
             {
@@ -387,33 +403,35 @@ namespace WangPluginPkm.GUI
                     default:
                         break;
                 }
-                var config = PluginConfig.LoadConfig();
-                string baseuri = $"{config.PokemonPicUrl}{x.Species.ToString().PadLeft(4, '0')}.png";
+                string prefix = PluginConfig.LoadConfig().PokemonPicUrl;
+                if (string.IsNullOrWhiteSpace(prefix))
+                {
+                    PKBox.Image = Properties.Resources.Home;
+                    return;
+                }
+
+                using var request = new CancellationTokenSource();
+                previewRequest = request;
                 try
                 {
-                    using (HttpClient client = new HttpClient())
-                    {
-                        byte[] Imdata = await client.GetByteArrayAsync(baseuri);
-                        using (var ms = new MemoryStream(Imdata))
-                        {
-                            Image image = Image.FromStream(ms);
-                            float ratioX = (float)PKBox.Width / (float)image.Width;
-                            float ratioY = (float)PKBox.Height / (float)image.Height;
-                            float ratio = Math.Min(ratioX, ratioY);
-                            int newWidth = (int)(image.Width * ratio);
-                            int newHeight = (int)(image.Height * ratio);
-                            Image newImage = new Bitmap(newWidth, newHeight);
-                            using (Graphics g = Graphics.FromImage(newImage))
-                            {
-                                g.DrawImage(image, 0, 0, newWidth, newHeight);
-                            }
-                            PKBox.Image = newImage;
-                        }
-                    }
+                    var data = await PreviewClient.GetByteArrayAsync($"{prefix}{x.Species:D4}.png", request.Token);
+                    if (request.IsCancellationRequested)
+                        return;
+
+                    using var stream = new MemoryStream(data);
+                    using var image = Image.FromStream(stream);
+                    previewBitmap = new Bitmap(image);
+                    PKBox.Image = previewBitmap;
                 }
                 catch (Exception)
                 {
-                    PKBox.Image = Properties.Resources.Home;
+                    if (!request.IsCancellationRequested)
+                        PKBox.Image = Properties.Resources.Home;
+                }
+                finally
+                {
+                    if (previewRequest == request)
+                        previewRequest = null;
                 }
             }
         }
