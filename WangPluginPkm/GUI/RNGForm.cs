@@ -2,6 +2,7 @@ using PKHeX.Core;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -883,7 +884,11 @@ namespace WangPluginPkm.GUI
         }
         private void CheckTeraSeed_BTN_Click(object sender, EventArgs e)
         {
-            var pk = (PK9)Editor.Data;
+            if (SAV.SAV.Version is not (GameVersion.SL or GameVersion.VL) || Editor.Data is not PK9 { Species: > 0 } pk)
+            {
+                global::WangPluginPkm.PluginMessageBox.Show(this, "请在朱紫存档的编辑面板中放入太晶团体战宝可梦。");
+                return;
+            }
             byte num5 = 0;
             switch (Gen9GanderValue)
             {
@@ -985,12 +990,35 @@ namespace WangPluginPkm.GUI
         }
         private void CalcBTN_Click(object sender, EventArgs e)
         {
-            if (SeedCheckBox.Text == "")
+            IVCheckBox.Clear();
+            var seedText = SeedCheckBox.Text.Trim();
+            if (seedText.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
+                seedText = seedText[2..];
+            if (!ulong.TryParse(seedText, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var seed) ||
+                (RNGMethod != MethodType.Lumiose && seed > uint.MaxValue))
+            {
+                global::WangPluginPkm.PluginMessageBox.Show(this, "请输入当前方法支持的十六进制种子。");
                 return;
-            string vIn = SeedCheckBox.Text;
-            uint vOut = Convert.ToUInt32(vIn, 16);
-            var pkm = Editor.Data;
-            GenPkm(ref pkm, vOut);
+            }
+            if (RNGMethod == MethodType.None || Editor.Data is not { Species: > 0 } original)
+            {
+                global::WangPluginPkm.PluginMessageBox.Show(this, "请选择 RNG 方法，并在编辑面板中放入宝可梦。");
+                return;
+            }
+            var pkm = original.Clone();
+            try
+            {
+                if (!GenPkm(ref pkm, seed, pkm.Form))
+                {
+                    global::WangPluginPkm.PluginMessageBox.Show(this, "此种子未生成符合当前条件的个体值。");
+                    return;
+                }
+            }
+            catch (NotSupportedException)
+            {
+                global::WangPluginPkm.PluginMessageBox.Show(this, "当前 RNG 方法不支持此计算。");
+                return;
+            }
             IVCheckBox.Text = $"{pkm.IV_HP}/{pkm.IV_ATK}/{pkm.IV_DEF}/{pkm.IV_SPA}/{pkm.IV_SPD}/{pkm.IV_SPE}";
         }
 

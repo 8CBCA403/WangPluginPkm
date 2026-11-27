@@ -1,10 +1,7 @@
-using Google.Apis.Sheets.v4.Data;
-using Microsoft.Z3;
 using PKHeX.Core;
 using System;
+using System.Globalization;
 using System.Windows.Forms;
-using static iText.Layout.Borders.Border;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace WangPluginPkm.GUI
 {
     public partial class MutiCalcUI : PluginForm
@@ -32,7 +29,8 @@ namespace WangPluginPkm.GUI
         }
         private void CalcStart_Click(object sender, System.EventArgs e)
         {
-            var PID = uint.Parse(PIDHex.Text, System.Globalization.NumberStyles.HexNumber);
+            if (!TryReadPid(PIDHex, out var PID))
+                return;
             var NatureID = PID % 25;
             Nature.Text = ShowNature(NatureID);
         }
@@ -254,7 +252,8 @@ namespace WangPluginPkm.GUI
 
         private void FormCalc_Click(object sender, EventArgs e)
         {
-            var PID = uint.Parse(UnownPidTextBox.Text, System.Globalization.NumberStyles.HexNumber);
+            if (!TryReadPid(UnownPidTextBox, out var PID))
+                return;
             var value = ((PID & 0x3000000) >> 18) | ((PID & 0x30000) >> 12) | ((PID & 0x300) >> 6) | (PID & 0x3);
             var s = (byte)(value % 28);
             UnownFormBox.Text = ShowForm(s);
@@ -262,31 +261,41 @@ namespace WangPluginPkm.GUI
 
         private void NSToS_BTN_Click(object sender, EventArgs e)
         {
-            ushort tid;
-            ushort sid;
-            uint NonShinyPid;
-            uint ShinyPid;
-            ushort.TryParse(TID_TB.Text, out tid);
-            ushort.TryParse(SID_TB.Text, out sid);
-            uint.TryParse(NonShinyPID_TB.Text, System.Globalization.NumberStyles.HexNumber, null, out NonShinyPid);
-            uint xorv = (uint)XorN.Value;
-            ShinyPid = (uint)((tid ^ sid) ^ NonShinyPid & 0xFFFF ^ xorv) << 16 | NonShinyPid & 0xFFFF;
-            var r = ShinyPid.ToString("X8");
-            ShinyPID_TB.Text = r;
+            if (!TryReadTrainerIds(out var tid, out var sid) || !TryReadPid(NonShinyPID_TB, out var nonShinyPid))
+                return;
+            uint low = nonShinyPid & 0xFFFF;
+            uint high = low ^ tid ^ sid ^ (uint)XorN.Value;
+            ShinyPID_TB.Text = ((high << 16) | low).ToString("X8");
         }
         private void SToNS_BTN_Click(object sender, EventArgs e)
         {
-            ushort tid;
-            ushort sid;
-            uint NonShinyPid;
-            uint ShinyPid;
-            ushort.TryParse(TID_TB.Text, out tid);
-            ushort.TryParse(SID_TB.Text, out sid);
-            uint.TryParse(ShinyPID_TB.Text, System.Globalization.NumberStyles.HexNumber, null, out ShinyPid);
-            uint xorv = (uint)XorN.Value;
-            NonShinyPid = (uint)(((ShinyPid >> 16) ^ (tid ^ sid) ^ xorv) << 16) | (ShinyPid & 0xFFFF);
-            var r = NonShinyPid.ToString("X8");
-            NonShinyPID_TB.Text = r;
+            if (!TryReadTrainerIds(out var tid, out var sid) || !TryReadPid(ShinyPID_TB, out var shinyPid))
+                return;
+
+            uint low = shinyPid & 0xFFFF;
+            uint high = (shinyPid >> 16) ^ tid ^ sid ^ (uint)XorN.Value;
+            // A shiny XOR is below 16 in modern games and below 8 in older games.
+            if ((high ^ low ^ tid ^ sid) < 16)
+                high ^= 0x10;
+            NonShinyPID_TB.Text = ((high << 16) | low).ToString("X8");
+        }
+        private bool TryReadPid(TextBox input, out uint pid)
+        {
+            if (uint.TryParse(input.Text, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out pid))
+                return true;
+            global::WangPluginPkm.PluginMessageBox.Show(this, "请输入有效的十六进制 PID。");
+            input.Focus();
+            return false;
+        }
+        private bool TryReadTrainerIds(out ushort tid, out ushort sid)
+        {
+            bool validTid = ushort.TryParse(TID_TB.Text, out tid);
+            bool validSid = ushort.TryParse(SID_TB.Text, out sid);
+            if (validTid && validSid)
+                return true;
+            global::WangPluginPkm.PluginMessageBox.Show(this, "请输入有效的训练家 ID（0 到 65535）。");
+            (validTid ? SID_TB : TID_TB).Focus();
+            return false;
         }
         private void ReadEditorBTN_Click(object sender, EventArgs e)
         {

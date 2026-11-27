@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using PKHeX.Core;
 using WangPluginPkm;
 using WangPluginPkm.GUI;
+using WangPluginPkm.Plugins;
 
 internal static class Program
 {
@@ -61,8 +62,8 @@ internal static class Program
         {
             entity.Species = 25;
             entity.StatAlignment = Nature.Adamant;
-            var provider = Stub.Create<ISaveFileProvider>("get_SAV", save);
-            var editor = Stub.Create<IPKMView>("get_Data", entity);
+            var provider = Stub.Create<ISaveFileProvider>("get_SAV", () => save);
+            var editor = Stub.Create<IPKMView>("get_Data", () => entity);
             using var database = new SuperDataBase(provider, editor);
             database.BindingContext = new BindingContext();
             foreach (string prefix in new[] { "MOV", "REM" })
@@ -79,6 +80,9 @@ internal static class Program
                 $"Stat alignment conversion for {entity.GetType().Name}");
         }
 
+        CheckSaveFeatures();
+        CheckDatabaseOverwrite();
+
         using var theme = new ThemeProbe();
         theme.TestLoad();
         bool dark = args.Contains("--dark");
@@ -94,18 +98,69 @@ internal static class Program
         Console.WriteLine("All regression checks passed.");
     }
 
+    private static void CheckSaveFeatures()
+    {
+        var save = BlankSaveFile.Get(GameVersion.GP, "Test");
+        var provider = Stub.Create<ISaveFileProvider>("get_SAV", () => save);
+        var eevee = new PK8 { Species = (ushort)Species.Eevee, Version = GameVersion.SW, Language = 2, Ball = 4 };
+        var editor = Stub.Create<IPKMView>("get_Data", () => eevee);
+        using var menu = new MenuStrip();
+        menu.Items.Add(new ToolStripMenuItem("Tools") { Name = "Menu_Tools" });
+        var sort = new SortPlugin();
+        sort.Initialize(provider, editor, menu);
+        var sortEntry = (ToolStripMenuItem)menu.Items.Find(sort.Name, true).Single();
+        Assert(sortEntry.DropDownItems.Count == 1, "Let's Go exposes its Kanto sort");
+
+        save = BlankSaveFile.Get(GameVersion.SW, "Test");
+        sort.NotifySaveLoaded();
+        var galar = sortEntry.DropDownItems.Cast<ToolStripMenuItem>().Single(item =>
+            item.Text == PluginLocalization.Translate("伽勒尔图鉴（本篇）/Galar (Base Game)"));
+        save.SetBoxSlotAtIndex(new PK8 { Species = (ushort)Species.Pikachu, Version = GameVersion.SW }, 0);
+        save.SetBoxSlotAtIndex(new PK8 { Species = (ushort)Species.Grookey, Version = GameVersion.SW }, 1);
+        galar.PerformClick();
+        Assert(save.GetBoxSlotAtIndex(0).Species == (ushort)Species.Grookey &&
+               save.GetBoxSlotAtIndex(1).Species == (ushort)Species.Pikachu, "Galar sort follows the loaded save");
+
+        save.ID32 = 2_123_456;
+        var eggFormType = typeof(PluginForm).Assembly.GetType("WangPluginPkm.GUI.EggGeneratorUI")!;
+        using var eggForm = (Form)Activator.CreateInstance(eggFormType, provider, editor)!;
+        var egg = (PKM)eggFormType.GetMethod("Egg")!.Invoke(eggForm, [eevee, provider])!;
+        Assert(egg.IsEgg && egg.Species == (ushort)Species.Eevee && egg.ID32 == save.ID32,
+            "Generated egg preserves the full trainer ID");
+    }
+
     private static void Assert(bool condition, string message)
     {
         if (!condition) throw new InvalidOperationException(message);
         Console.WriteLine($"PASS: {message}");
+    }
+
+    private static void CheckDatabaseOverwrite()
+    {
+        foreach (var version in new[] { GameVersion.SW, GameVersion.BD, GameVersion.PLA })
+        {
+            var save = BlankSaveFile.Get(version, "Test");
+            var entity = save.BlankPKM;
+            entity.Species = (ushort)Species.Pikachu;
+            entity.CurrentLevel = 8;
+            save.SetBoxSlotAtIndex(entity, 0, 0);
+            save.SetBoxSlotAtIndex(entity, 0, 1);
+            var provider = Stub.Create<ISaveFileProvider>("get_SAV", () => save);
+            var editor = Stub.Create<IPKMView>("get_Data", () => entity);
+            using var database = new SuperDataBase(provider, editor);
+            int count = database.ModifyBoxes(pk => pk.CurrentLevel = 42, save.Generation, 0, 1, 0, 2);
+            Assert(count == 1 && save.GetBoxSlotAtIndex(0, 0).CurrentLevel == 8 &&
+                   save.GetBoxSlotAtIndex(0, 1).CurrentLevel == 42 && save.GetBoxSlotAtIndex(0, 2).Species == 0,
+                $"Database overwrites only selected occupied slots in {version}");
+        }
     }
 }
 
 public class Stub : DispatchProxy
 {
     private string getter;
-    private object value;
-    public static T Create<T>(string getter, object value) where T : class
+    private Func<object> value;
+    public static T Create<T>(string getter, Func<object> value) where T : class
     {
         var result = Create<T, Stub>();
         var stub = (Stub)(object)result;
@@ -114,7 +169,7 @@ public class Stub : DispatchProxy
         return result;
     }
     protected override object Invoke(MethodInfo method, object[] args) => method.Name == getter
-        ? value : method.ReturnType == typeof(void) ? null
+        ? value() : method.ReturnType == typeof(void) ? null
         : method.ReturnType.IsValueType ? Activator.CreateInstance(method.ReturnType) : null;
 }
 

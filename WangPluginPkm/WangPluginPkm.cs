@@ -89,7 +89,7 @@ namespace WangPluginPkm
         protected abstract void AddPluginControl(ToolStripDropDownItem modmenu);
 
 
-        public void NotifySaveLoaded()
+        public virtual void NotifySaveLoaded()
         {
             Console.WriteLine($"{Name} was notified that a Save File was just loaded.");
         }

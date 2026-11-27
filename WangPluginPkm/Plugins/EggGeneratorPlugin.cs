@@ -11,20 +11,13 @@ namespace WangPluginPkm.Plugins
 
         protected override void AddPluginControl(ToolStripDropDownItem modmenu)
         {
-            if (SaveFileEditor.SAV.Version != GameVersion.PLA && SaveFileEditor.SAV.Version != GameVersion.ZA)
+            var ctrl = new ToolStripMenuItem(Name)
             {
-
-                var ctrl = new ToolStripMenuItem(Name)
-                {
-                    Image = Properties.Resources.Egg
-                };
-                ctrl.Click += OpenForm;
-                ctrl.Name = "变蛋器/Egg Generator";
-                modmenu.DropDownItems.Add(ctrl);
-            }
-            else
-                return;
-
+                Image = Properties.Resources.Egg,
+                Name = Name,
+            };
+            ctrl.Click += OpenForm;
+            modmenu.DropDownItems.Add(ctrl);
         }
 
         private void OpenForm(object sender, EventArgs e)
