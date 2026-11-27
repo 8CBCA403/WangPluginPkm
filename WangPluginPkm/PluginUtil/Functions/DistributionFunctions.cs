@@ -30,5 +30,32 @@ namespace WangPluginPkm.PluginUtil.Functions
         {
             return (((uint)(pk.TID16 ^ pk.SID16) ^ (pk.PID & 0xFFFF) ^ 1) << 16) | (pk.PID & 0xFFFF);
         }
+
+        internal static int ModifyBoxRange(SaveFile save, Action<PKM> action, int firstBox, int firstSlot, int lastBox, int lastSlot)
+        {
+            firstBox = Math.Max(0, firstBox);
+            firstSlot = Math.Max(0, firstSlot);
+            if ((uint)lastBox >= save.BoxCount)
+                lastBox = save.BoxCount - 1;
+            if ((uint)lastSlot >= save.BoxSlotCount)
+                lastSlot = save.BoxSlotCount - 1;
+
+            int count = 0;
+            for (int box = firstBox; box <= lastBox; box++)
+            {
+                for (int slot = firstSlot; slot <= lastSlot; slot++)
+                {
+                    if (save.IsBoxSlotOverwriteProtected(box, slot))
+                        continue;
+                    var pk = save.GetBoxSlotAtIndex(box, slot);
+                    if (pk.Species == 0)
+                        continue;
+                    action(pk);
+                    save.SetBoxSlotAtIndex(pk, box, slot, EntityImportSettings.None);
+                    count++;
+                }
+            }
+            return count;
+        }
     }
 }

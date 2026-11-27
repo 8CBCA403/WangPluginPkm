@@ -11,6 +11,7 @@ Contributors and projects, in no particular order.
 - CScorpion-h · [CScorpion-h](https://github.com/CScorpion-h)
 - 感谢污教授编写的教程wiki
 - foohyfooh PKHeXSortingPlugin · [PKHeXSortingPlugin](https://github.com/foohyfooh/PKHeXSortingPlugin)
+- Archit Date and santacrab2 · PKHeX.Core.AutoMod and PKHeX.Core.Enhancements, built from [PKHeX-Plugins commit f5a6f2c](https://github.com/santacrab2/PKHeX-Plugins/commit/f5a6f2ce80f24881563661639d7d0ae158c6bb63) · [MIT license](WangPluginPkm/deps/PKHeX-Plugins.LICENSE)
 - Leanny — PKHeX Raid Plugin · [PKHeX_Raid_Plugin](https://github.com/Leanny/PKHeX_Raid_Plugin)
 - Bill Young, Mike Suleski, and Andrew Ringer for RNGReporter · [RNGReporter](https://github.com/Slashmolder/RNGReporter) · [lrng](https://github.com/Slashmolder/lrng)
 - chiizu for PPRNG · [PPRNG](https://github.com/chiizu/PPRNG)

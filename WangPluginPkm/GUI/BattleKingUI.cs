@@ -52,6 +52,7 @@ namespace WangPluginPkm.GUI
         public BattleKingUI(ISaveFileProvider sav, IPKMView editor)
         {
             InitializeComponent();
+            PlayerPic.Disposed += (_, _) => PlayerPic.Image?.Dispose();
             Web_CB.DataSource = Enum.GetValues(typeof(Falinks));
             TB.Text = PluginLocalization.IsChinese
                 ? "注意，神偷-VGCPaste功能需要Google api key以及App Name" + Environment.NewLine + "在此处申请 https://console.cloud.google.com/apis"
@@ -713,6 +714,8 @@ namespace WangPluginPkm.GUI
             Rank_List_Box.ClearSelected();
             L.Clear();
             var html = await HomeSeasonDetail.DownloadPageAsync();
+            if (IsDisposed || Disposing || n != 0)
+                return;
             if (html != null)
             {
                 foreach (var h in html)
@@ -732,12 +735,9 @@ namespace WangPluginPkm.GUI
                     L.Add(r);
                 }
             }
-            var departmentBindingList = new BindingList<HomeSeasonDetail>(L);
-            var departmentSource = new BindingSource(departmentBindingList, "");
-            Rank_List_Box.DataSource = departmentSource;
             Rank_List_Box.DisplayMember = "DisplayName";
             Rank_List_Box.ValueMember = "Description";
-            Rank_List_Box.Refresh();
+            Rank_List_Box.DataSource = L.ToArray();
         }
         private async void Get_Rank_BTN_Click(object sender, EventArgs e)
         {
@@ -768,6 +768,8 @@ namespace WangPluginPkm.GUI
             Rank_List_Box.ClearSelected();
 
             var html = await HomeRankClass.DownloadPageAsync(rankUrl);
+            if (IsDisposed || Disposing || n != 1)
+                return;
             if (html != null)
             {
                 foreach (var h in html)
@@ -776,22 +778,16 @@ namespace WangPluginPkm.GUI
                     R.Add(r);
                 }
             }
-            var departmentBindingList = new BindingList<HomeRankClass>(R);
-            var departmentSource = new BindingSource(departmentBindingList, "");
-            Rank_List_Box.DataSource = departmentSource;
             Rank_List_Box.DisplayMember = "DisplayName";
             Rank_List_Box.ValueMember = "Description";
-            Rank_List_Box.Refresh();
+            Rank_List_Box.DataSource = R.ToArray();
         }
 
         private async void Rank_List_Box_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Rank_List_Box.SelectedIndex == -1)
-                return;
-
-            if (n == 0)
+            if (n == 0 && Rank_List_Box.SelectedItem is HomeSeasonDetail season)
             {
-                u = L[Rank_List_Box.SelectedIndex];
+                u = season;
                 S_Name.Text = u.DisplayName;
                 SStart_Box.Text = $"{u.Description?.start}";
                 SEnd_Box.Text = $"{u.Description?.end}";
@@ -799,40 +795,44 @@ namespace WangPluginPkm.GUI
                 RST_BOX.Text = $"{u.Rst}";
                 TS1_BOX.Text = $"{u.Ts1}";
             }
-            else if (n == 1)
+            else if (n == 1 && Rank_List_Box.SelectedItem is HomeRankClass rank)
             {
-                v = R[Rank_List_Box.SelectedIndex];
-                string imageUrl = "";
-                if (v.Description != null)
+                v = rank;
+                if (rank.Description is not { } details)
+                    return;
+                RankBox.Text = $"{details.rank}";
+                NameBox.Text = details.name;
+                RankValueBox.Text = $"{details.rating_value}";
+                LangBox.Text = short.TryParse(details.lng, out var language) ? Lng(language) : "";
+                SetRankImage(null);
+                if (string.IsNullOrEmpty(details.icon))
+                    return;
+
+                try
                 {
-                    RankBox.Text = $"{v.Description.rank}";
-                    NameBox.Text = v.Description.name;
-                    RankValueBox.Text = $"{v.Description.rating_value}";
-                    if (v.Description.lng != null)
-                        LangBox.Text = $"{Lng(Int16.Parse(v.Description.lng))}";
-                    imageUrl = "https://resource.pokemon-home.com/battledata/img/icons/trainer/" + v.Description.icon;
+                    using var httpClient = new HttpClient();
+                    var imageUrl = "https://resource.pokemon-home.com/battledata/img/icons/trainer/" + details.icon;
+                    using var response = await httpClient.GetAsync(imageUrl);
+                    response.EnsureSuccessStatusCode();
+                    var imageData = await response.Content.ReadAsByteArrayAsync();
+                    if (IsDisposed || Disposing || !ReferenceEquals(Rank_List_Box.SelectedItem, rank))
+                        return;
+                    using MemoryStream ms = new(imageData);
+                    using var downloadedImage = Image.FromStream(ms);
+                    SetRankImage(new Bitmap(downloadedImage));
                 }
-                if (!string.IsNullOrEmpty(imageUrl))
+                catch
                 {
-                    try
-                    {
-                        using var httpClient = new HttpClient();
-                        var response = await httpClient.GetAsync(imageUrl);
-                        var imageData = await response.Content.ReadAsByteArrayAsync();
-                        using MemoryStream ms = new(imageData);
-                        var downloadedImage = Image.FromStream(ms);
-                        PlayerPic.Image = downloadedImage;
-                    }
-                    catch
-                    {
-                        PlayerPic.Image = Properties.Resources._403;
-                    }
-                }
-                else
-                {
-                    global::WangPluginPkm.PluginMessageBox.Show("请输入图像的URL", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (!IsDisposed && !Disposing && ReferenceEquals(Rank_List_Box.SelectedItem, rank))
+                        SetRankImage(new Bitmap(Properties.Resources._403));
                 }
             }
+        }
+        private void SetRankImage(Image? image)
+        {
+            var previous = PlayerPic.Image;
+            PlayerPic.Image = image;
+            previous?.Dispose();
         }
         private static string Lng(int l)
         {

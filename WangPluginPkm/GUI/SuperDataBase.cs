@@ -1,4 +1,5 @@
 using PKHeX.Core;
+using WangPluginPkm.PluginUtil.Functions;
 using PKHeX.Core.AutoMod;
 using PKHeX.Core.Enhancements;
 using System;
@@ -31,6 +32,8 @@ namespace WangPluginPkm.GUI
         public SuperDataBase(ISaveFileProvider sav, IPKMView editor)
         {
             InitializeComponent();
+            StartBox_NUM.Maximum = EndBox_NUM.Maximum = Math.Max(1, sav.SAV.BoxCount);
+            Start_NUM.Maximum = End_NUM.Maximum = Math.Max(1, sav.SAV.BoxSlotCount);
             PKBox.SizeMode = PictureBoxSizeMode.Zoom;
             PKBox.Disposed += (_, _) =>
             {
@@ -672,39 +675,13 @@ namespace WangPluginPkm.GUI
             Lp_LIST.Refresh();
         }
         public int ModifyBoxes(Action<PKM> action, int gen, int BoxStart = 0, int slotStart = 0, int BoxEnd = -1, int slotEnd = -1)
-        {
-            if ((uint)BoxEnd >= SAV.SAV.BoxCount)
-                BoxEnd = SAV.SAV.BoxCount - 1;
-
-            Span<byte> boxBuffer = GetInfo(gen);
-            int num = 0;
-            for (int i = BoxStart; i <= BoxEnd; i++)
-            {
-                for (int j = slotStart; j <= slotEnd; j++)
-                {
-                    if (!SAV.SAV.IsBoxSlotOverwriteProtected(i, j))
-                    {
-                        int boxSlotOffset = SAV.SAV.GetBoxSlotOffset(i, j);
-                        Span<byte> span = boxBuffer.Slice(boxSlotOffset);
-                        if (SAV.SAV.IsPKMPresent(span))
-                        {
-                            PKM boxSlotAtIndex = SAV.SAV.GetBoxSlotAtIndex(i, j);
-                            action(boxSlotAtIndex);
-                            num++;
-                            SAV.SAV.SetBoxSlot(boxSlotAtIndex, span, EntityImportSettings.None);
-                        }
-                    }
-                }
-            }
-
-            return num;
-        }
+            => DistributionFunctions.ModifyBoxRange(SAV.SAV, action, BoxStart, slotStart, BoxEnd, slotEnd);
         private void Muticonvert(int startBox, int startSlot, int endBox, int endSlot)
         {
             for (int box = startBox; box <= endBox; box++)
             {
                 int start = (box == startBox) ? startSlot : 0;
-                int end = (box == endBox) ? endSlot : 29;
+                int end = (box == endBox) ? endSlot : SAV.SAV.BoxSlotCount - 1;
 
                 for (int slot = start; slot <= end; slot++)
                 {
@@ -725,10 +702,11 @@ namespace WangPluginPkm.GUI
                 /* case 4:
                      boxbuffer = ((SAV4)SAV.SAV).Storage;
                      break;*/
-                case 8:
-                    boxbuffer = ((SAV8SWSH)SAV.SAV).BoxInfo.Data;
-                    if (SAV.SAV.Version == GameVersion.PLA)
-                        boxbuffer = ((SAV8LA)SAV.SAV).BoxInfo.Data;
+                case 8 when SAV.SAV is SAV8SWSH swsh:
+                    boxbuffer = swsh.BoxInfo.Data;
+                    break;
+                case 8 when SAV.SAV is SAV8LA pla:
+                    boxbuffer = pla.BoxInfo.Data;
                     break;
                 case 9:
                     if (SAV.SAV.Version != GameVersion.ZA)

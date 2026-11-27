@@ -94,8 +94,7 @@ namespace WangPluginPkm.GUI
         private static void SetOTAndTrainerProps(PKM pk, ISaveFileProvider sav)
         {
             pk.OriginalTrainerName = sav.SAV.OT;
-            pk.DisplayTID = (ushort)sav.SAV.DisplayTID;
-            pk.DisplaySID = (ushort)sav.SAV.DisplaySID;
+            pk.ID32 = sav.SAV.ID32;
             pk.OriginalTrainerGender = (byte)sav.SAV.Gender;
         }
 
@@ -105,7 +104,8 @@ namespace WangPluginPkm.GUI
                 return pk;
 
             // Preserve a copy for attribute reuse
-            PKM pko = pk.Clone();
+            PKM pko = pk;
+            pk = pk.Clone();
 
             // Use pre-evolution if exists
             var tree = EvolutionTree.GetEvolutionTree(pk.Context);

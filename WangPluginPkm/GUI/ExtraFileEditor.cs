@@ -14,7 +14,6 @@ namespace WangPluginPkm.GUI
         private IPKMView Editor { get; }
         private WC9 SWC9;
         private GP1M gp = new();
-        private GP1 gpm = new();
         public static GameStrings GameStringsZh = GameInfo.GetStrings(PluginLocalization.Language);
         private const string GoFilter = "Go Park Entity |*.gp1|All Files|*.*";
         private const string PK8Filter = "SWSH/PLA pokemon file |*.pb8|*.pa8|All Files|*.*";
@@ -58,18 +57,16 @@ namespace WangPluginPkm.GUI
             };
             this.GenderBox.SelectedIndex = 0;
         }
-        private void ImportGP1From(string path)
+        private bool ImportGP1From(string path)
         {
             var data = File.ReadAllBytes(path);
             if (data.Length != GP1.SIZE)
             {
                 global::WangPluginPkm.PluginMessageBox.Show(MessageStrings.MsgFileLoadIncompatible);
-                return;
+                return false;
             }
-            var gp1 = new GP1M();
-            data.CopyTo(gp1.Data, 0);
-            data.CopyTo(gpm.Data.ToArray(), 0);
-            gp = gp1;
+            gp = new GP1M(data);
+            return true;
         }
         private void EditGP(GP1M pk)
         {
@@ -113,7 +110,8 @@ namespace WangPluginPkm.GUI
                 return;
 
             string path = sfd.FileName;
-            ImportGP1From(path);
+            if (!ImportGP1From(path))
+                return;
             var Name = SpeciesName.GetSpeciesName(gp.Species, 9);
             GameStrings GameStringsZh = GameInfo.GetStrings(PluginLocalization.Language);
             var Move1 = GameStringsZh.movelist[gp.Move1];
@@ -164,8 +162,12 @@ namespace WangPluginPkm.GUI
 
         private void CovertToPB7_Click(object sender, EventArgs e)
         {
-            PB7 pkm;
-            pkm = gpm.ConvertToPKM(SAV.SAV);
+            if (gp.Species == 0)
+            {
+                global::WangPluginPkm.PluginMessageBox.Show(MessageStrings.MsgFileLoadIncompatible);
+                return;
+            }
+            var pkm = new GP1(gp.Data).ConvertToPKM(SAV.SAV);
             Editor.PopulateFields(pkm, false);
             SAV.ReloadSlots();
         }

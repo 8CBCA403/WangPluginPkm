@@ -218,7 +218,6 @@ namespace WangPluginPkm.Plugins
             var config = PluginConfig.LoadConfig();
             string sp = p.Species.ToString().PadLeft(4, '0');
             string baseuri = $"{config.PokemonPicUrl}{sp}.png";
-            Uri siteUri = new Uri(baseuri);
             string pluginDirectory = Path.Combine(AppContext.BaseDirectory, "Plugins", "WangPluginPkm");
             string reportsDirectory = Path.Combine(pluginDirectory, "Reports");
             Directory.CreateDirectory(reportsDirectory);
@@ -242,7 +241,11 @@ namespace WangPluginPkm.Plugins
                 .SetTextAlignment(TextAlignment.LEFT).SetFontSize(12).SetFont(f1);
             ImageData imageData = ImageDataFactory.Create(ImageToByte(Properties.Resources.SuperWang));
             iText.Layout.Element.Image image = new iText.Layout.Element.Image(imageData).ScaleAbsolute(100, 100).SetFixedPosition(1, 450, 45);
-            ImageData imageData1 = ImageDataFactory.Create(ImageToByte(await LoadImage(siteUri)));
+            using var pokemonImage = Uri.TryCreate(baseuri, UriKind.Absolute, out var siteUri)
+                && siteUri.Scheme is "http" or "https"
+                ? await LoadImage(siteUri)
+                : new Bitmap(Properties.Resources.SuperWang);
+            ImageData imageData1 = ImageDataFactory.Create(ImageToByte(pokemonImage));
             iText.Layout.Element.Image image1 = new iText.Layout.Element.Image(imageData1).ScaleAbsolute(200, 200).SetFixedPosition(1, 380, 485);
             document.Add(image1);
             document.Add(image);
@@ -260,7 +263,6 @@ namespace WangPluginPkm.Plugins
         }
         public static async Task<Bitmap> LoadImage(Uri uri)
         {
-            Bitmap bitmapImage = new(Properties.Resources.SuperWang);
             try
             {
                 using var response = await HttpClient.GetAsync(uri);
@@ -273,7 +275,7 @@ namespace WangPluginPkm.Plugins
             {
                 Debug.WriteLine("下载图片失败: {0}", ex.Message);
             }
-            return bitmapImage;
+            return new Bitmap(Properties.Resources.SuperWang);
         }
 
 #nullable disable

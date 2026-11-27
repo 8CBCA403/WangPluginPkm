@@ -35,6 +35,8 @@ namespace WangPluginPkm.GUI
             SAV = sav;
             Editor = editor;
             InitializeComponent();
+            StartBox_NUM.Maximum = EndBox_NUM.Maximum = Math.Max(1, SAV.SAV.BoxCount);
+            Start_NUM.Maximum = End_NUM.Maximum = Math.Max(1, SAV.SAV.BoxSlotCount);
             BindingData();
             NewBinding();
         }
@@ -133,15 +135,32 @@ namespace WangPluginPkm.GUI
         #region 派送器
         public void SetPkm()
         {
-            List<PKM> PKL = new();
-            for (int i = 0; i < 30; i++)
+            const int cloneCount = 30;
+            if (Editor.Data is not { Species: > 0 } source)
             {
-                var pk = Editor.Data.Clone();
-                pk.StatAlignment = Editor.Data.StatAlignment;
-                pk.Move1_PPUps = Editor.Data.Move1_PPUps;
-                pk.Move2_PPUps = Editor.Data.Move2_PPUps;
-                pk.Move3_PPUps = Editor.Data.Move3_PPUps;
-                pk.Move4_PPUps = Editor.Data.Move4_PPUps;
+                global::WangPluginPkm.PluginMessageBox.Show(this, "请在编辑面板中放入要克隆的宝可梦。");
+                return;
+            }
+            var save = SAV.SAV;
+            var emptySlots = FindAllEmptySlots(save.BoxData, 0)
+                .Where(slot => !save.IsBoxSlotOverwriteProtected(slot))
+                .Take(cloneCount)
+                .ToArray();
+            if (emptySlots.Length < cloneCount)
+            {
+                global::WangPluginPkm.PluginMessageBox.Show(this, "空位不足，无法完成克隆。");
+                return;
+            }
+
+            List<PKM> PKL = new();
+            for (int i = 0; i < cloneCount; i++)
+            {
+                var pk = source.Clone();
+                pk.StatAlignment = source.StatAlignment;
+                pk.Move1_PPUps = source.Move1_PPUps;
+                pk.Move2_PPUps = source.Move2_PPUps;
+                pk.Move3_PPUps = source.Move3_PPUps;
+                pk.Move4_PPUps = source.Move4_PPUps;
                 if (SetTrainer_Box.Checked)
                 {
                     pk.OriginalTrainerName = Trainer.OriginalTrainerName;
@@ -190,17 +209,8 @@ namespace WangPluginPkm.GUI
 
                 PKL.Add(pk);
             }
-            var BoxData = SAV.SAV.BoxData;
-            IList<PKM> arr2 = BoxData;
-            List<int> list = FindAllEmptySlots(arr2, 0);
-            if (PKL.Count != 0)
-            {
-                for (int i = 0; i < PKL.Count; i++)
-                {
-                    int index = list[i];
-                    SAV.SAV.SetBoxSlotAtIndex(PKL[i], index);
-                }
-            }
+            for (int i = 0; i < PKL.Count; i++)
+                save.SetBoxSlotAtIndex(PKL[i], emptySlots[i]);
             SAV.ReloadSlots();
         }
         private void SetFivePKM()
@@ -405,7 +415,6 @@ namespace WangPluginPkm.GUI
             {
                 case 0:
                     SetPkm();
-                    SAV.ReloadSlots();
                     break;
                 case 1:
                     SetFivePKM();
@@ -1006,36 +1015,7 @@ namespace WangPluginPkm.GUI
             global::WangPluginPkm.PluginMessageBox.Show("速配完成！");
         }
         public int ModifyBoxes(Action<PKM> action, int gen, int BoxStart = 0, int slotStart = 0, int BoxEnd = -1, int slotEnd = -1)
-        {
-            if ((uint)BoxEnd >= SAV.SAV.BoxCount)
-            {
-                BoxEnd = SAV.SAV.BoxCount - 1;
-            }
-
-            Span<byte> boxBuffer = GetInfo(gen);
-            int num = 0;
-            for (int i = BoxStart; i <= BoxEnd; i++)
-            {
-                for (int j = slotStart; j <= slotEnd; j++)
-                {
-                    if (!SAV.SAV.IsBoxSlotOverwriteProtected(i, j))
-                    {
-                        int boxSlotOffset = SAV.SAV.GetBoxSlotOffset(i, j);
-                        int num2 = boxSlotOffset;
-                        Span<byte> span = boxBuffer.Slice(num2, boxBuffer.Length - num2);
-                        if (SAV.SAV.IsPKMPresent(span))
-                        {
-                            PKM boxSlotAtIndex = SAV.SAV.GetBoxSlotAtIndex(i, j);
-                            action(boxSlotAtIndex);
-                            num++;
-                            SAV.SAV.SetBoxSlot(boxSlotAtIndex, span, EntityImportSettings.None);
-                        }
-                    }
-                }
-            }
-
-            return num;
-        }
+            => ModifyBoxRange(SAV.SAV, action, BoxStart, slotStart, BoxEnd, slotEnd);
         public Span<byte> GetInfo(int gen)
         {
             Span<byte> boxbuffer = SAV.SAV.Data;
@@ -1047,10 +1027,11 @@ namespace WangPluginPkm.GUI
               /*  case 4:
                     boxbuffer = ((SAV4)SAV.SAV).Storage;
                     break;*/
-                case 8:
-                    boxbuffer = ((SAV8SWSH)SAV.SAV).BoxInfo.Data;
-                    if (SAV.SAV.Version == GameVersion.PLA)
-                        boxbuffer = ((SAV8LA)SAV.SAV).BoxInfo.Data;
+                case 8 when SAV.SAV is SAV8SWSH swsh:
+                    boxbuffer = swsh.BoxInfo.Data;
+                    break;
+                case 8 when SAV.SAV is SAV8LA pla:
+                    boxbuffer = pla.BoxInfo.Data;
                     break;
                 case 9:
                     if (SAV.SAV.Version != GameVersion.ZA)

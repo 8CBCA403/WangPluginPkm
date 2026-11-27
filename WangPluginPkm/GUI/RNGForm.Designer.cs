@@ -1356,6 +1356,7 @@ namespace WangPluginPkm.GUI
             CheckTeraSeed_BTN.TabIndex = 78;
             CheckTeraSeed_BTN.Text = "检测";
             CheckTeraSeed_BTN.UseVisualStyleBackColor = true;
+            CheckTeraSeed_BTN.Click += CheckTeraSeed_BTN_Click;
             // 
             // numScale
             // 
