@@ -2,14 +2,19 @@
 
 WangPluginPkm 是用于 Windows 版 PKHeX 的宝可梦存档编辑插件。你可以在同一个存档里研究一只宝可梦的随机数（RNG）、按地区图鉴整理盒子，或在「超级数据库」中筛选一批宝可梦文件，统一调整招式、等级和努力值。
 
-[English](README.en.md) · [使用教程 Wiki](https://github.com/8CBCA403/WangPluginPkm/wiki) · [历史发布包](https://github.com/8CBCA403/WangPluginPkm/releases)
+[English](README.en.md) · [使用教程 Wiki](https://github.com/8CBCA403/WangPluginPkm/wiki) · [下载正式版](https://github.com/8CBCA403/WangPluginPkm/releases/latest)
 
 ## 选择版本
 
 | 想用哪个版本 | 获取方式 | 配套 PKHeX |
 | --- | --- | --- |
+| 正式版 v1.8.0（Windows x64） | 从 [v1.8.0 发布页](https://github.com/8CBCA403/WangPluginPkm/releases/tag/v1.8.0) 下载插件 ZIP | PKHeX 26.10.18 |
 | 当前源码（`main`） | 按下方步骤编译插件 | [PKHeX 26.10.18](https://github.com/kwsch/PKHeX/releases/tag/26.10.18)，源码引用 PKHeX.Core 26.10.18 |
 | 历史整合包 v1.7.1 | 从 [v1.7.1 发布页](https://github.com/8CBCA403/WangPluginPkm/releases/tag/v1.7.1) 下载并解压 `PKHeX20241109+WangPlugins.zip` | 直接运行整合包自带的 PKHeX |
+
+## 安装正式版
+
+关闭 PKHeX，将插件 ZIP 解压到 `PKHeX.exe` 所在目录，保留压缩包内的文件夹结构。重启后打开 **工具 → 超王插件PKM → 关于和设置** 确认安装成功。发布包面向 64 位 Windows，需要另备 PKHeX 26.10.18。
 
 ## 编译和安装当前源码
 
@@ -19,13 +24,15 @@ WangPluginPkm 是用于 Windows 版 PKHeX 的宝可梦存档编辑插件。你�
    dotnet build WangPluginPkm/WangPluginPkm.csproj -c Release
    ```
 
-2. 关闭 PKHeX。从 `WangPluginPkm/bin/Release/net10.0-windows/` 复制两个 DLL 到 `PKHeX.exe` 旁的 `plugins` 文件夹。首次安装时创建该文件夹，升级时替换同名文件。
+2. 关闭 PKHeX。从 `WangPluginPkm/bin/Release/net10.0-windows/` 取出两个 DLL，按下图放置。PDF 报告使用的字体来自仓库的 `WangPluginPkm/Resources/simkai.ttf`。升级时替换相同路径的文件。
 
    ```text
    PKHeX.exe
+   libz3.dll
    plugins/
      WangPluginPkm.dll
-     libz3.dll
+     WangPluginPkm/
+       simkai.ttf
    ```
 
 3. 启动 PKHeX，打开 **工具 → 超王插件PKM → 关于和设置** 确认加载成功。英文界面对应 **Tools → Wang PKM Plugin → About and Settings**。插件跟随宿主的语言和深浅色设置，提供简体中文和英文界面。

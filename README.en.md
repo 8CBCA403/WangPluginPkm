@@ -8,8 +8,13 @@ WangPluginPkm adds Pokémon RNG research, regional Pokédex sorting and batch fi
 
 | Version | Installation |
 | --- | --- |
+| Stable v1.8.0 (Windows x64) | Download the plugin ZIP from [release v1.8.0](https://github.com/8CBCA403/WangPluginPkm/releases/tag/v1.8.0) for PKHeX 26.10.18. |
 | Current source (`main`) | Build the plugin for [PKHeX 26.10.18](https://github.com/kwsch/PKHeX/releases/tag/26.10.18). The project references PKHeX.Core 26.10.18. |
 | Historical bundle (v1.7.1) | Download `PKHeX20241109+WangPlugins.zip` from [release v1.7.1](https://github.com/8CBCA403/WangPluginPkm/releases/tag/v1.7.1), extract it, and launch the included PKHeX. |
+
+## Install the stable release
+
+Close PKHeX and extract the plugin ZIP beside `PKHeX.exe`, preserving its folders. Restart PKHeX and open **Tools → Wang PKM Plugin → About and Settings**. The archive requires a separate installation of PKHeX 26.10.18 on 64-bit Windows.
 
 ## Build and install the current source
 
@@ -19,7 +24,7 @@ WangPluginPkm adds Pokémon RNG research, regional Pokédex sorting and batch fi
    dotnet build WangPluginPkm/WangPluginPkm.csproj -c Release
    ```
 
-2. Close PKHeX. Copy `WangPluginPkm.dll` and `libz3.dll` from `WangPluginPkm/bin/Release/net10.0-windows/` into the `plugins` directory beside `PKHeX.exe`. Create the directory on first install or replace both files when upgrading.
+2. Close PKHeX. From `WangPluginPkm/bin/Release/net10.0-windows/`, place `libz3.dll` beside `PKHeX.exe` and `WangPluginPkm.dll` in its `plugins` folder. Copy `WangPluginPkm/Resources/simkai.ttf` from the repository to `plugins/WangPluginPkm/simkai.ttf` for PDF reports. Create the directories as needed.
 3. Start PKHeX and open **Tools → Wang PKM Plugin → About and Settings** to confirm installation. The plugin follows the host theme and displays its interface in Simplified Chinese or English.
 
 ## Using the tools

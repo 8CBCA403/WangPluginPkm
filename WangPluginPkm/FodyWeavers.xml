@@ -3,8 +3,8 @@
     <Costura
       CreateTemporaryAssemblies="true"
       IncludeDebugSymbols="false"
-      ExcludeAssemblies="PKHeX.Core;PKHeX.WinForms;System.*;Microsoft.*;netstandard;mscorlib"
-      ExcludeRuntimeAssemblies="PKHeX.Core;PKHeX.WinForms"
+      ExcludeAssemblies="PKHeX.Core|PKHeX.WinForms|netstandard|mscorlib"
+      ExcludeRuntimeAssemblies="libz3"
       DisableCompression="true" />
 
  
